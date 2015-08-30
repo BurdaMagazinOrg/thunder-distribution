@@ -1,0 +1,116 @@
+core: 8.x
+api: 2
+
+defaults:
+  projects:
+    subdir: "contrib"
+    translations:
+      - de
+
+# Drupal core
+
+projects:
+  drupal:
+    version: "8.0.0-beta14"
+    # patches runtests.sh to work with travis.
+    patch: "https://www.drupal.org/files/issues/2189345-67.patch"
+    # The line ending fix patches .gitattributes to
+    # not force line ending conversion on every file
+    patch: "patches/core/fix-line-ending.patch"
+
+# modules
+  google_analytics:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/google_analytics.git"
+      revision: "6770d8fd576e9252298392264601e8baed8638fd"
+
+# momentarily disabled, kills tests
+#  xmlsitemap:
+#    type: "module"
+#    download:
+#      url: "http://git.drupal.org/project/xmlsitemap.git"
+#      revision: "8bc6fa286790974c6766da94fec566e1c2300c00"
+
+  examples:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/examples.git"
+      revision: "ed68e8b"
+
+  devel:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/devel.git"
+      revision: "8e745a9"
+
+  embed:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/embed.git"
+      revision: "cb2353aa33c4fd1dd7cbb44224482ca0346b12e1"
+
+  entity_embed:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/entity_embed.git"
+      revision: "c1c62896d5c81b615e6a96031fbca0137ad25419"
+
+  globalredirect:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/globalredirect.git"
+      revision: "c2e0be7d3ca8158e44e0693cc185e6f5cb0b3f97"
+
+  media_entity:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/media_entity.git"
+      revision: "fafb4ec"
+
+  inline_entity_form:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/inline_entity_form.git"
+      revision: "c76ff1d"
+
+  token:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/token.git"
+      revision: "b17c78f"
+      patch: "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
+
+  stage_file_proxy:
+    type: "module"
+    download:
+      url: "https://github.com/ueberbit/stage_file_proxy.git"
+      revision: "e589007348a305756a3834ce3df0993d7068c292"
+
+  field_group:
+    type: "module"
+    download:
+      url: "https://github.com/webflo/field_group.git"
+      revision: "fc02a31d543090786797d7268831b1d2aa55eda4"
+
+  emptyparagraphkiller:
+    type: "module"
+    download:
+      url: "https://github.com/axe312ger/emptyparagraphkiller.git"
+      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
+
+  ivw_integration:
+    type: "module"
+    subdir: "burda"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
+      directory_name: "ivw_integration"
+
+# profiles
+  thunder:
+    type: "profile"
+    subdir: "burda"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/profile-thunder.git"
+      directory_name: "thunder"
+
