@@ -1,0 +1,23 @@
+default:
+  suites:
+    default:
+      paths:
+        features: 'features'
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://127.0.0.1:8888
+      files_path: ../../../
+    Drupal\DrupalExtension:
+      blackbox: ~
+      drush:
+        alias: self
+      # You need to set drupal - drupal_root with BEHAT_PARAMS
+      # export BEHAT_PARAMS="extensions[Drupal\\DrupalExtension\\Extension][drupal][drupal_root]=$DISTRO/drupal"
+      region_map:
+        Tabs: ".tabs.primary"
