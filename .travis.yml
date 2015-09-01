@@ -42,7 +42,7 @@ install:
 
   # Build the current branch
   - cd htdocs
-  - drush make --yes ../thunder.yml --prepare-install
+  - drush make --yes --concurrency=5 ../thunder.yml --prepare-install
   - cd ../
 
   # Setup files
