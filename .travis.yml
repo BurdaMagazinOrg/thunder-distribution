@@ -25,11 +25,9 @@ install:
 
 
   # Build Behat dependencies
-  - pwd
   - cd ./tests/thunder/behat
   - travis_retry composer install --prefer-dist --no-interaction
   - cd ../../../
-  - pwd
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
