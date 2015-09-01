@@ -44,7 +44,7 @@ install:
   - cd ../
 
   # Setup files
-  - chmod -R 777 htdocs/sites/all
+  - chmod -R 777 htdocs/sites/default
 
   # Setup display for Selenium
   - export DISPLAY=:99.0
