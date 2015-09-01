@@ -113,4 +113,5 @@ projects:
     download:
       url: "git@github.com:BurdaMagazinOrg/profile-thunder.git"
       directory_name: "thunder"
+      branch: "develop"
 
