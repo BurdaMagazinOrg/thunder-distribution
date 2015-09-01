@@ -28,7 +28,7 @@ install:
   - pwd
   - cd ./tests/thunder/behat
   - travis_retry composer install --prefer-dist --no-interaction
-  - cd ../../../../
+  - cd ../../../
   - pwd
 
   # Setting Behat environment
