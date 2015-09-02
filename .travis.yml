@@ -81,5 +81,5 @@ before_script:
 script:
 
   # Run Behat tests.
-  - then ./bin/behat --config behat.travis.yml
+  - ./bin/behat --config behat.travis.yml
 
