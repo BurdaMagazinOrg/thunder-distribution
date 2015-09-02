@@ -74,7 +74,7 @@ before_script:
   - drush pm-uninstall dblog --yes
 
   # Start server
-  - drush runserver --server=builtin 8888 > /dev/null 2>&1 &
+  - drush runserver 8888 > /dev/null 2>&1 &
   - nc -zvv localhost 8888; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 8888..."; nc -zvv localhost 8888; out=$?; sleep 5; done
   - cd ../tests/thunder/behat
 
