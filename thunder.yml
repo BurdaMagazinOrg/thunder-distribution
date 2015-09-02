@@ -111,7 +111,7 @@ projects:
     type: "profile"
     subdir: "burda"
     download:
-      url: "git@github.com:BurdaMagazinOrg/profile-thunder.git"
+      url: "git@github.com:BurdaMagazinOrg/thunder-profile.git"
       directory_name: "thunder"
       branch: "develop"
 
