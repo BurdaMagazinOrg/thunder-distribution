@@ -2,7 +2,12 @@ language: php
 sudo: false
 
 php:
-  - 5.6
+#  - 5.6
+  - hhvm
+
+matrix:
+  allow-failures:
+    - php: hhvm
 
 mysql:
   database: drupal
@@ -16,6 +21,8 @@ cache:
     - $HOME/.drush/cache
 
 install:
+
+  # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
 
   - travis_retry composer self-update && composer --version
@@ -55,11 +62,13 @@ install:
   - nc -zvv localhost 4444; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 4444..."; nc -zvv localhost 4444; out=$?; sleep 5; done
 
    # Disable sendmail
-  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
-  # Increase the MySQL connection timeout on the PHP end.
-  - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo sendmail_path=`which true` >> /etc/hhvm/php.ini ; fi
+  #- echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo "mysql.connect_timeout=3000" >> /etc/hhvm/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo "default_socket_timeout=3000" >> /etc/hhvm/php.ini ; fi
 
   # Increase the MySQL server timetout and packet size.
   - mysql -e "SET GLOBAL wait_timeout = 36000;"
