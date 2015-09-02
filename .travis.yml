@@ -18,11 +18,9 @@ cache:
 install:
   - "mysql -e 'create database drupal;'"
 
-  # Install latest Drush 6.
   - travis_retry composer self-update && composer --version
   - travis_retry composer global require "drush/drush:dev-master"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-
 
   # Build Behat dependencies
   - cd ./tests/thunder/behat
