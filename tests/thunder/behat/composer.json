@@ -1,20 +1,9 @@
 {
-  "autoload" : {
-    "psr-4" : {
-      "Goutte\\" : "../../htdocs/core/vendor/fabpot/goutte/Goutte",
-      "Behat\\Mink\\Driver\\" : "../../htdocs/core/vendor/mink-goutte-driver/src",
-      "Behat\\Mink\\" : "../../htdocs/core/vendor/behat/mink/src",
-      "GuzzleHttp\\" : "../../htdocsl/core/vendor/guzzlehttp/guzzle/src",
-      "GuzzleHttp\\Psr7\\" : "../../htdocs/core/vendor/guzzlehttp/psr7/src",
-      "GuzzleHttp\\Promise\\" : "../../htdocs/core/vendor/guzzlehttp/promises/src"
-    }
-  },
   "require": {
     "drupal/drupal-extension": "~3.0",
-    "phpunit/phpunit": ">=4.8.6"
+    "guzzlehttp/guzzle" : "^6.0@dev"
   },
   "config": {
     "bin-dir": "bin/"
   }
 }
-

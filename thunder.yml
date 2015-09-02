@@ -11,12 +11,14 @@ defaults:
 
 projects:
   drupal:
-    version: "8.0.0-beta14"
-    # patches runtests.sh to work with travis.
-    patch: "https://www.drupal.org/files/issues/2189345-67.patch"
-    # The line ending fix patches .gitattributes to
-    # not force line ending conversion on every file
-    patch: "patches/core/fix-line-ending.patch"
+    download:
+      url: "http://git.drupal.org/project/drupal.git"
+      revision: "f2194d1749081ec139a5e396e90944d50f8da1d1"
+      # patches runtests.sh to work with travis.
+      patch: "https://www.drupal.org/files/issues/2189345-67.patch"
+      # The line ending fix patches .gitattributes to
+      # not force line ending conversion on every file
+      patch: "patches/core/fix-line-ending.patch"
 
 # modules
   google_analytics:
