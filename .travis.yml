@@ -21,8 +21,6 @@ cache:
     - $HOME/.drush/cache
 
 install:
-  - ls ~/.phpenv/versions/$(phpenv version-name)
-  - ls ~/.phpenv/versions/$(phpenv version-name)/bin
 
   # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
@@ -64,7 +62,9 @@ install:
   - nc -zvv localhost 4444; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 4444..."; nc -zvv localhost 4444; out=$?; sleep 5; done
 
    # Disable sendmail
-  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo sendmail_path=`which true` >> /etc/hhvm/php.ini ; fi
+  #- echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
