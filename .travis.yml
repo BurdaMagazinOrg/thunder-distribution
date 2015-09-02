@@ -61,7 +61,8 @@ install:
 
    # Disable sendmail
   - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ls ~/.phpenv/versions/
+  - ls ~/.phpenv/versions/$(phpenv version-name)
+  - ls ~/.phpenv/versions/$(phpenv version-name)/etc
   # Increase the MySQL connection timeout on the PHP end.
   - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
