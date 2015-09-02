@@ -65,8 +65,10 @@ install:
   - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
   - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo sendmail_path=`which true` >> /etc/hhvm/php.ini ; fi
   #- echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo "mysql.connect_timeout=3000" >> /etc/hhvm/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "php*" ]]; then echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" = "hhv*" ]]; then echo "default_socket_timeout=3000" >> /etc/hhvm/php.ini ; fi
 
   # Increase the MySQL server timetout and packet size.
   - mysql -e "SET GLOBAL wait_timeout = 36000;"
