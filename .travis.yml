@@ -29,7 +29,7 @@ install:
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
-  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/drupal"}}}}'
+  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/htdocs"}}}}'
   - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$BUILD_TOP#`
   - export BEHAT_PARAMS
 
