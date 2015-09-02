@@ -2,7 +2,7 @@ language: php
 sudo: false
 
 php:
-  - 5.6
+#  - 5.6
   - hhvm
 
 matrix:
@@ -22,7 +22,7 @@ cache:
 
 install:
   - ls ~/.phpenv/versions/$(phpenv version-name)
-  - ls ~/.phpenv/versions/$(phpenv version-name)/etc
+  - ls ~/.phpenv/versions/$(phpenv version-name)/bin
 
   # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
