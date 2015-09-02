@@ -59,9 +59,6 @@ install:
   - java -jar selenium-server-standalone-2.42.1.jar > /dev/null 2>&1 &
   - nc -zvv localhost 4444; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 4444..."; nc -zvv localhost 4444; out=$?; sleep 5; done
 
-   # Disable sendmail
-  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
   # Increase the MySQL connection timeout on the PHP end.
   - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
@@ -71,6 +68,11 @@ install:
   - mysql -e "SET GLOBAL max_allowed_packet = 33554432;"
 
 before_script:
+  # setup fake mailserver
+  - sudo service postfix stop
+  - smtp-sink -d "%d.%H.%M.%S" 127.0.0.1:2500 1000 &
+  - echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
+  - echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
 
   - cd htdocs
   - drush si thunder --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
