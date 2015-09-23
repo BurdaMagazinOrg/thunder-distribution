@@ -1,4 +1,4 @@
-core: 8.x
+core: "8.x"
 api: 2
 
 defaults:
@@ -8,7 +8,6 @@ defaults:
       - de
 
 # Drupal core
-
 projects:
   drupal:
     download:
@@ -40,13 +39,13 @@ projects:
       revision: "3e9ddc42bad060a085b76903d62155b0fe2a4013"
 
   focal_point:
-    type = "module"
+    type: "module"
     download:
       url: "git://git.drupal.org/project/focal_point.git"
       revision: "f889c383a5b4953aebe19abfe13b880a3ec85d08"
-    patch: "https://www.drupal.org/files/issues/focal_point_media_entity.patch"
-    patch: "https://www.drupal.org/files/issues/focal_point_no_image.patch"
-    patch: "https://www.drupal.org/files/issues/focal_point_cache_tags.patch"
+      patch: "https://www.drupal.org/files/issues/focal_point_media_entity.patch"
+      patch: "https://www.drupal.org/files/issues/focal_point_no_image.patch"
+      patch: "https://www.drupal.org/files/issues/focal_point_cache_tags.patch"
 
   globalredirect:
     type: "module"
