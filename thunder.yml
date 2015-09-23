@@ -13,7 +13,7 @@ projects:
   drupal:
     download:
       url: "http://git.drupal.org/project/drupal.git"
-      revision: "f2194d1749081ec139a5e396e90944d50f8da1d1"
+      revision: "fc45b90ea3e89c083769744071675f168df37aab"
       # patches runtests.sh to work with travis.
       patch: "https://www.drupal.org/files/issues/2189345-67.patch"
       # The line ending fix patches .gitattributes to
@@ -21,42 +21,32 @@ projects:
       patch: "patches/core/fix-line-ending.patch"
 
 # modules
-  google_analytics:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/google_analytics.git"
-      revision: "6770d8fd576e9252298392264601e8baed8638fd"
-
-# momentarily disabled, kills tests
-#  xmlsitemap:
-#    type: "module"
-#    download:
-#      url: "http://git.drupal.org/project/xmlsitemap.git"
-#      revision: "8bc6fa286790974c6766da94fec566e1c2300c00"
-
-  examples:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/examples.git"
-      revision: "ed68e8b"
-
   devel:
     type: "module"
     download:
       url: "http://git.drupal.org/project/devel.git"
-      revision: "8e745a9"
+      revision: "76ff3d32e6bae2d94bee96d52f21370d09aef309"
 
   embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/embed.git"
-      revision: "cb2353aa33c4fd1dd7cbb44224482ca0346b12e1"
+      revision: "22aa7d01f329b9b50ac37d1ce2ca7a8ee8eccdf5"
 
   entity_embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
-      revision: "c1c62896d5c81b615e6a96031fbca0137ad25419"
+      revision: "3e9ddc42bad060a085b76903d62155b0fe2a4013"
+
+  focal_point:
+    type = "module"
+    download:
+      url: "git://git.drupal.org/project/focal_point.git"
+      revision: "f889c383a5b4953aebe19abfe13b880a3ec85d08"
+    patch: "https://www.drupal.org/files/issues/focal_point_media_entity.patch"
+    patch: "https://www.drupal.org/files/issues/focal_point_no_image.patch"
+    patch: "https://www.drupal.org/files/issues/focal_point_cache_tags.patch"
 
   globalredirect:
     type: "module"
@@ -64,17 +54,30 @@ projects:
       url: "http://git.drupal.org/project/globalredirect.git"
       revision: "c2e0be7d3ca8158e44e0693cc185e6f5cb0b3f97"
 
+  google_analytics:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/google_analytics.git"
+      revision: "4e7f0569274403fd3c4ed322eb59e26ec97a1fae"
+
   media_entity:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
-      revision: "fafb4ec"
+      revision: "b4693951b442d011013a630e7a7221548b40aed2"
+
+  metatag:
+    type: "module"
+    download:
+      url: "git://git.drupal.org/project/metatag.git"
+      revision: "9d12daedcb685beac313b0c3fb42c7244b8bd587"
 
   inline_entity_form:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "c76ff1d"
+      revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
+      patch: "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
 
   token:
     type: "module"
