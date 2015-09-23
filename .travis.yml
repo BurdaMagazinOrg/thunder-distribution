@@ -1,0 +1,85 @@
+language: php
+sudo: false
+
+php:
+  - 5.6
+
+mysql:
+  database: drupal
+  username: root
+  encoding: utf8
+
+# Cache Composer & Drush directories.
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.drush/cache
+
+install:
+
+  # Increase the MySQL connection timeout on the PHP end.
+  - "mysql -e 'create database drupal;'"
+
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer global require "drush/drush:dev-master"
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+  # Build Behat dependencies
+  - cd ./tests/thunder/behat
+  - travis_retry composer install --prefer-dist --no-interaction
+  - cd ../../../
+
+  # Setting Behat environment
+  - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
+  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/htdocs"}}}}'
+  - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$TRAVIS_BUILD_DIR#`
+  - export BEHAT_PARAMS
+
+  # Build Codebase
+  - mkdir htdocs
+
+  # Build the current branch
+  - cd htdocs
+  - drush make --yes --concurrency=5 ../thunder.yml --prepare-install
+  - cd ../
+
+  # Setup files
+  - chmod -R 777 htdocs/sites/default
+
+  # Setup display for Selenium
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 5
+
+  # Get Selenium
+  - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.1.jar
+  - java -jar selenium-server-standalone-2.42.1.jar > /dev/null 2>&1 &
+  - nc -zvv localhost 4444; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 4444..."; nc -zvv localhost 4444; out=$?; sleep 5; done
+
+  # Disable sendmail
+  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+  # set php timeouts
+  - echo "mysql.connect_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "default_socket_timeout=3000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+  # Increase the MySQL server timetout and packet size.
+  - mysql -e "SET GLOBAL wait_timeout = 36000;"
+  - mysql -e "SET GLOBAL max_allowed_packet = 33554432;"
+
+before_script:
+
+  - cd htdocs
+  - drush si thunder --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
+  - drush pm-uninstall dblog --yes
+
+  # Start server
+  - drush runserver 8888 > /dev/null 2>&1 &
+  - nc -zvv localhost 8888; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 8888..."; nc -zvv localhost 8888; out=$?; sleep 5; done
+  - cd ../tests/thunder/behat
+
+script:
+
+  # Run Behat tests.
+  - ./bin/behat --config behat.travis.yml
+
