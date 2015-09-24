@@ -11,7 +11,7 @@ This guide assumes you can setup your database and web server.
 
 ## Additional development dependencies
 Examples in this readme are written for a posix compliant system like OSX and Linux. Windows works as well, but most 
-commands will work differently, please consult the given links to external documentation.  
+commands will work differently, please consult the given links to external documentation.
 
 * git
 * drush
