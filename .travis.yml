@@ -25,7 +25,7 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Build Behat dependencies
-  - cd ./tests/thunder/behat
+  - cd ./tests/behat
   - travis_retry composer install --prefer-dist --no-interaction
   - cd ../../../
 
