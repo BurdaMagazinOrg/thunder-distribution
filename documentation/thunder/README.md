@@ -28,9 +28,14 @@ More information about [drush](http://docs.drush.org/) and [drush installation](
 
 ## Development setup
 ### Get thunder
-Clone thunder
-  
-    ~/your-project-dir $ git clone git@github.com:BurdaMagazinOrg/thunder.git
+Add the thunder repository to your repository as an upstream repository and fetch the content
+
+    ~/your-project-dir $ git remote add upstream git@github.com:BurdaMagazinOrg/thunder.git
+    ~/your-project-dir $ git fetch upstream
+    
+Now merge the core to your project, you can merge a specific version tag or simply master, which points the most current release
+
+    ~/your-project-dir $ git merge upstream/master
 
 ### Install drupal
 Use the provided drush make file to create the site in the folder htdocs
