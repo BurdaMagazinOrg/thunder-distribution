@@ -82,7 +82,7 @@ projects:
     type: "module"
     download:
       url: "https://github.com/md-systems/pathauto.git"
-      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
+      revision: "3350940ebd502826aff000b1c493673059e9aae6"
 
   token:
     type: "module"
