@@ -78,6 +78,12 @@ projects:
       revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
       patch: "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
 
+  pathauto:
+    type: "module"
+    download:
+      url: "https://github.com/md-systems/pathauto.git"
+      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
+
   token:
     type: "module"
     download:
