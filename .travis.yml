@@ -22,7 +22,8 @@ cache:
     - $HOME/.drush/cache
 
 install:
-
+  - echo $site-name
+  - echo $project
   # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
 
