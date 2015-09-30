@@ -89,8 +89,7 @@ script:
 
 deploy:
   provider: script
-  script: scripts/deploy.sh
+  script: $HOME/scripts/deploy.sh
   on:
-    branch:
-      - develop
-      - master
+    all_branches: true
+    tags: true
