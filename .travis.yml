@@ -4,6 +4,12 @@ sudo: false
 php:
   - 5.6
 
+branches:
+  only:
+    - master
+    - stage
+    - develop
+
 mysql:
   database: drupal
   username: root
@@ -82,4 +88,6 @@ script:
 
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
+
+after_success:
 
