@@ -7,7 +7,6 @@ php:
 branches:
   only:
     - master
-    - stage
     - develop
 
 mysql:
@@ -22,7 +21,6 @@ cache:
     - $HOME/.drush/cache
 
 install:
-  - echo $PROJECT
   # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
 
@@ -89,5 +87,10 @@ script:
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
 
-after_success:
-
+deploy:
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch:
+      - develop
+      - master
