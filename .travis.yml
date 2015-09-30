@@ -25,9 +25,9 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Build Behat dependencies
-  - cd ./tests/thunder/behat
+  - cd ./tests/behat
   - travis_retry composer install --prefer-dist --no-interaction
-  - cd ../../../
+  - cd ../../
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
@@ -70,13 +70,13 @@ install:
 before_script:
 
   - cd htdocs
-  - drush si thunder --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
+  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
   - nc -zvv localhost 8888; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 8888..."; nc -zvv localhost 8888; out=$?; sleep 5; done
-  - cd ../tests/thunder/behat
+  - cd ../tests/behat
 
 script:
 
