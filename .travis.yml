@@ -83,3 +83,5 @@ script:
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
 
+after_success:
+  - ls .
