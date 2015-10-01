@@ -87,9 +87,6 @@ script:
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
 
-deploy:
-  provider: script
-  script: scripts/deploy.sh
-
-  on:
-    all_branches: true
+after_success:
+  - cd $TRAVIS_BUILD_DIR
+  - ./scripts/deploy.sh
