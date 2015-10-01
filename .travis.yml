@@ -44,7 +44,7 @@ install:
 
   # Build the current branch
   - cd htdocs
-  - drush make --yes --concurrency=5 ../thunder.yml --prepare-install
+  - drush make --yes --concurrency=5 ../$PROJECT.yml --prepare-install
   - cd ../
 
   # Setup files
@@ -72,9 +72,10 @@ install:
   - mysql -e "SET GLOBAL max_allowed_packet = 33554432;"
 
 before_script:
+  - phpenv config-rm xdebug.ini
 
   - cd htdocs
-  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
+  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
@@ -88,5 +89,6 @@ script:
   - ./bin/behat --config behat.travis.yml
 
 after_success:
+
   - cd $TRAVIS_BUILD_DIR
   - ./scripts/deploy.sh

@@ -117,11 +117,11 @@ projects:
       directory_name: "ivw_integration"
 
 # profiles
-  thunder:
-    type: "profile"
-    subdir: "burda"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/thunder-profile.git"
-      directory_name: "thunder"
-      branch: "develop"
+#  thunder:
+#    type: "profile"
+#    subdir: "burda"
+#    download:
+#      url: "git@github.com:BurdaMagazinOrg/thunder-profile.git"
+#      directory_name: "thunder"
+#      branch: "develop"
 
