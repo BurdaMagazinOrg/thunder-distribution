@@ -89,7 +89,7 @@ script:
 
 deploy:
   provider: script
-  script: $HOME/scripts/deploy.sh
+  script: deploy.sh
 
   on:
     all_branches: true
