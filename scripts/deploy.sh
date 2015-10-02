@@ -17,7 +17,7 @@ function deploy_to_acquia() {
    git config user.name "Travis"
    git config --global push.default simple
 
-   git add --all .
+   git add --all . >/dev/null
    git commit --quiet -m "$TRAVIS_COMMIT"
    git push
 }
