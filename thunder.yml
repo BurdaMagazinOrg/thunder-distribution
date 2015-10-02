@@ -10,14 +10,10 @@ defaults:
 # Drupal core
 projects:
   drupal:
-    download:
-      url: "http://git.drupal.org/project/drupal.git"
-      revision: "fc45b90ea3e89c083769744071675f168df37aab"
-      # patches runtests.sh to work with travis.
-      patch: "https://www.drupal.org/files/issues/2189345-67.patch"
-      # The line ending fix patches .gitattributes to
-      # not force line ending conversion on every file
-      patch: "patches/core/fix-line-ending.patch"
+    version: "8.0.0-beta16"
+    # patches runtests.sh to work with travis.
+    patch:
+      - "patches/core/fix-line-ending.patch"
 
 # modules
   acquia_connector:
@@ -61,9 +57,8 @@ projects:
     download:
       url: "git://git.drupal.org/project/focal_point.git"
       revision: "f889c383a5b4953aebe19abfe13b880a3ec85d08"
-      patch: "https://www.drupal.org/files/issues/focal_point_media_entity.patch"
-      patch: "https://www.drupal.org/files/issues/focal_point_no_image.patch"
-      patch: "https://www.drupal.org/files/issues/focal_point_cache_tags.patch"
+    patch:
+      - "https://www.drupal.org/files/issues/focal_point_no_image.patch"
 
   globalredirect:
     type: "module"
@@ -82,7 +77,8 @@ projects:
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
       revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
-      patch: "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
+    patch:
+      - "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
 
   ivw_integration:
     type: "module"
@@ -120,7 +116,8 @@ projects:
     download:
       url: "http://git.drupal.org/project/token.git"
       revision: "b17c78f"
-      patch: "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
+    patch:
+      - "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
 
 # profiles
 #  thunder:

@@ -40,18 +40,13 @@ Now merge the core to your project, you can merge a specific version tag or simp
 ### Install drupal
 Use the provided drush make file to create the site in the folder htdocs
 
-    ~/your-project-dir $ drush make --prepare-install thunder/thunder.yml htdocs
+    ~/your-project-dir $ drush make --prepare-install thunder.yml htdocs
 
 The document root of the project resides in the "htdocs" directory of the repository, point your webserver to this
 directory. Make sure you have created a MySQL database for your project have your database credentials ready.
-
-Copy the sample settings.local.php into the sited directory and edit the file to fill in your database credentials.
-
-    ~/your-project-dir $ cp thunder/example-settings/settings.local.php htdocs/sites/default/settings.local.php
-
 Include settings.local.php in htdocs/sites/default/settings.php (see the example at the bottom of the file)
 
 Now you can install drupal, first enter the drupal directory and use drush to install the site:
 
     ~/your-project-dir $ cd htdocs
-    ~/your-project-dir/htdocs $ drush site-install thunder --yes --notify --site-name="Project name" --account-name=admin --account-pass=admin --site-mail=admin@example.com
+    ~/your-project-dir/htdocs $ drush site-install standard --yes --notify --site-name="Project name" --account-name=admin --account-pass=admin --site-mail=admin@example.com
