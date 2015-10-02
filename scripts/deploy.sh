@@ -17,10 +17,22 @@ function deploy_to_acquia() {
    git config user.name "Travis"
    git config --global push.default simple
 
-   git add --all . >/dev/null
+   git add --all .
    git commit --quiet -m "$TRAVIS_COMMIT"
    git push
 }
+
+if [ $ACQUIA_REPOSITORY == "" ]
+then
+    echo "Build successful, pull requests can not be deployed, please provide $ACQUIA_REPOSITORY environment variable."
+    exit
+fi
+
+if [ $ACQUIA_HOST == "" ]
+then
+    echo "Build successful, pull requests can not be deployed, please provide $ACQUIA_HOST environment variable."
+    exit
+fi
 
 if [ $TRAVIS_PULL_REQUEST == "true" ]
 then
