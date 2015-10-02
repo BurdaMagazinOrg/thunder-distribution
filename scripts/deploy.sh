@@ -8,12 +8,17 @@ function deploy_to_acquia() {
    cd $TRAVIS_BUILD_DIR
 
    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
-   rsync -avh --delete htdocs acquia/docroot
+   rsync -ah --delete htdocs/ acquia/docroot/
 
    ls acquia/docroot/modules
    ls acquia/docroot/modules/contrib
 
    cd acquia/docroot
+
+   # is it possible to access original git user?
+   git config user.email "travis@example.com"
+   git config user.name "Travis"
+
    git add .
    git commit --quiet -m "$TRAVIS_COMMIT"
    git push
