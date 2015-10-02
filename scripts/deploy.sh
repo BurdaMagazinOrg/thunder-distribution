@@ -16,18 +16,30 @@ echo "On branch $TRAVIS_BRANCH"
 if [ $TRAVIS_BRANCH == "master" ]
 then
   echo 'Deploy to stage.'
-  git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
-  ls -l acquia
+  deploy_to_acquia
 elif [ $TRAVIS_BRANCH == "develop" ]
 then
   echo 'Deploy to testing.'
-  git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
-  ls -l acquia
+  deploy_to_acquia
 elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
 then
   echo 'Deploy to testing.'
-  git clone --branch develop $ACQUIA_REPOSITORY acquia
-  ls -l acquia
+  deploy_to_acquia
 else
    echo "Build successful, $TRAVIS_BRANCH will not be deployed"
 fi
+
+
+deploy_to_acquia() {
+   cd $TRAVIS_BUILD_DIR
+   git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
+   rsync -avh --delete htdocs acquia/docroot
+
+   ls acquia/docroot/modules
+   ls acquia/docroot/modules/contrib
+
+   cd acquia/docroot
+   git add .
+   git commit --quiet -m "$TRAVIS_COMMIT"
+   git push
+}
