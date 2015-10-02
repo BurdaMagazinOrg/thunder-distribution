@@ -10,16 +10,18 @@ defaults:
 # Drupal core
 projects:
   drupal:
-    download:
-      url: "http://git.drupal.org/project/drupal.git"
-      revision: "fc45b90ea3e89c083769744071675f168df37aab"
-      # patches runtests.sh to work with travis.
-      patch: "https://www.drupal.org/files/issues/2189345-67.patch"
-      # The line ending fix patches .gitattributes to
-      # not force line ending conversion on every file
-      patch: "patches/core/fix-line-ending.patch"
+    version: "8.0.0-beta16"
+    # patches runtests.sh to work with travis.
+    patch:
+      - "patches/core/fix-line-ending.patch"
 
 # modules
+  acquia_connector:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/acquia_connector.git"
+      revision: "f59d3ccf356e0087a0f1406533b92ab1f0362c25"
+
   devel:
     type: "module"
     download:
@@ -32,20 +34,31 @@ projects:
       url: "http://git.drupal.org/project/embed.git"
       revision: "22aa7d01f329b9b50ac37d1ce2ca7a8ee8eccdf5"
 
+  emptyparagraphkiller:
+    type: "module"
+    download:
+      url: "https://github.com/axe312ger/emptyparagraphkiller.git"
+      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
+
   entity_embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
       revision: "3e9ddc42bad060a085b76903d62155b0fe2a4013"
 
+  field_group:
+    type: "module"
+    download:
+      url: "https://github.com/webflo/field_group.git"
+      revision: "fc02a31d543090786797d7268831b1d2aa55eda4"
+
   focal_point:
     type: "module"
     download:
       url: "git://git.drupal.org/project/focal_point.git"
       revision: "f889c383a5b4953aebe19abfe13b880a3ec85d08"
-      patch: "https://www.drupal.org/files/issues/focal_point_media_entity.patch"
-      patch: "https://www.drupal.org/files/issues/focal_point_no_image.patch"
-      patch: "https://www.drupal.org/files/issues/focal_point_cache_tags.patch"
+    patch:
+      - "https://www.drupal.org/files/issues/focal_point_no_image.patch"
 
   globalredirect:
     type: "module"
@@ -59,6 +72,21 @@ projects:
       url: "http://git.drupal.org/project/google_analytics.git"
       revision: "4e7f0569274403fd3c4ed322eb59e26ec97a1fae"
 
+  inline_entity_form:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/inline_entity_form.git"
+      revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
+    patch:
+      - "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
+
+  ivw_integration:
+    type: "module"
+    subdir: "burda"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
+      directory_name: "ivw_integration"
+
   media_entity:
     type: "module"
     download:
@@ -71,19 +99,11 @@ projects:
       url: "git://git.drupal.org/project/metatag.git"
       revision: "9d12daedcb685beac313b0c3fb42c7244b8bd587"
 
-  inline_entity_form:
+  pathauto:
     type: "module"
     download:
-      url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
-      patch: "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
-
-  token:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/token.git"
-      revision: "b17c78f"
-      patch: "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
+      url: "https://github.com/md-systems/pathauto.git"
+      revision: "3350940ebd502826aff000b1c493673059e9aae6"
 
   stage_file_proxy:
     type: "module"
@@ -91,31 +111,20 @@ projects:
       url: "https://github.com/ueberbit/stage_file_proxy.git"
       revision: "e589007348a305756a3834ce3df0993d7068c292"
 
-  field_group:
+  token:
     type: "module"
     download:
-      url: "https://github.com/webflo/field_group.git"
-      revision: "fc02a31d543090786797d7268831b1d2aa55eda4"
-
-  emptyparagraphkiller:
-    type: "module"
-    download:
-      url: "https://github.com/axe312ger/emptyparagraphkiller.git"
-      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
-
-  ivw_integration:
-    type: "module"
-    subdir: "burda"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
-      directory_name: "ivw_integration"
+      url: "http://git.drupal.org/project/token.git"
+      revision: "b17c78f"
+    patch:
+      - "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
 
 # profiles
-  thunder:
-    type: "profile"
-    subdir: "burda"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/thunder-profile.git"
-      directory_name: "thunder"
-      branch: "develop"
+#  thunder:
+#    type: "profile"
+#    subdir: "burda"
+#    download:
+#      url: "git@github.com:BurdaMagazinOrg/thunder-profile.git"
+#      directory_name: "thunder"
+#      branch: "develop"
 

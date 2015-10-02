@@ -4,6 +4,12 @@ sudo: false
 php:
   - 5.6
 
+branches:
+  only:
+    - master
+    - develop
+    - acquia-deploy
+
 mysql:
   database: drupal
   username: root
@@ -16,7 +22,6 @@ cache:
     - $HOME/.drush/cache
 
 install:
-
   # Increase the MySQL connection timeout on the PHP end.
   - "mysql -e 'create database drupal;'"
 
@@ -25,9 +30,9 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Build Behat dependencies
-  - cd ./tests/thunder/behat
+  - cd ./tests/behat
   - travis_retry composer install --prefer-dist --no-interaction
-  - cd ../../../
+  - cd ../../
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
@@ -40,7 +45,7 @@ install:
 
   # Build the current branch
   - cd htdocs
-  - drush make --yes --concurrency=5 ../thunder.yml --prepare-install
+  - drush make --yes --concurrency=5 ../$PROJECT.yml --prepare-install
   - cd ../
 
   # Setup files
@@ -68,18 +73,20 @@ install:
   - mysql -e "SET GLOBAL max_allowed_packet = 33554432;"
 
 before_script:
+  - phpenv config-rm xdebug.ini
 
   - cd htdocs
-  - drush si thunder --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Thunder Kickstart" --yes
+  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
   - nc -zvv localhost 8888; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 8888..."; nc -zvv localhost 8888; out=$?; sleep 5; done
-  - cd ../tests/thunder/behat
+  - cd ../tests/behat
 
 script:
-
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
 
+after_success:
+  - $TRAVIS_BUILD_DIR/scripts/deploy.sh
