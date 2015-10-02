@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - develop
+    - acquia-deploy
 
 mysql:
   database: drupal
