@@ -21,6 +21,11 @@ then
   echo 'Deploy to testing.'
   git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
   ls -l acquia
+elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
+then
+  echo 'Deploy to testing.'
+  git clone --branch develop $ACQUIA_REPOSITORY acquia
+  ls -l acquia
 else
    echo "Build successful, $TRAVIS_BRANCH will not be deployed"
 fi
