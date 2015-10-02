@@ -1,38 +1,13 @@
 #!/bin/bash
 
-# no actual deploy is happening right now
-# this will be implement as soon as we have acquia cloud access
+function deploy_to_acquia() {
+   DESTINATION_BRANCH=$1
 
-if [ $TRAVIS_PULL_REQUEST == "true" ]
-then
-    echo "Build successful, pull requests will not be deployed"
-    exit
-fi
+   echo "Deploying $TRAVIS_BRANCH to $DESTINATION_BRANCH"
 
-ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
-
-echo "On branch $TRAVIS_BRANCH"
-
-if [ $TRAVIS_BRANCH == "master" ]
-then
-  echo 'Deploy to stage.'
-  deploy_to_acquia
-elif [ $TRAVIS_BRANCH == "develop" ]
-then
-  echo 'Deploy to testing.'
-  deploy_to_acquia
-elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
-then
-  echo 'Deploy to testing.'
-  deploy_to_acquia
-else
-   echo "Build successful, $TRAVIS_BRANCH will not be deployed"
-fi
-
-
-deploy_to_acquia() {
    cd $TRAVIS_BUILD_DIR
-   git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
+
+   git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
    rsync -avh --delete htdocs acquia/docroot
 
    ls acquia/docroot/modules
@@ -43,3 +18,27 @@ deploy_to_acquia() {
    git commit --quiet -m "$TRAVIS_COMMIT"
    git push
 }
+
+if [ $TRAVIS_PULL_REQUEST == "true" ]
+then
+    echo "Build successful, pull requests will not be deployed"
+    exit
+fi
+
+ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
+
+if [ $TRAVIS_BRANCH == "master" ]
+then
+  deploy_to_acquia master
+elif [ $TRAVIS_BRANCH == "develop" ]
+then
+  deploy_to_acquia develop
+elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
+then
+  deploy_to_acquia develop
+else
+   echo "Build successful, $TRAVIS_BRANCH will not be deployed"
+fi
+
+
+
