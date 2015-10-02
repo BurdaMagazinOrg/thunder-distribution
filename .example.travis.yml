@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - develop
+    - acquia-deploy
 
 mysql:
   database: drupal
@@ -84,11 +85,8 @@ before_script:
   - cd ../tests/behat
 
 script:
-
   # Run Behat tests.
   - ./bin/behat --config behat.travis.yml
 
 after_success:
-
-  - cd $TRAVIS_BUILD_DIR
-  - ./scripts/deploy.sh
+  - $TRAVIS_BUILD_DIR/scripts/deploy.sh
