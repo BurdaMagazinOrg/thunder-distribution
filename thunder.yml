@@ -4,8 +4,7 @@ api: 2
 defaults:
   projects:
     subdir: "contrib"
-    translations:
-      - de
+
 
 # Drupal core
 projects:
@@ -14,6 +13,8 @@ projects:
     # patches runtests.sh to work with travis.
     patch:
       - "patches/core/fix-line-ending.patch"
+    translations:
+      - de
 
 # modules
   acquia_connector:
@@ -104,6 +105,12 @@ projects:
     download:
       url: "https://github.com/md-systems/pathauto.git"
       revision: "3350940ebd502826aff000b1c493673059e9aae6"
+
+  scheduler:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/scheduler.git"
+      revision: "382b793ef09710505c9915daf0769111e917a496"
 
   stage_file_proxy:
     type: "module"
