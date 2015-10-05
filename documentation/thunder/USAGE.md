@@ -38,15 +38,15 @@ Now merge the core to your project, you can merge a specific version tag or simp
     ~/your-project-dir $ git merge upstream/master
 
 ### Install drupal
-Use the provided drush make file to create the site in the folder htdocs
+Use the provided drush make file to create the site in the folder docroot
 
-    ~/your-project-dir $ drush make --prepare-install thunder.yml htdocs
+    ~/your-project-dir $ drush make --prepare-install thunder.yml docroot
 
-The document root of the project resides in the "htdocs" directory of the repository, point your webserver to this
+The document root of the project resides in the "docroot" directory of the repository, point your webserver to this
 directory. Make sure you have created a MySQL database for your project have your database credentials ready.
-Include settings.local.php in htdocs/sites/default/settings.php (see the example at the bottom of the file)
+Include settings.local.php in docroot/sites/default/settings.php (see the example at the bottom of the file)
 
 Now you can install drupal, first enter the drupal directory and use drush to install the site:
 
-    ~/your-project-dir $ cd htdocs
-    ~/your-project-dir/htdocs $ drush site-install standard --yes --notify --site-name="Project name" --account-name=admin --account-pass=admin --site-mail=admin@example.com
+    ~/your-project-dir $ cd docroot
+    ~/your-project-dir/docroot $ drush site-install standard --yes --notify --site-name="Project name" --account-name=admin --account-pass=admin --site-mail=admin@example.com

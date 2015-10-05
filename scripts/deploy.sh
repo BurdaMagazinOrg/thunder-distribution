@@ -8,7 +8,7 @@ function deploy_to_acquia() {
    cd $TRAVIS_BUILD_DIR
 
    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
-   rsync -ah --delete htdocs/ acquia/docroot/
+   rsync -ah --delete docroot/ acquia/docroot/
 
    cd acquia/docroot
 

@@ -36,20 +36,20 @@ install:
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
-  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/htdocs"}}}}'
+  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/docroot"}}}}'
   - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$TRAVIS_BUILD_DIR#`
   - export BEHAT_PARAMS
 
   # Build Codebase
-  - mkdir htdocs
+  - mkdir docroot
 
   # Build the current branch
-  - cd htdocs
+  - cd docroot
   - drush make --yes --concurrency=5 ../$PROJECT.yml --prepare-install
   - cd ../
 
   # Setup files
-  - chmod -R 777 htdocs/sites/default
+  - chmod -R 777 docroot/sites/default
 
   # Setup display for Selenium
   - export DISPLAY=:99.0
@@ -75,7 +75,7 @@ install:
 before_script:
   - phpenv config-rm xdebug.ini
 
-  - cd htdocs
+  - cd docroot
   - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
   - drush pm-uninstall dblog --yes
 
