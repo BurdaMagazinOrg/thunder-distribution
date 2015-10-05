@@ -22,10 +22,6 @@ $settings['hash_salt'] = 'sdklskfjslökdj987sd98f7sddf';
 
 // disable render cache
 $settings['cache']['bins']['render'] = 'cache.backend.null';
-/**
- * Keep production settings in configuration files,
- * override them here for development / stage
- */
 $config['system.logging']['error_level'] = 'verbose';
 
 // disable css/js preprocessing
