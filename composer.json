@@ -1,0 +1,6 @@
+{
+  "require-dev": {
+    "phing/phing": "2.*",
+    "drush/drush": "dev-master"
+  }
+}
