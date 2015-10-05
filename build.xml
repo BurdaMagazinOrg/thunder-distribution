@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${project_name}" default="dist">
+    <property file="build.properties"/>
+    <resolvepath propertyName="base.dir" file="./"/>
+    <target name="make">
+        <if>
+            <available file='${base.dir}/docroot' type='dir'/>
+            <then>
+                <delete dir="${base.dir}/docroot" failonerror="false"/>
+            </then>
+        </if>
+        <drush command="make">
+            <param>${makefile}</param>
+            <param>${base.dir}/docroot</param>
+        </drush>
+        <symlink target="${base.dir}/modules" link="${base.dir}/docroot/modules/custom" overwrite="true"/>
+        <if>
+            <available file='${base.dir}/profiles' type='dir'/>
+            <then>
+                <symlink target="${base.dir}/profiles" link="${base.dir}/docroot/profiles/custom" overwrite="true"/>
+            </then>
+        </if>
+        <if>
+            <available file='${base.dir}/themes' type='dir'/>
+            <then>
+                <symlink target="${base.dir}/themes" link="${base.dir}/docroot/themes/custom" overwrite="true"/>
+            </then>
+        </if>
+        <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
+        <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
+        <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}"/>
+    </target>
+    <target name="update" depends="make">
+        <chmod file="${base.dir}/docroot/sites/default/files" mode="0775"/>
+        <drush command="cim" root="${base.dir}/docroot" assume="yes">
+            <param>staging</param>
+        </drush>
+    </target>
+    <includepath classpath="tools/phing"/>
+    <taskdef name="drush" classname="DrushTask"/>
+    <taskdef name="drupal_db_settings" classname="DrupalDbSettingsTask"/>
+</project>

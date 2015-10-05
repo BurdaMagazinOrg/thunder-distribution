@@ -16,12 +16,20 @@ commands will work differently, please consult the given links to external docum
 * git
 * drush
 
-### Install drush
+### Install drush and phing
 Drush is the command line interface to drupal, most administrative and deployment tasks can be performed with it, 
-the easiest way to install it is with composer [get composer](https://getcomposer.org/download/). 
-For the BDD Drush 8 is required, which is the current dev-master branch of drush.
+the easiest way to install it is with composer [get composer](https://getcomposer.org/download/). Phing is used to automate the build process
+For the BDD Drush 8 is required, which is the current dev-master branch of drush. A composer.json is provided to install drush and phing
+locally, or you can install both globally
 
-    ~/your-project-dir $ composer global require drush/drush:dev-master
+Local install:
+
+    ~/your-project-dir $ composer install
+    
+This will install drush and phing inside the vendor directory, to have an easier access, you can install them globally:
+ 
+    ~/your-project-dir $ composer global require drush/drush:dev-master 
+    ~/your-project-dir $ composer global require phing/phing:2.*
     ~/your-project-dir $ export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 More information about [drush](http://docs.drush.org/) and [drush installation](http://docs.drush.org/en/master/install/)
@@ -38,6 +46,15 @@ Now merge the core to your project, you can merge a specific version tag or simp
     ~/your-project-dir $ git merge upstream/master
 
 ### Install drupal
+Copy and edit the example settings files in the settings folder
+
+    ~/your-project-dir $ cp settings/example.settings.acquia.php settings/settings.php
+    ~/your-project-dir $ cp settings/example.settings.local.php settings/settings.local.php
+
+Copy example build properties file and change it accordingly
+
+    ~/your-project-dir $ cp example.build.process build.process
+
 Use the provided drush make file to create the site in the folder docroot
 
     ~/your-project-dir $ drush make --prepare-install thunder.yml docroot
