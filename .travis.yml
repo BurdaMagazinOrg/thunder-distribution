@@ -85,4 +85,4 @@ script:
   - ./bin/behat --config behat.travis.yml
 
 after_success:
-  - $TRAVIS_BUILD_DIR/scripts/travis/deploy.sh
+  - $TRAVIS_BUILD_DIR/travis/scripts/deploy.sh
