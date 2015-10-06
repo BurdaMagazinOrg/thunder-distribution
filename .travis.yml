@@ -35,13 +35,9 @@ install:
   - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$TRAVIS_BUILD_DIR#`
   - export BEHAT_PARAMS
 
-  # Build Codebase
-  - mkdir docroot
-
   # Build the current branch
   - cp travis/travis.build.properties build.properties
   - cp travis/travis.settings.local.php settings/settings.local.php
-  - cp settings/example.settings.acquia.php settings/settings.acquia.php
   - phing make
 
   # Setup files
