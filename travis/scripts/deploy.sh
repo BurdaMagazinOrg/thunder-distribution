@@ -7,6 +7,7 @@ function deploy_to_acquia() {
 
    cd $TRAVIS_BUILD_DIR
    chmod a+rwx docroot/sites/default/settings.php
+   chmod a+rwx docroot/sites/default/settings.local.php
    cp settings/settings.acquia.php docroot/sites/default/settings.php
    rm docroot/sites/default/settings.local.php
    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
