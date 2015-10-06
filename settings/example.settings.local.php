@@ -2,15 +2,6 @@
 // enable dev services
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
 
-$databases['default']['default'] = array(
-  'driver' => 'mysql',
-  'database' => '<database>',
-  'username' => '<user>',
-  'password' => '<password>',
-  'host' => '<host>',
-  'prefix' => '',
-);
-
 $config_directories['active'] = '../config/active';
 $config_directories['staging'] = '../config/staging';
 
@@ -27,6 +18,3 @@ $config['system.logging']['error_level'] = 'verbose';
 // disable css/js preprocessing
 $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
-
-
-
