@@ -6,7 +6,7 @@ function deploy_to_acquia() {
    echo "Deploying $TRAVIS_BRANCH to $DESTINATION_BRANCH"
 
    cd $TRAVIS_BUILD_DIR
-   cp settings/settings.acquia.php docroot/sites/default/settings.php
+   cp settings/example.settings.acquia.php docroot/sites/default/settings.php
    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
    rsync -ah --delete docroot/ acquia/docroot/
 
