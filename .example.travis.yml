@@ -14,6 +14,7 @@ mysql:
   username: root
   encoding: utf8
 
+
 # Cache Composer & Drush directories.
 cache:
   directories:
@@ -25,8 +26,8 @@ install:
   - "mysql -e 'create database drupal;'"
 
   - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "drush/drush:dev-master"
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - travis_retry composer install --prefer-dist --no-interaction
+  - export PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
 
   # Build Behat dependencies
   - cd ./tests/behat
@@ -39,13 +40,10 @@ install:
   - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$TRAVIS_BUILD_DIR#`
   - export BEHAT_PARAMS
 
-  # Build Codebase
-  - mkdir docroot
-
   # Build the current branch
-  - cd docroot
-  - drush make --yes --concurrency=5 ../$PROJECT.yml --prepare-install
-  - cd ../
+  - cp travis/travis.build.properties build.properties
+  - cp travis/travis.settings.local.php settings/settings.local.php
+  - phing make
 
   # Setup files
   - chmod -R 777 docroot/sites/default
@@ -75,7 +73,7 @@ before_script:
   - phpenv config-rm xdebug.ini
 
   - cd docroot
-  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+  - drush si standard --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
@@ -88,4 +86,4 @@ script:
   - ./bin/behat --config behat.travis.yml
 
 after_success:
-  - $TRAVIS_BUILD_DIR/scripts/deploy.sh
+  - $TRAVIS_BUILD_DIR/travis/scripts/deploy.sh
