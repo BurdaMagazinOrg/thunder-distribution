@@ -700,5 +700,6 @@ if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/d8instyle/d8instyle-settings.inc');
 }
 
+$settings['install_profile'] = '<insert your profile>';
 $config_directories['active'] = '../config/active';
 $config_directories['staging'] = '../config/staging';
