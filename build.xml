@@ -22,7 +22,7 @@
                 <if>
                     <available file='${base.dir}/profiles' type='dir'/>
                     <then>
-                        <copy todir="${base.dir}/docroot/profiles/custom" overwrite="true">
+                        <copy todir="${base.dir}/docroot/profiles" overwrite="true">
                             <fileset dir="${base.dir}/profiles/" >
                             </fileset>
                         </copy>
