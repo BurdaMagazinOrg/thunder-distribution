@@ -12,6 +12,8 @@ class DrupalDbSettingsTask extends Task
     private $dbUser = null;
     private $dbPassword = null;
     private $name = null;
+    private $dbHost = null;
+    private $dbPort = null;
 
 
     private $settingsFile = null;
@@ -71,6 +73,20 @@ class DrupalDbSettingsTask extends Task
         $this->name = $name;
     }
 
+    /**
+     * @param null $dbHost
+     */
+    public function setDbHost($dbHost) {
+        $this->dbHost = $dbHost;
+    }
+
+    /**
+     * @param null $dbPort
+     */
+    public function setDbPort($dbPort) {
+        $this->dbPort = $dbPort;
+    }
+
 
     /**
      * The init method: Do init steps.
@@ -92,8 +108,8 @@ class DrupalDbSettingsTask extends Task
   'username' => '$this->dbUser',
   'password' => '$this->dbPassword',
   'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
+  'host' => $this->dbHost,
+  'port' => $this->dbPort,
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
