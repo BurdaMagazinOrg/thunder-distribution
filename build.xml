@@ -57,7 +57,7 @@
 
         <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
         <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
-        <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}"/>
+        <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
     </target>
     <target name="update" depends="make">
         <chmod file="${base.dir}/docroot/sites/default/files" mode="0775"/>
