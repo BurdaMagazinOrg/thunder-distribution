@@ -38,7 +38,7 @@ then
     exit
 fi
 
-if [ $TRAVIS_PULL_REQUEST == "true" ]
+if [ $TRAVIS_PULL_REQUEST != "true" ]
 then
     echo "Build successful, pull requests will not be deployed"
     exit
