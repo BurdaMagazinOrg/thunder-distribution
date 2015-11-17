@@ -6,6 +6,7 @@ function deploy_to_acquia() {
    echo "Deploying $TRAVIS_BRANCH to $DESTINATION_BRANCH"
 
    cd $TRAVIS_BUILD_DIR
+   LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
    cp settings/settings.acquia.php docroot/sites/default/settings.php
@@ -22,7 +23,7 @@ function deploy_to_acquia() {
    git config --global push.default simple
 
    git add --all .
-   git commit --quiet -m "$TRAVIS_COMMIT"
+   git commit --quiet -m "$LAST_COMMIT_INFO"
    git push
 }
 
