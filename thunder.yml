@@ -23,6 +23,21 @@ projects:
       url: "http://git.drupal.org/project/acquia_connector.git"
       revision: "f59d3ccf356e0087a0f1406533b92ab1f0362c25"
 
+  ad_integration:
+    type: "module"
+    subdir: "thunder"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
+      revision: "ee15d60416ec0614621a6307e60c358651d89086"
+      directory_name: "ad_integration"
+
+  breakpoints_js_settings:
+    type: "module"
+    subdir: "thunder"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-breakpoints_js_settings.git"
+      directory_name: "breakpoints_js_settings"
+
   devel:
     type: "module"
     download:
