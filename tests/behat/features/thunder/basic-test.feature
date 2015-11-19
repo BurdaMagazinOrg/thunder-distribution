@@ -5,10 +5,11 @@ Feature: basic functionalities
     Then the response status code should be 200
 
   Scenario: Login Error messages
-    Given I am on "/user"
-    When for "Username" I enter "admin"
-    And for "Password" I enter "admin"
-    And I press "Log in"
+    Given I am an anonymous user
+    And I am on "user"
+    Then I fill in "admin" for "edit-name"
+    And I fill in "admin" for "edit-pass"
+    And I press "edit-submit"
     And I should not see the following error messages:
       | error messages                                                                |
       | Password field is required                                                    |
