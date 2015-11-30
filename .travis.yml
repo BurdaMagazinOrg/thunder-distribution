@@ -73,7 +73,7 @@ before_script:
   - phpenv config-rm xdebug.ini
 
   - cd docroot
-  - drush si standard --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
