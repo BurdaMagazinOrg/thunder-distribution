@@ -24,12 +24,13 @@ function deploy_to_acquia() {
 
    git add --all .
    git commit --quiet -m "$LAST_COMMIT_INFO"
-   git push
    if [ "$TRAVIS_TAG" != "" ]
    then
     git tag $TRAVIS_TAG
     git push origin $TRAVIS_TAG
    fi
+
+   git push
 }
 
 if [ $ACQUIA_REPOSITORY == "" ]
