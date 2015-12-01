@@ -12,6 +12,7 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "2.*",
-    "drush/drush": "dev-master"
+    "drush/drush": "8.0.0",
+    "drupal/console": "dev-master"
   }
 }
