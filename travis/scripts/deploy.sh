@@ -20,6 +20,8 @@ function deploy_to_acquia() {
    rsync -ah --delete config/staging/ acquia/config/staging/
 
    cd acquia
+   # do not fix line endings, keep everything as is
+   echo "* -text" > docroot/.gitattributes
 
    # is it possible to access original git user?
    git config user.email "$LAST_COMMIT_USER_EMAIL"
