@@ -7,6 +7,10 @@ function deploy_to_acquia() {
 
    cd $TRAVIS_BUILD_DIR
    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
+   LAST_COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
+   LAST_COMMIT_USER=$(git show -s --format="%an")
+   LAST_COMMIT_USER_EMAIL=$(git show -s --format="%ae")
+
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
    cp settings/settings.acquia.php docroot/sites/default/settings.php
@@ -18,16 +22,17 @@ function deploy_to_acquia() {
    cd acquia
 
    # is it possible to access original git user?
-   git config user.email "travis@example.com"
-   git config user.name "Travis"
+   git config user.email "$LAST_COMMIT_USER_EMAIL"
+   git config user.name "$LAST_COMMIT_USER"
    git config --global push.default simple
 
    git add --all .
    git commit --quiet -m "$LAST_COMMIT_INFO"
-   if [ "$TRAVIS_TAG" != "" ]
+
+   if [ "$LAST_COMMIT_TAG" != "" ]
    then
-    git tag $TRAVIS_TAG
-    git push origin $TRAVIS_TAG
+    git tag $LAST_COMMIT_TAG
+    git push origin $LAST_COMMIT_TAG
    fi
 
    git push
