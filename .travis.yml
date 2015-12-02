@@ -9,11 +9,14 @@ branches:
     - master
     - develop
     - testing
+    - /^hotfix/
+    - /^v-[0-9]+\.[0-9]+\.[0-9]+/
 
 mysql:
   database: drupal
   username: root
   encoding: utf8
+
 
 # Cache Composer & Drush directories.
 cache:
@@ -41,9 +44,9 @@ install:
   - export BEHAT_PARAMS
 
   # Build the current branch
-  - cp travis/travis.build.properties build.properties
-  - cp travis/travis.settings.local.php settings/settings.local.php
+  - echo "environment=travis" >> build.properties
   - phing make
+  - cp travis/travis.settings.php docroot/sites/default/settings.php
 
   # Setup files
   - chmod -R 777 docroot/sites/default
@@ -73,7 +76,12 @@ before_script:
   - phpenv config-rm xdebug.ini
 
   - cd docroot
-  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+  - drush si <insert profile> --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+  - drush cset system.site uuid <insert site uuid> --yes
+  - drush cr
+  - drush config-import --source=../config/staging --yes
+  - drush updb --yes
+  - drush config-import --source=../config/staging --yes
   - drush pm-uninstall dblog --yes
 
   # Start server
