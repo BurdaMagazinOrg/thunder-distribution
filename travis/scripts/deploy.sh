@@ -40,6 +40,9 @@ function deploy_to_acquia() {
    git push
 }
 
+echo "tag: $TRAVIS_TAG"
+
+
 if [ $ACQUIA_REPOSITORY == "" ]
 then
     echo "Build successful, pull requests can not be deployed, please provide $ACQUIA_REPOSITORY environment variable."
