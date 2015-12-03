@@ -7,9 +7,15 @@ function deploy_to_acquia() {
 
    cd $TRAVIS_BUILD_DIR
    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
-   LAST_COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
    LAST_COMMIT_USER=$(git show -s --format="%an")
    LAST_COMMIT_USER_EMAIL=$(git show -s --format="%ae")
+
+   if [ "$TRAVIS_TAG" != "" ]
+   then
+    COMMIT_TAG=$TRAVIS_TAG
+   else
+    COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
+   fi
 
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
@@ -31,17 +37,14 @@ function deploy_to_acquia() {
    git add --all .
    git commit --quiet -m "$LAST_COMMIT_INFO"
 
-   if [ "$LAST_COMMIT_TAG" != "" ]
+   if [ "$COMMIT_TAG" != "" ]
    then
-    git tag $LAST_COMMIT_TAG
-    git push origin $LAST_COMMIT_TAG
+    git tag $COMMIT_TAG
+    git push origin $COMMIT_TAG
    fi
 
    git push
 }
-
-echo "tag: $TRAVIS_TAG"
-
 
 if [ $ACQUIA_REPOSITORY == "" ]
 then
@@ -63,13 +66,14 @@ fi
 
 ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
 
+if [ $TRAVIS_TAG != "" ]
+then
+  deploy_to_acquia $TRAVIS_BRANCH
+fi
 if [ $TRAVIS_BRANCH == "master" ]
 then
   deploy_to_acquia master
 elif [ $TRAVIS_BRANCH == "develop" ]
-then
-  deploy_to_acquia develop
-elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
 then
   deploy_to_acquia develop
 else
