@@ -77,12 +77,7 @@ before_script:
 
   - cd docroot
   - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
-  - drush cset system.site uuid <insert site uuid> --yes
-  - drush cr
-  - drush config-import --source=../config/staging --yes
-  - drush updb --yes
-  - drush config-import --source=../config/staging --yes
-  - drush pm-uninstall dblog --yes
+
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
