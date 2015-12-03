@@ -93,7 +93,9 @@ projects:
 
   imagemagick:
     type: "module"
-    version: "1.0-alpha1"
+    download:
+      url: "http://git.drupal.org/project/imagemagick.git"
+      revision: "c762940d174343dfb6c2eb403e177af4ddc09b95"
 
   inline_entity_form:
     type: "module"
