@@ -9,19 +9,21 @@ function deploy_to_acquia() {
    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
    LAST_COMMIT_USER=$(git show -s --format="%an")
    LAST_COMMIT_USER_EMAIL=$(git show -s --format="%ae")
-
-   if [ "$TRAVIS_TAG" != "" ]
-   then
-    COMMIT_TAG=$TRAVIS_TAG
-   else
-    COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
-   fi
+   COMMIT_TAG=$TRAVIS_TAG
 
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
    cp settings/settings.acquia.php docroot/sites/default/settings.php
    rm docroot/sites/default/settings.local.php
-   git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
+
+
+   if [ "$COMMIT_TAG" != "" ]
+   then
+    git clone $ACQUIA_REPOSITORY acquia
+   else
+    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
+   fi
+
    rsync -ah --delete docroot/ acquia/docroot/
    rsync -ah --delete config/staging/ acquia/config/staging/
 
@@ -29,7 +31,6 @@ function deploy_to_acquia() {
    # do not fix line endings, keep everything as is
    echo "* -text" > docroot/.gitattributes
 
-   # is it possible to access original git user?
    git config user.email "$LAST_COMMIT_USER_EMAIL"
    git config user.name "$LAST_COMMIT_USER"
    git config --global push.default simple
@@ -41,9 +42,9 @@ function deploy_to_acquia() {
    then
     git tag $COMMIT_TAG
     git push origin $COMMIT_TAG
+   else
+    git push
    fi
-
-   git push
 }
 
 if [ $ACQUIA_REPOSITORY == "" ]
@@ -69,8 +70,7 @@ ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
 if [ "$TRAVIS_TAG" != "" ]
 then
   deploy_to_acquia $TRAVIS_BRANCH
-fi
-if [ "$TRAVIS_BRANCH" == "master" ]
+elif [ "$TRAVIS_BRANCH" == "master" ]
 then
   deploy_to_acquia master
 elif [ "$TRAVIS_BRANCH" == "develop" ]
