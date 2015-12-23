@@ -34,7 +34,7 @@ projects:
     subdir: "thunder"
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
-      revision: "3277b8c5102c3ba3ce79c8ed73999ff3db085ed0"
+      revision: "2b3ef27eaf6b0c2d60984ab227657660927a11fa"
       directory_name: "ad_integration"
 
   breakpoints_js_settings:
