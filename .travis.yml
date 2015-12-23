@@ -9,7 +9,7 @@ branches:
     - master
     - develop
     - /^hotfix/
-    - /^v-[0-9]+\.[0-9]+\.[0-9]+/
+    - /^v[0-9]+\.[0-9]+\.[0-9]+/
 
 mysql:
   database: drupal
