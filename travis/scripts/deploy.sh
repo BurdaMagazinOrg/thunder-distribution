@@ -9,7 +9,12 @@ function deploy_to_acquia() {
    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
    LAST_COMMIT_USER=$(git show -s --format="%an")
    LAST_COMMIT_USER_EMAIL=$(git show -s --format="%ae")
-   COMMIT_TAG=$TRAVIS_TAG
+   if [ "$TRAVIS_TAG" == "" ]
+   then
+    COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
+   else
+    COMMIT_TAG=$TRAVIS_TAG
+   fi
 
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
@@ -17,12 +22,14 @@ function deploy_to_acquia() {
    rm docroot/sites/default/settings.local.php
 
 
-   if [ "$COMMIT_TAG" != "" ]
+   if [ "$COMMIT_TAG" == "" ]
    then
-    git clone $ACQUIA_REPOSITORY acquia
-   else
     git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
+   else
+    git clone $ACQUIA_REPOSITORY acquia
    fi
+
+   mkdir -p acquia/config
 
    rsync -ah --delete docroot/ acquia/docroot/
    rsync -ah --delete config/staging/ acquia/config/staging/
@@ -41,10 +48,9 @@ function deploy_to_acquia() {
    if [ "$COMMIT_TAG" != "" ]
    then
     git tag $COMMIT_TAG
-    git push origin $COMMIT_TAG
-   else
-    git push
    fi
+
+   git push --all
 }
 
 if [ $ACQUIA_REPOSITORY == "" ]
