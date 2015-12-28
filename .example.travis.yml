@@ -8,8 +8,9 @@ branches:
   only:
     - master
     - develop
+    - testing
     - /^hotfix/
-    - /^v-[0-9]+\.[0-9]+\.[0-9]+/
+    - /^v[0-9]+\.[0-9]+\.[0-9]+/
 
 mysql:
   database: drupal
@@ -75,13 +76,8 @@ before_script:
   - phpenv config-rm xdebug.ini
 
   - cd docroot
-  - drush si <insert profile> --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
-  - drush cset system.site uuid <insert site uuid> --yes
-  - drush cr
-  - drush config-import --source=../config/staging --yes
-  - drush updb --yes
-  - drush config-import --source=../config/staging --yes
-  - drush pm-uninstall dblog --yes
+  - drush si <insert-your-profile> --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
