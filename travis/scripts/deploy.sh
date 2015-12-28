@@ -19,20 +19,27 @@ function deploy_to_acquia() {
    cp settings/settings.acquia.php docroot/sites/default/settings.php
    rm docroot/sites/default/settings.local.php
 
+   git clone $ACQUIA_REPOSITORY acquia
+   cd acquia
 
    if [ "$COMMIT_TAG" == "" ]
    then
-    git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
-   else
-    git clone $ACQUIA_REPOSITORY acquia
+    git rev-parse --verify testing > /dev/null 2>&1
+    if [ "$?" = "0" ]
+    then
+        git checkout $TRAVIS_BRANCH
+    else
+        git checkout -b $TRAVIS_BRANCH
+        git push -u origin $TRAVIS_BRANCH
+    fi
    fi
 
-   mkdir -p acquia/config
+   mkdir -p config
 
-   rsync -ah --delete docroot/ acquia/docroot/
-   rsync -ah --delete config/staging/ acquia/config/staging/
+   rsync -ah --delete docroot/ docroot/
+   rsync -ah --delete config/staging/ config/staging/
 
-   cd acquia
+
    # do not fix line endings, keep everything as is
    echo "* -text" > docroot/.gitattributes
 
