@@ -36,8 +36,8 @@ function deploy_to_acquia() {
 
    mkdir -p config
 
-   rsync -ah --delete docroot/ docroot/
-   rsync -ah --delete config/staging/ config/staging/
+   rsync -ah --delete ../docroot/ docroot/
+   rsync -ah --delete ../config/staging/ config/staging/
 
 
    # do not fix line endings, keep everything as is
