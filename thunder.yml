@@ -9,7 +9,7 @@ defaults:
 # Drupal core
 projects:
   drupal:
-    version: "8.0.0"
+    version: "8.0.1"
     # patches runtests.sh to work with travis.
     patch:
       - "patches/core/fix-line-ending.patch"
@@ -26,15 +26,15 @@ projects:
   acquia_lift:
     type: "module"
     download:
-      url: "http://git.drupal.org/project/acquia_lift.git"
-      revision: "70f5a91a996656e3bd5af6bcfa0712ed1b2a39a5"
+      url: "https://github.com/acquia/acquia_lift.git"
+      revision: "9df5c88d92cdc5fd02d022b5fcdc8d2681ba946f"
 
   ad_integration:
     type: "module"
     subdir: "thunder"
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
-      revision: "72f52f517a2082e14ed737db0ef32cef6d3f0b77"
+      revision: "2b3ef27eaf6b0c2d60984ab227657660927a11fa"
       directory_name: "ad_integration"
 
   breakpoints_js_settings:
@@ -93,7 +93,9 @@ projects:
 
   imagemagick:
     type: "module"
-    version: "1.0-alpha1"
+    download:
+      url: "http://git.drupal.org/project/imagemagick.git"
+      revision: "c762940d174343dfb6c2eb403e177af4ddc09b95"
 
   inline_entity_form:
     type: "module"
@@ -106,7 +108,7 @@ projects:
     subdir: "thunder"
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
-      reision: "6d424dff3b3aabe3620b446702bd106686f80ec8"
+      revision: "1d2a4e5071211e25d5c005b84d7f4b4a7ddb6335"
       directory_name: "ivw_integration"
 
   media_entity:
