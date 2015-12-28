@@ -16,6 +16,8 @@ function deploy_to_acquia() {
     COMMIT_TAG=$TRAVIS_TAG
    fi
 
+   print "tag: $COMMIT_TAG"
+
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
    cp settings/settings.acquia.php docroot/sites/default/settings.php
