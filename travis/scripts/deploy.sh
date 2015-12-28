@@ -54,8 +54,9 @@ function deploy_to_acquia() {
    then
     git tag $COMMIT_TAG
     git push origin $COMMIT_TAG
+   else
+    git push origin $TRAVIS_BRANCH
    fi
-   git push
 }
 
 if [ $ACQUIA_REPOSITORY == "" ]
