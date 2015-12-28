@@ -12,6 +12,7 @@
         <drush command="make">
             <param>${makefile}</param>
             <param>${base.dir}/docroot</param>
+            <option name="working-copy"></option>
         </drush>
         <if>
             <equals arg1="${environment}" arg2="travis" />
