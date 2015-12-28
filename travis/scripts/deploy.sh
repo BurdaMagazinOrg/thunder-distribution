@@ -47,12 +47,10 @@ function deploy_to_acquia() {
 
    if [ "$COMMIT_TAG" != "" ]
    then
-    echo "tagging: $COMMIT_TAG"
     git tag $COMMIT_TAG
     git push origin $COMMIT_TAG
    fi
-
-   git push --all
+   git push
 }
 
 if [ $ACQUIA_REPOSITORY == "" ]
