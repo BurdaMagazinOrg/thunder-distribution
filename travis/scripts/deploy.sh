@@ -16,8 +16,6 @@ function deploy_to_acquia() {
     COMMIT_TAG=$TRAVIS_TAG
    fi
 
-   print "tag: $COMMIT_TAG"
-
    chmod a+rwx docroot/sites/default/settings.php
    chmod a+rwx docroot/sites/default
    cp settings/settings.acquia.php docroot/sites/default/settings.php
@@ -49,7 +47,9 @@ function deploy_to_acquia() {
 
    if [ "$COMMIT_TAG" != "" ]
    then
+    echo "tagging: $COMMIT_TAG"
     git tag $COMMIT_TAG
+    git push origin $COMMIT_TAG
    fi
 
    git push --all
