@@ -73,15 +73,4 @@ fi
 
 ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
 
-if [ "$TRAVIS_TAG" != "" ]
-then
-  deploy_to_acquia $TRAVIS_BRANCH
-elif [ "$TRAVIS_BRANCH" == "master" ]
-then
-  deploy_to_acquia master
-elif [ "$TRAVIS_BRANCH" == "develop" ]
-then
-  deploy_to_acquia develop
-else
-   echo "Build successful, $TRAVIS_BRANCH will not be deployed"
-fi
+deploy_to_acquia $TRAVIS_BRANCH
