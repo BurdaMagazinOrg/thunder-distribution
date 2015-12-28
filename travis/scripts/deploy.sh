@@ -1,9 +1,7 @@
 #!/bin/bash
 
 function deploy_to_acquia() {
-   DESTINATION_BRANCH=$1
-
-   echo "Deploying $TRAVIS_BRANCH to $DESTINATION_BRANCH"
+   echo "Deploying $TRAVIS_BRANCH"
 
    cd $TRAVIS_BUILD_DIR
    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
@@ -24,7 +22,7 @@ function deploy_to_acquia() {
 
    if [ "$COMMIT_TAG" == "" ]
    then
-    git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
+    git clone --branch $TRAVIS_BRANCH $ACQUIA_REPOSITORY acquia
    else
     git clone $ACQUIA_REPOSITORY acquia
    fi
@@ -73,4 +71,4 @@ fi
 
 ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
 
-deploy_to_acquia $TRAVIS_BRANCH
+deploy_to_acquia
