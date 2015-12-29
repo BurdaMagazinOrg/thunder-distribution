@@ -58,7 +58,7 @@ function deploy_to_acquia() {
     git commit --quiet -m "$LAST_COMMIT_INFO"
 
     if [ "$COMMIT_TAG" != "" ]
-        then
+    then
         git tag $COMMIT_TAG
         git push origin $COMMIT_TAG
     else
