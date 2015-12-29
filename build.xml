@@ -53,6 +53,7 @@
                         <symlink target="${base.dir}/themes" link="${base.dir}/docroot/themes/custom" overwrite="true"/>
                     </then>
                 </if>
+                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="777"/>
             </else>
         </if>
 
@@ -61,7 +62,7 @@
         <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
     </target>
     <target name="update" depends="make">
-        <chmod file="${base.dir}/docroot/sites/default/files" mode="0775"/>
+        <chmod file="${base.dir}/docroot/sites/default/files" mode="0777"/>
         <drush command="cim" root="${base.dir}/docroot" assume="yes">
             <param>staging</param>
         </drush>
