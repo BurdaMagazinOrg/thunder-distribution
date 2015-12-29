@@ -41,7 +41,7 @@ function deploy_to_acquia() {
         fi
     fi
 
-    mkdir -p config
+    mkdir -pv config
 
     rsync -ah --delete ../docroot/ docroot/
     rsync -ah --delete ../config/staging/ config/staging/
