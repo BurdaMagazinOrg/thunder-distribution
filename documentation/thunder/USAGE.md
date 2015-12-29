@@ -92,5 +92,8 @@ Now you can install drupal, first enter the drupal directory and use drush to in
 #### Prepare travis
 Copy .example.travis.yml to .travis.yml, open the file and replace <insert-your-profile> with your installation profile.
 
-    ~/your-project-dir $ cp .example.travis.yml .travis.yml
+    ~/your-project-dir $ cp tracis/.example.travis.yml .travis.yml
  
+Copy example.travis.settings.php to travis.settings.php. This is the drupal settings file for travis.
+
+    ~/your-project-dir $ cp tracis/example.travis.settings.php travis.settings.php

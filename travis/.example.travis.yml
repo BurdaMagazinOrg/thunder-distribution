@@ -79,8 +79,7 @@ before_script:
   - phpenv config-rm xdebug.ini
 
   - cd docroot
-  - drush si <insert-your-profile> --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
-
+  - drush si <insert-your-profile> --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
