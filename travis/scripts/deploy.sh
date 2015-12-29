@@ -29,7 +29,7 @@ function deploy_to_acquia() {
 
     if [ "$COMMIT_TAG" == "" ]
     then
-        git rev-parse --verify testing > /dev/null 2>&1
+        git rev-parse --verify $TRAVIS_BRANCH > /dev/null 2>&1
         if [ "$?" = "0" ]
         then
             git checkout $TRAVIS_BRANCH
