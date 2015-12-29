@@ -45,6 +45,7 @@ function deploy_to_acquia() {
 
     rsync -ah --delete ../docroot/ docroot/
     rsync -ah --delete ../config/staging/ config/staging/
+    rsync -ah --delete ../hooks/ hooks/
 
     # do not fix line endings, keep everything as is
     echo "* -text" > docroot/.gitattributes
