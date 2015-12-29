@@ -4,6 +4,12 @@
     <resolvepath propertyName="base.dir" file="./"/>
     <target name="make">
         <if>
+            <available file='${base.dir}/docroot/sites/default' type='dir'/>
+            <then>
+                <chmod file="${base.dir}/docroot/sites/default" mode="0777"/>
+            </then>
+        </if>
+        <if>
             <available file='${base.dir}/docroot' type='dir'/>
             <then>
                 <delete dir="${base.dir}/docroot" failonerror="false"/>
@@ -12,7 +18,15 @@
         <drush command="make">
             <param>${makefile}</param>
             <param>${base.dir}/docroot</param>
-            <option name="working-copy"></option>
+            <option name="no-gitinfofile"></option>
+            <if>
+                <not>
+                    <equals arg1="${environment}" arg2="travis" />
+                </not>
+                <then>
+                    <option name="working-copy"></option>
+                </then>
+            </if>
         </drush>
         <if>
             <equals arg1="${environment}" arg2="travis" />
@@ -38,6 +52,7 @@
                         </copy>
                     </then>
                 </if>
+                <copy file="${base.dir}/travis/travis.settings.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
             </then>
             <else>
                 <symlink target="${base.dir}/modules" link="${base.dir}/docroot/modules/custom" overwrite="true"/>
@@ -53,20 +68,14 @@
                         <symlink target="${base.dir}/themes" link="${base.dir}/docroot/themes/custom" overwrite="true"/>
                     </then>
                 </if>
-                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="777"/>
+                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="775"/>
             </else>
+            <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
+            <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
+            <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
         </if>
-
-        <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
-        <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
-        <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
     </target>
-    <target name="update" depends="make">
-        <chmod file="${base.dir}/docroot/sites/default/files" mode="0777"/>
-        <drush command="cim" root="${base.dir}/docroot" assume="yes">
-            <param>staging</param>
-        </drush>
-    </target>
+    <target name="update" depends="make"/>
     <includepath classpath="tools/phing"/>
     <taskdef name="drush" classname="DrushTask"/>
     <taskdef name="drupal_db_settings" classname="DrupalDbSettingsTask"/>
