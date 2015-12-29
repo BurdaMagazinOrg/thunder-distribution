@@ -29,11 +29,13 @@ function deploy_to_acquia() {
 
     if [ "$COMMIT_TAG" == "" ]
     then
-        git rev-parse --verify $TRAVIS_BRANCH > /dev/null 2>&1
-        if [ "$?" = "0" ]
+        git rev-parse --verify origin/$TRAVIS_BRANCH;
+        if [ "$?" == "0" ]
         then
+            echo "checking out branch $TRAVIS_BRANCH:";
             git checkout $TRAVIS_BRANCH
         else
+            echo "checking out new branch $TRAVIS_BRANCH:";
             git checkout -b $TRAVIS_BRANCH
             git push -u origin $TRAVIS_BRANCH
         fi
