@@ -15,19 +15,23 @@
                 <delete dir="${base.dir}/docroot" failonerror="false"/>
             </then>
         </if>
-        <drush command="make">
-            <param>${makefile}</param>
-            <param>${base.dir}/docroot</param>
-            <option name="no-gitinfofile"></option>
-            <if>
-                <not>
-                    <equals arg1="${environment}" arg2="travis" />
-                </not>
-                <then>
+        <if>
+            <equals arg1="${environment}" arg2="travis" />
+            <then>
+                <drush command="make" verbose="true">
+                    <param>${makefile}</param>
+                    <param>${base.dir}/docroot</param>
+                    <option name="no-gitinfofile"></option>
+                </drush>
+            </then>
+            <else>
+                <drush command="make" verbose="true">
+                    <param>${makefile}</param>
+                    <param>${base.dir}/docroot</param>
                     <option name="working-copy"></option>
-                </then>
-            </if>
-        </drush>
+                </drush>
+            </else>
+        </if>
         <if>
             <equals arg1="${environment}" arg2="travis" />
             <then>
@@ -69,10 +73,10 @@
                     </then>
                 </if>
                 <mkdir dir="${base.dir}/docroot/sites/default/files" mode="775"/>
+                <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
+                <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
+                <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
             </else>
-            <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
-            <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
-            <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
         </if>
     </target>
     <target name="update" depends="make"/>
