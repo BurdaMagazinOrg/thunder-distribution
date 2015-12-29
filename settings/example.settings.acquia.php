@@ -284,7 +284,10 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
+
+die('Provide salt in settings.php!');
 $settings['hash_salt'] = '';
+
 
 /**
  * Deployment identifier.
@@ -623,9 +626,9 @@ if ($settings['hash_salt']) {
  *
  * Remove the leading hash signs if you would like to alter this functionality.
  */
-# $config['system.performance']['fast_404']['exclude_paths'] = '/\/(?:styles)\//';
-# $config['system.performance']['fast_404']['paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
-# $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
+$config['system.performance']['fast_404']['exclude_paths'] = '/\/(?:styles)\//';
+$config['system.performance']['fast_404']['paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
+$config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 
 /**
  * Load services definition file.
@@ -678,19 +681,6 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  * example.org, with all subdomains included.
  */
 
-/**
- * Load local development override configuration, if available.
- *
- * Use settings.local.php to override variables on secondary (staging,
- * development, etc) installations of this site. Typically used to disable
- * caching, JavaScript/CSS compression, re-routing of outgoing emails, and
- * other things that should not happen on development and testing sites.
- *
- * Keep this code block at the end of this file to take full effect.
- */
-if (file_exists(__DIR__ . '/settings.local.php')) {
-  include __DIR__ . '/settings.local.php';
-}
 
 // On Acquia Cloud, this include file configures Drupal to use the correct
 // database in each site environment (Dev, Stage, or Prod). To use this
@@ -703,3 +693,23 @@ if (file_exists('/var/www/site-php')) {
 $settings['install_profile'] = '<insert your profile>';
 $config_directories['active'] = '../config/active';
 $config_directories['staging'] = '../config/staging';
+
+
+/**
+ * Load local development override configuration, if available.
+ *
+ * Use settings.local.php to override variables on secondary (staging,
+ * development, etc) installations of this site. Typically used to disable
+ * caching, JavaScript/CSS compression, re-routing of outgoing emails, and
+ * other things that should not happen on development and testing sites.
+ *
+ * Keep this code block at the end of this file to take full effect.
+ */
+
+/// BOTH acquia:dev and acquia:stage are 'dev' for some reason
+$siteEnvironment = isset($_ENV['AH_SITE_ENVIRONMENT']) ? $_ENV['AH_SITE_ENVIRONMENT'] : 'local';
+
+$stageSettingsFilePath = __DIR__ . '/settings.' . $siteEnvironment . '.php';
+if (file_exists($stageSettingsFilePath)) {
+  include $stageSettingsFilePath;
+}
