@@ -81,6 +81,12 @@ before_script:
   - cd docroot
   - drush si <insert-your-profile> --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
 
+  - drush config-import --source=../config/staging --yes
+  - drush updb --yes
+  - drush config-import --source=../config/staging --yes
+  - drush pm-uninstall dblog --yes
+  - drush cset system.site page.front /taxonomy/term/1 --yes
+
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
   - nc -zvv localhost 8888; out=$?; while [[ $out -ne 0 ]]; do echo "Retry hit port 8888..."; nc -zvv localhost 8888; out=$?; sleep 5; done

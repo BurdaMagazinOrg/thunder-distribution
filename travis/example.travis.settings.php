@@ -11,8 +11,4 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-
-$config_directories['active'] = '../config/active';
-$config_directories['staging'] = '../config/staging';
-
 $settings['hash_salt'] = 'change me!';
