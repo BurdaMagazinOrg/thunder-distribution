@@ -72,7 +72,7 @@
                         <symlink target="../../themes" link="./docroot/themes/custom" overwrite="true"/>
                     </then>
                 </if>
-                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="775"/>
+                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="777"/>
                 <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
                 <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
                 <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
