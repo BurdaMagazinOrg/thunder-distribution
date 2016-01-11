@@ -46,7 +46,13 @@ projects:
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
       revision: "3e9ddc42bad060a085b76903d62155b0fe2a4013"
-
+      
+  entity_reference_revisions:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/entity_reference_revisions.git"
+      revision: "da25d87e5df5fab2f6a164f2849a4e2139a28b02"
+      
   field_group:
     type: "module"
     download:
