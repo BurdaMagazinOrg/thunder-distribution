@@ -66,15 +66,15 @@ function deploy_to_acquia() {
     fi
 }
 
-if [ $ACQUIA_REPOSITORY == "" ]
+if [ -z $ACQUIA_REPOSITORY ]
 then
-    echo "Build successful, commit can not be deployed, please provide $ACQUIA_REPOSITORY environment variable."
+    echo 'Build successful, commit can not be deployed, please provide $ACQUIA_REPOSITORY environment variable.'
     exit
 fi
 
-if [ $ACQUIA_HOST == "" ]
+if [ -z $ACQUIA_HOST ]
 then
-    echo "Build successful, commit can not be deployed, please provide $ACQUIA_HOST environment variable."
+    echo 'Build successful, commit can not be deployed, please provide $ACQUIA_HOST environment variable.'
     exit
 fi
 
