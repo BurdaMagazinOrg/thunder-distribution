@@ -1,29 +1,69 @@
 #!/bin/bash
 
 function deploy_to_acquia() {
-   DESTINATION_BRANCH=$1
+    echo "Deploying $TRAVIS_BRANCH"
 
-   echo "Deploying $TRAVIS_BRANCH to $DESTINATION_BRANCH"
+    cd $TRAVIS_BUILD_DIR
+    LAST_COMMIT_INFO=$(git log -1 --pretty="[%h] (%an) %B")
+    LAST_COMMIT_USER=$(git show -s --format="%an")
+    LAST_COMMIT_USER_EMAIL=$(git show -s --format="%ae")
+    if [ "$TRAVIS_TAG" == "" ]
+    then
+        COMMIT_TAG=$(git tag --points-at $TRAVIS_COMMIT)
+    else
+        COMMIT_TAG=$TRAVIS_TAG
+    fi
 
-   cd $TRAVIS_BUILD_DIR
-   chmod a+rwx docroot/sites/default/settings.php
-   chmod a+rwx docroot/sites/default
-   cp settings/settings.acquia.php docroot/sites/default/settings.php
-   rm docroot/sites/default/settings.local.php
-   git clone --branch $DESTINATION_BRANCH $ACQUIA_REPOSITORY acquia
-   rsync -ah --delete docroot/ acquia/docroot/
-   rsync -ah --delete config/staging/ acquia/config/staging/
+    chmod a+rwx docroot/sites/default/settings.php
+    chmod a+rwx docroot/sites/default
+    cp -v settings/settings.acquia.php docroot/sites/default/settings.php
 
-   cd acquia
+    # FIXME workarounds for problematic config management (no stage dependent config) - remove these when issue is fixed
+    cp -v settings/settings.dev.php docroot/sites/default/settings.dev.php
+    cp -v settings/settings.prod.php docroot/sites/default/settings.prod.php
 
-   # is it possible to access original git user?
-   git config user.email "travis@example.com"
-   git config user.name "Travis"
-   git config --global push.default simple
+    rm docroot/sites/default/settings.local.php
 
-   git add --all .
-   git commit --quiet -m "$TRAVIS_COMMIT"
-   git push
+    git clone $ACQUIA_REPOSITORY acquia
+    cd acquia
+
+    if [ "$COMMIT_TAG" == "" ]
+    then
+        git rev-parse --verify origin/$TRAVIS_BRANCH;
+        if [ "$?" == "0" ]
+        then
+            echo "checking out branch $TRAVIS_BRANCH:";
+            git checkout $TRAVIS_BRANCH
+        else
+            echo "checking out new branch $TRAVIS_BRANCH:";
+            git checkout -b $TRAVIS_BRANCH
+            git push -u origin $TRAVIS_BRANCH
+        fi
+    fi
+
+    mkdir -pv config
+
+    rsync -ah --delete ../docroot/ docroot/
+    rsync -ah --delete ../config/staging/ config/staging/
+    rsync -ah --delete ../hooks/ hooks/
+
+    # do not fix line endings, keep everything as is
+    echo "* -text" > docroot/.gitattributes
+
+    git config user.email "$LAST_COMMIT_USER_EMAIL"
+    git config user.name "$LAST_COMMIT_USER"
+    git config --global push.default simple
+
+    git add --all .
+    git commit --quiet -m "$LAST_COMMIT_INFO"
+
+    if [ "$COMMIT_TAG" != "" ]
+    then
+        git tag $COMMIT_TAG
+        git push origin $COMMIT_TAG
+    else
+        git push origin $TRAVIS_BRANCH
+    fi
 }
 
 if [ -z $ACQUIA_REPOSITORY ]
@@ -38,23 +78,11 @@ then
     exit
 fi
 
-if [ $TRAVIS_PULL_REQUEST == "true" ]
+if [ $TRAVIS_PULL_REQUEST != "false" ]
 then
     echo "Build successful, pull requests will not be deployed"
     exit
 fi
 
 ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
-
-if [ $TRAVIS_BRANCH == "master" ]
-then
-  deploy_to_acquia master
-elif [ $TRAVIS_BRANCH == "develop" ]
-then
-  deploy_to_acquia develop
-elif [ $TRAVIS_BRANCH == "acquia-deploy" ]
-then
-  deploy_to_acquia develop
-else
-   echo "Build successful, $TRAVIS_BRANCH will not be deployed"
-fi
+deploy_to_acquia

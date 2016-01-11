@@ -9,7 +9,7 @@ defaults:
 # Drupal core
 projects:
   drupal:
-    version: "8.0.0-beta15"
+    version: "8.0.1"
     # patches runtests.sh to work with travis.
     patch:
       - "patches/core/fix-line-ending.patch"
@@ -21,51 +21,71 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/acquia_connector.git"
-      revision: "f59d3ccf356e0087a0f1406533b92ab1f0362c25"
+      revision: "368287ede8354c64d2bdb230a43d1b2d9b97ba50"
+
+  acquia_lift:
+    type: "module"
+    download:
+      url: "https://github.com/acquia/acquia_lift.git"
+      revision: "9df5c88d92cdc5fd02d022b5fcdc8d2681ba946f"
+
+  ad_integration:
+    type: "module"
+    subdir: "thunder"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
+      revision: "2b3ef27eaf6b0c2d60984ab227657660927a11fa"
+      directory_name: "ad_integration"
+
+  breakpoints_js_settings:
+    type: "module"
+    subdir: "thunder"
+    download:
+      url: "git@github.com:BurdaMagazinOrg/module-breakpoints_js_settings.git"
+      revision: "2c5c488f4f2703f66b0e3a9fc645a537045809df"
+      directory_name: "breakpoints_js_settings"
 
   devel:
     type: "module"
     download:
       url: "http://git.drupal.org/project/devel.git"
-      revision: "76ff3d32e6bae2d94bee96d52f21370d09aef309"
+      revision: "53c2a7d7ab6dde4ca90af0fbde48f0c01f6174a3"
 
   embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/embed.git"
-      revision: "22aa7d01f329b9b50ac37d1ce2ca7a8ee8eccdf5"
+      revision: "9b8d1ac3967883d4ede6066fd6ec14469cdc3c32"
 
   emptyparagraphkiller:
     type: "module"
     download:
-      url: "https://github.com/axe312ger/emptyparagraphkiller.git"
-      revision: "1a501a9553ccfbac833fd7cc6ad631a092681e40"
+      url: "https://github.com/webflo/emptyparagraphkiller.git"
+      revision: "bb23cec089161bc1ac584704e4b9c2c68ab5c45d"
 
   entity_embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
-      revision: "3e9ddc42bad060a085b76903d62155b0fe2a4013"
-      
+      revision: "70cb11d4248a80edcbb19017b1ab282431770214"
+
   entity_reference_revisions:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_reference_revisions.git"
       revision: "da25d87e5df5fab2f6a164f2849a4e2139a28b02"
-      
+
   field_group:
     type: "module"
     download:
-      url: "https://github.com/webflo/field_group.git"
-      revision: "fc02a31d543090786797d7268831b1d2aa55eda4"
+      url: "http://git.drupal.org/project/field_group.git"
+      revision: "e62de786a4fb7a3b6d91d48fe3516acbfd92c291"
 
   focal_point:
     type: "module"
     download:
-      url: "git://git.drupal.org/project/focal_point.git"
-      revision: "f889c383a5b4953aebe19abfe13b880a3ec85d08"
-    patch:
-      - "https://www.drupal.org/files/issues/focal_point_no_image.patch"
+      url: "http://git.drupal.org/project/focal_point.git"
+      revision: "3095c52246e3a45c708649d07dafe0505acb0659"
 
   globalredirect:
     type: "module"
@@ -75,62 +95,76 @@ projects:
 
   google_analytics:
     type: "module"
+    version: "2.0-rc1"
+
+  imagemagick:
+    type: "module"
     download:
-      url: "http://git.drupal.org/project/google_analytics.git"
-      revision: "4e7f0569274403fd3c4ed322eb59e26ec97a1fae"
+      url: "http://git.drupal.org/project/imagemagick.git"
+      revision: "c762940d174343dfb6c2eb403e177af4ddc09b95"
 
   inline_entity_form:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "6d12a8da0ad7bf85c0c4dceca5be681ba51296d7"
-    patch:
-      - "https://www.drupal.org/files/issues/ief-buttons-disappear-after-removing-reference.patch"
+      revision: "e039a1ea7bd976b2951a83f14c5ff7e7eae40782"
 
   ivw_integration:
     type: "module"
-    subdir: "burda"
+    subdir: "thunder"
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
+      revision: "1d2a4e5071211e25d5c005b84d7f4b4a7ddb6335"
       directory_name: "ivw_integration"
 
   media_entity:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
-      revision: "b4693951b442d011013a630e7a7221548b40aed2"
+      revision: "8fdf63df78fe004770cc8e2b80b739e3c71c062f"
 
   metatag:
     type: "module"
+    version: "1.0-beta2"
+
+  paragraphs:
+    type: "module"
     download:
-      url: "git://git.drupal.org/project/metatag.git"
-      revision: "9d12daedcb685beac313b0c3fb42c7244b8bd587"
+      url: "http://git.drupal.org/project/paragraphs.git"
+      revision: "740874bacb56a6a90683e7818c06ba77a638125c"
 
   pathauto:
     type: "module"
     download:
       url: "https://github.com/md-systems/pathauto.git"
-      revision: "3350940ebd502826aff000b1c493673059e9aae6"
+      revision: "4514f994f45cec60e88af9cd8a18776004fbdce8"
+
+  redirect:
+    type: "module"
+    download:
+      url: "https://github.com/md-systems/redirect.git"
+      revision: "f76170da77598c8bd847f9bd2fdb4286d5ede060"
 
   scheduler:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "382b793ef09710505c9915daf0769111e917a496"
+      revision: "cc6a64d08a9ce6e2c771862f67aed2785c7ef8e0"
 
   stage_file_proxy:
     type: "module"
     download:
-      url: "https://github.com/ueberbit/stage_file_proxy.git"
-      revision: "e589007348a305756a3834ce3df0993d7068c292"
+      url: "http://git.drupal.org/project/stage_file_proxy.git"
+      revision: "6fdb6bcfd0285c62eb7c6cc6d44651414f1c3116"
 
   token:
     type: "module"
     download:
       url: "http://git.drupal.org/project/token.git"
-      revision: "b17c78f"
+      revision: "5a36ca581d4c02d0afead767b48263e29af83824"
     patch:
       - "https://www.drupal.org/files/issues/2511324-1-token-field-config.patch"
+      - "https://www.drupal.org/files/issues/entity_field_tokens-2493567-8.patch"
 
 # profiles
 #  thunder:

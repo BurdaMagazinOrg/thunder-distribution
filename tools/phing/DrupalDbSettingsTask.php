@@ -108,7 +108,7 @@ class DrupalDbSettingsTask extends Task
   'username' => '$this->dbUser',
   'password' => '$this->dbPassword',
   'prefix' => '',
-  'host' => $this->dbHost,
+  'host' => '$this->dbHost',
   'port' => $this->dbPort,
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',

@@ -4,15 +4,34 @@
     <resolvepath propertyName="base.dir" file="./"/>
     <target name="make">
         <if>
+            <available file='${base.dir}/docroot/sites/default' type='dir'/>
+            <then>
+                <chmod file="${base.dir}/docroot/sites/default" mode="0777"/>
+            </then>
+        </if>
+        <if>
             <available file='${base.dir}/docroot' type='dir'/>
             <then>
                 <delete dir="${base.dir}/docroot" failonerror="false"/>
             </then>
         </if>
-        <drush command="make">
-            <param>${makefile}</param>
-            <param>${base.dir}/docroot</param>
-        </drush>
+        <if>
+            <equals arg1="${environment}" arg2="travis" />
+            <then>
+                <drush command="make" verbose="true">
+                    <param>${makefile}</param>
+                    <param>${base.dir}/docroot</param>
+                    <option name="no-gitinfofile"></option>
+                </drush>
+            </then>
+            <else>
+                <drush command="make" verbose="true">
+                    <param>${makefile}</param>
+                    <param>${base.dir}/docroot</param>
+                    <option name="working-copy"></option>
+                </drush>
+            </else>
+        </if>
         <if>
             <equals arg1="${environment}" arg2="travis" />
             <then>
@@ -37,34 +56,30 @@
                         </copy>
                     </then>
                 </if>
+                <copy file="${base.dir}/travis/travis.settings.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
             </then>
             <else>
-                <symlink target="${base.dir}/modules" link="${base.dir}/docroot/modules/custom" overwrite="true"/>
+                <symlink target="../../modules" link="./docroot/modules/custom" overwrite="true"/>
                 <if>
-                    <available file='${base.dir}/profiles' type='dir'/>
+                    <available file='./profiles' type='dir'/>
                     <then>
-                        <symlink target="${base.dir}/profiles" link="${base.dir}/docroot/profiles/custom" overwrite="true"/>
+                        <symlink target="../../profiles" link="./docroot/profiles/custom" overwrite="true"/>
                     </then>
                 </if>
                 <if>
-                    <available file='${base.dir}/themes' type='dir'/>
+                    <available file='./themes' type='dir'/>
                     <then>
-                        <symlink target="${base.dir}/themes" link="${base.dir}/docroot/themes/custom" overwrite="true"/>
+                        <symlink target="../../themes" link="./docroot/themes/custom" overwrite="true"/>
                     </then>
                 </if>
+                <mkdir dir="${base.dir}/docroot/sites/default/files" mode="777"/>
+                <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
+                <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
+                <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
             </else>
         </if>
-
-        <copy file="${base.dir}/settings/settings.acquia.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.php"/>
-        <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
-        <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
     </target>
-    <target name="update" depends="make">
-        <chmod file="${base.dir}/docroot/sites/default/files" mode="0775"/>
-        <drush command="cim" root="${base.dir}/docroot" assume="yes">
-            <param>staging</param>
-        </drush>
-    </target>
+    <target name="update" depends="make"/>
     <includepath classpath="tools/phing"/>
     <taskdef name="drush" classname="DrushTask"/>
     <taskdef name="drupal_db_settings" classname="DrupalDbSettingsTask"/>
