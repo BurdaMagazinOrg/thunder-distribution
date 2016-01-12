@@ -4,16 +4,22 @@ sudo: false
 php:
   - 5.6
 
+# travis will test and deploy only the branches and tags as show below
+# right now travis does not make a difference between branches and tags
+# tags starting with hotfix and tags in the form of "v1.0.0" will be tested
 branches:
   only:
     - master
     - develop
-    - acquia-deploy
+    - testing
+    - /^hotfix/
+    - /^v[0-9]+\.[0-9]+\.[0-9]+/
 
 mysql:
   database: drupal
   username: root
   encoding: utf8
+
 
 # Cache Composer & Drush directories.
 cache:
@@ -26,8 +32,8 @@ install:
   - "mysql -e 'create database drupal;'"
 
   - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "drush/drush:dev-master"
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - travis_retry composer install --prefer-dist --no-interaction
+  - export PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
 
   # Build Behat dependencies
   - cd ./tests/behat
@@ -36,20 +42,17 @@ install:
 
   # Setting Behat environment
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
-  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/htdocs"}}}}'
+  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"BUILD_TOP/docroot"}}}}'
   - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#BUILD_TOP#$TRAVIS_BUILD_DIR#`
   - export BEHAT_PARAMS
 
-  # Build Codebase
-  - mkdir htdocs
-
   # Build the current branch
-  - cd htdocs
-  - drush make --yes --concurrency=5 ../$PROJECT.yml --prepare-install
-  - cd ../
+  - echo "environment=travis" >> build.properties
+  - phing make
+  - cp travis/travis.settings.php docroot/sites/default/settings.php
 
   # Setup files
-  - chmod -R 777 htdocs/sites/default
+  - chmod -R 777 docroot/sites/default
 
   # Setup display for Selenium
   - export DISPLAY=:99.0
@@ -75,9 +78,14 @@ install:
 before_script:
   - phpenv config-rm xdebug.ini
 
-  - cd htdocs
-  - drush si standard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+  - cd docroot
+  - drush si <insert-your-profile> --account-name=admin --account-pass=admin --site-mail=admin@example.com --yes
+
+  - drush config-import --source=../config/staging --yes
+  - drush updb --yes
+  - drush config-import --source=../config/staging --yes
   - drush pm-uninstall dblog --yes
+  - drush cset system.site page.front /taxonomy/term/1 --yes
 
   # Start server
   - drush runserver 8888 > /dev/null 2>&1 &
@@ -89,4 +97,4 @@ script:
   - ./bin/behat --config behat.travis.yml
 
 after_success:
-  - $TRAVIS_BUILD_DIR/scripts/deploy.sh
+  - $TRAVIS_BUILD_DIR/travis/scripts/deploy.sh
