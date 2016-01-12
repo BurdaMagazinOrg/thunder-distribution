@@ -155,9 +155,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/token.git"
-      revision: "	d6cd94f19b053d8b6a411cb8fc5e75112d141d77"
-    patch:
-      - "https://www.drupal.org/files/issues/entity_field_tokens-2493567-8.patch"
+      revision: "d6cd94f19b053d8b6a411cb8fc5e75112d141d77"
 
 # profiles
 #  thunder:
