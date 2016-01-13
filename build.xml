@@ -2,7 +2,15 @@
 <project name="${project_name}" default="dist">
     <property file="build.properties"/>
     <resolvepath propertyName="base.dir" file="./"/>
+    <import file="${base.dir}/build.pre.xml" optional="true"/>
+    <import file="${base.dir}/build.post.xml" optional="true"/>
     <target name="make">
+        <if>
+          <available file="${base.dir}/build.pre.xml" type="file" />
+          <then>
+            <phingcall target="prebuild" />
+          </then>
+        </if>
         <if>
             <available file='${base.dir}/docroot/sites/default' type='dir'/>
             <then>
@@ -77,6 +85,12 @@
                 <copy file="${base.dir}/settings/settings.local.php" haltonerror="false" tofile="${base.dir}/docroot/sites/default/settings.local.php"/>
                 <drupal_db_settings settingsfile="${base.dir}/docroot/sites/default/settings.local.php" name="default" dbname="${dbname}" dbuser="${dbuser}" dbpassword="${dbpassword}" dbhost="${dbhost}" dbport="${dbport}"/>
             </else>
+        </if>
+        <if>
+          <available file="${base.dir}/build.post.xml" type="file" />
+          <then>
+            <phingcall target="postbuild" />
+          </then>
         </if>
     </target>
     <target name="update" depends="make"/>
