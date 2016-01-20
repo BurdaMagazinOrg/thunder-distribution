@@ -6,6 +6,14 @@ projects:
     download:
       url: "http://git.drupal.org/project/acquia_connector.git"
       revision: "f88c7ca372c96506ba31365d17e97455c072214b"
+      branch: "8.x-1.x"
+
+  thunder_module:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/thunder_module.git"
+      revision: "b4c98b7"
+      branch: "8.x-1.x"
 
   acquia_lift:
     type: "module"
@@ -17,7 +25,7 @@ projects:
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
       revision: "bd9fb9419ce981e2476c1cd0265300a5c1fcab5d"
-      directory_name: "ad_integration"
+      branch: "develop"
 
   breakpoints_js_settings:
     type: "module"
@@ -25,31 +33,35 @@ projects:
     download:
       url: "git@github.com:BurdaMagazinOrg/module-breakpoints_js_settings.git"
       revision: "2c5c488f4f2703f66b0e3a9fc645a537045809df"
-      directory_name: "breakpoints_js_settings"
+      branch: "develop"
 
   devel:
     type: "module"
     download:
       url: "http://git.drupal.org/project/devel.git"
       revision: "c0b5c5f9a8ec688459e7cd03eb6b1008a9d5a194"
+      branch: "8.x-1.x"
 
   embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/embed.git"
       revision: "8327162c7be3ad69721d57a1860915e1ee2d6a68"
+      branch: "8.x-1.x"
 
   emptyparagraphkiller:
     type: "module"
     download:
       url: "https://github.com/webflo/emptyparagraphkiller.git"
       revision: "bb23cec089161bc1ac584704e4b9c2c68ab5c45d"
+      branch: "8.x-1.x"
 
   entity_embed:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
       revision: "1376e86298f0a6c87a7af91c2ab274aa7d4a5fc1"
+      branch: "8.x-1.x"
 
   entity_reference_revisions:
     type: "module"
@@ -60,18 +72,21 @@ projects:
     download:
       url: "http://git.drupal.org/project/field_group.git"
       revision: "3c06fd263ea5c84eb6a5c6de575e2f680f403d0b"
+      branch: "8.x-1.x"
 
   focal_point:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
       revision: "3095c52246e3a45c708649d07dafe0505acb0659"
+      branch: "8.x-1.x"
 
   globalredirect:
     type: "module"
     download:
       url: "http://git.drupal.org/project/globalredirect.git"
       revision: "c2e0be7d3ca8158e44e0693cc185e6f5cb0b3f97"
+      branch: "8.x-1.x"
 
   google_analytics:
     type: "module"
@@ -91,53 +106,54 @@ projects:
     download:
       url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
       revision: "1d2a4e5071211e25d5c005b84d7f4b4a7ddb6335"
-      directory_name: "ivw_integration"
+      branch: "develop"
 
   media_entity:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
       revision: "f8decb81965037b05c51ce8c16eae8c37256e7a0"
+      branch: "8.x-1.x"
 
   metatag:
     type: "module"
     download:
       url: "http://git.drupal.org/project/metatag.git"
       revision: "6f6ae020aaaa4f4363508538c500a66e967c5312"
+      branch: "8.x-1.x"
 
   paragraphs:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
       revision: "740874bacb56a6a90683e7818c06ba77a638125c"
+      branch: "8.x-1.x"
 
   pathauto:
     type: "module"
     download:
-      url: "https://github.com/md-systems/pathauto.git"
-      revision: "3370284268cc1df0a65b0dae2ce0d95c70779dc7"
-
-  redirect:
-    type: "module"
-    download:
-      url: "https://github.com/md-systems/redirect.git"
-      revision: "72f8f362adfa9cbd6b08e1024c43a43c793e0243"
+      url: "http://git.drupal.org/project/pathauto.git"
+      revision: "e5a14769e1f8340b6f0e1e3384c6c8120ea5c79d"
+      branch: "8.x-1.x"
 
   scheduler:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
       revision: "459b6549f13a7126c66f70730b10501e369a9c04"
+      branch: "8.x-1.x"
 
   stage_file_proxy:
     type: "module"
     download:
       url: "http://git.drupal.org/project/stage_file_proxy.git"
       revision: "6fdb6bcfd0285c62eb7c6cc6d44651414f1c3116"
+      branch: "8.x-1.x"
 
   token:
     type: "module"
     download:
       url: "http://git.drupal.org/project/token.git"
       revision: "d6cd94f19b053d8b6a411cb8fc5e75112d141d77"
+      branch: "8.x-1.x"
 
