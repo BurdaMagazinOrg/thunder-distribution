@@ -1,0 +1,43 @@
+name: Thunder
+type: profile
+description: 'Na na na na na na na na... THUNDER!'
+core: 8.x
+distribution:
+  name: Thunder
+
+# Required modules
+dependencies:
+  # core
+  - block
+  - breakpoint
+  - ckeditor
+  - config
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - entity_reference
+  - help
+  - history
+  - image
+  - menu_ui
+  - node
+  - options
+  - path
+  - page_cache
+  - taxonomy
+  - dblog
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+
+themes:
+  - bartik
+  - seven
