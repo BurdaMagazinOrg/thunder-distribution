@@ -118,7 +118,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656214"
-      revision: "6559975cce825b0443cacc912a5b2f836bcaaa17"
+      revision: "906d458"
       branch: "8.x-1.x"
 
   thunder_media:
@@ -126,6 +126,13 @@ projects:
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656216"
       revision: "ba273f9"
+      branch: "8.x-1.x"
+
+  thunder_taxonomy:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/sandbox/chr.fritsch/2656218"
+      revision: "521968b"
       branch: "8.x-1.x"
 
   token:

@@ -49,6 +49,7 @@ dependencies:
 # thunder
   - thunder_article
   - thunder_media
+  - thunder_taxonomy
 themes:
   - bartik
   - seven
