@@ -1,6 +1,7 @@
 core: "8.x"
 api: 2
 projects:
+  # Missing modules: ivw, ad, breakpoint_js_settings, emptyparagraphkiller and redirect
   acquia_connector:
     type: "module"
     download:
@@ -8,32 +9,9 @@ projects:
       revision: "f88c7ca372c96506ba31365d17e97455c072214b"
       branch: "8.x-1.x"
 
-  thunder_module:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/thunder_module.git"
-      revision: "b4c98b7"
-      branch: "8.x-1.x"
-
   acquia_lift:
     type: "module"
     version: "1.0-alpha2"
-
-  ad_integration:
-    type: "module"
-    subdir: "thunder"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/module-ad_integration.git"
-      revision: "bd9fb9419ce981e2476c1cd0265300a5c1fcab5d"
-      branch: "develop"
-
-  breakpoints_js_settings:
-    type: "module"
-    subdir: "thunder"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/module-breakpoints_js_settings.git"
-      revision: "2c5c488f4f2703f66b0e3a9fc645a537045809df"
-      branch: "develop"
 
   devel:
     type: "module"
@@ -47,13 +25,6 @@ projects:
     download:
       url: "http://git.drupal.org/project/embed.git"
       revision: "8327162c7be3ad69721d57a1860915e1ee2d6a68"
-      branch: "8.x-1.x"
-
-  emptyparagraphkiller:
-    type: "module"
-    download:
-      url: "https://github.com/webflo/emptyparagraphkiller.git"
-      revision: "bb23cec089161bc1ac584704e4b9c2c68ab5c45d"
       branch: "8.x-1.x"
 
   entity_embed:
@@ -81,13 +52,6 @@ projects:
       revision: "3095c52246e3a45c708649d07dafe0505acb0659"
       branch: "8.x-1.x"
 
-  globalredirect:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/globalredirect.git"
-      revision: "c2e0be7d3ca8158e44e0693cc185e6f5cb0b3f97"
-      branch: "8.x-1.x"
-
   google_analytics:
     type: "module"
     version: "2.0-rc1"
@@ -100,20 +64,20 @@ projects:
     type: "module"
     version: "1.0-alpha3"
 
-  ivw_integration:
-    type: "module"
-    subdir: "thunder"
-    download:
-      url: "git@github.com:BurdaMagazinOrg/module-ivw_integration.git"
-      revision: "1d2a4e5071211e25d5c005b84d7f4b4a7ddb6335"
-      branch: "develop"
-
   media_entity:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
       revision: "f8decb81965037b05c51ce8c16eae8c37256e7a0"
       branch: "8.x-1.x"
+
+  media_entity_image:
+    type: "module"
+    version: "1.0-beta1"
+
+  media_entity_slideshow:
+    type: "module"
+    version: "1.0-beta1"
 
   metatag:
     type: "module"
@@ -148,6 +112,20 @@ projects:
     download:
       url: "http://git.drupal.org/project/stage_file_proxy.git"
       revision: "6fdb6bcfd0285c62eb7c6cc6d44651414f1c3116"
+      branch: "8.x-1.x"
+
+  thunder_article:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/sandbox/chr.fritsch/2656214"
+      revision: "6559975cce825b0443cacc912a5b2f836bcaaa17"
+      branch: "8.x-1.x"
+
+  thunder_media:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/sandbox/chr.fritsch/2656216"
+      revision: "ba273f9"
       branch: "8.x-1.x"
 
   token:

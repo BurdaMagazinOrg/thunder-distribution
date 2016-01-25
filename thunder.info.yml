@@ -11,19 +11,14 @@ dependencies:
   - block
   - breakpoint
   - ckeditor
-  - config
   - contextual
-  - contact
   - menu_link_content
   - datetime
-  - block_content
-  - quickedit
   - editor
   - entity_reference
-  - help
-  - history
   - image
   - menu_ui
+  - language
   - node
   - options
   - path
@@ -34,10 +29,26 @@ dependencies:
   - toolbar
   - field_ui
   - file
-  - rdf
+  - responsive_image
   - views
   - views_ui
-
+# contrib
+  - field_group
+  - focal_point
+  - entity_embed
+  - imagemagick
+  - inline_entity_form
+  - google_analytics
+  - metatag
+  - media_entity
+  - media_entity_image
+  - media_entity_slideshow
+  - scheduler
+  - pathauto
+  - paragraphs
+# thunder
+  - thunder_article
+  - thunder_media
 themes:
   - bartik
   - seven
