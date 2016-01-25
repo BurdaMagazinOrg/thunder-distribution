@@ -13,6 +13,13 @@ projects:
     type: "module"
     version: "1.0-alpha2"
 
+  ctools:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/ctools.git"
+      revision: "3cce7db38702db90cf912facdce9014a99badc44"
+      branch: "8.x-3.x"
+
   devel:
     type: "module"
     download:
@@ -73,11 +80,17 @@ projects:
 
   media_entity_image:
     type: "module"
-    version: "1.0-beta1"
+    download:
+      url: "http://git.drupal.org/project/media_entity_image.git"
+      revision: "f17384aeba3c8c00bbc57bfa8fa68529992873ce"
+      branch: "8.x-1.x"
 
   media_entity_slideshow:
     type: "module"
-    version: "1.0-beta1"
+    download:
+      url: "http://git.drupal.org/project/media_entity_slideshow.git"
+      revision: "5d79323b17d5def825d447194f21bee3c649a41b"
+      branch: "8.x-1.x"
 
   metatag:
     type: "module"
@@ -125,7 +138,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656216"
-      revision: "ba273f9"
+      revision: "321a145"
       branch: "8.x-1.x"
 
   thunder_taxonomy:
