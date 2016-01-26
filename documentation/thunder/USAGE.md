@@ -1,4 +1,4 @@
-# Thunder - Burda Drupal Distribution Core
+# Thunder - Installation and development guide
 
 ## Status
 
