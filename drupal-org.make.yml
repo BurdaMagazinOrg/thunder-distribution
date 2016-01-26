@@ -131,21 +131,21 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656214"
-      revision: "906d458"
+      revision: "67b6f7f"
       branch: "8.x-1.x"
 
   thunder_media:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656216"
-      revision: "321a145"
+      revision: "853d04d"
       branch: "8.x-1.x"
 
   thunder_taxonomy:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656218"
-      revision: "521968b"
+      revision: "977845b"
       branch: "8.x-1.x"
 
   token:

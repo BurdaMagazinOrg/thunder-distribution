@@ -25,7 +25,7 @@ dependencies:
   - page_cache
   - taxonomy
   - dblog
-  - shortcut
+  - dynamic_page_cache
   - toolbar
   - field_ui
   - file
