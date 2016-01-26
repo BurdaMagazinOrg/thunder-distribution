@@ -16,9 +16,14 @@ commands will work differently, please consult the given links to external docum
 * git
 * drush
 
-
 ## Development setup
 ### Get thunder
+Basically there are two different ways to get thunder. The simplest way to get thunder up and running is to use the drupal distribution hosted at drupal org, but if you want to have a more complex development environment you can use the github repository including alle fileas for integration into travis ci and acquia cloud.
+#### Simple install from drupal.org
+Visit [thunder](https://www.drupal.org/project/thunder) and download the most recent tarball. Follow standard drupal installation instructions as given [here](https://www.drupal.org/documentation/install), but use the previously downloaded thunder tarball instead of drupal. Use the given thunder installation profile when asked to select a profile.
+
+#### Full development build from github
+This assumes, that "~/your-project-dir" is your local path to an existing git repository for your project
 Add the thunder repository to your repository as an upstream repository and fetch the content
 
     ~/your-project-dir $ git remote add upstream git@github.com:BurdaMagazinOrg/thunder.git
