@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: seo
+label: Seo
+weight: 4
+is_admin: true
+permissions: {  }

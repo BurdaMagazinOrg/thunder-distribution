@@ -1,5 +1,67 @@
 <?php
+
+use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+use Drupal\taxonomy\Entity\Term;
+
 /**
  * @file
  * Install, update and uninstall functions for the thunder installation profile
  */
+
+function thunder_install() {
+
+  // Enable the admin theme.
+  \Drupal::configFactory()
+    ->getEditable('node.settings')
+    ->set('use_admin_theme', TRUE)
+    ->save(TRUE);
+
+  // Create basic nodes.
+  $basic_nodes = array(
+    'Imprint',
+    'Disclaimer',
+    '403',
+    '404',
+    'Terms & Conditions',
+  );
+
+  $default_language_id = \Drupal::service('language_manager')
+    ->getDefaultLanguage()
+    ->getId();
+
+  foreach ($basic_nodes as $basic_node) {
+    $node = Node::create(array(
+      'type' => 'page',
+      'title' => $basic_node,
+      'langcode' => $default_language_id,
+      'uid' => '1',
+      'status' => 1,
+      'field_fields' => array(),
+    ));
+    $node->save();
+  }
+
+  // Create "Home" term
+  $term = Term::create(array(
+    'vid' => 'channel',
+    'name' => 'Home',
+    'langcode' => $default_language_id,
+    'status' => 1,
+  ));
+  $term->save();
+
+
+  // Set default pages.
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('page.front', '/taxonomy/term/1')
+    ->set('page.403', '/node/3')
+    ->set('page.404', '/node/4')
+    ->save(TRUE);
+
+
+  // Assign user 1 the "administrator" role.
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
+}
