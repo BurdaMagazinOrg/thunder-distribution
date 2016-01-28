@@ -2,7 +2,7 @@
 
 ## What is Thunder? 
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/v2AC41dglnM" frameborder="0" allowfullscreen></iframe>
+[![Thunder](http://img.youtube.com/vi/v2AC41dglnM/0.jpg)](http://www.youtube.com/watch?v=v2AC41dglnM)
 
 ## Ok, seriously
 
