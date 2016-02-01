@@ -10,9 +10,4 @@
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "require-dev": {
-    "phing/phing": "2.*",
-    "drush/drush": "8.0.0",
-    "drupal/console": "dev-master"
-  }
 }
