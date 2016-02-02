@@ -48,7 +48,7 @@ dependencies:
   - paragraphs
 # thunder
   - ad_integration
-  - breakpoints_js_settings
+  - breakpoint_js_settings
   - ivw_integration
   - thunder_article
   - thunder_media
