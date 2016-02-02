@@ -20,7 +20,7 @@ projects:
       revision: "bd9fb9419ce981e2476c1cd0265300a5c1fcab5d"
       branch: "8.x-1.x"
 
-  breakpoints_js_settings:
+  breakpoint_js_settings:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660370.git"
