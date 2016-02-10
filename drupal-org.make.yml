@@ -24,7 +24,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660370.git"
-      revision: "0b72a200f4946823fe2be78a77b2d883d4efbff6"
+      revision: "798840d00a1286d720cb3ac347cbd8e9283a930c"
       branch: "8.x-1.x"
 
   ctools:
