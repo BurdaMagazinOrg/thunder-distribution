@@ -1,7 +1,7 @@
 core: "8.x"
 api: 2
 projects:
-  # Missing modules: ivw, ad, breakpoint_js_settings, emptyparagraphkiller and redirect
+  # Missing modules: redirect
   acquia_connector:
     type: "module"
     download:
@@ -145,7 +145,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/chr.fritsch/2656214"
-      revision: "da22de1"
+      revision: "02a55abacf5213d9a12ff68476d678120f3b6e81"
       branch: "8.x-1.x"
 
   thunder_media:
