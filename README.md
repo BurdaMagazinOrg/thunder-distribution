@@ -10,6 +10,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 
 ## What's in it?
 
+* admin_toolbar
 * field_group
 * focal_point
 * entity_embed
