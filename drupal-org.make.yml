@@ -17,6 +17,10 @@ projects:
       revision: "bd9fb9419ce981e2476c1cd0265300a5c1fcab5d"
       branch: "8.x-1.x"
 
+  admin_toolbar:
+    type: "module"
+    version: "1.14"
+
   breakpoint_js_settings:
     type: "module"
     download:
