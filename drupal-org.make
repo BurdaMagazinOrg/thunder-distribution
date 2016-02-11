@@ -4,6 +4,7 @@ projects[acquia_connector][type] = module
 projects[acquia_connector][version] = 1.0
 projects[acquia_lift][type] = module
 projects[acquia_lift][version] = 1.0-alpha2
+projects[acquia_lift][patch][] = https://www.drupal.org/files/issues/fix-requirements-return-value.patch
 projects[ad_integration][type] = module
 projects[ad_integration][download][url] = http://git.drupal.org/sandbox/daniel.bosen/2660394.git
 projects[ad_integration][download][revision] = bd9fb9419ce981e2476c1cd0265300a5c1fcab5d

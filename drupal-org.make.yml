@@ -9,6 +9,8 @@ projects:
   acquia_lift:
     type: "module"
     version: "1.0-alpha2"
+    patch:
+      - "https://www.drupal.org/files/issues/fix-requirements-return-value.patch"
 
   ad_integration:
     type: "module"

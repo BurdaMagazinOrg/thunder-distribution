@@ -129,7 +129,6 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid">Find more information in the documentation</a>.', [':analytics' => 'http://www.google.com/analytics/', ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])->toString()]),
       '#maxlength' => 20,
       '#placeholder' => 'UA-',
-      '#required' => TRUE,
       '#size' => 15,
       '#title' => t('Web Property ID'),
       '#type' => 'textfield',
@@ -144,7 +143,6 @@ class ModuleConfigureForm extends ConfigFormBase {
     $form['ivw']['site'] = array(
       '#type' => 'textfield',
       '#title' => t('IVW Site name'),
-      '#required' => TRUE,
       '#description' => t('Site name as given by IVW, this is used as default for the "st" parameter in the iam_data object')
     );
 
