@@ -35,6 +35,7 @@ dependencies:
 # contrib
   - acquia_lift
   - acquia_connector
+  - admin_toolbar
   - field_group
   - focal_point
   - entity_embed
