@@ -23,7 +23,6 @@ function thunder_install_tasks(&$install_state) {
       'display_name' => t('Configure modules'),
       'type' => 'form',
       'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-
     ),
   );
 

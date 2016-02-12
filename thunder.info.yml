@@ -39,7 +39,6 @@ dependencies:
   - field_group
   - focal_point
   - entity_embed
-  - imagemagick
   - inline_entity_form
   - google_analytics
   - metatag

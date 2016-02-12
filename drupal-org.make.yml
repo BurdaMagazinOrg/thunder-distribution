@@ -34,13 +34,6 @@ projects:
     type: "module"
     version: "3.0-alpha23"
 
-  devel:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/devel.git"
-      revision: "6063e24c24288cbcba8ac969d2de4c6f3f52b91c"
-      branch: "8.x-1.x"
-
   embed:
     type: "module"
     download:
@@ -78,13 +71,6 @@ projects:
     download:
       url: "http://git.drupal.org/project/google_analytics.git"
       revision: "64eaef0c725aa17cb90cfddf6860ccf64e7f9b4e"
-      branch: "8.x-1.x"
-
-  imagemagick:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/imagemagick.git"
-      revision: "ee49196c8b8890ae2a5536b039351cbcd267ff2d"
       branch: "8.x-1.x"
 
   inline_entity_form:
@@ -136,13 +122,6 @@ projects:
     download:
       url: "http://git.drupal.org/project/scheduler.git"
       revision: "89b9a097a00d1e6cbee67d7e758ea9fcc0f15fea"
-      branch: "8.x-1.x"
-
-  stage_file_proxy:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/stage_file_proxy.git"
-      revision: "6fdb6bcfd0285c62eb7c6cc6d44651414f1c3116"
       branch: "8.x-1.x"
 
   thunder_article:
