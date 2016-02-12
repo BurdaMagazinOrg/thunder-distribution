@@ -106,6 +106,7 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
+      'acquia_lift.settings',
       'ivw_integration.settings',
       'google_analytics.settings',
     ];
@@ -125,7 +126,7 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#title' => $this->t('Google Analytics'),
       '#open' => FALSE,
     );
-    $form['google_analytics']['account'] = array(
+    $form['google_analytics']['ga_account'] = array(
       '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid">Find more information in the documentation</a>.', [':analytics' => 'http://www.google.com/analytics/', ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])->toString()]),
       '#maxlength' => 20,
       '#placeholder' => 'UA-',
@@ -140,11 +141,46 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#title' => $this->t('IVW'),
       '#open' => FALSE,
     );
-    $form['ivw']['site'] = array(
+    $form['ivw']['ivw_site'] = array(
       '#type' => 'textfield',
       '#title' => t('IVW Site name'),
       '#description' => t('Site name as given by IVW, this is used as default for the "st" parameter in the iam_data object')
     );
+
+
+    $form['acquia_lift'] = array(
+      '#type' => 'details',
+      '#title' => $this->t('Acquia Lift'),
+      '#open' => FALSE,
+    );
+    $form['acquia_lift']['al_account_name'] = [
+      '#type' => 'textfield',
+      '#title' => t('Account Name'),
+    ];
+    $form['acquia_lift']['al_customer_site'] = [
+      '#type' => 'textfield',
+      '#title' => t('Customer Site'),
+    ];
+    $form['acquia_lift']['al_api_url'] = [
+      '#type' => 'textfield',
+      '#title' => t('API URL'),
+      '#field_prefix' => 'http(s)://',
+    ];
+    $form['acquia_lift']['al_access_key'] = [
+      '#type' => 'textfield',
+      '#title' => t('API Access Key'),
+    ];
+    $form['acquia_lift']['al_secret_key'] = [
+      '#type' => 'password',
+      '#title' => t('API Secret Key'),
+      '#description' => !empty($credential_settings['secret_key']) ? t('Only necessary if updating') : '',
+    ];
+    $form['acquia_lift']['al_js_path'] = [
+      '#type' => 'textfield',
+      '#title' => t('JavaScript Path'),
+      '#field_prefix' => 'http(s)://',
+    ];
+
 
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['save'] = array(
@@ -165,12 +201,22 @@ class ModuleConfigureForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $this->config('google_analytics.settings')
-      ->set('account', (string) $form_state->getValue('account'))
+      ->set('account', (string) $form_state->getValue('ga_account'))
       ->save(TRUE);
 
     $this->config('ivw_integration.settings')
-      ->set('site', (string) $form_state->getValue('site'))
+      ->set('site', (string) $form_state->getValue('ivw_site'))
       ->save(TRUE);
+
+    $this->config('acquia_lift.settings')
+      ->set('credential.account_name', (string) $form_state->getValue('al_account_name'))
+      ->set('credential.customer_site', (string) $form_state->getValue('al_customer_site'))
+      ->set('credential.api_url', (string) $form_state->getValue('al_api_url'))
+      ->set('credential.access_key', (string) $form_state->getValue('al_access_key'))
+      ->set('credential.secret_key', (string) $form_state->getValue('al_secret_key'))
+      ->set('credential.js_path', (string) $form_state->getValue('al_js_path'))
+      ->save(TRUE);
+
   }
 
 }
