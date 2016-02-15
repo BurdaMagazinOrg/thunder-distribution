@@ -84,7 +84,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660386.git"
-      revision: "82507a7a2dee90905f5d682d1c9639c93fe8a5eb"
+      revision: "cdb6c79d52b16f6d40a76bf257a35eb025746312"
       branch: "8.x-1.x"
 
   media_entity:
