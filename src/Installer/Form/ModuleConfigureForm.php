@@ -15,6 +15,7 @@ use Drupal\thunder\Installer\Form\OptionalModules\BreakpointJsSettings;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
 use Drupal\thunder\Installer\Form\OptionalModules\Ivw;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
+use Drupal\thunder\Installer\Form\OptionalModules\RiddleIntegration;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -55,6 +56,7 @@ class ModuleConfigureForm extends ConfigFormBase {
       new IvwIntegration($config_factory),
       new BreakpointJsSettings($config_factory),
       new AdIntegration($config_factory),
+      new RiddleIntegration($config_factory),
     ];
   }
 

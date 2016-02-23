@@ -107,6 +107,13 @@ projects:
       revision: "f293a51ae2cc282f1d84548382564e66f81863c1"
       branch: "8.x-1.x"
 
+  riddle:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/sandbox/riddle.com/2670272"
+      revision: "96a6a6302032960de2d5819e96a41e0625da742e"
+      branch: "8.x-1.x"
+
   scheduler:
     type: "module"
     download:
