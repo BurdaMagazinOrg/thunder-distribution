@@ -65,6 +65,38 @@ class IvwIntegration extends AbstractOptionalModule {
       ->set('site', (string) $form_state->getValue('ivw_site'))
       ->set('mobile_site', (string) $form_state->getValue('mobile_site'))
       ->save(TRUE);
+
+    $fieldStorage = \Drupal::entityTypeManager()
+      ->getStorage('field_storage_config')
+      ->load('node.field_ivw');
+    if (empty($fieldStorage)) {
+      $fieldStorageDefinition = array(
+        'field_name' => 'field_ivw',
+        'entity_type' => 'node',
+        'type' => 'ivw_integration_settings',
+      );
+      $fieldStorage = \Drupal::entityTypeManager()
+        ->getStorage('field_storage_config')
+        ->create($fieldStorageDefinition);
+      $fieldStorage->save();
+    }
+    $fieldDefinition = array(
+      'label' => 'IVW settings',
+      'field_name' => $fieldStorage->getName(),
+      'entity_type' => 'node',
+      'bundle' => 'article',
+      'settings' => [
+        'display_default' => '1',
+        'display_field' => '1',
+      ]
+    );
+    $field = entity_create('field_config', $fieldDefinition);
+    $field->save();
+    entity_get_form_display('node', 'article', 'default')
+      ->setComponent('field_ivw', array(
+        'type' => 'ivw_integration_widget',
+      ))
+      ->save();
   }
 
 }
