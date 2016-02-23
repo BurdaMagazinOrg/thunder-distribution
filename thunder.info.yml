@@ -33,8 +33,6 @@ dependencies:
   - views
   - views_ui
 # contrib
-  - acquia_lift
-  - acquia_connector
   - admin_toolbar
   - field_group
   - focal_point
