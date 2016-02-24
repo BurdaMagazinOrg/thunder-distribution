@@ -6,7 +6,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660394.git"
-      revision: "bd9fb9419ce981e2476c1cd0265300a5c1fcab5d"
+      revision: "117972530ca23354cf77401e84f40e23eeda9bcc"
       branch: "8.x-1.x"
 
   admin_toolbar:
@@ -17,7 +17,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660370.git"
-      revision: "798840d00a1286d720cb3ac347cbd8e9283a930c"
+      revision: "b954ccce4ce7a824afe68412f2b69e67c22b2d6d"
       branch: "8.x-1.x"
 
   ctools:
@@ -35,7 +35,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
-      revision: "99404669a34ee92e466e3444f1f053220a0a0512"
+      revision: "f883bb3422d2724248f7e5a3af6b09b34489d08a"
       branch: "8.x-1.x"
 
   entity_reference_revisions:
@@ -53,7 +53,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "3095c52246e3a45c708649d07dafe0505acb0659"
+      revision: "d63fcedcd13c2242ba35bd4063d63e35894ec677"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -65,16 +65,13 @@ projects:
 
   inline_entity_form:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "e20af5960c5f9112a91da2a4a52822fe0d672430"
-      branch: "8.x-1.x"
+    version: "1.0-alpha4"
 
   ivw_integration:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660386.git"
-      revision: "cdb6c79d52b16f6d40a76bf257a35eb025746312"
+      revision: "0767469bf139b2a09a66490018aba4548c981cdc"
       branch: "8.x-1.x"
 
   media_entity:
