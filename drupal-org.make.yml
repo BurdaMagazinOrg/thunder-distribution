@@ -35,7 +35,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
-      revision: "f883bb3422d2724248f7e5a3af6b09b34489d08a"
+      revision: "99404669a34ee92e466e3444f1f053220a0a0512"
       branch: "8.x-1.x"
 
   entity_reference_revisions:
@@ -53,7 +53,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "d63fcedcd13c2242ba35bd4063d63e35894ec677"
+      revision: "3095c52246e3a45c708649d07dafe0505acb0659"
       branch: "8.x-1.x"
 
   google_analytics:
