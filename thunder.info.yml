@@ -1,9 +1,11 @@
 name: Thunder
 type: profile
-description: 'Na na na na na na na na... THUNDER!'
+description: 'The Drupal8 based CMS for professional publishing.'
 core: 8.x
 distribution:
   name: Thunder
+  install:
+    theme: thunder
 
 # Required modules
 dependencies:
@@ -52,3 +54,4 @@ dependencies:
 themes:
   - bartik
   - seven
+

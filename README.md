@@ -1,14 +1,8 @@
 # Thunder
 
-## What is Thunder? 
-
-[![Thunder](http://img.youtube.com/vi/v2AC41dglnM/0.jpg)](http://www.youtube.com/watch?v=v2AC41dglnM)
-
-## Ok, seriously
-
 Thunder is a Drupal 8 distribution for professional publishers. It consists of the current Drupal 8 functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
 
-## What's in it?
+## What's installed by default?
 
 * admin_toolbar
 * field_group
@@ -16,7 +10,6 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * entity_embed
 * imagemagick
 * inline_entity_form
-* google_analytics
 * metatag
 * media_entity
 * media_entity_image
@@ -36,10 +29,22 @@ Plus some pre-configured content-types
     * Image
     * Video
     
+## What can be activated optionally?
+
+* googleanalytics
+* ivm
+* ad integration
+* breakpoint js settings
+* riddle
+
+[Here](https://burdamagazinorg.gitbooks.io/thunder/content/) you can find more information about these modules.
+
 ## Installation
 
-Can't be simpler than:
+Download thunder from the [distribution page](https://www.drupal.org/project/thunder) or just do:
 
 ```
 drush dl thunder
 ```
+
+For further information follow the [install instructions](https://www.drupal.org/documentation/install). 
