@@ -15,7 +15,7 @@ class RiddleIntegration extends AbstractOptionalModule {
 
   public function getFormId() {
 
-    return 'riddle';
+    return 'riddle_marketplace';
   }
 
   public function getFormName() {
@@ -27,13 +27,13 @@ class RiddleIntegration extends AbstractOptionalModule {
    */
   protected function getEditableConfigNames() {
     return [
-      'riddle.settings',
+      'riddle_marketplace.settings',
     ];
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['riddle'] = array(
+    $form['riddle_marketplace'] = array(
       '#type' => 'details',
       '#title' => $this->t('Riddle'),
       '#open' => TRUE,
@@ -44,7 +44,7 @@ class RiddleIntegration extends AbstractOptionalModule {
       )
     );
 
-    $form['riddle']['riddle_token'] = array(
+    $form['riddle_marketplace']['riddle_token'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Riddle token'),
       '#description' => $this->t('Goto Riddle.com and get a token from the Account->Plugins page (you may need to reset to get the first token)'),
@@ -55,7 +55,7 @@ class RiddleIntegration extends AbstractOptionalModule {
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $this->config('riggle.settings')
+    $this->config('riddle_marketplace.settings')
       ->set('token', (string) $form_state->getValue('riddle_token'))
       ->save(TRUE);
   }
