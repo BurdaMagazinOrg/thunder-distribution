@@ -38,7 +38,6 @@ dependencies:
   - focal_point
   - entity_embed
   - inline_entity_form
-  - google_analytics
   - metatag
   - media_entity
   - media_entity_image
@@ -47,9 +46,6 @@ dependencies:
   - pathauto
   - paragraphs
 # thunder
-  - ad_integration
-  - breakpoint_js_settings
-  - ivw_integration
   - thunder_article
   - thunder_media
   - thunder_taxonomy

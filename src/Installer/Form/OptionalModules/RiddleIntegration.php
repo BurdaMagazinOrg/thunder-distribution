@@ -33,12 +33,22 @@ class RiddleIntegration extends AbstractOptionalModule {
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['riddle_token'] = array(
+    $form['riddle'] = array(
+      '#type' => 'details',
+      '#title' => $this->t('Riddle'),
+      '#open' => TRUE,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="install_modules[riddle]"]' => array('checked' => TRUE),
+        ),
+      )
+    );
+
+    $form['riddle']['riddle_token'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Riddle token'),
       '#description' => $this->t('Goto Riddle.com and get a token from the Account->Plugins page (you may need to reset to get the first token)'),
     );
-
 
     return $form;
   }
