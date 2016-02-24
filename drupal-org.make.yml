@@ -94,14 +94,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "11a6b4ec2cf38c6b3316a4d36fd47bec17324a5f"
+      revision: "916b9bb33dfa7d7c32f55272752324da2affe6f0"
       branch: "8.x-1.x"
 
   pathauto:
     type: "module"
     download:
       url: "http://git.drupal.org/project/pathauto.git"
-      revision: "f293a51ae2cc282f1d84548382564e66f81863c1"
+      revision: "f6d2b6ad34fb7b49f4a750fbdf80bf5fa7d49610"
       branch: "8.x-1.x"
 
   riddle:
@@ -115,7 +115,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "89b9a097a00d1e6cbee67d7e758ea9fcc0f15fea"
+      revision: "e3e5c5233c80ea8ef439e99a646d2516fa660779"
       branch: "8.x-1.x"
 
   thunder_article:
