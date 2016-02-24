@@ -1,0 +1,40 @@
+name: Thunder Article
+type: module
+description: Provide content related configs and code for thunder.
+package: Thunder
+core: 8.x
+version: 8.x-1.x-dev
+dependencies:
+  - node
+  - field
+  - field_group
+  - field_ui
+  - thunder_media
+  - thunder_taxonomy
+  - menu_ui
+  - options
+  - paragraphs
+  - scheduler
+config_devel:
+  - core.entity_view_display.node.article.presenter_full
+  - core.entity_view_display.node.article.presenter_half
+  - core.entity_view_display.node.article.presenter_home_selectable
+  - core.entity_view_display.node.article.teaser_landscape_m
+  - core.entity_view_display.node.article.teaser_portrait_m
+  - core.entity_view_display.node.article.teaser_selectable
+  - core.entity_view_display.node.article.teaser_square_m
+  - core.entity_view_display.node.article.teaser_square_s
+  - field.field.node.article.field_channel
+  - field.field.node.article.field_hp_display_mode
+  - field.field.node.article.field_promote_home_presenter
+  - field.field.node.article.field_seo_title
+  - field.field.node.article.field_teaser_display_mode
+  - field.field.node.article.field_teaser_image
+  - field.field.node.article.field_teaser_text
+  - field.storage.node.field_channel
+  - field.storage.node.field_hp_display_mode
+  - field.storage.node.field_promote_home_presenter
+  - field.storage.node.field_seo_title
+  - field.storage.node.field_teaser_display_mode
+  - field.storage.node.field_teaser_image
+  - field.storage.node.field_teaser_text

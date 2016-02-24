@@ -1,0 +1,23 @@
+uuid: cb523c8d-b3f2-49ff-882f-47787df53ed9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_meta_tags
+    - taxonomy.vocabulary.tags
+  module:
+    - metatag
+id: taxonomy_term.tags.field_meta_tags
+field_name: field_meta_tags
+entity_type: taxonomy_term
+bundle: tags
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'a:23:{s:5:"title";s:0:"";s:11:"description";s:0:"";s:8:"abstract";s:0:"";s:8:"keywords";s:0:"";s:13:"canonical_url";s:0:"";s:16:"content_language";s:0:"";s:6:"robots";s:12:"index,follow";s:13:"news_keywords";s:0:"";s:8:"standout";s:0:"";s:9:"generator";s:0:"";s:9:"image_src";s:0:"";s:15:"original_source";s:0:"";s:6:"rights";s:0:"";s:12:"og_site_name";s:11:"[site:name]";s:7:"og_type";s:0:"";s:6:"og_url";s:0:"";s:8:"og_title";s:0:"";s:14:"og_description";s:0:"";s:8:"og_image";s:0:"";s:12:"og_image_url";s:0:"";s:19:"og_image_secure_url";s:0:"";s:9:"fb_admins";s:0:"";s:9:"fb_app_id";s:0:"";}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

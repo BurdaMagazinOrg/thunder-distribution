@@ -1,0 +1,17 @@
+name: Thunder Media
+type: module
+description: provide media bundles for thunder.
+package: Thunder
+core: 8.x
+version: 8.x-1.x-dev
+dependencies:
+  - field
+  - field_ui
+  - focal_point
+  - image
+  - inline_entity_form
+  - media_entity
+  - media_entity_image
+  - media_entity_slideshow
+  - responsive_image
+

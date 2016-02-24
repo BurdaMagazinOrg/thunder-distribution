@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.twitter.field_link
+    - paragraphs.paragraphs_type.twitter
+id: paragraph.twitter.default
+targetEntityType: paragraph
+bundle: twitter
+mode: default
+content: {  }
+hidden:
+  created: true
+  field_link: true
+  uid: true

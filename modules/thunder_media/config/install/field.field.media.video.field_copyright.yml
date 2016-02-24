@@ -1,0 +1,19 @@
+uuid: fa192984-d26d-42eb-8800-cc1af1cdcb21
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_copyright
+    - media_entity.bundle.video
+id: media.video.field_copyright
+field_name: field_copyright
+entity_type: media
+bundle: video
+label: Copyright
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

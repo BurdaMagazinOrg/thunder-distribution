@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: video
+label: Video
+description: ''
+type: generic
+type_configuration: {  }
+field_map: {  }

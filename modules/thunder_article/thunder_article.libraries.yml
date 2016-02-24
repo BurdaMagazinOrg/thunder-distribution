@@ -1,0 +1,5 @@
+article_form_styling:
+  version: 1.0
+  css:
+    theme:
+      css/article-form.css: {weight: 999999999}

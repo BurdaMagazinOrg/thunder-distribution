@@ -118,27 +118,6 @@ projects:
       revision: "89b9a097a00d1e6cbee67d7e758ea9fcc0f15fea"
       branch: "8.x-1.x"
 
-  thunder_article:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/sandbox/chr.fritsch/2656214"
-      revision: "ff1b22a"
-      branch: "8.x-1.x"
-
-  thunder_media:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/sandbox/chr.fritsch/2656216"
-      revision: "87ffefd"
-      branch: "8.x-1.x"
-
-  thunder_taxonomy:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/sandbox/chr.fritsch/2656218"
-      revision: "db5c396"
-      branch: "8.x-1.x"
-
   token:
     type: "module"
     version: "1.0-alpha2"

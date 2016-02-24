@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_slideshow
+id: gallery
+label: Gallery
+description: ''
+type: slideshow
+type_configuration:
+  source_field: ''
+field_map: {  }

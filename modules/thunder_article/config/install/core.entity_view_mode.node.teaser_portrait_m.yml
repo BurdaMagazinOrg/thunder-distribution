@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_portrait_m
+label: 'Teaser Portrait M'
+targetEntityType: node
+cache: true

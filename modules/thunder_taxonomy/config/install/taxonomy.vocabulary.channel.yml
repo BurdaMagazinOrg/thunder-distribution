@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Channel
+vid: channel
+description: ''
+hierarchy: 1
+weight: 0
