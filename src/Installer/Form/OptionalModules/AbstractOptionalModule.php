@@ -29,4 +29,39 @@ abstract class AbstractOptionalModule extends ConfigFormBase{
     return [];
   }
 
+  protected function addField($entityType, $entityBundle, $fieldName, $fieldLabel, $fieldType, $fieldWidget) {
+
+    $fieldStorage = \Drupal::entityTypeManager()
+      ->getStorage('field_storage_config')
+      ->load("$entityType.$fieldName");
+    if (empty($fieldStorage)) {
+      $fieldStorageDefinition = array(
+        'field_name' => $fieldName,
+        'entity_type' => $entityType,
+        'type' => $fieldType,
+      );
+      $fieldStorage = \Drupal::entityTypeManager()
+        ->getStorage('field_storage_config')
+        ->create($fieldStorageDefinition);
+      $fieldStorage->save();
+    }
+    $fieldDefinition = array(
+      'label' => $fieldLabel,
+      'field_name' => $fieldStorage->getName(),
+      'entity_type' => $entityType,
+      'bundle' => $entityBundle,
+      'settings' => [
+        'display_default' => '1',
+        'display_field' => '1',
+      ]
+    );
+    $field = entity_create('field_config', $fieldDefinition);
+    $field->save();
+    entity_get_form_display($entityType, $entityBundle, 'default')
+      ->setComponent($fieldName, array(
+        'type' => $fieldWidget,
+      ))
+      ->save();
+  }
+
 }

@@ -21,5 +21,4 @@ class BreakpointJsSettings extends AbstractOptionalModule {
   public function getFormName() {
     return 'Breakpoint js settings';
   }
-
 }

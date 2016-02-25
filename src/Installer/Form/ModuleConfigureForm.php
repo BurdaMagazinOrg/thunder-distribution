@@ -7,13 +7,13 @@
 
 namespace Drupal\thunder\Installer\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\thunder\Installer\Form\OptionalModules\AdIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\BreakpointJsSettings;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
-use Drupal\thunder\Installer\Form\OptionalModules\Ivw;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\RiddleIntegration;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -46,7 +46,7 @@ class ModuleConfigureForm extends ConfigFormBase {
   }
 
 
-  public function __construct(\Drupal\Core\Config\ConfigFactoryInterface $config_factory, ModuleInstallerInterface $module_installer) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleInstallerInterface $module_installer) {
     parent::__construct($config_factory);
 
     $this->moduleInstaller = $module_installer;
@@ -90,7 +90,6 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     drupal_get_messages();
 
-
     $installableModules = [];
 
     /** @var ConfigFormBase $provider */
@@ -99,6 +98,7 @@ class ModuleConfigureForm extends ConfigFormBase {
       $installableModules[$provider->getFormId()] = $provider->getFormName();
 
       $form = $provider->buildForm($form, $form_state);
+
     }
     $form['#title'] = $this->t('Install & configure modules');
 
@@ -137,7 +137,6 @@ class ModuleConfigureForm extends ConfigFormBase {
         $provider->submitForm($form, $form_state);
       }
     }
-
   }
 
 }
