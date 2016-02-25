@@ -35,7 +35,7 @@ dependencies:
   - views
   - views_ui
 # contrib
-  - admin_toolbar
+  - admin_toolbar_tools
   - field_group
   - focal_point
   - entity_embed
