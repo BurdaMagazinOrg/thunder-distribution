@@ -63,6 +63,13 @@ projects:
       revision: "64eaef0c725aa17cb90cfddf6860ccf64e7f9b4e"
       branch: "8.x-1.x"
 
+  hierarchical_config:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/hierarchical_config.git"
+      revision: "9b01025db683b6f47a2d40fb6b63fdf68b37e8a2"
+      branch: "8.x-1.x"
+
   inline_entity_form:
     type: "module"
     version: "1.0-alpha4"
