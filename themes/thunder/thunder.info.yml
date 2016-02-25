@@ -2,3 +2,9 @@ name: Thunder
 type: theme
 core: 8.x
 base theme: seven
+
+libraries-override:
+  seven/install-page:
+    css:
+      theme:
+        css/theme/install-page.css: css/install-page.css

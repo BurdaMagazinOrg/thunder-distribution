@@ -39,7 +39,7 @@ class RiddleIntegration extends AbstractOptionalModule {
       '#open' => TRUE,
       '#states' => array(
         'visible' => array(
-          ':input[name="install_modules[riddle]"]' => array('checked' => TRUE),
+          ':input[name="install_modules[riddle_marketplace]"]' => array('checked' => TRUE),
         ),
       )
     );
