@@ -6,7 +6,6 @@ dependencies:
 id: gallery
 label: Gallery
 description: ''
-type: slideshow
-type_configuration:
-  source_field: ''
+type: generic
+type_configuration: {  }
 field_map: {  }

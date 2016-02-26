@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.field.media.gallery.field_images
     - media_entity.bundle.gallery
+  module:
+    - inline_entity_form
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
@@ -17,11 +19,14 @@ content:
   field_images:
     weight: 11
     settings:
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      override_labels: false
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
   name:
     type: string_textfield
     weight: -5
