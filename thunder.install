@@ -17,6 +17,11 @@ function thunder_install() {
     ->set('use_admin_theme', TRUE)
     ->save(TRUE);
 
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'thunder')
+    ->save(TRUE);
+
   // Create basic nodes.
   $basic_nodes = array(
     'Imprint',
