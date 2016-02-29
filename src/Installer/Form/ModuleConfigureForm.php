@@ -13,6 +13,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\thunder\Installer\Form\OptionalModules\AdIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\BreakpointJsSettings;
+use Drupal\thunder\Installer\Form\OptionalModules\FacebookInstantArticles;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
 use Drupal\thunder\Installer\Form\OptionalModules\HierarchicalConfig;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
@@ -56,6 +57,7 @@ class ModuleConfigureForm extends ConfigFormBase {
       new GoogleAnalytics($config_factory),
       new IvwIntegration($config_factory),
      # new BreakpointJsSettings($config_factory),
+      new FacebookInstantArticles($config_factory),
       new AdIntegration($config_factory),
       new RiddleIntegration($config_factory),
       new HierarchicalConfig($config_factory),

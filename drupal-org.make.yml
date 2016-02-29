@@ -42,6 +42,13 @@ projects:
     type: "module"
     version: "1.0-rc4"
 
+  facebook_instant_articles:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/facebook_instant_articles.git"
+      revision: "12063b6d584e209dc203505e2872afa72c3685f1"
+      branch: "8.x-1.x"
+
   field_group:
     type: "module"
     download:
