@@ -20,14 +20,6 @@ targetEntityType: node
 bundle: article
 mode: default
 content:
-  field_footer_blocks:
-    weight: 9
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
   field_header_blocks:
     weight: 0
     label: hidden
@@ -37,48 +29,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
   field_meta_tags:
-    weight: 10
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
   field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    weight: 3
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-  field_seo_title:
-    type: string
-    weight: 13
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_sidebar_blocks:
-    weight: 8
-    label: hidden
-    settings:
-      link: true
-      view_mode: default
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-  field_tags:
-    type: entity_reference_label
-    weight: 7
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-  field_teaser_text:
-    weight: 14
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-  field_top_paragraphs:
     type: entity_reference_revisions_entity_view
     weight: 2
     label: hidden
@@ -86,12 +42,32 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+  field_tags:
+    type: entity_reference_label
+    weight: 3
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_top_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
 hidden:
   field_channel: true
+  field_footer_blocks: true
   field_header_media: true
   field_hp_display_mode: true
   field_presenter_media: true
+  field_seo_title: true
+  field_sidebar_blocks: true
   field_teaser_display_mode: true
   field_teaser_media: true
+  field_teaser_text: true
   langcode: true
   links: true
+

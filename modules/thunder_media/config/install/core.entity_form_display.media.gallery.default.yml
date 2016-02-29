@@ -19,8 +19,9 @@ content:
   field_images:
     weight: 11
     settings:
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: Media
+      label_plural: Medias
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS

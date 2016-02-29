@@ -38,7 +38,6 @@ third_party_settings:
         - field_channel
         - title
         - field_seo_title
-        - field_teaser_text
         - group_teaser
         - group_paragraphs
         - group_tags
@@ -71,6 +70,7 @@ third_party_settings:
     group_teaser:
       children:
         - field_teaser_media
+        - field_teaser_text
       parent_name: group_edit
       weight: 5
       label: Teaser
@@ -105,7 +105,7 @@ third_party_settings:
         id: ''
         required_fields: true
 _core:
-  default_config_hash: KugdZean7KSMV9LWOcY4tm_7rtL8vq2SxFq424Iu-Gk
+  default_config_hash: c62c9R5cwNjpHcSKMNi9IuNMF-vrgKADqC0QvgIpauQ
 id: node.article.default
 targetEntityType: node
 bundle: article
@@ -163,18 +163,18 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_teaser_media:
-    weight: 7
+    weight: 5
     settings:
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: Image
+      label_plural: Images
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings: {  }
     type: inline_entity_form_complex
   field_teaser_text:
-    weight: 4
+    weight: 6
     settings:
       rows: 5
       placeholder: ''

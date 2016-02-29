@@ -15,8 +15,9 @@ content:
     type: inline_entity_form_complex
     weight: 0
     settings:
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: Gallery
+      label_plural: Galleries
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS

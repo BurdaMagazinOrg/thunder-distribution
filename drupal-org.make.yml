@@ -128,3 +128,23 @@ projects:
   token:
     type: "module"
     version: "1.0-alpha2"
+
+  infinite_module:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/sandbox/gos77/2677752.git"
+      revision: "190c64083c1f2fda584e5894496502743198b246"
+      branch: "8.x-1.x"
+
+  infinite_theme:
+    type: "theme"
+    download:
+      url: "http://git.drupal.org/sandbox/gos77/2677750.git"
+      revision: "e74fdbe98683696a29f8e1e0cdf7e7818962b524"
+      branch: "8.x-1.x"
+
+  views_load_more:
+    type: "module"
+    download:
+      url: "https://git.drupal.org/project/views_load_more.git"
+      revision: "178d32195253207cc74097296e25079a23f0b2e5"

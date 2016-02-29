@@ -19,8 +19,18 @@ function thunder_install() {
 
   \Drupal::configFactory()
     ->getEditable('system.theme')
-    ->set('default', 'thunder')
+    ->set('default', 'infinite')
     ->save(TRUE);
+
+  \Drupal::configFactory()
+    ->getEditable('infinite.settings')
+    ->set('logo.use_default', 1)
+    ->set('logo.use_default', 'profiles/thunder/themes/thunder/images/thunder-logo.png')
+    ->save(TRUE);
+
+
+  \Drupal::service('module_installer')
+    ->install('infinite_base');
 
   // Create basic nodes.
   $basic_nodes = array(
@@ -69,4 +79,29 @@ function thunder_install() {
   $user = User::load(1);
   $user->roles[] = 'administrator';
   $user->save();
+
+  $data = file_get_contents(drupal_get_path('profile', 'thunder') . DIRECTORY_SEPARATOR . 'themes/thunder/images/bg-main.jpg');
+  $file = file_save_data($data, 'public://thunder.jpg', FILE_EXISTS_REPLACE);
+
+  $media = \Drupal\media_entity\Entity\Media::create([
+    'field_image' => $file->id(),
+    'name' => 'Thunder',
+    'bundle' => 'image'
+  ]);
+  $media->save();
+
+  $node = \Drupal\node\Entity\Node::create(array(
+    'type' => 'article',
+    'title' => 'Installation Successful',
+    'langcode' => $default_language_id,
+    'uid' => '1',
+    'status' => 1,
+    'field_hp_display_mode' => 'presenter_full',
+    'field_presenter_media' => $media->id(),
+  ));
+  $node->save();
+
+
+
+
 }
