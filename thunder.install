@@ -25,7 +25,7 @@ function thunder_install() {
   \Drupal::configFactory()
     ->getEditable('infinite.settings')
     ->set('logo.use_default', 1)
-    ->set('logo.use_default', 'profiles/thunder/themes/thunder/images/thunder-logo.png')
+    ->set('logo.use_default', 'profiles/thunder/themes/thunder/images/thunder-logo-big.png')
     ->save(TRUE);
 
 

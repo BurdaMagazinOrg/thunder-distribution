@@ -106,10 +106,7 @@ projects:
 
   pathauto:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/pathauto.git"
-      revision: "f293a51ae2cc282f1d84548382564e66f81863c1"
-      branch: "8.x-1.x"
+    version: "1.0-alpha2"
 
   riddle_marketplace:
     type: "module"
@@ -133,14 +130,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "190c64083c1f2fda584e5894496502743198b246"
+      revision: "362e660372d18e97af0267ab12c6a77c06867c68"
       branch: "8.x-1.x"
 
   infinite_theme:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "e74fdbe98683696a29f8e1e0cdf7e7818962b524f"
+      revision: "e74fdbe98683696a29f8e1e0cdf7e7818962b524"
       branch: "8.x-1.x"
 
   views_load_more:
