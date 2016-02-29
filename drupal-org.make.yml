@@ -130,14 +130,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "362e660372d18e97af0267ab12c6a77c06867c68"
+      revision: "ea10948fd722fb22ba5f3541c72ec02190413738"
       branch: "8.x-1.x"
 
-  infinite_theme:
+  infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "e74fdbe98683696a29f8e1e0cdf7e7818962b524"
+      revision: "a4fade1e3cb903c565df80b2249870792ca2dd7e"
       branch: "8.x-1.x"
 
   views_load_more:
