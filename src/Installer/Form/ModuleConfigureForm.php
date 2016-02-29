@@ -55,7 +55,7 @@ class ModuleConfigureForm extends ConfigFormBase {
     $this->provider = [
       new GoogleAnalytics($config_factory),
       new IvwIntegration($config_factory),
-      new BreakpointJsSettings($config_factory),
+     # new BreakpointJsSettings($config_factory),
       new AdIntegration($config_factory),
       new RiddleIntegration($config_factory),
       new HierarchicalConfig($config_factory),

@@ -48,6 +48,7 @@ dependencies:
   - pathauto
   - paragraphs
 # thunder
+  - breakpoint_js_settings
   - thunder_article
   - thunder_media
   - thunder_taxonomy
