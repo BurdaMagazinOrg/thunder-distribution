@@ -79,7 +79,7 @@ projects:
 
   inline_entity_form:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1.0-alpha5"
 
   ivw_integration:
     type: "module"
@@ -144,7 +144,7 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "a4fade1e3cb903c565df80b2249870792ca2dd7e"
+      revision: "de1108bd0ae5c707937506423537ff15e07fb12c"
       branch: "8.x-1.x"
 
   views_load_more:
