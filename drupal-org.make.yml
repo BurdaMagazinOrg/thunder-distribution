@@ -90,7 +90,10 @@ projects:
 
   media_entity:
     type: "module"
-    version: "1.0-beta2"
+    download:
+      url: "http://git.drupal.org/project/media_entity.git"
+      revision: "f544c91e4dd8d13653b57519edc53732d8bb138e"
+      branch: "8.x-1.x"
 
   media_entity_image:
     type: "module"
