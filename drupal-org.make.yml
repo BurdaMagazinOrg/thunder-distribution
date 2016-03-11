@@ -46,7 +46,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/facebook_instant_articles.git"
-      revision: "12063b6d584e209dc203505e2872afa72c3685f1"
+      revision: "bfc563f"
       branch: "8.x-1.x"
 
   field_group:
@@ -79,7 +79,10 @@ projects:
 
   inline_entity_form:
     type: "module"
-    version: "1.0-alpha5"
+    download:
+      url: "http://git.drupal.org/project/inline_entity_form.git"
+      revision: "40c84c9bf56d07a9d91fb3b5f907ed722c721094"
+      branch: "8.x-1.x"
 
   ivw_integration:
     type: "module"
@@ -105,7 +108,10 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta4"
+    download:
+      url: "http://git.drupal.org/project/metatag.git"
+      revision: "44deaf39c98b3a7cd096a37a4e161cd9459c8387"
+      branch: "8.x-1.x"
 
   paragraphs:
     type: "module"
@@ -129,7 +135,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "89b9a097a00d1e6cbee67d7e758ea9fcc0f15fea"
+      revision: "00ea0600ed3746a64107b68a5b7642d193f7976b"
       branch: "8.x-1.x"
 
   token:
@@ -140,14 +146,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "ea10948fd722fb22ba5f3541c72ec02190413738"
+      revision: "ab0ccb1"
       branch: "8.x-1.x"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "de1108bd0ae5c707937506423537ff15e07fb12c"
+      revision: "6c3b8c70fd1f97ebbecd23728a1d5be41a1c0ba2"
       branch: "8.x-1.x"
 
   views_load_more:
