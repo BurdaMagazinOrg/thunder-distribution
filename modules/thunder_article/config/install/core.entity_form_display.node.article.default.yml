@@ -43,10 +43,10 @@ third_party_settings:
         - group_tags
       parent_name: group_tabs
       weight: 16
-      label: 'Artikel schreiben'
+      label: 'Write article'
       format_type: tab
       format_settings:
-        label: 'Artikel schreiben'
+        label: 'Write article'
         id: ''
         classes: ''
         formatter: open
