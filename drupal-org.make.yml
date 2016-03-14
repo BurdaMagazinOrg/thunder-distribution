@@ -108,10 +108,7 @@ projects:
 
   metatag:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/metatag.git"
-      revision: "44deaf39c98b3a7cd096a37a4e161cd9459c8387"
-      branch: "8.x-1.x"
+    version: "1.0-beta5"
 
   paragraphs:
     type: "module"
@@ -153,7 +150,7 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "6c3b8c70fd1f97ebbecd23728a1d5be41a1c0ba2"
+      revision: "7d79b09328a77fe54c024ff0bc916fe1ea79b4fa"
       branch: "8.x-1.x"
 
   views_load_more:
