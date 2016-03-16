@@ -60,7 +60,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "3095c52246e3a45c708649d07dafe0505acb0659"
+      revision: "d39b83f955281255811618403ab62ee572146f0f"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -114,12 +114,15 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "11a6b4ec2cf38c6b3316a4d36fd47bec17324a5f"
+      revision: "4adb7aa041c112a672ee38c30fe8db2334c5d166"
       branch: "8.x-1.x"
 
   pathauto:
     type: "module"
-    version: "1.0-alpha2"
+    download:
+      url: "http://git.drupal.org/project/pathauto.git"
+      revision: "7da80a4e7d0f815923d0996e8564e8e0bc3e97e9"
+      branch: "8.x-1.x"
 
   riddle_marketplace:
     type: "module"
@@ -132,7 +135,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "00ea0600ed3746a64107b68a5b7642d193f7976b"
+      revision: "4ecd0626e8fc5a5b3323350ba3d44d5191481396"
       branch: "8.x-1.x"
 
   token:
@@ -143,7 +146,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "ab0ccb1"
+      revision: "769b470"
       branch: "8.x-1.x"
 
   infinite:
