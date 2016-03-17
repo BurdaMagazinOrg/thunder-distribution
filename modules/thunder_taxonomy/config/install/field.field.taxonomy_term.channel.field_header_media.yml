@@ -1,0 +1,26 @@
+uuid: fce180db-2261-4134-b706-6a38d9ad54ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_header_media
+    - media_entity.bundle.image
+    - taxonomy.vocabulary.channel
+id: taxonomy_term.channel.field_header_media
+field_name: field_header_media
+entity_type: taxonomy_term
+bundle: channel
+label: 'Header Media'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+field_type: entity_reference

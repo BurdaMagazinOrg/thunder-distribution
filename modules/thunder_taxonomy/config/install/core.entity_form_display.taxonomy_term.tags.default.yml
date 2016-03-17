@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.tags.field_header_media
+    - field.field.taxonomy_term.tags.field_header_title
+    - field.field.taxonomy_term.tags.field_meta_tags
+    - taxonomy.vocabulary.tags
+  module:
+    - inline_entity_form
+    - metatag
+    - path
+    - text
+id: taxonomy_term.tags.default
+targetEntityType: taxonomy_term
+bundle: tags
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 4
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_header_media:
+    type: inline_entity_form_complex
+    weight: 3
+    settings:
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings: {  }
+  field_header_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

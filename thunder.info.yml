@@ -1,0 +1,60 @@
+name: Thunder
+type: profile
+description: 'The Drupal8 based CMS for professional publishing.'
+core: 8.x
+distribution:
+  name: Thunder
+  install:
+    theme: thunder
+
+# Required modules
+dependencies:
+  # core
+  - block
+  - breakpoint
+  - ckeditor
+  - contextual
+  - menu_link_content
+  - datetime
+  - editor
+  - entity_reference
+  - image
+  - menu_ui
+  - language
+  - node
+  - options
+  - path
+  - page_cache
+  - taxonomy
+  - dblog
+  - dynamic_page_cache
+  - toolbar
+  - field_ui
+  - file
+  - responsive_image
+  - views
+  - views_ui
+# contrib
+  - admin_toolbar_tools
+  - field_group
+  - focal_point
+  - entity_embed
+  - inline_entity_form
+  - metatag
+  - media_entity
+  - media_entity_image
+  - media_entity_slideshow
+  - scheduler
+  - pathauto
+  - paragraphs
+# thunder
+  - breakpoint_js_settings
+  - thunder_article
+  - thunder_media
+  - thunder_taxonomy
+  - infinite_article
+themes:
+  - thunder
+  - infinite
+  - seven
+

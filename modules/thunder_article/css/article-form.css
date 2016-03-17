@@ -1,0 +1,163 @@
+/* line 3, ../sass/article-form.scss */
+body .horizontal-tabs {
+  border: 0;
+}
+/* line 6, ../sass/article-form.scss */
+body .horizontal-tabs .horizontal-tabs-list {
+  background-color: transparent;
+  border: 0;
+}
+/* line 10, ../sass/article-form.scss */
+body .horizontal-tabs .horizontal-tabs-list > li {
+  height: 35px;
+}
+/* line 15, ../sass/article-form.scss */
+body .horizontal-tabs .horizontal-tab-button {
+  border: 1px solid #c2c2c2;
+  border-bottom: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: rgba(242, 242, 240, 0.7);
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 24, ../sass/article-form.scss */
+body .horizontal-tabs .horizontal-tab-button.selected {
+  background-color: #fff;
+}
+/* line 30, ../sass/article-form.scss */
+body .horizontal-tabs-panes {
+  border: 1px solid #c2c2c2;
+  margin-top: -6px;
+}
+/* line 35, ../sass/article-form.scss */
+body .horizontal-tabs-pane {
+  padding: 0;
+}
+/* line 39, ../sass/article-form.scss */
+body fieldset {
+  border-left: 0;
+  border-right: 0;
+}
+/* line 43, ../sass/article-form.scss */
+body fieldset fieldset, body fieldset fieldset:not(.fieldgroup) {
+  border: 0;
+  padding-right: 0;
+}
+/* line 49, ../sass/article-form.scss */
+body fieldset:not(.fieldgroup) {
+  margin-top: 2.5em;
+}
+/* line 52, ../sass/article-form.scss */
+body fieldset:not(.fieldgroup):first-child {
+  margin-top: 0;
+}
+/* line 57, ../sass/article-form.scss */
+body .form-item {
+  margin-top: 1.5em;
+  padding-top: 0;
+}
+/* line 63, ../sass/article-form.scss */
+body .form-wrapper .field--type-string {
+  margin-top: 0em;
+}
+/* line 68, ../sass/article-form.scss */
+body label {
+  margin-bottom: 0.4em;
+}
+/* line 72, ../sass/article-form.scss */
+body input.form-autocomplete,
+body input.form-text,
+body input.form-tel,
+body input.form-email,
+body input.form-url,
+body input.form-search,
+body input.form-number,
+body input.form-color,
+body input.form-file,
+body input.form-date,
+body input.form-time,
+body textarea.form-textarea {
+  min-height: 35px;
+  width: 100%;
+  background: none;
+  background-color: white;
+}
+/* line 90, ../sass/article-form.scss */
+body ul.tips, body div.description, body .form-item .description {
+  margin-top: 0.5em;
+}
+/* line 93, ../sass/article-form.scss */
+body ul.tips:before, body div.description:before, body .form-item .description:before {
+  content: "\00bb";
+  font-size: 15px;
+  color: #4fa5ff;
+  margin-right: 4px;
+}
+/* line 102, ../sass/article-form.scss */
+body .field--widget-entity-reference-paragraphs .tabledrag-toggle-weight-wrapper {
+  margin-bottom: 1em;
+}
+/* line 107, ../sass/article-form.scss */
+body .field--name-field-media-images {
+  margin-top: 1.5em;
+  border-top: 1px solid #e6e4df;
+}
+/* line 114, ../sass/article-form.scss */
+body .field-multiple-table .fieldset-wrapper > .form-wrapper > * {
+  margin-top: 1.5em;
+}
+
+/* line 121, ../sass/article-form.scss */
+.inline-entity-form-media-thumbnail {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+/* line 127, ../sass/article-form.scss */
+.touchevents .draggable td {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+/* line 133, ../sass/article-form.scss */
+.touchevents a.tabledrag-handle .handle {
+  height: 40px;
+}
+
+/**
+* Harm want only 1 Label
+**/
+/* line 140, ../sass/article-form.scss */
+#edit-field-top-paragraphs, #edit-field-paragraphs {
+  font-size: 0;
+  line-height: 0;
+}
+/* line 144, ../sass/article-form.scss */
+#edit-field-top-paragraphs > *, #edit-field-paragraphs > * {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* line 150, ../sass/article-form.scss */
+#edit-field-presenter-media-wrapper fieldset {
+  padding-left: 0;
+}
+
+/* line 155, ../sass/article-form.scss */
+#field-paragraphs-values > thead, #field-top-paragraphs-values > thead {
+  display: none;
+}
+/* line 160, ../sass/article-form.scss */
+#field-paragraphs-values .draggable:first-child, #field-top-paragraphs-values .draggable:first-child {
+  border-top: 1px solid #e6e4df;
+}
+
+/* line 168, ../sass/article-form.scss */
+.field--widget-entity-reference-paragraphs .paragraph-type-top {
+  padding-top: 1em;
+}
+/* line 172, ../sass/article-form.scss */
+.field--widget-entity-reference-paragraphs .paragraphs-subform {
+  padding-bottom: 1em;
+}

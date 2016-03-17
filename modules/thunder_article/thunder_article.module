@@ -1,0 +1,28 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_node_article_edit_form_alter().
+ */
+function thunder_article_form_node_article_edit_form_alter(&$form, FormStateInterface $form_state) {
+  _thunder_article_form_alter_helper($form, $form_state);
+}
+
+/**
+ * Implements hook_form_node_article_form_alter().
+ */
+function thunder_article_form_node_article_form_alter(&$form, FormStateInterface $form_state) {
+  _thunder_article_form_alter_helper($form, $form_state);
+}
+
+/**
+ * Helper function for article form alter hooks.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_state) {
+  // Add CSS file for layout optimization.
+  $form['#attached']['library'][] = 'thunder_article/article_form_styling';
+}

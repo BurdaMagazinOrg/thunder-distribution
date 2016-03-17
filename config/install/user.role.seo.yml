@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies: {  }
+id: seo
+label: Seo
+weight: 3
+is_admin: false
+permissions:
+  - 'access contextual links'
+  - 'access files overview'
+  - 'use text format full_html'
+  - 'administer media'
+  - 'delete any media'
+  - 'update any media'
+  - 'administer meta tags'
+  - 'access content overview'
+  - 'administer nodes'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'access content'
+  - 'create article content'
+  - 'delete any article content'
+  - 'delete own article content'
+  - 'delete article revisions'
+  - 'edit any article content'
+  - 'edit own article content'
+  - 'revert article revisions'
+  - 'view article revisions'
+  - 'create page content'
+  - 'delete any page content'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'edit any page content'
+  - 'edit own page content'
+  - 'revert page revisions'
+  - 'view page revisions'
+  - 'create url aliases'
+  - 'schedule publishing of nodes'
+  - 'view scheduled content'
+  - 'administer menu'
+  - 'access administration pages'
+  - 'view the administration theme'
+  - 'administer taxonomy'
+  - 'delete terms in channel'
+  - 'edit terms in channel'
+  - 'delete terms in tags'
+  - 'edit terms in tags'
+  - 'access toolbar'

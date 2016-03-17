@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_landscape_l
+label: 'Teaser Landscape L'
+targetEntityType: node
+cache: true

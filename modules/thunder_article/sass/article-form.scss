@@ -1,0 +1,176 @@
+body {
+
+  .horizontal-tabs {
+    border: 0;
+
+    .horizontal-tabs-list {
+      background-color: transparent;
+      border: 0;
+
+      & > li {
+        height: 35px;
+      }
+    }
+
+    .horizontal-tab-button {
+      border: 1px solid #c2c2c2;
+      border-bottom: 0;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: rgba(242, 242, 240, 0.7);
+      padding-left: 15px;
+      padding-right: 15px;
+
+      &.selected {
+        background-color: #fff;
+      }
+    }
+  }
+
+  .horizontal-tabs-panes {
+    border: 1px solid #c2c2c2;
+    margin-top: -6px;
+  }
+
+  .horizontal-tabs-pane {
+    padding: 0;
+  }
+
+  fieldset {
+    border-left: 0;
+    border-right: 0;
+
+    fieldset, fieldset:not(.fieldgroup) {
+      border: 0;
+      padding-right: 0;
+    }
+  }
+
+  fieldset:not(.fieldgroup) {
+    margin-top: 2.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .form-item {
+    margin-top: 1.5em;
+    padding-top: 0;
+  }
+
+  .form-wrapper {
+    .field--type-string {
+      margin-top: 0em;
+    }
+  }
+
+  label {
+    margin-bottom: 0.4em;
+  }
+
+  input.form-autocomplete,
+  input.form-text,
+  input.form-tel,
+  input.form-email,
+  input.form-url,
+  input.form-search,
+  input.form-number,
+  input.form-color,
+  input.form-file,
+  input.form-date,
+  input.form-time,
+  textarea.form-textarea {
+    min-height: 35px;
+    width: 100%;
+    background: none;
+    background-color: white;
+  }
+
+  ul.tips, div.description, .form-item .description {
+    margin-top: 0.5em;
+
+    &:before {
+      content: "\00bb";
+      font-size: 15px;
+      color: #4fa5ff;
+      margin-right: 4px;
+    }
+  }
+
+  .field--widget-entity-reference-paragraphs {
+    .tabledrag-toggle-weight-wrapper {
+      margin-bottom: 1em;
+    }
+  }
+
+  .field--name-field-media-images {
+    margin-top: 1.5em;
+    border-top: 1px solid #e6e4df;
+  }
+
+  .field-multiple-table {
+    .fieldset-wrapper > .form-wrapper {
+      & > * {
+        margin-top: 1.5em;
+      }
+    }
+  }
+}
+
+.inline-entity-form-media-thumbnail {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.touchevents .draggable {
+  td {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
+
+.touchevents a.tabledrag-handle .handle {
+  height: 40px;
+}
+
+/**
+* Harm want only 1 Label
+**/
+#edit-field-top-paragraphs, #edit-field-paragraphs {
+  font-size: 0;
+  line-height: 0;
+
+  & > * {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+#edit-field-presenter-media-wrapper fieldset {
+  padding-left: 0;
+}
+
+#field-paragraphs-values, #field-top-paragraphs-values {
+  & > thead {
+    display: none;
+  }
+
+  .draggable {
+    &:first-child {
+      border-top: 1px solid #e6e4df;
+    }
+
+  }
+}
+
+.field--widget-entity-reference-paragraphs {
+  .paragraph-type-top {
+    padding-top: 1em;
+  }
+
+  .paragraphs-subform {
+    padding-bottom: 1em;
+  }
+}
+
