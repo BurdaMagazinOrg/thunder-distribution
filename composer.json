@@ -30,10 +30,7 @@
     }
   ],
   "require": {
-    "composer/installers": "^1.0.20",
-    "drupal-composer/drupal-scaffold": "~1",
-    "cweagans/composer-patches": "~1.0",
-    "drupal/core": "8.0.5",
+    "drupal/core": "8.0.*",
     "burdamagazinorg/ad_integration": "8.x-1.x-dev#7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6",
     "burdamagazinorg/breakpoint_js_settings": "8.x-1.x-dev#4f500f1a315f2e78d76dbe213b30bc7555e7a744",
     "drupal/admin_toolbar": "8.1.14",
@@ -59,16 +56,5 @@
     "drupal/scheduler": "8.x-1.x-dev#4ecd0626e8fc5a5b3323350ba3d44d5191481396",
     "drupal/token": "8.1.0-alpha2",
     "drupal/views_load_more": "8.x-1.x-dev#178d32195253207cc74097296e25079a23f0b2e5"
-  },
-  "scripts": {
-    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-  },
-  "extra": {
-    "installer-paths": {
-      "docroot/core": ["type:drupal-core"],
-      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "docroot/themes/contrib/{$name}": ["type:drupal-theme"]
-    }
   }
 }
