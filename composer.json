@@ -1,7 +1,7 @@
 {
   "name": "burdamagazinorg/thunder",
   "description": "The thunder distribution",
-  "type": "project",
+  "type": "drupal-profile",
   "authors": [
     {
       "name": "Daniel Bosen",
