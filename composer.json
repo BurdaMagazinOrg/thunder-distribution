@@ -30,7 +30,7 @@
     }
   ],
   "require": {
-    "drupal/core": "8.0.*",
+    "drupal/core": "8.0.5",
     "burdamagazinorg/ad_integration": "8.x-1.x-dev#7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6",
     "burdamagazinorg/breakpoint_js_settings": "8.x-1.x-dev#4f500f1a315f2e78d76dbe213b30bc7555e7a744",
     "drupal/admin_toolbar": "8.1.14",
