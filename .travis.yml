@@ -56,5 +56,5 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
 
 script:
-  - cd docroot
-  - php core/scripts/run-tests.sh --url http://localhost:8080 Thunder
+  - drush en simpletest -y
+  - php core/scripts/run-tests.sh --php `which php` --url http://localhost:8080 Thunder
