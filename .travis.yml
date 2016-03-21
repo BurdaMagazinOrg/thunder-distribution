@@ -57,4 +57,4 @@ before_script:
 
 script:
   - drush en simpletest -y
-  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --concurrency 2 --url http://localhost:8080 Thunder
+  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
