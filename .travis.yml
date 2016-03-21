@@ -41,14 +41,14 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  # Build drupal + lightning from makefile
+  # Build drupal + thunder from makefile
   - drush make --concurrency=5 drupal-org-core.make docroot -y
   - mkdir docroot/profiles/thunder
   - shopt -s extglob
   - cp -r !(docroot) docroot/profiles/thunder
   - drush make -y --no-core docroot/profiles/thunder/drupal-org.make docroot/profiles/thunder
 
-  # Install lightning
+  # Install thunder
   - cd docroot
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
