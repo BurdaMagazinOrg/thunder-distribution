@@ -41,7 +41,7 @@
     "drupal/facebook_instant_articles": "dev-8.x-1.x#bfc563fbc29133a201d0f3bf597cf44361323d00",
     "drupal/field_group": "dev-8.x-1.x#6c63c9abcb0c1a08074a1b9c223c85287299f272",
     "drupal/focal_point": "dev-8.x-1.x#d39b83f955281255811618403ab62ee572146f0f",
-    "drupal/google_analytics": "div-8.x-2.x#64eaef0c725aa17cb90cfddf6860ccf64e7f9b4e",
+    "drupal/google_analytics": "dev-8.x-2.x#64eaef0c725aa17cb90cfddf6860ccf64e7f9b4e",
     "drupal/inline_entity_form": "dev-8.x-1.x#40c84c9bf56d07a9d91fb3b5f907ed722c721094",
     "burdamagazinorg/iwv_integration": "dev-8.x-1.x#bedf311718fff59b6f3560d9bba479c3b786308a",
     "burdamagazinorg/infinite-theme": "dev-8.x-1.x#7d79b09328a77fe54c024ff0bc916fe1ea79b4fa",
