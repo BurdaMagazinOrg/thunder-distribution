@@ -3,10 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.gallery.field_images
-    - field.field.media.gallery.field_media_images
     - media_entity.bundle.gallery
-_core:
-  default_config_hash: VZagqQ2PZnQ_X-aBCBYuZ4rqeyA7FR452ONtUueciWM
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
