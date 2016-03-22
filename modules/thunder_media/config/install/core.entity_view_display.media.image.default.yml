@@ -11,8 +11,6 @@ dependencies:
     - media_entity.bundle.image
   module:
     - responsive_image
-_core:
-  default_config_hash: DEoTr0C78hyIoKCyFMxRf55ApoTy8sY99kFVxJb4wxc
 id: media.image.default
 targetEntityType: media
 bundle: image
