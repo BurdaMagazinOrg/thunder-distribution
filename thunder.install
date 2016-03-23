@@ -96,8 +96,9 @@ function thunder_install() {
     'langcode' => $default_language_id,
     'uid' => '1',
     'status' => 1,
-    'field_hp_display_mode' => 'presenter_full',
-    'field_presenter_media' => $media->id(),
+    'field_teaser_media' => $media->id(),
+    'field_channel' => 1,
+    'field_seo_title' => 'Installation Successful',
   ));
   $node->save();
 
