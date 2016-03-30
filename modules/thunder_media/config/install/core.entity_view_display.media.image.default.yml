@@ -25,9 +25,10 @@ content:
     weight: 0
     label: hidden
     settings:
+      image_style: ''
       image_link: ''
     third_party_settings: {  }
-    type: responsive_image
+    type: image
 hidden:
   created: true
   field_brands: true
