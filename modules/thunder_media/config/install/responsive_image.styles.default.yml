@@ -1,0 +1,8 @@
+langcode: de
+status: true
+dependencies: {  }
+id: default
+label: Default
+image_style_mappings: {  }
+breakpoint_group: responsive_image
+fallback_image_style: '_original image_'
