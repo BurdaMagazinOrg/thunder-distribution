@@ -8,7 +8,6 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - responsive_image.styles.default
     - media_entity.bundle.image
   module:
     - responsive_image
@@ -31,7 +30,7 @@ content:
       responsive_image_style: default
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
 hidden:
   created: true
   field_brands: true
