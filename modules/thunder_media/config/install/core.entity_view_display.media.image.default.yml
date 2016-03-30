@@ -3,13 +3,12 @@ status: true
 dependencies:
   config:
     - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
     - field.field.media.image.field_expires
     - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
     - media_entity.bundle.image
-  module:
-    - datetime
-    - image
-    - user
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -26,7 +25,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: large
+      image_style: ''
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -40,6 +39,6 @@ hidden:
   field_people: true
   field_source: true
   field_tags: true
+  langcode: true
   name: true
   thumbnail: true
-  uid: true
