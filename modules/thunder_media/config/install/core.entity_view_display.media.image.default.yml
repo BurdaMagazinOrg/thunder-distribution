@@ -27,7 +27,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      responsive_image_style: inline
+      responsive_image_style: wide
       image_link: ''
     third_party_settings: {  }
     type: responsive_image
