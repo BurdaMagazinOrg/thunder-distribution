@@ -6,9 +6,16 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 php:
+  - 5.5
   - 5.6
+  - 7.0
 
 sudo: false
+
+# match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
+branches:
+  only:
+    - /^8\.([0-9]+|x)\-[0-9]+\.([0-9]+|x)$/
 
 mysql:
   database: drupal
