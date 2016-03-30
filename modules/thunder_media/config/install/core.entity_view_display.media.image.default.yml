@@ -8,7 +8,10 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
+    - responsive_image.styles.default
     - media_entity.bundle.image
+  module:
+    - responsive_image
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -25,7 +28,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      responsive_image_style: default
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -42,3 +45,4 @@ hidden:
   langcode: true
   name: true
   thumbnail: true
+  uid: true
