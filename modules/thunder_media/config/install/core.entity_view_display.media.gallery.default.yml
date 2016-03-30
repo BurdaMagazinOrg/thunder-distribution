@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.gallery.field_images
+    - field.field.media.gallery.field_media_images
     - media_entity.bundle.gallery
 id: media.gallery.default
 targetEntityType: media

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.gallery.field_images
+    - field.field.media.gallery.field_media_images
     - media_entity.bundle.gallery
   module:
     - inline_entity_form
@@ -13,34 +13,35 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     settings: {  }
     third_party_settings: {  }
-  field_images:
-    weight: 11
+  field_media_images:
+    type: inline_entity_form_complex
+    weight: 1
     settings:
+      form_mode: default
       override_labels: true
       label_singular: Media
       label_plural: Medias
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true
