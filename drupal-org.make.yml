@@ -22,7 +22,7 @@ projects:
 
   ctools:
     type: "module"
-    version: "3.0-alpha23"
+    version: "3.0-alpha25"
 
   embed:
     type: "module"
@@ -35,7 +35,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_embed.git"
-      revision: "99404669a34ee92e466e3444f1f053220a0a0512"
+      revision: "509fc57267e80371581ba8a65b3a4b68fe9add3e"
       branch: "8.x-1.x"
 
   entity_reference_revisions:
@@ -67,7 +67,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/google_analytics.git"
-      revision: "64eaef0c725aa17cb90cfddf6860ccf64e7f9b4e"
+      revision: "b534f8cc5d8fd0782f657b4836559ef13f70da45"
       branch: "8.x-1.x"
 
   hierarchical_config:
@@ -81,7 +81,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "40c84c9bf56d07a9d91fb3b5f907ed722c721094"
+      revision: "1d1a455b45b5f2c78b58592673991c5a06a305fe"
       branch: "8.x-1.x"
 
   ivw_integration:
@@ -95,7 +95,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
-      revision: "f544c91e4dd8d13653b57519edc53732d8bb138e"
+      revision: "040c5ffbca99aba64bdf686923df20b7251e3cb8"
       branch: "8.x-1.x"
 
   media_entity_image:
@@ -108,20 +108,20 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-beta7"
 
   paragraphs:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "4adb7aa041c112a672ee38c30fe8db2334c5d166"
+      revision: "6f946be51adb6348d0a7bb31309cfe0476565a33"
       branch: "8.x-1.x"
 
   pathauto:
     type: "module"
     download:
       url: "http://git.drupal.org/project/pathauto.git"
-      revision: "7da80a4e7d0f815923d0996e8564e8e0bc3e97e9"
+      revision: "c96694f6aa09541d304c7389b8944df3c3b1f5bc"
       branch: "8.x-1.x"
 
   riddle_marketplace:
@@ -135,7 +135,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "4ecd0626e8fc5a5b3323350ba3d44d5191481396"
+      revision: "8cc62c1a8a7863789567ccf0a7101028f61f3a56"
       branch: "8.x-1.x"
 
   token:
