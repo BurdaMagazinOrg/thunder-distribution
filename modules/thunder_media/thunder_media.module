@@ -10,12 +10,17 @@
  */
 function thunder_media_file_presave(\Drupal\file\Entity\File $entity) {
 
-  $pathinfo = pathinfo($entity->getFilename());
+  $config = \Drupal::config('thunder_media.configuration');
 
-  /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
-  $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
+  if ($config->get('enable_filename_transliteration')) {
 
-  $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+    $pathinfo = pathinfo($entity->getFilename());
 
-  $entity->setFilename($cleanFilename);
+    /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
+    $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
+
+    $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+
+    $entity->setFilename($cleanFilename);
+  }
 }

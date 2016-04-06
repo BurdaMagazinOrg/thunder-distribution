@@ -1,0 +1,11 @@
+
+thunder_media.configuration_form:
+  path: '/admin/config/thunder_media/configuration'
+  defaults:
+    _form: '\Drupal\thunder_media\Form\ConfigurationForm'
+    _title: 'ConfigurationForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
