@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Contains
+ */
+
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function thunder_media_file_presave(\Drupal\file\Entity\File $entity) {
+
+  $config = \Drupal::config('thunder_media.configuration');
+
+  if ($config->get('enable_filename_transliteration')) {
+
+    $pathinfo = pathinfo($entity->getFilename());
+
+    /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
+    $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
+
+    $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+
+    $entity->setFilename($cleanFilename);
+  }
+}
