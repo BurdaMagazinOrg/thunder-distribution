@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a34c0536aca4174dee4e5883d48b2f1b",
-    "content-hash": "8bfbe05eb2813b9e45710906a545abb8",
+    "hash": "55705a5476c40cc9cd53800870668527",
+    "content-hash": "4660c5e7fbcb8af5222171b8553471d3",
     "packages": [
         {
             "name": "burdamagazinorg/ad_integration",
@@ -39,7 +39,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BurdaMagazinOrg/module-breakpoints_js_settings/zipball/4f500f1a315f2e78d76dbe213b30bc7555e7a744",
+                "url": "https://api.github.com/repos/BurdaMagazinOrg/module-breakpoints_js_settings/zipball/0c4290975ac2c89001610f07d52aad9793b0574e",
                 "reference": "4f500f1a315f2e78d76dbe213b30bc7555e7a744",
                 "shasum": ""
             },
@@ -57,7 +57,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "2f17fe9c4db488711d59fe42a12c0b98b16ebe17"
+                "reference": "f7043a28d1b1d3edbb1c2f858ff06addac7806bd"
             },
             "type": "drupal-module",
             "authors": [
@@ -67,7 +67,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-03-16 15:11:09"
+            "time": "2016-04-11 09:26:49"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -1039,7 +1039,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/inline_entity_form",
-                "reference": "1d1a455b45b5f2c78b58592673991c5a06a305fe"
+                "reference": "274143d6748b8aaa02eb9dcc3296bf17ffddeee3"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1056,7 +1056,7 @@
             ],
             "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities. ",
             "homepage": "https://www.drupal.org/project/inline_entity_form",
-            "time": "2016-04-05 16:41:12"
+            "time": "2016-04-11 11:55:15"
         },
         {
             "name": "drupal/media_entity",
@@ -1659,16 +1659,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "8f782e0f01a6e33a319bdc8f6de9cfd6569979a4"
+                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/8f782e0f01a6e33a319bdc8f6de9cfd6569979a4",
-                "reference": "8f782e0f01a6e33a319bdc8f6de9cfd6569979a4",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
+                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
                 "shasum": ""
             },
             "require": {
@@ -1678,7 +1678,7 @@
             "require-dev": {
                 "phpunit/phpunit": "4.*",
                 "sami/sami": "~2.0",
-                "satooshi/php-coveralls": "0.6.*"
+                "satooshi/php-coveralls": "1.0.*"
             },
             "type": "library",
             "extra": {
@@ -1720,7 +1720,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2015-06-07 08:43:18"
+            "time": "2016-04-11 13:54:57"
         },
         {
             "name": "psr/http-message",
