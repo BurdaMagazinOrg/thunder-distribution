@@ -81,7 +81,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "1d1a455b45b5f2c78b58592673991c5a06a305fe"
+      revision: "274143d6748b8aaa02eb9dcc3296bf17ffddeee3"
       branch: "8.x-1.x"
 
   ivw_integration:
@@ -146,7 +146,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "489dfde"
+      revision: "2986767"
       branch: "8.x-1.x"
 
   infinite:

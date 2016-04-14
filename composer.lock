@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5a657d877884bca47b0cad9564a98c61",
-    "content-hash": "1cb7bc879ee615119fd076af832dcdc2",
+    "hash": "a60d8c0a1ad5043048675dbd00857cef",
+    "content-hash": "c7c32402f3e513d1a6c76fd38c4d0c4f",
     "packages": [
         {
             "name": "composer/semver",
@@ -970,7 +970,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/inline_entity_form",
-                "reference": "1d1a455b45b5f2c78b58592673991c5a06a305fe"
+                "reference": "274143d6748b8aaa02eb9dcc3296bf17ffddeee3"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -987,7 +987,7 @@
             ],
             "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities. ",
             "homepage": "https://www.drupal.org/project/inline_entity_form",
-            "time": "2016-04-05 16:41:12"
+            "time": "2016-04-11 11:55:15"
         },
         {
             "name": "drupal/ivw_integration",

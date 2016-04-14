@@ -19,6 +19,14 @@
     {
       "type": "vcs",
       "url": "https://git.drupal.org/sandbox/riddle.com/2670272.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/sandbox/gos77/2677750.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
     }
   ],
   "require": {
@@ -33,7 +41,7 @@
     "drupal/field_group": "dev-8.x-1.x#6c63c9abcb0c1a08074a1b9c223c85287299f272",
     "drupal/focal_point": "dev-8.x-1.x#d39b83f955281255811618403ab62ee572146f0f",
     "drupal/google_analytics": "dev-8.x-2.x#b534f8cc5d8fd0782f657b4836559ef13f70da45",
-    "drupal/inline_entity_form": "dev-8.x-1.x#1d1a455b45b5f2c78b58592673991c5a06a305fe",
+    "drupal/inline_entity_form": "dev-8.x-1.x#274143d6748b8aaa02eb9dcc3296bf17ffddeee3",
     "drupal/ivw_integration": "8.1.0-rc2",
     "drupal/media_entity": "dev-8.x-1.x#040c5ffbca99aba64bdf686923df20b7251e3cb8",
     "drupal/media_entity_image": "8.1.0-beta2",
