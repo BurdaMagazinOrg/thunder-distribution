@@ -1,5 +1,5 @@
 {
-  "name": "burdamagazinorg/thunder",
+  "name": "drupal/thunder",
   "description": "The thunder distribution",
   "type": "drupal-profile",
   "authors": [
@@ -19,20 +19,11 @@
     {
       "type": "vcs",
       "url": "https://git.drupal.org/sandbox/riddle.com/2670272.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://git.drupal.org/sandbox/gos77/2677750.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
     }
   ],
   "require": {
     "drupal/core": "8.0.6",
-    "burdamagazinorg/ad_integration": "dev-8.x-1.x#7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6",
-    "burdamagazinorg/breakpoint_js_settings": "dev-8.x-1.x#4f500f1a315f2e78d76dbe213b30bc7555e7a744",
+    "drupal/breakpoint_js_settings": "8.1.0-rc1",
     "drupal/admin_toolbar": "8.1.14",
     "drupal/ctools": "8.3.0-alpha25",
     "drupal/embed": "dev-8.x-1.x#8327162c7be3ad69721d57a1860915e1ee2d6a68",
@@ -43,9 +34,7 @@
     "drupal/focal_point": "dev-8.x-1.x#d39b83f955281255811618403ab62ee572146f0f",
     "drupal/google_analytics": "dev-8.x-2.x#b534f8cc5d8fd0782f657b4836559ef13f70da45",
     "drupal/inline_entity_form": "dev-8.x-1.x#1d1a455b45b5f2c78b58592673991c5a06a305fe",
-    "burdamagazinorg/iwv_integration": "dev-8.x-1.x#bedf311718fff59b6f3560d9bba479c3b786308a",
-    "burdamagazinorg/infinite-theme": "dev-8.x-1.x#7d79b09328a77fe54c024ff0bc916fe1ea79b4fa",
-    "burdamagazinorg/infinite-module": "dev-8.x-1.x#2f17fe9c4db488711d59fe42a12c0b98b16ebe17",
+    "drupal/ivw_integration": "8.1.0-rc2",
     "drupal/media_entity": "dev-8.x-1.x#040c5ffbca99aba64bdf686923df20b7251e3cb8",
     "drupal/media_entity_image": "8.1.0-beta2",
     "drupal/media_entity_slideshow": "8.1.0-beta2",

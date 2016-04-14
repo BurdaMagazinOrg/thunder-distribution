@@ -4,110 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a34c0536aca4174dee4e5883d48b2f1b",
-    "content-hash": "8bfbe05eb2813b9e45710906a545abb8",
+    "hash": "5a657d877884bca47b0cad9564a98c61",
+    "content-hash": "1cb7bc879ee615119fd076af832dcdc2",
     "packages": [
-        {
-            "name": "burdamagazinorg/ad_integration",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BurdaMagazinOrg/module-ad_integration.git",
-                "reference": "7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BurdaMagazinOrg/module-ad_integration/zipball/7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6",
-                "reference": "7241d90ad03d4fd39d2ba4952805ae3dbbb86bd6",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Ad Integration",
-            "time": "2016-03-17 18:49:52"
-        },
-        {
-            "name": "burdamagazinorg/breakpoint_js_settings",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BurdaMagazinOrg/module-breakpoints_js_settings.git",
-                "reference": "4f500f1a315f2e78d76dbe213b30bc7555e7a744"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BurdaMagazinOrg/module-breakpoints_js_settings/zipball/4f500f1a315f2e78d76dbe213b30bc7555e7a744",
-                "reference": "4f500f1a315f2e78d76dbe213b30bc7555e7a744",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Write breakpoint information into javascript settings.",
-            "time": "2016-03-17 18:50:37"
-        },
-        {
-            "name": "burdamagazinorg/infinite-module",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "2f17fe9c4db488711d59fe42a12c0b98b16ebe17"
-            },
-            "type": "drupal-module",
-            "authors": [
-                {
-                    "name": "ITCru",
-                    "email": "steffen.schlaer@it-cru.de"
-                }
-            ],
-            "description": "The modules for the infinite distribution",
-            "time": "2016-03-16 15:11:09"
-        },
-        {
-            "name": "burdamagazinorg/infinite-theme",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/sandbox/gos77/2677750.git",
-                "reference": "7d79b09328a77fe54c024ff0bc916fe1ea79b4fa"
-            },
-            "type": "drupal-theme",
-            "authors": [
-                {
-                    "name": "Steffen Schlaer",
-                    "email": "steffen.schlaer@it-cru.de"
-                }
-            ],
-            "time": "2016-03-11 18:18:00"
-        },
-        {
-            "name": "burdamagazinorg/iwv_integration",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BurdaMagazinOrg/module-ivw_integration.git",
-                "reference": "bedf311718fff59b6f3560d9bba479c3b786308a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BurdaMagazinOrg/module-ivw_integration/zipball/bedf311718fff59b6f3560d9bba479c3b786308a",
-                "reference": "bedf311718fff59b6f3560d9bba479c3b786308a",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "IVW Integration",
-            "time": "2016-03-17 18:48:59"
-        },
         {
             "name": "composer/semver",
             "version": "1.4.0",
@@ -614,6 +513,38 @@
             "time": "2016-02-08 14:39:48"
         },
         {
+            "name": "drupal/breakpoint_js_settings",
+            "version": "8.1.0-rc1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/breakpoint_js_settings.git",
+                "reference": "0c4290975ac2c89001610f07d52aad9793b0574e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/breakpoint_js_settings-8.x-1.0-rc1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/breakpoint": "8.*",
+                "drupal/core": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Write breakpoint informtion into javascript settings.",
+            "homepage": "https://www.drupal.org/project/breakpoint_js_settings",
+            "time": "2016-04-11 09:03:43"
+        },
+        {
             "name": "drupal/core",
             "version": "8.0.6",
             "source": {
@@ -1057,6 +988,39 @@
             "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities. ",
             "homepage": "https://www.drupal.org/project/inline_entity_form",
             "time": "2016-04-05 16:41:12"
+        },
+        {
+            "name": "drupal/ivw_integration",
+            "version": "8.1.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/ivw_integration.git",
+                "reference": "d6d2a1f3567204b42b1081705154aa7f5c9dcb80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ivw_integration-8.x-1.0-rc2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/breakpoint_js_settings": "8.1.0-rc1",
+                "drupal/core": "8.*",
+                "drupal/token": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "IVW (SZM 2) tracking",
+            "homepage": "https://www.drupal.org/project/ivw_integration",
+            "time": "2016-04-12 14:59:06"
         },
         {
             "name": "drupal/media_entity",
@@ -1601,16 +1565,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.3",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
+                "reference": "31382fef2889136415751badebbd1cb022a4ed72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/31382fef2889136415751badebbd1cb022a4ed72",
+                "reference": "31382fef2889136415751badebbd1cb022a4ed72",
                 "shasum": ""
             },
             "require": {
@@ -1655,20 +1619,20 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-02-18 21:54:00"
+            "time": "2016-04-13 19:56:01"
         },
         {
             "name": "masterminds/html5",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "8f782e0f01a6e33a319bdc8f6de9cfd6569979a4"
+                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/8f782e0f01a6e33a319bdc8f6de9cfd6569979a4",
-                "reference": "8f782e0f01a6e33a319bdc8f6de9cfd6569979a4",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
+                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
                 "shasum": ""
             },
             "require": {
@@ -1678,7 +1642,7 @@
             "require-dev": {
                 "phpunit/phpunit": "4.*",
                 "sami/sami": "~2.0",
-                "satooshi/php-coveralls": "0.6.*"
+                "satooshi/php-coveralls": "1.0.*"
             },
             "type": "library",
             "extra": {
@@ -1720,7 +1684,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2015-06-07 08:43:18"
+            "time": "2016-04-11 13:54:57"
         },
         {
             "name": "psr/http-message",
@@ -3099,16 +3063,16 @@
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "22eb098958980fbbe6b9a06f209f5a4b496cc0c1"
+                "reference": "8bafa58574204bdff03c275d1d618aaa601588ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/22eb098958980fbbe6b9a06f209f5a4b496cc0c1",
-                "reference": "22eb098958980fbbe6b9a06f209f5a4b496cc0c1",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/8bafa58574204bdff03c275d1d618aaa601588ae",
+                "reference": "8bafa58574204bdff03c275d1d618aaa601588ae",
                 "shasum": ""
             },
             "require": {
@@ -3140,15 +3104,13 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2016-02-03 16:53:37"
+            "time": "2016-04-12 21:19:36"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "burdamagazinorg/ad_integration": 20,
-        "burdamagazinorg/breakpoint_js_settings": 20,
         "drupal/embed": 20,
         "drupal/entity_embed": 20,
         "drupal/facebook_instant_articles": 20,
@@ -3156,9 +3118,6 @@
         "drupal/focal_point": 20,
         "drupal/google_analytics": 20,
         "drupal/inline_entity_form": 20,
-        "burdamagazinorg/iwv_integration": 20,
-        "burdamagazinorg/infinite-theme": 20,
-        "burdamagazinorg/infinite-module": 20,
         "drupal/media_entity": 20,
         "drupal/paragraphs": 20,
         "drupal/pathauto": 20,
