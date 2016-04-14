@@ -68,7 +68,7 @@ projects:
     download:
       url: "http://git.drupal.org/project/google_analytics.git"
       revision: "b534f8cc5d8fd0782f657b4836559ef13f70da45"
-      branch: "8.x-1.x"
+      branch: "8.x-2.x"
 
   hierarchical_config:
     type: "module"
@@ -90,6 +90,10 @@ projects:
       url: "http://git.drupal.org/sandbox/daniel.bosen/2660386.git"
       revision: "0767469bf139b2a09a66490018aba4548c981cdc"
       branch: "8.x-1.x"
+
+  linkit:
+    type: "module"
+    version: "4.1"
 
   media_entity:
     type: "module"
