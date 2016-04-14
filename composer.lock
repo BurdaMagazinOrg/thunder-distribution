@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b92cec61a6ca44b919880d719d39cc55",
-    "content-hash": "85719d45679bee614dcfd50ab71a5bb1",
+    "hash": "94f35d6303bbe88bdc06861e68c07415",
+    "content-hash": "8230b789f8422fdc6cb133a21307d352",
     "packages": [
         {
             "name": "composer/semver",
@@ -1211,7 +1211,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/pathauto",
-                "reference": "c96694f6aa09541d304c7389b8944df3c3b1f5bc"
+                "reference": "8c713bf48f76bab90f0c135bb955d8047a9987e5"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1231,7 +1231,7 @@
             ],
             "description": "Provides a mechanism for modules to automatically generate aliases for the content they manage.",
             "homepage": "https://www.drupal.org/project/pathauto",
-            "time": "2016-04-02 20:46:46"
+            "time": "2016-04-13 23:49:56"
         },
         {
             "name": "drupal/riddle_marketplace",

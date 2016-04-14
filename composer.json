@@ -40,7 +40,7 @@
     "drupal/media_entity_slideshow": "8.1.0-beta2",
     "drupal/metatag": "8.1.0-beta7",
     "drupal/paragraphs": "dev-8.x-1.x#6f946be51adb6348d0a7bb31309cfe0476565a33",
-    "drupal/pathauto": "dev-8.x-1.x#c96694f6aa09541d304c7389b8944df3c3b1f5bc",
+    "drupal/pathauto": "dev-8.x-1.x#8c713bf48f76bab90f0c135bb955d8047a9987e5",
     "drupal/riddle_marketplace": "dev-8.x-1.x#a917c946fdac3c2b3bc39e2e143da89340243aed",
     "drupal/scheduler": "dev-8.x-1.x#8cc62c1a8a7863789567ccf0a7101028f61f3a56",
     "drupal/token": "8.1.0-alpha2",
