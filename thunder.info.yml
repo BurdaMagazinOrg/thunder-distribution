@@ -52,9 +52,7 @@ dependencies:
   - thunder_article
   - thunder_media
   - thunder_taxonomy
-  - infinite_article
 themes:
   - thunder
-  - infinite
   - seven
 
