@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66ea1e91ddaf7928fa03e9e6b3ed5640",
-    "content-hash": "1457d5bc988bb8f40a557736b8ddadb4",
+    "hash": "131434b8505d05445fd8f6e5c7375301",
+    "content-hash": "d542e358199acd63256c50eab8fb3739",
     "packages": [
         {
             "name": "composer/semver",
@@ -1079,7 +1079,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity.git",
-                "reference": "85b1b50942231c7a75f3370c5ec05ce021a0db38"
+                "reference": "4350707127235ed143c88c43cac32ea5e7a597ac"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1099,7 +1099,7 @@
             ],
             "description": "Media entity API.",
             "homepage": "https://www.drupal.org/project/media_entity",
-            "time": "2016-04-14 09:37:00"
+            "time": "2016-04-15 07:54:22"
         },
         {
             "name": "drupal/media_entity_image",

@@ -87,7 +87,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity.git"
-      revision: "85b1b50942231c7a75f3370c5ec05ce021a0db38"
+      revision: "4350707127235ed143c88c43cac32ea5e7a597ac"
       branch: "8.x-1.x"
 
   media_entity_image:
