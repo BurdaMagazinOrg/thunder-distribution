@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b92cec61a6ca44b919880d719d39cc55",
-    "content-hash": "85719d45679bee614dcfd50ab71a5bb1",
+    "hash": "66ea1e91ddaf7928fa03e9e6b3ed5640",
+    "content-hash": "1457d5bc988bb8f40a557736b8ddadb4",
     "packages": [
         {
             "name": "composer/semver",
@@ -751,11 +751,17 @@
         },
         {
             "name": "drupal/embed",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-rc2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/embed.git",
-                "reference": "8327162c7be3ad69721d57a1860915e1ee2d6a68"
+                "reference": "294666ad05ad930003308a5fcd1282cdeb63833a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0-rc2.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*"
@@ -772,15 +778,21 @@
             ],
             "description": "Provides a framework for different types of embeds in text editors.",
             "homepage": "https://www.drupal.org/project/embed",
-            "time": "2015-12-07 16:43:55"
+            "time": "2016-04-14 01:03:52"
         },
         {
             "name": "drupal/entity_embed",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_embed.git",
-                "reference": "509fc57267e80371581ba8a65b3a4b68fe9add3e"
+                "reference": "a40f556feaf921980f69d9fe4ccbc1ef2e325edb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0-alpha1.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*",
@@ -800,19 +812,19 @@
             ],
             "description": "Allows entities to be embedded using a text editor.",
             "homepage": "https://www.drupal.org/project/entity_embed",
-            "time": "2016-03-29 16:49:13"
+            "time": "2016-04-14 05:38:14"
         },
         {
             "name": "drupal/entity_reference_revisions",
-            "version": "8.1.0-rc4",
+            "version": "8.1.0-rc6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_reference_revisions.git",
-                "reference": "6a811cd957fa3cd0f22ac9a9f788fae1fd79d520"
+                "reference": "c9056323e728586436688d6aa1310a0b60c241d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc4.zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -831,7 +843,7 @@
             ],
             "description": "Adds a Entity Reference field type with revision support.",
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
-            "time": "2015-11-16 14:05:31"
+            "time": "2016-04-12 23:57:54"
         },
         {
             "name": "drupal/facebook_instant_articles",
@@ -877,7 +889,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/field_group",
-                "reference": "6c63c9abcb0c1a08074a1b9c223c85287299f272"
+                "reference": "ffc9a1e2af9ca3a96649aa7cd1c68f8f73005cf9"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -901,7 +913,7 @@
             ],
             "description": "Provides the ability to group your fields on both form and display.",
             "homepage": "https://www.drupal.org/project/field_group",
-            "time": "2016-01-30 21:21:30"
+            "time": "2016-04-13 10:47:03"
         },
         {
             "name": "drupal/focal_point",
@@ -970,7 +982,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/inline_entity_form",
-                "reference": "274143d6748b8aaa02eb9dcc3296bf17ffddeee3"
+                "reference": "a2b2e6708604d3b1f2989c3f154d302c81ed433e"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -987,7 +999,7 @@
             ],
             "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities. ",
             "homepage": "https://www.drupal.org/project/inline_entity_form",
-            "time": "2016-04-11 11:55:15"
+            "time": "2016-04-14 22:47:18"
         },
         {
             "name": "drupal/ivw_integration",
@@ -1023,12 +1035,51 @@
             "time": "2016-04-12 14:59:06"
         },
         {
+            "name": "drupal/linkit",
+            "version": "8.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/linkit",
+                "reference": "a3e3369aef72b3cec15e705b21987c4d66be0c0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/linkit-8.x-4.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/core": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-4.x": "8.4.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Emil Stjerneman",
+                    "email": "emil@stjerneman.com",
+                    "homepage": "https://stjerneman.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Linkit",
+            "homepage": "http://drupal.org/project/linkit",
+            "time": "2016-02-09 20:50:33"
+        },
+        {
             "name": "drupal/media_entity",
             "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity.git",
-                "reference": "040c5ffbca99aba64bdf686923df20b7251e3cb8"
+                "reference": "85b1b50942231c7a75f3370c5ec05ce021a0db38"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1048,7 +1099,7 @@
             ],
             "description": "Media entity API.",
             "homepage": "https://www.drupal.org/project/media_entity",
-            "time": "2016-03-24 08:53:19"
+            "time": "2016-04-14 09:37:00"
         },
         {
             "name": "drupal/media_entity_image",
@@ -1171,7 +1222,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/paragraphs",
-                "reference": "6f946be51adb6348d0a7bb31309cfe0476565a33"
+                "reference": "627d5d84caf4efd78cf13f28bb6e49b3cc974c5e"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1203,7 +1254,7 @@
             ],
             "description": "Implements the Paragraphs entity types, Entity Reference selection type and Entity Reference field widget. To safely uninstall, go first to Structure > Paragraphs types > Settings.",
             "homepage": "https://www.drupal.org/project/paragraphs",
-            "time": "2016-04-05 11:39:23"
+            "time": "2016-04-14 11:51:32"
         },
         {
             "name": "drupal/pathauto",
@@ -1211,7 +1262,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/pathauto",
-                "reference": "c96694f6aa09541d304c7389b8944df3c3b1f5bc"
+                "reference": "8c713bf48f76bab90f0c135bb955d8047a9987e5"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1231,7 +1282,7 @@
             ],
             "description": "Provides a mechanism for modules to automatically generate aliases for the content they manage.",
             "homepage": "https://www.drupal.org/project/pathauto",
-            "time": "2016-04-02 20:46:46"
+            "time": "2016-04-13 23:49:56"
         },
         {
             "name": "drupal/riddle_marketplace",
@@ -1254,7 +1305,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/scheduler",
-                "reference": "8cc62c1a8a7863789567ccf0a7101028f61f3a56"
+                "reference": "333bec292b27243537f56a7418a97858ee3495a5"
             },
             "require": {
                 "drupal/action": "8.*",
@@ -1276,7 +1327,7 @@
             ],
             "description": "Publish and unpublish content on specified dates and time.",
             "homepage": "https://www.drupal.org/project/scheduler",
-            "time": "2016-03-26 14:18:31"
+            "time": "2016-04-13 13:10:01"
         },
         {
             "name": "drupal/token",
@@ -3111,8 +3162,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/embed": 20,
-        "drupal/entity_embed": 20,
         "drupal/facebook_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
