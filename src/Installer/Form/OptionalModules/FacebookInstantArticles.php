@@ -10,7 +10,7 @@ class FacebookInstantArticles extends AbstractOptionalModule {
 
   public function getFormId() {
 
-    return 'facebook_instant_articles';
+    return 'fb_instant_articles';
   }
 
   public function getFormName() {

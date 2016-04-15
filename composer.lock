@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "131434b8505d05445fd8f6e5c7375301",
-    "content-hash": "d542e358199acd63256c50eab8fb3739",
+    "hash": "1ce7e16b48b95e8698de153ccd7d89ab",
+    "content-hash": "e2cca369bee1abd443152f0991a8b850",
     "packages": [
         {
             "name": "composer/semver",
@@ -846,12 +846,12 @@
             "time": "2016-04-12 23:57:54"
         },
         {
-            "name": "drupal/facebook_instant_articles",
+            "name": "drupal/fb_instant_articles",
             "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
-                "url": "https://git.drupal.org/project/facebook_instant_articles.git",
-                "reference": "bfc563fbc29133a201d0f3bf597cf44361323d00"
+                "url": "https://git.drupal.org/project/fb_instant_articles.git",
+                "reference": "07b8afb323332278f5a0c6ba107dee2a81cac4ec"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -877,11 +877,11 @@
                 }
             ],
             "description": "FB Instant articles RSS feed generator for integration into the FB IA program",
-            "homepage": "https://www.drupal.org/project/facebook_instant_articles",
+            "homepage": "https://www.drupal.org/project/fb_instant_articles",
             "keywords": [
                 "Drupal"
             ],
-            "time": "2016-03-10 14:40:33"
+            "time": "2016-04-15 09:28:31"
         },
         {
             "name": "drupal/field_group",
@@ -3162,7 +3162,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/facebook_instant_articles": 20,
+        "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
         "drupal/google_analytics": 20,

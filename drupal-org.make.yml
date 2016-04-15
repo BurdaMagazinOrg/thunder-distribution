@@ -33,11 +33,11 @@ projects:
     type: "module"
     version: "1.0-rc6"
 
-  facebook_instant_articles:
+  fb_instant_articles:
     type: "module"
     download:
-      url: "http://git.drupal.org/project/facebook_instant_articles.git"
-      revision: "bfc563f"
+      url: "http://git.drupal.org/project/fb_instant_articles.git"
+      revision: "07b8afb323332278f5a0c6ba107dee2a81cac4ec"
       branch: "8.x-1.x"
 
   field_group:
