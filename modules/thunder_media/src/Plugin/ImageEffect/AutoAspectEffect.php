@@ -7,7 +7,6 @@
 
 namespace Drupal\thunder_media\Plugin\ImageEffect;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;

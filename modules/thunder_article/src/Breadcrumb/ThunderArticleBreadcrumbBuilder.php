@@ -7,31 +7,18 @@
 
 namespace Drupal\thunder_article\Breadcrumb;
 
-use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Access\AccessManagerInterface;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Controller\TitleResolverInterface;
 use Drupal\Core\Link;
 use Drupal\Core\ParamConverter\ParamNotConvertedException;
-use Drupal\Core\Path\CurrentPathStack;
-use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
-use Drupal\Core\Routing\RequestContext;
-use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
-use Drupal\node\NodeInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Entity\EntityManagerInterface;
-use Drupal\taxonomy\TermStorageInterface;
 
 /**
  * Class to define the menu_link breadcrumb builder.

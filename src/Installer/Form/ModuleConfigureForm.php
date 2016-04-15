@@ -12,7 +12,6 @@ use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\thunder\Installer\Form\OptionalModules\AdIntegration;
-use Drupal\thunder\Installer\Form\OptionalModules\BreakpointJsSettings;
 use Drupal\thunder\Installer\Form\OptionalModules\FacebookInstantArticles;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
 use Drupal\thunder\Installer\Form\OptionalModules\HierarchicalConfig;
