@@ -19,6 +19,14 @@
     {
       "type": "vcs",
       "url": "https://git.drupal.org/sandbox/riddle.com/2670272.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/sandbox/gos77/2677750.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
     }
   ],
   "require": {
@@ -34,6 +42,8 @@
     "drupal/focal_point": "dev-8.x-1.x#d39b83f955281255811618403ab62ee572146f0f",
     "drupal/google_analytics": "dev-8.x-2.x#b534f8cc5d8fd0782f657b4836559ef13f70da45",
     "drupal/inline_entity_form": "dev-8.x-1.x#a2b2e6708604d3b1f2989c3f154d302c81ed433e",
+    "burdamagazinorg/infinite-module": "dev-8.x-1.x#2986767485011ac314fce6196ee551a634eba557",
+    "burdamagazinorg/infinite-theme": "dev-8.x-1.x#c1c09191afee1b09980c9fe13355cdfad7f7f437",
     "drupal/ivw_integration": "8.1.0-rc2",
     "drupal/linkit": "8.4.1",
     "drupal/media_entity": "dev-8.x-1.x#4350707127235ed143c88c43cac32ea5e7a597ac",

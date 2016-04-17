@@ -4,9 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1ce7e16b48b95e8698de153ccd7d89ab",
-    "content-hash": "e2cca369bee1abd443152f0991a8b850",
+    "hash": "4918d18b1f78efc398ab5753875c765d",
+    "content-hash": "0ffac38be395f50a205870bde9d6ff89",
     "packages": [
+        {
+            "name": "burdamagazinorg/infinite-module",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
+                "reference": "2986767485011ac314fce6196ee551a634eba557"
+            },
+            "type": "drupal-module",
+            "authors": [
+                {
+                    "name": "ITCru",
+                    "email": "steffen.schlaer@it-cru.de"
+                }
+            ],
+            "description": "The modules for the infinite distribution",
+            "time": "2016-04-13 08:24:19"
+        },
+        {
+            "name": "burdamagazinorg/infinite-theme",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/sandbox/gos77/2677750.git",
+                "reference": "c1c09191afee1b09980c9fe13355cdfad7f7f437"
+            },
+            "type": "drupal-theme",
+            "authors": [
+                {
+                    "name": "Steffen Schlaer",
+                    "email": "steffen.schlaer@it-cru.de"
+                }
+            ],
+            "time": "2016-03-23 11:08:15"
+        },
         {
             "name": "composer/semver",
             "version": "1.4.0",
@@ -3167,6 +3202,8 @@
         "drupal/focal_point": 20,
         "drupal/google_analytics": 20,
         "drupal/inline_entity_form": 20,
+        "burdamagazinorg/infinite-module": 20,
+        "burdamagazinorg/infinite-theme": 20,
         "drupal/media_entity": 20,
         "drupal/paragraphs": 20,
         "drupal/pathauto": 20,
