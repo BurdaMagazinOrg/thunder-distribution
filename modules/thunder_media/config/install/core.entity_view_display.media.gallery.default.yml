@@ -9,7 +9,7 @@ targetEntityType: media
 bundle: gallery
 mode: default
 content:
-  field_images:
+  field_media_images:
     weight: 0
     label: hidden
     settings:

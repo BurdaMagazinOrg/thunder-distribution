@@ -31,7 +31,10 @@ projects:
 
   entity_reference_revisions:
     type: "module"
-    version: "1.0-rc6"
+    download:
+      url: "http://git.drupal.org/project/entity_reference_revisions.git"
+      revision: "1bf476aa99b1c88a7634c24b259ef35417c8126c"
+      branch: "8.x-1.x"
 
   fb_instant_articles:
     type: "module"
@@ -106,7 +109,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "627d5d84caf4efd78cf13f28bb6e49b3cc974c5e"
+      revision: "020df39b1da5b5dea7fa5a960ea2843ca0efae3e"
       branch: "8.x-1.x"
 
   pathauto:
@@ -145,7 +148,7 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "7d79b09328a77fe54c024ff0bc916fe1ea79b4fa"
+      revision: "af53832"
       branch: "8.x-1.x"
 
   views_load_more:

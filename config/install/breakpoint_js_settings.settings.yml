@@ -1,0 +1,39 @@
+breakpoints:
+  -
+    breakpoint_id: infinite.xxs
+    breakpoint_name: xxs
+    breakpoint_min_width: 0
+  -
+    breakpoint_id: infinite.xs
+    breakpoint_name: xs
+    breakpoint_min_width: 480
+  -
+    breakpoint_id: infinite.sm
+    breakpoint_name: sm
+    breakpoint_min_width: 767
+  -
+    breakpoint_id: infinite.md
+    breakpoint_name: md
+    breakpoint_min_width: 992
+  -
+    breakpoint_id: infinite.lg
+    breakpoint_name: lg
+    breakpoint_min_width: 1128
+  -
+    breakpoint_id: infinite.xl
+    breakpoint_name: xl
+    breakpoint_min_width: 1450
+  -
+    breakpoint_id: infinite.xxl
+    breakpoint_name: xxl
+    breakpoint_min_width: 1800
+device_mappings:
+  -
+    device: smartphone
+    breakpoint_id: infinite.xxs
+  -
+    device: tablet
+    breakpoint_id: infinite.sm
+  -
+    device: desktop
+    breakpoint_id: infinite.lg

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4918d18b1f78efc398ab5753875c765d",
-    "content-hash": "0ffac38be395f50a205870bde9d6ff89",
+    "hash": "922c8f8979376d8747893c1a0573404a",
+    "content-hash": "a1fd39118c8fd834eeb6251e69e28c89",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -31,7 +31,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677750.git",
-                "reference": "c1c09191afee1b09980c9fe13355cdfad7f7f437"
+                "reference": "af53832"
             },
             "type": "drupal-theme",
             "authors": [
@@ -40,7 +40,7 @@
                     "email": "steffen.schlaer@it-cru.de"
                 }
             ],
-            "time": "2016-03-23 11:08:15"
+            "time": "2016-04-18 07:56:41"
         },
         {
             "name": "composer/semver",
@@ -851,17 +851,11 @@
         },
         {
             "name": "drupal/entity_reference_revisions",
-            "version": "8.1.0-rc6",
+            "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_reference_revisions.git",
-                "reference": "c9056323e728586436688d6aa1310a0b60c241d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc6.zip",
-                "reference": null,
-                "shasum": null
+                "reference": "1bf476aa99b1c88a7634c24b259ef35417c8126c"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -878,7 +872,7 @@
             ],
             "description": "Adds a Entity Reference field type with revision support.",
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
-            "time": "2016-04-12 23:57:54"
+            "time": "2016-04-16 14:00:54"
         },
         {
             "name": "drupal/fb_instant_articles",
@@ -1257,7 +1251,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/paragraphs",
-                "reference": "627d5d84caf4efd78cf13f28bb6e49b3cc974c5e"
+                "reference": "020df39b1da5b5dea7fa5a960ea2843ca0efae3e"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1289,7 +1283,7 @@
             ],
             "description": "Implements the Paragraphs entity types, Entity Reference selection type and Entity Reference field widget. To safely uninstall, go first to Structure > Paragraphs types > Settings.",
             "homepage": "https://www.drupal.org/project/paragraphs",
-            "time": "2016-04-14 11:51:32"
+            "time": "2016-04-17 06:58:02"
         },
         {
             "name": "drupal/pathauto",
@@ -3197,6 +3191,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/entity_reference_revisions": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
