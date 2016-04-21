@@ -44,7 +44,8 @@ class RiddleIntegration extends AbstractOptionalModule {
     $form['paragraphs_riddle_marketplace']['riddle_token'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Riddle token'),
-      '#description' => $this->t('Register a new accout at riddle.com and get a token from the Account->Plugins page (you may need to reset to get the first token)'),
+      '#description' => $this->t('Register a new account at <a href=":riddle" target="_blank">riddle.com</a> and get a token from the Account->Plugins page (you may need to reset to get the first token)',
+        [':riddle' => 'http://www.riddle.com']),
     );
 
     return $form;
