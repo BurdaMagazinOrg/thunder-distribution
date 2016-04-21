@@ -57,9 +57,9 @@ class ModuleConfigureForm extends ConfigFormBase {
       new IvwIntegration($config_factory),
      # new BreakpointJsSettings($config_factory),
       new FacebookInstantArticles($config_factory),
-      new AdIntegration($config_factory),
+     # new AdIntegration($config_factory),
       new RiddleIntegration($config_factory),
-      new HierarchicalConfig($config_factory),
+     # new HierarchicalConfig($config_factory),
     ];
   }
 
