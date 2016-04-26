@@ -4,11 +4,10 @@
  * Contains
  */
 
-
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_create().
  */
-function thunder_media_file_presave(\Drupal\file\Entity\File $entity) {
+function thunder_media_file_create(\Drupal\file\Entity\File $entity) {
 
   $config = \Drupal::config('thunder_media.configuration');
 
