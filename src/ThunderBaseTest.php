@@ -4,7 +4,7 @@
  * Contains
  */
 
-namespace Drupal\thunder\Tests;
+namespace Drupal\thunder;
 
 
 use Drupal\simpletest\WebTestBase;

@@ -8,7 +8,7 @@ namespace Drupal\thunder_media\Tests;
 
 
 use Drupal\Core\StreamWrapper\PublicStream;
-use Drupal\thunder\Tests\ThunderBaseTest;
+use Drupal\thunder\ThunderBaseTest;
 
 /**
  * @group Thunder
