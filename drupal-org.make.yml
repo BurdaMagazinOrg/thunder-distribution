@@ -90,6 +90,8 @@ projects:
   media_entity:
     type: "module"
     version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/2717375-hook_requirements-have-to-return-an-array.patch"
 
   media_entity_image:
     type: "module"

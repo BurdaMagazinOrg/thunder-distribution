@@ -48,6 +48,7 @@ projects[linkit][type] = module
 projects[linkit][version] = 4.1
 projects[media_entity][type] = module
 projects[media_entity][version] = 1.0
+projects[media_entity][patch][] = https://www.drupal.org/files/issues/2717375-hook_requirements-have-to-return-an-array.patch
 projects[media_entity_image][type] = module
 projects[media_entity_image][version] = 1.0
 projects[media_entity_slideshow][type] = module
