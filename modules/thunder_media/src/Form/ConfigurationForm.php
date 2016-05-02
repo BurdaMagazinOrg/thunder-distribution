@@ -22,7 +22,7 @@ class ConfigurationForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'thunder_media.configuration',
+      'thunder_media.settings',
     ];
   }
 
@@ -37,7 +37,7 @@ class ConfigurationForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('thunder_media.configuration');
+    $config = $this->config('thunder_media.settings');
 
     $form['enable_filename_transliteration'] = array(
       '#type' => 'checkbox',
@@ -62,7 +62,7 @@ class ConfigurationForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    $this->config('thunder_media.configuration')
+    $this->config('thunder_media.settings')
       ->set('enable_filename_transliteration', $form_state->getValue('enable_filename_transliteration'))
       ->save();
   }
