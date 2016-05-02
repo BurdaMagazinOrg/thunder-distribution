@@ -25,6 +25,10 @@ projects:
     type: "module"
     version: "1.0-rc2"
 
+  entity:
+    type: "module"
+    version: "1.0-alpha3"
+
   entity_embed:
     type: "module"
     version: "1.0-alpha1"
@@ -33,7 +37,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_reference_revisions.git"
-      revision: "1bf476aa99b1c88a7634c24b259ef35417c8126c"
+      revision: "6bf3f94223baa5806bcd99488353993dbc411ac1"
       branch: "8.x-1.x"
 
   fb_instant_articles:
@@ -47,7 +51,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/field_group.git"
-      revision: "ffc9a1e2af9ca3a96649aa7cd1c68f8f73005cf9"
+      revision: "14173e352948b97a455b48586d3e022a864a38c6"
       branch: "8.x-1.x"
 
   focal_point:
@@ -59,10 +63,7 @@ projects:
 
   google_analytics:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/google_analytics.git"
-      revision: "b534f8cc5d8fd0782f657b4836559ef13f70da45"
-      branch: "8.x-2.x"
+    version: "2.0"
 
   hierarchical_config:
     type: "module"
@@ -75,7 +76,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "a2b2e6708604d3b1f2989c3f154d302c81ed433e"
+      revision: "561662783412bbca512c170e63bc0c94eb3a394d"
       branch: "8.x-1.x"
 
   ivw_integration:
@@ -88,18 +89,15 @@ projects:
 
   media_entity:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/media_entity.git"
-      revision: "4350707127235ed143c88c43cac32ea5e7a597ac"
-      branch: "8.x-1.x"
+    version: "1.0"
 
   media_entity_image:
     type: "module"
-    version: "1.0-beta2"
+    version: "1.0"
 
   media_entity_slideshow:
     type: "module"
-    version: "1.0-beta2"
+    version: "1.0"
 
   metatag:
     type: "module"
@@ -109,15 +107,12 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "020df39b1da5b5dea7fa5a960ea2843ca0efae3e"
+      revision: "6e7b8322a5f677a40afd8e9134b3fdc2da3b8b2e"
       branch: "8.x-1.x"
 
   pathauto:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/pathauto.git"
-      revision: "8c713bf48f76bab90f0c135bb955d8047a9987e5"
-      branch: "8.x-1.x"
+    version: "1.0-alpha3"
 
   riddle_marketplace:
     type: "module"
@@ -130,7 +125,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/scheduler.git"
-      revision: "333bec292b27243537f56a7418a97858ee3495a5"
+      revision: "1ddd7c5c642c17f8bb606369e9068ca8751cccb9"
       branch: "8.x-1.x"
 
   token:
