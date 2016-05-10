@@ -10,7 +10,6 @@ dependencies:
     - field.field.media.video.field_source
     - media_entity.bundle.video
   module:
-    - datetime
     - text
     - video_embed_field
 id: media.video.default
@@ -19,39 +18,34 @@ bundle: video
 mode: default
 content:
   field_copyright:
-    weight: 3
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-  field_description:
-    type: text_textarea
-    weight: 4
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  field_expires:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-  field_media_video_embed_field:
+    type: string
     weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_description:
+    type: text_default
+    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: video_embed_field_textfield
-  name:
-    type: string_textfield
+  field_media_video_embed_field:
     weight: 0
+    label: hidden
     settings:
-      size: 60
-      placeholder: ''
+      autoplay: true
+      responsive: true
+      width: '854'
+      height: '480'
     third_party_settings: {  }
+    type: video_embed_field_video
 hidden:
   created: true
   field_caption: true
+  field_expires: true
   field_source: true
   langcode: true
+  name: true
+  thumbnail: true
   uid: true

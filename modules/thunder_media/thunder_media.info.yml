@@ -17,4 +17,5 @@ dependencies:
   - media_entity_twitter
   - responsive_image
   - pathauto
+  - video_embed_media
 

@@ -1,9 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - video_embed_media
 id: video
 label: Video
 description: ''
-type: generic
+type: video_embed_field
+queue_thumbnail_downloads: false
+new_revision: false
 type_configuration: {  }
 field_map: {  }

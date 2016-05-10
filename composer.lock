@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "904981f378f850eb5cfc280ae9bc9289",
-    "content-hash": "f9dc6a8eb788d6b1325ec2d7851a5502",
+    "hash": "74584f1b0feca4fa5820969ef9e083ab",
+    "content-hash": "8bf2dbe9dda2dc8b4a4570dde4d7f64f",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "577cecc7590f5771c4187ac2061cb60bbe96ad51"
+                "reference": "65b720165b9f6494e95aac6aa838d4dd93c4bd62"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-05-10 09:26:22"
+            "time": "2016-05-10 13:28:04"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -31,7 +31,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677750.git",
-                "reference": "cd78deca0397ccf6e9757f2447dcf32908478370"
+                "reference": "e1d6382b7ec73122642cf35d5eb150b7045ed0ed"
             },
             "type": "drupal-theme",
             "authors": [
@@ -40,7 +40,7 @@
                     "email": "steffen.schlaer@it-cru.de"
                 }
             ],
-            "time": "2016-05-10 09:46:58"
+            "time": "2016-05-10 13:29:35"
         },
         {
             "name": "composer/semver",
@@ -1507,6 +1507,52 @@
             "description": "Provides a user interface for the Token API and some missing core tokens.",
             "homepage": "https://www.drupal.org/project/token",
             "time": "2016-01-21 08:02:24"
+        },
+        {
+            "name": "drupal/video_embed_field",
+            "version": "8.1.0-rc8",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/video_embed_field",
+                "reference": "4c01b410084ff35ff3995dba2d3c5dd878544e9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.0-rc8.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/field": "8.*"
+            },
+            "replace": {
+                "drupal/video_embed_media": "self.version",
+                "drupal/video_embed_wysiwyg": "self.version"
+            },
+            "suggest": {
+                "drupal/ckeditor": "Required by drupal/video_embed_wysiwyg",
+                "drupal/core": "Required by drupal/video_embed_media, drupal/video_embed_wysiwyg",
+                "drupal/field": "Required by drupal/video_embed_wysiwyg",
+                "drupal/media_entity": "Required by drupal/video_embed_media"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "package": "Field types",
+                    "version": "8.x-1.x"
+                },
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "A field type for displaying videos from 3rd party providers such as YouTube and Vimeo.",
+            "homepage": "https://www.drupal.org/project/video_embed_field",
+            "time": "2016-04-29 11:04:49"
         },
         {
             "name": "drupal/views_load_more",

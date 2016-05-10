@@ -146,15 +146,19 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "577cecc"
+      revision: "65b7201"
       branch: "8.x-1.x"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "cd78dec"
+      revision: "e1d6382"
       branch: "8.x-1.x"
+
+  video_embed_field:
+    type: "module"
+    version: "1.0-rc8"
 
   views_load_more:
     type: "module"
