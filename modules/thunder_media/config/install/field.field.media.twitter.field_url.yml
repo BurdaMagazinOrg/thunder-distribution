@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_link
-    - paragraphs.paragraphs_type.twitter
+    - field.storage.media.field_url
+    - media_entity.bundle.twitter
   module:
     - link
-id: paragraph.twitter.field_link
-field_name: field_link
-entity_type: paragraph
+id: media.twitter.field_url
+field_name: field_url
+entity_type: media
 bundle: twitter
-label: 'Twitter URL'
+label: Url
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

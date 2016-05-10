@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_link
-    - paragraphs.paragraphs_type.instagram
+    - field.storage.media.field_url
+    - media_entity.bundle.instagram
   module:
     - link
-id: paragraph.instagram.field_link
-field_name: field_link
-entity_type: paragraph
+id: media.instagram.field_url
+field_name: field_url
+entity_type: media
 bundle: instagram
-label: 'Instagram URL'
+label: Url
 description: ''
 required: false
 translatable: true

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_instagram
+id: instagram
+label: Instagram
+description: ''
+type: instagram
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_url
+  use_instagram_api: false
+  client_id: ''
+field_map: {  }

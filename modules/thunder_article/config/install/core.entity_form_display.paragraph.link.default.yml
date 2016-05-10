@@ -20,4 +20,5 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  status: true
   uid: true

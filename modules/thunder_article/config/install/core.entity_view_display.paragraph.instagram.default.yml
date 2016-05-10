@@ -4,23 +4,19 @@ dependencies:
   config:
     - field.field.paragraph.instagram.field_media
     - paragraphs.paragraphs_type.instagram
-  module:
-    - inline_entity_form
 id: paragraph.instagram.default
 targetEntityType: paragraph
 bundle: instagram
 mode: default
 content:
   field_media:
+    type: entity_reference_entity_view
     weight: 0
+    label: hidden
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: inline_entity_form_simple
 hidden:
   created: true
-  status: true
   uid: true

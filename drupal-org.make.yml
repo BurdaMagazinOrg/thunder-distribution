@@ -93,11 +93,19 @@ projects:
     patch:
       - "https://www.drupal.org/files/issues/2717375-hook_requirements-have-to-return-an-array.patch"
 
+  media_entity_instagram:
+    type: "module"
+    version: "1.0"
+
   media_entity_image:
     type: "module"
     version: "1.0"
 
   media_entity_slideshow:
+    type: "module"
+    version: "1.0"
+
+  media_entity_twitter:
     type: "module"
     version: "1.0"
 
@@ -138,14 +146,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "2986767"
+      revision: "577cecc"
       branch: "8.x-1.x"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "af53832"
+      revision: "cd78dec"
       branch: "8.x-1.x"
 
   views_load_more:
