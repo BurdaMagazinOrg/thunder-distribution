@@ -11,8 +11,10 @@ dependencies:
   - image
   - inline_entity_form
   - media_entity
+  - media_entity_instagram
   - media_entity_image
   - media_entity_slideshow
+  - media_entity_twitter
   - responsive_image
   - pathauto
 

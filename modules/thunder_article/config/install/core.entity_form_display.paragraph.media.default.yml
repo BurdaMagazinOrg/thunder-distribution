@@ -21,8 +21,8 @@ content:
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings: {  }
 hidden:
   created: true
+  status: true
   uid: true

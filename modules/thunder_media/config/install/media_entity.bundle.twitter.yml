@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_twitter
+id: twitter
+label: Twitter
+description: ''
+type: twitter
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_url
+  use_twitter_api: false
+  consumer_key: ''
+  consumer_secret: ''
+  oauth_access_token: ''
+  oauth_access_token_secret: ''
+field_map: {  }

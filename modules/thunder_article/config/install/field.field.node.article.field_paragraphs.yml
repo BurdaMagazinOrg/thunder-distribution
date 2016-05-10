@@ -25,7 +25,6 @@ settings:
       media: media
       instagram: instagram
       gallery: gallery
-      pinterest: pinterest
       twitter: twitter
     target_bundles_drag_drop:
       text:
@@ -44,9 +43,6 @@ settings:
         enabled: true
         weight: 8
       gallery:
-        enabled: true
-        weight: 9
-      pinterest:
         enabled: true
         weight: 9
       twitter:

@@ -2,14 +2,21 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.twitter.field_link
+    - field.field.paragraph.twitter.field_media
     - paragraphs.paragraphs_type.twitter
 id: paragraph.twitter.default
 targetEntityType: paragraph
 bundle: twitter
 mode: default
-content: {  }
+content:
+  field_media:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
 hidden:
   created: true
-  field_link: true
   uid: true
