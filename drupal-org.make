@@ -1,15 +1,11 @@
 core = 8.x
 api = 2
-projects[ad_integration][type] = module
-projects[ad_integration][download][url] = http://git.drupal.org/sandbox/daniel.bosen/2660394.git
-projects[ad_integration][download][revision] = 117972530ca23354cf77401e84f40e23eeda9bcc
-projects[ad_integration][download][branch] = 8.x-1.x
 projects[admin_toolbar][type] = module
 projects[admin_toolbar][version] = 1.14
 projects[breakpoint_js_settings][type] = module
 projects[breakpoint_js_settings][version] = 1.0-rc1
 projects[ctools][type] = module
-projects[ctools][version] = 3.0-alpha25
+projects[ctools][version] = 3.0-alpha26
 projects[embed][type] = module
 projects[embed][version] = 1.0-rc2
 projects[entity][type] = module

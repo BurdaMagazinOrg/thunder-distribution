@@ -2,13 +2,6 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
-  ad_integration:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/sandbox/daniel.bosen/2660394.git"
-      revision: "117972530ca23354cf77401e84f40e23eeda9bcc"
-      branch: "8.x-1.x"
-
   admin_toolbar:
     type: "module"
     version: "1.14"
@@ -19,7 +12,7 @@ projects:
 
   ctools:
     type: "module"
-    version: "3.0-alpha25"
+    version: "3.0-alpha26"
 
   embed:
     type: "module"

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf6d47d410d8fbcf27abcdba620451ef",
-    "content-hash": "f4db7335e11c12da22469539d8233a10",
+    "hash": "df71363cd1b2f7c0695d048620bdeef7",
+    "content-hash": "82cfe710a9517a87b9944187ca948c5e",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -748,15 +748,15 @@
         },
         {
             "name": "drupal/ctools",
-            "version": "8.3.0-alpha25",
+            "version": "8.3.0-alpha26",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/ctools",
-                "reference": "3c65d78a2ac14dbd0c54fea979a41ee9575aa188"
+                "reference": "c14a5eee970c3d0aab02e88f6c6a4d18091439b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.0-alpha25.zip",
+                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.0-alpha26.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -784,7 +784,7 @@
             ],
             "description": "Provides a number of utility and helper APIs for Drupal developers and site builders.",
             "homepage": "https://www.drupal.org/project/ctools",
-            "time": "2016-04-01 20:16:42"
+            "time": "2016-05-06 18:51:13"
         },
         {
             "name": "drupal/embed",
