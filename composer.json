@@ -34,6 +34,7 @@
     "drupal/breakpoint_js_settings": "8.1.0-rc1",
     "drupal/admin_toolbar": "8.1.14",
     "drupal/ctools": "8.3.0-alpha26",
+    "drupal/default_content": "dev-8.x-1.x#c6a79ee2ffc71b0136d4988871618e05d8be4018",
     "drupal/embed": "8.1.0-rc2",
     "drupal/entity": "8.1.0-alpha3",
     "drupal/entity_embed": "8.1.0-alpha1",

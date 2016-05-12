@@ -6,6 +6,13 @@ projects:
     type: "module"
     version: "1.14"
 
+  better_normalizers:
+    type: "module"
+    download:
+      url: "https://git.drupal.org/sandbox/sam/2705067.git"
+      revision: "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
+      branch: "8.x-1.x"
+
   breakpoint_js_settings:
     type: "module"
     version: "1.0-rc1"
@@ -13,6 +20,13 @@ projects:
   ctools:
     type: "module"
     version: "3.0-alpha26"
+
+  default_content:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/default_content.git"
+      revision: "c6a79ee2ffc71b0136d4988871618e05d8be4018"
+      branch: "8.x-1.x"
 
   embed:
     type: "module"

@@ -1,0 +1,171 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/1?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/image.png"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "href": "http:\/\/default\/user\/0?_format=hal_json",
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/0?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "1"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "17965877-27b2-428f-8b8c-7dccba9786e5"
+        }
+    ],
+    "vid": [
+        {
+            "value": "1"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "image"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "name": [
+        {
+            "value": "Thunder",
+            "lang": "en"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/image.png"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "ccf94ab7-b7a9-46b4-aa16-7fcbd5fda2a7"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "Thunder",
+                "width": "180",
+                "height": "180"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/0?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "a6293dd7-9609-4c67-9753-b6fb6a535d15"
+                    }
+                ],
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/0?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "a6293dd7-9609-4c67-9753-b6fb6a535d15"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6cb75575-77ef-44c9-8d0e-573ccf49d14b"
+                    }
+                ],
+                "alt": "",
+                "title": "",
+                "width": "1254",
+                "height": "634"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "1462976658",
+            "lang": "en"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463031421",
+            "lang": "en"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1462976658"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ]
+}
