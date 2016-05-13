@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f8c864c8d98a85b86766fd91e2e295d1",
-    "content-hash": "97d3ba5023357f036bb1201a9a307a4e",
+    "hash": "ba94489157a78ceaada48cffbe0c069d",
+    "content-hash": "a0bed2c4ea35e24e8d11559b92d910b1",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "03b7ee0bb104149c03a389c3ccea49bcc69c5cfd"
+                "reference": "b23f47beda45bf12e26b18ad56e7497c834d4480"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-05-13 14:43:02"
+            "time": "2016-05-13 17:24:23"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
