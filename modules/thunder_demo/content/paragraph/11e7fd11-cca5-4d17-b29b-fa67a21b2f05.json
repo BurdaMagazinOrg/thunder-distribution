@@ -1,0 +1,134 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/text"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json",
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "id": [
+        {
+            "value": "1"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "11e7fd11-cca5-4d17-b29b-fa67a21b2f05"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": "1"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "text"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ],
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463075423",
+            "lang": "en"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463075616",
+            "lang": "en"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463075423"
+        }
+    ],
+    "parent_id": [
+        {
+            "value": "6"
+        }
+    ],
+    "parent_type": [
+        {
+            "value": "node"
+        }
+    ],
+    "parent_field_name": [
+        {
+            "value": "field_paragraphs"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ],
+    "field_text": [
+        {
+            "value": "<ul>\r\n\t<li>The first online Content Management System by publishers, for publishers<\/li>\r\n\t<li>International community of industry partners, publishers, and developers<\/li>\r\n\t<li>Free to use and continuously improved through community collaboration<\/li>\r\n<\/ul>\r\n\r\n<p>Munich, March 17th, 2016 \u2013 As of today, international media group Hubert Burda Media makes its Drupal 8 based Thunder Content Management System (CMS) available online as a free open-source platform for use and further development by other publishers. With this move, Burda joins forces with sector and industry partners including Acquia, Facebook, Microsoft, nexx.tv and Riddle.com, aiming to develop the best open-source CMS platform for publishers. Burda believes that in today\u2019s world, successful media offerings result from the right combination of quality journalism and technology expertise. For the media company, this meant future-proofing its Content Management System by developing Thunder, an opensource system based on leading-edge technology, now available online free of charge for use and continuous development.<\/p>\r\n\r\n<p>Board Member Philipp Welte explains, \u201cSuccess in this new era of publishing can only be achieved by keeping up with the lightning speed of technological progress. No publisher in the world can do this alone, so we have to leave our historical silos behind, share our knowledge, cross traditional boundaries and learn how to work in a much more connected way. Thunder symbolizes this new era of collaboration: We have invested a lot of development effort, but we are not keeping the results for ourselves. We are putting it out there, to the core of our industry, so everyone can contribute to its continued enhancement. Our aim is to work with our partners to develop the best technology foundation for publishing the best journalistic content.\u201d<\/p>\r\n",
+            "format": "basic_html"
+        }
+    ]
+}

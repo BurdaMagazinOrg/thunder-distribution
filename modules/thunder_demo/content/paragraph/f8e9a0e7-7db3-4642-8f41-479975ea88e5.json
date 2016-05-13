@@ -1,0 +1,134 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/text"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json",
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "id": [
+        {
+            "value": "3"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "f8e9a0e7-7db3-4642-8f41-479975ea88e5"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": "3"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "text"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ],
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/text\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463075493",
+            "lang": "en"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463075616",
+            "lang": "en"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463075493"
+        }
+    ],
+    "parent_id": [
+        {
+            "value": "6"
+        }
+    ],
+    "parent_type": [
+        {
+            "value": "node"
+        }
+    ],
+    "parent_field_name": [
+        {
+            "value": "field_paragraphs"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1",
+            "lang": "en"
+        }
+    ],
+    "field_text": [
+        {
+            "value": "<h2>Worldwide collaboration \u2014 The Thunder Coalition<\/h2>\r\n\r\n<p>With the launch of the new CMS, Burda is creating a worldwide coalition for publishers, industry partners, and developers. At the core of the community is a team of publishing experts and developers led by Ingo R\u00fcbe, CTO for Burda\u2019s German publishing operations, and initiator of Thunder. This team will also be responsible for coordinating the continuous development and enhancement of Thunder. Ingo R\u00fcbe explains,\u201cA CMS is no longer a strategic differentiator, especially in the consumer\u2019s perception. Thunder helps media companies break free from expensive legacy systems, and focus on the development of their content and brands.\u201d<\/p>\r\n\r\n<h2>Innovative CMS technology enriched by custom features for publishers<\/h2>\r\n\r\n<p>Thunder is a Drupal distribution based on the new version 8 of the framework, released in November 2015. It features a range of publisher-centric Drupal modules with custom&nbsp;enhancements, including tools for interactive content, IVW counting tools, single sign-on (SSO) and Responsive Web Design (RWD). With RWD, the layout of both the front-end (websites) and the back-end (authoring tool) automatically adjusts to each user\u2019s device. Thunder users also benefit from a whole range of channel- and feature-specific enhancements through collaboration with industry partners such as Acquia, Facebook, Microsoft, nexx.tv, and Riddle.com.<\/p>\r\n\r\n<p>Burda have already migrated their Playboy and Instyle brands to Thunder. Florian Boitin, Editor-in-Chief of Playboy, remembers: \u201cOver six months ago, we were one of the first brands to integrate Thunder into our editorial workflows, and we are proud to have laid the foundations for something really big. We were able to contribute to the design of Thunder by leveraging our long-standing experience of different CMS platforms. We are now reaping the benefits of further development efforts by the community, both in terms of technology and content.\u201d<\/p>\r\n\r\n<p>Thunder was released under the GNU General Public License, meaning the software can be used and enhanced by all users free of charge.<\/p>\r\n\r\n<p>For more information about Thunder, available extensions, and the Thunder Coalition, visit www.thunder.org.<\/p>\r\n",
+            "format": "basic_html"
+        }
+    ]
+}

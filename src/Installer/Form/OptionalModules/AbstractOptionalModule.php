@@ -64,4 +64,8 @@ abstract class AbstractOptionalModule extends ConfigFormBase{
       ->save();
   }
 
+  public function isEnabled() {
+    return 0;
+  }
+
 }
