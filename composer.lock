@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c41fddde623b0a078eb2f2133d7daec9",
-    "content-hash": "b681192ff4c7611ff249e74fc9c69e43",
+    "hash": "44e2db8dcfcc6dedd983cc75c6b0c32d",
+    "content-hash": "4505c468f5d99508784d6e91c12f1347",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "865ca84ea0b956321dfbd5530e1f42a278834232"
+                "reference": "ba1d041c8483d699a987253d8ad5afd7ebefbd23"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-05-11 07:34:49"
+            "time": "2016-05-13 14:10:51"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -748,15 +748,15 @@
         },
         {
             "name": "drupal/crop",
-            "version": "8.1.0-alpha2",
+            "version": "8.1.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/crop.git",
-                "reference": "5ec7b07c043e3e3d0139bd873ad387d3e7efc26d"
+                "reference": "8506e099c9f7cd889db4e982890011df2b956bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-alpha2.zip",
+                "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-rc1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -784,7 +784,7 @@
             ],
             "description": "Provides storage and API for image crops.",
             "homepage": "https://www.drupal.org/project/crop",
-            "time": "2016-01-27 16:24:50"
+            "time": "2016-05-18 15:47:02"
         },
         {
             "name": "drupal/ctools",
@@ -825,6 +825,32 @@
             "description": "Provides a number of utility and helper APIs for Drupal developers and site builders.",
             "homepage": "https://www.drupal.org/project/ctools",
             "time": "2016-05-06 18:51:13"
+        },
+        {
+            "name": "drupal/default_content",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/default_content.git",
+                "reference": "c6a79ee2ffc71b0136d4988871618e05d8be4018"
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/hal": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Imports default content when a module is enabled",
+            "homepage": "https://www.drupal.org/project/default_content",
+            "time": "2016-04-26 23:32:14"
         },
         {
             "name": "drupal/embed",
@@ -1418,7 +1444,10 @@
                 "drupal/field_ui": "Required by drupal/paragraphs_demo",
                 "drupal/image": "Required by drupal/paragraphs_demo",
                 "drupal/language": "Required by drupal/paragraphs_demo",
-                "drupal/node": "Required by drupal/paragraphs_demo"
+                "drupal/node": "Required by drupal/paragraphs_demo",
+                "drupal/search_api": "Required by drupal/paragraphs_demo",
+                "drupal/search_api_db": "Required by drupal/paragraphs_demo",
+                "drupal/views": "Required by drupal/paragraphs_demo"
             },
             "type": "drupal-module",
             "extra": {
@@ -3486,16 +3515,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
                 "shasum": ""
             },
             "require": {
@@ -3543,7 +3572,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-25 21:22:18"
+            "time": "2016-05-30 09:11:59"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -3750,6 +3779,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/default_content": 20,
         "drupal/entity_reference_revisions": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,

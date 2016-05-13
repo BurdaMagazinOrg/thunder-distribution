@@ -18,6 +18,7 @@ use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
 use Drupal\thunder\Installer\Form\OptionalModules\HierarchicalConfig;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\RiddleIntegration;
+use Drupal\thunder\Installer\Form\OptionalModules\ThunderDemo;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -57,6 +58,7 @@ class ModuleConfigureForm extends ConfigFormBase {
     $this->moduleInstaller = $module_installer;
 
     $this->provider = [
+      new ThunderDemo($config_factory),
       new GoogleAnalytics($config_factory),
       new IvwIntegration($config_factory),
       new FacebookInstantArticles($config_factory),
