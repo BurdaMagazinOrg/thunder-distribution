@@ -53,7 +53,7 @@
     "drupal/ivw_integration": "8.1.0-rc2",
     "drupal/libraries": "dev-8.x-3.x#0755c4d92dc4dd32155bb78dce50dd8d220e41ff",
     "drupal/linkit": "8.4.1",
-    "drupal/media_entity": "dev-8.x-1.x#9ce472e5a50715a5798799ae7224f979450ae272",
+    "drupal/media_entity": "8.1.1",
     "drupal/media_entity_browser": "dev-8.x-1.x#4abc37fcc374db7e5bd261e6c905d516e8e2f8b9",
     "drupal/media_entity_instagram": "8.1.0",
     "drupal/media_entity_image": "8.1.0",
