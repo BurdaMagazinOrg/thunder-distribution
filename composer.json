@@ -47,7 +47,7 @@
     "burdamagazinorg/infinite-theme": "dev-8.x-1.x#e1d6382b7ec73122642cf35d5eb150b7045ed0ed",
     "drupal/ivw_integration": "8.1.0-rc2",
     "drupal/linkit": "8.4.1",
-    "drupal/media_entity": "dev-8.x-1.x#ffe1b5991e203605ce468bda4bfd2c36acf4fc5f",
+    "drupal/media_entity": "dev-8.x-1.x#9ce472e5a50715a5798799ae7224f979450ae272",
     "drupal/media_entity_instagram": "8.1.0",
     "drupal/media_entity_image": "8.1.0",
     "drupal/media_entity_slideshow": "8.1.0",

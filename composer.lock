@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0276737028d8b378761bee33fd3c8786",
-    "content-hash": "d00be0dd9a3c4396dd3f12f36af15960",
+    "hash": "c41fddde623b0a078eb2f2133d7daec9",
+    "content-hash": "b681192ff4c7611ff249e74fc9c69e43",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -1189,7 +1189,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity.git",
-                "reference": "ffe1b5991e203605ce468bda4bfd2c36acf4fc5f"
+                "reference": "9ce472e5a50715a5798799ae7224f979450ae272"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1211,7 +1211,7 @@
             ],
             "description": "Media entity API.",
             "homepage": "https://www.drupal.org/project/media_entity",
-            "time": "2016-05-16 20:13:30"
+            "time": "2016-05-02 15:48:28"
         },
         {
             "name": "drupal/media_entity_image",
@@ -1430,7 +1430,7 @@
             "license": [
                 "GPL-2.0+"
             ],
-            "description": "Implements the Paragraphs entity types, Entity Reference selection type and Entity Reference field widget. To safely uninstall, go first to Structure > Paragraphs types > Settings.",
+            "description": "Enables the creation of paragraphs entities. To safely uninstall, go first to Structure > Paragraphs types > Settings.",
             "homepage": "https://www.drupal.org/project/paragraphs",
             "time": "2016-05-01 22:44:24"
         },
