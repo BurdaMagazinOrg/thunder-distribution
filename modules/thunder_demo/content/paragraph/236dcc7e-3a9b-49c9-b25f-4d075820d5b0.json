@@ -8,8 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
@@ -43,12 +42,6 @@
             "target_id": "media"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "_embedded": {
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
             {
@@ -64,8 +57,7 @@
                     {
                         "value": "741faabc-56ed-45cb-b963-57c95db628d9"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
@@ -105,20 +97,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1463075473",
-            "lang": "en"
+            "value": "1463075473"
         }
     ],
     "changed": [
         {
-            "value": "1463075616",
-            "lang": "en"
+            "value": "1463075616"
         }
     ],
     "revision_timestamp": [
@@ -143,8 +132,7 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ]
 }

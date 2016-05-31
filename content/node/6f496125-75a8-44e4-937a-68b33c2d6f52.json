@@ -8,8 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/node\/page\/uid": [
             {
-                "href": "http:\/\/default\/user\/0?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/0?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/page\/revision_uid": [
@@ -33,12 +32,6 @@
             "value": "2"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "type": [
         {
             "target_id": "page"
@@ -46,8 +39,7 @@
     ],
     "title": [
         {
-            "value": "Disclaimer",
-            "lang": "en"
+            "value": "Disclaimer"
         }
     ],
     "_embedded": {
@@ -65,8 +57,7 @@
                     {
                         "value": "eb571c08-6d69-4e76-ba9b-1150b2bd51a7"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/page\/revision_uid": [
@@ -89,20 +80,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1462976658",
-            "lang": "en"
+            "value": "1462976658"
         }
     ],
     "changed": [
         {
-            "value": "1462976658",
-            "lang": "en"
+            "value": "1462976658"
         }
     ],
     "promote": [
@@ -112,8 +100,7 @@
     ],
     "sticky": [
         {
-            "value": "0",
-            "lang": "en"
+            "value": "0"
         }
     ],
     "revision_timestamp": [
@@ -123,14 +110,12 @@
     ],
     "revision_translation_affected": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ]
 }

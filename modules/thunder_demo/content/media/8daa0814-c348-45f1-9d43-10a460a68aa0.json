@@ -13,8 +13,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/instagram\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/instagram\/revision_uid": [
@@ -43,16 +42,9 @@
             "target_id": "instagram"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "name": [
         {
-            "value": "Duis autem vel eum iriure",
-            "lang": "en"
+            "value": "Duis autem vel eum iriure"
         }
     ],
     "_embedded": {
@@ -91,8 +83,7 @@
                     {
                         "value": "741faabc-56ed-45cb-b963-57c95db628d9"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/instagram\/revision_uid": [
@@ -115,20 +106,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1463125999",
-            "lang": "en"
+            "value": "1463125999"
         }
     ],
     "changed": [
         {
-            "value": "1463125999",
-            "lang": "en"
+            "value": "1463125999"
         }
     ],
     "revision_timestamp": [
@@ -138,16 +126,14 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "field_url": [
         {
             "uri": "https:\/\/www.instagram.com\/p\/BEiRGTJQJzm",
             "title": "",
-            "options": [],
-            "lang": "en"
+            "options": []
         }
     ]
 }

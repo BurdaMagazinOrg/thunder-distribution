@@ -8,8 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/gallery\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/gallery\/revision_uid": [
@@ -19,8 +18,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/gallery\/field_media": [
             {
-                "href": "http:\/\/default\/media\/18?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/media\/18?_format=hal_json"
             }
         ]
     },
@@ -44,12 +42,6 @@
             "target_id": "gallery"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "_embedded": {
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/gallery\/uid": [
             {
@@ -65,8 +57,7 @@
                     {
                         "value": "741faabc-56ed-45cb-b963-57c95db628d9"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/paragraph\/gallery\/revision_uid": [
@@ -100,27 +91,23 @@
                     {
                         "value": "d65746ed-6b92-498d-9100-8603be730c71"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ]
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1463125178",
-            "lang": "en"
+            "value": "1463125178"
         }
     ],
     "changed": [
         {
-            "value": "1463125240",
-            "lang": "en"
+            "value": "1463125240"
         }
     ],
     "revision_timestamp": [
@@ -145,8 +132,7 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ]
 }

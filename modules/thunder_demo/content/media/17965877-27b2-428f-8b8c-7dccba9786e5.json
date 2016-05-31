@@ -37,16 +37,9 @@
             "target_id": "image"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "name": [
         {
-            "value": "Thunder",
-            "lang": "en"
+            "value": "Thunder"
         }
     ],
     "_embedded": {
@@ -95,20 +88,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1462976658",
-            "lang": "en"
+            "value": "1462976658"
         }
     ],
     "changed": [
         {
-            "value": "1463031421",
-            "lang": "en"
+            "value": "1463031421"
         }
     ],
     "revision_timestamp": [
@@ -118,8 +108,7 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ]
 }

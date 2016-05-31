@@ -13,8 +13,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/gallery\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/gallery\/revision_uid": [
@@ -60,16 +59,9 @@
             "target_id": "gallery"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "name": [
         {
-            "value": "DrupalCon Gallery",
-            "lang": "en"
+            "value": "DrupalCon Gallery"
         }
     ],
     "_embedded": {
@@ -108,8 +100,7 @@
                     {
                         "value": "741faabc-56ed-45cb-b963-57c95db628d9"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/gallery\/revision_uid": [
@@ -209,20 +200,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1463084596",
-            "lang": "en"
+            "value": "1463084596"
         }
     ],
     "changed": [
         {
-            "value": "1463084596",
-            "lang": "en"
+            "value": "1463084596"
         }
     ],
     "revision_timestamp": [
@@ -232,8 +220,7 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ]
 }

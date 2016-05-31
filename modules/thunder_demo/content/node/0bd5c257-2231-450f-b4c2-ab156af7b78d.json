@@ -8,8 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/uid": [
             {
-                "href": "http:\/\/default\/user\/0?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/0?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/revision_uid": [
@@ -68,12 +67,6 @@
             "value": "6"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "type": [
         {
             "target_id": "article"
@@ -81,8 +74,7 @@
     ],
     "title": [
         {
-            "value": "Burda Launches Worldwide Coalition Of Industry Partners And Releases Open-Source Online CMS Platform",
-            "lang": "en"
+            "value": "Burda Launches Worldwide Coalition Of Industry Partners And Releases Open-Source Online CMS Platform"
         }
     ],
     "_embedded": {
@@ -100,8 +92,7 @@
                     {
                         "value": "00914fe5-457c-41ec-9b41-89d0aa1e9f6d"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/revision_uid": [
@@ -273,32 +264,27 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1464043338",
-            "lang": "en"
+            "value": "1464043338"
         }
     ],
     "changed": [
         {
-            "value": "1463126175",
-            "lang": "en"
+            "value": "1463126175"
         }
     ],
     "promote": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "sticky": [
         {
-            "value": "0",
-            "lang": "en"
+            "value": "0"
         }
     ],
     "revision_timestamp": [
@@ -308,14 +294,12 @@
     ],
     "revision_translation_affected": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "field_hp_display_mode": [

@@ -13,8 +13,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json",
-                "lang": "en"
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/revision_uid": [
@@ -43,16 +42,9 @@
             "target_id": "video"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "name": [
         {
-            "value": "Thunder",
-            "lang": "en"
+            "value": "Thunder"
         }
     ],
     "_embedded": {
@@ -91,8 +83,7 @@
                     {
                         "value": "741faabc-56ed-45cb-b963-57c95db628d9"
                     }
-                ],
-                "lang": "en"
+                ]
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/revision_uid": [
@@ -115,20 +106,17 @@
     },
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "created": [
         {
-            "value": "1463075616",
-            "lang": "en"
+            "value": "1463075616"
         }
     ],
     "changed": [
         {
-            "value": "1463075616",
-            "lang": "en"
+            "value": "1463075616"
         }
     ],
     "revision_timestamp": [
@@ -138,14 +126,12 @@
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "field_media_video_embed_field": [
         {
-            "value": "https:\/\/www.youtube.com\/watch?v=cnT8dycXnMU",
-            "lang": "en"
+            "value": "https:\/\/www.youtube.com\/watch?v=cnT8dycXnMU"
         }
     ]
 }

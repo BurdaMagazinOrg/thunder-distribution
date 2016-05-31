@@ -22,11 +22,6 @@
             "value": "30178439-6c4c-40ac-9d35-e97c9144fa1f"
         }
     ],
-    "langcode": [
-        {
-            "value": "en"
-        }
-    ],
     "_embedded": {
         "http:\/\/drupal.org\/rest\/relation\/file\/file\/uid": [
             {

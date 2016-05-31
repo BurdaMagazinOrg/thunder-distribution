@@ -22,16 +22,9 @@
             "target_id": "channel"
         }
     ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
     "name": [
         {
-            "value": "Home",
-            "lang": "en"
+            "value": "Home"
         }
     ],
     "weight": [
@@ -41,20 +34,17 @@
     ],
     "changed": [
         {
-            "value": "1462976658",
-            "lang": "en"
+            "value": "1462976658"
         }
     ],
     "default_langcode": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "status": [
         {
-            "value": "1",
-            "lang": "en"
+            "value": "1"
         }
     ],
     "field_meta_tags": [
