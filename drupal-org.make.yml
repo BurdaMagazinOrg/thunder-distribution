@@ -104,7 +104,7 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta7"
+    version: "1.0-beta8"
 
   paragraphs:
     type: "module"
