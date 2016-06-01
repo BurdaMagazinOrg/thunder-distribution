@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c41fddde623b0a078eb2f2133d7daec9",
-    "content-hash": "b681192ff4c7611ff249e74fc9c69e43",
+    "hash": "25f91ba2bc65d51f2dd8254aefe5b6c3",
+    "content-hash": "3cefb6c2ac799a367a17acb2a5702de1",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -748,15 +748,15 @@
         },
         {
             "name": "drupal/crop",
-            "version": "8.1.0-alpha2",
+            "version": "8.1.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/crop.git",
-                "reference": "5ec7b07c043e3e3d0139bd873ad387d3e7efc26d"
+                "reference": "8506e099c9f7cd889db4e982890011df2b956bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-alpha2.zip",
+                "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-rc1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -784,7 +784,7 @@
             ],
             "description": "Provides storage and API for image crops.",
             "homepage": "https://www.drupal.org/project/crop",
-            "time": "2016-01-27 16:24:50"
+            "time": "2016-05-18 15:47:02"
         },
         {
             "name": "drupal/ctools",
@@ -1345,15 +1345,15 @@
         },
         {
             "name": "drupal/metatag",
-            "version": "8.1.0-beta7",
+            "version": "8.1.0-beta8",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/metatag",
-                "reference": "c12149e7ea0444bed959018384d48d1f79d42af3"
+                "reference": "6a1b892f9b1f1a3b027dbddca81676e0d69a6ef3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta7.zip",
+                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta8.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1363,11 +1363,13 @@
                 "drupal/token": "8.*"
             },
             "replace": {
+                "drupal/metatag_google_plus": "self.version",
                 "drupal/metatag_open_graph": "self.version",
-                "drupal/metatag_twitter_cards": "self.version"
+                "drupal/metatag_twitter_cards": "self.version",
+                "drupal/metatag_verification": "self.version"
             },
             "suggest": {
-                "drupal/core": "Required by drupal/metatag_open_graph, drupal/metatag_twitter_cards"
+                "drupal/core": "Required by drupal/metatag_google_plus, drupal/metatag_open_graph, drupal/metatag_twitter_cards, drupal/metatag_verification"
             },
             "type": "drupal-module",
             "extra": {
@@ -1392,7 +1394,7 @@
                 "php",
                 "seo"
             ],
-            "time": "2016-04-03 18:17:59"
+            "time": "2016-05-14 11:04:56"
         },
         {
             "name": "drupal/paragraphs",
@@ -1418,7 +1420,10 @@
                 "drupal/field_ui": "Required by drupal/paragraphs_demo",
                 "drupal/image": "Required by drupal/paragraphs_demo",
                 "drupal/language": "Required by drupal/paragraphs_demo",
-                "drupal/node": "Required by drupal/paragraphs_demo"
+                "drupal/node": "Required by drupal/paragraphs_demo",
+                "drupal/search_api": "Required by drupal/paragraphs_demo",
+                "drupal/search_api_db": "Required by drupal/paragraphs_demo",
+                "drupal/views": "Required by drupal/paragraphs_demo"
             },
             "type": "drupal-module",
             "extra": {
@@ -3486,16 +3491,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
                 "shasum": ""
             },
             "require": {
@@ -3543,7 +3548,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-25 21:22:18"
+            "time": "2016-05-30 09:11:59"
         },
         {
             "name": "zendframework/zend-diactoros",
