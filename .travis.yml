@@ -63,5 +63,6 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
 
 script:
+  - php -i
   - drush en simpletest -y
   - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
