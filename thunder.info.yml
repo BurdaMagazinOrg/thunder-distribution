@@ -38,8 +38,6 @@ dependencies:
   - admin_toolbar_tools
   - field_group
   - focal_point
-  - better_normalizers
-  - default_content
   - entity_embed
   - inline_entity_form
   - linkit

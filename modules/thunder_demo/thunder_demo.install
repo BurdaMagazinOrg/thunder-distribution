@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Contains
+ */
+
+
+function thunder_demo_install() {
+  
+  // Set default pages.
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('page.front', '/taxonomy/term/1')
+    ->set('page.403', '/node/3')
+    ->set('page.404', '/node/4')
+    ->save(TRUE);
+
+}

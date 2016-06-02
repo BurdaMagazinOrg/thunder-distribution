@@ -29,12 +29,6 @@ function thunder_install() {
     ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo-big.png')
     ->save(TRUE);
 
-  // Set default pages.
-  \Drupal::configFactory()->getEditable('system.site')
-    ->set('page.front', '/taxonomy/term/1')
-    ->set('page.403', '/node/3')
-    ->set('page.404', '/node/4')
-    ->save(TRUE);
 
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
