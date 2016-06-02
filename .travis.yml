@@ -64,5 +64,6 @@ before_script:
 
 script:
   - php -i
+  - drush pml
   - drush en simpletest -y
   - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
