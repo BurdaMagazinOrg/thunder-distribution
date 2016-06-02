@@ -1,0 +1,246 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/node\/7?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/article"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_channel": [
+            {
+                "href": "http:\/\/default\/taxonomy\/term\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_paragraphs": [
+            {
+                "href": ""
+            },
+            {
+                "href": ""
+            },
+            {
+                "href": ""
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_teaser_media": [
+            {
+                "href": "http:\/\/default\/media\/6?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": "7"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "36b2e2b2-3df0-43eb-a282-d792b0999c07"
+        }
+    ],
+    "vid": [
+        {
+            "value": "7"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "article"
+        }
+    ],
+    "title": [
+        {
+            "value": "Come to DrupalCon New Orleans"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_channel": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/taxonomy\/term\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/channel"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "164f135e-551b-45a4-9e95-79aafe3f285a"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_paragraphs": [
+            {
+                "_links": {
+                    "self": {
+                        "href": ""
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/gallery"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "698fa476-f9ba-4404-a3f1-cfaef81178c5"
+                    }
+                ],
+                "target_revision_id": "9"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": ""
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/text"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "1e0bf060-a2af-422a-ad51-a739f7bc158a"
+                    }
+                ],
+                "target_revision_id": "7"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": ""
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/media"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "c49c3b83-9863-4109-ad9e-c3198d7cd640"
+                    }
+                ],
+                "target_revision_id": "8"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_teaser_media": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/media\/6?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "a4c1035a-5b27-4713-8ba3-40ba5942486d"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463167734"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463126236"
+        }
+    ],
+    "promote": [
+        {
+            "value": "1"
+        }
+    ],
+    "sticky": [
+        {
+            "value": "0"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463083946"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": "1"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ],
+    "field_footer_blocks": [
+        {
+            "target_id": "lazyloadingsimple"
+        }
+    ],
+    "field_meta_tags": [
+        {
+            "value": "a:4:{s:5:\"title\";s:22:\"[node:field_seo_title]\";s:11:\"description\";s:24:\"[node:field_teaser_text]\";s:13:\"canonical_url\";s:11:\"[node:path]\";s:16:\"content_language\";s:15:\"[node:langcode]\";}"
+        }
+    ],
+    "field_seo_title": [
+        {
+            "value": "Come to DrupalCon New Orleans"
+        }
+    ],
+    "field_teaser_display_mode": [
+        {
+            "value": "teaser_landscape_m"
+        }
+    ]
+}

@@ -1,0 +1,139 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/3?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/twitter"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/twitter.png"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "3"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "929b164b-8718-494a-9769-853a6f758a81"
+        }
+    ],
+    "vid": [
+        {
+            "value": "3"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "twitter"
+        }
+    ],
+    "name": [
+        {
+            "value": "Thunder Installation"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/twitter.png"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "5dcea711-2cf2-48d2-b2d6-fadcf2e54afa"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "Thunder Installation",
+                "width": "180",
+                "height": "180"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/twitter\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463076699"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463076699"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463076699"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ],
+    "field_url": [
+        {
+            "uri": "https:\/\/twitter.com\/rteijeiro\/status\/719814039241625600",
+            "title": "",
+            "options": []
+        }
+    ]
+}

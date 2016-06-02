@@ -1,0 +1,158 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/15?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/picjumbo.com_P1020591.jpg"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/picjumbo.com_P1020591.jpg"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "15"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "23f6d444-ece1-465d-a667-b1fb80e641d3"
+        }
+    ],
+    "vid": [
+        {
+            "value": "15"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "image"
+        }
+    ],
+    "name": [
+        {
+            "value": "Lorem ipsum dolor sit amet 1"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/picjumbo.com_P1020591.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "37aa3505-ba78-4f81-904d-bd65c940abfa"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "Lorem ipsum dolor sit amet 1",
+                "width": "1618",
+                "height": "1080"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/picjumbo.com_P1020591.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "37aa3505-ba78-4f81-904d-bd65c940abfa"
+                    }
+                ],
+                "alt": "",
+                "title": "",
+                "width": "1618",
+                "height": "1080"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463125205"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463125205"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463125205"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

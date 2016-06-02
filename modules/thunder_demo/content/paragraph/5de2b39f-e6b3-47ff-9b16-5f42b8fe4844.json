@@ -1,0 +1,138 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/twitter"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/field_media": [
+            {
+                "href": "http:\/\/default\/media\/4?_format=hal_json"
+            }
+        ]
+    },
+    "id": [
+        {
+            "value": "5"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "5de2b39f-e6b3-47ff-9b16-5f42b8fe4844"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": "5"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "twitter"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/twitter\/field_media": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/media\/4?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/twitter"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "068bccdd-75af-4ec0-9091-5efc2294d250"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463076745"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463076759"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463076745"
+        }
+    ],
+    "parent_id": [
+        {
+            "value": "6"
+        }
+    ],
+    "parent_type": [
+        {
+            "value": "node"
+        }
+    ],
+    "parent_field_name": [
+        {
+            "value": "field_paragraphs"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

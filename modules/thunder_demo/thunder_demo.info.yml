@@ -1,0 +1,9 @@
+name: Thunder Demo
+type: module
+description: Provide demo content.
+package: Thunder
+core: 8.x
+version: 8.x-1.x-dev
+dependencies:
+  - default_content
+  - better_normalizers

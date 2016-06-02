@@ -1,0 +1,158 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/11?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/26871881601_e356175aee_k.jpg"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/26871881601_e356175aee_k.jpg"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "11"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "483760b8-64c5-4035-9fe2-b15196020d69"
+        }
+    ],
+    "vid": [
+        {
+            "value": "11"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "image"
+        }
+    ],
+    "name": [
+        {
+            "value": "Image 2"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/26871881601_e356175aee_k.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "40e262a6-f402-4b17-90ff-ba8bd619c707"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "Image 2",
+                "width": "2048",
+                "height": "1369"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/26871881601_e356175aee_k.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "40e262a6-f402-4b17-90ff-ba8bd619c707"
+                    }
+                ],
+                "alt": "",
+                "title": "",
+                "width": "2048",
+                "height": "1369"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463084512"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463084512"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463084512"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}
