@@ -1,0 +1,114 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/1?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "1"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "17965877-27b2-428f-8b8c-7dccba9786e5"
+        }
+    ],
+    "vid": [
+        {
+            "value": "1"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "image"
+        }
+    ],
+    "name": [
+        {
+            "value": "Thunder"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6cb75575-77ef-44c9-8d0e-573ccf49d14b"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "Thunder",
+                "width": "1254",
+                "height": "634"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6cb75575-77ef-44c9-8d0e-573ccf49d14b"
+                    }
+                ],
+                "alt": "",
+                "title": "",
+                "width": "1254",
+                "height": "634"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1462976658"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463031421"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1462976658"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

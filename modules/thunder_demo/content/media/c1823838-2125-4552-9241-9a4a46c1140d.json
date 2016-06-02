@@ -1,0 +1,137 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/media\/7?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/thumbnail": [
+            {
+                "href": "http:\/\/default\/sites\/default\/files\/video_thumbnails\/Ksp5JVFryEg.jpg"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "mid": [
+        {
+            "value": "7"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "c1823838-2125-4552-9241-9a4a46c1140d"
+        }
+    ],
+    "vid": [
+        {
+            "value": "7"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "video"
+        }
+    ],
+    "name": [
+        {
+            "value": "DrupalCon"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/sites\/default\/files\/video_thumbnails\/Ksp5JVFryEg.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "41b5145d-3ec0-43a3-ad5c-65bb1d6de4f5"
+                    }
+                ],
+                "alt": "Thumbnail",
+                "title": "DrupalCon",
+                "width": "1280",
+                "height": "720"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "created": [
+        {
+            "value": "1463083993"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1463083993"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "1463083993"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ],
+    "field_media_video_embed_field": [
+        {
+            "value": "https:\/\/www.youtube.com\/watch?v=Ksp5JVFryEg"
+        }
+    ]
+}

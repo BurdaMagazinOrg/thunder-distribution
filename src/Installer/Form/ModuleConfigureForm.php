@@ -11,12 +11,14 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder\Installer\Form\OptionalModules\AbstractOptionalModule;
 use Drupal\thunder\Installer\Form\OptionalModules\AdIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\FacebookInstantArticles;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
 use Drupal\thunder\Installer\Form\OptionalModules\HierarchicalConfig;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\RiddleIntegration;
+use Drupal\thunder\Installer\Form\OptionalModules\ThunderDemo;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -34,6 +36,9 @@ class ModuleConfigureForm extends ConfigFormBase {
   protected $moduleInstaller;
 
 
+  /**
+   * @var AbstractOptionalModule[]
+   */
   private $provider = [];
 
   /**
@@ -53,13 +58,11 @@ class ModuleConfigureForm extends ConfigFormBase {
     $this->moduleInstaller = $module_installer;
 
     $this->provider = [
+      new ThunderDemo($config_factory),
       new GoogleAnalytics($config_factory),
       new IvwIntegration($config_factory),
-     # new BreakpointJsSettings($config_factory),
       new FacebookInstantArticles($config_factory),
-     # new AdIntegration($config_factory),
       new RiddleIntegration($config_factory),
-     # new HierarchicalConfig($config_factory),
     ];
   }
 
@@ -78,7 +81,7 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $configNames = [];
 
-    /** @var ConfigFormBase $provider */
+    /** @var AbstractOptionalModule $provider */
     foreach ($this->provider as $provider) {
       $configNames = array_merge($configNames, $provider->getEditableConfigNames());
     }
@@ -94,11 +97,16 @@ class ModuleConfigureForm extends ConfigFormBase {
     drupal_get_messages();
 
     $installableModules = [];
+    $defaultValues = [];
 
-    /** @var ConfigFormBase $provider */
+    /** @var AbstractOptionalModule $provider */
     foreach ($this->provider as $provider) {
 
       $installableModules[$provider->getFormId()] = $provider->getFormName();
+
+      if ($provider->isEnabled()) {
+        $defaultValues[] = $provider->getFormId();
+      }
 
       $form = $provider->buildForm($form, $form_state);
 
@@ -109,7 +117,8 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#type' => 'checkboxes',
       '#options' => $installableModules,
       '#title' => t('Which module do you also like to install?'),
-      '#weight' => -1
+      '#weight' => -1,
+      '#default_value' => $defaultValues,
     );
 
     $form['actions'] = array('#type' => 'actions');
