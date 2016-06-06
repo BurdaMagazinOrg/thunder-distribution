@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "478135fbcf4b7055a9072979499858f2",
-    "content-hash": "25e9a45cfee2733fa904ca5383f1e076",
+    "hash": "691405d881217882f80a57a22323ff50",
+    "content-hash": "85393625e642f5571c03ced428bd6cd2",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -548,21 +548,20 @@
         },
         {
             "name": "drupal/admin_toolbar",
-            "version": "8.1.14",
+            "version": "8.1.15",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/admin_toolbar.git",
-                "reference": "bb7533adfce88bf783dcb23aea137ee9dbd80cdb"
+                "reference": "f8380381183bc76babaec9dfe392511011d54904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.14.zip",
+                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.15.zip",
                 "reference": null,
                 "shasum": null
             },
             "require": {
                 "drupal/core": "8.*",
-                "drupal/node": "8.*",
                 "drupal/toolbar": "8.*"
             },
             "replace": {
@@ -587,9 +586,9 @@
                     "homepage": "https://www.drupal.org/u/matio89"
                 }
             ],
-            "description": "Admin Toolbar improve the default Drupal Toolbar,it lets the hover of sub menus.",
+            "description": "Provides a drop-down menu interface to the core Drupal Toolbar.",
             "homepage": "http://drupal.org/project/admin_toolbar",
-            "time": "2016-02-08 14:39:48"
+            "time": "2016-05-23 11:35:45"
         },
         {
             "name": "drupal/better_normalizers",
@@ -651,16 +650,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.1.1",
+            "version": "8.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal-composer/drupal-core.git",
-                "reference": "e405a10c85a874a70932fe53670993f790df746f"
+                "reference": "a5d3f14db87ef953d227fb411489bada1afbb0a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/e405a10c85a874a70932fe53670993f790df746f",
-                "reference": "e405a10c85a874a70932fe53670993f790df746f",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/a5d3f14db87ef953d227fb411489bada1afbb0a8",
+                "reference": "a5d3f14db87ef953d227fb411489bada1afbb0a8",
                 "shasum": ""
             },
             "require": {
@@ -721,6 +720,7 @@
                 "drupal/core-discovery": "self.version",
                 "drupal/core-event-dispatcher": "self.version",
                 "drupal/core-file-cache": "self.version",
+                "drupal/core-filesystem": "self.version",
                 "drupal/core-gettext": "self.version",
                 "drupal/core-graph": "self.version",
                 "drupal/core-php-storage": "self.version",
@@ -784,7 +784,7 @@
                 "drupal/views_ui": "self.version"
             },
             "require-dev": {
-                "behat/mink": "~1.6",
+                "behat/mink": "~1.7",
                 "behat/mink-goutte-driver": "~1.2",
                 "jcalderonzumba/gastonjs": "~1.0.2",
                 "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
@@ -814,7 +814,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2016-05-04 11:20:24"
+            "time": "2016-06-01 23:31:24"
         },
         {
             "name": "drupal/crop",
@@ -1118,11 +1118,17 @@
         },
         {
             "name": "drupal/entity_reference_revisions",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-rc7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_reference_revisions.git",
-                "reference": "6bf3f94223baa5806bcd99488353993dbc411ac1"
+                "reference": "09b19416018f59e1b1f4acef6cfd34496ba991ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc7.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1139,7 +1145,7 @@
             ],
             "description": "Adds a Entity Reference field type with revision support.",
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
-            "time": "2016-04-26 10:30:18"
+            "time": "2016-05-26 00:06:06"
         },
         {
             "name": "drupal/fb_instant_articles",
@@ -1281,11 +1287,17 @@
         },
         {
             "name": "drupal/inline_entity_form",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-alpha6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/inline_entity_form",
-                "reference": "561662783412bbca512c170e63bc0c94eb3a394d"
+                "reference": "27af4de9fd961fa6ae1369604d05fec8b06db867"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/inline_entity_form-8.x-1.0-alpha6.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1302,7 +1314,7 @@
             ],
             "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities. ",
             "homepage": "https://www.drupal.org/project/inline_entity_form",
-            "time": "2016-04-23 23:35:22"
+            "time": "2016-04-18 21:57:48"
         },
         {
             "name": "drupal/ivw_integration",
@@ -1466,15 +1478,15 @@
         },
         {
             "name": "drupal/media_entity_image",
-            "version": "8.1.0",
+            "version": "8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_image.git",
-                "reference": "717acca8a2cc7ba6ab76f8a30bc7aa247f542255"
+                "reference": "889bd7d34fb6a6c1dc2bfaf20485491a2b38e0aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity_image-8.x-1.0.zip",
+                "url": "https://ftp.drupal.org/files/projects/media_entity_image-8.x-1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1494,7 +1506,7 @@
             ],
             "description": "Media entity local images provider.",
             "homepage": "https://www.drupal.org/project/media_entity_image",
-            "time": "2016-04-20 08:51:19"
+            "time": "2016-05-19 09:24:25"
         },
         {
             "name": "drupal/media_entity_instagram",
@@ -1649,11 +1661,17 @@
         },
         {
             "name": "drupal/paragraphs",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/paragraphs",
-                "reference": "6e7b8322a5f677a40afd8e9134b3fdc2da3b8b2e"
+                "reference": "bed1bddffdf03626ba057ab697635b049d8d98de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.0-rc5.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1688,7 +1706,7 @@
             ],
             "description": "Enables the creation of paragraphs entities. To safely uninstall, go first to Structure > Paragraphs types > Settings.",
             "homepage": "https://www.drupal.org/project/paragraphs",
-            "time": "2016-05-01 22:44:24"
+            "time": "2016-05-31 19:59:20"
         },
         {
             "name": "drupal/pathauto",
@@ -1759,11 +1777,17 @@
         },
         {
             "name": "drupal/scheduler",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/scheduler",
-                "reference": "1ddd7c5c642c17f8bb606369e9068ca8751cccb9"
+                "reference": "af9ca78d4f7e337dbb03d11f5e78988da2896cd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/scheduler-8.x-1.0-alpha1.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/action": "8.*",
@@ -1783,31 +1807,9 @@
             "license": [
                 "GPL-2.0+"
             ],
-            "authors": [
-                {
-                    "name": "Eric Schaefer (Eric Schaefer)",
-                    "homepage": "https://www.drupal.org/u/eric-schaefer",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Jonathan Smith (jonathan1055)",
-                    "homepage": "https://www.drupal.org/u/jonathan1055",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Pieter Frenssen (pfrenssen)",
-                    "homepage": "https://www.drupal.org/u/pfrenssen",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Rick Manelius (rickmanelius)",
-                    "homepage": "https://www.drupal.org/u/rickmanelius",
-                    "role": "Maintainer"
-                }
-            ],
             "description": "Publish and unpublish content on specified dates and time.",
-            "homepage": "https://drupal.org/project/scheduler",
-            "time": "2016-04-16 11:56:26"
+            "homepage": "https://www.drupal.org/project/scheduler",
+            "time": "2016-05-17 14:18:45"
         },
         {
             "name": "drupal/token",
@@ -1842,21 +1844,22 @@
         },
         {
             "name": "drupal/video_embed_field",
-            "version": "8.1.0-rc8",
+            "version": "8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/video_embed_field",
-                "reference": "4c01b410084ff35ff3995dba2d3c5dd878544e9e"
+                "reference": "a842a01b3803adee9dce44a291ba54ef15bf3284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.0-rc8.zip",
+                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.0.zip",
                 "reference": null,
                 "shasum": null
             },
             "require": {
                 "drupal/core": "8.*",
-                "drupal/field": "8.*"
+                "drupal/field": "8.*",
+                "drupal/image": "8.*"
             },
             "replace": {
                 "drupal/video_embed_media": "self.version",
@@ -1884,7 +1887,7 @@
             ],
             "description": "A field type for displaying videos from 3rd party providers such as YouTube and Vimeo.",
             "homepage": "https://www.drupal.org/project/video_embed_field",
-            "time": "2016-04-29 11:04:49"
+            "time": "2016-05-06 10:36:31"
         },
         {
             "name": "drupal/views_load_more",
@@ -4085,18 +4088,14 @@
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
-        "drupal/entity_reference_revisions": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
-        "drupal/inline_entity_form": 20,
         "burdamagazinorg/infinite-module": 20,
         "burdamagazinorg/infinite-theme": 20,
         "drupal/libraries": 20,
         "drupal/media_entity_browser": 20,
-        "drupal/paragraphs": 20,
         "drupal/riddle_marketplace": 20,
-        "drupal/scheduler": 20,
         "drupal/views_load_more": 20
     },
     "prefer-stable": true,
