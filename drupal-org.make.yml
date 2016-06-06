@@ -28,6 +28,13 @@ projects:
       revision: "c6a79ee2ffc71b0136d4988871618e05d8be4018"
       branch: "8.x-1.x"
 
+  dropzonejs:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/dropzonejs.git"
+      revision: "fb8166df3217a2c9e1dc9a581d48011cee4c187e"
+      branch: "8.x-1.x"
+
   embed:
     type: "module"
     version: "1.0-rc2"
@@ -35,6 +42,12 @@ projects:
   entity:
     type: "module"
     version: "1.0-alpha3"
+
+  entity_browser:
+    type: "module"
+    version: "1.0-alpha3"
+    patch:
+      - "https://www.drupal.org/files/issues/use-admin-route.patch"
 
   entity_embed:
     type: "module"
@@ -90,6 +103,13 @@ projects:
     type: "module"
     version: "1.0-rc2"
 
+  libraries:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/libraries.git"
+      revision: "0755c4d92dc4dd32155bb78dce50dd8d220e41ff"
+      branch: "8.x-3.x"
+
   linkit:
     type: "module"
     version: "4.1"
@@ -99,6 +119,13 @@ projects:
     version: "1.0"
     patch:
       - "https://www.drupal.org/files/issues/2717375-hook_requirements-have-to-return-an-array.patch"
+
+  media_entity_browser:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/media_entity_browser.git"
+      revision: "4abc37fcc374db7e5bd261e6c905d516e8e2f8b9"
+      branch: "8.x-1.x"
 
   media_entity_instagram:
     type: "module"
@@ -153,7 +180,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "b23f47beda45bf12e26b18ad56e7497c834d4480"
+      revision: "d19090c"
       branch: "8.x-1.x"
 
   infinite:
@@ -173,3 +200,10 @@ projects:
       url: "https://git.drupal.org/project/views_load_more.git"
       revision: "178d32195253207cc74097296e25079a23f0b2e5"
       branch: "8.x-1.x"
+
+libraries:
+  dropzone:
+    type: "library"
+    download:
+      type: "get"
+      url: "https://github.com/enyo/dropzone/archive/v4.3.0.zip"

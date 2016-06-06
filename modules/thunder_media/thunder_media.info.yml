@@ -5,12 +5,14 @@ package: Thunder
 core: 8.x
 version: 8.x-1.x-dev
 dependencies:
+  - dropzonejs_eb_widget
   - field
   - field_ui
   - focal_point
   - image
   - inline_entity_form
   - media_entity
+  - media_entity_browser
   - media_entity_instagram
   - media_entity_image
   - media_entity_slideshow
@@ -18,4 +20,3 @@ dependencies:
   - responsive_image
   - pathauto
   - video_embed_media
-
