@@ -10,8 +10,8 @@ name: image_browser
 label: 'Image Browser'
 display: modal
 display_configuration:
-  width: '650'
-  height: '500'
+  width: '1070'
+  height: '840'
   link_text: 'Select entities'
 selection_display: no_display
 selection_display_configuration: {  }
