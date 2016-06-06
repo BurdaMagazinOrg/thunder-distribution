@@ -508,6 +508,7 @@ display:
         operator: AND
         groups:
           1: AND
+      css_class: view-media-entity-browser
     cache_metadata:
       max-age: -1
       contexts:
