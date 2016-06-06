@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "acc952de185be7d4e00d916c868d01ba",
-    "content-hash": "41dee71319f1384db9c5db006e01b88a",
+    "hash": "edb0505d2fd36a685ef236f1299e243c",
+    "content-hash": "612da15426f6369f54df37eb4f0ff0e8",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "b23f47beda45bf12e26b18ad56e7497c834d4480"
+                "reference": "d19090c8492cfc343b1751da66cd7800f9464948"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-05-13 17:24:23"
+            "time": "2016-06-06 13:20:19"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -879,6 +879,40 @@
             "time": "2016-04-26 23:32:14"
         },
         {
+            "name": "drupal/dropzonejs",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/dropzonejs.git",
+                "reference": "fb8166df3217a2c9e1dc9a581d48011cee4c187e"
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/file": "8.*"
+            },
+            "replace": {
+                "drupal/dropzonejs_eb_widget": "self.version"
+            },
+            "suggest": {
+                "drupal/core": "Required by drupal/dropzonejs_eb_widget",
+                "drupal/entity_browser": "Required by drupal/dropzonejs_eb_widget",
+                "drupal/file": "Required by drupal/dropzonejs_eb_widget"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "DropzoneJS",
+            "homepage": "https://www.drupal.org/project/dropzonejs",
+            "time": "2016-05-27 18:17:29"
+        },
+        {
             "name": "drupal/embed",
             "version": "8.1.0-rc2",
             "source": {
@@ -940,6 +974,60 @@
             "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
             "homepage": "http://drupal.org/project/entity",
             "time": "2016-04-27 08:54:12"
+        },
+        {
+            "name": "drupal/entity_browser",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/entity_browser.git",
+                "reference": "3342d2b4e485ba073defcfc097cb9339f92a632e"
+            },
+            "require": {
+                "drupal/core": "8.*"
+            },
+            "replace": {
+                "drupal/entity_browser_entity_form": "self.version",
+                "drupal/entity_browser_example": "self.version"
+            },
+            "suggest": {
+                "drupal/core": "Required by drupal/entity_browser_entity_form, drupal/entity_browser_example",
+                "drupal/field": "Required by drupal/entity_browser_example",
+                "drupal/file": "Required by drupal/entity_browser_example",
+                "drupal/inline_entity_form": "Required by drupal/entity_browser_entity_form",
+                "drupal/node": "Required by drupal/entity_browser_example",
+                "drupal/views": "Required by drupal/entity_browser_example"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Janez Urevc",
+                    "homepage": "https://github.com/slashrsm",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Primoz Hmeljak",
+                    "homepage": "https://github.com/primsi",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "See other contributors",
+                    "homepage": "https://www.drupal.org/node/1943336/committers",
+                    "role": "contributor"
+                }
+            ],
+            "description": "Provide a generic entity browser/picker/selector.",
+            "homepage": "http://drupal.org/project/entity_browser",
+            "time": "2016-06-03 15:07:33"
         },
         {
             "name": "drupal/entity_embed",
@@ -1197,6 +1285,31 @@
             "time": "2016-04-12 14:59:06"
         },
         {
+            "name": "drupal/libraries",
+            "version": "dev-8.x-3.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/libraries",
+                "reference": "0755c4d92dc4dd32155bb78dce50dd8d220e41ff"
+            },
+            "require": {
+                "drupal/core": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-3.x": "8.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Allows version-dependent and shared usage of external libraries.",
+            "homepage": "http://drupal.org/project/libraries",
+            "time": "2016-06-04 09:57:16"
+        },
+        {
             "name": "drupal/linkit",
             "version": "8.4.1",
             "source": {
@@ -1264,6 +1377,33 @@
             "description": "Media entity API.",
             "homepage": "https://www.drupal.org/project/media_entity",
             "time": "2016-05-02 15:48:28"
+        },
+        {
+            "name": "drupal/media_entity_browser",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/media_entity_browser.git",
+                "reference": "4abc37fcc374db7e5bd261e6c905d516e8e2f8b9"
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/entity_browser": "8.*",
+                "drupal/media_entity": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "This module provides an Entity Browser for Media Entity.",
+            "homepage": "https://www.drupal.org/project/media_entity_browser",
+            "time": "2016-04-22 01:38:35"
         },
         {
             "name": "drupal/media_entity_image",
@@ -1786,6 +1926,42 @@
                 "validator"
             ],
             "time": "2016-05-15 10:06:34"
+        },
+        {
+            "name": "enyo/dropzone",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enyo/dropzone.git",
+                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/enyo/dropzone/zipball/d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
+                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matias Meno",
+                    "email": "m@tias.me",
+                    "homepage": "http://www.matiasmeno.com"
+                }
+            ],
+            "description": "Handles drag and drop of files for you.",
+            "homepage": "http://www.dropzonejs.com",
+            "keywords": [
+                "drag and drop",
+                "dragndrop",
+                "file upload",
+                "upload"
+            ],
+            "time": "2016-02-14 04:19:41"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3809,6 +3985,8 @@
     "stability-flags": {
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
+        "drupal/dropzonejs": 20,
+        "drupal/entity_browser": 20,
         "drupal/entity_reference_revisions": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
@@ -3816,7 +3994,9 @@
         "drupal/inline_entity_form": 20,
         "burdamagazinorg/infinite-module": 20,
         "burdamagazinorg/infinite-theme": 20,
+        "drupal/libraries": 20,
         "drupal/media_entity": 20,
+        "drupal/media_entity_browser": 20,
         "drupal/paragraphs": 20,
         "drupal/riddle_marketplace": 20,
         "drupal/scheduler": 20,

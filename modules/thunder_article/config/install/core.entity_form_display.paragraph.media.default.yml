@@ -5,22 +5,23 @@ dependencies:
     - field.field.paragraph.media.field_media
     - paragraphs.paragraphs_type.media
   module:
-    - inline_entity_form
+    - entity_browser
 id: paragraph.media.default
 targetEntityType: paragraph
 bundle: media
 mode: default
 content:
   field_media:
-    type: inline_entity_form_complex
+    type: entity_browser_entity_reference
     weight: 0
     settings:
-      override_labels: true
-      label_singular: Media
-      label_plural: Medias
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      field_widget_display_settings:
+        view_mode: square_s
     third_party_settings: {  }
 hidden:
   created: true

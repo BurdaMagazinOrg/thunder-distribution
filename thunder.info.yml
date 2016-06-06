@@ -40,6 +40,7 @@ dependencies:
   - focal_point
   - entity_embed
   - inline_entity_form
+  - libraries
   - linkit
   - metatag
   - media_entity
