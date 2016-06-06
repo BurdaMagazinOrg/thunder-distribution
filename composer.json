@@ -30,6 +30,7 @@
     }
   ],
   "require": {
+    "cweagans/composer-patches": "~1.0",
     "drupal/core": "8.1.1",
     "drupal/better_normalizers": "dev-8.x-1.x",
     "drupal/breakpoint_js_settings": "8.1.0-rc1",
@@ -39,7 +40,7 @@
     "drupal/dropzonejs": "dev-8.x-1.x#fb8166df3217a2c9e1dc9a581d48011cee4c187e",
     "drupal/embed": "8.1.0-rc2",
     "drupal/entity": "8.1.0-alpha3",
-    "drupal/entity_browser": "dev-8.x-1.x#3342d2b4e485ba073defcfc097cb9339f92a632e",
+    "drupal/entity_browser": "8.1.0-alpha3",
     "drupal/entity_embed": "8.1.0-alpha1",
     "drupal/entity_reference_revisions": "dev-8.x-1.x#6bf3f94223baa5806bcd99488353993dbc411ac1",
     "drupal/fb_instant_articles": "dev-8.x-1.x#07b8afb323332278f5a0c6ba107dee2a81cac4ec",
@@ -67,5 +68,12 @@
     "drupal/video_embed_field": "8.1.0-rc8",
     "drupal/views_load_more": "dev-8.x-1.x#178d32195253207cc74097296e25079a23f0b2e5",
     "enyo/dropzone": "v4.3.0"
+  },
+  "extra": {
+    "patches": {
+      "drupal/entity_browser": {
+        "Use admin route": "https://www.drupal.org/files/issues/use-admin-route.patch"
+      }
+    }
   }
 }

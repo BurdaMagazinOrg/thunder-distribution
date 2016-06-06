@@ -45,10 +45,9 @@ projects:
 
   entity_browser:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/entity_browser.git"
-      revision: "3342d2b4e485ba073defcfc097cb9339f92a632e"
-      branch: "8.x-1.x"
+    version: "1.0-alpha3"
+    patch:
+      - "https://www.drupal.org/files/issues/use-admin-route.patch"
 
   entity_embed:
     type: "module"
