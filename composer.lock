@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba94489157a78ceaada48cffbe0c069d",
-    "content-hash": "a0bed2c4ea35e24e8d11559b92d910b1",
+    "hash": "acc952de185be7d4e00d916c868d01ba",
+    "content-hash": "41dee71319f1384db9c5db006e01b88a",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -44,16 +44,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "84c47f3d8901440403217afc120683c7385aecb8"
+                "reference": "03c9de5aa25e7672c4ad251eeaba0c47a06c8b98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/84c47f3d8901440403217afc120683c7385aecb8",
-                "reference": "84c47f3d8901440403217afc120683c7385aecb8",
+                "url": "https://api.github.com/repos/composer/semver/zipball/03c9de5aa25e7672c4ad251eeaba0c47a06c8b98",
+                "reference": "03c9de5aa25e7672c4ad251eeaba0c47a06c8b98",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +102,7 @@
                 "validation",
                 "versioning"
             ],
-            "time": "2016-03-30 13:16:03"
+            "time": "2016-06-02 09:04:51"
         },
         {
             "name": "doctrine/annotations",
@@ -546,6 +546,32 @@
             "description": "Admin Toolbar improve the default Drupal Toolbar,it lets the hover of sub menus.",
             "homepage": "http://drupal.org/project/admin_toolbar",
             "time": "2016-02-08 14:39:48"
+        },
+        {
+            "name": "drupal/better_normalizers",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/better_normalizers.git",
+                "reference": "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/hal": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Improve the normalizers in core.",
+            "homepage": "https://www.drupal.org/project/better_normalizers",
+            "time": "2016-04-13 01:37:30"
         },
         {
             "name": "drupal/breakpoint_js_settings",
@@ -1371,15 +1397,15 @@
         },
         {
             "name": "drupal/metatag",
-            "version": "8.1.0-beta7",
+            "version": "8.1.0-beta9",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/metatag",
-                "reference": "c12149e7ea0444bed959018384d48d1f79d42af3"
+                "reference": "1a62e1e051462cb2ddabf4db35a8fef5c69b9c5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta7.zip",
+                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta9.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1389,11 +1415,13 @@
                 "drupal/token": "8.*"
             },
             "replace": {
+                "drupal/metatag_google_plus": "self.version",
                 "drupal/metatag_open_graph": "self.version",
-                "drupal/metatag_twitter_cards": "self.version"
+                "drupal/metatag_twitter_cards": "self.version",
+                "drupal/metatag_verification": "self.version"
             },
             "suggest": {
-                "drupal/core": "Required by drupal/metatag_open_graph, drupal/metatag_twitter_cards"
+                "drupal/core": "Required by drupal/metatag_google_plus, drupal/metatag_open_graph, drupal/metatag_twitter_cards, drupal/metatag_verification"
             },
             "type": "drupal-module",
             "extra": {
@@ -1418,7 +1446,7 @@
                 "php",
                 "seo"
             ],
-            "time": "2016-04-03 18:17:59"
+            "time": "2016-06-02 19:37:25"
         },
         {
             "name": "drupal/paragraphs",
@@ -2266,22 +2294,22 @@
         },
         {
             "name": "stack/builder",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stackphp/builder.git",
-                "reference": "c1f8a4693b55c563405024f708a76ef576c3b276"
+                "reference": "59fcc9b448a8ce5e338a04c4e2e4aca893e83425"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stackphp/builder/zipball/c1f8a4693b55c563405024f708a76ef576c3b276",
-                "reference": "c1f8a4693b55c563405024f708a76ef576c3b276",
+                "url": "https://api.github.com/repos/stackphp/builder/zipball/59fcc9b448a8ce5e338a04c4e2e4aca893e83425",
+                "reference": "59fcc9b448a8ce5e338a04c4e2e4aca893e83425",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "symfony/http-foundation": "~2.1",
-                "symfony/http-kernel": "~2.1"
+                "symfony/http-foundation": "~2.1|~3.0",
+                "symfony/http-kernel": "~2.1|~3.0"
             },
             "require-dev": {
                 "silex/silex": "~1.0"
@@ -2311,7 +2339,7 @@
             "keywords": [
                 "stack"
             ],
-            "time": "2014-11-23 20:37:11"
+            "time": "2016-06-02 06:58:42"
         },
         {
             "name": "symfony-cmf/routing",
@@ -3779,6 +3807,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/entity_reference_revisions": 20,
         "drupal/fb_instant_articles": 20,

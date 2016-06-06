@@ -31,6 +31,7 @@
   ],
   "require": {
     "drupal/core": "8.1.1",
+    "drupal/better_normalizers": "dev-8.x-1.x",
     "drupal/breakpoint_js_settings": "8.1.0-rc1",
     "drupal/admin_toolbar": "8.1.14",
     "drupal/ctools": "8.3.0-alpha26",
@@ -53,7 +54,7 @@
     "drupal/media_entity_image": "8.1.0",
     "drupal/media_entity_slideshow": "8.1.0",
     "drupal/media_entity_twitter": "8.1.0",
-    "drupal/metatag": "8.1.0-beta7",
+    "drupal/metatag": "8.1.0-beta9",
     "drupal/paragraphs": "dev-8.x-1.x#6e7b8322a5f677a40afd8e9134b3fdc2da3b8b2e",
     "drupal/pathauto": "8.1.0-alpha3",
     "drupal/riddle_marketplace": "dev-8.x-1.x#a917c946fdac3c2b3bc39e2e143da89340243aed",
