@@ -4,7 +4,7 @@ projects:
   # Missing modules: redirect
   admin_toolbar:
     type: "module"
-    version: "1.14"
+    version: "1.15"
 
   better_normalizers:
     type: "module"
@@ -14,6 +14,10 @@ projects:
       branch: "8.x-1.x"
 
   breakpoint_js_settings:
+    type: "module"
+    version: "1.0-rc1"
+
+  crop:
     type: "module"
     version: "1.0-rc1"
 
@@ -55,10 +59,7 @@ projects:
 
   entity_reference_revisions:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/entity_reference_revisions.git"
-      revision: "6bf3f94223baa5806bcd99488353993dbc411ac1"
-      branch: "8.x-1.x"
+    version: "1.0-rc7"
 
   fb_instant_articles:
     type: "module"
@@ -78,7 +79,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "d39b83f955281255811618403ab62ee572146f0f"
+      revision: "4cf6bca20e686524eecbcfeeb6e4905391da2005"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -96,7 +97,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "561662783412bbca512c170e63bc0c94eb3a394d"
+      revision: "95b22227b926083e730870efc3e3b352b735be91"
       branch: "8.x-1.x"
 
   ivw_integration:
@@ -116,9 +117,7 @@ projects:
 
   media_entity:
     type: "module"
-    version: "1.0"
-    patch:
-      - "https://www.drupal.org/files/issues/2717375-hook_requirements-have-to-return-an-array.patch"
+    version: "1.1"
 
   media_entity_browser:
     type: "module"
@@ -133,7 +132,7 @@ projects:
 
   media_entity_image:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   media_entity_slideshow:
     type: "module"
@@ -149,10 +148,7 @@ projects:
 
   paragraphs:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/paragraphs.git"
-      revision: "6e7b8322a5f677a40afd8e9134b3fdc2da3b8b2e"
-      branch: "8.x-1.x"
+    version: "1.0-rc5"
 
   pathauto:
     type: "module"
@@ -160,17 +156,11 @@ projects:
 
   riddle_marketplace:
     type: "module"
-    download:
-      url: "http://git.drupal.org/sandbox/riddle.com/2670272"
-      revision: "a917c94"
-      branch: "8.x-1.x"
+    version: "1.0-alpha1"
 
   scheduler:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/scheduler.git"
-      revision: "1ddd7c5c642c17f8bb606369e9068ca8751cccb9"
-      branch: "8.x-1.x"
+    version: "1.0-alpha1"
 
   token:
     type: "module"
@@ -180,7 +170,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "d19090c"
+      revision: "0915d374e2f09a967fa3f4389d8e63f62ccace0f"
       branch: "8.x-1.x"
 
   infinite:
@@ -192,7 +182,7 @@ projects:
 
   video_embed_field:
     type: "module"
-    version: "1.0-rc8"
+    version: "1.0"
 
   views_load_more:
     type: "module"

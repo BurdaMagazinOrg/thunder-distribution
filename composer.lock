@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2ca240d96d2eebb552cf27d0c17179f5",
-    "content-hash": "986509cdd287f298fde8bd43fb9d76ec",
+    "hash": "f5f895120b6d00d6dd22254d2e1be884",
+    "content-hash": "0107d2759beb7b8091887c29fac56737",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "d19090c8492cfc343b1751da66cd7800f9464948"
+                "reference": "0915d374e2f09a967fa3f4389d8e63f62ccace0f"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-06-06 13:20:19"
+            "time": "2016-06-07 08:47:49"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -1223,7 +1223,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/focal_point",
-                "reference": "d39b83f955281255811618403ab62ee572146f0f"
+                "reference": "4cf6bca20e686524eecbcfeeb6e4905391da2005"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1242,7 +1242,7 @@
             ],
             "description": "Allows users to specify the focal point of an image for use during cropping.",
             "homepage": "https://www.drupal.org/project/focal_point",
-            "time": "2016-03-10 19:57:23"
+            "time": "2016-06-03 13:58:01"
         },
         {
             "name": "drupal/google_analytics",
