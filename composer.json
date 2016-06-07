@@ -18,10 +18,6 @@
     },
     {
       "type": "vcs",
-      "url": "https://git.drupal.org/sandbox/riddle.com/2670272.git"
-    },
-    {
-      "type": "vcs",
       "url": "https://git.drupal.org/sandbox/gos77/2677750.git"
     },
     {
@@ -62,7 +58,7 @@
     "drupal/metatag": "^8.1.0",
     "drupal/paragraphs": "^8.1.0",
     "drupal/pathauto": "^8.1.0",
-    "drupal/riddle_marketplace": "dev-8.x-1.x#a917c946fdac3c2b3bc39e2e143da89340243aed",
+    "drupal/riddle_marketplace": "^8.1.0",
     "drupal/scheduler": "^8.1.0",
     "drupal/token": "^8.1.0",
     "drupal/video_embed_field": "^8.1.0",

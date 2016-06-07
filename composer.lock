@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "691405d881217882f80a57a22323ff50",
-    "content-hash": "85393625e642f5571c03ced428bd6cd2",
+    "hash": "2ca240d96d2eebb552cf27d0c17179f5",
+    "content-hash": "986509cdd287f298fde8bd43fb9d76ec",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -1744,11 +1744,17 @@
         },
         {
             "name": "drupal/riddle_marketplace",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/riddle_marketplace.git",
                 "reference": "a917c946fdac3c2b3bc39e2e143da89340243aed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/riddle_marketplace-8.x-1.0-alpha1.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/ckeditor": "8.*",
@@ -4095,7 +4101,6 @@
         "burdamagazinorg/infinite-theme": 20,
         "drupal/libraries": 20,
         "drupal/media_entity_browser": 20,
-        "drupal/riddle_marketplace": 20,
         "drupal/views_load_more": 20
     },
     "prefer-stable": true,
