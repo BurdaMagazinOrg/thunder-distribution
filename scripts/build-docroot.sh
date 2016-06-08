@@ -6,7 +6,7 @@ then
   drush make --concurrency=5 drupal-org-core.make docroot -y
   mkdir docroot/profiles/thunder
   shopt -s extglob
-  cp -r !(docroot) docroot/profiles/thunder
+  rsync -av --progress . docroot/profiles/thunder --exclude docroot
   drush make -y --no-core docroot/profiles/thunder/drupal-org.make docroot/profiles/thunder
 fi
 
