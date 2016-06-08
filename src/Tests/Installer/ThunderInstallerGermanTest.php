@@ -20,4 +20,13 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
     'Save and continue' => 'Speichern und fortfahren'
   ];
 
+  /**
+   * Installer step: Select language.
+   */
+  protected function setUpLanguage() {
+    $edit = array(
+      'langcode' => $this->langcode,
+    );
+    $this->drupalPostForm(NULL, $edit, 'Save and continue');
+  }
 }

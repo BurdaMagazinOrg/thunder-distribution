@@ -6,9 +6,12 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 php:
-  - 5.5
   - 5.6
   - 7.0
+
+env:
+  - INSTALL_METHOD=drush_make
+  - INSTALL_METHOD=composer
 
 sudo: false
 
@@ -48,15 +51,10 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  # Build drupal + thunder from makefile
-  - drush make --concurrency=5 drupal-org-core.make docroot -y
-  - mkdir docroot/profiles/thunder
-  - shopt -s extglob
-  - cp -r !(docroot) docroot/profiles/thunder
-  - drush make -y --no-core docroot/profiles/thunder/drupal-org.make docroot/profiles/thunder
+  - bash scripts/build-docroot.sh
 
   # Install thunder
-  - cd docroot
+  - cd test-dir/docroot
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
 before_script:
