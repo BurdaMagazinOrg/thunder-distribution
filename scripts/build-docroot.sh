@@ -1,5 +1,4 @@
 #!/bin/bash
-INSTALL_METHOD="drush_make"
 if [ "$INSTALL_METHOD" == "drush_make" ]
 then
   # Build drupal + thunder from makefile
@@ -15,5 +14,5 @@ then
     composer create-project burdamagazinorg/thunder-infrastructure test-dir --stability dev --no-interaction
     cd test-dir
     composer require burdamagazinorg/thunder:dev-8.x-1.x
-
+    mv docroot ../
 fi
