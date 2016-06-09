@@ -51,7 +51,7 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  - sh scripts/build-docroot.sh
+  - bash scripts/build-docroot.sh
 
   # Install thunder
   - cd docroot
