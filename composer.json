@@ -26,7 +26,6 @@
     }
   ],
   "require": {
-    "cweagans/composer-patches": "~1.0",
     "drupal/core": "^8.1.0",
     "drupal/crop": "^8.1.0",
     "drupal/better_normalizers": "dev-8.x-1.x#1cd9b4b50e91f5e595eb86813611dc368227c4b6",
@@ -37,7 +36,7 @@
     "drupal/dropzonejs": "dev-8.x-1.x#fb8166df3217a2c9e1dc9a581d48011cee4c187e",
     "drupal/embed": "^8.1.0",
     "drupal/entity": "^8.1.0",
-    "drupal/entity_browser": "^8.1.0",
+    "drupal/entity_browser": "dev-8.x-1.x#c81f82ac7008486374111e9eaeb9984c8b44651c",
     "drupal/entity_embed": "^8.1.0",
     "drupal/entity_reference_revisions": "^8.1.0",
     "drupal/fb_instant_articles": "dev-8.x-1.x#07b8afb323332278f5a0c6ba107dee2a81cac4ec",
@@ -65,15 +64,5 @@
     "drupal/video_embed_field": "^8.1.0",
     "drupal/views_load_more": "dev-8.x-1.x#178d32195253207cc74097296e25079a23f0b2e5",
     "enyo/dropzone": "^v4.3.0"
-  },
-  "extra": {
-    "patches": {
-      "drupal/core": {
-        "Make installer test work with different languages": "https://www.drupal.org/files/issues/2691389-fix-installertestbase-in-different-lang.patch"
-      },
-      "drupal/entity_browser": {
-        "Use admin route": "https://www.drupal.org/files/issues/use-admin-route.patch"
-      }
-    }
   }
 }

@@ -14,4 +14,5 @@ then
     composer create-project burdamagazinorg/thunder-infrastructure test-dir --stability dev --no-interaction
     cd test-dir
     composer require burdamagazinorg/thunder:dev-8.x-1.x
+    composer update
 fi
