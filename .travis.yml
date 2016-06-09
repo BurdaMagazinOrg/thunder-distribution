@@ -54,7 +54,7 @@ install:
   - bash scripts/build-docroot.sh
 
   # Install thunder
-  - cd docroot
+  - cd test-dir/docroot
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
 before_script:
