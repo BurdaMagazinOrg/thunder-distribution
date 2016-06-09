@@ -68,6 +68,9 @@
   },
   "extra": {
     "patches": {
+      "drupal/core": {
+        "Make installer test work with different languages": "https://www.drupal.org/files/issues/2691389-fix-installertestbase-in-different-lang.patch"
+      },
       "drupal/entity_browser": {
         "Use admin route": "https://www.drupal.org/files/issues/use-admin-route.patch"
       }
