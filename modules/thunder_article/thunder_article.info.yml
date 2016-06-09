@@ -14,5 +14,6 @@ dependencies:
   - menu_ui
   - options
   - paragraphs
+  - pathauto
   - scheduler
 

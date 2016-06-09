@@ -1,0 +1,20 @@
+status: true
+dependencies:
+  module:
+    - node
+id: article
+label: Article
+type: 'canonical_entities:node'
+pattern: '[node:field_seo_title]'
+selection_criteria:
+  3dade791-a55f-4114-9fba-4b38c8f572f7:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 3dade791-a55f-4114-9fba-4b38c8f572f7
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -11,7 +11,7 @@ label: 'Image Browser'
 display: modal
 display_configuration:
   width: '1070'
-  height: '840'
+  height: '910'
   link_text: 'Select entities'
 selection_display: no_display
 selection_display_configuration: {  }
