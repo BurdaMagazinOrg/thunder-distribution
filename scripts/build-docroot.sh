@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $INSTALL_METHOD
 if [ "$INSTALL_METHOD" == "drush_make" ]
 then
   # Build drupal + thunder from makefile
