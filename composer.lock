@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ecc8160d5ddb58f9ae78e13e64c04b60",
-    "content-hash": "3a1ceed5c7f3b1b59d1b727ae3f3c515",
+    "hash": "d30e8dcc640e122354da251f4643ab49",
+    "content-hash": "065829681494260e7cf17fa635009ae8",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -1402,7 +1402,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_browser.git",
-                "reference": "4abc37fcc374db7e5bd261e6c905d516e8e2f8b9"
+                "reference": "7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1421,7 +1421,7 @@
             ],
             "description": "This module provides an Entity Browser for Media Entity.",
             "homepage": "https://www.drupal.org/project/media_entity_browser",
-            "time": "2016-04-22 01:38:35"
+            "time": "2016-06-10 07:03:50"
         },
         {
             "name": "drupal/media_entity_image",

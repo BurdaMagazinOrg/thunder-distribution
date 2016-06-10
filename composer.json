@@ -50,7 +50,7 @@
     "drupal/libraries": "dev-8.x-3.x#0755c4d92dc4dd32155bb78dce50dd8d220e41ff",
     "drupal/linkit": "^8.4.0",
     "drupal/media_entity": "^8.1.0",
-    "drupal/media_entity_browser": "dev-8.x-1.x#4abc37fcc374db7e5bd261e6c905d516e8e2f8b9",
+    "drupal/media_entity_browser": "dev-8.x-1.x#7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56",
     "drupal/media_entity_instagram": "^8.1.0",
     "drupal/media_entity_image": "^8.1.0",
     "drupal/media_entity_slideshow": "^8.1.0",

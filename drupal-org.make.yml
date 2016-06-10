@@ -87,13 +87,6 @@ projects:
     type: "module"
     version: "2.0"
 
-  hierarchical_config:
-    type: "module"
-    download:
-      url: "http://git.drupal.org/project/hierarchical_config.git"
-      revision: "9b01025db683b6f47a2d40fb6b63fdf68b37e8a2"
-      branch: "8.x-1.x"
-
   inline_entity_form:
     type: "module"
     download:
@@ -124,7 +117,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity_browser.git"
-      revision: "4abc37fcc374db7e5bd261e6c905d516e8e2f8b9"
+      revision: "7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56"
       branch: "8.x-1.x"
 
   media_entity_instagram:
