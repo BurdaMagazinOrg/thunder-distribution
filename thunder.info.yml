@@ -45,6 +45,7 @@ dependencies:
   - metatag
   - media_entity
   - scheduler
+  - simple_sitemap
   - pathauto
   - paragraphs
 # thunder

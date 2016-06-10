@@ -163,6 +163,10 @@ projects:
     type: "module"
     version: "1.0-alpha1"
 
+  simple_sitemap:
+    type: "module"
+    version: "2.5"
+
   token:
     type: "module"
     version: "1.0-alpha2"
@@ -171,7 +175,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "0915d374e2f09a967fa3f4389d8e63f62ccace0f"
+      revision: "d19090c8492cfc343b1751da66cd7800f9464948"
       branch: "8.x-1.x"
 
   infinite:

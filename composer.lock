@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f5f895120b6d00d6dd22254d2e1be884",
-    "content-hash": "0107d2759beb7b8091887c29fac56737",
+    "hash": "ecc8160d5ddb58f9ae78e13e64c04b60",
+    "content-hash": "3a1ceed5c7f3b1b59d1b727ae3f3c515",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677752.git",
-                "reference": "0915d374e2f09a967fa3f4389d8e63f62ccace0f"
+                "reference": "d19090c8492cfc343b1751da66cd7800f9464948"
             },
             "type": "drupal-module",
             "authors": [
@@ -23,7 +23,7 @@
                 }
             ],
             "description": "The modules for the infinite distribution",
-            "time": "2016-06-07 08:47:49"
+            "time": "2016-06-06 13:20:19"
         },
         {
             "name": "burdamagazinorg/infinite-theme",
@@ -103,50 +103,6 @@
                 "versioning"
             ],
             "time": "2016-06-02 09:04:51"
-        },
-        {
-            "name": "cweagans/composer-patches",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cweagans/composer-patches.git",
-                "reference": "8de7c73b2eae217f4e7028d7262ff2330aa4b4e8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/8de7c73b2eae217f4e7028d7262ff2330aa4b4e8",
-                "reference": "8de7c73b2eae217f4e7028d7262ff2330aa4b4e8",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "composer/composer": "~1.0",
-                "phpunit/phpunit": "~4.6"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "cweagans\\Composer\\Patches"
-            },
-            "autoload": {
-                "psr-4": {
-                    "cweagans\\Composer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Cameron Eagans",
-                    "email": "me@cweagans.net"
-                }
-            ],
-            "description": "Provides a way to patch Composer packages.",
-            "time": "2016-03-28 18:54:21"
         },
         {
             "name": "doctrine/annotations",
@@ -1021,17 +977,11 @@
         },
         {
             "name": "drupal/entity_browser",
-            "version": "8.1.0-alpha3",
+            "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_browser.git",
-                "reference": "3d86431a6c70289b7b357875e8bf167a05e7dcc9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_browser-8.x-1.0-alpha3.zip",
-                "reference": null,
-                "shasum": null
+                "reference": "c81f82ac7008486374111e9eaeb9984c8b44651c"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1052,9 +1002,6 @@
             "extra": {
                 "branch-alias": {
                     "dev-8.x-1.x": "8.1.x-dev"
-                },
-                "patches_applied": {
-                    "Use admin route": "https://www.drupal.org/files/issues/use-admin-route.patch"
                 }
             },
             "notification-url": "https://packagist.drupal-composer.org/downloads/",
@@ -1080,7 +1027,7 @@
             ],
             "description": "Provide a generic entity browser/picker/selector.",
             "homepage": "http://drupal.org/project/entity_browser",
-            "time": "2016-05-31 16:42:48"
+            "time": "2016-06-09 11:24:15"
         },
         {
             "name": "drupal/entity_embed",
@@ -1816,6 +1763,37 @@
             "description": "Publish and unpublish content on specified dates and time.",
             "homepage": "https://www.drupal.org/project/scheduler",
             "time": "2016-05-17 14:18:45"
+        },
+        {
+            "name": "drupal/simple_sitemap",
+            "version": "8.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/simple_sitemap.git",
+                "reference": "354ae49491b6fce3654d5f7047a1558a730d2b6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-2.5.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/core": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-2.x": "8.2.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Creates a standard conform XML sitemap of your content.",
+            "homepage": "https://www.drupal.org/project/simple_sitemap",
+            "time": "2016-06-08 22:57:23"
         },
         {
             "name": "drupal/token",
@@ -4094,6 +4072,7 @@
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
+        "drupal/entity_browser": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
