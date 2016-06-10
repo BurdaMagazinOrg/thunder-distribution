@@ -150,7 +150,7 @@ projects:
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha1"
+    version: "1.0-alpha2"
 
   scheduler:
     type: "module"

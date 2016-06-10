@@ -54,7 +54,7 @@ class RiddleIntegration extends AbstractOptionalModule {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $this->config('riddle_marketplace.settings')
-      ->set('token', (string) $form_state->getValue('riddle_token'))
+      ->set('riddle_marketplace.token', (string) $form_state->getValue('riddle_token'))
       ->save(TRUE);
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
