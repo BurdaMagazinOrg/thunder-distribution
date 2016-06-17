@@ -5,16 +5,23 @@ namespace Drupal\thunder\Installer\Form\OptionalModules;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * @file
- * Contains
+ * Class RiddleIntegration.
+ *
+ * @package Drupal\thunder\Installer\Form\OptionalModules
  */
 class RiddleIntegration extends AbstractOptionalModule {
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormId() {
 
     return 'paragraphs_riddle_marketplace';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormName() {
     return 'Riddle Integration';
   }
@@ -28,6 +35,9 @@ class RiddleIntegration extends AbstractOptionalModule {
     ];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $form['paragraphs_riddle_marketplace'] = array(
@@ -38,7 +48,7 @@ class RiddleIntegration extends AbstractOptionalModule {
         'visible' => array(
           ':input[name="install_modules[paragraphs_riddle_marketplace]"]' => array('checked' => TRUE),
         ),
-      )
+      ),
     );
 
     $form['paragraphs_riddle_marketplace']['riddle_token'] = array(
@@ -51,6 +61,9 @@ class RiddleIntegration extends AbstractOptionalModule {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $this->config('riddle_marketplace.settings')
@@ -70,4 +83,5 @@ class RiddleIntegration extends AbstractOptionalModule {
     $field->save();
 
   }
+
 }

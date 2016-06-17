@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d30e8dcc640e122354da251f4643ab49",
-    "content-hash": "065829681494260e7cf17fa635009ae8",
+    "hash": "19e29f2db4597922f18061df64f05147",
+    "content-hash": "9c1202410f4806cf798333ee9d6a92a0",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -513,7 +513,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.15.zip",
-                "reference": null,
+                "reference": "f8380381183bc76babaec9dfe392511011d54904",
                 "shasum": null
             },
             "require": {
@@ -583,7 +583,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/breakpoint_js_settings-8.x-1.0-rc1.zip",
-                "reference": null,
+                "reference": "0c4290975ac2c89001610f07d52aad9793b0574e",
                 "shasum": null
             },
             "require": {
@@ -783,7 +783,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-rc1.zip",
-                "reference": null,
+                "reference": "8506e099c9f7cd889db4e982890011df2b956bca",
                 "shasum": null
             },
             "require": {
@@ -823,7 +823,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.0-alpha26.zip",
-                "reference": null,
+                "reference": "c14a5eee970c3d0aab02e88f6c6a4d18091439b8",
                 "shasum": null
             },
             "require": {
@@ -923,7 +923,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0-rc2.zip",
-                "reference": null,
+                "reference": "294666ad05ad930003308a5fcd1282cdeb63833a",
                 "shasum": null
             },
             "require": {
@@ -954,7 +954,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0-alpha3.zip",
-                "reference": null,
+                "reference": "70a105ae063c54bf59e67f9e41cb9121374acb7c",
                 "shasum": null
             },
             "require": {
@@ -1040,7 +1040,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0-alpha1.zip",
-                "reference": null,
+                "reference": "a40f556feaf921980f69d9fe4ccbc1ef2e325edb",
                 "shasum": null
             },
             "require": {
@@ -1074,7 +1074,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc7.zip",
-                "reference": null,
+                "reference": "09b19416018f59e1b1f4acef6cfd34496ba991ba",
                 "shasum": null
             },
             "require": {
@@ -1202,7 +1202,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/google_analytics-8.x-2.0.zip",
-                "reference": null,
+                "reference": "99802b6a9f7711d30838acaa1af9ce2cf5b4d614",
                 "shasum": null
             },
             "require": {
@@ -1243,7 +1243,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/inline_entity_form-8.x-1.0-alpha6.zip",
-                "reference": null,
+                "reference": "27af4de9fd961fa6ae1369604d05fec8b06db867",
                 "shasum": null
             },
             "require": {
@@ -1274,7 +1274,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/ivw_integration-8.x-1.0-rc2.zip",
-                "reference": null,
+                "reference": "d6d2a1f3567204b42b1081705154aa7f5c9dcb80",
                 "shasum": null
             },
             "require": {
@@ -1332,7 +1332,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/linkit-8.x-4.1.zip",
-                "reference": null,
+                "reference": "a3e3369aef72b3cec15e705b21987c4d66be0c0d",
                 "shasum": null
             },
             "require": {
@@ -1371,7 +1371,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity-8.x-1.1.zip",
-                "reference": null,
+                "reference": "ffe1b5991e203605ce468bda4bfd2c36acf4fc5f",
                 "shasum": null
             },
             "require": {
@@ -1434,7 +1434,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_image-8.x-1.1.zip",
-                "reference": null,
+                "reference": "889bd7d34fb6a6c1dc2bfaf20485491a2b38e0aa",
                 "shasum": null
             },
             "require": {
@@ -1466,7 +1466,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_instagram-8.x-1.0.zip",
-                "reference": null,
+                "reference": "351d484ceff91623d32690cd57358f587c92ab4e",
                 "shasum": null
             },
             "require": {
@@ -1499,7 +1499,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_slideshow-8.x-1.0.zip",
-                "reference": null,
+                "reference": "ed92e4c7dc119944c7b74c72c77646456c05c4c1",
                 "shasum": null
             },
             "require": {
@@ -1531,7 +1531,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_twitter-8.x-1.0.zip",
-                "reference": null,
+                "reference": "ef412841b5666e07b09c1c5d3643597f2767aa84",
                 "shasum": null
             },
             "require": {
@@ -1564,7 +1564,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta9.zip",
-                "reference": null,
+                "reference": "1a62e1e051462cb2ddabf4db35a8fef5c69b9c5c",
                 "shasum": null
             },
             "require": {
@@ -1617,7 +1617,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.0-rc5.zip",
-                "reference": null,
+                "reference": "bed1bddffdf03626ba057ab697635b049d8d98de",
                 "shasum": null
             },
             "require": {
@@ -1666,7 +1666,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/pathauto-8.x-1.0-alpha3.zip",
-                "reference": null,
+                "reference": "c4952e15e2906ff2040bc01f5e8f37d23950269e",
                 "shasum": null
             },
             "require": {
@@ -1700,7 +1700,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/riddle_marketplace-8.x-1.0-alpha1.zip",
-                "reference": null,
+                "reference": "a917c946fdac3c2b3bc39e2e143da89340243aed",
                 "shasum": null
             },
             "require": {
@@ -1739,7 +1739,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/scheduler-8.x-1.0-alpha1.zip",
-                "reference": null,
+                "reference": "af9ca78d4f7e337dbb03d11f5e78988da2896cd0",
                 "shasum": null
             },
             "require": {
@@ -1775,7 +1775,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-2.5.zip",
-                "reference": null,
+                "reference": "354ae49491b6fce3654d5f7047a1558a730d2b6e",
                 "shasum": null
             },
             "require": {
@@ -1806,7 +1806,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/token-8.x-1.0-alpha2.zip",
-                "reference": null,
+                "reference": "918d0d5e8e8ee7f446d3e068cb6aa2d7c61ee625",
                 "shasum": null
             },
             "require": {
@@ -1837,7 +1837,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.0.zip",
-                "reference": null,
+                "reference": "a842a01b3803adee9dce44a291ba54ef15bf3284",
                 "shasum": null
             },
             "require": {
@@ -4065,7 +4065,159 @@
             "time": "2016-04-12 21:19:36"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "burdamagazinorg/thunder-dev-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BurdaMagazinOrg/thunder-dev-tools.git",
+                "reference": "fe27db4f3e4b1344333117ffa96b4104559ff121"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BurdaMagazinOrg/thunder-dev-tools/zipball/fe27db4f3e4b1344333117ffa96b4104559ff121",
+                "reference": "fe27db4f3e4b1344333117ffa96b4104559ff121",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/coder": "^8.2.0"
+            },
+            "bin": [
+                "scripts/check-guidelines.sh"
+            ],
+            "type": "library",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Mladen Todorovic",
+                    "email": "mladen.todorovic@burda.com"
+                }
+            ],
+            "description": "Developer tools for Thunder distribution",
+            "support": {
+                "source": "https://github.com/BurdaMagazinOrg/thunder-dev-tools/tree/master",
+                "issues": "https://github.com/BurdaMagazinOrg/thunder-dev-tools/issues"
+            },
+            "time": "2016-06-17 08:43:24"
+        },
+        {
+            "name": "drupal/coder",
+            "version": "8.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/coder",
+                "reference": "a5b5f6b5769393a016da0d106a3b33f932c73331"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/coder-8.x-2.7.zip",
+                "reference": "a5b5f6b5769393a016da0d106a3b33f932c73331",
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "squizlabs/php_codesniffer": ">=2.5.1",
+                "symfony/yaml": ">=2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Coder is a library to review Drupal code.",
+            "homepage": "https://www.drupal.org/project/coder",
+            "keywords": [
+                "code review",
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-03-27 09:53:21"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
+                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "scripts/phpcs",
+                "scripts/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "CodeSniffer.php",
+                    "CodeSniffer/CLI.php",
+                    "CodeSniffer/Exception.php",
+                    "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
+                    "CodeSniffer/Report.php",
+                    "CodeSniffer/Reporting.php",
+                    "CodeSniffer/Sniff.php",
+                    "CodeSniffer/Tokens.php",
+                    "CodeSniffer/Reports/",
+                    "CodeSniffer/Tokenizers/",
+                    "CodeSniffer/DocGenerators/",
+                    "CodeSniffer/Standards/AbstractPatternSniff.php",
+                    "CodeSniffer/Standards/AbstractScopeSniff.php",
+                    "CodeSniffer/Standards/AbstractVariableSniff.php",
+                    "CodeSniffer/Standards/IncorrectPatternException.php",
+                    "CodeSniffer/Standards/Generic/Sniffs/",
+                    "CodeSniffer/Standards/MySource/Sniffs/",
+                    "CodeSniffer/Standards/PEAR/Sniffs/",
+                    "CodeSniffer/Standards/PSR1/Sniffs/",
+                    "CodeSniffer/Standards/PSR2/Sniffs/",
+                    "CodeSniffer/Standards/Squiz/Sniffs/",
+                    "CodeSniffer/Standards/Zend/Sniffs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-05-30 22:24:32"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
@@ -4080,7 +4232,8 @@
         "burdamagazinorg/infinite-theme": 20,
         "drupal/libraries": 20,
         "drupal/media_entity_browser": 20,
-        "drupal/views_load_more": 20
+        "drupal/views_load_more": 20,
+        "burdamagazinorg/thunder-dev-tools": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

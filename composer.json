@@ -23,6 +23,10 @@
     {
       "type": "vcs",
       "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
+    },
+    {
+      "type": "vcs",
+      "url":  "git@github.com:BurdaMagazinOrg/thunder-dev-tools.git"
     }
   ],
   "require": {
@@ -65,5 +69,8 @@
     "drupal/video_embed_field": "^8.1.0",
     "drupal/views_load_more": "dev-8.x-1.x#178d32195253207cc74097296e25079a23f0b2e5",
     "enyo/dropzone": "^v4.3.0"
+  },
+  "require-dev": {
+    "burdamagazinorg/thunder-dev-tools": "dev-master"
   }
 }
