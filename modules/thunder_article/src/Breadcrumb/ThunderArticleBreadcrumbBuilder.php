@@ -140,7 +140,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     // Add all parent forums to breadcrumbs.
     /** @var \Drupal\Taxonomy\TermInterface $term */
-    $term = $node->field_channel->entity;
+    $term = !(empty($node->field_channel)) ? $node->field_channel->entity : '';
 
     if ($term) {
       $breadcrumb->addCacheableDependency($term);
