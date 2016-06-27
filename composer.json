@@ -23,10 +23,6 @@
     {
       "type": "vcs",
       "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
-    },
-    {
-      "type": "vcs",
-      "url":  "git@github.com:BurdaMagazinOrg/thunder-dev-tools.git"
     }
   ],
   "require": {
