@@ -16,6 +16,11 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
 }
 
+/**
+ * Implements hook_install_tasks().
+ *
+ * @see hook_install_tasks()
+ */
 function thunder_install_tasks(&$install_state) {
 
   $tasks = array(
@@ -28,4 +33,3 @@ function thunder_install_tasks(&$install_state) {
 
   return $tasks;
 }
-
