@@ -1,0 +1,31 @@
+default:
+  suites:
+    default:
+       paths:
+          features: '%paths.base%/features'
+       contexts:
+          - FeatureContext
+          - Devinci\DevinciExtension\Context\JavascriptContext:
+              maximum_wait: 120
+          - Drupal\DrupalExtension\Context\DrupalContext
+          - Drupal\DrupalExtension\Context\DrushContext
+          - Drupal\DrupalExtension\Context\MessageContext
+          - Drupal\DrupalExtension\Context\MinkContext
+  extensions:
+    Behat\MinkExtension:
+      files_path: "%paths.base%/files/"
+      goutte: ~
+      selenium2: ~
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: 'drupal'
+      region_map:
+        content: '.container-main .region-content'
+        menu_sidebar: '#menu-sidebar'
+        header_home: '#header-home'
+      selectors:
+        message_selector: '.messages'
+        error_message_selector: '.messages.messages-error'
+        success_message_selector: '.messages.messages-status'
+imports:
+  - behat.local.yml

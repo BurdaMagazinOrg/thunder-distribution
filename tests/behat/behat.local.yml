@@ -1,0 +1,9 @@
+default:
+  extensions:
+    Behat\MinkExtension:
+      # If necessary, change this for Local site
+      base_url: 'http://localhost:8080'
+    Drupal\DrupalExtension:
+      drupal:
+        # This assumes that working directory is: DRUPAL_ROOT/profiles/thunder
+        drupal_root: '../../'
