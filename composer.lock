@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d30e8dcc640e122354da251f4643ab49",
-    "content-hash": "065829681494260e7cf17fa635009ae8",
+    "hash": "d72029cefd14195b677c728100a0d318",
+    "content-hash": "26046db9e8cb00fb259e2c94fe80b5cb",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -606,16 +606,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.1.2",
+            "version": "8.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal-composer/drupal-core.git",
-                "reference": "a5d3f14db87ef953d227fb411489bada1afbb0a8"
+                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/a5d3f14db87ef953d227fb411489bada1afbb0a8",
-                "reference": "a5d3f14db87ef953d227fb411489bada1afbb0a8",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
+                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
                 "shasum": ""
             },
             "require": {
@@ -770,7 +770,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2016-06-01 23:31:24"
+            "time": "2016-06-15 20:08:27"
         },
         {
             "name": "drupal/crop",
@@ -884,7 +884,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/dropzonejs.git",
-                "reference": "fb8166df3217a2c9e1dc9a581d48011cee4c187e"
+                "reference": "23e0d81de407c74c10333e65fb5d4fae09494e09"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -910,38 +910,7 @@
             ],
             "description": "DropzoneJS",
             "homepage": "https://www.drupal.org/project/dropzonejs",
-            "time": "2016-05-27 18:17:29"
-        },
-        {
-            "name": "drupal/embed",
-            "version": "8.1.0-rc2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/embed.git",
-                "reference": "294666ad05ad930003308a5fcd1282cdeb63833a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0-rc2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "drupal/core": "8.*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-8.x-1.x": "8.1.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.drupal-composer.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Provides a framework for different types of embeds in text editors.",
-            "homepage": "https://www.drupal.org/project/embed",
-            "time": "2016-04-14 01:03:52"
+            "time": "2016-06-22 11:54:21"
         },
         {
             "name": "drupal/entity",
@@ -981,7 +950,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_browser.git",
-                "reference": "c81f82ac7008486374111e9eaeb9984c8b44651c"
+                "reference": "77e18608cff42cfc4384bbcdd730a1ffdc37779b"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1027,41 +996,7 @@
             ],
             "description": "Provide a generic entity browser/picker/selector.",
             "homepage": "http://drupal.org/project/entity_browser",
-            "time": "2016-06-09 11:24:15"
-        },
-        {
-            "name": "drupal/entity_embed",
-            "version": "8.1.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/entity_embed.git",
-                "reference": "a40f556feaf921980f69d9fe4ccbc1ef2e325edb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0-alpha1.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "drupal/core": "8.*",
-                "drupal/editor": "8.*",
-                "drupal/embed": "8.*",
-                "drupal/filter": "8.*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-8.x-1.x": "8.1.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.drupal-composer.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Allows entities to be embedded using a text editor.",
-            "homepage": "https://www.drupal.org/project/entity_embed",
-            "time": "2016-04-14 05:38:14"
+            "time": "2016-06-23 14:05:47"
         },
         {
             "name": "drupal/entity_reference_revisions",
@@ -1138,7 +1073,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/field_group",
-                "reference": "14173e352948b97a455b48586d3e022a864a38c6"
+                "reference": "77c5dfa28f7a4d7880bedc1cd2accf2d5986697c"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1162,7 +1097,7 @@
             ],
             "description": "Provides the ability to group your fields on both form and display.",
             "homepage": "https://www.drupal.org/project/field_group",
-            "time": "2016-04-23 13:09:53"
+            "time": "2016-06-25 12:10:54"
         },
         {
             "name": "drupal/focal_point",
@@ -1170,7 +1105,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/focal_point",
-                "reference": "4cf6bca20e686524eecbcfeeb6e4905391da2005"
+                "reference": "e08d5c555f5daf61c35f639762637b119f6a5c8e"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1189,7 +1124,7 @@
             ],
             "description": "Allows users to specify the focal point of an image for use during cropping.",
             "homepage": "https://www.drupal.org/project/focal_point",
-            "time": "2016-06-03 13:58:01"
+            "time": "2016-06-30 00:39:14"
         },
         {
             "name": "drupal/google_analytics",
@@ -1302,7 +1237,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/libraries",
-                "reference": "0755c4d92dc4dd32155bb78dce50dd8d220e41ff"
+                "reference": "548f3c2c47596c5242e37b18000e7b2ec930f66a"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1319,7 +1254,7 @@
             ],
             "description": "Allows version-dependent and shared usage of external libraries.",
             "homepage": "http://drupal.org/project/libraries",
-            "time": "2016-06-04 09:57:16"
+            "time": "2016-06-27 23:35:26"
         },
         {
             "name": "drupal/linkit",
@@ -1402,7 +1337,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_browser.git",
-                "reference": "7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56"
+                "reference": "1f9a47a5b7efacc969367b907e8f033db18bdbae"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1421,7 +1356,7 @@
             ],
             "description": "This module provides an Entity Browser for Media Entity.",
             "homepage": "https://www.drupal.org/project/media_entity_browser",
-            "time": "2016-06-10 07:03:50"
+            "time": "2016-06-11 11:27:39"
         },
         {
             "name": "drupal/media_entity_image",
@@ -1457,15 +1392,15 @@
         },
         {
             "name": "drupal/media_entity_instagram",
-            "version": "8.1.0",
+            "version": "8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_instagram.git",
-                "reference": "351d484ceff91623d32690cd57358f587c92ab4e"
+                "reference": "fa28eb4d5227383fea0dc9b9824050e390de5ea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity_instagram-8.x-1.0.zip",
+                "url": "https://ftp.drupal.org/files/projects/media_entity_instagram-8.x-1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1486,7 +1421,7 @@
             ],
             "description": "Media entity Instagram provider.",
             "homepage": "https://www.drupal.org/project/media_entity_instagram",
-            "time": "2016-02-10 08:00:41"
+            "time": "2016-06-18 14:14:12"
         },
         {
             "name": "drupal/media_entity_slideshow",
@@ -1691,15 +1626,15 @@
         },
         {
             "name": "drupal/riddle_marketplace",
-            "version": "8.1.0-alpha1",
+            "version": "8.1.0-alpha3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/riddle_marketplace.git",
-                "reference": "a917c946fdac3c2b3bc39e2e143da89340243aed"
+                "reference": "5af4ca4c64d9f74f9837a9ae5432d09b0c924358"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/riddle_marketplace-8.x-1.0-alpha1.zip",
+                "url": "https://ftp.drupal.org/files/projects/riddle_marketplace-8.x-1.0-alpha3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1726,7 +1661,7 @@
             ],
             "description": "Creation and placing of riddles in Drupal8",
             "homepage": "https://www.drupal.org/project/riddle_marketplace",
-            "time": "2016-02-24 17:13:22"
+            "time": "2016-06-10 08:47:36"
         },
         {
             "name": "drupal/scheduler",
@@ -1828,15 +1763,15 @@
         },
         {
             "name": "drupal/video_embed_field",
-            "version": "8.1.0",
+            "version": "8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/video_embed_field",
-                "reference": "a842a01b3803adee9dce44a291ba54ef15bf3284"
+                "reference": "531f0c56883307a85c76539e0bf14e4d8a727393"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.0.zip",
+                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1869,9 +1804,9 @@
             "license": [
                 "GPL-2.0+"
             ],
-            "description": "A field type for displaying videos from 3rd party providers such as YouTube and Vimeo.",
+            "description": "Provides a field type for displaying videos from 3rd party providers such as YouTube and Vimeo.",
             "homepage": "https://www.drupal.org/project/video_embed_field",
-            "time": "2016-05-06 10:36:31"
+            "time": "2016-06-19 23:58:17"
         },
         {
             "name": "drupal/views_load_more",
@@ -2164,16 +2099,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72"
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/31382fef2889136415751badebbd1cb022a4ed72",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
                 "shasum": ""
             },
             "require": {
@@ -2189,7 +2124,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2218,7 +2153,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-04-13 19:56:01"
+            "time": "2016-06-24 23:00:38"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -2314,16 +2249,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077"
+                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
-                "reference": "cb1ce51f817af9bbf400c88e8dcebcbf9a097077",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/170aa5cb35b29fccafbf5ea63487c013f396fdc9",
+                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9",
                 "shasum": ""
             },
             "require": {
@@ -2375,7 +2310,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2016-04-11 13:54:57"
+            "time": "2016-05-10 14:11:45"
         },
         {
             "name": "paragonie/random_compat",
@@ -2648,7 +2583,7 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony CMF Community",
+                    "name": "Symfony CMF community",
                     "homepage": "https://github.com/symfony-cmf/Routing/contributors"
                 }
             ],
