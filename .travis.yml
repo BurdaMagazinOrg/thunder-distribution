@@ -58,7 +58,7 @@ install:
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
   # Install Test requirements
-  composer install --working-dir="profiles/thunder/" "behat/behat" "drupal/drupal-extension" "devinci/devinci-behat-extension"
+  - composer install --working-dir="profiles/thunder/" "behat/behat" "drupal/drupal-extension" "devinci/devinci-behat-extension"
 
 before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
