@@ -7,18 +7,11 @@ then
   shopt -s extglob
   rsync -a --progress . test-dir/docroot/profiles/thunder --exclude docroot
   drush make -y --no-core test-dir/docroot/profiles/thunder/drupal-org.make test-dir/docroot/profiles/thunder
-
-  # Link to Docroot for tests
-  ln -s test-dir/docroot/profiles/thunder thunder_dist_root
 fi
 
 if [ "$INSTALL_METHOD" == "composer" ]
 then
     composer create-project burdamagazinorg/thunder-infrastructure test-dir --stability dev --no-interaction
-
-    # Link to Docroot for tests
-    ln -s test-dir/docroot/profiles/contrib/thunder thunder_dist_root
-
     cd test-dir
     composer require burdamagazinorg/thunder:dev-8.x-1.x
     composer update

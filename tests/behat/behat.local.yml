@@ -6,4 +6,4 @@ default:
     Drupal\DrupalExtension:
       drupal:
         # This assumes that working directory is: DRUPAL_ROOT/profiles/thunder
-        drupal_root: '../../'
+        drupal_root: '../../test-dir/docroot'

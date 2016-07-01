@@ -10,8 +10,8 @@ php:
   - 7.0
 
 env:
-#  - INSTALL_METHOD=drush_make
-  - INSTALL_METHOD=composer
+  - INSTALL_METHOD=drush_make
+#  - INSTALL_METHOD=composer
 
 sudo: false
 
@@ -58,16 +58,15 @@ install:
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
   # Install Test requirements
-  - composer require --working-dir="../../thunder_dist_root" --dev "behat/behat:~3.0" "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
+  - composer require --working-dir="../.." --dev "behat/behat:~3.0" "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
 
 before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-  - drush en simpletest -y
-  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
+#  - drush en simpletest -y
+#  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 
   # Run Behat tests
-  - cd ../../thunder_dist_root
-  - vendor/bin/behat --config tests/behat/behat.yml
+  - ../../vendor/bin/behat --config ../../tests/behat/behat.yml
