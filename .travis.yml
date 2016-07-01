@@ -6,7 +6,7 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 php:
-#  - 5.6
+  - 5.6
   - 7.0
 
 env:
