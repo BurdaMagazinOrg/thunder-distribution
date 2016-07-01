@@ -11,7 +11,7 @@ php:
 
 env:
   - INSTALL_METHOD=drush_make
-#  - INSTALL_METHOD=composer
+  - INSTALL_METHOD=composer
 
 sudo: false
 
@@ -51,10 +51,15 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
+  # Set global environment variables
+  - export THUNDER_DIST_DIR=`echo $(pwd)`
+  - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
+
+  # Build docroot
   - bash scripts/build-docroot.sh
 
   # Install thunder
-  - cd test-dir/docroot
+  - cd ${TEST_DIR}/docroot
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
   # Install Test requirements
@@ -65,8 +70,8 @@ before_script:
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-#  - drush en simpletest -y
-#  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
+  - drush en simpletest -y
+  - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 
   # Run Behat tests
-  - behat --config ../../tests/behat/behat.yml
+  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.yml
