@@ -20,12 +20,12 @@ function thunder_install() {
 
   \Drupal::configFactory()
     ->getEditable('system.theme')
-    ->set('default', 'infinite')
+    ->set('default', 'bartik')
     ->save(TRUE);
 
   $profilePath = drupal_get_path('profile', 'thunder');
   \Drupal::configFactory()
-    ->getEditable('infinite.settings')
+    ->getEditable('bartik.settings')
     ->set('logo.use_default', 0)
     ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo-big.png')
     ->save(TRUE);
