@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\thunder\Tests\Installer\ThunderInstallerTest.
- */
-
 namespace Drupal\thunder\Tests\Installer;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
@@ -15,13 +10,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+
 /**
  * Tests the interactive installer installing the standard profile.
  *
  * @group Thunder
  */
 class ThunderInstallerTest extends InstallerTestBase {
-
 
   /**
    * {@inheritdoc}
@@ -117,8 +112,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     }
   }
 
-
-
   /**
    * {@inheritdoc}
    */
@@ -148,13 +141,16 @@ class ThunderInstallerTest extends InstallerTestBase {
     // installation workflow.
   }
 
-
+  /**
+   * Setup modules -> subroutine of test setUp process.
+   */
   protected function setUpModules() {
 
     $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
     $this->isInstalled = TRUE;
 
   }
+
   /**
    * Confirms that the installation succeeded.
    */

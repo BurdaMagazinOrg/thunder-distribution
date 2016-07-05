@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\thunder_article\Breadcrumb\ThunderArticleBreadcrumbBuilder.
- */
-
 namespace Drupal\thunder_article\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
@@ -17,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Drupal\node\Entity\Node;
 use Drupal\Core\Entity\EntityManagerInterface;
 
 /**
@@ -92,22 +86,8 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
-   * @param \Drupal\Core\Routing\RequestContext $context
-   *   The router request context.
-   * @param \Drupal\Core\Access\AccessManagerInterface $access_manager
-   *   The menu link access service.
-   * @param \Symfony\Component\Routing\Matcher\RequestMatcherInterface $router
-   *   The dynamic router service.
-   * @param \Drupal\Core\PathProcessor\InboundPathProcessorInterface $path_processor
-   *   The inbound path processor.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory service.
-   * @param \Drupal\Core\Controller\TitleResolverInterface $title_resolver
-   *   The title resolver service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user object.
-   * @param \Drupal\Core\Path\CurrentPathStack $current_path
-   *   The current path.
+   * @param \Drupal\Core\Entity\EntityManagerInterface $entityManager
+   *   EntityManager (entity.manager) service.
    */
   public function __construct(EntityManagerInterface $entityManager) {
     $this->entityManager = $entityManager;
@@ -118,7 +98,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * {@inheritdoc}
    */
   public function applies(RouteMatchInterface $route_match) {
-    // This breadcrumb apply only for all articles
+    // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
     if (isset($parameters['node']) && is_object($parameters['node'])) {
       return $parameters['node']->getType() == 'article';

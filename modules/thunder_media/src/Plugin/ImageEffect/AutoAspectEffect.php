@@ -1,17 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\image\Plugin\ImageEffect\ResizeImageEffect.
- */
-
 namespace Drupal\thunder_media\Plugin\ImageEffect;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\image\ImageEffectInterface;
 
 /**
  * Resizes an image resource.
@@ -28,10 +22,10 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * {@inheritdoc}
    */
   public function applyEffect(ImageInterface $image) {
-    $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval( $this->configuration['ratio_adjustment']) : 1;
+    $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval($this->configuration['ratio_adjustment']) : 1;
     $aspect = $image->getWidth() / $image->getHeight();
 
-    // width / height * adjustment. If > 1, it's wide.
+    // Calculate orientation: width / height * adjustment. If > 1, it's wide.
     $style_name = (($aspect * $ratio_adjustment) > 1) ? $this->configuration['landscape'] : $this->configuration['portrait'];
 
     if (empty($style_name)) {
@@ -79,7 +73,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       }
     }
     else {
-      $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval( $this->configuration['ratio_adjustment']) : 1;
+      $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval($this->configuration['ratio_adjustment']) : 1;
       $aspect = $dimensions['width'] / $dimensions['height'];
       $style_name = (($aspect * $ratio_adjustment) > 1) ? $this->configuration['landscape'] : $this->configuration['portrait'];
 

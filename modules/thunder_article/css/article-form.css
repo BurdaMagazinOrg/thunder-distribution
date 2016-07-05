@@ -40,7 +40,8 @@ body fieldset {
   border-right: 0;
 }
 /* line 43, ../sass/article-form.scss */
-body fieldset fieldset, body fieldset fieldset:not(.fieldgroup) {
+body fieldset fieldset,
+body fieldset fieldset:not(.fieldgroup) {
   border: 0;
   padding-right: 0;
 }
@@ -84,11 +85,15 @@ body textarea.form-textarea {
   background-color: white;
 }
 /* line 90, ../sass/article-form.scss */
-body ul.tips, body div.description, body .form-item .description {
+body ul.tips,
+body div.description,
+body .form-item .description {
   margin-top: 0.5em;
 }
 /* line 93, ../sass/article-form.scss */
-body ul.tips:before, body div.description:before, body .form-item .description:before {
+body ul.tips:before,
+body div.description:before,
+body .form-item .description:before {
   content: "\00bb";
   font-size: 15px;
   color: #4fa5ff;
@@ -129,12 +134,14 @@ body .field-multiple-table .fieldset-wrapper > .form-wrapper > * {
 * Harm want only 1 Label
 **/
 /* line 140, ../sass/article-form.scss */
-#edit-field-top-paragraphs, #edit-field-paragraphs {
+#edit-field-top-paragraphs,
+#edit-field-paragraphs {
   font-size: 0;
   line-height: 0;
 }
 /* line 144, ../sass/article-form.scss */
-#edit-field-top-paragraphs > *, #edit-field-paragraphs > * {
+#edit-field-top-paragraphs > *,
+#edit-field-paragraphs > * {
   font-size: 12px;
   line-height: 1;
 }
@@ -145,11 +152,13 @@ body .field-multiple-table .fieldset-wrapper > .form-wrapper > * {
 }
 
 /* line 155, ../sass/article-form.scss */
-#field-paragraphs-values > thead, #field-top-paragraphs-values > thead {
+#field-paragraphs-values > thead,
+#field-top-paragraphs-values > thead {
   display: none;
 }
 /* line 160, ../sass/article-form.scss */
-#field-paragraphs-values .draggable:first-child, #field-top-paragraphs-values .draggable:first-child {
+#field-paragraphs-values .draggable:first-child,
+#field-top-paragraphs-values .draggable:first-child {
   border-top: 1px solid #e6e4df;
 }
 

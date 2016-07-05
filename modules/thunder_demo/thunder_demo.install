@@ -1,12 +1,14 @@
 <?php
 /**
  * @file
- * Contains
+ * Contains.
  */
 
-
+/**
+ * Install thunder demo content.
+ */
 function thunder_demo_install() {
-  
+
   // Set default pages.
   \Drupal::configFactory()->getEditable('system.site')
     ->set('page.front', '/taxonomy/term/1')

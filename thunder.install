@@ -1,14 +1,15 @@
 <?php
 
-use Drupal\node\Entity\Node;
-use Drupal\user\Entity\User;
-use Drupal\taxonomy\Entity\Term;
-
 /**
  * @file
- * Install, update and uninstall functions for the thunder installation profile
+ * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\user\Entity\User;
+
+/**
+ * Install the thunder installation profile.
+ */
 function thunder_install() {
 
   // Enable the admin theme.
@@ -28,7 +29,6 @@ function thunder_install() {
     ->set('logo.use_default', 0)
     ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo-big.png')
     ->save(TRUE);
-
 
   // Assign user 1 the "administrator" role.
   $user = User::load(1);

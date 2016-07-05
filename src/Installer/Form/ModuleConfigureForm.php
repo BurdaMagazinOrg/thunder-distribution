@@ -1,29 +1,24 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\thunder\Installer\Form\SiteConfigureForm.
- */
-
 namespace Drupal\thunder\Installer\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder\Installer\Form\OptionalModules\AbstractOptionalModule;
-use Drupal\thunder\Installer\Form\OptionalModules\AdIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\FacebookInstantArticles;
 use Drupal\thunder\Installer\Form\OptionalModules\GoogleAnalytics;
-use Drupal\thunder\Installer\Form\OptionalModules\HierarchicalConfig;
 use Drupal\thunder\Installer\Form\OptionalModules\IvwIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\RiddleIntegration;
 use Drupal\thunder\Installer\Form\OptionalModules\ThunderDemo;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
+ * Class ModuleConfigureForm.
+ *
  * Provides the site configuration form.
+ *
+ * @package Drupal\thunder\Installer\Form
  */
 class ModuleConfigureForm extends ConfigFormBase {
 
@@ -35,9 +30,10 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   protected $moduleInstaller;
 
-
   /**
-   * @var AbstractOptionalModule[]
+   * List of modules available at installation process.
+   *
+   * @var \Drupal\thunder\Installer\Form\OptionalModules\AbstractOptionalModule[]
    */
   private $provider = [];
 
@@ -51,7 +47,14 @@ class ModuleConfigureForm extends ConfigFormBase {
     );
   }
 
-
+  /**
+   * ModuleConfigureForm constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Configuration factory service.
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
+   *   Module installer service.
+   */
   public function __construct(ConfigFactoryInterface $config_factory, ModuleInstallerInterface $module_installer) {
     parent::__construct($config_factory);
 
@@ -65,7 +68,6 @@ class ModuleConfigureForm extends ConfigFormBase {
       new RiddleIntegration($config_factory),
     ];
   }
-
 
   /**
    * {@inheritdoc}
@@ -81,7 +83,7 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $configNames = [];
 
-    /** @var AbstractOptionalModule $provider */
+    /** @var \Drupal\thunder\Installer\Form\OptionalModules\AbstractOptionalModule $provider */
     foreach ($this->provider as $provider) {
       $configNames = array_merge($configNames, $provider->getEditableConfigNames());
     }
@@ -99,7 +101,7 @@ class ModuleConfigureForm extends ConfigFormBase {
     $installableModules = [];
     $defaultValues = [];
 
-    /** @var AbstractOptionalModule $provider */
+    /** @var \Drupal\thunder\Installer\Form\OptionalModules\AbstractOptionalModule $provider */
     foreach ($this->provider as $provider) {
 
       $installableModules[$provider->getFormId()] = $provider->getFormName();
@@ -131,7 +133,6 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     return $form;
   }
-
 
   /**
    * {@inheritdoc}

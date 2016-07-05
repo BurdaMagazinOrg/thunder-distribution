@@ -1,13 +1,15 @@
 <?php
 /**
  * @file
- * Contains
+ * Contains.
  */
+
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_ENTITY_TYPE_create().
  */
-function thunder_media_file_create(\Drupal\file\Entity\File $entity) {
+function thunder_media_file_create(File $entity) {
 
   $config = \Drupal::config('thunder_media.settings');
 

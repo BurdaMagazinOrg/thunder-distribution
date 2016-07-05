@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Thunder Article module hooks.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -18,9 +23,6 @@ function thunder_article_form_node_article_form_alter(&$form, FormStateInterface
 
 /**
  * Helper function for article form alter hooks.
- *
- * @param $form
- * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_state) {
   // Add CSS file for layout optimization.
