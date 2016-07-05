@@ -36,12 +36,8 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/dropzonejs.git"
-      revision: "fb8166df3217a2c9e1dc9a581d48011cee4c187e"
+      revision: "23e0d81de407c74c10333e65fb5d4fae09494e09"
       branch: "8.x-1.x"
-
-  embed:
-    type: "module"
-    version: "1.0-rc2"
 
   entity:
     type: "module"
@@ -51,12 +47,8 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/entity_browser.git"
-      revision: "c81f82ac7008486374111e9eaeb9984c8b44651c"
+      revision: "77e18608cff42cfc4384bbcdd730a1ffdc37779b"
       branch: "8.x-1.x"
-
-  entity_embed:
-    type: "module"
-    version: "1.0-alpha1"
 
   entity_reference_revisions:
     type: "module"
@@ -73,14 +65,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/field_group.git"
-      revision: "14173e352948b97a455b48586d3e022a864a38c6"
+      revision: "77c5dfa28f7a4d7880bedc1cd2accf2d5986697c"
       branch: "8.x-1.x"
 
   focal_point:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "4cf6bca20e686524eecbcfeeb6e4905391da2005"
+      revision: "e08d5c555f5daf61c35f639762637b119f6a5c8e"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -102,7 +94,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/libraries.git"
-      revision: "0755c4d92dc4dd32155bb78dce50dd8d220e41ff"
+      revision: "548f3c2c47596c5242e37b18000e7b2ec930f66a"
       branch: "8.x-3.x"
 
   linkit:
@@ -117,12 +109,12 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/media_entity_browser.git"
-      revision: "7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56"
+      revision: "1f9a47a5b7efacc969367b907e8f033db18bdbae"
       branch: "8.x-1.x"
 
   media_entity_instagram:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   media_entity_image:
     type: "module"
@@ -180,7 +172,7 @@ projects:
 
   video_embed_field:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   views_load_more:
     type: "module"

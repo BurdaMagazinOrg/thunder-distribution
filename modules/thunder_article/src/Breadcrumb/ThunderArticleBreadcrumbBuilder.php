@@ -100,7 +100,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   public function applies(RouteMatchInterface $route_match) {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
-    if (isset($parameters['node'])) {
+    if (isset($parameters['node']) && is_object($parameters['node'])) {
       return $parameters['node']->getType() == 'article';
     }
     return FALSE;
@@ -120,7 +120,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     // Add all parent forums to breadcrumbs.
     /** @var \Drupal\Taxonomy\TermInterface $term */
-    $term = $node->field_channel->entity;
+    $term = !(empty($node->field_channel)) ? $node->field_channel->entity : '';
 
     if ($term) {
       $breadcrumb->addCacheableDependency($term);
