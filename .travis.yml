@@ -62,8 +62,11 @@ install:
   - cd ${TEST_DIR}/docroot
   - drush si thunder --db-url=mysql://root:@localhost/drupal -y
 
-  # Install Test requirements
+  # Install Test requirements and set global environment variables
   - composer global require "behat/behat:~3.0" "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
+  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
+  - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
+  - export BEHAT_PARAMS
 
 before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
@@ -74,4 +77,4 @@ script:
   - php core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 
   # Run Behat tests
-  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.yml
+  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.travis.yml

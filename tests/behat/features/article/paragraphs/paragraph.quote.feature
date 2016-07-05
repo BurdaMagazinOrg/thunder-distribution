@@ -1,9 +1,9 @@
 @api
 @javascript
 
-Feature: Paragraph Text
+Feature: Paragraph Quote
 
-  Scenario: As Administrator I make Article with Text Paragraph
+  Scenario: As Administrator I make Article with Quote Paragraph
     Given I am logged in as a user with the "administrator" role
 
     # Create basic channel term.
@@ -17,16 +17,16 @@ Feature: Paragraph Text
     And I fill in "This is the page title" for "SEO Title"
     And I select "Behat channel" from "Channel"
     And I click "URL path settings"
-    And I fill in "/behat/article" for "URL alias" in the "Right Sidebar" region
+    And I fill in "/behat/article-quote" for "URL alias" in the "Right Sidebar" region
 
-    # Add 'Text' paragraph.
-    And I press "Add Text" for drop-down button in the "Paragraphs" region
+    # Add 'Quote' paragraph.
+    And I press "Add Quote" for drop-down button in the "Paragraphs" region
     And I wait for page to load content
 
-    Then I fill CKEditor with "Simple Text Paragraph Test" in the "Paragraphs" region
+    Then I fill CKEditor with "Simple Quote Paragraph Test" in the "Paragraphs" region
 
     And I press "Save and publish" for drop-down button in the "Footer Bar" region
 
     # Check node page.
-    Given I am on "/behat/article"
-    Then I should see the text "Simple Text Paragraph Test"
+    Given I am on "/behat/article-quote"
+    Then I should see the text "Simple Quote Paragraph Test"

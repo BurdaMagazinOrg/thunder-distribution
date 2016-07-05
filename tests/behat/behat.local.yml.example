@@ -1,0 +1,10 @@
+default:
+  extensions:
+    Behat\MinkExtension:
+      # Adjust "base_url" to Local installed Thunder site.
+      base_url: 'http://localhost:8080'
+    Drupal\DrupalExtension:
+      drupal:
+        # Adjust "drupal_root" to point on local installation docroot.
+        # It can be full path or relative path from location of Behat YAML configuration file.
+        drupal_root: '../..'
