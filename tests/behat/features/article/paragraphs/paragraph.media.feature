@@ -17,7 +17,7 @@ Feature: Paragraph Media
     And I fill in "Behat Test Title" for "Title"
     And I fill in "This is the page title" for "SEO Title"
     And I select "Behat channel" from "Channel"
-    And I click "URL path settings"
+    And I expand "URL path settings" option in the "Right Sidebar" region
     And I fill in "/behat/media-article" for "URL alias" in the "Right Sidebar" region
 
     # Add 'Media' paragraph.

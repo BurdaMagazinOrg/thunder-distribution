@@ -5,8 +5,9 @@
  * Contains actions for Behat Tests.
  */
 
-use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
 
 /**
  * Class FeatureContext.
@@ -23,6 +24,18 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    * context constructor through behat.yml.
    */
   public function __construct() {
+  }
+
+  /**
+   * Setup functionality before real scenario execution.
+   *
+   * @param BeforeScenarioScope $scope
+   *   Scope of scenario.
+   *
+   * @BeforeScenario
+   */
+  public function beforeScenario(BeforeScenarioScope $scope) {
+    $this->getSession()->getDriver()->resizeWindow(1680, 1050);
   }
 
   /**
@@ -58,7 +71,8 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    * @Given I wait for page to load content
    */
   public function iWaitForPageToUpdate() {
-    $this->getSession()->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
+    $this->getSession()
+      ->wait(5000, '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))');
   }
 
   /**
@@ -136,6 +150,46 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
     $this->getSession()
       ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$value\");");
+  }
+
+  /**
+   * Expand/Collapse option in defined region.
+   *
+   * @param string $option
+   *   The option text of the button to be pressed.
+   * @param string $region
+   *   The region in which the menu option should be expanded/collapsed.
+   *
+   * @throws \Exception
+   *   If region or menu option within it cannot be found.
+   *
+   * @When I expand/collapse :option option in the :region( region)
+   */
+  public function iToggleOptionInRegion($option, $region) {
+    $regionObj = $this->getRegion($region);
+
+    // Find menu option to expand/collapse.
+    $xpathQuery = "//details/child::summary[text() = '$option']";
+    $menuOption = $regionObj->find('xpath', $xpathQuery);
+
+    // Sometimes it's rendered as link tag.
+    if (empty($menuOption)) {
+      $xpathQuery = "//details/summary/child::a[text() = '$option']";
+      $menuOption = $regionObj->find('xpath', $xpathQuery);
+    }
+
+    if (empty($menuOption)) {
+      throw new \Exception(
+        sprintf(
+          'Unable to find option "%s" in the region "%s" on the page %s',
+          $option,
+          $region,
+          $this->getSession()->getCurrentUrl()
+        )
+      );
+    }
+
+    $menuOption->click();
   }
 
   /**
