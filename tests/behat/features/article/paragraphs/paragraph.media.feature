@@ -1,6 +1,7 @@
 @api
 @javascript
 @critical
+@article
 
 Feature: Paragraph Media
 
@@ -14,27 +15,23 @@ Feature: Paragraph Media
 
     # Create basic article structure.
     Given I am on "/node/add/article"
+    And I select "Behat channel" from "Channel"
     And I fill in "Behat Test Title" for "Title"
     And I fill in "This is the page title" for "SEO Title"
-    And I select "Behat channel" from "Channel"
+    And I wait for page to load content
     And I expand "URL path settings" option in the "Right Sidebar" region
-    And I fill in "/behat/media-article" for "URL alias" in the "Right Sidebar" region
+    And I uncheck the box "Generate automatic URL alias"
+    And I fill in "/behat/article-media" for "URL alias" in the "Right Sidebar" region
 
     # Add 'Media' paragraph.
     And I press "Add Media" for drop-down button in the "Paragraphs" region
     And I wait for page to load content
-    And I press "Add new Media"
+    And I press "Select entities" in the "Paragraphs" region
     And I wait for page to load content
-    And I fill in "Test Behat Media" for "Media name" in the "Paragraphs" region
-    And I attach the file "thunder-main-1.png" to "Image"
-    And I wait for page to load content
-    And I fill in "Alt text for Test Behat Media" for "Alternative text" in the "Paragraphs" region
-    And I fill in "Title for Test Behat Media" for "Title" in the "Paragraphs" region
-    And I press "Create Media"
+    And I drop the file "thunder-main-1.png" in drop zone and select it
     And I wait for page to load content
     And I press "Save and publish" for drop-down button in the "Footer Bar" region
 
     # Check node page.
-    Given I am on "/behat/media-article"
-    Then I should see the image alt "Alt text for Test Behat Media" in the "Content" region
+    Given I am on "/behat/article-media"
     Then I should see an image in the "Content" region

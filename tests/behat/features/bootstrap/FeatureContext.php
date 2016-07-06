@@ -181,6 +181,66 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
+   * Upload file to drop zone of Entity selector.
+   *
+   * Mimic functionality by exposing file field and uploading over it.
+   *
+   * @param string $path
+   *   File name used to be uploaded in Drop files field.
+   *
+   * @throws \Exception
+   *   If file field is not found for drop down.
+   *
+   * @When I drop the file :path in drop zone and select it
+   */
+  public function dropFileInSelectEntities($path) {
+
+    // Go into iframe scope from Entity Browsers.
+    $this->getSession()->switchToIFrame('entity-browser-iframe-image-browser');
+
+    // Make file field visible and isolate possible problems with "multiple".
+    $this->getSession()
+      ->executeScript('jQuery("input[type=\'file\'].dz-hidden-input").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
+
+    $fileField = $this->getSession()
+      ->getPage()
+      ->find('css', 'input[type="file"].dz-hidden-input');
+
+    if (empty($fileField)) {
+      throw new \Exception(
+        sprintf(
+          'The drop-down file field was not found on the page %s',
+          $this->getSession()->getCurrentUrl()
+        )
+      );
+    }
+
+    // Generate full path to file.
+    if ($this->getMinkParameter('files_path')) {
+      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $path;
+      if (is_file($fullPath)) {
+        $path = $fullPath;
+      }
+    }
+
+    $fileField->attachFile($path);
+
+    // Wait for file to upload and use press Select button.
+    $this->iWaitForPageToUpdate();
+
+    $this->getSession()->getPage()->pressButton('Select');
+
+    // Go back to Page scope.
+    $this->getSession()->switchToWindow();
+
+    // Wait up to 10 sec that main page is loaded with new selected images.
+    $this->getSession()->wait(
+      10000,
+      '(typeof jQuery === "undefined" || jQuery(\'.button.js-form-submit.form-submit[value="Remove"]\').length > 0)'
+    );
+  }
+
+  /**
    * Check that alt text for image exists is displayed.
    *
    * NOTE: We specify a regex to allow escaped quotes in the alt text.
