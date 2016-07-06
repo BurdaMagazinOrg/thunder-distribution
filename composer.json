@@ -67,6 +67,7 @@
     "enyo/dropzone": "^v4.3.0"
   },
   "require-dev": {
+    "burdamagazinorg/thunder-dev-tools": "dev-master",
     "behat/behat": "~3.0",
     "drupal/drupal-extension": "^3.2",
     "devinci/devinci-behat-extension": "dev-master"

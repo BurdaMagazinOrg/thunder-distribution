@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\thunder\Tests\Installer\ThunderInstallerGermanTest.
- */
-
 namespace Drupal\thunder\Tests\Installer;
 
 /**
@@ -17,7 +12,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   protected $langcode = 'de';
 
   protected $translations = [
-    'Save and continue' => 'Speichern und fortfahren'
+    'Save and continue' => 'Speichern und fortfahren',
   ];
 
   /**
@@ -29,4 +24,5 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
     );
     $this->drupalPostForm(NULL, $edit, 'Save and continue');
   }
+
 }

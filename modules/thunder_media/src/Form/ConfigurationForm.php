@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\thunder_media\Form\ConfigurationForm.
- */
-
 namespace Drupal\thunder_media\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -43,7 +38,7 @@ class ConfigurationForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => t('Enable filename transliteration'),
       '#description' => t('Enable this checkbox to clean filenames before saving the files.'),
-      '#default_value' => $config->get('enable_filename_transliteration')
+      '#default_value' => $config->get('enable_filename_transliteration'),
     );
 
     return parent::buildForm($form, $form_state);

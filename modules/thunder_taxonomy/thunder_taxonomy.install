@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Contains Thunder taxonomy install / uninstall hooks.
+ */
+
+/**
  * Implements hook_install().
  */
 function thunder_taxonomy_install() {

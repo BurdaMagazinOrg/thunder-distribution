@@ -6,16 +6,23 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * @file
- * Contains
+ * Class GoogleAnalytics.
+ *
+ * @package Drupal\thunder\Installer\Form\OptionalModules
  */
 class GoogleAnalytics extends AbstractOptionalModule {
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormId() {
 
     return 'google_analytics';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormName() {
     return 'Google Analytics';
   }
@@ -29,7 +36,9 @@ class GoogleAnalytics extends AbstractOptionalModule {
     ];
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $form['google_analytics'] = array(
@@ -46,7 +55,7 @@ class GoogleAnalytics extends AbstractOptionalModule {
       '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics" target="_blank">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid"  target="_blank">Find more information in the documentation</a>.', [
         ':analytics' => 'http://www.google.com/analytics/',
         ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])
-          ->toString()
+          ->toString(),
       ]),
       '#maxlength' => 20,
       '#placeholder' => 'UA-',
@@ -58,6 +67,9 @@ class GoogleAnalytics extends AbstractOptionalModule {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $this->config('google_analytics.settings')
