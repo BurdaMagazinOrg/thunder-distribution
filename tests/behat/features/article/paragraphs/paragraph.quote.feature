@@ -26,7 +26,7 @@ Feature: Paragraph Quote
     # Add 'Quote' paragraph.
     And I press "Add Quote" for drop-down button in the "Paragraphs" region
     And I wait for page to load content
-    Then I fill CKEditor with "Simple Quote Paragraph Test" in the "Paragraphs" region
+    And I fill CKEditor with "Simple Quote Paragraph Test" in the "Paragraphs" region
     And I press "Save and publish" for drop-down button in the "Footer Bar" region
 
     # Check node page.

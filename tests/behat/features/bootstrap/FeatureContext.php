@@ -5,7 +5,6 @@
  * Contains actions for Behat Tests.
  */
 
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 
@@ -24,6 +23,15 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    * context constructor through behat.yml.
    */
   public function __construct() {
+  }
+
+  /**
+   * Set screen size before test.
+   *
+   * @BeforeScenario
+   */
+  public function beforeScenario() {
+    $this->getSession()->getDriver()->resizeWindow(1680, 3150);
   }
 
   /**
@@ -198,6 +206,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     // Go into iframe scope from Entity Browsers.
     $this->getSession()->switchToIFrame('entity-browser-iframe-image-browser');
 
+    // Wait that iframe is loaded and jQuery is available.
+    $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
+
     // Make file field visible and isolate possible problems with "multiple".
     $this->getSession()
       ->executeScript('jQuery("input[type=\'file\'].dz-hidden-input").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
@@ -228,10 +239,12 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     // Wait for file to upload and use press Select button.
     $this->iWaitForPageToUpdate();
 
-    $this->getSession()->getPage()->pressButton('Select');
-
     // Go back to Page scope.
     $this->getSession()->switchToWindow();
+
+    // Click Select button - inside iframe.
+    $this->getSession()
+      ->executeScript('document.querySelector(\'iframe[name="entity-browser-iframe-image-browser"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
 
     // Wait up to 10 sec that main page is loaded with new selected images.
     $this->getSession()->wait(

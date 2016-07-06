@@ -34,4 +34,5 @@ Feature: Paragraph Media
 
     # Check node page.
     Given I am on "/behat/article-media"
+    And I wait for "Behat Test Title"
     Then I should see an image in the "Content" region

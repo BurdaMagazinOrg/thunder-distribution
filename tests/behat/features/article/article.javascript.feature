@@ -33,5 +33,6 @@ Feature: Article Teaser
 
     # Check channel page.
     Given I am on "/behat-teasers"
+    And I wait for "Behat Teaser Title"
     Then I should see the text "Behat Teaser Title"
     Then I should see an image in the "Content" region
