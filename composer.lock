@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "009d000e17c67811f6a6bd952471d0c6",
-    "content-hash": "5b1289ddcd9a468f1cea38ccc6603e13",
+    "hash": "8da20cad7c9b270e39e4ba0e663f46ea",
+    "content-hash": "5a5a19fca5979b7deb4cf72f9c7a811d",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -41,6 +41,108 @@
                 }
             ],
             "time": "2016-05-10 13:29:35"
+        },
+        {
+            "name": "composer/installers",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
+                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "ImageCMS",
+                "MODX Evo",
+                "Mautic",
+                "OXID",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "zend",
+                "zikula"
+            ],
+            "time": "2016-07-05 06:18:20"
         },
         {
             "name": "composer/semver",
@@ -606,16 +708,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.1.3",
+            "version": "8.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal-composer/drupal-core.git",
-                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c"
+                "reference": "5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
-                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d",
+                "reference": "5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d",
                 "shasum": ""
             },
             "require": {
@@ -670,8 +772,10 @@
                 "drupal/content_translation": "self.version",
                 "drupal/contextual": "self.version",
                 "drupal/core-annotation": "self.version",
+                "drupal/core-assertion": "self.version",
                 "drupal/core-bridge": "self.version",
                 "drupal/core-datetime": "self.version",
+                "drupal/core-dependency-injection": "self.version",
                 "drupal/core-diff": "self.version",
                 "drupal/core-discovery": "self.version",
                 "drupal/core-event-dispatcher": "self.version",
@@ -770,7 +874,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2016-06-15 20:08:27"
+            "time": "2016-07-07 09:38:59"
         },
         {
             "name": "drupal/crop",
@@ -1297,25 +1401,21 @@
         },
         {
             "name": "drupal/media_entity",
-            "version": "8.1.1",
+            "version": "8.1.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity.git",
-                "reference": "ffe1b5991e203605ce468bda4bfd2c36acf4fc5f"
+                "reference": "8bc03edd625dc1ce7f7f6b770ce02e51f14cbcd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity-8.x-1.1.zip",
+                "url": "https://ftp.drupal.org/files/projects/media_entity-8.x-1.2.zip",
                 "reference": null,
                 "shasum": null
             },
             "require": {
                 "drupal/core": "8.*",
-                "drupal/entity": ">=8.1.0-alpha3",
-                "drupal/image": "8.*",
-                "drupal/system": ">=8.1.0",
-                "drupal/user": "8.*",
-                "drupal/views": "8.*"
+                "drupal/entity": ">=8.1.0-alpha3"
             },
             "type": "drupal-module",
             "extra": {
@@ -1329,7 +1429,7 @@
             ],
             "description": "Media entity API.",
             "homepage": "https://www.drupal.org/project/media_entity",
-            "time": "2016-05-16 20:13:30"
+            "time": "2016-07-05 11:52:22"
         },
         {
             "name": "drupal/media_entity_browser",
@@ -1457,15 +1557,15 @@
         },
         {
             "name": "drupal/media_entity_twitter",
-            "version": "8.1.0",
+            "version": "8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_twitter.git",
-                "reference": "ef412841b5666e07b09c1c5d3643597f2767aa84"
+                "reference": "ed5a40009d31deeaadb58df370c86af6de095d54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity_twitter-8.x-1.0.zip",
+                "url": "https://ftp.drupal.org/files/projects/media_entity_twitter-8.x-1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1486,7 +1586,7 @@
             ],
             "description": "Media entity Twitter provider.",
             "homepage": "https://www.drupal.org/project/media_entity_twitter",
-            "time": "2016-02-25 16:02:22"
+            "time": "2016-07-05 11:14:02"
         },
         {
             "name": "drupal/metatag",
@@ -1898,16 +1998,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "1.2.12",
+            "version": "1.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "cbfe3ee6f758225559b1111048e05a3e4c2e26cf"
+                "reference": "b8bb147f46cc9790326ce2440a13be06cc5a63bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/cbfe3ee6f758225559b1111048e05a3e4c2e26cf",
-                "reference": "cbfe3ee6f758225559b1111048e05a3e4c2e26cf",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/b8bb147f46cc9790326ce2440a13be06cc5a63bb",
+                "reference": "b8bb147f46cc9790326ce2440a13be06cc5a63bb",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +2046,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2016-05-15 10:06:34"
+            "time": "2016-07-03 21:52:18"
         },
         {
             "name": "enyo/dropzone",
@@ -4037,15 +4137,15 @@
         },
         {
             "name": "drupal/coder",
-            "version": "8.2.7",
+            "version": "8.2.8",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/coder",
-                "reference": "a5b5f6b5769393a016da0d106a3b33f932c73331"
+                "reference": "6d717e1a5a5dd592ebbeaafad11746849fb52532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/coder-8.x-2.7.zip",
+                "url": "https://ftp.drupal.org/files/projects/coder-8.x-2.8.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -4069,7 +4169,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-03-27 09:53:21"
+            "time": "2016-07-05 20:48:03"
         },
         {
             "name": "squizlabs/php_codesniffer",
