@@ -49,3 +49,6 @@ drush dl thunder
 
 For further information follow the [install instructions](https://www.drupal.org/documentation/install). 
 
+## Development
+
+For Development information please take a look at [docs/development.md](docs/development.md).
