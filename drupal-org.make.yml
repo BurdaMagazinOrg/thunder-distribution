@@ -13,6 +13,10 @@ projects:
       revision: "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
       branch: "8.x-1.x"
 
+  blazy:
+    type: "module"
+    version: "1.0-beta2"
+
   breakpoint_js_settings:
     type: "module"
     version: "1.0-rc1"
@@ -149,6 +153,14 @@ projects:
     type: "module"
     version: "2.5"
 
+  slick:
+    type: "module"
+    version: "1.0-beta2"
+
+  slick_media:
+    type: "module"
+    version: "1.0-beta2"
+
   token:
     type: "module"
     version: "1.0-alpha2"
@@ -184,3 +196,17 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/enyo/dropzone/archive/v4.3.0.zip"
+
+  blazy_lib:
+    type: "blazy"
+    directory_name: "library"
+    download:
+      type: "get"
+      url: "https://github.com/dinbror/blazy/archive/1.6.2.zip"
+
+  slick_lib:
+    type: "library"
+    directory_name: "slick"
+    download:
+      type: "get"
+      url: "https://github.com/kenwheeler/slick/archive/1.6.0.zip"
