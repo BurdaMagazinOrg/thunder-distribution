@@ -26,7 +26,6 @@
     }
   ],
   "extra": {
-    "drupal-libraries": ["enyo/dropzone"],
     "installer-paths": {
       "docroot/core": ["type:drupal-core"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
@@ -37,6 +36,7 @@
   },
   "require": {
     "composer/installers": "^1.0",
+    "burdamagazinorg/thunder-libraries-installer": "dev-master",
     "drupal/core": "^8.1.0",
     "drupal/crop": "^8.1.0",
     "drupal/better_normalizers": "dev-8.x-1.x#1cd9b4b50e91f5e595eb86813611dc368227c4b6",

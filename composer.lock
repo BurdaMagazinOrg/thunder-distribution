@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8da20cad7c9b270e39e4ba0e663f46ea",
-    "content-hash": "5a5a19fca5979b7deb4cf72f9c7a811d",
+    "hash": "c31af631420682e7f45c8943132aecef",
+    "content-hash": "5bf503a2d199eb6d707f0ed634f0902e",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -41,6 +41,38 @@
                 }
             ],
             "time": "2016-05-10 13:29:35"
+        },
+        {
+            "name": "burdamagazinorg/thunder-libraries-installer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BurdaMagazinOrg/thunder-libraries-installer.git",
+                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BurdaMagazinOrg/thunder-libraries-installer/zipball/aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
+                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Thunder\\Composer\\ThunderInstallerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Thunder\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2016-07-08 09:17:30"
         },
         {
             "name": "composer/installers",
@@ -4253,6 +4285,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "burdamagazinorg/thunder-libraries-installer": 20,
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
