@@ -29,6 +29,7 @@ Feature: Article Teaser
     And I wait for page to load content
     And I drop the file "thunder-main-1.png" in drop zone and select it
     And I wait for page to load content
+    And I should see an image in the "Teaser" region
     And I press "Save and publish" for drop-down button in the "Footer Bar" region
 
     # Check channel page.

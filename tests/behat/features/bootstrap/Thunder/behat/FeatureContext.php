@@ -295,7 +295,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     $regionObj = $this->getRegion($region);
 
     // In order to give browser chance to load image, wait for 10sec.
-    $elements = $regionObj->waitFor(10000, function () use ($regionObj) {
+    $elements = $regionObj->waitFor(10, function () use ($regionObj) {
       return $regionObj->findAll('css', 'img');
     });
 
