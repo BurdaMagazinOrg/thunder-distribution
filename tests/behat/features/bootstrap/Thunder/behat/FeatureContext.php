@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains actions for Behat Tests.
- */
+namespace Thunder\behat;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Drupal\DrupalExtension\Context\RawDrupalContext;

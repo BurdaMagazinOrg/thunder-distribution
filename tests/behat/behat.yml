@@ -4,7 +4,7 @@ default:
        paths:
           features: '%paths.base%/features'
        contexts:
-          - FeatureContext
+          - Thunder\behat\FeatureContext
           - Devinci\DevinciExtension\Context\JavascriptContext:
               maximum_wait: 120
           - Drupal\DrupalExtension\Context\DrupalContext
