@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e2774adfe35f28944171725199a28d90",
-    "content-hash": "8be3f5546a572a8e636ad7d569bb4653",
+    "hash": "53609e980d7e27d599421a7809352037",
+    "content-hash": "a39f8bfa4b71300760ff8dbdb93dc85d",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -41,6 +41,140 @@
                 }
             ],
             "time": "2016-05-10 13:29:35"
+        },
+        {
+            "name": "burdamagazinorg/thunder-libraries-installer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BurdaMagazinOrg/thunder-libraries-installer.git",
+                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BurdaMagazinOrg/thunder-libraries-installer/zipball/aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
+                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Thunder\\Composer\\ThunderInstallerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Thunder\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2016-07-08 09:17:30"
+        },
+        {
+            "name": "composer/installers",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
+                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "ImageCMS",
+                "MODX Evo",
+                "Mautic",
+                "OXID",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "zend",
+                "zikula"
+            ],
+            "time": "2016-07-05 06:18:20"
         },
         {
             "name": "composer/semver",
@@ -513,7 +647,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.15.zip",
-                "reference": "f8380381183bc76babaec9dfe392511011d54904",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -583,7 +717,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/breakpoint_js_settings-8.x-1.0-rc1.zip",
-                "reference": "0c4290975ac2c89001610f07d52aad9793b0574e",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -606,16 +740,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.1.3",
+            "version": "8.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal-composer/drupal-core.git",
-                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c"
+                "reference": "5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
-                "reference": "ac94c29c14d85c8e77f5cb1d0ab38036f5f25c9c",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d",
+                "reference": "5e4ee1266c741ace5df7c9b8ac3ba1b0d592ee9d",
                 "shasum": ""
             },
             "require": {
@@ -670,8 +804,10 @@
                 "drupal/content_translation": "self.version",
                 "drupal/contextual": "self.version",
                 "drupal/core-annotation": "self.version",
+                "drupal/core-assertion": "self.version",
                 "drupal/core-bridge": "self.version",
                 "drupal/core-datetime": "self.version",
+                "drupal/core-dependency-injection": "self.version",
                 "drupal/core-diff": "self.version",
                 "drupal/core-discovery": "self.version",
                 "drupal/core-event-dispatcher": "self.version",
@@ -770,7 +906,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2016-06-15 20:08:27"
+            "time": "2016-07-07 09:38:59"
         },
         {
             "name": "drupal/crop",
@@ -783,7 +919,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/crop-8.x-1.0-rc1.zip",
-                "reference": "8506e099c9f7cd889db4e982890011df2b956bca",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -823,7 +959,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.0-alpha26.zip",
-                "reference": "c14a5eee970c3d0aab02e88f6c6a4d18091439b8",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -923,7 +1059,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0-rc2.zip",
-                "reference": "294666ad05ad930003308a5fcd1282cdeb63833a",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -954,7 +1090,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0-alpha3.zip",
-                "reference": "70a105ae063c54bf59e67f9e41cb9121374acb7c",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1040,7 +1176,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0-alpha2.zip",
-                "reference": "c248cda0da575d6a9f5f979497852137a6d07811",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1074,7 +1210,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.0-rc7.zip",
-                "reference": "09b19416018f59e1b1f4acef6cfd34496ba991ba",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1202,7 +1338,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/google_analytics-8.x-2.0.zip",
-                "reference": "99802b6a9f7711d30838acaa1af9ce2cf5b4d614",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1243,7 +1379,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/inline_entity_form-8.x-1.0-alpha6.zip",
-                "reference": "27af4de9fd961fa6ae1369604d05fec8b06db867",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1274,7 +1410,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/ivw_integration-8.x-1.0-rc2.zip",
-                "reference": "d6d2a1f3567204b42b1081705154aa7f5c9dcb80",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1332,7 +1468,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/linkit-8.x-4.1.zip",
-                "reference": "a3e3369aef72b3cec15e705b21987c4d66be0c0d",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1371,7 +1507,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity-8.x-1.2.zip",
-                "reference": "8bc03edd625dc1ce7f7f6b770ce02e51f14cbcd2",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1430,7 +1566,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_image-8.x-1.1.zip",
-                "reference": "889bd7d34fb6a6c1dc2bfaf20485491a2b38e0aa",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1462,7 +1598,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_instagram-8.x-1.1.zip",
-                "reference": "fa28eb4d5227383fea0dc9b9824050e390de5ea1",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1495,7 +1631,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_slideshow-8.x-1.0.zip",
-                "reference": "ed92e4c7dc119944c7b74c72c77646456c05c4c1",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1527,7 +1663,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/media_entity_twitter-8.x-1.1.zip",
-                "reference": "ed5a40009d31deeaadb58df370c86af6de095d54",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1560,7 +1696,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.0-beta9.zip",
-                "reference": "1a62e1e051462cb2ddabf4db35a8fef5c69b9c5c",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1613,7 +1749,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.0-rc5.zip",
-                "reference": "bed1bddffdf03626ba057ab697635b049d8d98de",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1662,7 +1798,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/pathauto-8.x-1.0-alpha3.zip",
-                "reference": "c4952e15e2906ff2040bc01f5e8f37d23950269e",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1696,7 +1832,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/riddle_marketplace-8.x-1.0-alpha3.zip",
-                "reference": "5af4ca4c64d9f74f9837a9ae5432d09b0c924358",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1735,7 +1871,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/scheduler-8.x-1.0-alpha1.zip",
-                "reference": "af9ca78d4f7e337dbb03d11f5e78988da2896cd0",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1771,7 +1907,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-2.5.zip",
-                "reference": "354ae49491b6fce3654d5f7047a1558a730d2b6e",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1802,7 +1938,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/token-8.x-1.0-alpha2.zip",
-                "reference": "918d0d5e8e8ee7f446d3e068cb6aa2d7c61ee625",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1833,7 +1969,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.1.zip",
-                "reference": "531f0c56883307a85c76539e0bf14e4d8a727393",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2644,7 +2780,7 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony CMF community",
+                    "name": "Symfony CMF Community",
                     "homepage": "https://github.com/symfony-cmf/Routing/contributors"
                 }
             ],
@@ -5218,6 +5354,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "burdamagazinorg/thunder-libraries-installer": 20,
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
