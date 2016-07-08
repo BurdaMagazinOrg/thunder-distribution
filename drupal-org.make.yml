@@ -45,7 +45,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "8.x-1.0-alpha5"
+    version: "1.0-alpha5"
 
   entity_reference_revisions:
     type: "module"
