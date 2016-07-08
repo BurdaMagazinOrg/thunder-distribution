@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53609e980d7e27d599421a7809352037",
-    "content-hash": "a39f8bfa4b71300760ff8dbdb93dc85d",
+    "hash": "c874a3d004e35eb753d4bbf28eb167cf",
+    "content-hash": "f4eb6eb79fa17f713e3022c0c3e2c5b2",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -1020,7 +1020,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/dropzonejs.git",
-                "reference": "fb8166df3217a2c9e1dc9a581d48011cee4c187e"
+                "reference": "23e0d81de407c74c10333e65fb5d4fae09494e09"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1046,38 +1046,7 @@
             ],
             "description": "DropzoneJS",
             "homepage": "https://www.drupal.org/project/dropzonejs",
-            "time": "2016-05-27 18:17:29"
-        },
-        {
-            "name": "drupal/embed",
-            "version": "8.1.0-rc2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/embed.git",
-                "reference": "294666ad05ad930003308a5fcd1282cdeb63833a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0-rc2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "drupal/core": "8.*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-8.x-1.x": "8.1.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.drupal-composer.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Provides a framework for different types of embeds in text editors.",
-            "homepage": "https://www.drupal.org/project/embed",
-            "time": "2016-04-14 01:03:52"
+            "time": "2016-06-22 11:54:21"
         },
         {
             "name": "drupal/entity",
@@ -1113,11 +1082,17 @@
         },
         {
             "name": "drupal/entity_browser",
-            "version": "dev-8.x-1.x",
+            "version": "8.1.0-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_browser.git",
-                "reference": "c81f82ac7008486374111e9eaeb9984c8b44651c"
+                "reference": "e3b4ed3640e29ab4165d252007a13dffece7381e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_browser-8.x-1.0-alpha5.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1163,41 +1138,7 @@
             ],
             "description": "Provide a generic entity browser/picker/selector.",
             "homepage": "http://drupal.org/project/entity_browser",
-            "time": "2016-06-09 11:24:15"
-        },
-        {
-            "name": "drupal/entity_embed",
-            "version": "8.1.0-alpha2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/entity_embed.git",
-                "reference": "c248cda0da575d6a9f5f979497852137a6d07811"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0-alpha2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "drupal/core": "8.*",
-                "drupal/editor": "8.*",
-                "drupal/embed": "8.*",
-                "drupal/filter": "8.*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-8.x-1.x": "8.1.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.drupal-composer.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Allows entities to be embedded using a text editor.",
-            "homepage": "https://www.drupal.org/project/entity_embed",
-            "time": "2016-07-05 12:08:46"
+            "time": "2016-07-01 08:21:20"
         },
         {
             "name": "drupal/entity_reference_revisions",
@@ -1274,7 +1215,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/field_group",
-                "reference": "14173e352948b97a455b48586d3e022a864a38c6"
+                "reference": "77c5dfa28f7a4d7880bedc1cd2accf2d5986697c"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1298,7 +1239,7 @@
             ],
             "description": "Provides the ability to group your fields on both form and display.",
             "homepage": "https://www.drupal.org/project/field_group",
-            "time": "2016-04-23 13:09:53"
+            "time": "2016-06-25 12:10:54"
         },
         {
             "name": "drupal/focal_point",
@@ -1306,7 +1247,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/focal_point",
-                "reference": "4cf6bca20e686524eecbcfeeb6e4905391da2005"
+                "reference": "e08d5c555f5daf61c35f639762637b119f6a5c8e"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1325,7 +1266,7 @@
             ],
             "description": "Allows users to specify the focal point of an image for use during cropping.",
             "homepage": "https://www.drupal.org/project/focal_point",
-            "time": "2016-06-03 13:58:01"
+            "time": "2016-06-30 00:39:14"
         },
         {
             "name": "drupal/google_analytics",
@@ -1438,7 +1379,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/libraries",
-                "reference": "0755c4d92dc4dd32155bb78dce50dd8d220e41ff"
+                "reference": "548f3c2c47596c5242e37b18000e7b2ec930f66a"
             },
             "require": {
                 "drupal/core": "8.*"
@@ -1455,7 +1396,7 @@
             ],
             "description": "Allows version-dependent and shared usage of external libraries.",
             "homepage": "http://drupal.org/project/libraries",
-            "time": "2016-06-04 09:57:16"
+            "time": "2016-06-27 23:35:26"
         },
         {
             "name": "drupal/linkit",
@@ -1534,7 +1475,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_browser.git",
-                "reference": "7c632e4481c5d2b4d06fd47b121d9c7c5e94ab56"
+                "reference": "1f9a47a5b7efacc969367b907e8f033db18bdbae"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1553,7 +1494,7 @@
             ],
             "description": "This module provides an Entity Browser for Media Entity.",
             "homepage": "https://www.drupal.org/project/media_entity_browser",
-            "time": "2016-06-10 07:03:50"
+            "time": "2016-06-11 11:27:39"
         },
         {
             "name": "drupal/media_entity_image",
@@ -5358,7 +5299,6 @@
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
-        "drupal/entity_browser": 20,
         "drupal/fb_instant_articles": 20,
         "drupal/field_group": 20,
         "drupal/focal_point": 20,
