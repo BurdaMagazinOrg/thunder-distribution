@@ -25,20 +25,8 @@
       "url": "https://git.drupal.org/sandbox/gos77/2677752.git"
     }
   ],
-  "scripts": {
-    "pre-install-cmd": [
-      "Thunder\\ScriptHandler::initializeInstaller"
-    ],
-    "pre-update-cmd": [
-      "Thunder\\ScriptHandler::initializeInstaller"
-    ]
-  },
-  "autoload": {
-    "classmap": [
-      "scripts/ScriptHandler.php"
-    ]
-  },
   "extra": {
+    "drupal-libraries": ["enyo/dropzone"],
     "installer-paths": {
       "docroot/core": ["type:drupal-core"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
