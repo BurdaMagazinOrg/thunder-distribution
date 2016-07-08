@@ -293,9 +293,14 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    */
   public function assertValidImageRegion($region) {
     $regionObj = $this->getRegion($region);
-    $elements = $regionObj->findAll('css', 'img');
+
+    // In order to give browser chance to load image, wait for 10sec.
+    $elements = $regionObj->waitFor(10000, function () use ($regionObj) {
+      return $regionObj->findAll('css', 'img');
+    });
+
     if (empty($elements)) {
-      throw new \Exception(sprintf('No image was not found in the "%s" region on the page %s', $region, $this->getSession()
+      throw new \Exception(sprintf('Image was not found in the "%s" region on the page %s', $region, $this->getSession()
         ->getCurrentUrl()));
     }
 
