@@ -201,7 +201,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   public function dropFileInSelectEntities($path) {
 
     // Go into iframe scope from Entity Browsers.
-    $this->getSession()->switchToIFrame('entity-browser-iframe-image-browser');
+    $this->getSession()->switchToIFrame('entity_browser_iframe_image-browser');
 
     // Wait that iframe is loaded and jQuery is available.
     $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
@@ -241,7 +241,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
     // Click Select button - inside iframe.
     $this->getSession()
-      ->executeScript('document.querySelector(\'iframe[name="entity-browser-iframe-image-browser"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
+      ->executeScript('document.querySelector(\'iframe[name="entity_browser_iframe_image-browser"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
 
     // Wait up to 10 sec that main page is loaded with new selected images.
     $this->getSession()->wait(
