@@ -78,12 +78,20 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
   }
 
   /**
-   * @param $entityType
-   * @param $entityBundle
-   * @param $fieldName
-   * @param $fieldLabel
-   * @param $fieldType
-   * @param $fieldWidget
+   * Add custom field for form.
+   *
+   * @param string $entityType
+   *   Entity type.
+   * @param string $entityBundle
+   *   Entity type.
+   * @param string $fieldName
+   *   Field name.
+   * @param string $fieldLabel
+   *   Field label.
+   * @param string $fieldType
+   *   Field type.
+   * @param string $fieldWidget
+   *   Field widget.
    */
   protected function addField($entityType, $entityBundle, $fieldName, $fieldLabel, $fieldType, $fieldWidget) {
 
@@ -121,7 +129,10 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
   }
 
   /**
+   * Check is optional module enabled.
+   *
    * @return int
+   *   Return status as int 0|1.
    */
   public function isStandardlyEnabled() {
     return 0;
