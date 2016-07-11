@@ -1,39 +1,18 @@
 <?php
 
-namespace Drupal\thunder\Installer\Form\OptionalModules;
+namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class IvwIntegration.
+ * IVW Integration.
  *
- * @package Drupal\thunder\Installer\Form\OptionalModules
+ * @ThunderOptionalModule(
+ *   id = "ivw_integration",
+ *   label = @Translation("IVW Integration"),
+ * )
  */
 class IvwIntegration extends AbstractOptionalModule {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-
-    return 'ivw_integration';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormName() {
-    return 'IVW Integration';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames() {
-    return [
-      'ivw_integration.settings',
-    ];
-  }
 
   /**
    * {@inheritdoc}
@@ -68,11 +47,11 @@ class IvwIntegration extends AbstractOptionalModule {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array $formValues) {
 
-    $this->config('ivw_integration.settings')
-      ->set('site', (string) $form_state->getValue('ivw_site'))
-      ->set('mobile_site', (string) $form_state->getValue('mobile_site'))
+    $this->configFactory->getEditable('ivw_integration.settings')
+      ->set('site', (string) $formValues['ivw_site'])
+      ->set('mobile_site', (string) $formValues['mobile_site'])
       ->save(TRUE);
 
     $this->addField('node', 'article', 'field_ivw', 'IVW settings', 'ivw_integration_settings', 'ivw_integration_widget');
