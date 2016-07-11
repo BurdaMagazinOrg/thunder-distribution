@@ -2,3 +2,4 @@
 /vendor
 /docroot
 .DS_Store
+tests/behat/behat.local.yml
