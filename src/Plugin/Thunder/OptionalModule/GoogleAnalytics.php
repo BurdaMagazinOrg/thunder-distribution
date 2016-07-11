@@ -1,40 +1,19 @@
 <?php
 
-namespace Drupal\thunder\Installer\Form\OptionalModules;
+namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Class GoogleAnalytics.
+ * Google Analytics.
  *
- * @package Drupal\thunder\Installer\Form\OptionalModules
+ * @ThunderOptionalModule(
+ *   id = "google_analytics",
+ *   label = @Translation("Google Analytics"),
+ * )
  */
 class GoogleAnalytics extends AbstractOptionalModule {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-
-    return 'google_analytics';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormName() {
-    return 'Google Analytics';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames() {
-    return [
-      'google_analytics.settings',
-    ];
-  }
 
   /**
    * {@inheritdoc}
@@ -70,10 +49,10 @@ class GoogleAnalytics extends AbstractOptionalModule {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array $formValues) {
 
-    $this->config('google_analytics.settings')
-      ->set('account', (string) $form_state->getValue('ga_account'))
+    $this->configFactory->getEditable('google_analytics.settings')
+      ->set('account', (string) $formValues['ga_account'])
       ->save(TRUE);
   }
 

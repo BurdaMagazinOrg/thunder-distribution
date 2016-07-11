@@ -1,39 +1,18 @@
 <?php
 
-namespace Drupal\thunder\Installer\Form\OptionalModules;
+namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class RiddleIntegration.
+ * Riddle integration.
  *
- * @package Drupal\thunder\Installer\Form\OptionalModules
+ * @ThunderOptionalModule(
+ *   id = "paragraphs_riddle_marketplace",
+ *   label = @Translation("Riddle integration"),
+ * )
  */
 class RiddleIntegration extends AbstractOptionalModule {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-
-    return 'paragraphs_riddle_marketplace';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormName() {
-    return 'Riddle Integration';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames() {
-    return [
-      'riddle_marketplace.settings',
-    ];
-  }
 
   /**
    * {@inheritdoc}
@@ -64,10 +43,10 @@ class RiddleIntegration extends AbstractOptionalModule {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array $formValues) {
 
-    $this->config('riddle_marketplace.settings')
-      ->set('riddle_marketplace.token', (string) $form_state->getValue('riddle_token'))
+    $this->configFactory->getEditable('riddle_marketplace.settings')
+      ->set('riddle_marketplace.token', (string) $formValues['riddle_token'])
       ->save(TRUE);
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
