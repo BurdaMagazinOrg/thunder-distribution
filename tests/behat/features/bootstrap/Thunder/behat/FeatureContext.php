@@ -236,6 +236,12 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     // Wait for file to upload and use press Select button.
     $this->iWaitForPageToUpdate();
 
+    // Wait up to 10 sec that "Submit" button is active.
+    $this->getSession()->wait(
+      10000,
+      '(typeof jQuery === "undefined" || !jQuery(\'input[value="Select"]\').is(":disabled"))'
+    );
+
     // Go back to Page scope.
     $this->getSession()->switchToWindow();
 
