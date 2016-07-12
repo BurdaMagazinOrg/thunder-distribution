@@ -199,7 +199,7 @@ libraries:
 
   blazy_lib:
     type: "blazy"
-    directory_name: "library"
+    directory_name: "blazy"
     download:
       type: "get"
       url: "https://github.com/dinbror/blazy/archive/1.6.2.zip"
