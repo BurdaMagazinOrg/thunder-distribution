@@ -5,28 +5,8 @@ package: Thunder
 core: 8.x
 version: 8.x-1.x-dev
 dependencies:
-  - inline_entity_form
   - metatag
   - path
   - taxonomy
   - text
   - thunder_media
-config_devel:
-  - core.entity_form_display.taxonomy_term.channel.default
-  - core.entity_form_display.taxonomy_term.tags.default
-  - core.entity_view_display.taxonomy_term.channel.default
-  - core.entity_view_display.taxonomy_term.channel.token
-  - core.entity_view_display.taxonomy_term.tags.default
-  - core.entity_view_display.taxonomy_term.tags.token
-  - core.entity_view_mode.taxonomy_term.token
-  - field.field.taxonomy_term.channel.field_header_media
-  - field.field.taxonomy_term.channel.field_header_title
-  - field.field.taxonomy_term.channel.field_meta_tags
-  - field.field.taxonomy_term.tags.field_header_media
-  - field.field.taxonomy_term.tags.field_header_title
-  - field.field.taxonomy_term.tags.field_meta_tags
-  - field.storage.taxonomy_term.field_header_media
-  - field.storage.taxonomy_term.field_header_title
-  - field.storage.taxonomy_term.field_meta_tags
-  - taxonomy.vocabulary.channel
-  - taxonomy.vocabulary.tags

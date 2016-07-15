@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.channel.field_header_media
     - field.field.taxonomy_term.channel.field_meta_tags
     - taxonomy.vocabulary.channel
   module:
@@ -26,5 +25,4 @@ content:
     third_party_settings: {  }
     type: metatag_empty_formatter
 hidden:
-  field_header_media: true
   langcode: true
