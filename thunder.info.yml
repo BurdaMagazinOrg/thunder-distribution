@@ -55,6 +55,7 @@ dependencies:
   - thunder_taxonomy
 themes:
   - thunder
+  - infinite
   - bartik
   - seven
 
