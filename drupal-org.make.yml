@@ -169,7 +169,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "bc4bb24"
+      revision: "69ba6408cdc01d010781af589fe6b07c4b22badb"
       branch: "8.x-1.x"
 
   infinite:
