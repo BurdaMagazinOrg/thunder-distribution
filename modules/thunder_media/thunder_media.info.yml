@@ -6,6 +6,7 @@ core: 8.x
 version: 8.x-1.x-dev
 dependencies:
   - dropzonejs_eb_widget
+  - entity_browser_entity_form
   - field
   - field_ui
   - focal_point

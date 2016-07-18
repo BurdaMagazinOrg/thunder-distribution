@@ -21,7 +21,9 @@ content:
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: gallery_browser
 hidden:
   created: true
   status: true

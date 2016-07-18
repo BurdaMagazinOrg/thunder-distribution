@@ -5,9 +5,10 @@ dependencies:
     - media_entity.bundle.image
   module:
     - dropzonejs_eb_widget
+    - entity_browser_entity_form
     - views
-name: image_browser
-label: 'Image Browser'
+name: media_browser
+label: 'Media Browser'
 display: modal
 display_configuration:
   width: '1070'
@@ -18,23 +19,31 @@ selection_display_configuration: {  }
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  e6bbb585-adb6-4023-aece-e73d893491c9:
+  ec1759ab-e969-4448-a9db-d3a70e123326:
     settings:
       media_entity_bundle: image
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
-    uuid: e6bbb585-adb6-4023-aece-e73d893491c9
-    weight: 1
+    uuid: ec1759ab-e969-4448-a9db-d3a70e123326
+    weight: -9
     label: 'Import image'
     id: dropzonejs_media_entity
-  f09e2255-6bd8-4301-ba02-1d446f7fca70:
+  05782e5e-1928-4606-8b3f-f7c333701c25:
     settings:
-      view: image_browser
+      view: media_browser
       view_display: entity_browser_1
-    uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
-    weight: 2
+    uuid: 05782e5e-1928-4606-8b3f-f7c333701c25
+    weight: -10
     label: 'Select existing'
     id: view
+  5d665b33-fbc8-435b-b560-e0e76e22f237:
+    settings:
+      entity_type: media
+      bundle: video
+    uuid: 5d665b33-fbc8-435b-b560-e0e76e22f237
+    weight: -8
+    label: 'Create video'
+    id: entity_form
 submit_text: Select

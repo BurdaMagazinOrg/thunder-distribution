@@ -30,7 +30,14 @@ function thunder_media_file_create(File $entity) {
  * Implements hook_preprocess_views_view().
  */
 function thunder_media_preprocess_views_view(&$variables) {
-  if ($variables['view']->id() === 'image_browser') {
+
+  $thunder_media_browser = [
+    'image_browser',
+    'media_browser',
+    'gallery_browser',
+  ];
+
+  if (in_array($variables['view']->id(), $thunder_media_browser)) {
     $variables['view_array']['#attached']['library'][] = 'media_entity_browser/view';
   }
 }
