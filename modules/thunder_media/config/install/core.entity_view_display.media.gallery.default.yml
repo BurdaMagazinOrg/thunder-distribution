@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.field.media.gallery.field_media_images
     - media_entity.bundle.gallery
+  module:
+    - slick_media
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
@@ -13,13 +15,90 @@ content:
     weight: 0
     label: hidden
     settings:
-      view_mode: gallery
-      link: false
+      optionset: default
+      optionset_thumbnail: ''
+      skin: classic
+      skin_thumbnail: ''
+      image_style: gallery
+      thumbnail_style: ''
+      thumbnail_effect: ''
+      media_switch: ''
+      ratio: ''
+      view_mode: default
+      image: ''
+      title: field_description
+      link: ''
+      layout: below
+      thumbnail_caption: ''
+      class: ''
+      caption:
+        field_copyright: field_copyright
+        field_description: '0'
+        field_expires: '0'
+        field_image: '0'
+        field_source: '0'
+        field_tags: '0'
+      cache: 0
+      sizes: ''
+      current_view_mode: default
+      vanilla: false
+      background: false
+      skin_arrows: ''
+      skin_dots: ''
+      responsive_image_style: ''
+      iframe_lazy: false
+      thumbnail: ''
+      overlay: ''
+      id: ''
+      breakpoints:
+        xs:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        sm:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        md:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        lg:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        xl:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      color_field: ''
+      grid: 0
+      grid_header: ''
+      grid_medium: 0
+      grid_small: 0
+      preserve_keys: false
+      visible_items: 0
+      display: main
+      item_id: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      icon: false
+      dimension: ''
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: slick_media
 hidden:
   created: true
-  field_media_images: true
   langcode: true
   name: true
   thumbnail: true

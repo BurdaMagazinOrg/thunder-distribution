@@ -19,5 +19,6 @@ dependencies:
   - media_entity_slideshow
   - media_entity_twitter
   - responsive_image
+  - slick_media
   - pathauto
   - video_embed_media

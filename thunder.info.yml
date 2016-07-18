@@ -45,7 +45,7 @@ dependencies:
   - media_entity
   - scheduler
   - simple_sitemap
-  - slick
+  - slick_media
   - pathauto
   - paragraphs
 # thunder
