@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies: {  }
+id: content-add
+label: 'Add content'
+module: thunder_demo
+routes:
+  - route_name: node.add
+    route_params:
+      node_type: article
+tips:
+  article-channel:
+    id: article-channel
+    plugin: text
+    label: Channel
+    body: '<p>Choose a “Channel” in which your article will be published.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-channel
+  article-title:
+    id: article-title
+    plugin: text
+    label: Title
+    body: '<p>Enter the title of your article.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-title-wrapper
+  article-seo-title:
+    id: article-seo-title
+    plugin: text
+    label: Seo-Title
+    body: '<p>Enter the same or a different title, which is optimized for search engines and will be used to generate the url.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-seo-title-wrapper
+  article-teaser-media:
+    id: article-teaser-media
+    plugin: text
+    label: Teaser media
+    body: '<p>Enter the information that will be published at the front page.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-teaser-media
+  article-teaser-text:
+    id: article-teaser-text
+    plugin: text
+    label: Teaser text
+    body: '<p>Type the text which will appear at the front page and which will be used for Facebook and Google-Snippets, too.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-teaser-text-wrapper
