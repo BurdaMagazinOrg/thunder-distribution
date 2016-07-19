@@ -200,19 +200,51 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    */
   public function dropFileInSelectEntities($path) {
 
+    // Select entity browser iframe.
+    $iframe = $this->getSession()
+      ->getPage()
+      ->find('css', 'iframe.entity-browser-modal-iframe');
+    if (empty($iframe)) {
+      throw new \Exception(
+        sprintf(
+          'Unable to find entity browser iframe on page %s',
+          $this->getSession()->getCurrentUrl()
+        )
+      );
+    }
+    $iframeName = $iframe->getAttribute('name');
+
     // Go into iframe scope from Entity Browsers.
-    $this->getSession()->switchToIFrame('entity_browser_iframe_image-browser');
+    $this->getSession()->switchToIFrame($iframeName);
 
     // Wait that iframe is loaded and jQuery is available.
     $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
 
-    // Make file field visible and isolate possible problems with "multiple".
-    $this->getSession()
-      ->executeScript('jQuery("input[type=\'file\'].dz-hidden-input").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
+    // Click all tabs until we find upload Tab.
+    $tabLinks = $this->getSession()->getPage()->findAll('css', '.eb-tabs a');
+    if (empty($tabLinks)) {
+      throw new \Exception(
+        sprintf(
+          'Unable to find tabs in entity browser iframe on page %s',
+          $this->getSession()->getCurrentUrl()
+        )
+      );
+    }
 
-    $fileField = $this->getSession()
-      ->getPage()
-      ->find('css', 'input[type="file"].dz-hidden-input');
+    // Click all tabs until input file field for upload is found.
+    $fileFieldSelector = "input[type='file'].dz-hidden-input";
+    foreach ($tabLinks as $tabLink) {
+      /* @var \Behat\Mink\Element\NodeElement $tabLink */
+      $tabLink->click();
+
+      $fileField = $this->getSession()
+        ->getPage()
+        ->find('css', $fileFieldSelector);
+
+      if (!empty($fileField)) {
+        break;
+      }
+    }
 
     if (empty($fileField)) {
       throw new \Exception(
@@ -222,6 +254,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
         )
       );
     }
+
+    // Make file field visible and isolate possible problems with "multiple".
+    $this->getSession()
+      ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
 
     // Generate full path to file.
     if ($this->getMinkParameter('files_path')) {
@@ -247,7 +283,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
     // Click Select button - inside iframe.
     $this->getSession()
-      ->executeScript('document.querySelector(\'iframe[name="entity_browser_iframe_image-browser"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
+      ->executeScript('document.querySelector(\'iframe[name="' . $iframeName . '"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
 
     // Wait up to 10 sec that main page is loaded with new selected images.
     $this->getSession()->wait(
