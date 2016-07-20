@@ -8,6 +8,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  * @ThunderOptionalModule(
  *   id = "fb_instant_articles",
  *   label = @Translation("Facebook Instant Articles"),
+ *   type = "module",
  * )
  */
 class FacebookInstantArticles extends AbstractOptionalModule {}

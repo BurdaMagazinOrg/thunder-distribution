@@ -11,6 +11,7 @@ use Drupal\Core\Url;
  * @ThunderOptionalModule(
  *   id = "google_analytics",
  *   label = @Translation("Google Analytics"),
+ *   type = "module",
  * )
  */
 class GoogleAnalytics extends AbstractOptionalModule {
