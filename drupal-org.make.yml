@@ -19,7 +19,7 @@ projects:
 
   crop:
     type: "module"
-    version: "1.0-rc1"
+    version: "1.0"
 
   ctools:
     type: "module"
@@ -100,7 +100,7 @@ projects:
 
   media_entity:
     type: "module"
-    version: "1.1"
+    version: "1.2"
 
   media_entity_browser:
     type: "module"
@@ -123,7 +123,7 @@ projects:
 
   media_entity_twitter:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   metatag:
     type: "module"
