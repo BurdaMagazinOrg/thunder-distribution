@@ -45,6 +45,7 @@ dependencies:
   - media_entity
   - scheduler
   - simple_sitemap
+  - slick_media
   - pathauto
   - paragraphs
 # thunder
@@ -52,9 +53,8 @@ dependencies:
   - thunder_article
   - thunder_media
   - thunder_taxonomy
-  - infinite_article
 themes:
   - thunder
-  - infinite
+  - bartik
   - seven
 

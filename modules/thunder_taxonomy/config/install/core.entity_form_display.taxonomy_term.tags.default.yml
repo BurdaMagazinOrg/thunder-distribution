@@ -2,12 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.tags.field_header_media
-    - field.field.taxonomy_term.tags.field_header_title
     - field.field.taxonomy_term.tags.field_meta_tags
     - taxonomy.vocabulary.tags
   module:
-    - inline_entity_form
     - metatag
     - path
     - text
@@ -23,24 +20,6 @@ content:
       placeholder: ''
       rows: 5
     third_party_settings: {  }
-  field_header_media:
-    type: inline_entity_form_complex
-    weight: 3
-    settings:
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings: {  }
-  field_header_title:
-    weight: 2
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
   field_meta_tags:
     type: metatag_firehose
     weight: 6

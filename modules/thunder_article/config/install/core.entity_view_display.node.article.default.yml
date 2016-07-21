@@ -2,9 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser_square_m
     - field.field.node.article.field_channel
-    - field.field.node.article.field_header_media
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
     - field.field.node.article.field_seo_title
@@ -13,34 +11,27 @@ dependencies:
     - field.field.node.article.field_teaser_text
     - node.type.article
   module:
+    - entity_reference_revisions
     - user
-id: node.article.teaser_square_m
+id: node.article.default
 targetEntityType: node
 bundle: article
-mode: teaser_square_m
+mode: default
 content:
-  field_teaser_media:
-    type: entity_reference_entity_view
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
     weight: 0
     label: hidden
     settings:
-      view_mode: square_m
-      link: false
+      view_mode: default
+      link: ''
     third_party_settings: {  }
 hidden:
   field_channel: true
-  field_footer_blocks: true
-  field_header_blocks: true
-  field_header_media: true
-  field_hp_display_mode: true
   field_meta_tags: true
-  field_paragraphs: true
-  field_presenter_media: true
   field_seo_title: true
-  field_sidebar_blocks: true
   field_tags: true
-  field_teaser_display_mode: true
+  field_teaser_media: true
   field_teaser_text: true
-  field_top_paragraphs: true
   langcode: true
   links: true

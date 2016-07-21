@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "paragraphs_riddle_marketplace",
  *   label = @Translation("Riddle integration"),
+ *   type = "module",
  * )
  */
 class RiddleIntegration extends AbstractOptionalModule {

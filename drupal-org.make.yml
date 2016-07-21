@@ -13,6 +13,12 @@ projects:
       revision: "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
       branch: "8.x-1.x"
 
+  blazy:
+    type: "module"
+    version: "1.0-beta2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
+
   breakpoint_js_settings:
     type: "module"
     version: "1.0-rc1"
@@ -149,6 +155,16 @@ projects:
     type: "module"
     version: "2.5"
 
+  slick:
+    type: "module"
+    version: "1.0-beta2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_libraries_support-2768457-3.patch"
+
+  slick_media:
+    type: "module"
+    version: "1.0-beta2"
+
   token:
     type: "module"
     version: "1.0-alpha2"
@@ -157,14 +173,14 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "d19090c8492cfc343b1751da66cd7800f9464948"
+      revision: "69ba6408cdc01d010781af589fe6b07c4b22badb"
       branch: "8.x-1.x"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "e1d6382"
+      revision: "3420cce3504c3e7d68cc0e158b3026a1bea596c3"
       branch: "8.x-1.x"
 
   video_embed_field:
@@ -184,3 +200,17 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/enyo/dropzone/archive/v4.3.0.zip"
+
+  blazy_lib:
+    type: "blazy"
+    directory_name: "blazy"
+    download:
+      type: "get"
+      url: "https://github.com/dinbror/blazy/archive/1.6.2.zip"
+
+  slick_lib:
+    type: "library"
+    directory_name: "slick"
+    download:
+      type: "get"
+      url: "https://github.com/kenwheeler/slick/archive/1.6.0.zip"

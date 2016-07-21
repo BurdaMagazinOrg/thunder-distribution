@@ -3,7 +3,6 @@ status: true
 dependencies:
   module:
     - editor
-    - infinite_base
 name: 'Basic HTML'
 format: basic_html
 weight: 0
@@ -41,11 +40,3 @@ filters:
     status: true
     weight: 11
     settings: {  }
-  filter_external_links:
-    id: filter_external_links
-    provider: infinite_base
-    status: false
-    weight: 10
-    settings:
-      filter_external_links_nofollow: '1'
-      filter_external_links_target: '1'
