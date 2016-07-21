@@ -33,7 +33,6 @@ Plus some pre-configured content-types
 
 * googleanalytics
 * ivm
-* ad integration
 * breakpoint js settings
 * riddle
 
