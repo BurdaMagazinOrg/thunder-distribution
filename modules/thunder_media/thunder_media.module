@@ -41,3 +41,7 @@ function thunder_media_preprocess_views_view(&$variables) {
     $variables['view_array']['#attached']['library'][] = 'media_entity_browser/view';
   }
 }
+
+function thunder_media_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'thunder_media/gallery';
+}
