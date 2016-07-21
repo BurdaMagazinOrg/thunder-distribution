@@ -20,8 +20,8 @@ default:
       blackbox: ~
       api_driver: 'drupal'
       region_map:
-        Teaser: '#edit-group-edit fieldset:nth-of-type(2)'
-        Content: '.container-main .region-content'
+        Teaser: '#edit-field-teaser-media-wrapper'
+        Content: '.region-content'
         Paragraphs: '#edit-field-paragraphs-wrapper'
         Right Sidebar: '.layout-region-node-secondary'
         Footer Bar: '.layout-region-node-footer'
