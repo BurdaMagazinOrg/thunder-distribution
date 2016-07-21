@@ -54,7 +54,7 @@
     "drupal/google_analytics": "^8.2.0",
     "drupal/inline_entity_form": "^8.1.0",
     "burdamagazinorg/infinite-module": "dev-8.x-1.x#69ba6408cdc01d010781af589fe6b07c4b22badb",
-    "burdamagazinorg/infinite-theme": "dev-8.x-1.x#71a445cb746ebbfa1bbc750bb9e6ba975383a3e6",
+    "burdamagazinorg/infinite-theme": "dev-8.x-1.x#3420cce3504c3e7d68cc0e158b3026a1bea596c3",
     "drupal/ivw_integration": "^8.1.0",
     "drupal/libraries": "dev-8.x-3.x#548f3c2c47596c5242e37b18000e7b2ec930f66a",
     "drupal/linkit": "^8.4.0",

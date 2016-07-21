@@ -10,7 +10,7 @@ dependencies:
     - field.field.media.image.field_tags
     - media_entity.bundle.image
   module:
-    - responsive_image
+    - blazy
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -27,10 +27,47 @@ content:
     weight: 0
     label: hidden
     settings:
-      responsive_image_style: default
-      image_link: ''
+      image_style: media_image
+      thumbnail_style: ''
+      media_switch: ''
+      ratio: ''
+      sizes: ''
+      breakpoints:
+        xs:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        sm:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        md:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        lg:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        xl:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+      current_view_mode: default
+      skin: ''
+      background: false
+      layout: ''
+      caption:
+        title: '0'
+        alt: '0'
+      responsive_image_style: ''
+      icon: false
+      box_style: ''
+      cache: -1
+      item_id: ''
+      optionset: default
     third_party_settings: {  }
-    type: responsive_image
+    type: blazy
 hidden:
   created: true
   field_brands: true
