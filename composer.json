@@ -39,6 +39,12 @@
       },
       "drupal/blazy": {
         "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
+      },
+      "drupal/dropzonejs": {
+        "Update to support recent WidgetBase.php changes": "https://www.drupal.org/files/issues/2763529_32.patch"
+      },
+      "drupal/entity_browser": {
+        "Allow passing existing selection from field widget": "https://www.drupal.org/files/issues/allow_passing_existing-2767737-8.patch"
       }
     }
   },
@@ -53,9 +59,9 @@
     "drupal/admin_toolbar": "^8.1.0",
     "drupal/ctools": "^8.3.0",
     "drupal/default_content": "dev-8.x-1.x#c6a79ee2ffc71b0136d4988871618e05d8be4018",
-    "drupal/dropzonejs": "dev-8.x-1.x#23e0d81de407c74c10333e65fb5d4fae09494e09",
+    "drupal/dropzonejs": "dev-8.x-1.x#ead1be9edd8d431d81190eb7cd589f75b26b3fe1",
     "drupal/entity": "^8.1.0",
-    "drupal/entity_browser": "^8.1.0",
+    "drupal/entity_browser":"dev-8.x-1.x#a45b62ade601b8d4653e10d3fac4943c95bca902",
     "drupal/entity_reference_revisions": "^8.1.0",
     "drupal/fb_instant_articles": "dev-8.x-1.x#07b8afb323332278f5a0c6ba107dee2a81cac4ec",
     "drupal/field_group": "dev-8.x-1.x#77c5dfa28f7a4d7880bedc1cd2accf2d5986697c",

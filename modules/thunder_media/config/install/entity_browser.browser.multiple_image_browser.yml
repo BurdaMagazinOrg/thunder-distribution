@@ -7,36 +7,42 @@ dependencies:
     - dropzonejs_eb_widget
     - media_entity
     - views
-name: image_browser
-label: 'Image Browser'
+name: multiple_image_browser
+label: 'Multiple Image Browser'
 display: modal
 display_configuration:
   width: '1070'
   height: '910'
   link_text: 'Select entities'
-selection_display: no_display
-selection_display_configuration: {  }
+selection_display: multi_step_display
+selection_display_configuration:
+  entity_type: media
+  display: rendered_entity
+  display_settings:
+    view_mode: thumbnail
+  select_text: 'Use selected'
+  selection_hidden: false
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  e6bbb585-adb6-4023-aece-e73d893491c9:
+  189eb084-6031-4143-9e50-74df6a0ce6ac:
     settings:
       media_entity_bundle: image
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
-      submit_text: Select
-    uuid: e6bbb585-adb6-4023-aece-e73d893491c9
+      submit_text: 'Select entities'
+    uuid: 189eb084-6031-4143-9e50-74df6a0ce6ac
     weight: 1
     label: 'Import image'
     id: dropzonejs_media_entity
-  f09e2255-6bd8-4301-ba02-1d446f7fca70:
+  de986014-a995-494b-b81e-ed3c458716ee:
     settings:
       view: image_browser
       view_display: entity_browser_1
       submit_text: Select
-    uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
+    uuid: de986014-a995-494b-b81e-ed3c458716ee
     weight: 2
     label: 'Select existing'
     id: view

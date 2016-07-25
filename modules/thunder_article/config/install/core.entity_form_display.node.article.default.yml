@@ -109,6 +109,7 @@ content:
       field_widget_edit: true
       field_widget_remove: true
       open: true
+      field_widget_selection_mode: selection_append
       field_widget_display_settings:
         view_mode: thumbnail
     third_party_settings: {  }
