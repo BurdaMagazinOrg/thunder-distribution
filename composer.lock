@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b550e376376f95b3f409857637351af",
-    "content-hash": "3243866a22e2e043d5b4389e52d1d837",
+    "hash": "a3ce6824b72729ab84748d9d54f8c913",
+    "content-hash": "bedeff1ddffbafffcacf7a213edbb16c",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -31,7 +31,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/sandbox/gos77/2677750.git",
-                "reference": "e1d6382b7ec73122642cf35d5eb150b7045ed0ed"
+                "reference": "3420cce3504c3e7d68cc0e158b3026a1bea596c3"
             },
             "type": "drupal-theme",
             "authors": [
@@ -40,7 +40,7 @@
                     "email": "steffen.schlaer@it-cru.de"
                 }
             ],
-            "time": "2016-05-10 13:29:35"
+            "time": "2016-07-21 08:42:44"
         },
         {
             "name": "burdamagazinorg/thunder-libraries-installer",
@@ -707,6 +707,49 @@
             "time": "2016-04-13 01:37:30"
         },
         {
+            "name": "drupal/blazy",
+            "version": "8.1.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/blazy.git",
+                "reference": "c5c4da3acb830276ad876e96c94ab11b8d8df4af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/blazy-8.x-1.0-beta2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/image": "8.*"
+            },
+            "replace": {
+                "drupal/blazy_ui": "self.version"
+            },
+            "suggest": {
+                "drupal/core": "Required by drupal/blazy_ui"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Provides basic Blazy integration for lazy loading and multi-serving images.",
+            "homepage": "https://drupal.org/project/blazy",
+            "keywords": [
+                "Drupal",
+                "bLazy",
+                "lazyload"
+            ],
+            "time": "2016-05-09 21:53:51"
+        },
+        {
             "name": "drupal/breakpoint_js_settings",
             "version": "8.1.0-rc1",
             "source": {
@@ -740,16 +783,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.1.6",
+            "version": "8.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal-composer/drupal-core.git",
-                "reference": "a6555edbe58e0a6a1d107cbf8c6568dd5e4531a2"
+                "reference": "3870ff6a47e723e3dce857473329d2f143e88d93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/a6555edbe58e0a6a1d107cbf8c6568dd5e4531a2",
-                "reference": "a6555edbe58e0a6a1d107cbf8c6568dd5e4531a2",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-core/zipball/3870ff6a47e723e3dce857473329d2f143e88d93",
+                "reference": "3870ff6a47e723e3dce857473329d2f143e88d93",
                 "shasum": ""
             },
             "require": {
@@ -758,7 +801,7 @@
                 "doctrine/common": "2.5.*",
                 "easyrdf/easyrdf": "0.9.*",
                 "egulias/email-validator": "1.2.*",
-                "guzzlehttp/guzzle": "~6.1",
+                "guzzlehttp/guzzle": "~6.2",
                 "masterminds/html5": "~2.1",
                 "paragonie/random_compat": "~1.0",
                 "php": ">=5.5.9",
@@ -906,7 +949,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2016-07-11 13:07:34"
+            "time": "2016-07-18 15:01:43"
         },
         {
             "name": "drupal/crop",
@@ -1869,6 +1912,49 @@
             "time": "2016-06-08 22:57:23"
         },
         {
+            "name": "drupal/slick",
+            "version": "8.1.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/slick.git",
+                "reference": "740dbfa66f7a838e53473830e939a4c809076273"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slick-8.x-1.0-beta2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/blazy": "8.*",
+                "drupal/core": "8.*"
+            },
+            "replace": {
+                "drupal/slick_ui": "self.version"
+            },
+            "suggest": {
+                "drupal/core": "Required by drupal/slick_ui"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Slick carousel, the last carousel you'll ever need.",
+            "homepage": "https://drupal.org/project/slick",
+            "keywords": [
+                "Drupal",
+                "carousel",
+                "slideshow"
+            ],
+            "time": "2016-05-08 20:31:11"
+        },
+        {
             "name": "drupal/token",
             "version": "8.1.0-alpha2",
             "source": {
@@ -1901,15 +1987,15 @@
         },
         {
             "name": "drupal/video_embed_field",
-            "version": "8.1.1",
+            "version": "8.1.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/video_embed_field",
-                "reference": "531f0c56883307a85c76539e0bf14e4d8a727393"
+                "reference": "811376244c729bc536ec37f7b63557e8ce6bab2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.1.zip",
+                "url": "https://ftp.drupal.org/files/projects/video_embed_field-8.x-1.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1944,7 +2030,7 @@
             ],
             "description": "Provides a field type for displaying videos from 3rd party providers such as YouTube and Vimeo.",
             "homepage": "https://www.drupal.org/project/video_embed_field",
-            "time": "2016-06-19 23:58:17"
+            "time": "2016-07-22 09:03:05"
         },
         {
             "name": "drupal/views_load_more",
@@ -2124,27 +2210,27 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662"
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/promises": "~1.0",
-                "guzzlehttp/psr7": "~1.1",
-                "php": ">=5.5.0"
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.3.1",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "~4.0",
-                "psr/log": "~1.0"
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -2182,7 +2268,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-03-21 20:02:09"
+            "time": "2016-07-15 17:22:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -2341,12 +2427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/J7mbo/twitter-api-php.git",
-                "reference": "a89ce3e294484aad7ae13dbabe45fb3928024ef8"
+                "reference": "5a1ac487adc248b59a73d5edc002b57f8dc211b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/J7mbo/twitter-api-php/zipball/a89ce3e294484aad7ae13dbabe45fb3928024ef8",
-                "reference": "a89ce3e294484aad7ae13dbabe45fb3928024ef8",
+                "url": "https://api.github.com/repos/J7mbo/twitter-api-php/zipball/5a1ac487adc248b59a73d5edc002b57f8dc211b8",
+                "reference": "5a1ac487adc248b59a73d5edc002b57f8dc211b8",
                 "shasum": ""
             },
             "require": {
@@ -2383,7 +2469,7 @@
                 "php",
                 "twitter"
             ],
-            "time": "2015-08-03 21:35:18"
+            "time": "2016-07-21 13:33:46"
         },
         {
             "name": "masterminds/html5",
@@ -2721,7 +2807,7 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony CMF community",
+                    "name": "Symfony CMF Community",
                     "homepage": "https://github.com/symfony-cmf/Routing/contributors"
                 }
             ],
