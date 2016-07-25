@@ -1,4 +1,4 @@
 {
-  "directory": "docroot/libraries",
+  "directory": "libraries",
   "ignoredDependencies": ["jquery", "jqueryui", "backbone", "underscore"]
 }
