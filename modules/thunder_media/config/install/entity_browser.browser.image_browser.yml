@@ -5,7 +5,6 @@ dependencies:
     - media_entity.bundle.image
   module:
     - dropzonejs_eb_widget
-    - media_entity
     - views
 name: image_browser
 label: 'Image Browser'
@@ -26,7 +25,6 @@ widgets:
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
-      submit_text: Select
     uuid: e6bbb585-adb6-4023-aece-e73d893491c9
     weight: 1
     label: 'Import image'
@@ -35,8 +33,8 @@ widgets:
     settings:
       view: image_browser
       view_display: entity_browser_1
-      submit_text: Select
     uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
     weight: 2
     label: 'Select existing'
     id: view
+submit_text: Select
