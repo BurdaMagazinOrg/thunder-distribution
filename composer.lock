@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb939dc022fef1940175248353542f60",
-    "content-hash": "4886518adfc5f0890936f86f8095943c",
+    "hash": "58e52f6b729f1fbb7e18a3740e738a3b",
+    "content-hash": "7d6ad35b436fd725d6da6272d01ad3ac",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -41,38 +41,6 @@
                 }
             ],
             "time": "2016-07-21 08:42:44"
-        },
-        {
-            "name": "burdamagazinorg/thunder-libraries-installer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BurdaMagazinOrg/thunder-libraries-installer.git",
-                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BurdaMagazinOrg/thunder-libraries-installer/zipball/aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
-                "reference": "aa66d0a45ce7e8c075f7ca0b7e414eba0070bbc2",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Thunder\\Composer\\ThunderInstallerPlugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "Thunder\\Composer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2016-07-08 09:17:30"
         },
         {
             "name": "composer/installers",
@@ -237,6 +205,50 @@
                 "versioning"
             ],
             "time": "2016-06-02 09:04:51"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "8de7c73b2eae217f4e7028d7262ff2330aa4b4e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/8de7c73b2eae217f4e7028d7262ff2330aa4b4e8",
+                "reference": "8de7c73b2eae217f4e7028d7262ff2330aa4b4e8",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "cweagans\\Composer\\Patches"
+            },
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "time": "2016-03-28 18:54:21"
         },
         {
             "name": "doctrine/annotations",
@@ -734,6 +746,9 @@
             "extra": {
                 "branch-alias": {
                     "dev-8.x-1.x": "8.1.x-dev"
+                },
+                "patches_applied": {
+                    "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
                 }
             },
             "notification-url": "https://packagist.drupal-composer.org/downloads/",
@@ -1939,6 +1954,9 @@
             "extra": {
                 "branch-alias": {
                     "dev-8.x-1.x": "8.1.x-dev"
+                },
+                "patches_applied": {
+                    "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768457-3.patch"
                 }
             },
             "notification-url": "https://packagist.drupal-composer.org/downloads/",
@@ -2205,42 +2223,6 @@
                 "validator"
             ],
             "time": "2016-07-03 21:52:18"
-        },
-        {
-            "name": "enyo/dropzone",
-            "version": "v4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/enyo/dropzone.git",
-                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/enyo/dropzone/zipball/d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
-                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matias Meno",
-                    "email": "m@tias.me",
-                    "homepage": "http://www.matiasmeno.com"
-                }
-            ],
-            "description": "Handles drag and drop of files for you.",
-            "homepage": "http://www.dropzonejs.com",
-            "keywords": [
-                "drag and drop",
-                "dragndrop",
-                "file upload",
-                "upload"
-            ],
-            "time": "2016-02-14 04:19:41"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -5415,7 +5397,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "burdamagazinorg/thunder-libraries-installer": 20,
         "drupal/better_normalizers": 20,
         "drupal/default_content": 20,
         "drupal/dropzonejs": 20,
