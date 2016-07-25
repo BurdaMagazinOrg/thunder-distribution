@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a3ce6824b72729ab84748d9d54f8c913",
-    "content-hash": "bedeff1ddffbafffcacf7a213edbb16c",
+    "hash": "bb939dc022fef1940175248353542f60",
+    "content-hash": "4886518adfc5f0890936f86f8095943c",
     "packages": [
         {
             "name": "burdamagazinorg/infinite-module",
@@ -1953,6 +1953,40 @@
                 "slideshow"
             ],
             "time": "2016-05-08 20:31:11"
+        },
+        {
+            "name": "drupal/slick_media",
+            "version": "8.1.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/slick_media.git",
+                "reference": "436d25f2cf7fb2acc6d0606922c2368ae0ee4c30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slick_media-8.x-1.0-beta2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "drupal/core": "8.*",
+                "drupal/media_entity_image": "8.*",
+                "drupal/slick": "8.*",
+                "drupal/video_embed_media": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Provides Slick carousel integration with Media entity.",
+            "homepage": "https://www.drupal.org/project/slick_media",
+            "time": "2016-04-11 04:34:33"
         },
         {
             "name": "drupal/token",
