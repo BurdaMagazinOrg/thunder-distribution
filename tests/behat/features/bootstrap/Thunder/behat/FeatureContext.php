@@ -275,7 +275,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     // Wait up to 10 sec that "Submit" button is active.
     $this->getSession()->wait(
       10000,
-      '(typeof jQuery === "undefined" || !jQuery(\'input[value="Select"]\').is(":disabled"))'
+      '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
     // Go back to Page scope.
@@ -283,7 +283,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
     // Click Select button - inside iframe.
     $this->getSession()
-      ->executeScript('document.querySelector(\'iframe[name="' . $iframeName . '"]\').contentWindow.jQuery(\'input[value="Select"]\').click();');
+      ->executeScript('document.querySelector(\'iframe[name="' . $iframeName . '"]\').contentWindow.jQuery(\'input[name="op"]\').click();');
 
     // Wait up to 10 sec that main page is loaded with new selected images.
     $this->getSession()->wait(
