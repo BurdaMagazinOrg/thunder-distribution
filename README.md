@@ -1,5 +1,7 @@
 # Thunder
 
+[![Build Status](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution.svg?branch=8.x-1.x)](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution)
+
 Thunder is a Drupal 8 distribution for professional publishers. It consists of the current Drupal 8 functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
 
 ## What's installed by default?
