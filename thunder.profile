@@ -111,7 +111,6 @@ function thunder_themes_installed($theme_list) {
     \Drupal::service('module_installer')->install(['infinite_article'], $dependencies = TRUE);
     \Drupal::service('config.installer')->installOptionalConfig();
 
-
     // Ensure that footer block is pre-filled with lazy loading block.
     $entityTypeManager = \Drupal::service('entity_type.manager');
     $articles = $entityTypeManager->getStorage('node')->loadByProperties([
@@ -129,7 +128,7 @@ function thunder_themes_installed($theme_list) {
 
     // Adding header and footer blocks to default article view.
     /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $display */
-    $display = entity_load('entity_view_display',  'node.article.default');
+    $display = entity_load('entity_view_display', 'node.article.default');
 
     $display->setComponent('field_header_blocks', [
       'type' => 'entity_reference_entity_view',
@@ -155,5 +154,21 @@ function thunder_themes_installed($theme_list) {
       ->set('logo.use_default', 0)
       ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo-big.png')
       ->save(TRUE);
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function thunder_page_attachments(array &$attachments) {
+
+  foreach ($attachments['#attached']['html_head'] as &$html_head) {
+
+    $name = $html_head[1];
+
+    if ($name == 'system_meta_generator') {
+      $tag = &$html_head[0];
+      $tag['#attributes']['content'] = 'Drupal 8 (Thunder | http://www.thunder.org)';
+    }
   }
 }
