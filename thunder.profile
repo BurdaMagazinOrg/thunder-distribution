@@ -157,3 +157,18 @@ function thunder_themes_installed($theme_list) {
   }
 }
 
+/**
+ * Implements hook_page_attachments().
+ */
+function thunder_page_attachments(array &$attachments) {
+
+  foreach ($attachments['#attached']['html_head'] as &$html_head) {
+
+    $name = $html_head[1];
+
+    if ($name == 'system_meta_generator') {
+      $tag = &$html_head[0];
+      $tag['#attributes']['content'] = 'Drupal 8 (Thunder)';
+    }
+  }
+}
