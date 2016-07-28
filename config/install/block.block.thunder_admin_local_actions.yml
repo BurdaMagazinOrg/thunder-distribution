@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - seven
-id: seven_local_actions
-theme: seven
+    - thunder_admin
+id: thunder_admin_local_actions
+theme: thunder_admin
 region: content
 weight: -10
 provider: null

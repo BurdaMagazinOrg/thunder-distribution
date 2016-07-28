@@ -6,9 +6,9 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_account_menu
-theme: bartik
+    - thunder_base
+id: thunder_base_account_menu
+theme: thunder_base
 region: secondary_menu
 weight: 0
 provider: null

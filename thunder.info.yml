@@ -5,7 +5,7 @@ core: 8.x
 distribution:
   name: Thunder
   install:
-    theme: thunder
+    theme: thunder_admin
 
 # Required modules
 dependencies:
@@ -54,7 +54,6 @@ dependencies:
   - thunder_media
   - thunder_taxonomy
 themes:
-  - thunder
-  - bartik
-  - seven
+  - thunder_base
+  - thunder_admin
 

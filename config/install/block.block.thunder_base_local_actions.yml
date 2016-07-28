@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
-id: bartik_local_actions
-theme: bartik
+    - thunder_base
+id: thunder_base_local_actions
+theme: thunder_base
 region: content
 weight: -20
 provider: null

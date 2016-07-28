@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_content
-theme: bartik
+    - thunder_base
+id: thunder_base_content
+theme: thunder_base
 region: content
 weight: 0
 provider: null

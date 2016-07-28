@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_messages
-theme: bartik
+    - thunder_admin
+id: thunder_admin_messages
+theme: thunder_admin
 region: highlighted
 weight: 0
 provider: null

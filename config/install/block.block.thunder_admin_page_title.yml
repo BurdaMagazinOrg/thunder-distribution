@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
-id: bartik_page_title
-theme: bartik
-region: content
-weight: -50
+    - thunder_admin
+id: thunder_admin_page_title
+theme: thunder_admin
+region: header
+weight: -30
 provider: null
 plugin: page_title_block
 settings:

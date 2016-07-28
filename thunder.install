@@ -20,14 +20,14 @@ function thunder_install() {
 
   \Drupal::configFactory()
     ->getEditable('system.theme')
-    ->set('default', 'bartik')
+    ->set('default', 'thunder_base')
     ->save(TRUE);
 
   $profilePath = drupal_get_path('profile', 'thunder');
   \Drupal::configFactory()
-    ->getEditable('bartik.settings')
+    ->getEditable('thunder_base.settings')
     ->set('logo.use_default', 0)
-    ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo.png')
+    ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
     ->save(TRUE);
 
   // Assign user 1 the "administrator" role.
