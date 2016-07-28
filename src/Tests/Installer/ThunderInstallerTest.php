@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\thunder\Tests\Installer;
+
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;

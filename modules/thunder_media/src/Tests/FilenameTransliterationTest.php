@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_media\Tests;
 
-
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\thunder\ThunderBaseTest;
 

@@ -2,12 +2,6 @@
 
 namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
-use Drupal\Core\Action\ActionManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\ConfigInstallerInterface;
-
 /**
  * Google Analytics.
  *
@@ -19,7 +13,9 @@ use Drupal\Core\Config\ConfigInstallerInterface;
  */
 class Infinite extends AbstractOptionalModule {
 
-
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array $formValues) {
 
     \Drupal::configFactory()
@@ -27,6 +23,5 @@ class Infinite extends AbstractOptionalModule {
       ->set('default', 'infinite')
       ->save(TRUE);
   }
-
 
 }
