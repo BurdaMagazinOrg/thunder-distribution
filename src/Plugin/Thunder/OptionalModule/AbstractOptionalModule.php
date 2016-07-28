@@ -63,16 +63,14 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
   }
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   * @return array
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     return $form;
   }
 
   /**
-   * @param array $formValues
+   * {@inheritdoc}
    */
   public function submitForm(array $formValues) {
   }

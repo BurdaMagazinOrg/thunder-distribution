@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Enables modules and site configuration for a thunder site installation.
@@ -79,10 +80,10 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
   try {
     $definition = $optionalModulesManager->getDefinition($module_name);
     if ($definition['type'] == 'module') {
-      \Drupal::service('module_installer')->install($module, $dependencies = TRUE);
+      \Drupal::service('module_installer')->install($module, TRUE);
     }
     elseif ($definition['type'] == 'theme') {
-      \Drupal::service('theme_installer')->install($module, $dependencies = TRUE);
+      \Drupal::service('theme_installer')->install($module, TRUE);
     }
 
     $instance = $optionalModulesManager->createInstance($module_name);
@@ -108,7 +109,7 @@ function thunder_themes_installed($theme_list) {
       Drupal::configFactory()->getEditable($config)->delete();
     }
 
-    \Drupal::service('module_installer')->install(['infinite_article'], $dependencies = TRUE);
+    \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
     \Drupal::service('config.installer')->installOptionalConfig();
 
     // Ensure that footer block is pre-filled with lazy loading block.

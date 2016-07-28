@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder;
 
-
 use Drupal\simpletest\WebTestBase;
 
 /**
