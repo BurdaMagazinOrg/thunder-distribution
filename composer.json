@@ -6,6 +6,18 @@
     {
       "name": "Daniel Bosen",
       "email": "daniel.bosen@burda.com"
+    },
+    {
+      "name": "Christian Fritsch",
+      "email": "christian.fritsch@burda.com"
+    },
+    {
+      "name": "Mladen Todorovic",
+      "email": "mladen.todorovic@burda.com"
+    },
+    {
+      "name": "Timo Welde",
+      "email": "welde@galaniproject.de"
     }
   ],
   "minimum-stability": "dev",
@@ -42,9 +54,6 @@
       },
       "drupal/dropzonejs": {
         "Update to support recent WidgetBase.php changes": "https://www.drupal.org/files/issues/2763529_32.patch"
-      },
-      "drupal/entity_browser": {
-        "Allow passing existing selection from field widget": "https://www.drupal.org/files/issues/allow_passing_existing-2767737-8.patch"
       }
     }
   },
@@ -54,27 +63,27 @@
     "drupal/core": "^8.0",
     "drupal/blazy": "^1.0",
     "drupal/crop": "^1.0",
-    "drupal/better_normalizers": "dev-1.x#1cd9b4b50e91f5e595eb86813611dc368227c4b6",
+    "drupal/better_normalizers": "dev-1.x",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/ctools": "^3.0",
-    "drupal/default_content": "dev-1.x#c6a79ee2ffc71b0136d4988871618e05d8be4018",
-    "drupal/dropzonejs": "dev-1.x#ead1be9edd8d431d81190eb7cd589f75b26b3fe1",
+    "drupal/default_content": "dev-1.x",
+    "drupal/dropzonejs": "dev-1.x",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser":"dev-1.x#a45b62ade601b8d4653e10d3fac4943c95bca902",
+    "drupal/entity_browser":"dev-1.x",
     "drupal/entity_reference_revisions": "^1.0",
-    "drupal/fb_instant_articles": "dev-2.x#07b8afb323332278f5a0c6ba107dee2a81cac4ec",
-    "drupal/field_group": "dev-1.x#77c5dfa28f7a4d7880bedc1cd2accf2d5986697c",
-    "drupal/focal_point": "dev-1.x#e08d5c555f5daf61c35f639762637b119f6a5c8e",
+    "drupal/fb_instant_articles": "dev-2.x",
+    "drupal/field_group": "dev-1.x",
+    "drupal/focal_point": "dev-1.x",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
-    "burdamagazinorg/infinite-module": "dev-8.x-1.x#69ba6408cdc01d010781af589fe6b07c4b22badb",
-    "burdamagazinorg/infinite-theme": "dev-8.x-1.x#3420cce3504c3e7d68cc0e158b3026a1bea596c3",
+    "burdamagazinorg/infinite-module": "dev-8.x-1.x",
+    "burdamagazinorg/infinite-theme": "dev-8.x-1.x",
     "drupal/ivw_integration": "^1.0",
-    "drupal/libraries": "dev-3.x#548f3c2c47596c5242e37b18000e7b2ec930f66a",
+    "drupal/libraries": "dev-3.x",
     "drupal/linkit": "^4.0",
     "drupal/media_entity": "^1.0",
-    "drupal/media_entity_browser": "dev-1.x#1f9a47a5b7efacc969367b907e8f033db18bdbae",
+    "drupal/media_entity_browser": "dev-1.x",
     "drupal/media_entity_instagram": "^1.0",
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
@@ -89,7 +98,7 @@
     "drupal/slick_media": "^1.0",
     "drupal/token": "^1.0",
     "drupal/video_embed_field": "^1.0",
-    "drupal/views_load_more": "dev-1.x#178d32195253207cc74097296e25079a23f0b2e5"
+    "drupal/views_load_more": "dev-1.x"
   },
   "require-dev": {
     "burdamagazinorg/thunder-dev-tools": "dev-master",
