@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
-id: bartik_local_tasks
-theme: bartik
-region: content
-weight: -40
+    - thunder_admin
+id: thunder_admin_secondary_local_tasks
+theme: thunder_admin
+region: pre_content
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: Tabs
+  label: 'Secondary tabs'
   provider: core
   label_display: '0'
-  primary: true
+  primary: false
   secondary: true
 visibility: {  }

@@ -232,5 +232,10 @@
         {
             "value": "Come to DrupalCon New Orleans"
         }
+    ],
+    "field_teaser_text": [
+        {
+            "value": "The Drupal community is one of the largest open source communities in the world. We're developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we'll be in New Orleans."
+        }
     ]
 }

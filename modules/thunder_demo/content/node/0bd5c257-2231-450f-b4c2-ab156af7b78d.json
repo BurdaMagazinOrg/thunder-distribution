@@ -289,5 +289,10 @@
         {
             "value": "Burda Launches Worldwide Coalition Of Industry Partners And Releases Open-Source Online CMS Platform"
         }
+    ],
+    "field_teaser_text": [
+        {
+            "value": "Munich, March 17th, 2016 – As of today, international media group Hubert Burda Media makes its Drupal 8 based Thunder Content Management System (CMS) available online as a free open-source platform for use and further development by other publishers. With this move, Burda joins forces with sector and industry partners including Acquia, Facebook, Microsoft, nexx.tv and Riddle.com, aiming to develop the best open-source CMS platform for publishers. Burda believes that in today’s world, successful media offerings result from the right combination of quality journalism and technology expertise. For the media company, this meant future-proofing its Content Management System by developing Thunder, an opensource system based on leading-edge technology, now available online free of charge for use and continuous development."
+        }
     ]
 }

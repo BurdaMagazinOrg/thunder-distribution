@@ -6,9 +6,9 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_footer
-theme: bartik
+    - thunder_base
+id: thunder_base_footer
+theme: thunder_base
 region: footer_fifth
 weight: 0
 provider: null

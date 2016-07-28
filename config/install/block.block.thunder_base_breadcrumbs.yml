@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_breadcrumbs
-theme: bartik
+    - thunder_base
+id: thunder_base_breadcrumbs
+theme: thunder_base
 region: breadcrumb
 weight: 0
 provider: null

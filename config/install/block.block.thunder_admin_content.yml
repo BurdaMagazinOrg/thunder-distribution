@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - seven
-id: seven_content
-theme: seven
+    - thunder_admin
+id: thunder_admin_content
+theme: thunder_admin
 region: content
 weight: 0
 provider: null

@@ -1,0 +1,10 @@
+
+
+article.teaser .left {
+    float: left;
+    margin-right: 20px;
+}
+
+article.teaser {
+    clear: both;
+}

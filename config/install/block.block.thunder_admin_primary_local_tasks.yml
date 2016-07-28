@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - seven
-id: seven_secondary_local_tasks
-theme: seven
-region: pre_content
+    - thunder_admin
+id: thunder_admin_primary_local_tasks
+theme: thunder_admin
+region: header
 weight: 0
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: 'Secondary tabs'
+  label: 'Primary tabs'
   provider: core
   label_display: '0'
-  primary: false
-  secondary: true
+  primary: true
+  secondary: false
 visibility: {  }
