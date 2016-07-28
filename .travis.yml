@@ -40,7 +40,7 @@ install:
   # Install Drush
   - composer global require drush/drush:~8 --prefer-source
   - phpenv rehash
-  - drush dl drupalorg_drush
+  - drush dl drupalorg_drush-7.x
   - drush verify-makefile
 
   # MySQL Options
