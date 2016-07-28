@@ -40,6 +40,8 @@ install:
   # Install Drush
   - composer global require drush/drush:~8 --prefer-source
   - phpenv rehash
+  - drush dl drupalorg_drush
+  - drush verify-makefile
 
   # MySQL Options
   - mysql -e 'SET GLOBAL wait_timeout = 5400;'
