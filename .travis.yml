@@ -71,4 +71,4 @@ before_script:
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-  - bash -x ${THUNDER_DIST_DIR}/scripts/run-tests.sh
+  - travis_wait 30 bash -x ${THUNDER_DIST_DIR}/scripts/run-tests.sh
