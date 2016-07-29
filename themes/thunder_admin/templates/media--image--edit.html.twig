@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present a media entity.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<style>
+  .quickedit-field.quickedit-editable {
+    box-shadow: 0 0 0 0;
+  }
+</style>
+<article{{ attributes.addClass("media-quickedit") }}>
+  {{ title_suffix.contextual_links }}
+
+  <div>
+    <div style="float: left; margin-right: 20px;">
+      {{ content.field_image }}
+
+    </div>
+    <div>
+      {{ content.name }}
+      {{ content.field_copyright }}
+      {{ content.field_source }}
+      {{ content.field_expires }}
+    </div>
+  </div>
+
+  <div style="clear: both">
+    {{ content.field_description }}
+  </div>
+
+</article>
