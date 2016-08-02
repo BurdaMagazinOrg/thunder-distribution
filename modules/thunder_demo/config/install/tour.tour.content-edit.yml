@@ -1,13 +1,16 @@
 langcode: en
 status: true
-dependencies: {  }
-id: content-add
-label: 'Add content'
+dependencies:
+  module:
+    - thunder_demo
+id: content-edit
+label: 'Edit content'
 module: thunder_demo
 routes:
-  - route_name: node.add
+  -
+    route_name: entity.node.edit_form
     route_params:
-      node_type: article
+      node: 7
 tips:
   article-channel:
     id: article-channel
@@ -36,7 +39,7 @@ tips:
   article-teaser-media:
     id: article-teaser-media
     plugin: text
-    label: Teaser media
+    label: 'Teaser media'
     body: '<p>Enter the information that will be published at the front page.</p>'
     weight: 1
     attributes:
@@ -44,7 +47,7 @@ tips:
   article-teaser-text:
     id: article-teaser-text
     plugin: text
-    label: Teaser text
+    label: 'Teaser text'
     body: '<p>Type the text which will appear at the front page and which will be used for Facebook and Google-Snippets, too.</p>'
     weight: 1
     attributes:

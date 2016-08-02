@@ -26,10 +26,12 @@ regions:
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
 
-
-
 libraries-override:
   bartik/global-styling:
     css:
       theme:
         css/colors.css: css/colors.css
+
+libraries-extend:
+  tour/tour-styling:
+    - seven/tour-styling
