@@ -10,7 +10,7 @@ routes:
   -
     route_name: entity.taxonomy_term.canonical
     route_params:
-      taxonomy_term: 1
+      taxonomy_term: '1'
 tips:
   article-channel:
     id: article-channel
