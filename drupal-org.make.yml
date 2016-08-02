@@ -4,7 +4,7 @@ projects:
   # Missing modules: redirect
   admin_toolbar:
     type: "module"
-    version: "1.15"
+    version: "1.16"
 
   better_normalizers:
     type: "module"
@@ -45,7 +45,7 @@ projects:
       revision: "ead1be9edd8d431d81190eb7cd589f75b26b3fe1"
       branch: "8.x-1.x"
     patch:
-      - "https://www.drupal.org/files/issues/2763529_32.patch"
+      - "https://www.drupal.org/files/issues/2763529_51.patch"
 
   entity:
     type: "module"
@@ -60,7 +60,7 @@ projects:
 
   entity_reference_revisions:
     type: "module"
-    version: "1.0-rc7"
+    version: "1.0"
 
   fb_instant_articles:
     type: "module"
@@ -80,7 +80,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "e08d5c555f5daf61c35f639762637b119f6a5c8e"
+      revision: "4317905726ff676de56664b7a01dc3aaa4f436f1"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -126,7 +126,10 @@ projects:
 
   media_entity_image:
     type: "module"
-    version: "1.1"
+    download:
+      url: "https://git.drupal.org/project/media_entity_image.git"
+      revision: "549011feece27b59891dfe0e27215a3d0afe3c96"
+      branch: "8.x-1.x"
 
   media_entity_slideshow:
     type: "module"
@@ -142,7 +145,7 @@ projects:
 
   paragraphs:
     type: "module"
-    version: "1.0-rc5"
+    version: "1.0"
 
   pathauto:
     type: "module"
