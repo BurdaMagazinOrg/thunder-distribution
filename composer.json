@@ -51,9 +51,6 @@
       },
       "drupal/blazy": {
         "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
-      },
-      "drupal/dropzonejs": {
-        "Update to support recent WidgetBase.php changes": "https://www.drupal.org/files/issues/2763529_51.patch"
       }
     }
   },
@@ -68,9 +65,9 @@
     "drupal/admin_toolbar": "^1.0",
     "drupal/ctools": "^3.0",
     "drupal/default_content": "dev-1.x",
-    "drupal/dropzonejs": "dev-1.x",
+    "drupal/dropzonejs": "^1.0",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser":"dev-1.x",
+    "drupal/entity_browser":"^1.0",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-2.x",
     "drupal/field_group": "dev-1.x",
@@ -85,7 +82,7 @@
     "drupal/media_entity": "^1.0",
     "drupal/media_entity_browser": "dev-1.x",
     "drupal/media_entity_instagram": "^1.0",
-    "drupal/media_entity_image": "dev-1.x",
+    "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
     "drupal/media_entity_twitter": "^1.0",
     "drupal/metatag": "^1.0",
