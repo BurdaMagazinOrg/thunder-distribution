@@ -51,6 +51,9 @@
       },
       "drupal/blazy": {
         "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
+      },
+      "drupal/media_entity_slideshow": {
+        "Updating a gallery is not possible any more": "https://www.drupal.org/files/issues/updating_a_gallery_is-2778843-2.patch"
       }
     }
   },
@@ -67,7 +70,7 @@
     "drupal/default_content": "dev-1.x",
     "drupal/dropzonejs": "^1.0",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser":"^1.0",
+    "drupal/entity_browser":"dev-1.x",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-2.x",
     "drupal/field_group": "dev-1.x",
