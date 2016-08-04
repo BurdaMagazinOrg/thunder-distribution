@@ -28,3 +28,23 @@ function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_sta
   // Add CSS file for layout optimization.
   $form['#attached']['library'][] = 'thunder_article/article_form_styling';
 }
+
+/**
+ * Implements hook_theme().
+ */
+function thunder_article_theme($existing, $type, $render, $path) {
+  $theme = array();
+  $files = scandir(DRUPAL_ROOT.'/'.$path.'/templates/fb_instant_articles');
+  foreach ($files as $file) {
+    if($file === '.' || $file === '..') continue;
+    $file = str_replace('-', '_', $file);
+    $file = basename($file, '.html.twig');
+    $base = array();
+    preg_match('/([a-z]*)_/', $file, $base);
+    $theme[$file] = [
+      'path' => $path .'/templates/fb_instant_articles',
+      'base hook' => $base[1]
+    ];
+  }
+  return $theme;
+}
