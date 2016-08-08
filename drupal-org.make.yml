@@ -50,7 +50,7 @@ projects:
     type: "module"
     download:
       url: "https://git.drupal.org/project/entity_browser.git"
-      revision: "792375446c2de664f0b85082b997eda9bbac92d7"
+      revision: "7fab8bb8c50c23c7d0e850a2901619f5e5b3b9e9"
       branch: "8.x-1.x"
 
   entity_reference_revisions:
