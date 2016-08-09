@@ -10,7 +10,7 @@ routes:
   -
     route_name: node.add
     route_params:
-      node_type: 'article'
+      node_type: article
 tips:
   article:
     id: article
@@ -46,7 +46,7 @@ tips:
     id: article-teaser-media
     plugin: text
     label: 'Teaser media'
-    body: '<p>Enter the information that will be published at the front page.</p>'
+    body: '<p>Enter the information that will be published at the front page. First upload or select a teaser image.</p>'
     weight: 1
     attributes:
       data-id: edit-field-teaser-media
@@ -61,8 +61,8 @@ tips:
   article-paragraphs:
     id: article-paragraphs
     plugin: text
-    label: 'Paragraphs'
-    body: '<p>The paragraphs section represents the main article content. Here you can your text and various types of media.</p>'
+    label: Paragraphs
+    body: '<p>The paragraphs section represents the main article content. Here you can your text and various types of media. To get an introduction, follow <a href="/node/7/edit?tour=1">this</a>.</p>'
     weight: 1
     attributes:
       data-class: 'paragraphs-container .fieldset-legend'

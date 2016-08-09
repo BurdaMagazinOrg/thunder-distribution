@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - thunder_demo
+id: content-paragraphs
+label: 'Introduction to paragraphs'
+module: thunder_demo
+routes:
+  -
+    route_name: entity.node.edit_form
+    route_params:
+      node: '7'
+tips:
+  article-paragraphs:
+    id: article-paragraphs
+    plugin: text
+    label: Paragraphs
+    body: '<p>The paragraphs section represents the main article content. Here you can your text and various types of media.</p>'
+    weight: 1
+    attributes:
+      data-class: 'paragraphs-container .fieldset-legend'
+  article-paragraphs-gallery:
+    id: article-paragraphs-gallery
+    plugin: text
+    label: Gallery
+    body: '<p>This is a gallery. On "Edit" you are able to add more images, change the order or delete some images.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-paragraphs-0-top
+  article-paragraphs-text:
+    id: article-paragraphs-text
+    plugin: text
+    label: Text
+    body: '<p>This is a normal text field with a WYSIWYG editor.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-paragraphs-1-top
+  article-paragraphs-media:
+    id: article-paragraphs-media
+    plugin: text
+    label: Media
+    body: '<p>A media item could be an image or a video. You can select one from your previous ones, or upload a new one.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-paragraphs-2-top
