@@ -75,7 +75,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/focal_point.git"
-      revision: "4317905726ff676de56664b7a01dc3aaa4f436f1"
+      revision: "c329a0e3af711ff2865b809e8b547b9406595085"
       branch: "8.x-1.x"
 
   google_analytics:
@@ -91,7 +91,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.0-rc2"
+    version: "1.0-rc3"
 
   libraries:
     type: "module"
@@ -125,9 +125,7 @@ projects:
 
   media_entity_slideshow:
     type: "module"
-    version: "1.1"
-    patch:
-      - "https://www.drupal.org/files/issues/updating_a_gallery_is-2778843-2.patch"
+    version: "1.2"
 
   media_entity_twitter:
     type: "module"
@@ -175,15 +173,13 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      revision: "69ba6408cdc01d010781af589fe6b07c4b22badb"
-      branch: "8.x-1.x"
+      tag: "8.x-1.0-beta1"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "3420cce3504c3e7d68cc0e158b3026a1bea596c3"
-      branch: "8.x-1.x"
+      tag: "8.x-1.0-beta1"
 
   video_embed_field:
     type: "module"
