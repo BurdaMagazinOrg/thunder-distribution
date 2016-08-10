@@ -73,10 +73,7 @@ projects:
 
   focal_point:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/focal_point.git"
-      revision: "c329a0e3af711ff2865b809e8b547b9406595085"
-      branch: "8.x-1.x"
+    version: "1.0-beta2"
 
   google_analytics:
     type: "module"

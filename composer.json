@@ -63,7 +63,7 @@
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-2.x",
     "drupal/field_group": "dev-1.x",
-    "drupal/focal_point": "dev-1.x",
+    "drupal/focal_point": "^1.0",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
     "burdamagazinorg/infinite-module": "^1.0",
