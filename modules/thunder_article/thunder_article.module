@@ -64,3 +64,33 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
 
   $variables['options']['figure'] = $entityHtml;
 }
+
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function thunder_article_preprocess_paragraph(&$variables) {
+  /**
+   * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
+   */
+  $paragraph = $variables['paragraph'];
+
+  if ($variables['view_mode'] == "facebook_instant_articles_rss" && $paragraph instanceof \Drupal\paragraphs\Entity\Paragraph) {
+    if($paragraph->getType() == 'media' && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
+      if($paragraph->parent_type->value == 'node') {
+        $nid = $paragraph->parent_id->value;
+        $node = \Drupal\node\Entity\Node::load($nid);
+        $teaser_uri = $node->field_teaser_media->entity->field_image->entity->uri->value;
+
+        $media = $variables['content']['field_media'][0]['#media'];
+        $media_uri = $media->field_image->entity->uri->value;
+
+        if($teaser_uri == $media_uri) {
+          $variables = array();
+        }
+      }
+    }
+  }
+}
+
+
