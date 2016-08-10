@@ -6,6 +6,10 @@ projects:
     type: "module"
     version: "1.16"
 
+  adsense:
+    type: "module"
+    version: "1.0-beta1"
+
   better_normalizers:
     type: "module"
     download:
