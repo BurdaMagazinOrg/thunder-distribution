@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_form_node_article_edit_form_alter().
@@ -23,6 +24,9 @@ function thunder_article_form_node_article_form_alter(&$form, FormStateInterface
 
 /**
  * Helper function for article form alter hooks.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_state) {
   // Add CSS file for layout optimization.
@@ -65,6 +69,38 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
   $variables['options']['figure'] = $entityHtml;
 }
 
+/**
+ * Implements hook_preprocess_node().
+ */
+function thunder_article_preprocess_node(&$variables) {
+  /**
+   * @var string $view_mode
+   *  the view mode name
+   */
+  $view_mode = $variables['view_mode'] = $variables['elements']['#view_mode'];
+  if ($view_mode=='fb_instant_articles_rss') {
+    /**
+     * If we are looking at a node using the fia rss view-mode, then only show
+     * field values for entities that are also in an fia view mode
+     */
+    if (is_array($variables['content'])) {
+      foreach ($variables['content'] as $key => $content) {
+        if (isset($content['#theme']) && $content['#theme']=='field') {
+          foreach (Element::children($content) as $index) {
+            $value = $content[$index];
+            if(empty($value['#view_mode'])) continue;
+            switch ($value['#view_mode']) {
+              case 'facebook_instant_articles_rss':
+                break;
+              default:
+                $variables['content'][$key][$index]['#access'] = FALSE;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_preprocess_paragraph().
