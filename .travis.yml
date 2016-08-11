@@ -65,7 +65,7 @@ install:
   - export BEHAT_PARAMS
 
   # Build docroot and install thunder
-  - bash -x ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
+  - bash -x -e ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
 
 before_script:
   - cd ${TEST_DIR}/docroot
@@ -73,4 +73,4 @@ before_script:
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-  - travis_wait 30 bash -x ${THUNDER_DIST_DIR}/scripts/run-tests.sh
+  - travis_wait 30 bash -x -e ${THUNDER_DIST_DIR}/scripts/run-tests.sh
