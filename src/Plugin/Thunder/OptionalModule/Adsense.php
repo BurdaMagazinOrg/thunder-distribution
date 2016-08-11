@@ -34,7 +34,7 @@ class Adsense extends AbstractOptionalModule {
     $form['adsense']['adsense_basic_id'] = [
       '#type' => 'textfield',
       '#title' => t('Site Google AdSense Publisher ID'),
-      '#required' => TRUE,
+      '#required' => FALSE,
       '#default_value' => '',
       '#pattern' => 'pub-[0-9]+',
       '#description' => t('This is the Google AdSense Publisher ID for the site owner. It is used if no other ID is suitable. Get this in your Google Adsense account. It should be similar to %id.', [
