@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.facebook_instant_articles_rss
+label: 'Facebook Instant Articles: RSS'
+targetEntityType: media
+cache: true
