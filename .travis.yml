@@ -65,7 +65,7 @@ install:
   - export BEHAT_PARAMS
 
   # Build docroot and install thunder
-  - bash -x ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
+  - bash -x -e ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
 
 before_script:
   - cd ${TEST_DIR}/docroot
