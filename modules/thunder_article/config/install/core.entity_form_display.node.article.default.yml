@@ -52,10 +52,10 @@ third_party_settings:
       label: Paragraphs
       format_type: fieldset
       format_settings:
-        description: ''
-        classes: ''
-        id: ''
+        label: Paragraphs
         required_fields: true
+        id: ''
+        classes: paragraphs-container
 id: node.article.default
 targetEntityType: node
 bundle: article

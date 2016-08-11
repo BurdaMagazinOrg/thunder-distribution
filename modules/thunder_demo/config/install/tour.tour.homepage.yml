@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - thunder_demo
+id: homepage
+label: Homepage
+module: thunder_demo
+routes:
+  -
+    route_name: entity.taxonomy_term.canonical
+    route_params:
+      taxonomy_term: '1'
+tips:
+  homepage:
+    id: homepage
+    plugin: text
+    label: 'Welcome and thank you for installing Thunder!'
+    body: '<p>What would you like to try first?</p><p><a href="/node/add/article?tour=1">Create a new article</a><br/><a href="/node/7/edit?tour=1">Introduction to paragraphs</a></p><p>Or just discover Thunder on your own. You can always restart this tour in the top right corner.'
+    weight: 1
