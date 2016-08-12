@@ -1,5 +1,0 @@
-tour-styling:
-  version: VERSION
-  css:
-    layout:
-      css/tour.css: {}

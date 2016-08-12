@@ -38,9 +38,6 @@
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "patches": {
-      "drupal/core": {
-        "Make it possible to specify a destination after the installation for distributions": "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"
-      },
       "drupal/slick": {
         "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768457-3.patch"
       },

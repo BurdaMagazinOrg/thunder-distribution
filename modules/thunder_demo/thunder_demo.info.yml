@@ -5,6 +5,5 @@ package: Thunder
 core: 8.x
 version: 8.x-1.x-dev
 dependencies:
-  - better_normalizers
   - default_content
-  - tour
+  - better_normalizers
