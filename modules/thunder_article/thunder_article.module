@@ -62,11 +62,13 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
   /** @var \Drupal\media_entity\Entity\Media $entity */
   $entity = $field_teaser_media->entity;
 
-  $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
-  $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
-  $entityHtml = render($entityRender);
+  if(isset($entity)) {
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
+    $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
+    $entityHtml = render($entityRender);
 
-  $variables['options']['figure'] = $entityHtml;
+    $variables['options']['figure'] = $entityHtml;
+  }
 }
 
 /**
