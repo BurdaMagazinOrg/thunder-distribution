@@ -47,6 +47,9 @@
     }
   },
   "require": {
+    "burdamagazinorg/infinite-module": "^1.0",
+    "burdamagazinorg/infinite-theme": "^1.0",
+    "burdamagazinorg/nexx-integration": "^1.0",
     "composer/installers": "^1.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/adsense": "^1.0",
@@ -67,8 +70,6 @@
     "drupal/focal_point": "^1.0",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
-    "burdamagazinorg/infinite-module": "^1.0",
-    "burdamagazinorg/infinite-theme": "^1.0",
     "drupal/ivw_integration": "^1.0",
     "drupal/libraries": "dev-3.x",
     "drupal/linkit": "^4.0",
