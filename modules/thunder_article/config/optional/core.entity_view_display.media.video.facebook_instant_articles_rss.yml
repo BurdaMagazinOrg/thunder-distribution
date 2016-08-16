@@ -11,6 +11,7 @@ dependencies:
     - field.field.media.video.field_source
     - media_entity.bundle.video
   module:
+    - fb_instant_articles
     - text
     - video_embed_field
 id: media.video.facebook_instant_articles_rss

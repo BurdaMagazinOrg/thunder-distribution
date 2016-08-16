@@ -5,6 +5,8 @@ dependencies:
     - core.entity_view_mode.paragraph.facebook_instant_articles_rss
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
+  module:
+      - fb_instant_articles
 id: paragraph.gallery.facebook_instant_articles_rss
 targetEntityType: paragraph
 bundle: gallery
