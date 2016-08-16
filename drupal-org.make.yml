@@ -81,7 +81,7 @@ projects:
 
   google_analytics:
     type: "module"
-    version: "2.0"
+    version: "2.1"
 
   inline_entity_form:
     type: "module"
