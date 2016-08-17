@@ -88,6 +88,7 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
 
     $instance = $optionalModulesManager->createInstance($module_name);
     $instance->submitForm($form_values);
+    \Drupal::service('config.installer')->installOptionalConfig();
   }
   catch (\Exception $e) {
 
