@@ -156,7 +156,7 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled() {
-    $this->assertUrl('<front>');
+    $this->assertUrl('?tour=1');
     $this->assertResponse(200);
     // Confirm that we are logged-in after installation.
     $this->assertText($this->rootUser->getUsername());

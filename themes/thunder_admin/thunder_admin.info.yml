@@ -9,6 +9,10 @@ libraries-override:
       theme:
         css/theme/install-page.css: css/install-page.css
 
+libraries-extend:
+  tour/tour-styling:
+    - thunder_admin/tour-styling
+
 regions:
   header: 'Header'
   pre_content: 'Pre-content'
