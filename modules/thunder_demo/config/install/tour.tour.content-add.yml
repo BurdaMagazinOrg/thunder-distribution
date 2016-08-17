@@ -62,7 +62,7 @@ tips:
     id: article-paragraphs
     plugin: text
     label: Paragraphs
-    body: '<p>The paragraphs section represents the main article content. Here you can your text and various types of media. To get an introduction, follow <a href="/node/7/edit?tour=1">this</a>.</p>'
+    body: '<p>The paragraphs section represents the main article content. Here you can add your text and various types of media. To get an introduction, follow <a href="/node/7/edit?tour=1">this</a>.</p>'
     weight: 1
     attributes:
       data-class: 'paragraphs-container .fieldset-legend'
