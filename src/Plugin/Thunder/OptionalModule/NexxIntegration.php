@@ -49,23 +49,9 @@ class NexxIntegration extends AbstractOptionalModule {
    * {@inheritdoc}
    */
   public function submitForm(array $formValues) {
-
-    $this->configFactory->getEditable('riddle_marketplace.settings')
-      ->set('riddle_marketplace.token', (string) $formValues['riddle_token'])
+    $this->configFactory->getEditable('nexx_integration.settings')
+      ->set('nexx_api_authkey', $formValues['nexx_api_authkey'])
+      ->set('omnia_id', $formValues['omnia_id'])
       ->save(TRUE);
-
-    /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = entity_load('field_config', 'node.article.field_paragraphs');
-
-    $settings = $field->getSetting('handler_settings');
-
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
-
-    $field->setSetting('handler_settings', $settings);
-
-    $field->save();
-
   }
-
 }
