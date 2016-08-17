@@ -139,8 +139,7 @@ projects:
   nexx_integration:
     type: "module"
     download:
-      url: "https://github.com/BurdaMagazinOrg/module-nexx_integration.git"
-      tag: "8.1.3"
+      tag: "1.3"
 
   paragraphs:
     type: "module"
