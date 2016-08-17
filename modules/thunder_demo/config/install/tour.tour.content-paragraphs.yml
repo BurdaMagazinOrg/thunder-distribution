@@ -36,6 +36,14 @@ tips:
     weight: 1
     attributes:
       data-id: edit-field-paragraphs-1-top
+  article-paragraphs-instagram:
+    id: article-paragraphs-instagram
+    plugin: text
+    label: Instagram
+    body: '<p>This is an instagram card. Just add a the url of an instagram post and the widget will automaticly shown.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-paragraphs-2-top
   article-paragraphs-media:
     id: article-paragraphs-media
     plugin: text
@@ -43,4 +51,12 @@ tips:
     body: '<p>A media item could be an image or a video. You can select one from your previous ones, or upload a new one.</p>'
     weight: 1
     attributes:
-      data-id: edit-field-paragraphs-2-top
+      data-id: edit-field-paragraphs-3-top
+  article-paragraphs-twitter:
+    id: article-paragraphs-twitter
+    plugin: text
+    label: Twitter
+    body: '<p>This is a twitter card. It behaves in the same way like an instagram paragraph.</p>'
+    weight: 1
+    attributes:
+      data-id: edit-field-paragraphs-4-top
