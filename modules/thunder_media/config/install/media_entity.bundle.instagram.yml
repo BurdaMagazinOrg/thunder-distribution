@@ -10,7 +10,7 @@ type: instagram
 queue_thumbnail_downloads: false
 new_revision: false
 type_configuration:
-  source_field: field_url
   use_instagram_api: false
+  source_field: field_url
   client_id: ''
 field_map: {  }

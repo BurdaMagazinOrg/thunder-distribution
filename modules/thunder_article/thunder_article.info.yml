@@ -1,19 +1,25 @@
-name: Thunder Article
+name: 'Thunder Article'
+description: 'Provide content related configs and code for thunder.'
 type: module
-description: Provide content related configs and code for thunder.
-package: Thunder
 core: 8.x
-version: 8.x-1.x-dev
 dependencies:
-  - node
+  - entity_browser
+  - entity_browser_entity_form
+  - entity_reference_revisions
   - field
   - field_group
-  - field_ui
-  - thunder_media
-  - thunder_taxonomy
+  - inline_entity_form
+  - link
+  - media_entity
   - menu_ui
-  - options
+  - metatag
+  - node
   - paragraphs
+  - path
   - pathauto
   - scheduler
-
+  - taxonomy
+  - text
+  - user
+version: 8.x-1.x-dev
+package: Thunder
