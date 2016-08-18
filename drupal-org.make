@@ -45,6 +45,7 @@ projects[field_group][download][revision] = 77c5dfa28f7a4d7880bedc1cd2accf2d5986
 projects[field_group][download][branch] = 8.x-1.x
 projects[focal_point][type] = module
 projects[focal_point][version] = 1.0-beta2
+projects[focal_point][patch][] = https://www.drupal.org/files/issues/crop_anchor_is_lost-2782073-8.patch
 projects[google_analytics][type] = module
 projects[google_analytics][version] = 2.1
 projects[inline_entity_form][type] = module
