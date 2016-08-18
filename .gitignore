@@ -2,8 +2,6 @@
 /vendor
 /node_modules
 /docroot
-/modules
-!/modules/thunder_*
 /libraries
 /themes/infinite/
 .DS_Store

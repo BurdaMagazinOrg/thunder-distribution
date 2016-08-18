@@ -9,8 +9,6 @@ dependencies:
     - image
     - media_entity
     - user
-_core:
-  default_config_hash: sN6UKaw5th6r7-e77v1eDX5lNBmgMJXiAxG5fCx8IWU
 id: gallery_browser
 label: 'Gallery Browser'
 module: views
