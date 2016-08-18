@@ -10,6 +10,7 @@ dependencies:
   - field_group
   - inline_entity_form
   - link
+  - linkit
   - media_entity
   - menu_ui
   - metatag
@@ -20,6 +21,8 @@ dependencies:
   - scheduler
   - taxonomy
   - text
+  - thunder_media
+  - thunder_taxonomy
   - user
 version: 8.x-1.x-dev
 package: Thunder

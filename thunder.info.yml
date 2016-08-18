@@ -37,20 +37,10 @@ dependencies:
   - views_ui
 # contrib
   - admin_toolbar_tools
-  - field_group
-  - focal_point
-  - inline_entity_form
   - libraries
-  - linkit
-  - metatag
-  - media_entity
-  - scheduler
+  - media_entity_browser
   - simple_sitemap
-  - slick_media
-  - pathauto
-  - paragraphs
 # thunder
-  - breakpoint_js_settings
   - thunder_article
   - thunder_media
   - thunder_taxonomy

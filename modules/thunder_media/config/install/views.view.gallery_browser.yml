@@ -2,15 +2,15 @@ langcode: und
 status: true
 dependencies:
   config:
-    - image.style.media_entity_browser_thumbnail
-    - media_entity.bundle.image
+    - image.style.entity_browser_thumbnail
+    - media_entity.bundle.gallery
   module:
     - entity_browser
     - image
     - media_entity
     - user
-id: image_browser
-label: 'Image Browser'
+id: gallery_browser
+label: 'Gallery Browser'
 module: views
 description: ''
 tag: ''
@@ -135,7 +135,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: media_entity_browser_thumbnail
+            image_style: entity_browser_thumbnail
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -377,47 +377,6 @@ display:
           entity_type: media
           entity_field: status
           plugin_id: boolean
-        bundle:
-          id: bundle
-          table: media_field_data
-          field: bundle
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            image: image
-          group: 1
-          exposed: false
-          expose:
-            operator_id: bundle_op
-            label: Provider
-            description: ''
-            use_operator: false
-            operator: bundle_op
-            identifier: provider
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: media
-          entity_field: bundle
-          plugin_id: bundle
         name:
           id: name
           table: media_field_data
@@ -497,6 +456,46 @@ display:
           entity_type: media
           entity_field: langcode
           plugin_id: language
+        bundle:
+          id: bundle
+          table: media_field_data
+          field: bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            gallery: gallery
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: media
+          entity_field: bundle
+          plugin_id: bundle
       sorts: {  }
       header: {  }
       footer: {  }
