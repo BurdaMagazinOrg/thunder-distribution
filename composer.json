@@ -46,6 +46,9 @@
       },
       "drupal/blazy": {
         "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
+      },
+      "drupal/focal_point": {
+        "Crop anchor is lost after scaling": "https://www.drupal.org/files/issues/crop_anchor_is_lost-2782073-8.patch"
       }
     }
   },
@@ -70,7 +73,7 @@
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-2.x",
     "drupal/field_group": "dev-1.x",
-    "drupal/focal_point": "^1.0",
+    "drupal/focal_point": "1.0-beta2",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
     "drupal/ivw_integration": "^1.0",
