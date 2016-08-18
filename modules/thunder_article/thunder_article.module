@@ -7,6 +7,7 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_form_node_article_edit_form_alter().
@@ -38,16 +39,18 @@ function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_sta
  */
 function thunder_article_theme($existing, $type, $render, $path) {
   $theme = array();
-  $files = scandir(DRUPAL_ROOT.'/'.$path.'/templates/fb_instant_articles');
+  $files = scandir(DRUPAL_ROOT . '/' . $path . '/templates/fb_instant_articles');
   foreach ($files as $file) {
-    if($file === '.' || $file === '..') continue;
+    if ($file === '.' || $file === '..') {
+      continue;
+    }
     $file = str_replace('-', '_', $file);
     $file = basename($file, '.html.twig');
     $base = array();
     preg_match('/([a-z]*)_/', $file, $base);
     $theme[$file] = [
-      'path' => $path .'/templates/fb_instant_articles',
-      'base hook' => $base[1]
+      'path' => $path . '/templates/fb_instant_articles',
+      'base hook' => $base[1],
     ];
   }
   return $theme;
@@ -62,7 +65,7 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
   /** @var \Drupal\media_entity\Entity\Media $entity */
   $entity = $field_teaser_media->entity;
 
-  if(isset($entity)) {
+  if (isset($entity)) {
     $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
     $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
     $entityHtml = render($entityRender);
@@ -75,25 +78,28 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
  * Implements hook_preprocess_node().
  */
 function thunder_article_preprocess_node(&$variables) {
-  /**
+  /*
    * @var string $view_mode
    *  the view mode name
    */
   $view_mode = $variables['view_mode'] = $variables['elements']['#view_mode'];
-  if ($view_mode=='fb_instant_articles_rss') {
-    /**
+  if ($view_mode == 'fb_instant_articles_rss') {
+    /*
      * If we are looking at a node using the fia rss view-mode, then only show
      * field values for entities that are also in an fia view mode
      */
     if (is_array($variables['content'])) {
       foreach ($variables['content'] as $key => $content) {
-        if (isset($content['#theme']) && $content['#theme']=='field') {
+        if (isset($content['#theme']) && $content['#theme'] == 'field') {
           foreach (Element::children($content) as $index) {
             $value = $content[$index];
-            if(empty($value['#view_mode'])) continue;
+            if (empty($value['#view_mode'])) {
+              continue;
+            }
             switch ($value['#view_mode']) {
               case 'facebook_instant_articles_rss':
                 break;
+
               default:
                 $variables['content'][$key][$index]['#access'] = FALSE;
             }
@@ -108,25 +114,23 @@ function thunder_article_preprocess_node(&$variables) {
  * Implements hook_preprocess_paragraph().
  */
 function thunder_article_preprocess_paragraph(&$variables) {
-  /**
-   * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
-   */
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
   if ($variables['view_mode'] == "facebook_instant_articles_rss" && $paragraph instanceof \Drupal\paragraphs\Entity\Paragraph) {
     if ($paragraph->getType() == 'text') {
       $variables['content']['field_text'][0]['#format'] = "basic_html";
     }
-    if($paragraph->getType() == 'media' && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
-      if($paragraph->parent_type->value == 'node') {
+    if ($paragraph->getType() == 'media' && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
+      if ($paragraph->parent_type->value == 'node') {
         $nid = $paragraph->parent_id->value;
-        $node = \Drupal\node\Entity\Node::load($nid);
+        $node = Node::load($nid);
         $teaser_uri = $node->field_teaser_media->entity->field_image->entity->uri->value;
 
         $media = $variables['content']['field_media'][0]['#media'];
         $media_uri = $media->field_image->entity->uri->value;
 
-        if($teaser_uri == $media_uri) {
+        if ($teaser_uri == $media_uri) {
           $variables = array();
         }
       }
