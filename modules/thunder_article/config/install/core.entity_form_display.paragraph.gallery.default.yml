@@ -5,6 +5,7 @@ dependencies:
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
   module:
+    - entity_browser_entity_form
     - inline_entity_form
 id: paragraph.gallery.default
 targetEntityType: paragraph

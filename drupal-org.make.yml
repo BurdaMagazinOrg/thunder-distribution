@@ -27,6 +27,10 @@ projects:
     type: "module"
     version: "1.0-rc1"
 
+  config_update:
+    type: "module"
+    version: "1.1"
+
   crop:
     type: "module"
     version: "1.0"
@@ -67,6 +71,10 @@ projects:
       url: "http://git.drupal.org/project/fb_instant_articles.git"
       revision: "07b8afb323332278f5a0c6ba107dee2a81cac4ec"
       branch: "8.x-1.x"
+
+  features:
+    type: "module"
+    version: "3.0-beta7"
 
   field_group:
     type: "module"

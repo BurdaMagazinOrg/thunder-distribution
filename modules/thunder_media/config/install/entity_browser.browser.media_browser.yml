@@ -6,6 +6,7 @@ dependencies:
   module:
     - dropzonejs_eb_widget
     - entity_browser_entity_form
+    - media_entity
     - views
 name: media_browser
 label: 'Media Browser'
@@ -26,6 +27,7 @@ widgets:
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
+      submit_text: 'Select entities'
     uuid: ec1759ab-e969-4448-a9db-d3a70e123326
     weight: -9
     label: 'Import image'
@@ -34,6 +36,7 @@ widgets:
     settings:
       view: media_browser
       view_display: entity_browser_1
+      submit_text: 'Select entities'
     uuid: 05782e5e-1928-4606-8b3f-f7c333701c25
     weight: -10
     label: 'Select existing'
@@ -42,8 +45,9 @@ widgets:
     settings:
       entity_type: media
       bundle: video
+      form_mode: default
+      submit_text: 'Save entity'
     uuid: 5d665b33-fbc8-435b-b560-e0e76e22f237
     weight: -8
     label: 'Create video'
     id: entity_form
-submit_text: Select

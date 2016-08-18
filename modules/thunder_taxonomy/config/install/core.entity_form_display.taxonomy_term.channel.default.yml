@@ -42,4 +42,10 @@ content:
     weight: 5
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
 hidden: {  }

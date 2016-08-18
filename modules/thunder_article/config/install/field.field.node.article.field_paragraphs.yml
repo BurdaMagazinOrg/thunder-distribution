@@ -4,6 +4,12 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.article
+    - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.instagram
+    - paragraphs.paragraphs_type.media
+    - paragraphs.paragraphs_type.quote
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.twitter
   module:
     - entity_reference_revisions
 id: node.article.field_paragraphs

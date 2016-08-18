@@ -4,7 +4,6 @@ dependencies:
   module:
     - node
     - taxonomy
-    - thunder_taxonomy
 id: node.field_channel
 field_name: field_channel
 entity_type: node

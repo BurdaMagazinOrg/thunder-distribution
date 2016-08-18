@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.article.field_tags
     - field.field.node.article.field_teaser_media
     - field.field.node.article.field_teaser_text
-    - image.style.medium
+    - image.style.teaser
     - node.type.article
   module:
     - media_entity
