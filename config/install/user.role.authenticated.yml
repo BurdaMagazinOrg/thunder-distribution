@@ -6,12 +6,9 @@ label: 'Authenticated user'
 weight: 1
 is_admin: false
 permissions:
-  - 'access content'
-  - 'use text format basic_html'
-  - 'create media'
-  - 'delete media'
-  - 'update media'
-  - 'view media'
-  - 'cancel account'
-  - 'change own username'
-  - 'access user profiles'
+  0: 'access content'
+  1: 'use text format basic_html'
+  5: 'view media'
+  6: 'cancel account'
+  7: 'change own username'
+  8: 'access user profiles'
