@@ -4,7 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.gallery.field_media
-    - image.style.thumbnail
+    - image.style.media_thumbnail
     - paragraphs.paragraphs_type.gallery
   module:
     - media_entity
@@ -18,7 +18,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: thumbnail
+      image_style: media_thumbnail
       image_link: ''
     third_party_settings: {  }
 hidden:

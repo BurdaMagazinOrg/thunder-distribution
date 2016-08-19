@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.medium
+    - image.style.media_thumbnail
     - media_entity.bundle.image
   module:
     - image
@@ -22,7 +22,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: medium
+      image_style: media_thumbnail
       image_link: ''
     third_party_settings: {  }
     type: image

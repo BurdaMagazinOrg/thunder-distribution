@@ -13,7 +13,7 @@ label: 'Media Browser'
 display: modal
 display_configuration:
   width: '1070'
-  height: '910'
+  height: ''
   link_text: 'Select entities'
 selection_display: no_display
 selection_display_configuration: {  }

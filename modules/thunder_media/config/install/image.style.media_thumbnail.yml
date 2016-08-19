@@ -3,13 +3,13 @@ status: true
 dependencies:
   module:
     - focal_point
-name: entity_browser_thumbnail
-label: 'Entity Browser thumbnail (350x200)'
+name: media_thumbnail
+label: 'Media thumbnail (241x138)'
 effects:
   8a41a5b5-469d-4918-879e-460f26e08700:
     uuid: 8a41a5b5-469d-4918-879e-460f26e08700
     id: focal_point_scale_and_crop
     weight: 1
     data:
-      width: '350'
-      height: '200'
+      width: '241'
+      height: '138'

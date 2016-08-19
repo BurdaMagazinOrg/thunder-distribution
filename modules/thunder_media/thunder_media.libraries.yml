@@ -2,3 +2,13 @@ gallery:
   version: 1.0
   js:
     js/thunder_gallery.js: {}
+
+entity_browser_view:
+  css:
+    theme:
+      css/media_entity_browser.view.css: {}
+  js:
+    js/media_entity_browser.view.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
