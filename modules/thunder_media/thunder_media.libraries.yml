@@ -1,7 +1,10 @@
 gallery:
-  version: 1.0
+  version: VERSION
   js:
     js/thunder_gallery.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
 
 entity_browser_view:
   css:
