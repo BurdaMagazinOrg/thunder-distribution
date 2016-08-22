@@ -1,0 +1,120 @@
+/**
+ * @media-entity media_entity_browser.view.css
+ */
+
+.view-media-entity-browser .views-row {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  display: block;
+  text-align: center;
+  border: 2px solid #b8b8b8;
+  transition: .2s;
+}
+
+@media screen and (min-width:37.5em) { /* 600px */
+  .view-media-entity-browser .views-row {
+    width: 50%;
+    float: left;
+  }
+}
+
+@media screen and (min-width:62.5em) { /* 1000px */
+  .view-media-entity-browser .views-row {
+    width: 25%;
+  }
+}
+
+.view-media-entity-browser .views-row.checked {
+  border: 2px solid #37802f;
+}
+
+.view-media-entity-browser .views-row img {
+  vertical-align: bottom;
+  width: 100%;
+  height: auto;
+}
+
+.view-media-entity-browser .views-row img::selection {
+  background: transparent;
+}
+
+.view-media-entity-browser .views-row .views-field-entity-browser-select {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.view-media-entity-browser .views-row:after {
+  content: " ";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: transparent url("/core/misc/icons/73b355/check.svg") no-repeat center center;
+  background-size: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.view-media-entity-browser .views-row.checked:after {
+  background-size: 80px 80px;
+}
+.entity-browser-form > div.form-actions {
+  clear: both;
+  padding-top: 10px;
+}
+
+.media-info {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(0,0,0,.8);
+  padding: 5px 10px;
+  color: white;
+  text-align: left;
+}
+
+.media-info span {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  height: 18px;
+  width: 18px;
+  background-size: 16px 16px;
+  margin-right: 4px;
+}
+
+.media-info--Video {
+  background: transparent url("../images/video.svg") no-repeat;
+}
+
+.media-info--Image {
+  background: transparent url("../images/image.svg") no-repeat;
+}
+
+.media-info--Twitter {
+  background: transparent url("../images/twitter.svg") no-repeat;
+}
+
+input[type="submit"][name="filter"] {
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+.media-entity-browser-actions {
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  padding: 10px;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #b8b8b8;
+}

@@ -13,7 +13,7 @@ label: 'Media Browser'
 display: modal
 display_configuration:
   width: '1070'
-  height: '910'
+  height: ''
   link_text: 'Select entities'
 selection_display: no_display
 selection_display_configuration: {  }
@@ -49,5 +49,5 @@ widgets:
       submit_text: 'Save entity'
     uuid: 5d665b33-fbc8-435b-b560-e0e76e22f237
     weight: -8
-    label: 'Create video'
+    label: 'Embed video'
     id: entity_form

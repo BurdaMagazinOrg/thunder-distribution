@@ -9,22 +9,23 @@ dependencies:
     - field.field.media.video.field_expires
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
-    - image.style.medium
     - media_entity.bundle.video
   module:
-    - image
+    - video_embed_field
 id: media.video.thumbnail
 targetEntityType: media
 bundle: video
 mode: thumbnail
 content:
-  thumbnail:
-    type: image
+  field_media_video_embed_field:
+    type: video_embed_field_video
     weight: 0
     label: hidden
     settings:
-      image_style: medium
-      image_link: ''
+      width: 241
+      height: 138
+      autoplay: false
+      responsive: false
     third_party_settings: {  }
 hidden:
   created: true
@@ -32,8 +33,8 @@ hidden:
   field_copyright: true
   field_description: true
   field_expires: true
-  field_media_video_embed_field: true
   field_source: true
   langcode: true
   name: true
+  thumbnail: true
   uid: true

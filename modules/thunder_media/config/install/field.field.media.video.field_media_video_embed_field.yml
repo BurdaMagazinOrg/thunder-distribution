@@ -11,7 +11,7 @@ field_name: field_media_video_embed_field
 entity_type: media
 bundle: video
 label: 'Video URL'
-description: ''
+description: 'Vimeo and YouTube videos are supported. Just copy the video url inside this field'
 required: false
 translatable: true
 default_value: {  }

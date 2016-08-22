@@ -4,22 +4,19 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.media.field_media
-    - image.style.thumbnail
     - paragraphs.paragraphs_type.media
-  module:
-    - media_entity
 id: paragraph.media.preview
 targetEntityType: paragraph
 bundle: media
 mode: preview
 content:
   field_media:
-    type: media_thumbnail
+    type: entity_reference_entity_view
     weight: 0
     label: hidden
     settings:
-      image_style: thumbnail
-      image_link: ''
+      view_mode: thumbnail
+      link: false
     third_party_settings: {  }
 hidden:
   created: true

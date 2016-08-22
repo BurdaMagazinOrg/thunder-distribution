@@ -38,7 +38,6 @@ dependencies:
 # contrib
   - admin_toolbar_tools
   - libraries
-  - media_entity_browser
   - simple_sitemap
 # thunder
   - thunder_article

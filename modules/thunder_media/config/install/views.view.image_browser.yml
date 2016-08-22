@@ -2,7 +2,7 @@ langcode: und
 status: true
 dependencies:
   config:
-    - image.style.entity_browser_thumbnail
+    - image.style.media_thumbnail
     - media_entity.bundle.image
   module:
     - entity_browser
@@ -52,7 +52,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 9
+          items_per_page: 20
           offset: 0
           id: 0
           total_pages: null
@@ -135,7 +135,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: entity_browser_thumbnail
+            image_style: media_thumbnail
             image_link: ''
           group_column: ''
           group_columns: {  }
