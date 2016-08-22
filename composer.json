@@ -58,7 +58,7 @@
   "require": {
     "burdamagazinorg/infinite-module": "^1.0",
     "burdamagazinorg/infinite-theme": "^1.0",
-    "burdamagazinorg/nexx-integration": "^1.0",
+    "burdamagazinorg/nexx_integration": "^8.0",
     "composer/installers": "^1.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/adsense": "^1.0",
