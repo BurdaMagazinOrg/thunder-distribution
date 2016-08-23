@@ -154,7 +154,7 @@ function thunder_themes_installed($theme_list) {
     \Drupal::configFactory()
       ->getEditable('infinite.settings')
       ->set('logo.use_default', 0)
-      ->set('logo.path', $profilePath . '/themes/thunder/images/thunder-logo-big.png')
+      ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
       ->save(TRUE);
   }
 }
