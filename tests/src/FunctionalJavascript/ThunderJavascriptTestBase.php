@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
+
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 
 /**
@@ -17,4 +18,19 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected $profile = 'thunder';
 
+
+  /**
+   * Waits and asserts that a given element is visible.
+   *
+   * @param string $selector
+   *   The CSS selector.
+   * @param int $timeout
+   *   (Optional) Timeout in milliseconds, defaults to 1000.
+   * @param string $message
+   *   (Optional) Message to pass to assertJsCondition().
+   */
+  protected function waitUntilVisible($selector, $timeout = 1000, $message = '') {
+    $condition = "jQuery('" . $selector . ":visible').length > 0";
+    $this->assertJsCondition($condition, $timeout, $message);
+  }
 }
