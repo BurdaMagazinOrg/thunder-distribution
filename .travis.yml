@@ -36,11 +36,6 @@ before_install:
   - rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
 
 install:
-  # TESTING START:
-  # just wait for 25 minutes to force travis timout
-  - sleep 1500
-
-
   # add composer's global bin directory to the path
   # see: https://github.com/drush-ops/drush#install---composer
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -81,4 +76,8 @@ before_script:
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-  - travis_wait 30 bash -x -e ${THUNDER_DIST_DIR}/scripts/run-tests.sh
+# run Drupal tests (@group Thunder)
+  - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
+
+# run Behat tests
+  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.travis.yml
