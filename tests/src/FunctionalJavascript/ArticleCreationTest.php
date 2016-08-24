@@ -23,21 +23,32 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $page->fillField('title[0][value]', 'Test article');
     $page->fillField('field_seo_title[0][value]', 'Massive gaining seo traffic text');
 
-    $this->selectMedia('field_teaser_media', 'image_browser', 'media:1');
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    $this->addParagraph('field_paragraphs', 'media');
-    $this->selectMedia('field_paragraphs_0_subform_field_media', 'media_browser', 'media:5');
+    // Paragraph 1
+    $this->addMediaParagraph('field_paragraphs', ['media:5']);
 
-    $this->addParagraph('field_paragraphs', 'media');
-    $this->selectMedia('field_paragraphs_1_subform_field_media', 'media_browser', 'media:1');
+    // Paragraph 2
+    $this->addTextParagraph('field_paragraphs', 'Awesome text');
+
+    // Paragraph 3
+    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
+
+    // Paragraph 4
+    $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
+
+    $this->createScreenshot('before.jpg');
 
     $page->pressButton('Save and publish');
 
     $this->assertSession()->titleEquals('Massive gaining seo traffic text');
-
     $this->assertSession()->pageTextContains('Test article');
+    $this->assertSession()->pageTextContains('Awesome text');
+    $this->assertSession()->pageTextContains('Awesome quote');
 
-    $this->createScreenshot('foo.jpg');
+    $this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(1) img');
+    $this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
 
+    $this->createScreenshot('after.jpg');
   }
 }

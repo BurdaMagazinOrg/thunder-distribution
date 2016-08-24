@@ -29,6 +29,23 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->drupalLogin($editor);
   }
 
+  protected function openIefComplex($fieldName) {
+
+    $page = $this->getSession()->getPage();
+
+    $selector = "div[data-drupal-selector='edit-" . str_replace('_', '-', $fieldName) . "-wrapper'] > div";
+
+    $this->assertSession()->elementExists('css', $selector);
+
+    $iefForm = $page->find('css', $selector);
+
+    $iefId = $iefForm->getAttribute('id');
+
+    $page->pressButton(str_replace('inline-entity-form', 'ief', $iefId) . '-add');
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
+  }
+
   /**
    * Waits and asserts that a given element is visible.
    *
