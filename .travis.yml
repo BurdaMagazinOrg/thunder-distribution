@@ -1,11 +1,9 @@
 language: php
 cache:
   apt: true
-  bundler: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
-  - "$HOME/.npm"
   - "vendor"
 php:
   - 5.6
