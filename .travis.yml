@@ -36,6 +36,12 @@ before_install:
   - rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
 
 install:
+  # Set global environment variables
+  - export THUNDER_DIST_DIR=`echo $(pwd)`
+  - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
+  - bash -x -e ${THUNDER_DIST_DIR}/scripts/keep-travis-running.sh &
+  - sleep 1500
+
   # add composer's global bin directory to the path
   # see: https://github.com/drush-ops/drush#install---composer
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -56,9 +62,6 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  # Set global environment variables
-  - export THUNDER_DIST_DIR=`echo $(pwd)`
-  - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
   - mkdir -p ${TEST_DIR}
 
   # Install Test requirements and set global environment variables
@@ -76,8 +79,8 @@ before_script:
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
-# run Drupal tests (@group Thunder)
+  # Run Drupal tests (@group Thunder)
   - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 
-# run Behat tests
+  # Run Behat tests
   - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.travis.yml
