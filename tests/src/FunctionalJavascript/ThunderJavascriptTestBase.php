@@ -19,6 +19,16 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   protected $profile = 'thunder';
 
 
+  protected function setUp() {
+
+    parent::setUp();
+
+    $editor = $this->drupalCreateUser();
+    $editor->addRole('editor');
+    $editor->save();
+    $this->drupalLogin($editor);
+  }
+
   /**
    * Waits and asserts that a given element is visible.
    *
