@@ -14,7 +14,6 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * inline_entity_form
 * metatag
 * media_entity
-* media_entity_browser
 * media_entity_image
 * media_entity_slideshow
 * scheduler
