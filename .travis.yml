@@ -39,7 +39,7 @@ install:
   # Set global environment variables
   - export THUNDER_DIST_DIR=`echo $(pwd)`
   - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
-  - bash -x -e ${THUNDER_DIST_DIR}/scripts/keep-travis-running.sh &
+  - bash -e ${THUNDER_DIST_DIR}/scripts/keep-travis-running.sh &
   - sleep 1500
 
   # add composer's global bin directory to the path
