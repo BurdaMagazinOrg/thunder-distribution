@@ -31,6 +31,8 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     rsync -a . ${TEST_DIR}/docroot/profiles/thunder --exclude docroot
 
     drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
+    phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${TEST_DIR}/docroot/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1500 5000 &>/dev/null &
+
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     # Build thunder by composer
     composer create-project burdamagazinorg/thunder-infrastructure ${TEST_DIR} --stability dev --no-interaction --no-install
@@ -38,6 +40,7 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" --no-progress
+    phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${TEST_DIR}/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1500 5000 &>/dev/null &
 fi
 
 # Post install part
