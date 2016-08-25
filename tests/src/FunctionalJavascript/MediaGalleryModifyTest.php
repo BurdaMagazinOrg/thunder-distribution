@@ -40,7 +40,10 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $selector = "div[data-drupal-selector='edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current']";
     $this->getSession()->getDriver()->executeScript('jQuery("' . $selector . ' div[data-entity-id=\'media:8\']").simulateDragSortable({ move: 1 });');
 
-    $secondElement = $page->find('css', $selector . ' > div:nth-child(4)');
+    $secondElement = $page->find('css', $selector . ' > div:nth-child(2)');
+
+    // Not sure why, but without this call, test fails
+    $this->getSession()->getScreenshot();
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
   }

@@ -74,6 +74,7 @@ before_script:
   - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - phantomjs --webdriver=4444 > /dev/null &
+  - phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1500 5000 &
 
 script:
   # Run Drupal tests (@group Thunder)
