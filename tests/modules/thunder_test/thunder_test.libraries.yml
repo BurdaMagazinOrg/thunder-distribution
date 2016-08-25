@@ -1,0 +1,7 @@
+thunder_test_simulate_sortable:
+  version: VERSION
+  js:
+    js/jquery.simulate.drag-sortable.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

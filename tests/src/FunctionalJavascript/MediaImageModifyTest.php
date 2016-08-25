@@ -8,9 +8,9 @@ use Drupal\media_entity\Entity\Media;
 /**
  * Tests the media modification.
  *
- * @group thunder
+ * @group Thunder
  */
-class MediaModifyTest extends ThunderJavascriptTestBase {
+class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
   public function testFocalPointChange() {
 

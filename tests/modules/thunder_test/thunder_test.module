@@ -1,0 +1,9 @@
+<?php
+
+
+/**
+ *
+ */
+function thunder_test_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'thunder_test/thunder_test_simulate_sortable';
+}
