@@ -26,6 +26,7 @@ mysql:
   encoding: utf8
 
 before_install:
+  - export PHANTOMJS_VERSION=2.1.1
   - phantomjs --version
   - wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
   - tar -xjf phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
