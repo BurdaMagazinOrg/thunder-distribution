@@ -31,7 +31,7 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     rsync -a . ${TEST_DIR}/docroot/profiles/thunder --exclude docroot
 
     drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
-    phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${TEST_DIR}/docroot/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1500 5000 &
+    phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${TEST_DIR}/docroot/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1500 5000 &>/dev/null &
 
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     # Build thunder by composer
