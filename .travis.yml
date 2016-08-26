@@ -80,6 +80,9 @@ install:
 
   # Build docroot and install thunder
   - bash -x -e ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
+  - cd ${TEST_DIR}/docroot
+  - wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+  - patch -p1 < test-session-expire-2771547-64.patch
 
 before_script:
   - printf "\n" | pecl install imagick
