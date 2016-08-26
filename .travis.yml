@@ -31,7 +31,7 @@ before_install:
   - wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
   - tar -xjf phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
   - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
-  - sudo mv phantomjs /usr/local/phantomjs/bin/phantomjs
+  - sudo mv phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/phantomjs/bin/phantomjs
   - phantomjs --version
   - phpenv config-rm xdebug.ini
   - composer self-update
