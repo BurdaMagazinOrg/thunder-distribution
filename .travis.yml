@@ -71,6 +71,7 @@ install:
 
 before_script:
   - cd ${TEST_DIR}/docroot
+  - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - phantomjs --webdriver=4444 > /dev/null &
 
