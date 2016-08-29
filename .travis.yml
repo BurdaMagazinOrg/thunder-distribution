@@ -5,6 +5,7 @@ cache:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
   - "vendor"
+  - "travis_phantomjs"
 php:
   - 5.6
   - 7.0
@@ -28,11 +29,9 @@ mysql:
 before_install:
   - export PHANTOMJS_VERSION=2.1.1
   - export PATH=$PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64/bin:$PATH
-  - phantomjs --version
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then wget https://assets.membergetmember.co/software/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2; fi
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
-  - phantomjs --version
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer --version
@@ -84,6 +83,7 @@ before_script:
   - cd ${TEST_DIR}/docroot
   - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - phantomjs --version
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
