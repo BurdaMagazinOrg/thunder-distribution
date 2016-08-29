@@ -13,7 +13,7 @@ env:
   - INSTALL_METHOD=drush_make
   - INSTALL_METHOD=composer
 
-sudo: true
+sudo: false
 
 # match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
@@ -30,9 +30,8 @@ before_install:
   - phantomjs --version
   - wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
   - tar -xjf phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
-  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
-  - sudo mv phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/phantomjs/bin/phantomjs
-  - phantomjs --version
+  - mv phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs phantomjs
+  - ./phantomjs --version
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer --version
@@ -84,7 +83,7 @@ before_script:
   - cd ${TEST_DIR}/docroot
   - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
-  - phantomjs --webdriver=4444 > /dev/null &
+  - ${THUNDER_DIST_DIR}/phantomjs --webdriver=4444 > /dev/null &
 
 script:
   # Run Drupal tests (@group Thunder)
