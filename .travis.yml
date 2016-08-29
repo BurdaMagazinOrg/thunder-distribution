@@ -34,7 +34,7 @@ before_install:
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
   - phpenv config-rm xdebug.ini
   - composer self-update
-  - composer --version
+
   # Clear drush release history cache, to pick up new releases.
   - rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
 
@@ -83,7 +83,6 @@ before_script:
   - cd ${TEST_DIR}/docroot
   - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
-  - phantomjs --version
   - phantomjs --webdriver=4444 > /dev/null &
 
 script:
