@@ -26,27 +26,13 @@ mysql:
   username: root
   encoding: utf8
 
-before_install:
-  - export PHANTOMJS_VERSION=2.1.1
-  - export PATH=$PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64/bin:$PATH
+before_install: ./scripts/travis/before-install.sh
+
+install:
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then wget https://assets.membergetmember.co/software/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2; fi
   - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
-  - phpenv config-rm xdebug.ini
-  - composer self-update
 
-  # Clear drush release history cache, to pick up new releases.
-  - rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
-
-install:
-  # Set global environment variables
-  - export THUNDER_DIST_DIR=`echo $(pwd)`
-  - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
-  - bash -e ${THUNDER_DIST_DIR}/scripts/keep-travis-running.sh &
-
-  # add composer's global bin directory to the path
-  # see: https://github.com/drush-ops/drush#install---composer
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Install Drush
   - composer global require drush/drush:~8 --prefer-source
