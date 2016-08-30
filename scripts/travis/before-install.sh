@@ -2,9 +2,6 @@
 # remove xdebug to make php execute faster
 phpenv config-rm xdebug.ini
 
-# get most current composer
-composer self-update
-
 # Clear drush release history cache, to pick up new releases.
 rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
 
