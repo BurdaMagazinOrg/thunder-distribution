@@ -11,8 +11,8 @@ php:
   - 7.0
 
 env:
-#  - INSTALL_METHOD=drush_make
-  - INSTALL_METHOD=composer
+  - INSTALL_METHOD=drush_make
+  #- INSTALL_METHOD=composer
 
 sudo: false
 
