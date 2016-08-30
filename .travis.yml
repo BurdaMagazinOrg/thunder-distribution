@@ -31,50 +31,17 @@ before_install:
   - bash -e ./scripts/travis/before-install.sh
 
 install:
-  - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi
-  - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then wget https://assets.membergetmember.co/software/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2; fi
-  - if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
-
-
-  # Install Drush
-  - composer global require drush/drush:~8 --prefer-source
-  - phpenv rehash
-  - drush --version
-  - phantomjs --version
-  - drush dl drupalorg_drush-7.x
-  - drush verify-makefile
-
-  # MySQL Options
-  - mysql -e 'SET GLOBAL wait_timeout = 5400;'
-  - mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
-
-  # PHP conf tweaks
-  - echo 'max_execution_time = 120' >> drupal.php.ini;
-  - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-  - phpenv config-add drupal.php.ini
-  - phpenv rehash
-
-  - mkdir -p ${TEST_DIR}
-
-  # Install Test requirements and set global environment variables
-  - composer global require "behat/behat:~3.0" "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
-  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
-  - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
-  - export BEHAT_PARAMS
-
   # Build docroot and install thunder
-  - bash -x -e ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
-  - cd ${TEST_DIR}/docroot
-  - wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
-  - patch -p1 < test-session-expire-2771547-64.patch
+  - bash -e ./scripts/travis/install.sh
 
 before_script:
-  - printf "\n" | pecl install imagick
   - cd ${TEST_DIR}/docroot
   - drush cr
   - drush runserver --default-server=builtin 8080 &>/dev/null &
 
 script:
+  # verify, that makefile is accepted by drupal.org
+  - drush verify-makefile
   # Run Drupal tests (@group Thunder)
   - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 

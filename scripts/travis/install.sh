@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 # Install thunder and enable Test module
 # in provided folder
@@ -56,3 +57,8 @@ if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
 else
     install_thunder ${TEST_DIR}/docroot
 fi
+
+# apply cookie expire patch dor javascript tests
+cd ${TEST_DIR}/docroot
+wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+patch -p1 < test-session-expire-2771547-64.patch
