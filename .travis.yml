@@ -8,6 +8,7 @@ cache:
   - "travis_phantomjs"
 php:
   - 5.6
+  - 7.0
 
 env:
 #  - INSTALL_METHOD=drush_make
