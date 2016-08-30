@@ -10,19 +10,19 @@ install_thunder() {
     drush en simpletest -y
 }
 
-# For daily cron runs, current version from Drupal will be installed
-# and after that update will be executed and tested
-if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
-    # Install last version released on Drupal
-    mkdir -p ${TEST_DIR}-cron-base
-    cd ${TEST_DIR}-cron-base
+# Update thunder to current test version
+update_thunder() {
+    # Link sites folder from initial installation
+    mv ${TEST_DIR}/docroot/sites ${TEST_DIR}/docroot/_sites
+    ln -s ${UPDATE_BASE_PATH}/docroot/sites ${TEST_DIR}/docroot/sites
 
-    drush dl thunder --drupal-project-rename="docroot" -y
-    install_thunder ${TEST_DIR}-cron-base/docroot
-fi
+    cd ${TEST_DIR}/docroot
 
-# Install thunder from repository
-if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
+    # Execute all required updates
+    drush updatedb -y
+}
+
+drush_make_thunder() {
     cd ${THUNDER_DIST_DIR}
 
     # Build drupal + thunder from makefile
@@ -32,30 +32,37 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     rsync -a . ${TEST_DIR}/docroot/profiles/thunder --exclude docroot
 
     drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
-elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    # Build thunder by composer
+}
+
+composer_create_thunder() {
+    cd ${THUNDER_DIST_DIR}
     composer create-project burdamagazinorg/thunder-infrastructure ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" --no-progress
+}
+
+apply_patches() {
+    # apply cookie expire patch for javascript tests
+    cd ${TEST_DIR}/docroot
+    wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+    patch -p1 < test-session-expire-2771547-64.patch
+}
+# Build current revision of thunder
+if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
+    drush_make_thunder
+elif [[ ${INSTALL_METHOD} == "composer" ]]; then
+    composer_create_thunder
 fi
 
-# Post install part
-if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
-    # Link sites folder from initial installation
-    mv ${TEST_DIR}/docroot/sites ${TEST_DIR}/docroot/_sites
-    ln -s ${TEST_DIR}-cron-base/docroot/sites ${TEST_DIR}/docroot/sites
-
-    cd ${TEST_DIR}/docroot
-
-    # Execute all required updates
-    drush updatedb -y
+# Install Thunder
+if [[ ${TEST_UPDATE} == "true" ]]; then
+    # Install last drupal org version and update to currently tested version
+    install_thunder ${UPDATE_BASE_PATH}/docroot
+    update_thunder
 else
     install_thunder ${TEST_DIR}/docroot
 fi
 
-# apply cookie expire patch dor javascript tests
-cd ${TEST_DIR}/docroot
-wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
-patch -p1 < test-session-expire-2771547-64.patch
+apply_patches

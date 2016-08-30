@@ -17,3 +17,15 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     COMPOSER_VENDOR_DIR=${TEST_DIR}/vendor
 fi
 export COMPOSER_DIR
+
+# For daily cron runs, current version from Drupal will be installed
+# and after that update will be executed and tested
+if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+    TEST_UPDATE="true"
+else
+    TEST_UPDATE=""
+fi
+export TEST_UPDATE;
+
+# base path for update tests
+export UPDATE_BASE_PATH=${TEST_DIR}-update-base
