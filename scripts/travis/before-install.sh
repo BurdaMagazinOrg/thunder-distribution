@@ -53,3 +53,6 @@ export BEHAT_PARAMS
 
 # install image magick
 printf "\n" | pecl install imagick
+
+# verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
+drush verify-makefile

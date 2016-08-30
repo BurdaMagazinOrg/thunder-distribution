@@ -28,11 +28,11 @@ mysql:
 
 before_install:
   - source ./scripts/travis/setup-environment.sh
-  - bash -e ./scripts/travis/before-install.sh
+  - bash -x -e ./scripts/travis/before-install.sh
 
 install:
   # Build docroot and install thunder
-  - bash -e ./scripts/travis/install.sh
+  - bash -x -e ./scripts/travis/install.sh
 
 before_script:
   - cd ${TEST_DIR}/docroot
@@ -40,8 +40,6 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
 
 script:
-  # verify, that makefile is accepted by drupal.org
-  - drush verify-makefile
   # Run Drupal tests (@group Thunder)
   - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
 
