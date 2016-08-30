@@ -1,0 +1,17 @@
+
+thunder_updater.diff3_controller_generatePatch:
+  path: '/thunder-updater/generate-patch/{module_name}/{version_name}/{patch_type}'
+  defaults:
+    _controller: '\Drupal\thunder_updater\Controller\Diff3Controller::generatePatch'
+    _title: 'Generate Patch'
+    patch_type: reverse
+  requirements:
+    _permission: 'access content'
+
+thunder_updater.diff3_controller_applyPatch:
+  path: '/thunder-updater/apply-patch/{module_name}/{version_name}'
+  defaults:
+    _controller: '\Drupal\thunder_updater\Controller\Diff3Controller::applyPatch'
+    _title: 'Apply Patch'
+  requirements:
+    _permission: 'access content'
