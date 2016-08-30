@@ -40,6 +40,7 @@ install:
   - composer global require drush/drush:~8 --prefer-source
   - phpenv rehash
   - drush --version
+  - phantomjs --version
   - drush dl drupalorg_drush-7.x
   - drush verify-makefile
 
