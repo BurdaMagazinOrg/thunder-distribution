@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# update composer
+composer self-update
+
 # install required phantomjs Version, if its not already build from travis cache
 if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then
     rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs;
