@@ -18,6 +18,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class Updater.
  *
+ * TODO:
+ * - support for applying multiple patches (skipped update)
+ *
  * @package Drupal\thunder_updater
  */
 class Updater {

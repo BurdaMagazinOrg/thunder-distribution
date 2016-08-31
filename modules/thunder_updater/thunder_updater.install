@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update related hooks and functions.
+ */
+
+use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Get all missing modules dependencies.
+ *
+ * @return array
+ *   Return list of modules that require dependencies.
+ */
+function _thunder_updater_get_missing_dependencies() {
+  $unavailableModules = [];
+
+  $moduleConfigs = system_rebuild_module_data();
+  foreach ($moduleConfigs as $moduleName => $moduleConfig) {
+    if (!$moduleConfig->status) {
+      continue;
+    }
+
+    foreach ($moduleConfig->requires as $requirement) {
+      $requiredModule = $requirement['name'];
+
+      $notInstalled = !isset($moduleConfigs[$requiredModule]) || !$moduleConfigs[$requiredModule]->status;
+      if ($notInstalled) {
+        if (!isset($unavailableModules[$moduleName])) {
+          $unavailableModules[$moduleName] = [];
+        }
+
+        $unavailableModules[$moduleName][] = $requiredModule;
+      }
+    }
+  }
+
+  return $unavailableModules;
+}
+
+/**
+ * List of modules with module dependencies that should be installed.
+ *
+ * @param array $moduleDependencies
+ *   List of module dependencies. [ Key => List of modules ].
+ *
+ * @return array
+ *   Returns list of modules that still missing dependencies.
+ */
+function _thunder_updater_install_modules($moduleDependencies) {
+  /** @var \Drupal\Core\Extension\ModuleInstaller $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  $unavailableModules = [];
+  foreach ($moduleDependencies as $moduleName => $missingModules) {
+    try {
+      $moduleInstaller->install($missingModules);
+
+      \Drupal::logger('php')
+        ->info(t('Installed dependencies for module :module_names.', [':module_names' => implode(', ', $unavailableModules)]));
+    }
+    catch (MissingDependencyException $e) {
+      \Drupal::logger('php')
+        ->warning(t('Unable to install following dependencies (:module_names) for module :module_name.', [
+          ':module_name' => $moduleName,
+          ':module_names' => implode(', ', $unavailableModules),
+        ]));
+
+      $unavailableModules[] = $moduleName;
+    }
+  }
+
+  return $unavailableModules;
+}
+
+/**
+ * Check module dependencies and install all missing.
+ *
+ * TODO:
+ * - find some better solution to install dependencies.
+ *
+ * @return array
+ *   Returns empty array, because it's not relevant, but it's defined by hook.
+ *
+ * @throws \Drupal\Core\Extension\MissingDependencyException
+ */
+function thunder_updater_update_dependencies() {
+  $dependencies = _thunder_updater_get_missing_dependencies();
+
+  // Install dependencies if they are missing modules.
+  if (!empty($dependencies)) {
+    $unavailableModules = _thunder_updater_install_modules($dependencies);
+
+    if (!empty($unavailableModules)) {
+      throw new MissingDependencyException(t('Unable to install all dependencies. Please resolve problem manually for following modules: :module_names', [':module_names' => implode(', ', $unavailableModules)]));
+    }
+  }
+
+  return [];
+}
+
+/**
+ * Update hook to trigger dependency check.
+ *
+ * TODO:
+ * - find some better solution to install dependencies.
+ */
+function thunder_updater_update_8001() {
+  return t('All dependencies are installed.');
+}
