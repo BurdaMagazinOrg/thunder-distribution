@@ -12,11 +12,11 @@ export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
 
 # depending on install method, the composer vendor dirrectory is in different places
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    COMPOSER_VENDOR_DIR=${TEST_DIR}/docroot/vendor
+    LOCAL_COMPOSER_VENDOR_DIR=${TEST_DIR}/docroot/vendor
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    COMPOSER_VENDOR_DIR=${TEST_DIR}/vendor
+    LOCAL_COMPOSER_VENDOR_DIR=${TEST_DIR}/vendor
 fi
-export COMPOSER_VENDOR_DIR
+export LOCAL_COMPOSER_VENDOR_DIR
 
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
