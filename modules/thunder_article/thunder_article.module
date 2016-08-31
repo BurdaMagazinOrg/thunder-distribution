@@ -72,6 +72,13 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
 
       $variables['options']['figure'] = $entityHtml;
     }
+    if ($variables['row']['#node'] instanceof \Drupal\node\Entity\Node) {
+      /** @var \Drupal\node\Entity\Node $entity */
+      $entity = $variables['row']['#node'];
+      $owner = $entity->getOwner();
+      $variables['options']['author'] = $owner->first_name->value . ' ' . $owner->last_name->value;
+    }
+  }
 }
 
 /**
@@ -118,9 +125,11 @@ function thunder_article_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
 
   if ($variables['view_mode'] == "facebook_instant_articles_rss" && $paragraph instanceof \Drupal\paragraphs\Entity\Paragraph) {
+    // Force 'basic_html' for text paragraphs.
     if ($paragraph->getType() == 'text') {
       $variables['content']['field_text'][0]['#format'] = "basic_html";
     }
+    // Remove duplicate images.
     if ($paragraph->getType() == 'media' && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
       if ($paragraph->parent_type->value == 'node') {
         $nid = $paragraph->parent_id->value;
