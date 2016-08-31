@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: timowelde
- * Date: 04.08.16
- * Time: 15:39
- */
 
 namespace Drupal\thunder_article\Twig;
 
