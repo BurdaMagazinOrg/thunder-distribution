@@ -65,17 +65,22 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
     /** @var \Drupal\node\Entity\Node $node */
     $node = $variables['row']['#node'];
 
-    // Add teaser media as teaser image to fia.
-    if ($field_teaser_media = $node->field_teaser_media) {
+    // Add teaser image to fia.
+    if ($media = getFirstParagraphImageEntity($node)) {
+      $render_controller = \Drupal::entityTypeManager()->getViewBuilder($media->getEntityTypeId());
+      $entityRender = $render_controller->view($media, 'facebook_instant_articles_rss', NULL);
+
+      $variables['options']['figure'] = $entityRender;
+    }
+    if (empty($variables['options']['figure']) && $field_teaser_media = $node->field_teaser_media) {
       /** @var \Drupal\media_entity\Entity\Media $entity */
       $entity = $field_teaser_media->entity;
 
       if (isset($entity)) {
         $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
         $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
-        $entityHtml = render($entityRender);
 
-        $variables['options']['figure'] = $entityHtml;
+        $variables['options']['figure'] = $entityRender;
       }
     }
 
@@ -117,6 +122,10 @@ function thunder_article_preprocess_node(&$variables) {
           }
         }
       }
+      // If first paragraph is the teaser image, don't render it.
+      if (getFirstParagraphImageEntity($variables['node'])) {
+        $variables['content']['field_paragraphs'][0]['#access'] = FALSE;
+      }
     }
   }
 }
@@ -133,25 +142,25 @@ function thunder_article_preprocess_paragraph(&$variables) {
     if ($paragraph->getType() == 'text') {
       $variables['content']['field_text'][0]['#format'] = "basic_html";
     }
-    // Remove duplicate images.
-    if ($paragraph->getType() == 'media'
-      && isset($variables['content']['field_media'][0]['#media'])
-      && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
-
-      if ($paragraph->parent_type->value == 'node') {
-        $nid = $paragraph->parent_id->value;
-        $node = Node::load($nid);
-        $teaser_uri = $node->field_teaser_media->entity->field_image->entity->uri->value;
-
-        $media = $variables['content']['field_media'][0]['#media'];
-        $media_uri = $media->field_image->entity->uri->value;
-
-        if ($teaser_uri == $media_uri) {
-          $variables = array();
-        }
-      }
-    }
   }
 }
 
+/**
+ * Checks, if the first paragraph of a node is an image and returns it.
+ *
+ * @param \Drupal\node\Entity\Node $node
+ *   The node, which should be searched.
+ *
+ * @return bool|Drupal\media_entity\Entity\Media
+ *   Returns false, if first paragraph is not an image,
+ *   or the according media entity.
+ */
+function getFirstParagraphImageEntity($node) {
+  if (isset($node->field_paragraphs[0]) && $paragraph = $node->field_paragraphs[0]->entity) {
+    if ($paragraph->getType() == 'media' && isset($paragraph->field_media->entity) && $paragraph->field_media->entity->bundle() == 'image') {
+      return $paragraph->field_media->entity;
+    }
+  }
+  return FALSE;
+}
 
