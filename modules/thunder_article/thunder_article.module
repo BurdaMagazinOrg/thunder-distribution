@@ -61,23 +61,27 @@ function thunder_article_theme($existing, $type, $render, $path) {
  * Implements hook_preprocess_views_view_row_fia().
  */
 function thunder_article_preprocess_views_view_row_fia(&$variables) {
-  if ($field_teaser_media = $variables['row']['#node']->field_teaser_media) {
-    /** @var \Drupal\media_entity\Entity\Media $entity */
-    $entity = $field_teaser_media->entity;
+  if ($variables['row']['#node'] instanceof \Drupal\node\Entity\Node) {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $variables['row']['#node'];
 
-    if (isset($entity)) {
-      $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
-      $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
-      $entityHtml = render($entityRender);
+    // Add teaser media as teaser image to fia.
+    if ($field_teaser_media = $node->field_teaser_media) {
+      /** @var \Drupal\media_entity\Entity\Media $entity */
+      $entity = $field_teaser_media->entity;
 
-      $variables['options']['figure'] = $entityHtml;
+      if (isset($entity)) {
+        $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
+        $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
+        $entityHtml = render($entityRender);
+
+        $variables['options']['figure'] = $entityHtml;
+      }
     }
-    if ($variables['row']['#node'] instanceof \Drupal\node\Entity\Node) {
-      /** @var \Drupal\node\Entity\Node $entity */
-      $entity = $variables['row']['#node'];
-      $owner = $entity->getOwner();
-      $variables['options']['author'] = $owner->first_name->value . ' ' . $owner->last_name->value;
-    }
+
+    // Change author name to "firstname lastname".
+    $owner = $node->getOwner();
+    $variables['options']['author'] = $owner->first_name->value . ' ' . $owner->last_name->value;
   }
 }
 
