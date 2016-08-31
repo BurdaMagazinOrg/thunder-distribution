@@ -16,7 +16,7 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     COMPOSER_VENDOR_DIR=${TEST_DIR}/vendor
 fi
-export COMPOSER_DIR
+export COMPOSER_VENDOR_DIR
 
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
