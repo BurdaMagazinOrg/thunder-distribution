@@ -61,17 +61,17 @@ function thunder_article_theme($existing, $type, $render, $path) {
  * Implements hook_preprocess_views_view_row_fia().
  */
 function thunder_article_preprocess_views_view_row_fia(&$variables) {
-  $field_teaser_media = $variables['row']['#node']->field_teaser_media;
-  /** @var \Drupal\media_entity\Entity\Media $entity */
-  $entity = $field_teaser_media->entity;
+  if ($field_teaser_media = $variables['row']['#node']->field_teaser_media) {
+    /** @var \Drupal\media_entity\Entity\Media $entity */
+    $entity = $field_teaser_media->entity;
 
-  if (isset($entity)) {
-    $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
-    $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
-    $entityHtml = render($entityRender);
+    if (isset($entity)) {
+      $render_controller = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
+      $entityRender = $render_controller->view($entity, 'facebook_instant_articles_rss', NULL);
+      $entityHtml = render($entityRender);
 
-    $variables['options']['figure'] = $entityHtml;
-  }
+      $variables['options']['figure'] = $entityHtml;
+    }
 }
 
 /**
