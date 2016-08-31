@@ -134,7 +134,10 @@ function thunder_article_preprocess_paragraph(&$variables) {
       $variables['content']['field_text'][0]['#format'] = "basic_html";
     }
     // Remove duplicate images.
-    if ($paragraph->getType() == 'media' && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
+    if ($paragraph->getType() == 'media'
+      && isset($variables['content']['field_media'][0]['#media'])
+      && $variables['content']['field_media'][0]['#media']->bundle() == 'image') {
+
       if ($paragraph->parent_type->value == 'node') {
         $nid = $paragraph->parent_id->value;
         $node = Node::load($nid);
