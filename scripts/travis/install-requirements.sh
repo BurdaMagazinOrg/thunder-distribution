@@ -12,7 +12,7 @@ if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then
 fi
 
 # Install Drush and drupalorg_drush module
-composer global require drush/drush:~8 --prefer-source
+composer global require drush/drush:~8
 phpenv rehash
 drush dl drupalorg_drush-7.x
 
