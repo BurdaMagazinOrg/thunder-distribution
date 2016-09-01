@@ -11,6 +11,7 @@ class FilterExtension extends \Twig_Extension{
   public function getFilters() {
     return array(
       new \Twig_SimpleFilter('plain_text', array($this, 'plainText')),
+      new \Twig_SimpleFilter('basic_format', array($this, 'basicFormat'), array('is_safe' => array('html'))),
     );
   }
 
@@ -31,6 +32,12 @@ class FilterExtension extends \Twig_Extension{
     $element = render($value);
     $element = strip_tags($element);
     $element = html_entity_decode($element, ENT_QUOTES);
+    return $element;
+  }
+
+  public static function basicFormat($value) {
+    $element = render($value);
+    $element = strip_tags($element, '<a><em><strong><b><i>');
     return $element;
   }
 }
