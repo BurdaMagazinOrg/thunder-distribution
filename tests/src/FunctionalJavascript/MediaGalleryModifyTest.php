@@ -46,6 +46,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->getSession()->getScreenshot();
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
+    $this->getSession()->stop();
   }
 
 }

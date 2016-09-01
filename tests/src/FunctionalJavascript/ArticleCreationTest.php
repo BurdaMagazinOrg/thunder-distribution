@@ -50,5 +50,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
 
     $this->createScreenshot('after.jpg');
+
+    $this->getSession()->stop();
   }
 }

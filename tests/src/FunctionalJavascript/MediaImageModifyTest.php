@@ -43,6 +43,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $image1->clear();
     $image2->clear();
+    $this->getSession()->stop();
   }
 
 }
