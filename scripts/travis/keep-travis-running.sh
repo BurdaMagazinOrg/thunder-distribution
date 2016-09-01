@@ -2,6 +2,8 @@
 
 while true
 do
-    echo "Still testing...."
-    sleep 300
+    cat /proc/meminfo | grep MemFree
+    cat /proc/loadavg
+    ps ax
+    sleep 60
 done
