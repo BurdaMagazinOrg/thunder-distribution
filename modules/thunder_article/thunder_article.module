@@ -86,7 +86,9 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
 
     // Change author name to "firstname lastname".
     $owner = $node->getOwner();
-    $variables['options']['author'] = $owner->first_name->value . ' ' . $owner->last_name->value;
+    $variables['options']['author'] = array(
+      '#markup' => '<a>' . $owner->first_name->value . ' ' . $owner->last_name->value . '</a>',
+    );
   }
 
   // Add empty footer to trigger fb to include related articles.
