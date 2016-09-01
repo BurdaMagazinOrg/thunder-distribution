@@ -5,7 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 /**
  * Tests the article creation.
  *
- * @group Thunder_deactivated
+ * @group Thunder
  */
 class ArticleCreationTest extends ThunderJavascriptTestBase {
 
