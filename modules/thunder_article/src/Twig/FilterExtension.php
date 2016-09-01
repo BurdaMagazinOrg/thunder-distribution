@@ -21,7 +21,7 @@ class FilterExtension extends \Twig_Extension{
    * @return string The extension name
    */
   public function getName() {
-    return 'filter_extension';
+    return 'thunder_article_filter_extension';
   }
 
   /**
