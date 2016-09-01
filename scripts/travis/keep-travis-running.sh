@@ -3,7 +3,7 @@
 while true
 do
     cat /proc/meminfo | grep MemFree
+    cat /proc/cpuinfo | grep processor
     cat /proc/loadavg
-    ps ax
-    sleep 60
+    sleep 300
 done
