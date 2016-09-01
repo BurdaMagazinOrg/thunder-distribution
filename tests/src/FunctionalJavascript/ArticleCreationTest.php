@@ -5,7 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 /**
  * Tests the article creation.
  *
- * @group Thunder
+ * @group Thunder_deactivated
  */
 class ArticleCreationTest extends ThunderJavascriptTestBase {
 
@@ -13,7 +13,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderMediaTestTrait;
 
   public function testCreateArticle() {
-
     $this->drupalGet('node/add/article');
 
     $page = $this->getSession()->getPage();

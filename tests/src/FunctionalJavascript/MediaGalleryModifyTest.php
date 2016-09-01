@@ -9,7 +9,7 @@ use Drupal\media_entity\Entity\Media;
 /**
  * Tests the media modification.
  *
- * @group Thunder
+ * @group Thunder_deactivated
  */
 class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
