@@ -17,7 +17,6 @@ fi
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:~8
 phpenv rehash
-ls -la ${HOME}/.composer
 drush dl drupalorg_drush-7.x
 
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
