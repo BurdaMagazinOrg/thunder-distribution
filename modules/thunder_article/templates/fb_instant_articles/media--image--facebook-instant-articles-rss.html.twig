@@ -3,7 +3,7 @@
         {{ content.field_image }}
         <figcaption>
             {% if content.field_description|render %}
-                <h1>{{ content.field_description }}</h1>
+                <h1>{{ content.field_description | basic_format }}</h1>
             {% endif %}
             {% if content.field_copyright | plain_text or content.field_source | plain_text %}
                 <cite>

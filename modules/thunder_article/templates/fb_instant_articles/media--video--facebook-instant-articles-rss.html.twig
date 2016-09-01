@@ -6,7 +6,7 @@
                 <cite><span class="text-copyright">{{ content.field_copyright }}</span></cite>
             {% endif %}
             {% if content.field_description|render %}
-                <h1>{{ content.field_description }}</h1>
+                <h1>{{ content.field_description | basic_format }}</h1>
             {% endif %}
         </figcaption>
     </figure>
