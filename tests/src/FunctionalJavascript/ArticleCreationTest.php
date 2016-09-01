@@ -23,22 +23,28 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $page->fillField('field_seo_title[0][value]', 'Massive gaining seo traffic text');
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    print "1";
 
     // Paragraph 1
     $this->addMediaParagraph('field_paragraphs', ['media:5']);
+    print "2";
 
     // Paragraph 2
     $this->addTextParagraph('field_paragraphs', 'Awesome text');
+    print "3";
 
     // Paragraph 3
     $this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
+    print "4";
 
     // Paragraph 4
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
+    print "5";
 
     //$this->createScreenshot('before.jpg');
 
     $page->pressButton('Save and publish');
+    print "6";
 
     $this->assertSession()->titleEquals('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
