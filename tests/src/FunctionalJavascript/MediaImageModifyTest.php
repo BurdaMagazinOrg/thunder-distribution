@@ -40,6 +40,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
     $this->assertTrue($result[1] < 0.01, 'Images are identical');
+
+    $image1->clear();
+    $image2->clear();
   }
 
 }
