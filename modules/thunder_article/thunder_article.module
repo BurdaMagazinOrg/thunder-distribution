@@ -90,11 +90,6 @@ function thunder_article_preprocess_views_view_row_fia(&$variables) {
       '#markup' => '<a>' . $owner->first_name->value . ' ' . $owner->last_name->value . '</a>',
     );
   }
-
-  // Add empty footer to trigger fb to include related articles.
-  $variables['footer'] = array(
-    '#markup' => '',
-  );
 }
 
 /**
