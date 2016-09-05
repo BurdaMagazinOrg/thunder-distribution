@@ -31,7 +31,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph('field_paragraphs', 'Awesome text');
 
     // Paragraph 3
-    #$this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
+    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
 
     // Paragraph 4
     #$this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
