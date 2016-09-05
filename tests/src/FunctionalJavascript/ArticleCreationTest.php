@@ -22,7 +22,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $page->fillField('title[0][value]', 'Test article');
     $page->fillField('field_seo_title[0][value]', 'Massive gaining seo traffic text');
 
-    #$this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
     // Paragraph 1
     #$this->addMediaParagraph('field_paragraphs', ['media:5']);
