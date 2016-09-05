@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - fb_instant_articles
+    - paragraphs
+id: paragraph.facebook_instant_articles_rss
+label: 'Facebook Instant Articles: RSS'
+targetEntityType: paragraph
+cache: true
