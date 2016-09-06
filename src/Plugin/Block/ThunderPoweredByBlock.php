@@ -5,7 +5,7 @@ namespace Drupal\thunder\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides a 'Powered by Drupal' block.
+ * Provides a 'Powered by Thunder' block.
  *
  * @Block(
  *   id = "thunder_powered_by_block",
