@@ -50,21 +50,24 @@ function thunder_module_install(&$install_state) {
 
   $modules = $install_state['thunder_additional_modules'];
 
-  $operations = array();
-  foreach ($modules as $module => $weight) {
-    $operations[] = array(
-      '_thunder_install_module_batch',
-      array(array($module), $module, $install_state['form_state_values']),
-    );
+  $batch = [];
+  if ($modules) {
+    $operations = array();
+    foreach ($modules as $module => $weight) {
+      $operations[] = array(
+        '_thunder_install_module_batch',
+        array(array($module), $module, $install_state['form_state_values']),
+      );
+    }
+
+    $batch = [
+      'operations' => $operations,
+      'title' => t('Installing additional modules'),
+      'error_message' => t('The installation has encountered an error.'),
+    ];
   }
 
-  $batch = array(
-    'operations' => $operations,
-    'title' => t('Installing additional modules'),
-    'error_message' => t('The installation has encountered an error.'),
-  );
   return $batch;
-
 }
 
 /**
