@@ -35,14 +35,7 @@ install:
   - bash -x -e ./scripts/travis/install-thunder.sh
 
 before_script:
-  - cd ${TEST_DIR}/docroot
-  - drush cr
-  - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - bash -x -e ./scripts/travis/setup-tests.sh
 
 script:
-  # Run Drupal tests (@group Thunder)
-  - cd ${TEST_DIR}/docroot
-  - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
-
-  # Run Behat tests
-  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.travis.yml
+  - bash -x -e ./scripts/travis/run-tests.sh
