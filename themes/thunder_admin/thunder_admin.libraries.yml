@@ -3,3 +3,9 @@ tour-styling:
   css:
     layout:
       css/tour.css: {}
+
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      css/backend.css: {}
