@@ -41,15 +41,6 @@
       "drupal/core": {
         "Make it possible to specify a destination after the installation for distributions": "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"
       },
-      "drupal/slick": {
-        "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768457-3.patch"
-      },
-      "drupal/blazy": {
-        "Add libraries support": "https://www.drupal.org/files/issues/add_libraries_support-2768463-2.patch"
-      },
-      "drupal/focal_point": {
-        "Crop anchor is lost after scaling": "https://www.drupal.org/files/issues/crop_anchor_is_lost-2782073-8.patch"
-      },
       "drupal/paragraphs": {
         "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch"
       }
@@ -64,7 +55,7 @@
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
-    "drupal/blazy": "1.0-beta2",
+    "drupal/blazy": "^1.0",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
@@ -73,12 +64,12 @@
     "drupal/default_content": "dev-1.x",
     "drupal/dropzonejs": "^1.0",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser":"dev-1.x",
+    "drupal/entity_browser":"^1.0",
     "drupal/entity_reference_revisions": "^1.0",
-    "drupal/fb_instant_articles": "dev-2.x",
+    "drupal/fb_instant_articles": "dev-1.x",
     "drupal/features": "^3.0",
     "drupal/field_group": "dev-1.x",
-    "drupal/focal_point": "1.0-beta2",
+    "drupal/focal_point": "^1.0",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
     "drupal/ivw_integration": "^1.0",
@@ -95,7 +86,7 @@
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
     "drupal/simple_sitemap": "^2.0",
-    "drupal/slick": "1.0-beta2",
+    "drupal/slick": "^1.0",
     "drupal/slick_media": "^1.0",
     "drupal/token": "^1.0",
     "drupal/video_embed_field": "^1.0",
