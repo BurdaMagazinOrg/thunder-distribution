@@ -14,8 +14,8 @@ drush_download_thunder() {
 phpenv config-rm xdebug.ini
 
 # Set MySQL Options
-mysql -e 'SET GLOBAL wait_timeout = 5400;'
-mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
+mysql -u root -e 'SET GLOBAL wait_timeout = 5400;'
+mysql -u root -e "SHOW VARIABLES LIKE 'wait_timeout'"
 
 # PHP conf tweaks
 echo 'max_execution_time = 120' >> drupal.php.ini;
