@@ -8,7 +8,7 @@ use Drupal\media_entity\Entity\Media;
 /**
  * Tests the media modification.
  *
- * @group Thunder_deactivate
+ * @group Thunder
  */
 class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
