@@ -13,6 +13,9 @@ libraries-extend:
   tour/tour-styling:
     - thunder_admin/tour-styling
 
+libraries:
+  - thunder_admin/global-styling
+
 regions:
   header: 'Header'
   pre_content: 'Pre-content'
