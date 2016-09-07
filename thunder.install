@@ -35,4 +35,8 @@ function thunder_install() {
   $user->roles[] = 'administrator';
   $user->save();
 
+  // Set default pages.
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('page.front', '/node')
+    ->save(TRUE);
 }
