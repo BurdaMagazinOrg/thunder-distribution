@@ -14,11 +14,6 @@ function deploy_to_acquia() {
         COMMIT_TAG=$TRAVIS_TAG
     fi
 
-    # drupal revokes directory and settings file writability
-    chmod +w docroot/sites/default/settings.php
-    chmod +w docroot/sites/default
-    rm docroot/sites/default/settings.php
-
     git clone $ACQUIA_REPOSITORY acquia
     if [ ! -d "acquia" ]
     then

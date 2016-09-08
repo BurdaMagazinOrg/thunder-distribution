@@ -6,12 +6,12 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 php:
-  - 5.6
+  #- 5.6
   - 7.0
 
 env:
   - INSTALL_METHOD=drush_make
-  - INSTALL_METHOD=composer
+  #- INSTALL_METHOD=composer
 
 sudo: false
 
