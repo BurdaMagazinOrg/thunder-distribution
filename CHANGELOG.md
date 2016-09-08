@@ -1,5 +1,17 @@
 # Change Log
 
+## [8.1.0-beta12](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-beta12) 2016-09-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-beta11...8.x-1.0-beta12)
+
+- Cleanup Release
+- removing obsolete patches
+- updating to current module versions, drupal core
+- Fine tune editor permissions
+- deeper integration of facebook instant articles
+- ckeditor cleanups
+- updated README.md
+
+
 ## [8.1.0-beta11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-beta11) 2016-08-23
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-beta10...8.x-1.0-beta11)
 
