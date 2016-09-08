@@ -19,7 +19,6 @@ settings:
         -
           name: Linking
           items:
-            - DrupalLink
             - Linkit
             - DrupalUnlink
         -
