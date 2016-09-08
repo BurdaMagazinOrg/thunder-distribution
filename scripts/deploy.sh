@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function deploy_to_acquia() {
+function deploy_to_test_site() {
     echo "Deploying $TRAVIS_BRANCH"
 
     cd $TRAVIS_BUILD_DIR
@@ -14,27 +14,17 @@ function deploy_to_acquia() {
         COMMIT_TAG=$TRAVIS_TAG
     fi
 
-    git clone $ACQUIA_REPOSITORY acquia
-    if [ ! -d "acquia" ]
+    git clone git@github.com:BurdaMagazinOrg/thunder-test-site.git thunder-test-site
+    if [ ! -d "thunder-test-site" ]
     then
-        echo 'Could not checkout acquia repository.'
+        echo 'Could not checkout thunder-test-site repository.'
         exit
     fi
-    cd acquia
+    cd thunder-test-site
 
-    if [ "$COMMIT_TAG" == "" ]
-    then
-        git rev-parse --verify origin/$TRAVIS_BRANCH;
-        if [ "$?" == "0" ]
-        then
-            echo "checking out branch $TRAVIS_BRANCH:";
-            git checkout $TRAVIS_BRANCH
-        else
-            echo "checking out new branch $TRAVIS_BRANCH:";
-            git checkout -b $TRAVIS_BRANCH
-            git push -u origin $TRAVIS_BRANCH
-        fi
-    fi
+    git checkout 8.x-1.x
+
+    composer require "burdamagazinorg/thunder:dev-$TRAVIS_BRANCH"
 
     # do not fix line endings, keep everything as is
     echo "* -text" > docroot/.gitattributes
@@ -46,26 +36,8 @@ function deploy_to_acquia() {
     git add --all .
     git commit --quiet -m "$LAST_COMMIT_INFO"
 
-    if [ "$COMMIT_TAG" != "" ]
-    then
-        git tag $COMMIT_TAG
-        git push origin $COMMIT_TAG
-    else
-        git push origin $TRAVIS_BRANCH
-    fi
+    git push
 }
-
-if [ -z $ACQUIA_REPOSITORY ]
-then
-    echo 'Build successful, commit can not be deployed, please provide $ACQUIA_REPOSITORY environment variable.'
-    exit
-fi
-
-if [ -z $ACQUIA_HOST ]
-then
-    echo 'Build successful, commit can not be deployed, please provide $ACQUIA_HOST environment variable.'
-    exit
-fi
 
 if [ $TRAVIS_PULL_REQUEST != "false" ]
 then
@@ -73,5 +45,4 @@ then
     exit
 fi
 
-ssh-keyscan $ACQUIA_HOST >> ~/.ssh/known_hosts
-deploy_to_acquia
+deploy_to_test_site
