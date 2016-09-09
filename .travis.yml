@@ -15,22 +15,11 @@ env:
   #- INSTALL_METHOD=composer
 
 sudo: required
-dist: trusty
 
 # match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
   only:
     - /^8\.([0-9]+|x)\-[0-9]+\.([0-9]+|x)$/
-
-services:
-  - mysql
-
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
 
 mysql:
   database: drupal
