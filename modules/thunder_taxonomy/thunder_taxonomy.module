@@ -30,3 +30,12 @@ function thunder_taxonomy_entity_base_field_info(EntityTypeInterface $entity_typ
     return $fields;
   }
 }
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function thunder_taxonomy_entity_type_alter(array &$entity_types) {
+  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+
+  $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
+}
