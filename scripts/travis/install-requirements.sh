@@ -13,6 +13,7 @@ fi
 if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then
     tar -xf $PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs;
 fi
+phantomjs --version
 
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:~8
