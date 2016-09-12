@@ -1,13 +1,13 @@
-name: 'Thunder Taxonomy'
-description: 'Provide taxonomy functions for Thunder.'
+name: 'Thunder Paragraphs'
+description: 'Provide paragaphs functions for Thunder.'
 type: module
 core: 8.x
 dependencies:
+  - entity_reference_revisions
   - field
   - metatag
   - path
   - taxonomy
-  - thunder_paragraphs
   - text
 version: 8.x-1.x-dev
 package: Thunder
