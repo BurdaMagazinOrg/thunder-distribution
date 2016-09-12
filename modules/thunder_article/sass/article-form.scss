@@ -134,10 +134,7 @@ body {
   height: 40px;
 }
 
-/**
-* Harm want only 1 Label
-**/
-#edit-field-top-paragraphs, #edit-field-paragraphs {
+#edit-field-paragraphs > strong[data-drupal-selector="edit-field-paragraphs-title"] {
   font-size: 0;
   line-height: 0;
 
@@ -174,3 +171,6 @@ body {
   }
 }
 
+.paragraphs-container thead {
+  display: none;
+}
