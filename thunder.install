@@ -18,6 +18,7 @@ function thunder_install() {
     ->set('use_admin_theme', TRUE)
     ->save(TRUE);
 
+  // Set frontend theme.
   \Drupal::configFactory()
     ->getEditable('system.theme')
     ->set('default', 'thunder_base')
@@ -39,4 +40,11 @@ function thunder_install() {
   \Drupal::configFactory()->getEditable('system.site')
     ->set('page.front', '/node')
     ->save(TRUE);
+
+  // Configure user registration.
+  \Drupal::configFactory()
+    ->getEditable('user.settings')
+    ->set('register', 'visitors_admin_approval')
+    ->save(TRUE);
+
 }
