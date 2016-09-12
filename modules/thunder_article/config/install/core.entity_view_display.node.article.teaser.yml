@@ -34,6 +34,10 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+  links:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_channel: true
   field_meta_tags: true
@@ -41,4 +45,3 @@ hidden:
   field_seo_title: true
   field_tags: true
   langcode: true
-  links: true
