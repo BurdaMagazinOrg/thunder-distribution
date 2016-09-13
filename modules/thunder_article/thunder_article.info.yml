@@ -23,6 +23,7 @@ dependencies:
   - text
   - thunder_media
   - thunder_taxonomy
+  - thunder_paragraphs
   - user
 version: 8.x-1.x-dev
 package: Thunder
