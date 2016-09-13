@@ -7,16 +7,16 @@ dependencies:
 id: channel
 label: Channel
 type: 'canonical_entities:taxonomy_term'
-pattern: '[term:thunder-term-parents-all:join-path]'
+pattern: '[term:parents:join-path]/[term:name]'
 selection_criteria:
-  c3226532-5c55-4a42-9098-5f5a331230f0:
+  10250d56-f16e-4847-b5a3-ff9a90e2e1b5:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       channel: channel
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: c3226532-5c55-4a42-9098-5f5a331230f0
+    uuid: 10250d56-f16e-4847-b5a3-ff9a90e2e1b5
 selection_logic: and
 weight: -5
 relationships: {  }
