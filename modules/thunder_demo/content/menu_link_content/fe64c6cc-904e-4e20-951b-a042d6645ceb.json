@@ -1,0 +1,72 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/admin\/structure\/menu\/item\/2\/edit?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/menu_link_content\/menu_link_content"
+        }
+    },
+    "id": [
+        {
+            "value": "2"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "fe64c6cc-904e-4e20-951b-a042d6645ceb"
+        }
+    ],
+    "bundle": [
+        {
+            "value": "menu_link_content"
+        }
+    ],
+    "title": [
+        {
+            "value": "Events"
+        }
+    ],
+    "menu_name": [
+        {
+            "value": "main"
+        }
+    ],
+    "link": [
+        {
+            "uri": "internal:\/taxonomy\/term\/2",
+            "title": "",
+            "options": []
+        }
+    ],
+    "external": [
+        {
+            "value": "0"
+        }
+    ],
+    "rediscover": [
+        {
+            "value": "1"
+        }
+    ],
+    "weight": [
+        {
+            "value": "-48"
+        }
+    ],
+    "expanded": [
+        {
+            "value": "0"
+        }
+    ],
+    "enabled": [
+        {
+            "value": "1"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

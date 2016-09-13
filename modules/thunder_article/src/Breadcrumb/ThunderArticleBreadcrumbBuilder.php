@@ -122,6 +122,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     /** @var \Drupal\Taxonomy\TermInterface $term */
     $term = !(empty($node->field_channel)) ? $node->field_channel->entity : '';
 
+    $links = [];
     if ($term) {
       $breadcrumb->addCacheableDependency($term);
 
@@ -132,8 +133,9 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', array('taxonomy_term' => $term->id()));
       }
     }
-    else {
-      $links[] = Link::createFromRoute($this->t('Home'), '<front>');
+
+    if ($links && $links[0]->getText() != "Home") {
+      array_unshift($links, Link::createFromRoute($this->t('Home'), '<front>'));
     }
 
     return $breadcrumb->setLinks($links);
