@@ -134,7 +134,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       }
     }
 
-    if ($links && $links[0]->getText() != "Home") {
+    if (!$links || $links[0]->getText() != "Home") {
       array_unshift($links, Link::createFromRoute($this->t('Home'), '<front>'));
     }
 
