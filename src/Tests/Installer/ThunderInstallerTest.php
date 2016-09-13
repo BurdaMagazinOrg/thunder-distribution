@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Tests the interactive installer installing the standard profile.
  *
- * @group Thunder
+ * @group ThunderOff
  */
 class ThunderInstallerTest extends InstallerTestBase {
 
