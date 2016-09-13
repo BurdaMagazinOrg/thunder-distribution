@@ -11,7 +11,6 @@ Feature: Article Teaser
     # Create basic channel term.
     Given I am on "admin/structure/taxonomy/manage/channel/add"
     And I fill in "Behat Teaser channel" for "Name"
-    And I fill in "/behat-teasers" for "URL alias"
     And I press "Save"
 
     # Create basic article structure.
@@ -22,7 +21,7 @@ Feature: Article Teaser
     And I wait for page to load content
     And I expand "URL path settings" option in the "Right Sidebar" region
     And I uncheck the box "Generate automatic URL alias"
-    And I fill in "/behat-teasers/article-teaser" for "URL alias" in the "Right Sidebar" region
+    And I fill in "/behat-teaser-channel/article-teaser" for "URL alias" in the "Right Sidebar" region
 
     # Add 'Teaser'.
     And I press "Select entities" in the "Teaser" region
@@ -33,7 +32,7 @@ Feature: Article Teaser
     And I press "Save and publish" for drop-down button in the "Footer Bar" region
 
     # Check channel page.
-    Given I am on "/behat-teasers"
+    Given I am on "/behat-teaser-channel"
     And I wait for "Behat Teaser Title"
     Then I should see the text "Behat Teaser Title"
     Then I should see an image in the "Content" region
