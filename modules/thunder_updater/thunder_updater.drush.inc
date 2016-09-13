@@ -73,11 +73,16 @@ function drush_thunder_updater_apply_patch($module, $version) {
   /** @var \Drupal\thunder_updater\Updater $updater */
   $updater = Drupal::service('thunder_updater.updater');
 
-  $updateReport = $updater->applyPatch($module, $version);
-
   $report = [];
-  foreach ($updateReport as $updateEntry) {
-    $report[] = $updateEntry['action'] . ': ' . $updateEntry['config'];
+  try {
+    $updateReport = $updater->applyPatch($module, $version);
+
+    foreach ($updateReport as $updateEntry) {
+      $report[] = $updateEntry['action'] . ': ' . $updateEntry['config'];
+    }
+  }
+  catch (Exception $e) {
+    $report[] = dt('Exception occurred with message') . ': ' . $e->getMessage();
   }
 
   if (empty($report)) {

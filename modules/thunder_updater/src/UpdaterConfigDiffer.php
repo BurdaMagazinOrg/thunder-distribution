@@ -10,6 +10,11 @@ use Drupal\config_update\ConfigDiffer;
  * Normalization is changed so that it can be 2-way normalization, not 1-way.
  * Also format is adjusted to better supports converting from/to config array.
  *
+ * TODO:
+ * - (de)normalization should be solved properly. It does not support option
+ *   with multiple assoc arrays in array. In Yaml empty line with '-' and then
+ *   parameters after it.
+ *
  * @package Drupal\thunder_updater
  */
 class UpdaterConfigDiffer extends ConfigDiffer {
@@ -84,28 +89,68 @@ class UpdaterConfigDiffer extends ConfigDiffer {
       $lastKey = array_pop($keyPath);
       $currentElement = &$result;
       foreach ($keyPath as $key) {
-        if (!isset($currentElement[$key])) {
+        if ($key === '-') {
+          $key = count($currentElement) - 1;
+        }
+        elseif (!isset($currentElement[$key])) {
           $currentElement[$key] = [];
         }
 
         $currentElement = &$currentElement[$key];
       }
 
+      $value = [];
       if (count($keyValue) === 2) {
         $value = ($keyValue[1] == $this->t('(NULL)')) ? NULL : $keyValue[1];
-        if ($lastKey === '-') {
-          $currentElement[] = $value;
-        }
-        else {
-          $currentElement[$lastKey] = $value;
-        }
+      }
+
+      if ($lastKey === '-') {
+        $currentElement[] = $value;
       }
       else {
-        $currentElement[$lastKey] = [];
+        $currentElement[$lastKey] = $value;
       }
+
     }
 
     return $result;
+  }
+
+  /**
+   * Strip some generic fields (uuid, _core).
+   *
+   * @param mixed $data
+   *   Configuration array.
+   *
+   * @return mixed
+   *   Returns stripped configuration.
+   */
+  protected function stripIgnore($data) {
+    foreach ($this->ignore as $element) {
+      unset($data[$element]);
+    }
+
+    return $data;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function same($source, $target) {
+    $source = $this->stripIgnore($source);
+    $target = $this->stripIgnore($target);
+
+    return parent::same($source, $target);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function diff($source, $target) {
+    $source = $this->stripIgnore($source);
+    $target = $this->stripIgnore($target);
+
+    return parent::diff($source, $target);
   }
 
 }

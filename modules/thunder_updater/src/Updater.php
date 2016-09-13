@@ -11,6 +11,7 @@ use Drupal\Core\Config\NullStorage;
 use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\thunder_updater\Diff3\Diff3;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * TODO:
  * - support for applying multiple patches (skipped update)
+ * - cleanup temp folder.
  *
  * @package Drupal\thunder_updater
  */
@@ -84,6 +86,13 @@ class Updater {
   protected $eventDispatcher;
 
   /**
+   * File system service.
+   *
+   * @var \Drupal\Core\File\FileSystem
+   */
+  protected $fileSystem;
+
+  /**
    * Temporally sub-directory where exports will be saved before applying them.
    *
    * It will be used to generate temporal folder with that prefix.
@@ -139,7 +148,8 @@ class Updater {
     EntityTypeManagerInterface $entity_manager,
     StorageInterface $active_config_storage,
     ConfigFactoryInterface $config_factory,
-    EventDispatcherInterface $dispatcher
+    EventDispatcherInterface $dispatcher,
+    FileSystem $file_system
   ) {
     $this->configDiffer = $config_diff;
     $this->configList = $config_list;
@@ -149,6 +159,7 @@ class Updater {
     $this->configStorage = $active_config_storage;
     $this->configFactory = $config_factory;
     $this->eventDispatcher = $dispatcher;
+    $this->fileSystem = $file_system;
   }
 
   /**
@@ -157,21 +168,23 @@ class Updater {
    * It compares Base vs. Active configuration and creates patch with defined
    * name in patch folder.
    *
-   * @param string $module_name
+   * @param string $moduleName
    *   Module name that will be used to generate patch for it.
-   * @param string $version_name
+   * @param string $versionName
    *   Suffix name for patch. Usually version number.
-   * @param string $patch_type
+   * @param string $patchType
    *   Defined how diff will be calculated.
    *
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
    */
-  public function generatePatch($module_name, $version_name, $patch_type = self::PATCH_TYPE_REVERSE) {
+  public function generatePatch($moduleName, $versionName, $patchType = self::PATCH_TYPE_REVERSE) {
     $updatePatch = [];
 
-    $configurationLists = $this->configList->listConfig('module', $module_name);
-    $configNames = $this->getConfigNames($configurationLists[1]);
+    $configurationLists = $this->configList->listConfig('module', $moduleName);
+
+    // Get required and optional configuration names.
+    $configNames = $this->getConfigNames(array_merge($configurationLists[1], $configurationLists[2]));
 
     foreach ($configNames as $configName) {
       $activeConfig = $this->getConfigFrom(
@@ -183,7 +196,7 @@ class Updater {
       );
 
       if (!$this->configDiffer->same($baseConfig, $activeConfig)) {
-        if ($patch_type == static::PATCH_TYPE_NORMAL) {
+        if ($patchType == static::PATCH_TYPE_NORMAL) {
           $updateDiff = $this->configDiffer->diff(
             $baseConfig,
             $activeConfig
@@ -201,13 +214,40 @@ class Updater {
     }
 
     if (!empty($updatePatch)) {
-      $patchFilePath = $this->getPatchFileName($module_name, $version_name);
-      file_put_contents($patchFilePath, gzencode(serialize($updatePatch)));
+      $patchFilePath = $this->getPatchFileName($moduleName, $versionName);
+      $this->savePatchFile($patchFilePath, $updatePatch);
 
       return $patchFilePath;
     }
 
     return FALSE;
+  }
+
+  /**
+   * Generate patch file.
+   *
+   * It also creates directory if it does not exist.
+   *
+   * @param string $patchFilePath
+   *   Filename with path that should be created.
+   * @param string $data
+   *   Data that will be saved in file.
+   *
+   * @throws \Exception
+   */
+  protected function savePatchFile($patchFilePath, $data) {
+    $directory = dirname($patchFilePath);
+
+    if (!is_dir($directory)) {
+      if ($this->fileSystem->mkdir($directory, NULL, TRUE) === FALSE) {
+        throw new \Exception($this->t('Failed to create directory @directory.', ['@directory' => $directory]));
+      }
+    }
+
+    $updatePatch = gzencode(serialize($data));
+    if (file_put_contents($patchFilePath, $updatePatch) === FALSE) {
+      throw new \Exception($this->t('Failed to write file @filename.', ['@filename' => $patchFilePath]));
+    }
   }
 
   /**
@@ -267,9 +307,9 @@ class Updater {
   /**
    * Apply patch for module and version defined.
    *
-   * @param string $module_name
+   * @param string $moduleName
    *   Module name that will be used to generate patch for it.
-   * @param string $version_name
+   * @param string $versionName
    *   Suffix name for patch. Usually version number.
    *
    * @return array
@@ -278,13 +318,13 @@ class Updater {
    * @throws \Exception
    *   When it's not possible to apply patch.
    */
-  public function applyPatch($module_name, $version_name) {
+  public function applyPatch($moduleName, $versionName) {
     $updateReport = [];
 
     $conflictedConfigurations = [];
     $configNames = [];
 
-    $reverseEdits = $this->getPatchEdits($module_name, $version_name);
+    $reverseEdits = $this->getPatchEdits($moduleName, $versionName);
     foreach ($reverseEdits as $configFullName => $updateEdits) {
       $configName = ConfigName::createByFullName($configFullName);
       $configNames[] = $configName;
@@ -348,6 +388,18 @@ class Updater {
           $existingConfig = $mergedConfigReverter
             ->getFromActive($configName->getType(), $configName->getName());
           if (empty($existingConfig)) {
+
+            if ($this->isOptionalConfig($configName, $moduleName)) {
+              \Drupal::logger('thunder-updater')
+                ->info($this->t('Skipped optional configuration: :config_name', [':config_name' => $configFullName]));
+              $updateReport[] = [
+                'config' => $configFullName,
+                'action' => $this->t('Skipped optional config'),
+              ];
+
+              continue;
+            }
+
             $mergedConfigReverter
               ->import($configName->getType(), $configName->getName());
 
@@ -472,13 +524,31 @@ class Updater {
 
       mkdir($tmpDir);
       if (!is_dir($tmpDir)) {
-        throw new \Exception('Unable to create temporally folder to export merged files.');
+        throw new \Exception('Unable to create temporally folder: ' . $tmpDir . ' - to export merged files.');
       }
 
       $this->mergeFileStorage = new FileStorage($tmpDir);
     }
 
     return $this->mergeFileStorage;
+  }
+
+  /**
+   * Checks if provided configuration name is optional or not.
+   *
+   * @param \Drupal\thunder_updater\ConfigName $configName
+   *   Configuration name object.
+   * @param string $moduleName
+   *   Module name.
+   *
+   * @return bool
+   *   Returns if configuration is optional for defined module.
+   */
+  protected function isOptionalConfig(ConfigName $configName, $moduleName) {
+    $configurationLists = $this->configList->listConfig('module', $moduleName);
+
+    // 2nd list in configuration lists is list of optional configurations.
+    return in_array($configName->getFullName(), $configurationLists[2]);
   }
 
 }

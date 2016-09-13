@@ -5,5 +5,5 @@ services:
 
   thunder_updater.updater:
     class: Drupal\thunder_updater\Updater
-    arguments: ['@thunder_updater.config_diff', '@config_update.config_list', '@config_update.config_update', '@module_handler', '@entity.manager', '@config.storage', '@config.factory', '@event_dispatcher']
+    arguments: ['@thunder_updater.config_diff', '@config_update.config_list', '@config_update.config_update', '@module_handler', '@entity.manager', '@config.storage', '@config.factory', '@event_dispatcher', '@file_system']
 
