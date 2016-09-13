@@ -4,6 +4,7 @@ namespace Drupal\thunder_article\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Link;
 use Drupal\Core\ParamConverter\ParamNotConvertedException;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -49,11 +50,11 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   protected $pathProcessor;
 
   /**
-   * Site config object.
+   * Site configFactory object.
    *
-   * @var \Drupal\Core\Config\Config
+   * @var ConfigFactoryInterface
    */
-  protected $config;
+  protected $configFactory;
 
   /**
    * The title resolver.
@@ -89,9 +90,10 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * @param \Drupal\Core\Entity\EntityManagerInterface $entityManager
    *   EntityManager (entity.manager) service.
    */
-  public function __construct(EntityManagerInterface $entityManager) {
+  public function __construct(EntityManagerInterface $entityManager, ConfigFactoryInterface $configFactory) {
     $this->entityManager = $entityManager;
     $this->termStorage = $entityManager->getStorage('taxonomy_term');
+    $this->configFactory = $configFactory;
   }
 
   /**
@@ -133,8 +135,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', array('taxonomy_term' => $term->id()));
       }
     }
-
-    if (!$links || $links[0]->getText() != "Home") {
+    if (!$links || '/' . $links[0]->getUrl()->getInternalPath() != $this->configFactory->get('system.site')->get('page.front')) {
       array_unshift($links, Link::createFromRoute($this->t('Home'), '<front>'));
     }
 
