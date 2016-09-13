@@ -1,0 +1,55 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/2?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/channel"
+        }
+    },
+    "tid": [
+        {
+            "value": "2"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "0bb70443-8172-4d8e-9335-2876bc32e356"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "channel"
+        }
+    ],
+    "name": [
+        {
+            "value": "Events"
+        }
+    ],
+    "weight": [
+        {
+            "value": "1"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1473759961"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ],
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "field_meta_tags": [
+        {
+            "value": "a:1:{s:8:\"referrer\";s:11:\"no-referrer\";}"
+        }
+    ]
+}

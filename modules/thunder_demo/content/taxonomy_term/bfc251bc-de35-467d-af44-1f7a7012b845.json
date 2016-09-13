@@ -1,0 +1,55 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/1?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/channel"
+        }
+    },
+    "tid": [
+        {
+            "value": "1"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "bfc251bc-de35-467d-af44-1f7a7012b845"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "channel"
+        }
+    ],
+    "name": [
+        {
+            "value": "News"
+        }
+    ],
+    "weight": [
+        {
+            "value": "0"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1473759944"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ],
+    "status": [
+        {
+            "value": "1"
+        }
+    ],
+    "field_meta_tags": [
+        {
+            "value": "a:1:{s:8:\"referrer\";s:11:\"no-referrer\";}"
+        }
+    ]
+}

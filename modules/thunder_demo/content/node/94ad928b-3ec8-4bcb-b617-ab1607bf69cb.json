@@ -110,7 +110,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "164f135e-551b-45a4-9e95-79aafe3f285a"
+                        "value": "bfc251bc-de35-467d-af44-1f7a7012b845"
                     }
                 ]
             }
@@ -188,19 +188,9 @@
             "value": "1"
         }
     ],
-    "created": [
-        {
-            "value": "1463125879"
-        }
-    ],
-    "changed": [
-        {
-            "value": "1463125999"
-        }
-    ],
     "promote": [
         {
-            "value": "1"
+            "value": "0"
         }
     ],
     "sticky": [
