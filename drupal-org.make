@@ -87,6 +87,7 @@ projects[slick_media][type] = module
 projects[slick_media][version] = 1.0-beta3
 projects[token][type] = module
 projects[token][version] = 1.0-beta1
+projects[token][patch][] = https://www.drupal.org/files/issues/current_page_title_-2714257-17.patch
 projects[infinite_module][type] = module
 projects[infinite_module][download][url] = http://git.drupal.org/sandbox/gos77/2677752.git
 projects[infinite_module][download][tag] = 8.x-1.0-beta2
