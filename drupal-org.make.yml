@@ -173,7 +173,9 @@ projects:
   harbourmaster:
     type: "module"
     download:
-      url: "https://www.drupal.org/sandbox/patrick_durold/2791755"
+      url: "https://git.drupal.org/sandbox/patrick_durold/2791755.git"
+      tag: "8.1.1-beta4"
+
   infinite_module:
     type: "module"
     download:
