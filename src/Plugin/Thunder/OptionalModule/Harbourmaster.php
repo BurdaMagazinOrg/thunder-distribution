@@ -9,11 +9,11 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @ThunderOptionalModule(
  *   id = "harbourmaster",
- *   label = @Translation("Adsense"),
+ *   label = @Translation("Harbourmaster"),
  *   type = "module",
  * )
  */
-class Adsense extends AbstractOptionalModule {
+class Harbourmaster extends AbstractOptionalModule {
 
   /**
    * {@inheritdoc}
