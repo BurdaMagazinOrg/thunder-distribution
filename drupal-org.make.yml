@@ -170,6 +170,10 @@ projects:
     type: "module"
     version: "1.0-beta1"
 
+  harbourmaster:
+    type: "module"
+    download:
+      url: "https://www.drupal.org/sandbox/patrick_durold/2791755"
   infinite_module:
     type: "module"
     download:
