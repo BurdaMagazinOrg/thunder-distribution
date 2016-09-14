@@ -3,7 +3,6 @@
 namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 
 /**
  * Adsense.
@@ -38,8 +37,8 @@ class Adsense extends AbstractOptionalModule {
       '#default_value' => '',
       '#pattern' => 'pub-[0-9]+',
       '#description' => t('This is the Google AdSense Publisher ID for the site owner. It is used if no other ID is suitable. Get this in your Google Adsense account. It should be similar to %id.', [
-          '%id' => 'pub-9999999999999',
-        ]
+        '%id' => 'pub-9999999999999',
+      ]
       ),
     ];
 

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains.
+ * Contains media related functions.
  */
 
 use Drupal\file\Entity\File;
@@ -44,7 +44,7 @@ function thunder_media_preprocess_views_view(&$variables) {
 }
 
 /**
- *
+ * Implements hook_page_attachments().
  */
 function thunder_media_page_attachments(array &$page) {
   $page['#attached']['library'][] = 'thunder_media/gallery';

@@ -3,7 +3,6 @@
 namespace Drupal\thunder_taxonomy;
 
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\taxonomy\TermAccessControlHandler;
@@ -23,7 +22,6 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
     switch ($operation) {
       case 'view':
         return AccessResult::allowedIf($account->hasPermission('access content') && $entity->status->value);
-        break;
 
       default:
         return parent::checkAccess($entity, $operation, $account);

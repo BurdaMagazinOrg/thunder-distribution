@@ -116,6 +116,8 @@ class ModuleConfigureForm extends ConfigFormBase {
     $install_state[0]['thunder_additional_modules'] = array_filter($installModules);
     $install_state[0]['form_state_values'] = $form_state->getValues();
 
+    $buildInfo['args'] = $install_state;
+
     $form_state->setBuildInfo($buildInfo);
 
   }

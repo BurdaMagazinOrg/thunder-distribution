@@ -2,11 +2,16 @@
 
 namespace Drupal\thunder_article\Twig;
 
-
-class FilterExtension extends \Twig_Extension{
+/**
+ * Introduce some twig filters.
+ */
+class FilterExtension extends \Twig_Extension {
 
   /**
-   * @return array Declared Twig filters
+   * Returns introduced filters.
+   *
+   * @return array
+   *   Declared Twig filters
    */
   public function getFilters() {
     return array(
@@ -18,15 +23,21 @@ class FilterExtension extends \Twig_Extension{
   /**
    * Returns the name of the extension.
    *
-   * @return string The extension name
+   * @return string
+   *   The extension name
    */
   public function getName() {
     return 'thunder_article_filter_extension';
   }
 
   /**
-   * @param string $value The content to be processed
-   * @return string The processed content
+   * Plains a text. Strips everything evil out.
+   *
+   * @param string $value
+   *   The content to be processed.
+   *
+   * @return string
+   *   The processed content.
    */
   public static function plainText($value) {
     $element = render($value);
@@ -35,9 +46,19 @@ class FilterExtension extends \Twig_Extension{
     return $element;
   }
 
+  /**
+   * Cleans a text and just allow a few tags.
+   *
+   * @param string $value
+   *   The content to be processed.
+   *
+   * @return string
+   *   The processed content.
+   */
   public static function basicFormat($value) {
     $element = render($value);
     $element = strip_tags($element, '<a><em><strong><b><i>');
     return $element;
   }
+
 }

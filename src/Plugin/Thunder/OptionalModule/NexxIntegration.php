@@ -54,4 +54,5 @@ class NexxIntegration extends AbstractOptionalModule {
       ->set('omnia_id', $formValues['omnia_id'])
       ->save(TRUE);
   }
+
 }
