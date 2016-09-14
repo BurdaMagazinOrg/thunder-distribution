@@ -4,12 +4,9 @@ type: module
 core: 8.x
 dependencies:
   - entity_browser
-  - entity_browser_entity_form
   - entity_reference_revisions
   - field
   - field_group
-  - inline_entity_form
-  - link
   - linkit
   - media_entity
   - menu_ui
@@ -20,10 +17,10 @@ dependencies:
   - pathauto
   - scheduler
   - taxonomy
-  - text
   - thunder_media
-  - thunder_taxonomy
   - thunder_paragraphs
+  - thunder_taxonomy
   - user
+  - views
 version: 8.x-1.x-dev
 package: Thunder
