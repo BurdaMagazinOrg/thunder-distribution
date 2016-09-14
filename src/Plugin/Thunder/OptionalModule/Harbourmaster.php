@@ -31,9 +31,10 @@ class Harbourmaster extends AbstractOptionalModule {
       ),
       '#description' => t('Integrates Harbourmaster providing a single sign-on solution for Drupal. You will need an instance of the harbourmaster running. See <a href=":url" target="_blank">harbourmaster documentation</a> for more details.', [
         ':url' => 'https://valiton.github.io/harbourmaster-docs/index.html',
-      ])
+      ]),
     );
 
     return $form;
   }
+
 }
