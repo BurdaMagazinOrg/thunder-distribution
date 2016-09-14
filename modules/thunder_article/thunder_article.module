@@ -8,6 +8,7 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_form_node_article_edit_form_alter().
@@ -61,12 +62,12 @@ function thunder_article_theme($existing, $type, $render, $path) {
  * Implements hook_preprocess_views_view_row_fia().
  */
 function thunder_article_preprocess_views_view_row_fia(&$variables) {
-  if ($variables['row']['#node'] instanceof \Drupal\node\Entity\Node) {
+  if ($variables['row']['#node'] instanceof Node) {
     /** @var \Drupal\node\Entity\Node $node */
     $node = $variables['row']['#node'];
 
     // Add teaser image to fia.
-    if ($media = getFirstParagraphImageEntity($node)) {
+    if ($media = thunder_article_get_first_paragraph_image_entity($node)) {
       $render_controller = \Drupal::entityTypeManager()->getViewBuilder($media->getEntityTypeId());
       $entityRender = $render_controller->view($media, 'facebook_instant_articles_rss', NULL);
 
@@ -125,7 +126,7 @@ function thunder_article_preprocess_node(&$variables) {
         }
       }
       // If first paragraph is the teaser image, don't render it.
-      if (getFirstParagraphImageEntity($variables['node'])) {
+      if (thunder_article_get_first_paragraph_image_entity($variables['node'])) {
         $variables['content']['field_paragraphs'][0]['#access'] = FALSE;
       }
     }
@@ -139,7 +140,7 @@ function thunder_article_preprocess_paragraph(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  if ($variables['view_mode'] == "facebook_instant_articles_rss" && $paragraph instanceof \Drupal\paragraphs\Entity\Paragraph) {
+  if ($variables['view_mode'] == "facebook_instant_articles_rss" && $paragraph instanceof Paragraph) {
     // Force 'basic_html' for text paragraphs.
     if ($paragraph->getType() == 'text') {
       $variables['content']['field_text'][0]['#format'] = "basic_html";
@@ -157,7 +158,7 @@ function thunder_article_preprocess_paragraph(&$variables) {
  *   Returns false, if first paragraph is not an image,
  *   or the according media entity.
  */
-function getFirstParagraphImageEntity($node) {
+function thunder_article_get_first_paragraph_image_entity(Node $node) {
   if (isset($node->field_paragraphs[0]) && $paragraph = $node->field_paragraphs[0]->entity) {
     if ($paragraph->getType() == 'media' && isset($paragraph->field_media->entity) && $paragraph->field_media->entity->bundle() == 'image') {
       return $paragraph->field_media->entity;
@@ -165,4 +166,3 @@ function getFirstParagraphImageEntity($node) {
   }
   return FALSE;
 }
-
