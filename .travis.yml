@@ -12,6 +12,7 @@ php:
 
 services:
   - docker
+  - mysql
 
 env:
   - INSTALL_METHOD=drush_make
