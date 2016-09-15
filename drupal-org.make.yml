@@ -54,7 +54,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha8"
+    version: "1.0-alpha9"
 
   entity_reference_revisions:
     type: "module"
@@ -69,7 +69,7 @@ projects:
 
   features:
     type: "module"
-    version: "3.0-beta8"
+    version: "3.0-beta9"
 
   field_group:
     type: "module"
@@ -152,7 +152,7 @@ projects:
 
   scheduler:
     type: "module"
-    version: "1.0-alpha1"
+    version: "1.0-alpha2"
 
   simple_sitemap:
     type: "module"
