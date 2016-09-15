@@ -159,6 +159,11 @@ function thunder_themes_installed($theme_list) {
       ->set('logo.use_default', 0)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
       ->save(TRUE);
+
+    // Set default pages.
+    \Drupal::configFactory()->getEditable('system.site')
+      ->set('page.front', '/taxonomy/term/1')
+      ->save(TRUE);
   }
 }
 

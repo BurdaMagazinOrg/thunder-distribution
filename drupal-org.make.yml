@@ -54,7 +54,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha8"
+    version: "1.0-alpha9"
 
   entity_reference_revisions:
     type: "module"
@@ -69,7 +69,7 @@ projects:
 
   features:
     type: "module"
-    version: "3.0-beta8"
+    version: "3.0-beta9"
 
   field_group:
     type: "module"
@@ -152,7 +152,7 @@ projects:
 
   scheduler:
     type: "module"
-    version: "1.0-alpha1"
+    version: "1.0-alpha2"
 
   simple_sitemap:
     type: "module"
@@ -169,6 +169,8 @@ projects:
   token:
     type: "module"
     version: "1.0-beta1"
+    patch:
+      - "https://www.drupal.org/files/issues/current_page_title_-2714257-17.patch"
 
   harbourmaster:
     type: "module"
@@ -180,7 +182,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      tag: "8.x-1.0-beta2"
+      tag: "8.x-1.0-beta3"
 
   infinite:
     type: "theme"

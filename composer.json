@@ -43,6 +43,9 @@
       },
       "drupal/paragraphs": {
         "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch"
+      },
+      "drupal/token": {
+        "[current-page:title] not working properly with Image File Directory": "https://www.drupal.org/files/issues/current_page_title_-2714257-17.patch"
       }
     }
   },
@@ -88,7 +91,7 @@
     "drupal/simple_sitemap": "^2.0",
     "drupal/slick": "^1.0",
     "drupal/slick_media": "^1.0",
-    "drupal/token": "^1.0",
+    "drupal/token": "1.0-beta1",
     "drupal/video_embed_field": "^1.0",
     "drupal/views_load_more": "dev-1.x",
     "valiton/harbourmaster": "~8.1"
