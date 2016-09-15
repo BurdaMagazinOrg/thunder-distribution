@@ -169,6 +169,8 @@ projects:
   token:
     type: "module"
     version: "1.0-beta1"
+    patch:
+      - "https://www.drupal.org/files/issues/current_page_title_-2714257-17.patch"
 
   harbourmaster:
     type: "module"
