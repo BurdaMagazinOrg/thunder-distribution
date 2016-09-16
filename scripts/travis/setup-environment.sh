@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ## Setup environment
-export PHANTOMJS_VERSION=2.1.1
-export PATH=$PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64/bin:$PATH
+export PHANTOMJS_VERSION=1.9.8
+# export PATH=$PWD/travis_phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64/bin:$PATH
 
 # add composer's global bin directory to the path
 # see: https://github.com/drush-ops/drush#install---composer
