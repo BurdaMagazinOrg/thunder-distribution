@@ -3,7 +3,7 @@
  *
  * Media related javascripts.
  */
-(function ($) {
+(function ($, Drupal, drupalSettings) {
 
     'use strict';
 
