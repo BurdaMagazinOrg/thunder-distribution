@@ -2,6 +2,10 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Behat\Mink\Driver\Selenium2Driver;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 
 /**
@@ -18,6 +22,76 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected $profile = 'thunder';
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $minkDefaultDriverClass = Selenium2Driver::class;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function initMink() {
+    // Set up the template cache used by the PhantomJS mink driver.
+    $path = $this->tempFilesDirectory . DIRECTORY_SEPARATOR . 'browsertestbase-templatecache';
+
+    $this->minkDefaultDriverArgs = [
+      'firefox',
+      NULL,
+      'http://127.0.0.1:4444/wd/hub',
+    ];
+
+    if (!file_exists($path)) {
+      mkdir($path);
+    }
+
+    try {
+      return parent::initMink();
+    }
+    catch (Exception $e) {
+      $this->markTestSkipped('An unexpected error occurred while starting Mink: ' . $e->getMessage());
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function drupalLogin(AccountInterface $account) {
+    if ($this->loggedInUser) {
+      $this->drupalLogout();
+    }
+
+    $this->drupalGet('user');
+//    $this->assertSession()->statusCodeEquals(200);
+    $this->submitForm(array(
+      'name' => $account->getUsername(),
+      'pass' => $account->passRaw,
+    ), t('Log in'));
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    $account->sessionId = $this->getSession()->getCookie($this->getSessionName());
+    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', array('name' => $account->getUsername())));
+
+    $this->loggedInUser = $account;
+    $this->container->get('current_user')->setAccount($account);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function drupalLogout() {
+    // Make a request to the logout page, and redirect to the user page, the
+    // idea being if you were properly logged out you should be seeing a login
+    // screen.
+    $assert_session = $this->assertSession();
+    $this->drupalGet('user/logout', array('query' => array('destination' => 'user')));
+    $assert_session->fieldExists('name');
+    $assert_session->fieldExists('pass');
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    unset($this->loggedInUser->sessionId);
+    $this->loggedInUser = FALSE;
+    $this->container->get('current_user')->setAccount(new AnonymousUserSession());
+  }
 
   protected function setUp() {
 
@@ -59,5 +133,9 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   protected function waitUntilVisible($selector, $timeout = 1000, $message = '') {
     $condition = "jQuery('" . $selector . ":visible').length > 0";
     $this->assertJsCondition($condition, $timeout, $message);
+  }
+
+  protected function scrollElementInView($cssSelector) {
+    $this->getSession()->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
   }
 }

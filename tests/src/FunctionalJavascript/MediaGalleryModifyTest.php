@@ -2,14 +2,10 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Drupal\file\Entity\File;
-use Drupal\image\Entity\ImageStyle;
-use Drupal\media_entity\Entity\Media;
-
 /**
  * Tests the media modification.
  *
- * @group ThunderOff
+ * @group Thunder
  */
 class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
@@ -30,22 +26,28 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $page = $this->getSession()->getPage();
 
+    $this->scrollElementInView('[name="field_paragraphs_0_edit"]');
     $page->pressButton('field_paragraphs_0_edit');
+
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $editButton = $page->find('css', 'input[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit"]');
     $editButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $selector = "div[data-drupal-selector='edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current']";
-    $this->getSession()->getDriver()->executeScript('jQuery("' . $selector . ' div[data-entity-id=\'media:8\']").simulateDragSortable({ move: 1 });');
+    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]';
 
-    $secondElement = $page->find('css', $selector . ' > div:nth-child(2)');
+    $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
+    $this->getSession()->getDriver()->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
 
-    // Not sure why, but without this call, test fails
-    $this->getSession()->getScreenshot();
+    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
+
+    if (empty($secondElement)) {
+      throw new \Exception('Second element in Gallery is not found');
+    }
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
+
     $this->getSession()->stop();
   }
 
