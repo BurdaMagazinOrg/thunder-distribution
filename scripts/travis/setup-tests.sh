@@ -17,7 +17,7 @@ drush runserver --default-server=builtin 8080 &>/dev/null &
 
 # Setup display for Selenium
 export DISPLAY=:99.0
-/etc/init.d/xvfb start
+bash -e /etc/init.d/xvfb start
 sleep 3
 
 # Download and Run Selenium2 Server

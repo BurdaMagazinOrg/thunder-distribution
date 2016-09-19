@@ -7,6 +7,7 @@ use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Base class for Thunder Javascript functional tests.
@@ -45,7 +46,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     }
 
     try {
-      return parent::initMink();
+      return BrowserTestBase::initMink();
     }
     catch (Exception $e) {
       $this->markTestSkipped('An unexpected error occurred while starting Mink: ' . $e->getMessage());
