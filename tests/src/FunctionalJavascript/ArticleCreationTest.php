@@ -38,6 +38,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     //$this->createScreenshot('before.jpg');
 
+    $this->scrollElementInView('#edit-actions');
     $page->pressButton('Save and publish');
 
 //    $this->assertSession()->titleEquals('Massive gaining seo traffic text');
