@@ -29,6 +29,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   protected $minkDefaultDriverClass = Selenium2Driver::class;
 
   /**
+   * Directory path for saving screenshots.
+   *
+   * @var string
+   */
+  protected $screenshotDirectory = '/tmp/thunder-travis-ci';
+
+  /**
    * {@inheritdoc}
    */
   protected function initMink() {
@@ -136,6 +143,32 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->assertJsCondition($condition, $timeout, $message);
   }
 
+  /**
+   * Get directory for saving of screenshots.
+   *
+   * Directory will be created if it does not already exist.
+   *
+   * @return string
+   *   Return directory path to store screenshots.
+   *
+   * @throws \Exception
+   */
+  protected function getScreenshotFolder() {
+    if (!is_dir($this->screenshotDirectory)) {
+      if (mkdir($this->screenshotDirectory, 0777, TRUE) === FALSE) {
+        throw new \Exception('Unable to create directory: ' . $this->screenshotDirectory);
+      }
+    }
+
+    return realpath($this->screenshotDirectory);
+  }
+
+  /**
+   * Scroll element with defined css selector in middle of browser view.
+   *
+   * @param string $cssSelector
+   *   CSS Selector for element that should be centralized.
+   */
   protected function scrollElementInView($cssSelector) {
     $this->getSession()->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
   }

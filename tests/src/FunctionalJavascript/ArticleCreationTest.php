@@ -38,7 +38,15 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     //$this->createScreenshot('before.jpg');
 
+    $classNameParts = explode('\\', __CLASS__);
+    $className = array_pop($classNameParts);
+
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_1_' . date('Ymd_His') . '.png');
+
     $this->scrollElementInView('#edit-actions');
+
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_2_' . date('Ymd_His') . '.png');
+
     $page->pressButton('Save and publish');
 
 //    $this->assertSession()->titleEquals('Massive gaining seo traffic text');
