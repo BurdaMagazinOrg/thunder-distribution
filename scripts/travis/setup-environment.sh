@@ -29,3 +29,14 @@ export TEST_UPDATE;
 
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
+
+# Behat Params
+BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
+BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
+export BEHAT_PARAMS
+
+# Setup Selenium2 parameters
+export DISPLAY=:99.0
+
+SELENIUM_PATH="$PWD/travis_selenium"
+export SELENIUM_PATH

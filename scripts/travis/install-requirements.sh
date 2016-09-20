@@ -15,6 +15,15 @@ if [ $(phantomjs --version) != ${PHANTOMJS_VERSION} ]; then
 fi
 phantomjs --version
 
+# download + install Selenium2
+if [ ! -d "$SELENIUM_PATH" ]; then
+  mkdir -p $SELENIUM_PATH;
+fi
+
+if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar" ]; then
+  wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar"
+fi
+
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:~8
 phpenv rehash
@@ -25,9 +34,6 @@ drush verify-makefile
 
 # Install and configure behat
 composer global require "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
-BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
-BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
-export BEHAT_PARAMS
 
 # install image magick
 printf "\n" | pecl install imagick
