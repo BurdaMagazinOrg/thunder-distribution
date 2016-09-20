@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-
 trait ThunderParagraphsTestTrait {
 
   protected $paragraphCount;

@@ -12,6 +12,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderParagraphsTestTrait;
   use ThunderMediaTestTrait;
 
+  /**
+   * Test Creation of Article.
+   */
   public function testCreateArticle() {
     $this->drupalGet('node/add/article');
 
@@ -47,10 +50,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_2_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and publish');
+    $page->pressButton('Save as unpublished');
 
-//    $this->assertSession()->titleEquals('Massive gaining seo traffic text');
+    $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
+
     #$this->assertSession()->pageTextContains('Awesome text');
     #$this->assertSession()->pageTextContains('Awesome quote');
 
@@ -61,4 +65,5 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->getSession()->stop();
   }
+
 }

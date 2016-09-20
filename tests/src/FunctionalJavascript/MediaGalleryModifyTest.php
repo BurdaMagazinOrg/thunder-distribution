@@ -3,7 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Tests the media modification.
+ * Tests the Gallery media modification.
  *
  * @group Thunder
  */
@@ -19,7 +19,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     'thunder_test',
   ];
 
-
+  /**
+   * Test order change for Gallery.
+   *
+   * @throws \Exception
+   */
   public function testOrderChange() {
 
     $this->drupalGet("node/7/edit");
@@ -38,7 +42,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]';
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
-    $this->getSession()->getDriver()->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
+    $this->getSession()
+      ->getDriver()
+      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
 
     $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
 

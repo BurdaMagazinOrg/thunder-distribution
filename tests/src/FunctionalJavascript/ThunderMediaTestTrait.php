@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-
 trait ThunderMediaTestTrait {
 
   /**
@@ -33,7 +32,6 @@ trait ThunderMediaTestTrait {
 
     $this->getSession()->switchToIFrame();
     $this->assertSession()->assertWaitOnAjaxRequest();
-
 
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] img');
   }

@@ -69,14 +69,14 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     }
 
     $this->drupalGet('user');
-//    $this->assertSession()->statusCodeEquals(200);
     $this->submitForm(array(
       'name' => $account->getUsername(),
       'pass' => $account->passRaw,
     ), t('Log in'));
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
-    $account->sessionId = $this->getSession()->getCookie($this->getSessionName());
+    $account->sessionId = $this->getSession()
+      ->getCookie($this->getSessionName());
     $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', array('name' => $account->getUsername())));
 
     $this->loggedInUser = $account;
@@ -98,9 +98,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     unset($this->loggedInUser->sessionId);
     $this->loggedInUser = FALSE;
-    $this->container->get('current_user')->setAccount(new AnonymousUserSession());
+    $this->container->get('current_user')
+      ->setAccount(new AnonymousUserSession());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
 
     parent::setUp();
@@ -111,6 +115,12 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->drupalLogin($editor);
   }
 
+  /**
+   * Opening of Inline Entity Form.
+   *
+   * @param string $fieldName
+   *   Field Name.
+   */
   protected function openIefComplex($fieldName) {
 
     $page = $this->getSession()->getPage();
@@ -170,6 +180,26 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   CSS Selector for element that should be centralized.
    */
   protected function scrollElementInView($cssSelector) {
-    $this->getSession()->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
+    $this->getSession()
+      ->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
   }
+
+  /**
+   * Assert page title.
+   *
+   * @param string $expectedTitle
+   *   Expected title.
+   */
+  protected function assertPageTitle($expectedTitle) {
+    $driver = $this->getSession()->getDriver();
+    if ($driver instanceof Selenium2Driver) {
+      $actualTitle = $driver->getWebDriverSession()->title();
+
+      static::assertTrue($expectedTitle === $actualTitle, 'Title found');
+    }
+    else {
+      $this->assertSession()->titleEquals($expectedTitle);
+    }
+  }
+
 }
