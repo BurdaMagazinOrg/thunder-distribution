@@ -39,8 +39,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Paragraph 4
     #$this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
-    //$this->createScreenshot('before.jpg');
-
     $classNameParts = explode('\\', __CLASS__);
     $className = array_pop($classNameParts);
 
@@ -60,8 +58,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     #$this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(1) img');
     #$this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
-
-    //$this->createScreenshot('after.jpg');
 
     $this->getSession()->stop();
   }
