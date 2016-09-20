@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @ThunderOptionalModule(
  *   id = "harbourmaster",
- *   label = @Translation("Harbourmaster"),
+ *   label = @Translation("Harbourmaster SSO connector"),
  *   description = @Translation("Harbourmaster is providing a single sign-on solution."),
  *   type = "module",
  * )
@@ -21,16 +21,11 @@ class Harbourmaster extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['harbourmaster'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Harbourmaster SSO connector'),
-      '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[harbourmaster]"]' => array('checked' => TRUE),
-        ),
-      ),
-      '#description' => t('Integrates Harbourmaster providing a single sign-on solution for Drupal. You will need an instance of the harbourmaster running. See <a href=":url" target="_blank">harbourmaster documentation</a> for more details.', [
+    $form = parent::buildForm($form, $form_state);
+
+    $form['harbourmaster']['description'] = array(
+      '#type' => 'item',
+      '#markup' => $this->t('Integrates Harbourmaster providing a single sign-on solution for Drupal. You will need an instance of the harbourmaster running. See <a href=":url" target="_blank">harbourmaster documentation</a> for more details.', [
         ':url' => 'https://valiton.github.io/harbourmaster-docs/index.html',
       ]),
     );

@@ -78,7 +78,7 @@ class ModuleConfigureForm extends ConfigFormBase {
 
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
-      $form['install_modules[' . $provider['id'] . ']'] = array(
+      $form['install_modules_' . $provider['id']] = array(
         '#type' => 'checkbox',
         '#title' => $provider['label'],
         '#description' => isset($provider['description']) ? $provider['description'] : '',
@@ -105,13 +105,21 @@ class ModuleConfigureForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $installModules = $form_state->getUserInput('install_modules')['install_modules'];
+    $installModules = [];
+
+    foreach ($form_state->getValues() as $key => $value) {
+
+      if (strpos($key, 'install_modules') !== FALSE && $value) {
+        preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
+        $installModules[] = $values['name'];
+      }
+    }
 
     $buildInfo = $form_state->getBuildInfo();
 
     $install_state = $buildInfo['args'];
 
-    $install_state[0]['thunder_additional_modules'] = array_keys($installModules);
+    $install_state[0]['thunder_additional_modules'] = $installModules;
     $install_state[0]['form_state_values'] = $form_state->getValues();
 
     $buildInfo['args'] = $install_state;

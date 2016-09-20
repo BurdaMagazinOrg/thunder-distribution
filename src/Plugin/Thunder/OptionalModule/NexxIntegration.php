@@ -21,17 +21,12 @@ class NexxIntegration extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['nexx_integration'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Nexx video'),
-      '#open' => TRUE,
-      '#description' => $this->t('Register a new account at <a href=":nexx_url" target="_blank">http://www.nexx.tv/thunder</a> and get a domain ID and an installation code. You can provide theme right here or at a later stage on the nexx Settings form',
+    $form = parent::buildForm($form, $form_state);
+
+    $form['nexx_integration']['description'] = array(
+      '#type' => 'item',
+      '#markup' => $this->t('Register a new account at <a href=":nexx_url" target="_blank">http://www.nexx.tv/thunder</a> and get a domain ID and an installation code. You can provide theme right here or at a later stage on the nexx Settings form',
         [':nexx_url' => 'http://www.nexx.tv/thunder']),
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[nexx_integration]"]' => array('checked' => TRUE),
-        ),
-      ),
     );
 
     $form['nexx_integration']['omnia_id'] = array(

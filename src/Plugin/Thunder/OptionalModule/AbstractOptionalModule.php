@@ -66,6 +66,28 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    // Check if this method is overridden.
+    $reflection = new \ReflectionClass($this);
+    foreach ($reflection->getMethods() as $method) {
+      if ($method->name == 'buildForm') {
+        if ($method->class != get_class($this)) {
+          return $form;
+        }
+      }
+    }
+
+    $form[$this->getBaseId()] = array(
+      '#type' => 'details',
+      '#title' => $this->pluginDefinition['label'],
+      '#open' => TRUE,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="install_modules_' . $this->getBaseId() . '"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
     return $form;
   }
 

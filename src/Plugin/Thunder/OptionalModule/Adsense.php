@@ -21,16 +21,8 @@ class Adsense extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['adsense'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Adsense'),
-      '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[adsense]"]' => array('checked' => TRUE),
-        ),
-      ),
-    );
+    $form = parent::buildForm($form, $form_state);
+
     $form['adsense']['adsense_basic_id'] = [
       '#type' => 'textfield',
       '#title' => t('Site Google AdSense Publisher ID'),
