@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "ivw_integration",
  *   label = @Translation("IVW Integration"),
+ *   description = @Translation("Integration module for the German audience measurement organisation IVW."),
  *   type = "module",
  * )
  */

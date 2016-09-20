@@ -65,33 +65,30 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    drupal_get_messages();
+    $form['description'] = array(
+      '#type' => 'item',
+      '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
+    );
 
-    $installableModules = [];
-    $defaultValues = [];
+    $form['install_modules'] = array(
+      '#type' => 'container',
+    );
 
     foreach ($this->optionalModulesManager->getDefinitions() as $provider) {
 
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
-      $installableModules[$provider['id']] = $provider['label'];
-
-      if ($instance->isStandardlyEnabled()) {
-        $defaultValues[] = $provider['id'];
-      }
+      $form['install_modules[' . $provider['id'] . ']'] = array(
+        '#type' => 'checkbox',
+        '#title' => $provider['label'],
+        '#description' => isset($provider['description']) ? $provider['description'] : '',
+        '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
+      );
 
       $form = $instance->buildForm($form, $form_state);
 
     }
     $form['#title'] = $this->t('Install & configure modules');
-
-    $form['install_modules'] = array(
-      '#type' => 'checkboxes',
-      '#options' => $installableModules,
-      '#title' => t('Which module do you also like to install?'),
-      '#weight' => -1,
-      '#default_value' => $defaultValues,
-    );
 
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['save'] = array(
@@ -108,12 +105,13 @@ class ModuleConfigureForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $installModules = $form_state->getValue('install_modules');
+    $installModules = $form_state->getUserInput('install_modules')['install_modules'];
+
     $buildInfo = $form_state->getBuildInfo();
 
     $install_state = $buildInfo['args'];
 
-    $install_state[0]['thunder_additional_modules'] = array_filter($installModules);
+    $install_state[0]['thunder_additional_modules'] = array_keys($installModules);
     $install_state[0]['form_state_values'] = $form_state->getValues();
 
     $buildInfo['args'] = $install_state;

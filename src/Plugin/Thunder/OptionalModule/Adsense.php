@@ -9,7 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @ThunderOptionalModule(
  *   id = "adsense",
- *   label = @Translation("Adsense"),
+ *   label = @Translation("AdSense"),
+ *   description = @Translation("With Google AdSense, you can earn money from your online content."),
  *   type = "module",
  * )
  */

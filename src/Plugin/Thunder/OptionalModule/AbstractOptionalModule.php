@@ -126,14 +126,4 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
       ->save();
   }
 
-  /**
-   * Check is optional module enabled.
-   *
-   * @return int
-   *   Return status as int 0|1.
-   */
-  public function isStandardlyEnabled() {
-    return 0;
-  }
-
 }

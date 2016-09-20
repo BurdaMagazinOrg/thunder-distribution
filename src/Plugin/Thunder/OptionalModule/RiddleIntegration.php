@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "paragraphs_riddle_marketplace",
  *   label = @Translation("Riddle integration"),
+ *   description = @Translation("Riddle makes it easy to quickly create beautiful and highly shareable quizzes, tests, lists, polls, and more."),
  *   type = "module",
  * )
  */

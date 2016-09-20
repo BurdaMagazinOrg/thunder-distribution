@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "harbourmaster",
  *   label = @Translation("Harbourmaster"),
+ *   description = @Translation("Harbourmaster is providing a single sign-on solution."),
  *   type = "module",
  * )
  */
