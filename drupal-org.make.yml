@@ -39,10 +39,7 @@ projects:
 
   default_content:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/default_content.git"
-      revision: "c6a79ee2ffc71b0136d4988871618e05d8be4018"
-      branch: "8.x-1.x"
+    version: "1.0-alpha3"
 
   dropzonejs:
     type: "module"
@@ -144,7 +141,7 @@ projects:
 
   pathauto:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1.0-beta1"
 
   riddle_marketplace:
     type: "module"
