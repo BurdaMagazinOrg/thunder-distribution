@@ -24,7 +24,7 @@ drush dl drupalorg_drush-7.x
 drush verify-makefile
 
 # Install and configure behat
-composer global require "behat/behat:3.1.0" "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
+composer global require "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
 BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
 BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
 export BEHAT_PARAMS
