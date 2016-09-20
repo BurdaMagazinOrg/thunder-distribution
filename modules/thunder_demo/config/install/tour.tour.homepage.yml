@@ -8,9 +8,7 @@ label: Homepage
 module: thunder_demo
 routes:
   -
-    route_name: entity.taxonomy_term.canonical
-    route_params:
-      taxonomy_term: '1'
+    route_name: view.frontpage.page_1
 tips:
   homepage:
     id: homepage

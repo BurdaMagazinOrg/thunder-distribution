@@ -5,7 +5,7 @@ thunder_media.configuration_form:
     _form: '\Drupal\thunder_media\Form\ConfigurationForm'
     _title: 'ConfigurationForm'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'administer site configuration'
   options:
     _admin_route: TRUE
 

@@ -3,10 +3,14 @@ description: 'Provide taxonomy functions for Thunder.'
 type: module
 core: 8.x
 dependencies:
+  - ctools
+  - entity_reference_revisions
   - field
   - metatag
+  - paragraphs
   - path
+  - pathauto
   - taxonomy
-  - text
+  - thunder_paragraphs
 version: 8.x-1.x-dev
 package: Thunder

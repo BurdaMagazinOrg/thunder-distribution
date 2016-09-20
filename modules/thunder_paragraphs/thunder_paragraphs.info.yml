@@ -1,0 +1,16 @@
+name: 'Thunder Paragraphs'
+description: 'Provide paragaphs functions for Thunder.'
+type: module
+core: 8.x
+dependencies:
+  - entity_browser
+  - entity_browser_entity_form
+  - field
+  - inline_entity_form
+  - link
+  - media_entity
+  - paragraphs
+  - text
+  - thunder_media
+version: 8.x-1.x-dev
+package: Thunder

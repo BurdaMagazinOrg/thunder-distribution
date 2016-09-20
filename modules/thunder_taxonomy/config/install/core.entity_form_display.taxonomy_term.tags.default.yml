@@ -3,27 +3,31 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.tags.field_meta_tags
+    - field.field.taxonomy_term.tags.field_paragraphs
     - taxonomy.vocabulary.tags
   module:
     - metatag
+    - paragraphs
     - path
-    - text
 id: taxonomy_term.tags.default
 targetEntityType: taxonomy_term
 bundle: tags
 mode: default
 content:
-  description:
-    type: text_textarea
-    weight: 4
-    settings:
-      placeholder: ''
-      rows: 5
-    third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 6
+    weight: 4
     settings: {  }
+    third_party_settings: {  }
+  field_paragraphs:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -39,13 +43,14 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 3
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 5
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  description: true

@@ -3,26 +3,30 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.tags.field_meta_tags
+    - field.field.taxonomy_term.tags.field_paragraphs
     - taxonomy.vocabulary.tags
   module:
+    - entity_reference_revisions
     - metatag
-    - text
 id: taxonomy_term.tags.default
 targetEntityType: taxonomy_term
 bundle: tags
 mode: default
 content:
-  description:
-    label: hidden
-    type: text_default
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
   field_meta_tags:
     weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
 hidden:
+  description: true
   langcode: true

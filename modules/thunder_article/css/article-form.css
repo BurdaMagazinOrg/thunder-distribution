@@ -130,15 +130,15 @@ body .field-multiple-table .fieldset-wrapper > .form-wrapper > * {
   height: 40px;
 }
 
-/**
-* Harm want only 1 Label
-**/
-/* line 140, ../sass/article-form.scss */
-#edit-field-top-paragraphs,
-#edit-field-paragraphs {
+#edit-field-paragraphs > strong[data-drupal-selector="edit-field-paragraphs-title"] {
   font-size: 0;
   line-height: 0;
 }
+
+.paragraphs-container thead {
+  display: none;
+}
+
 /* line 144, ../sass/article-form.scss */
 #edit-field-top-paragraphs > *,
 #edit-field-paragraphs > * {

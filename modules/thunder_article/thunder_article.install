@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Thunder Article install hooks.
+ */
+
+/**
+ * Implements hook_update().
+ */
+function thunder_article_update_8001() {
+
+  $modules = \Drupal::configFactory()
+    ->getEditable('core.extension')
+    ->get('module');
+
+  $modules['thunder_paragraphs'] = 1;
+
+  \Drupal::configFactory()
+    ->getEditable('core.extension')
+    ->set('module', $modules)
+    ->save();
+
+}

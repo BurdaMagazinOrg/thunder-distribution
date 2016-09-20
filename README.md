@@ -6,37 +6,55 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 
 ## What's installed by default?
 
-* admin_toolbar
-* field_group
-* focal_point
-* entity_embed
-* imagemagick
-* inline_entity_form
-* metatag
-* media_entity
-* media_entity_image
-* media_entity_slideshow
-* scheduler
-* pathauto
-* paragraphs
+* Admin Toolbar
+* Better Normalizers
+* Blazy
+* Dropzonejs
+* Entity API
+* Entity Browser
+* Field Group
+* Focal Point
+* Inline Entity Form
+* Libraries API
+* Linkit - Enriched linking experience
+* Metatag
+* Media Entiy
+* Media entity image
+* Media entity slideshow
+* Media entity Instagram
+* Media entity twitter
+* Paragraphs
+* Pathauto
+* Scheduler
+* Simple XML sitemap
+* Slick
+* Slick media
+* Token
+* Video Embed Field
 
-Plus some pre-configured content-types
+Plus some base configuration:
 
 * A channel taxonomy
-* An article with some base fields
-* Image, gallery and video media types
-* A set of commonly used paragraph types:
+* An article content type with some base fields
+* Image, gallery, social media and video media types
+* A set of commonly used paragraph types
     * Gallery
     * Instagram
     * Image
+    * Twitter
     * Video
-    
+* Pre configured role for editorial staff
+ 
 ## What can be activated optionally?
 
-* googleanalytics
-* ivm
-* breakpoint js settings
-* riddle
+* Google AdSense integration
+* Google Analytics
+* Riddle Marketplace
+* IVW
+* Nexx Video Player
+* Facebook Instant Articles
+* Valiton Harbourmaster SSO
+
 
 [Here](https://burdamagazinorg.gitbooks.io/thunder/content/) you can find more information about these modules.
 
@@ -46,6 +64,12 @@ Download thunder from the [distribution page](https://www.drupal.org/project/thu
 
 ```
 drush dl thunder
+```
+
+If you want to install Thunder with composer (recommended) do the following:
+
+```
+composer create-project 'burdamagazinorg/thunder-project:~8.1.0' MYPROJECT --stability dev  --no-interaction
 ```
 
 For further information follow the [install instructions](https://www.drupal.org/documentation/install). 
