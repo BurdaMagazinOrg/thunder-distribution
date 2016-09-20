@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_taxonomy;
+namespace Drupal\thunder_taxonomy_access;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
