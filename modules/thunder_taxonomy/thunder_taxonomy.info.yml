@@ -1,5 +1,5 @@
 name: 'Thunder Taxonomy'
-description: 'Provide taxonomy functions for Thunder.'
+description: 'Provide taxonomy configuration for Thunder.'
 type: module
 core: 8.x
 dependencies:
