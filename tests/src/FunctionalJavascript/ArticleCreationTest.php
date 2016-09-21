@@ -25,30 +25,29 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $page->fillField('title[0][value]', 'Test article');
     $page->fillField('field_seo_title[0][value]', 'Massive gaining seo traffic text');
 
-    #$this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    // Paragraph 1
-    #$this->addMediaParagraph('field_paragraphs', ['media:5']);
+    // Paragraph 1.
+    $this->addMediaParagraph('field_paragraphs', ['media:5']);
 
-    // Paragraph 2
-    #$this->addTextParagraph('field_paragraphs', 'Awesome text');
+    // Paragraph 2.
+    $this->addTextParagraph('field_paragraphs', 'Awesome text');
 
-    // Paragraph 3
-    #$this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
+    // Paragraph 3.
+    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
 
-    // Paragraph 4
-    #$this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
+    // Paragraph 4.
+    $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
-    $classNameParts = explode('\\', __CLASS__);
-    $className = array_pop($classNameParts);
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_1_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_1_' . date('Ymd_His') . '.png');
 
     $this->scrollElementInView('#edit-actions');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_2_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_2_' . date('Ymd_His') . '.png');
 
     $page->pressButton('Save as unpublished');
+
+    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_3_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');

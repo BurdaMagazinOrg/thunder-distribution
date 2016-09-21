@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Behat\Mink\Element\DocumentElement;
+
 trait ThunderMediaTestTrait {
 
   /**
@@ -11,6 +13,7 @@ trait ThunderMediaTestTrait {
    */
   public function selectMedia($fieldName, $entityBrowser, $medias) {
 
+    /** @var DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     $selectButton = $page->find('css', 'input[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-entity-browser-entity-browser-open-modal"]');
@@ -21,7 +24,7 @@ trait ThunderMediaTestTrait {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
-      $page->checkField("entity_browser_select[$media]");
+      $this->getSession()->executeScript("jQuery('[name=\"entity_browser_select[$media]\"]').prop('checked', true);");
     }
 
     $page->pressButton('Select entities');

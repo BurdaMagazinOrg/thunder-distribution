@@ -19,7 +19,8 @@ trait ThunderParagraphsTestTrait {
 
     if (!isset($this->paragraphCount[$fieldName])) {
       $this->paragraphCount[$fieldName] = 0;
-    } else {
+    }
+    else {
       $this->paragraphCount[$fieldName]++;
     }
 
@@ -47,7 +48,6 @@ trait ThunderParagraphsTestTrait {
 
   }
 
-
   public function addTextParagraph($fieldName, $text, $type = 'text') {
 
     $this->addParagraph($fieldName, $type);
@@ -59,6 +59,9 @@ trait ThunderParagraphsTestTrait {
 
     $ckEditorId = $ckEditor->getAttribute('id');
 
-    $this->getSession()->getDriver()->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+    $this->getSession()
+      ->getDriver()
+      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
   }
+
 }
