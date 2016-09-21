@@ -53,7 +53,7 @@ function thunder_module_install(&$install_state) {
   $batch = [];
   if ($modules) {
     $operations = array();
-    foreach ($modules as $module => $weight) {
+    foreach ($modules as $module) {
       $operations[] = array(
         '_thunder_install_module_batch',
         array(array($module), $module, $install_state['form_state_values']),

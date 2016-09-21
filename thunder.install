@@ -12,6 +12,8 @@ use Drupal\user\Entity\User;
  */
 function thunder_install() {
 
+  drupal_get_messages();
+
   // Enable the admin theme.
   \Drupal::configFactory()
     ->getEditable('node.settings')
