@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__article
+label: 'Content: Article'
+tags:
+  image_src: '[node:field_teaser_media:entity:field_image]'
+  referrer: no-referrer
+  og_image: '[node:field_teaser_media:entity:field_image:facebook]'
+  og_image_height: '[node:field_teaser_media:entity:field_image:facebook:height]'
+  og_image_type: '[node:field_teaser_media:entity:field_image:facebook:mimetype]'
+  og_image_width: '[node:field_teaser_media:entity:field_image:facebook:width]'
+  og_type: article
+  og_updated_time: '[node:changed:html_datetime]'
+  twitter_cards_image: '[node:field_teaser_media:entity:field_image:medium]'
+  twitter_cards_image_height: '[node:field_teaser_media:entity:field_image:medium:height]'
+  twitter_cards_image_width: '[node:field_teaser_media:entity:field_image:medium:width]'
+  twitter_cards_type: summary
