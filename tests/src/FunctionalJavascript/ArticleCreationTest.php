@@ -59,9 +59,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->pageTextContains('Awesome quote');
 
     $this->assertSession()
-      ->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(1) img');
+      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img');
     $this->assertSession()
-      ->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
+      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//img');
 
     $this->getSession()->stop();
   }
