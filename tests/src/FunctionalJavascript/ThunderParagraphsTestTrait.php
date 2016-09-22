@@ -2,10 +2,28 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+/**
+ * Trait for handling of Paragraph related test actions.
+ *
+ * @package Drupal\Tests\thunder\FunctionalJavascript
+ */
 trait ThunderParagraphsTestTrait {
 
+  /**
+   * Counter used to count number of added Paragraphs.
+   *
+   * @var int $paragraphCount
+   */
   protected $paragraphCount;
 
+  /**
+   * Add paragraph for field with defined paragraph type.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $type
+   *   Type of the paragraph.
+   */
   public function addParagraph($fieldName, $type) {
 
     $page = $this->getSession()->getPage();
@@ -32,6 +50,14 @@ trait ThunderParagraphsTestTrait {
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $this->paragraphCount[$fieldName] . '-subform"]');
   }
 
+  /**
+   * Add Media paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param array $media
+   *   List of media identifiers.
+   */
   public function addMediaParagraph($fieldName, $media) {
 
     $this->addParagraph($fieldName, 'media');
@@ -41,7 +67,16 @@ trait ThunderParagraphsTestTrait {
 
   }
 
-
+  /**
+   * Add Gallery paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $name
+   *   Name of the gallery.
+   * @param array $media
+   *   List of media identifiers.
+   */
   public function addGalleryParagraph($fieldName, $name, $media) {
 
     $this->addParagraph($fieldName, 'gallery');
@@ -53,6 +88,16 @@ trait ThunderParagraphsTestTrait {
 
   }
 
+  /**
+   * Adding text type paragraphs.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $text
+   *   Text for paragraph.
+   * @param string $type
+   *   Type of text paragraph.
+   */
   public function addTextParagraph($fieldName, $text, $type = 'text') {
 
     $this->addParagraph($fieldName, $type);

@@ -34,7 +34,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph('field_paragraphs', 'Awesome text');
 
     // Paragraph 3.
-    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', ['media:1', 'media:5']);
+    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', [
+      'media:1',
+      'media:5',
+    ]);
 
     // Paragraph 4.
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
@@ -52,11 +55,13 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
 
-    #$this->assertSession()->pageTextContains('Awesome text');
-    #$this->assertSession()->pageTextContains('Awesome quote');
+    $this->assertSession()->pageTextContains('Awesome text');
+    $this->assertSession()->pageTextContains('Awesome quote');
 
-    #$this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(1) img');
-    #$this->assertSession()->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
+    $this->assertSession()
+      ->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(1) img');
+    $this->assertSession()
+      ->elementExists('css', '.field--name-field-paragraphs > div.field__item:nth-child(3) img');
 
     $this->getSession()->stop();
   }
