@@ -6,6 +6,8 @@
  */
 
 use Drupal\user\Entity\User;
+use \Drupal\Core\Entity\EntityStorageException;
+use \Drupal\metatag\Entity\MetatagDefaults;
 
 /**
  * Install the thunder installation profile.
@@ -49,4 +51,42 @@ function thunder_install() {
     ->set('register', 'visitors_admin_approval')
     ->save(TRUE);
 
+}
+
+/**
+ * Adds metatag configuration.
+ */
+function thunder_update_8001() {
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+    'metatag_open_graph',
+    'metatag_twitter_cards',
+  ]);
+
+  $configs = [
+    'metatag_defaults' => ['node__article'],
+    'image_style' => ['twitter', 'facebook'],
+  ];
+
+  foreach ($configs as $entity => $ids) {
+    foreach ($ids as $id) {
+      try {
+        \Drupal::service('config_update.config_update')->import($entity, $id);
+      }
+      catch (EntityStorageException $e) {
+      }
+    }
+  }
+
+  $meta = MetatagDefaults::load('global');
+  $tags = $meta->get('tags');
+  if (empty($tags['og_site_name'])) {
+    $tags['og_site_name'] = '[site:name]';
+  }
+  if (empty($tags['twitter_cards_type'])) {
+    $tags['twitter_cards_type'] = 'summary';
+  }
+  $meta->set('tags', $tags);
+  $meta->save();
 }
