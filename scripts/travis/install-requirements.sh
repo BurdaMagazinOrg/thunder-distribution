@@ -32,8 +32,5 @@ drush dl drupalorg_drush-7.x
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
 drush verify-makefile
 
-# Install and configure behat
-composer global require "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
-
 # install image magick
 printf "\n" | pecl install imagick
