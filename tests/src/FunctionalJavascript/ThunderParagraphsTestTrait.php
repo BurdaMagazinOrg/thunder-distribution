@@ -10,11 +10,16 @@ trait ThunderParagraphsTestTrait {
 
     $page = $this->getSession()->getPage();
 
-    $toggleButton = $page->find('css', '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button');
+    $toggleButtonSelector = '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button';
+    $toggleButton = $page->find('css', $toggleButtonSelector);
+    $this->scrollElementInView($toggleButtonSelector);
+
     $toggleButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->pressButton("${fieldName}_${type}_add_more");
+    $addMoreButtonName = "${fieldName}_${type}_add_more";
+    $this->scrollElementInView("[name=\"$addMoreButtonName\"]");
+    $page->pressButton($addMoreButtonName);
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     if (!isset($this->paragraphCount[$fieldName])) {

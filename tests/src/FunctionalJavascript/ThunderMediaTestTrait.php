@@ -13,11 +13,21 @@ trait ThunderMediaTestTrait {
    */
   public function selectMedia($fieldName, $entityBrowser, $medias) {
 
+    $classNameParts = explode('\\', __CLASS__);
+    $className = array_pop($classNameParts);
+
     /** @var DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $selectButton = $page->find('css', 'input[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-entity-browser-entity-browser-open-modal"]');
-    $selectButton->click();
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_TM1_' . date('Ymd_His') . '.png');
+
+    $buttonName = $fieldName . '_entity_browser_entity_browser';
+    $this->scrollElementInView("[name=\"{$buttonName}\"]");
+    $page->pressButton($buttonName);
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_TM2_' . date('Ymd_His') . '.png');
 
     $this->getSession()
       ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
@@ -56,4 +66,5 @@ trait ThunderMediaTestTrait {
 
     $this->selectMedia("${fieldName}_form_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
   }
+
 }
