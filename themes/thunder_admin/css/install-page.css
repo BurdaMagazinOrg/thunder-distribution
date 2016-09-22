@@ -59,9 +59,3 @@ body {
   }
 
 }
-
-
-/* hack to prevent error message till problem is resolved */
-.messages--error {
-  display: none;
-}
