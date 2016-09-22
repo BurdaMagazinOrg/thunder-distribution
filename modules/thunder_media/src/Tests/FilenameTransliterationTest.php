@@ -8,7 +8,7 @@ use Drupal\thunder\ThunderBaseTest;
 /**
  * Tests for transliteration of file names.
  *
- * @group ThunderOff
+ * @group Thunder
  */
 class FilenameTransliterationTest extends ThunderBaseTest {
 

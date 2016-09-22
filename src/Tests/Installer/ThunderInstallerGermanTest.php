@@ -5,7 +5,7 @@ namespace Drupal\thunder\Tests\Installer;
 /**
  * Tests the interactive installer installing the standard profile.
  *
- * @group ThunderOff
+ * @group Thunder
  */
 class ThunderInstallerGermanTest extends ThunderInstallerTest {
 
