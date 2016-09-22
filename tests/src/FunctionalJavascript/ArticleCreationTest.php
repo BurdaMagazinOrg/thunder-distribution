@@ -42,15 +42,13 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Paragraph 4.
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_1_' . date('Ymd_His') . '.png');
-
     $this->scrollElementInView('#edit-actions');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_2_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
     $page->pressButton('Save as unpublished');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_3_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');

@@ -21,21 +21,16 @@ trait ThunderMediaTestTrait {
    */
   public function selectMedia($fieldName, $entityBrowser, $medias) {
 
-    $classNameParts = explode('\\', __CLASS__);
-    $className = array_pop($classNameParts);
-
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_TM1_' . date('Ymd_His') . '.png');
 
     $buttonName = $fieldName . '_entity_browser_entity_browser';
     $this->scrollElementInView("[name=\"{$buttonName}\"]");
     $page->pressButton($buttonName);
 
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . $className . '_TM2_' . date('Ymd_His') . '.png');
 
     $this->getSession()
       ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);

@@ -30,6 +30,8 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $page = $this->getSession()->getPage();
 
+    $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_BeforeOrderChange_' . date('Ymd_His') . '.png');
+
     $this->scrollElementInView('[name="field_paragraphs_0_edit"]');
     $page->pressButton('field_paragraphs_0_edit');
 
@@ -46,8 +48,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->getDriver()
       ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
 
-    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
+    $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
+    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
     if (empty($secondElement)) {
       throw new \Exception('Second element in Gallery is not found');
     }

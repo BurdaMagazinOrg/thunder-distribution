@@ -25,9 +25,13 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet("media/$mediaId/edit");
 
+    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeFocalPointChange_' . date('Ymd_His') . '.png');
+
     $this->getSession()
       ->getDriver()
       ->executeScript('var e = new jQuery.Event("click"); e.offsetX = 48; e.offsetY = 15; jQuery(".focal-point-wrapper img").trigger(e);');
+
+    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterFocalPointChange_' . date('Ymd_His') . '.png');
 
     $page->pressButton('Save and keep publish');
 
