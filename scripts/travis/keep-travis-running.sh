@@ -3,5 +3,5 @@
 while true
 do
     echo "Still testing...."
-    sleep 60
+    sleep 300
 done

@@ -5,6 +5,9 @@ cache:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
   - "vendor"
+  - "travis_phantomjs"
+  - "travis_selenium"
+
 php:
   - 5.6
   - 7.0
@@ -28,58 +31,28 @@ mysql:
   encoding: utf8
 
 before_install:
-  - phpenv config-rm xdebug.ini
-  - composer self-update
-  - composer --version
-  # Clear drush release history cache, to pick up new releases.
-  - rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
+  - source ./scripts/travis/setup-environment.sh
+  - bash -x -e ./scripts/travis/before-install.sh
 
 install:
-  # Set global environment variables
-  - export THUNDER_DIST_DIR=`echo $(pwd)`
-  - export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
-  - bash -e ${THUNDER_DIST_DIR}/scripts/keep-travis-running.sh &
-
-  # add composer's global bin directory to the path
-  # see: https://github.com/drush-ops/drush#install---composer
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-
-  # Install Drush
-  - composer global require drush/drush:~8 --prefer-source
-  - phpenv rehash
-  - drush dl drupalorg_drush-7.x
-  - drush verify-makefile
-
-  # MySQL Options
-  - mysql -e 'SET GLOBAL wait_timeout = 5400;'
-  - mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
-
-  # PHP conf tweaks
-  - echo 'max_execution_time = 120' >> drupal.php.ini;
-  - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-  - phpenv config-add drupal.php.ini
-  - phpenv rehash
-
-  - mkdir -p ${TEST_DIR}
-
-  # Install Test requirements and set global environment variables
-  - composer global require "drupal/drupal-extension:^3.2" "devinci/devinci-behat-extension:dev-master"
-  - BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"TEST_DIR_MACRO/docroot"}},"Behat\\MinkExtension":{"base_url":"http://localhost:8080"}}}'
-  - BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#TEST_DIR_MACRO#$TEST_DIR#g`
-  - export BEHAT_PARAMS
-
-  # Build docroot and install thunder
-  - bash -x -e ${THUNDER_DIST_DIR}/scripts/build-docroot.sh
+  - bash -x -e ./scripts/travis/install-requirements.sh
+  - bash -x -e ./scripts/travis/install-thunder.sh
 
 before_script:
-  - cd ${TEST_DIR}/docroot
-  - drush cr
-  - drush runserver --default-server=builtin 8080 &>/dev/null &
-  - phantomjs --webdriver=4444 > /dev/null &
+  - bash -x -e ./scripts/travis/setup-tests.sh
 
 script:
-  # Run Drupal tests (@group Thunder)
-  - php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --die-on-fail --verbose --url http://localhost:8080 Thunder
+  - bash -x -e ./scripts/travis/run-tests.sh
 
-  # Run Behat tests
-  - behat --config ${THUNDER_DIST_DIR}/tests/behat/behat.travis.yml
+deploy:
+  provider: s3
+  access_key_id: AKIAJULZG77ZX2XFLPOA
+  secret_access_key:
+    secure: AtsY08zKG01jR6ZQLzIrH6MAF52heHB1fdvWLUs+S9eJJ4h31Z4MJqRtlQQn8Ur1JzFWWS4Gmt3biKILDRm7uCBFz3z3b8kuEt4dPDHzBRdhe6TN4QvTyUz6pL5Q6AR8pVMKc0jNNR2tDCMWqjCMpBCHbdS+28iyobdtx8tQn/HP6Udapl2FHByF1TqCtpMQ9ISbpcjf0AC9WUADL1BnyHoqybAvwUpyoO3Iuym6EhOzCJ3aZULt64IamwpWy3fikVwOtzxwQHS7Jp4M7k0QhgGM0hvlEKnKwS7X6CRysBuxH/exY11UdDUgTzPMw5AsnORkFbyKIh2WW2mvJ9aQJuKbSxAmnr4zQKSS9/7MmDM3FEkeQF8DL5SKb/Q0ap3zCgdcbSVfS5UElS4YrKHSGioudfyEpIQUtMOkW1Lz7SDdLCRD5PaubR8BvifbxRvKNLJX2RjVJ2HyPzKNdkn6mviAteNJrh2YwMgLvC5aFRwCHRFgsJwoek43LL4w3M5jZS8Vz4PrjJkBsLwhVzZbeR0S4CpeewttM5hoC19CllygpbRjjJrChfdre1RsfDRYKsty4WpqZD4jZoxU0sNfyNcn0KnCvspRV40bZqzy0uxY3mVPw76OnZUvWBLVi89PvJ56/AXuHhNalkQbgRxyd0SXAjK34EBMLOyLCGBi3NM=
+  bucket: thunder-travis-ci
+  region: eu-central-1
+  local-dir: /tmp/thunder-travis-ci
+  upload-dir: thunder-distribution
+  acl: private
+  on:
+    repo: BurdaMagazinOrg/thunder-distribution
