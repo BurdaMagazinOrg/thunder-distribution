@@ -47,8 +47,8 @@ class Diff3Controller extends ControllerBase {
    * @return array
    *   Rendering array with displayed full path to file.
    */
-  public function generatePatch($module_name, $version_name, $patch_type) {
-    $fileName = $this->updater->generatePatch($module_name, $version_name, $patch_type);
+  public function generateUpdate($module_name, $version_name, $patch_type) {
+    $fileName = $this->updater->generateUpdate($module_name, $version_name, $patch_type);
 
     return [
       '#type' => 'markup',
@@ -57,12 +57,12 @@ class Diff3Controller extends ControllerBase {
   }
 
   /**
-   * Apply patch for module and version defined.
+   * Execute update for module and versions defined.
    *
    * @param string $module_name
    *   Module name that will be used to generate patch for it.
-   * @param string $version_name
-   *   Suffix name for patch. Usually version number.
+   * @param string $version_names
+   *   Suffix names for patch. Usually version number. Comma separated.
    *
    * @return array
    *   Returns rendering array with result of execution.
@@ -70,8 +70,8 @@ class Diff3Controller extends ControllerBase {
    * @throws \Exception
    *   When it's not possible to apply patch.
    */
-  public function applyPatch($module_name, $version_name) {
-    $updateReport = $this->updater->applyPatch($module_name, $version_name);
+  public function executeUpdate($module_name, $version_names) {
+    $updateReport = $this->updater->executeUpdate($module_name, $version_names);
 
     $html = '';
 

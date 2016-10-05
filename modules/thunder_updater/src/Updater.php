@@ -3,31 +3,27 @@
 namespace Drupal\thunder_updater;
 
 use Drupal\config_update\ConfigListInterface;
-use Drupal\config_update\ConfigReverter;
 use Drupal\config_update\ConfigRevertInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\NullStorage;
 use Drupal\Core\Config\StorageInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\File\FileSystem;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\thunder_updater\Diff3\Diff3;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 
 /**
- * Class Updater.
- *
- * TODO:
- * - support for applying multiple patches (skipped update)
- * - cleanup temp folder.
+ * Thunder Updater service to apply update of distribution modules.
  *
  * @package Drupal\thunder_updater
  */
 class Updater {
 
   use StringTranslationTrait;
+
+  /**
+   * Logger for "thunder-updater" channel.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
 
   /**
    * The config differ.
@@ -51,62 +47,25 @@ class Updater {
   protected $configReverter;
 
   /**
-   * Module handler.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
-   * Entity manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityManager;
-
-  /**
-   * Config Storage, that uses default active and install configuration.
+   * Storage used for merged files.
    *
    * @var \Drupal\Core\Config\StorageInterface
    */
-  protected $configStorage;
+  protected $mergeStorage;
 
   /**
-   * Config factory.
+   * Reverter that will use merged configuration files.
    *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * @var \Drupal\config_update\ConfigRevertInterface
    */
-  protected $configFactory;
+  protected $mergedReverter;
 
   /**
-   * Event dispatcher.
+   * Service used to manipulate patch files.
    *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   * @var UpdaterPatchHandler
    */
-  protected $eventDispatcher;
-
-  /**
-   * File system service.
-   *
-   * @var \Drupal\Core\File\FileSystem
-   */
-  protected $fileSystem;
-
-  /**
-   * Temporally sub-directory where exports will be saved before applying them.
-   *
-   * It will be used to generate temporal folder with that prefix.
-   *
-   * @var string
-   */
-  protected $exportFolderName = 'thunder_updater_export';
-
-  /**
-   * Configuration folder in module, used to store patch files.
-   *
-   * @var string
-   */
-  protected $configUpdateFolder = 'config/update';
+  protected $patchHandler;
 
   /**
    * Possible patch options.
@@ -122,44 +81,24 @@ class Updater {
   const PATCH_TYPE_REVERSE = 'reverse';
 
   /**
-   * Storage used for merged files.
-   *
-   * It should be access over: mergeFileStorage() method.
-   *
-   * @var StorageInterface
-   */
-  protected $mergeFileStorage;
-
-  /**
-   * Reverter that will use merged configuration files.
-   *
-   * @var ConfigReverter
-   */
-  protected $mergedConfigReverter;
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(
-    UpdaterConfigDiffer $config_diff,
-    ConfigListInterface $config_list,
-    ConfigRevertInterface $config_update,
-    ModuleHandlerInterface $module_handler,
-    EntityTypeManagerInterface $entity_manager,
-    StorageInterface $active_config_storage,
-    ConfigFactoryInterface $config_factory,
-    EventDispatcherInterface $dispatcher,
-    FileSystem $file_system
+    LoggerInterface $logger,
+    UpdaterConfigDiffer $configDiffer,
+    ConfigListInterface $configList,
+    ConfigRevertInterface $configReverter,
+    StorageInterface $mergeStorage,
+    ConfigRevertInterface $mergedReverter,
+    UpdaterPatchHandler $patchHandler
   ) {
-    $this->configDiffer = $config_diff;
-    $this->configList = $config_list;
-    $this->configReverter = $config_update;
-    $this->moduleHandler = $module_handler;
-    $this->entityManager = $entity_manager;
-    $this->configStorage = $active_config_storage;
-    $this->configFactory = $config_factory;
-    $this->eventDispatcher = $dispatcher;
-    $this->fileSystem = $file_system;
+    $this->logger = $logger;
+    $this->configDiffer = $configDiffer;
+    $this->configList = $configList;
+    $this->configReverter = $configReverter;
+    $this->mergeStorage = $mergeStorage;
+    $this->mergedReverter = $mergedReverter;
+    $this->patchHandler = $patchHandler;
   }
 
   /**
@@ -178,7 +117,7 @@ class Updater {
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
    */
-  public function generatePatch($moduleName, $versionName, $patchType = self::PATCH_TYPE_REVERSE) {
+  public function generateUpdate($moduleName, $versionName, $patchType = self::PATCH_TYPE_REVERSE) {
     $updatePatch = [];
 
     $configurationLists = $this->configList->listConfig('module', $moduleName);
@@ -187,35 +126,14 @@ class Updater {
     $configNames = $this->getConfigNames(array_merge($configurationLists[1], $configurationLists[2]));
 
     foreach ($configNames as $configName) {
-      $activeConfig = $this->getConfigFrom(
-        $this->configReverter->getFromActive($configName->getType(), $configName->getName())
-      );
-
-      $baseConfig = $this->getConfigFrom(
-        $this->configReverter->getFromExtension($configName->getType(), $configName->getName())
-      );
-
-      if (!$this->configDiffer->same($baseConfig, $activeConfig)) {
-        if ($patchType == static::PATCH_TYPE_NORMAL) {
-          $updateDiff = $this->configDiffer->diff(
-            $baseConfig,
-            $activeConfig
-          );
-        }
-        else {
-          $updateDiff = $this->configDiffer->diff(
-            $activeConfig,
-            $baseConfig
-          );
-        }
-
-        $updatePatch[$configName->getFullName()] = $updateDiff->getEdits();
+      $configDiff = $this->getConfigDiff($configName, $patchType);
+      if (!empty($configDiff)) {
+        $updatePatch[$configName->getFullName()] = $configDiff;
       }
     }
 
     if (!empty($updatePatch)) {
-      $patchFilePath = $this->getPatchFileName($moduleName, $versionName);
-      $this->savePatchFile($patchFilePath, $updatePatch);
+      $patchFilePath = $this->patchHandler->savePatch($moduleName, $versionName, $updatePatch);
 
       return $patchFilePath;
     }
@@ -224,30 +142,43 @@ class Updater {
   }
 
   /**
-   * Generate patch file.
+   * Get diff for single configuration.
    *
-   * It also creates directory if it does not exist.
+   * @param \Drupal\thunder_updater\ConfigName $configName
+   *   Configuration name.
+   * @param string $patchType
+   *   Defined how diff will be calculated.
    *
-   * @param string $patchFilePath
-   *   Filename with path that should be created.
-   * @param string $data
-   *   Data that will be saved in file.
-   *
-   * @throws \Exception
+   * @return \Drupal\Component\Diff\Engine\DiffOp[]
+   *   Return diff edits.
    */
-  protected function savePatchFile($patchFilePath, $data) {
-    $directory = dirname($patchFilePath);
+  protected function getConfigDiff(ConfigName $configName, $patchType = self::PATCH_TYPE_REVERSE) {
+    $activeConfig = $this->getConfigFrom(
+      $this->configReverter->getFromActive($configName->getType(), $configName->getName())
+    );
 
-    if (!is_dir($directory)) {
-      if ($this->fileSystem->mkdir($directory, NULL, TRUE) === FALSE) {
-        throw new \Exception($this->t('Failed to create directory @directory.', ['@directory' => $directory]));
+    $baseConfig = $this->getConfigFrom(
+      $this->configReverter->getFromExtension($configName->getType(), $configName->getName())
+    );
+
+    if (!$this->configDiffer->same($baseConfig, $activeConfig)) {
+      if ($patchType == static::PATCH_TYPE_NORMAL) {
+        $updateDiff = $this->configDiffer->diff(
+          $baseConfig,
+          $activeConfig
+        );
       }
+      else {
+        $updateDiff = $this->configDiffer->diff(
+          $activeConfig,
+          $baseConfig
+        );
+      }
+
+      return $updateDiff->getEdits();
     }
 
-    $updatePatch = gzencode(serialize($data));
-    if (file_put_contents($patchFilePath, $updatePatch) === FALSE) {
-      throw new \Exception($this->t('Failed to write file @filename.', ['@filename' => $patchFilePath]));
-    }
+    return [];
   }
 
   /**
@@ -288,29 +219,12 @@ class Updater {
   }
 
   /**
-   * Create patch file name based on version and module name.
-   *
-   * @param string $module_name
-   *   Module name that will be used to generate patch for it.
-   * @param string $version_name
-   *   Suffix name for patch. Usually version number.
-   *
-   * @return string
-   *   Returns patch file path with file name.
-   */
-  protected function getPatchFileName($module_name, $version_name) {
-    $modulePath = $this->moduleHandler->getModule($module_name)->getPath();
-
-    return $modulePath . '/' . $this->configUpdateFolder . '/' . urlencode($module_name . '-' . $version_name) . '.gz';
-  }
-
-  /**
    * Apply patch for module and version defined.
    *
    * @param string $moduleName
    *   Module name that will be used to generate patch for it.
-   * @param string $versionName
-   *   Suffix name for patch. Usually version number.
+   * @param string $versions
+   *   Suffix names for patch. Usually version number. Comma separated.
    *
    * @return array
    *   Returns array with executed actions for configs.
@@ -318,18 +232,16 @@ class Updater {
    * @throws \Exception
    *   When it's not possible to apply patch.
    */
-  public function applyPatch($moduleName, $versionName) {
-    $updateReport = [];
-
-    $conflictedConfigurations = [];
+  public function executeUpdate($moduleName, $versions) {
+    $conflictedConfigs = [];
     $configNames = [];
 
-    $reverseEdits = $this->getPatchEdits($moduleName, $versionName);
-    foreach ($reverseEdits as $configFullName => $updateEdits) {
+    $reverseEdits = $this->patchHandler->getPatches($moduleName, $versions);
+    foreach ($reverseEdits as $configFullName => $baseEdits) {
       $configName = ConfigName::createByFullName($configFullName);
       $configNames[] = $configName;
 
-      $baseConfig = $this->generateBaseConfig($updateEdits);
+      $baseConfig = $this->generateBaseConfig($baseEdits);
       $activeConfig = $this->getConfigFrom(
         $this->configReverter->getFromActive($configName->getType(), $configName->getName())
       );
@@ -357,79 +269,102 @@ class Updater {
       );
 
       if (!$diff3->isCleanlyMerged()) {
-        $conflictedConfigurations[] = $configName->getFullName();
+        $conflictedConfigs[] = $configName->getFullName();
       }
 
       $ymlNormalized = $this->configDiffer->formatToConfig($mergedResult);
 
-      $this->mergeFileStorage()->write($configFullName, $ymlNormalized);
+      $this->mergeStorage->write($configFullName, $ymlNormalized);
     }
 
-    if (!empty($conflictedConfigurations)) {
+    if (!empty($conflictedConfigs)) {
       throw new \Exception('Unable to auto merge configuration. Please make update manually');
     }
-    else {
-      $mergedConfigReverter = $this->getMergedConfigReverter();
-      foreach ($configNames as $configName) {
-        $configFullName = $configName->getFullName();
 
-        if (empty($configName->getType())) {
-          \Drupal::logger('thunder-updater')
-            ->info($this->t('Skipped: :config_name', [':config_name' => $configFullName]));
-          $updateReport[] = [
-            'config' => $configFullName,
-            'action' => $this->t('Skipped'),
-          ];
+    $updateReport = $this->importConfigurations($this->mergedReverter, $configNames, $moduleName);
 
-          continue;
-        }
+    // CleanUp temporally merged files after apply is finished.
+    foreach (array_keys($reverseEdits) as $configFullName) {
+      $this->mergeStorage->delete($configFullName);
+    }
 
-        try {
-          $existingConfig = $mergedConfigReverter
-            ->getFromActive($configName->getType(), $configName->getName());
-          if (empty($existingConfig)) {
+    return $updateReport;
+  }
 
-            if ($this->isOptionalConfig($configName, $moduleName)) {
-              \Drupal::logger('thunder-updater')
-                ->info($this->t('Skipped optional configuration: :config_name', [':config_name' => $configFullName]));
-              $updateReport[] = [
-                'config' => $configFullName,
-                'action' => $this->t('Skipped optional config'),
-              ];
+  /**
+   * Import listed configurations for module.
+   *
+   * If configuration is new it will be imported, if it's existing will be
+   * updated with configuration from file.
+   *
+   * @param ConfigRevertInterface $configReverter
+   *   Return config reverter.
+   * @param ConfigName[] $configNames
+   *   List of configuration names.
+   * @param string $moduleName
+   *   Module name that will be used to generate patch for it.
+   *
+   * @return array
+   *   Returns status of configuration import.
+   */
+  public function importConfigurations(ConfigRevertInterface $configReverter, array $configNames, $moduleName) {
+    $updateReport = [];
 
-              continue;
-            }
+    foreach ($configNames as $configName) {
+      $configFullName = $configName->getFullName();
 
-            $mergedConfigReverter
-              ->import($configName->getType(), $configName->getName());
+      if (empty($configName->getType())) {
+        $this->logger->info($this->t('Skipped: :config_name', [':config_name' => $configFullName]));
+        $updateReport[] = [
+          'config' => $configFullName,
+          'action' => $this->t('Skipped'),
+        ];
 
-            \Drupal::logger('thunder-updater')
-              ->info($this->t('Imported: :config_name', [':config_name' => $configFullName]));
+        continue;
+      }
+
+      try {
+        $existingConfig = $configReverter
+          ->getFromActive($configName->getType(), $configName->getName());
+
+        if (empty($existingConfig)) {
+
+          if ($this->isOptionalConfig($configName, $moduleName)) {
+            $this->logger->info($this->t('Skipped optional configuration: :config_name', [':config_name' => $configFullName]));
             $updateReport[] = [
               'config' => $configFullName,
-              'action' => $this->t('Imported'),
+              'action' => $this->t('Skipped optional config'),
             ];
-          }
-          else {
-            $mergedConfigReverter
-              ->revert($configName->getType(), $configName->getName());
 
-            \Drupal::logger('thunder-updater')
-              ->info($this->t('Updated: :config_name', [':config_name' => $configFullName]));
-            $updateReport[] = [
-              'config' => $configFullName,
-              'action' => $this->t('Updated'),
-            ];
+            continue;
           }
-        }
-        catch (\Exception $e) {
-          \Drupal::logger('thunder-updater')
-            ->info($this->t('Not Imported: :config_name', [':config_name' => $configFullName]));
+
+          $configReverter
+            ->import($configName->getType(), $configName->getName());
+
+          $this->logger->info($this->t('Imported: :config_name', [':config_name' => $configFullName]));
           $updateReport[] = [
             'config' => $configFullName,
-            'action' => $this->t('Not Imported'),
+            'action' => $this->t('Imported'),
           ];
         }
+        else {
+          $configReverter
+            ->revert($configName->getType(), $configName->getName());
+
+          $this->logger->info($this->t('Updated: :config_name', [':config_name' => $configFullName]));
+          $updateReport[] = [
+            'config' => $configFullName,
+            'action' => $this->t('Updated'),
+          ];
+        }
+      }
+      catch (\Exception $e) {
+        $this->logger->info($this->t('Not Imported: :config_name', [':config_name' => $configFullName]));
+        $updateReport[] = [
+          'config' => $configFullName,
+          'action' => $this->t('Not Imported'),
+        ];
       }
     }
 
@@ -457,80 +392,6 @@ class Updater {
     );
 
     return $this->configDiffer->formatToConfig($mergedResult);
-  }
-
-  /**
-   * Get edits provided by patch for module.
-   *
-   * @param string $module_name
-   *   Module name that will be used to generate patch for it.
-   * @param string $version_name
-   *   Suffix name for patch. Usually version number.
-   *
-   * @return mixed
-   *   Returns list of edits per configuration from patch file.
-   *
-   * @throws \Exception
-   *   When patch file is not available.
-   */
-  protected function getPatchEdits($module_name, $version_name) {
-    $patchFilename = $this->getPatchFileName($module_name, $version_name);
-
-    if (!is_file($patchFilename)) {
-      throw new \Exception('Patch file: ' . $patchFilename . ' does not exist.');
-    }
-
-    $gzipContent = file_get_contents($patchFilename);
-
-    return unserialize(gzdecode($gzipContent));
-  }
-
-  /**
-   * Get merge config reverter.
-   *
-   * @return ConfigReverter
-   *   Return config reverter.
-   */
-  protected function getMergedConfigReverter() {
-    if (!$this->mergedConfigReverter) {
-      $this->mergedConfigReverter = new ConfigReverter(
-        $this->entityManager,
-        $this->configStorage,
-        $this->mergeFileStorage(),
-        new NullStorage(),
-        $this->configFactory,
-        $this->eventDispatcher
-      );
-    }
-
-    return $this->mergedConfigReverter;
-  }
-
-  /**
-   * Get merge file storage.
-   *
-   * @return StorageInterface
-   *   Returns file storage where merged configuration will be exported.
-   *
-   * @throws \Exception
-   *   Throws exception when it's not possible to crate temporally folder.
-   */
-  protected function mergeFileStorage() {
-    if (!$this->mergeFileStorage) {
-      $tmpDir = tempnam(sys_get_temp_dir(), $this->exportFolderName);
-      if (is_file($tmpDir)) {
-        unlink($tmpDir);
-      }
-
-      mkdir($tmpDir);
-      if (!is_dir($tmpDir)) {
-        throw new \Exception('Unable to create temporally folder: ' . $tmpDir . ' - to export merged files.');
-      }
-
-      $this->mergeFileStorage = new FileStorage($tmpDir);
-    }
-
-    return $this->mergeFileStorage;
   }
 
   /**

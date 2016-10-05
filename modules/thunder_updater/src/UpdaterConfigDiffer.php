@@ -50,19 +50,19 @@ class UpdaterConfigDiffer extends ConfigDiffer {
         $key = '-';
       }
 
-      $section_prefix = ($prefix) ? $prefix . $this->hierarchyPrefix . $key : $key;
+      $sectionPrefix = ($prefix) ? $prefix . $this->hierarchyPrefix . $key : $key;
       if (is_array($value)) {
-        $lines[] = $section_prefix;
-        $newlines = $this->format($value, $section_prefix);
+        $lines[] = $sectionPrefix;
+        $newlines = $this->format($value, $sectionPrefix);
         foreach ($newlines as $line) {
           $lines[] = $line;
         }
       }
       elseif (is_null($value)) {
-        $lines[] = $section_prefix . $this->valuePrefix . $this->t('(NULL)');
+        $lines[] = $sectionPrefix . $this->valuePrefix . $this->t('(NULL)');
       }
       else {
-        $lines[] = $section_prefix . $this->valuePrefix . $value;
+        $lines[] = $sectionPrefix . $this->valuePrefix . $value;
       }
     }
 

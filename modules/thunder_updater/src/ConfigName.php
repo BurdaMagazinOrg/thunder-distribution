@@ -72,12 +72,12 @@ class ConfigName {
    *   Return instance of ConfigName.
    */
   public static function createByTypeName($configType, $configName) {
-    $configName = new static();
+    $configNameInstance = new static();
 
-    $configName->type = $configType;
-    $configName->name = $configName;
+    $configNameInstance->type = $configType;
+    $configNameInstance->name = $configName;
 
-    return $configName;
+    return $configNameInstance;
   }
 
   /**
@@ -101,11 +101,11 @@ class ConfigName {
       $result['name'] = substr($fullConfigName, strlen($prefix));
     }
     else {
-      foreach ($this->entityManager()->getDefinitions() as $entity_type => $definition) {
+      foreach ($this->entityManager()->getDefinitions() as $entityType => $definition) {
         if ($definition->isSubclassOf('Drupal\Core\Config\Entity\ConfigEntityInterface')) {
           $prefix = $definition->getConfigPrefix() . '.';
           if (strpos($fullConfigName, $prefix) === 0) {
-            $result['type'] = $entity_type;
+            $result['type'] = $entityType;
             $result['name'] = substr($fullConfigName, strlen($prefix));
           }
         }

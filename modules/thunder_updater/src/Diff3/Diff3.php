@@ -138,7 +138,7 @@ class Diff3 {
   }
 
   /**
-   * Check are there any conflicts generated during exection of merge_output.
+   * Check are there any conflicts generated during execution of merge_output.
    *
    * @return bool
    *   Merge status.
