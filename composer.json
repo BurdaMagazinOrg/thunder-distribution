@@ -59,6 +59,9 @@
       },
       "drupal/media_entity": {
         "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
+      },
+      "drupal/metatag": {
+        "Deactivate drupal console": "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
       }
     }
   },
@@ -96,7 +99,7 @@
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
     "drupal/media_entity_twitter": "^1.0",
-    "drupal/metatag": "1.0-beta9",
+    "drupal/metatag": "1.0-beta10",
     "drupal/paragraphs": "1.0",
     "drupal/pathauto": "^1.0",
     "drupal/riddle_marketplace": "^1.0",

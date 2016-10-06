@@ -137,7 +137,9 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta9"
+    version: "1.0-beta10"
+    patch:
+      - "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
 
   nexx_integration:
     type: "module"
