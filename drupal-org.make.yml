@@ -44,6 +44,8 @@ projects:
   dropzonejs:
     type: "module"
     version: "1.0-alpha2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
 
   entity:
     type: "module"
@@ -52,6 +54,8 @@ projects:
   entity_browser:
     type: "module"
     version: "1.0-alpha9"
+    patch:
+      - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
 
   entity_reference_revisions:
     type: "module"
@@ -78,6 +82,8 @@ projects:
   focal_point:
     type: "module"
     version: "1.0-beta3"
+    patch:
+      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-2.patch"
 
   google_analytics:
     type: "module"
@@ -104,10 +110,14 @@ projects:
   linkit:
     type: "module"
     version: "4.1"
+    patch:
+      - "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
 
   media_entity:
     type: "module"
     version: "1.5"
+    patch:
+      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
 
   media_entity_instagram:
     type: "module"

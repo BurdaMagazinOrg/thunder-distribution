@@ -44,6 +44,21 @@
       "drupal/paragraphs": {
         "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch",
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
+      },
+      "drupal/dropzonejs": {
+        "Add missing EB widget schema": "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
+      },
+      "drupal/entity_browser": {
+        "Incomplete schema for multi_step_display": "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
+      },
+      "drupal/focal_point": {
+        "Add image effect schema": "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-2.patch"
+      },
+      "drupal/linkit": {
+        "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
+      },
+      "drupal/media_entity": {
+        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
       }
     }
   },
@@ -63,20 +78,20 @@
     "drupal/crop": "^1.0",
     "drupal/ctools": "^3.0",
     "drupal/default_content": "dev-1.x",
-    "drupal/dropzonejs": "^1.0",
+    "drupal/dropzonejs": "1.0-alpha2",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser":"^1.0",
+    "drupal/entity_browser": "1.0-alpha9",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/features": "^3.0",
     "drupal/field_group": "dev-1.x",
-    "drupal/focal_point": "^1.0",
+    "drupal/focal_point": "1.0-beta3",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
     "drupal/ivw_integration": "^1.0",
     "drupal/libraries": "dev-3.x",
-    "drupal/linkit": "^4.0",
-    "drupal/media_entity": "^1.0",
+    "drupal/linkit": "4.1",
+    "drupal/media_entity": "1.5",
     "drupal/media_entity_instagram": "^1.0",
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
