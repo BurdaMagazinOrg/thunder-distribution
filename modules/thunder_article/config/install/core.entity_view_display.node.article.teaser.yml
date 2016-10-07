@@ -10,10 +10,8 @@ dependencies:
     - field.field.node.article.field_tags
     - field.field.node.article.field_teaser_media
     - field.field.node.article.field_teaser_text
-    - image.style.teaser
     - node.type.article
   module:
-    - media_entity
     - user
 id: node.article.teaser
 targetEntityType: node
@@ -21,12 +19,12 @@ bundle: article
 mode: teaser
 content:
   field_teaser_media:
-    type: media_thumbnail
+    type: entity_reference_entity_view
     weight: 0
     label: hidden
     settings:
-      image_style: teaser
-      image_link: ''
+      view_mode: thumbnail
+      link: false
     third_party_settings: {  }
   field_teaser_text:
     type: basic_string
