@@ -1,0 +1,13 @@
+media_entity.bundle.third_party.thunder_media_expire:
+  type: mapping
+  label: 'Expire settings'
+  mapping:
+    expire_field:
+      type: string
+      label: 'Datetime filed with expire information'
+    enable_expiring:
+      type: integer
+      label: 'Indicates if expiring is enabeld'
+    fallback_media:
+      type: string
+      label: 'Fallback media'
