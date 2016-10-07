@@ -94,6 +94,7 @@
     "valiton/harbourmaster": "~8.1"
   },
   "require-dev": {
-    "burdamagazinorg/thunder-dev-tools": "dev-master"
+    "burdamagazinorg/thunder-dev-tools": "dev-master",
+    "behat/mink-selenium2-driver": "dev-master"
   }
 }

@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\media_entity\Entity\Media;
+use Imagick;
 
 /**
  * Tests the Image media modification.
@@ -45,8 +46,8 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
 
-    $image1 = new \Imagick($derivativeUri);
-    $image2 = new \Imagick(dirname(__FILE__) . '/../../fixtures/reference.jpg');
+    $image1 = new Imagick($derivativeUri);
+    $image2 = new Imagick(dirname(__FILE__) . '/../../fixtures/reference.jpg');
 
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
@@ -54,7 +55,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $image1->clear();
     $image2->clear();
-    $this->getSession()->stop();
   }
 
 }
