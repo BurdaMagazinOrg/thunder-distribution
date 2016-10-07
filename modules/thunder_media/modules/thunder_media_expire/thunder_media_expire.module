@@ -126,3 +126,13 @@ function thunder_media_expire_media_build_defaults_alter(array &$build, EntityIn
     }
   }
 }
+
+/**
+ * Implements hook_cron().
+ */
+function hook_cron() {
+
+  /** @var \Drupal\thunder_media_expire\MediaExpireService $service */
+  $service = \Drupal::service('thunder_media_expire.service');
+  $service->unpublishExpiredMedia();
+}
