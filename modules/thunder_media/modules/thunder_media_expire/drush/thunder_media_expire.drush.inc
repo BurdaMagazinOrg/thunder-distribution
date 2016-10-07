@@ -31,16 +31,18 @@ function drush_thunder_media_expire_check() {
   foreach ($bundles as $bundle) {
     if ($bundle->getThirdPartySetting('thunder_media_expire', 'enable_expiring')) {
 
+      $expireField = $bundle->getThirdPartySetting('thunder_media_expire', 'expire_field');
       $query = \Drupal::entityQuery('media');
       $query->condition('status', 1);
       $query->condition('bundle', $bundle->id());
-      $query->condition($bundle->getThirdPartySetting('thunder_media_expire', 'expire_field'), date("Y-m-d\TH:i:s"), '<');
+      $query->condition($expireField, date("Y-m-d\TH:i:s"), '<');
       $entityIds = $query->execute();
 
       /** @var Media[] $medias */
       $medias = Media::loadMultiple($entityIds);
       foreach ($medias as $media) {
         $media->setPublished(Media::NOT_PUBLISHED);
+        $media->$expireField->removeItem(0);
         $media->save();
       }
     }

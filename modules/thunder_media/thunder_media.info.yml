@@ -22,6 +22,7 @@ dependencies:
   - slick_media
   - taxonomy
   - text
+  - thunder_media_expire
   - user
   - video_embed_field
   - video_embed_media
