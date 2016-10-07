@@ -14,7 +14,6 @@ dependencies:
   module:
     - image
     - text
-    - fb_instant_articles
 id: media.image.facebook_instant_articles_rss
 targetEntityType: media
 bundle: image
