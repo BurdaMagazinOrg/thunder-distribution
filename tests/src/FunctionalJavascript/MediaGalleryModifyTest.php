@@ -5,7 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 /**
  * Tests the Gallery media modification.
  *
- * @group Thunder_InDev
+ * @group Thunder
  */
 class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
