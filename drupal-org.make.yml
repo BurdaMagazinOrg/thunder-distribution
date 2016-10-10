@@ -55,6 +55,8 @@ projects:
     type: "module"
     version: "1.0-alpha9"
     patch:
+      - "https://www.drupal.org/files/issues/2802969-5.patch"
+      - "https://www.drupal.org/files/issues/2764889_31.patch"
       - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
 
   entity_reference_revisions:
@@ -83,7 +85,7 @@ projects:
     type: "module"
     version: "1.0-beta3"
     patch:
-      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-2.patch"
+      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
 
   google_analytics:
     type: "module"
