@@ -1,0 +1,5 @@
+# Schema for the configuration files of the Thunder admin theme.
+
+thunder_admin.settings:
+  type: theme_settings
+  label: 'Thunder admin settings'

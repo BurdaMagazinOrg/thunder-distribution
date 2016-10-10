@@ -46,13 +46,10 @@ composer_create_thunder() {
 apply_patches() {
     cd ${TEST_DIR}/docroot
 
+    #EXAMPLE:
     # apply cookie expire patch for javascript tests
-    wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
-    patch -p1 < test-session-expire-2771547-64.patch
-
-    # return correct error code from run-tests.php script
-    wget https://www.drupal.org/files/issues/2776071-25.patch
-    patch -p1 < 2776071-25.patch
+    #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+    #patch -p1 < test-session-expire-2771547-64.patch
 }
 # Build current revision of thunder
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then

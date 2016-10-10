@@ -19,7 +19,7 @@ projects:
 
   blazy:
     type: "module"
-    version: "1.0-beta3"
+    version: "1.0-beta4"
 
   breakpoint_js_settings:
     type: "module"
@@ -44,6 +44,8 @@ projects:
   dropzonejs:
     type: "module"
     version: "1.0-alpha2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
 
   entity:
     type: "module"
@@ -52,6 +54,10 @@ projects:
   entity_browser:
     type: "module"
     version: "1.0-alpha9"
+    patch:
+      - "https://www.drupal.org/files/issues/2802969-5.patch"
+      - "https://www.drupal.org/files/issues/2764889_31.patch"
+      - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
 
   entity_reference_revisions:
     type: "module"
@@ -66,7 +72,7 @@ projects:
 
   features:
     type: "module"
-    version: "3.0-beta9"
+    version: "3.0-rc1"
 
   field_group:
     type: "module"
@@ -78,6 +84,8 @@ projects:
   focal_point:
     type: "module"
     version: "1.0-beta3"
+    patch:
+      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
 
   google_analytics:
     type: "module"
@@ -104,10 +112,14 @@ projects:
   linkit:
     type: "module"
     version: "4.1"
+    patch:
+      - "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
 
   media_entity:
     type: "module"
     version: "1.5"
+    patch:
+      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
 
   media_entity_instagram:
     type: "module"
@@ -127,7 +139,9 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta9"
+    version: "1.0-beta10"
+    patch:
+      - "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
 
   nexx_integration:
     type: "module"
@@ -138,6 +152,7 @@ projects:
     version: "1.0"
     patch:
       - "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch"
+      - "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
 
   pathauto:
     type: "module"
@@ -157,7 +172,7 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-beta3"
+    version: "1.0-beta4"
 
   slick_media:
     type: "module"
