@@ -90,3 +90,22 @@ function thunder_update_8001() {
   $meta->set('tags', $tags);
   $meta->save();
 }
+
+/**
+ * Enable thunder_fia.
+ */
+function thunder_update_8002() {
+
+  if (\Drupal::moduleHandler()->moduleExists('fb_instant_articles')) {
+    $modules = \Drupal::configFactory()
+      ->getEditable('core.extension')
+      ->get('module');
+
+    $modules['thunder_fia'] = 1;
+
+    \Drupal::configFactory()
+      ->getEditable('core.extension')
+      ->set('module', $modules)
+      ->save();
+  }
+}
