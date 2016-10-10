@@ -99,14 +99,11 @@ trait ThunderParagraphsTestTrait {
   public function addTextParagraph($fieldName, $text, $type = 'text') {
     $paragraphIndex = $this->addParagraph($fieldName, $type);
 
-    $page = $this->getSession()->getPage();
-
-    $ckEditor = $page->find('css', "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']");
-    $ckEditorId = $ckEditor->getAttribute('id');
-
-    $this->getSession()
-      ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+    $this->fillCkEditor(
+      $this->getSession()->getPage(),
+      "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']",
+      $text
+    );
   }
 
   /**
