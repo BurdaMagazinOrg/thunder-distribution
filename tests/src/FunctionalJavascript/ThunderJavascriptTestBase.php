@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\DocumentElement;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
@@ -113,6 +114,9 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $editor->addRole('editor');
     $editor->save();
     $this->drupalLogin($editor);
+
+    // Set window width/height.
+    $this->getSession()->getDriver()->resizeWindow(1024, 768);
   }
 
   /**
@@ -121,7 +125,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * @param string $fieldName
    *   Field Name.
    */
-  protected function openIefComplex($fieldName) {
+  public function openIefComplex($fieldName) {
 
     $page = $this->getSession()->getPage();
 
@@ -148,7 +152,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * @param string $message
    *   (Optional) Message to pass to assertJsCondition().
    */
-  protected function waitUntilVisible($selector, $timeout = 1000, $message = '') {
+  public function waitUntilVisible($selector, $timeout = 1000, $message = '') {
     $condition = "jQuery('" . $selector . ":visible').length > 0";
     $this->assertJsCondition($condition, $timeout, $message);
   }
@@ -179,9 +183,31 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * @param string $cssSelector
    *   CSS Selector for element that should be centralized.
    */
-  protected function scrollElementInView($cssSelector) {
+  public function scrollElementInView($cssSelector) {
     $this->getSession()
       ->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
+  }
+
+  /**
+   * Click on Button based on Drupal selector (data-drupal-selector).
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $drupalSelector
+   *   Drupal selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
+    $cssSelector = 'input[data-drupal-selector="' . $drupalSelector . '"]';
+
+    $this->scrollElementInView($cssSelector);
+    $editButton = $page->find('css', $cssSelector);
+    $editButton->click();
+
+    if ($waitAfterAction) {
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
   }
 
   /**

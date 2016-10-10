@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Behat\Mink\Element\DocumentElement;
+
 /**
  * Trait for handling of Paragraph related test actions.
  *
@@ -12,7 +14,7 @@ trait ThunderParagraphsTestTrait {
   /**
    * Counter used to count number of added Paragraphs.
    *
-   * @var int $paragraphCount
+   * @var int
    */
   protected $paragraphCount;
 
@@ -25,7 +27,6 @@ trait ThunderParagraphsTestTrait {
    *   Type of the paragraph.
    */
   public function addParagraph($fieldName, $type) {
-
     $page = $this->getSession()->getPage();
 
     $toggleButtonSelector = '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button';
@@ -35,7 +36,7 @@ trait ThunderParagraphsTestTrait {
     $toggleButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $addMoreButtonName = "${fieldName}_${type}_add_more";
+    $addMoreButtonName = "{$fieldName}_{$type}_add_more";
     $this->scrollElementInView("[name=\"$addMoreButtonName\"]");
     $page->pressButton($addMoreButtonName);
     $this->assertSession()->assertWaitOnAjaxRequest();
@@ -48,6 +49,8 @@ trait ThunderParagraphsTestTrait {
     }
 
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $this->paragraphCount[$fieldName] . '-subform"]');
+
+    return $this->paragraphCount[$fieldName];
   }
 
   /**
@@ -59,11 +62,9 @@ trait ThunderParagraphsTestTrait {
    *   List of media identifiers.
    */
   public function addMediaParagraph($fieldName, $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'media');
 
-    $this->addParagraph($fieldName, 'media');
-
-    $count = $this->paragraphCount[$fieldName];
-    $this->selectMedia("${fieldName}_${count}_subform_field_media", 'media_browser', $media);
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_media", 'media_browser', $media);
 
   }
 
@@ -78,14 +79,11 @@ trait ThunderParagraphsTestTrait {
    *   List of media identifiers.
    */
   public function addGalleryParagraph($fieldName, $name, $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'gallery');
 
-    $this->addParagraph($fieldName, 'gallery');
-    $count = $this->paragraphCount[$fieldName];
+    $this->openIefComplex("{$fieldName}_{$paragraphIndex}_subform_field_media");
 
-    $this->openIefComplex("${fieldName}_${count}_subform_field_media");
-
-    $this->createGallery($name, "${fieldName}_${count}_subform_field_media", $media);
-
+    $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
   }
 
   /**
@@ -99,19 +97,34 @@ trait ThunderParagraphsTestTrait {
    *   Type of text paragraph.
    */
   public function addTextParagraph($fieldName, $text, $type = 'text') {
-
-    $this->addParagraph($fieldName, $type);
-    $count = $this->paragraphCount[$fieldName];
+    $paragraphIndex = $this->addParagraph($fieldName, $type);
 
     $page = $this->getSession()->getPage();
 
-    $ckEditor = $page->find('css', "textarea[name='${fieldName}[${count}][subform][field_text][0][value]']");
-
+    $ckEditor = $page->find('css', "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']");
     $ckEditorId = $ckEditor->getAttribute('id');
 
     $this->getSession()
       ->getDriver()
       ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+  }
+
+  /**
+   * Click button for editing of paragraph.
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $paragraphsFieldName
+   *   Field name in content type used to paragraphs.
+   * @param int $index
+   *   Index of paragraph to be edited, starts from 0.
+   */
+  public function editParagraph(DocumentElement $page, $paragraphsFieldName, $index) {
+    $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
+
+    $this->scrollElementInView("[name=\"{$editButtonName}\"]");
+    $page->pressButton($editButtonName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
 }

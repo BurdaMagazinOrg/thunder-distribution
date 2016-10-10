@@ -60,8 +60,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img');
     $this->assertSession()
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//img');
-
-    $this->getSession()->stop();
   }
 
 }

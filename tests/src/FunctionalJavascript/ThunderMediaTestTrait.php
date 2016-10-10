@@ -73,7 +73,7 @@ trait ThunderMediaTestTrait {
     $nameField = $page->find('css', $selector);
     $nameField->setValue($name);
 
-    $this->selectMedia("${fieldName}_form_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
+    $this->selectMedia("{$fieldName}_form_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
   }
 
 }
