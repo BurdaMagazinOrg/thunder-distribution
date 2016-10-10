@@ -3,13 +3,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.facebook_instant_articles_rss
-    - field.field.paragraph.gallery.field_media
-    - paragraphs.paragraphs_type.gallery
-  module:
-      - fb_instant_articles
-id: paragraph.gallery.facebook_instant_articles_rss
+    - field.field.paragraph.media.field_media
+    - paragraphs.paragraphs_type.media
+id: paragraph.media.facebook_instant_articles_rss
 targetEntityType: paragraph
-bundle: gallery
+bundle: media
 mode: facebook_instant_articles_rss
 content:
   field_media:
