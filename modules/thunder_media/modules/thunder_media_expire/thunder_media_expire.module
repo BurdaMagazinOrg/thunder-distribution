@@ -72,11 +72,11 @@ function thunder_media_expire_form_media_bundle_form_alter(&$form, FormStateInte
 
     $form['thunder_media_expire']['fallback_media'] = [
       '#type' => 'entity_autocomplete',
-      '#title' => t('Fallback @label', ['label' => strtolower($bundle->label())]),
+      '#title' => t('Fallback @label', ['@label' => strtolower($bundle->label())]),
       '#default_value' => $defaultValue,
       '#target_type' => 'media',
       '#selection_settings' => array('target_bundles' => [$bundle->id()]),
-      '#description' => t('Select a fallback @label for unpublished entities.', ['label' => strtolower($bundle->label())]),
+      '#description' => t('Select a fallback @label for unpublished entities.', ['@label' => strtolower($bundle->label())]),
       '#states' => array(
         'visible' => array(
           array(
