@@ -60,7 +60,7 @@
         "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
       "drupal/media_entity": {
-        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
+        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
       },
       "drupal/metatag": {
         "Deactivate drupal console": "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
