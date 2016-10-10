@@ -114,6 +114,9 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $editor->addRole('editor');
     $editor->save();
     $this->drupalLogin($editor);
+
+    // Set window width/height.
+    $this->getSession()->getDriver()->resizeWindow(1024, 768);
   }
 
   /**

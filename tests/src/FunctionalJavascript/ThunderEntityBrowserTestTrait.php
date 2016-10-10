@@ -101,6 +101,16 @@ trait ThunderEntityBrowserTestTrait {
       ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
 
     $fileField->attachFile($filePath);
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Wait up to 10 sec that "Use selected" button is active.
+    $this->getSession()->wait(
+      10000,
+      '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
+    );
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
 }
