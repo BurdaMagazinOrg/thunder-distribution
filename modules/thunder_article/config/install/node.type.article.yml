@@ -10,16 +10,16 @@ third_party_settings:
       - main
     parent: 'main:'
   scheduler:
-    expand_fieldset: false
-    publish_enable: 1
+    expand_fieldset: when_required
+    publish_enable: true
     publish_past_date: schedule
-    publish_required: 0
-    publish_revision: 0
-    publish_touch: 1
-    unpublish_enable: 1
-    unpublish_required: 0
-    unpublish_revision: 0
-    use_vertical_tabs: '1'
+    publish_required: false
+    publish_revision: false
+    publish_touch: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+    fields_display_mode: vertical_tab
 name: Article
 type: article
 description: 'Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'

@@ -53,6 +53,7 @@ Plus some base configuration:
 * IVW
 * Nexx Video Player
 * Facebook Instant Articles
+* Valiton Harbourmaster SSO
 
 
 [Here](https://burdamagazinorg.gitbooks.io/thunder/content/) you can find more information about these modules.

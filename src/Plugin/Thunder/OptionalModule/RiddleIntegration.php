@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "paragraphs_riddle_marketplace",
  *   label = @Translation("Riddle integration"),
+ *   description = @Translation("Riddle makes it easy to quickly create beautiful and highly shareable quizzes, tests, lists, polls, and more."),
  *   type = "module",
  * )
  */
@@ -20,16 +21,7 @@ class RiddleIntegration extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['paragraphs_riddle_marketplace'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Riddle'),
-      '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[paragraphs_riddle_marketplace]"]' => array('checked' => TRUE),
-        ),
-      ),
-    );
+    $form = parent::buildForm($form, $form_state);
 
     $form['paragraphs_riddle_marketplace']['riddle_token'] = array(
       '#type' => 'textfield',

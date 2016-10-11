@@ -38,6 +38,7 @@ dependencies:
 # contrib
   - admin_toolbar_tools
   - libraries
+  - quickedit
   - simple_sitemap
 # thunder
   - thunder_article
