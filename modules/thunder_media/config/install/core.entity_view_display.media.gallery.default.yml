@@ -47,6 +47,26 @@ content:
       background: false
       iframe_lazy: false
       breakpoints:
+        xs:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        sm:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        md:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        lg:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        xl:
+          breakpoint: ''
+          image_style: ''
+          width: ''
       override: false
       overridables:
         arrows: '0'
