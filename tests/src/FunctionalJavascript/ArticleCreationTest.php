@@ -13,6 +13,13 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderMediaTestTrait;
 
   /**
+   * Filed name for paragraphs in article content.
+   *
+   * @var string
+   */
+  protected static $paragraphsField = 'field_paragraphs';
+
+  /**
    * Test Creation of Article.
    */
   public function testCreateArticle() {
@@ -27,20 +34,29 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    // Paragraph 1.
-    $this->addMediaParagraph('field_paragraphs', ['media:5']);
+    // Add Media Image Paragraph.
+    $this->addMediaParagraph(static::$paragraphsField, ['media:5']);
 
-    // Paragraph 2.
-    $this->addTextParagraph('field_paragraphs', 'Awesome text');
+    // Add Text Paragraph.
+    $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
 
-    // Paragraph 3.
-    $this->addGalleryParagraph('field_paragraphs', 'Test gallery', [
+    // Add Gallery Paragraph.
+    $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
       'media:1',
       'media:5',
     ]);
 
-    // Paragraph 4.
-    $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
+    // Add Quote Paragraph.
+    $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
+
+    // Add Twitter Paragraph.
+    $this->addTwitterParagraph(static::$paragraphsField, 'Thunder Tweet', 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter');
+
+    // Add Instagram Paragraph.
+    $this->addTwitterParagraph(static::$paragraphsField, 'DrupalCon2016 Instagram', 'https://www.instagram.com/p/BK3VVUtAuJ3/', 'instagram');
+
+    // Add Link Paragraph.
+    $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     $this->scrollElementInView('#edit-actions');
 
@@ -60,6 +76,18 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img');
     $this->assertSession()
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//img');
+
+    // Check that one Instagram widget is on page.
+    $this->getSession()
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BK3VVUtAuJ3') !== -1);}).length === 1");
+
+    // Check that one Twitter widget is on page.
+    $this->getSession()
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+
+    // Check Link Paragraph.
+    $this->assertSession()->linkExists('Link to Thunder');
+    $this->assertSession()->linkByHrefExists('http://www.thunder.org');
   }
 
 }

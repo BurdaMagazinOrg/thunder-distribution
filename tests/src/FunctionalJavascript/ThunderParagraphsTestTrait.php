@@ -107,6 +107,48 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
+   * Create Twitter or Insagram Paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $name
+   *   Name for paragraph.
+   * @param string $tweetUrl
+   *   Url to tweet or instagram.
+   * @param string $type
+   *   Type of paragraph (twitter|instagram).
+   */
+  public function addTwitterParagraph($fieldName, $name, $tweetUrl, $type = "twitter") {
+    $paragraphIndex = $this->addParagraph($fieldName, $type);
+
+    /** @var DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][name][0][value]", $name);
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $tweetUrl);
+  }
+
+  /**
+   * Add link paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $urlText
+   *   Text that will be displayed for link.
+   * @param string $url
+   *   Link url.
+   */
+  public function addLinkParagraph($fieldName, $urlText, $url) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'link');
+
+    /** @var DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_link][0][title]", $urlText);
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_link][0][uri]", $url);
+  }
+
+  /**
    * Click button for editing of paragraph.
    *
    * @param \Behat\Mink\Element\DocumentElement $page
