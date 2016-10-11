@@ -61,6 +61,7 @@ fi
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Install last drupal org version and update to currently tested version
+    print ${UPDATE_BASE_PATH}/docroot
     install_thunder ${UPDATE_BASE_PATH}/docroot
     update_thunder
 else
