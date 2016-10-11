@@ -47,10 +47,6 @@ class IvwIntegration extends AbstractOptionalModule {
       ->set('site', (string) $formValues['ivw_site'])
       ->set('mobile_site', (string) $formValues['mobile_site'])
       ->save(TRUE);
-
-    $this->addField('node', 'article', 'field_ivw', 'IVW settings', 'ivw_integration_settings', 'ivw_integration_widget');
-    $this->addField('taxonomy_term', 'channel', 'field_ivw', 'IVW settings', 'ivw_integration_settings', 'ivw_integration_widget');
-
   }
 
 }

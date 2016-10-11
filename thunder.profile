@@ -168,6 +168,44 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
+ * Implements hook_modules_installed().
+ */
+function thunder_modules_installed($modules) {
+
+  // Move fields into form display.
+  if (in_array('ivw_integration', $modules)) {
+
+    $fieldWidget = 'ivw_integration_widget';
+
+    entity_get_form_display('node', 'article', 'default')
+      ->setComponent('field_ivw', array(
+        'type' => $fieldWidget,
+      ))->save();
+
+    entity_get_form_display('taxonomy_term', 'channel', 'default')
+      ->setComponent('field_ivw', array(
+        'type' => $fieldWidget,
+      ))->save();
+  }
+
+  // Enable riddle paragraph in field_paragraphs.
+  if (in_array('paragraphs_riddle_marketplace', $modules)) {
+
+    /** @var \Drupal\field\Entity\FieldConfig $field */
+    $field = entity_load('field_config', 'node.article.field_paragraphs');
+
+    $settings = $field->getSetting('handler_settings');
+
+    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
+    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
+
+    $field->setSetting('handler_settings', $settings);
+
+    $field->save();
+  }
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function thunder_page_attachments(array &$attachments) {

@@ -42,18 +42,6 @@ class RiddleIntegration extends AbstractOptionalModule {
       ->set('riddle_marketplace.token', (string) $formValues['riddle_token'])
       ->save(TRUE);
 
-    /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = entity_load('field_config', 'node.article.field_paragraphs');
-
-    $settings = $field->getSetting('handler_settings');
-
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
-
-    $field->setSetting('handler_settings', $settings);
-
-    $field->save();
-
   }
 
 }

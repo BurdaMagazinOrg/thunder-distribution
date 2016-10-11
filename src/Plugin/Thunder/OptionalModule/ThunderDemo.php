@@ -13,7 +13,4 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  *   standardlyEnabled = 1
  * )
  */
-class ThunderDemo extends AbstractOptionalModule {
-
-
-}
+class ThunderDemo extends AbstractOptionalModule {}
