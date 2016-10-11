@@ -40,18 +40,11 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function initMink() {
-    // Set up the template cache used by the PhantomJS mink driver.
-    $path = $this->tempFilesDirectory . DIRECTORY_SEPARATOR . 'browsertestbase-templatecache';
-
     $this->minkDefaultDriverArgs = [
       'firefox',
       NULL,
       'http://127.0.0.1:4444/wd/hub',
     ];
-
-    if (!file_exists($path)) {
-      mkdir($path);
-    }
 
     try {
       return BrowserTestBase::initMink();
