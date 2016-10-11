@@ -27,7 +27,7 @@ content:
       thumbnail_position: ''
       media_switch: ''
       ratio: ''
-      view_mode: default
+      view_mode: slick
       image: ''
       title: field_description
       link: ''
