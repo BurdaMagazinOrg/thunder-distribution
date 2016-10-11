@@ -99,14 +99,53 @@ trait ThunderParagraphsTestTrait {
   public function addTextParagraph($fieldName, $text, $type = 'text') {
     $paragraphIndex = $this->addParagraph($fieldName, $type);
 
+    $this->fillCkEditor(
+      $this->getSession()->getPage(),
+      "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']",
+      $text
+    );
+  }
+
+  /**
+   * Create Twitter or Insagram Paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $name
+   *   Name for paragraph.
+   * @param string $tweetUrl
+   *   Url to tweet or instagram.
+   * @param string $type
+   *   Type of paragraph (twitter|instagram).
+   */
+  public function addTwitterParagraph($fieldName, $name, $tweetUrl, $type = "twitter") {
+    $paragraphIndex = $this->addParagraph($fieldName, $type);
+
+    /** @var DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $ckEditor = $page->find('css', "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']");
-    $ckEditorId = $ckEditor->getAttribute('id');
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][name][0][value]", $name);
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $tweetUrl);
+  }
 
-    $this->getSession()
-      ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+  /**
+   * Add link paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $urlText
+   *   Text that will be displayed for link.
+   * @param string $url
+   *   Link url.
+   */
+  public function addLinkParagraph($fieldName, $urlText, $url) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'link');
+
+    /** @var DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_link][0][title]", $urlText);
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_link][0][uri]", $url);
   }
 
   /**
