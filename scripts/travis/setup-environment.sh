@@ -20,10 +20,9 @@ export LOCAL_COMPOSER_VENDOR_DIR
 if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
     TEST_UPDATE="true"
 else
-    TEST_UPDATE=""
+    TEST_UPDATE="true"
 fi
 
-TEST_UPDATE="true"
 export TEST_UPDATE;
 
 # base path for update tests
