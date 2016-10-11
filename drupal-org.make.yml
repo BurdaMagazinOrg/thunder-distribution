@@ -120,6 +120,7 @@ projects:
     version: "1.5"
     patch:
       - "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
+      - https://www.drupal.org/files/issues/add_contextual_links-2775131-2.patch
 
   media_entity_instagram:
     type: "module"
