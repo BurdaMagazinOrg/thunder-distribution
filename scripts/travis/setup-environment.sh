@@ -22,6 +22,8 @@ if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
 else
     TEST_UPDATE=""
 fi
+
+TEST_UPDATE="true"
 export TEST_UPDATE;
 
 # base path for update tests
