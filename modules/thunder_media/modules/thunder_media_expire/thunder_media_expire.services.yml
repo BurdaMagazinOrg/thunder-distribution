@@ -1,4 +1,0 @@
-services:
-  thunder_media_expire.service:
-    class: Drupal\thunder_media_expire\MediaExpireService
-    arguments: ['@entity.manager', '@entity.query']

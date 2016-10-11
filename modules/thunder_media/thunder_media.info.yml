@@ -18,11 +18,11 @@ dependencies:
   - media_entity_instagram
   - media_entity_slideshow
   - media_entity_twitter
+  - media_expire
   - responsive_image
   - slick_media
   - taxonomy
   - text
-  - thunder_media_expire
   - user
   - video_embed_field
   - video_embed_media

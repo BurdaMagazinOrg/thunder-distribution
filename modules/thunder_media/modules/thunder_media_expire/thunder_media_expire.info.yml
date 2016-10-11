@@ -1,8 +1,0 @@
-name: 'Thunder Media Expire'
-description: 'Expires media assets.'
-type: module
-core: 8.x
-dependencies:
-  - media_entity
-version: 8.x-1.x-dev
-package: Thunder

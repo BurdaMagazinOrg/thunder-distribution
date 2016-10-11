@@ -4,11 +4,11 @@ dependencies:
   module:
     - crop
     - media_entity_image
-    - thunder_media_expire
+    - media_expire
 third_party_settings:
   crop:
     image_field: field_image
-  thunder_media_expire:
+  media_expire:
     expire_field: field_expires
     enable_expiring: 1
     fallback_media: '1'
