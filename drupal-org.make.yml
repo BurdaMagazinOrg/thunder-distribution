@@ -139,7 +139,10 @@ projects:
 
   media_expire:
     type: "module"
-    version: "1.0-alpha1"
+    download:
+      url: "http://git.drupal.org/project/media_expire.git"
+      revision: "2fc8008"
+      branch: "8.x-1.x"
 
   metatag:
     type: "module"
