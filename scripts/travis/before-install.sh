@@ -4,9 +4,9 @@
 drush_download_thunder() {
     DOWNLOAD_PATH=$1
 
-    mkdir -p ${DOWNLOAD_PATH}
-    cd ${DOWNLOAD_PATH}
-
+    mkdir -p $DOWNLOAD_PATH
+    cd $DOWNLOAD_PATH
+    pwd
     drush dl thunder --drupal-project-rename="docroot" -y
 }
 
@@ -59,7 +59,5 @@ bash -e ${THUNDER_DIST_DIR}/scripts/travis/keep-travis-running.sh &
 # If we test update, we also need the previous version of thunder downloaded
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
-     echo "INSTALLING TO DIR: "
-    echo ${UPDATE_BASE_PATH}
     drush_download_thunder {$UPDATE_BASE_PATH}
 fi
