@@ -6,7 +6,6 @@ drush_download_thunder() {
 
     mkdir -p $DOWNLOAD_PATH
     cd $DOWNLOAD_PATH
-    pwd
     drush dl thunder --drupal-project-rename="docroot" -y
 }
 
