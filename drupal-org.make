@@ -94,6 +94,7 @@ projects[simple_sitemap][type] = module
 projects[simple_sitemap][version] = 2.6
 projects[slick][type] = module
 projects[slick][version] = 1.0-beta4
+projects[slick][patch][] = https://www.drupal.org/files/issues/slick-centered-images.patch
 projects[slick_media][type] = module
 projects[slick_media][version] = 1.0-beta3
 projects[token][type] = module
