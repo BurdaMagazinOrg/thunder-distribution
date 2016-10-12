@@ -78,7 +78,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $page->fillField('field_image[0][alt]', "Media {$mediaId} Alt Text");
     $page->fillField('field_image[0][title]', "Media {$mediaId} Title");
     $page->fillField('field_expires[0][value][date]', '2022-12-18');
-    $page->fillField('field_expires[0][value][time]', '00:00:00');
+    $page->fillField('field_expires[0][value][time]', '01:02:03');
     $page->fillField('field_copyright[0][value]', "Media {$mediaId} Copyright");
     $page->fillField('field_source[0][value]', "Media {$mediaId} Source");
 
@@ -101,6 +101,8 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
       ->fieldValueEquals('field_image[0][title]', "Media {$mediaId} Title");
     $this->assertSession()
       ->fieldValueEquals('field_expires[0][value][date]', '2022-12-18');
+    $this->assertSession()
+      ->fieldValueEquals('field_expires[0][value][time]', '01:02:03');
     $this->assertSession()
       ->fieldValueEquals('field_copyright[0][value]', "Media {$mediaId} Copyright");
     $this->assertSession()
