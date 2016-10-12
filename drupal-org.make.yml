@@ -198,8 +198,7 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      revision: "aaa028b61938724508c5fdda46f87673c2dcb57a"
-      branch: "8.x-1.x"
+      tag: "8.x-1.0-beta4"
 
   video_embed_field:
     type: "module"
