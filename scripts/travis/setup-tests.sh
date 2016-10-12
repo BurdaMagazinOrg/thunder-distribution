@@ -12,9 +12,6 @@ drush cr
 # Run the webserver
 drush runserver --default-server=builtin 8080 &>/dev/null &
 
-# Run phantomjs for javascript tests
-#phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${LOCAL_COMPOSER_VENDOR_DIR}/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 false &>/dev/null &
-
 # Run Selenium2 Server
 bash -e /etc/init.d/xvfb start
 sleep 3

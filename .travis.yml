@@ -5,7 +5,6 @@ cache:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
   - "vendor"
-  - "travis_phantomjs"
   - "travis_selenium"
 
 php:
@@ -35,7 +34,6 @@ before_install:
   - bash -x -e ./scripts/travis/before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/install-requirements.sh
   - bash -x -e ./scripts/travis/install-thunder.sh
 
 before_script:
