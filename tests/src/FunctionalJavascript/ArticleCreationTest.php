@@ -50,10 +50,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
 
     // Add Twitter Paragraph.
-    $this->addTwitterParagraph(static::$paragraphsField, 'Thunder Tweet', 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter');
 
     // Add Instagram Paragraph.
-    $this->addTwitterParagraph(static::$paragraphsField, 'DrupalCon2016 Instagram', 'https://www.instagram.com/p/BK3VVUtAuJ3/', 'instagram');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BK3VVUtAuJ3/', 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
