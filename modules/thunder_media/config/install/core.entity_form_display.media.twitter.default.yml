@@ -13,19 +13,13 @@ mode: default
 content:
   field_url:
     type: link_default
-    weight: 1
+    weight: 0
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  name:
-    type: string_textfield
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
   created: true
   langcode: true
+  name: true
   uid: true
