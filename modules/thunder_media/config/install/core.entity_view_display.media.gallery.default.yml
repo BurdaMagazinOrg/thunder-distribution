@@ -15,16 +15,19 @@ content:
     weight: 0
     label: hidden
     settings:
+      vanilla: true
       optionset: default
       optionset_thumbnail: ''
       skin: classic
       skin_thumbnail: ''
       image_style: gallery
       thumbnail_style: ''
+      responsive_image_style: ''
       thumbnail_effect: ''
+      thumbnail_position: ''
       media_switch: ''
       ratio: ''
-      view_mode: default
+      view_mode: slick
       image: ''
       title: field_description
       link: ''
@@ -41,15 +44,8 @@ content:
       cache: 0
       sizes: ''
       current_view_mode: default
-      vanilla: false
       background: false
-      skin_arrows: ''
-      skin_dots: ''
-      responsive_image_style: ''
       iframe_lazy: false
-      thumbnail: ''
-      overlay: ''
-      id: ''
       breakpoints:
         xs:
           breakpoint: ''
@@ -87,14 +83,19 @@ content:
       grid_medium: 0
       grid_small: 0
       preserve_keys: false
+      thumbnail: ''
       visible_items: 0
       display: main
+      skin_arrows: ''
+      skin_dots: ''
       item_id: ''
       box_caption: ''
       box_caption_custom: ''
       box_style: ''
       icon: false
       dimension: ''
+      id: ''
+      overlay: ''
     third_party_settings: {  }
     type: slick_media
 hidden:

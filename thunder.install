@@ -51,6 +51,9 @@ function thunder_install() {
     ->set('register', 'visitors_admin_approval')
     ->save(TRUE);
 
+  // Disable default media view, cause we have our own.
+  \Drupal\views\Entity\View::load('media')->setStatus(FALSE)->save();
+
 }
 
 /**

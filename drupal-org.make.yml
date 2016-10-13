@@ -119,7 +119,7 @@ projects:
     type: "module"
     version: "1.5"
     patch:
-      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-2.patch"
+      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
 
   media_entity_instagram:
     type: "module"
@@ -136,6 +136,13 @@ projects:
   media_entity_twitter:
     type: "module"
     version: "1.2"
+
+  media_expire:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/media_expire.git"
+      revision: "2fc8008"
+      branch: "8.x-1.x"
 
   metatag:
     type: "module"
@@ -173,6 +180,8 @@ projects:
   slick:
     type: "module"
     version: "1.0-beta4"
+    patch:
+      - "https://www.drupal.org/files/issues/slick-centered-images.patch"
 
   slick_media:
     type: "module"
