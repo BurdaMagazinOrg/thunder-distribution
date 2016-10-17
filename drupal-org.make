@@ -78,6 +78,7 @@ projects[media_expire][download][branch] = 8.x-1.x
 projects[metatag][type] = module
 projects[metatag][version] = 1.0-beta10
 projects[metatag][patch][] = https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch
+projects[metatag][patch][] = https://www.drupal.org/files/issues/metatag_shows-2817309-9.patch
 projects[nexx_integration][type] = module
 projects[nexx_integration][version] = 1.3
 projects[paragraphs][type] = module
