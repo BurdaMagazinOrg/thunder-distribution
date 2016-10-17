@@ -203,7 +203,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      tag: "8.x-1.0-beta3"
+      tag: "8.x-1.0-beta4"
 
   infinite:
     type: "theme"
