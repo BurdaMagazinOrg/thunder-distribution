@@ -75,11 +75,14 @@ trait ThunderMetaTagTrait {
    *   Full meta tag field name that can be used to set value for it.
    */
   protected function getMetaTagFieldName($metaTagName, $groupName = '', $fieldNamePrefix = '') {
+    // Based on examples, this way of forming field name works properly.
+    $fieldName = str_replace(['.', ':'], '_', $metaTagName);
+
     if (empty($groupName) && empty($fieldNamePrefix)) {
-      return $metaTagName;
+      return $fieldName;
     }
 
-    return $fieldNamePrefix . '[' . $groupName . '][' . $metaTagName . ']';
+    return $fieldNamePrefix . '[' . $groupName . '][' . $fieldName . ']';
   }
 
   /**
@@ -91,7 +94,7 @@ trait ThunderMetaTagTrait {
   public function checkMetaTags(array $metaTagConfiguration) {
     // Check on article are custom meta tags properly populated.
     foreach ($metaTagConfiguration as $metaTagName => $value) {
-      $metaTag = explode(':', $metaTagName);
+      $metaTag = explode(' ', $metaTagName);
 
       $this->checkMetaTag($metaTag[1], $value);
     }
@@ -108,8 +111,15 @@ trait ThunderMetaTagTrait {
   protected function checkMetaTag($name, $value) {
     $htmlValue = htmlentities($value);
 
+    $checkXPath = "@content='{$htmlValue}'";
+    if (strpos($value, 'LIKE:') === 0) {
+      $valueToCheck = substr($htmlValue, strlen('LIKE:'));
+
+      $checkXPath = "contains(@content, '{$valueToCheck}')";
+    }
+
     $this->assertSession()
-      ->elementExists('xpath', "//head/meta[@name='{$name}' and @content='{$htmlValue}']");
+      ->elementExists('xpath', "//head/meta[(@name='{$name}' or @property='{$name}') and {$checkXPath}]");
   }
 
   /**
@@ -166,7 +176,7 @@ trait ThunderMetaTagTrait {
     $fieldValues = [];
 
     foreach ($configuration as $metaTagName => $metaTagValue) {
-      $metaTag = explode(':', $metaTagName);
+      $metaTag = explode(' ', $metaTagName);
 
       if (!empty($fieldNamePrefix)) {
         $fieldValues[$this->getMetaTagFieldName($metaTag[1], $metaTag[0], $fieldNamePrefix)] = $metaTagValue;

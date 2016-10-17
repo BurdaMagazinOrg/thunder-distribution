@@ -12,6 +12,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class MetaInformationTest extends ThunderJavascriptTestBase {
 
   use ThunderMetaTagTrait;
+  use ThunderMediaTestTrait;
 
   /**
    * Default user login role used for testing.
@@ -26,10 +27,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $globalMetaTags = [
-    'basic:title' => 'Global Title',
-    'basic:keywords' => 'Thunder,CMS,Burda',
-    'basic:abstract' => '[random]',
-    'basic:description' => '[random]',
+    'basic title' => 'Global Title',
+    'basic keywords' => 'Thunder,CMS,Burda',
+    'basic abstract' => '[random]',
+    'basic description' => '[random]',
   ];
 
   /**
@@ -38,8 +39,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $contentMetaTags = [
-    'basic:title' => '[node:title]',
-    'basic:abstract' => '[random]',
+    'basic title' => '[node:title]',
+    'basic abstract' => '[random]',
   ];
 
   /**
@@ -48,10 +49,20 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $articleMetaTags = [
-    'basic:title' => 'Test [node:field_teaser_text]',
-    'basic:description' => '[random]',
-    'advanced:robots' => 'index, follow, noydir',
-    'advanced:referrer' => 'no-referrer-when-downgrade',
+    'basic title' => 'Test [node:field_teaser_text]',
+    'basic description' => '[random]',
+    'advanced robots' => 'index, follow, noydir',
+    'advanced referrer' => 'no-referrer-when-downgrade',
+
+    // OpenGraph Meta Tags.
+    'open_graph og:image' => '[node:field_teaser_media:entity:field_image:facebook]',
+    'open_graph og:image:type' => '[node:field_teaser_media:entity:field_image:facebook:mimetype]',
+    'open_graph og:image:height' => '[node:field_teaser_media:entity:field_image:facebook:height]',
+    'open_graph og:image:width' => '[node:field_teaser_media:entity:field_image:facebook:width]',
+    'open_graph og:description' => '[node:field_teaser_text]',
+    'open_graph og:title' => '[node:field_seo_title]',
+    'open_graph og:site_name' => '[node:title]',
+    'open_graph og:type' => 'article',
   ];
 
   /**
@@ -60,10 +71,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $customMetaTags = [
-    'basic:title' => 'Custom [node:field_teaser_text]',
-    'basic:description' => '[random]',
-    'advanced:robots' => 'follow',
-    'advanced:referrer' => 'no-referrer',
+    'basic title' => 'Custom [node:field_teaser_text]',
+    'basic description' => '[random]',
+    'advanced robots' => 'follow',
+    'advanced referrer' => 'no-referrer',
   ];
 
   /**
@@ -75,6 +86,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     '[node:field_seo_title]' => 'Test SEO Title',
     '[node:field_teaser_text]' => 'Test Teaser Text',
     '[node:title]' => 'Test Note Title',
+
+    // For testing Media:1 is used for teaser.
+    '[node:field_teaser_media:entity:field_image:facebook]' => 'LIKE:/files/styles/facebook/public/2016-05/thunder_1.jpg?itok=',
+    '[node:field_teaser_media:entity:field_image:facebook:mimetype]' => 'image/jpeg',
+    '[node:field_teaser_media:entity:field_image:facebook:height]' => '630',
+    '[node:field_teaser_media:entity:field_image:facebook:width]' => '1200',
   ];
 
   /**
@@ -97,6 +114,33 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
+   * Click article save option based on option index.
+   *
+   * Option 2 - is dedicated for drop-down button and it should not be used.
+   *
+   * TODO: Improve xpath to use simpler indexing. (without skip index 2).
+   *
+   * @param int $optionIndex
+   *   Index for option that should be clicked. (1-default, 3-2nd option, ..)
+   */
+  protected function clickArticleSave($optionIndex = 1) {
+    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
+    $page = $this->getSession()->getPage();
+
+    if ($optionIndex === 2) {
+      $optionIndex = 1;
+    }
+
+    if ($optionIndex !== 1) {
+      $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
+        ->click();
+    }
+
+    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[' . $optionIndex . ']/input')
+      ->click();
+  }
+
+  /**
    * Create simple article for meta tag testing.
    *
    * @param array $fieldValues
@@ -112,14 +156,14 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $page->fillField('field_seo_title[0][value]', static::$tokens['[node:field_seo_title]']);
     $page->fillField('field_teaser_text[0][value]', static::$tokens['[node:field_teaser_text]']);
 
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+
     if (isset($fieldValues)) {
       $this->expandAllTabs();
       $this->setFieldValues($page, $fieldValues);
     }
 
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[1]/input')
-      ->click();
+    $this->clickArticleSave();
   }
 
   /**
@@ -213,9 +257,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->expandAllTabs();
     $this->setFieldValues($page, $unPublishFieldValues);
 
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[1]/input')
-      ->click();
+    $this->clickArticleSave();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
@@ -270,13 +312,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->createArticleWithFields($customFields);
 
     $this->drupalGet('node/' . $articleId . '/edit');
-    $page = $this->getSession()->getPage();
 
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
-      ->click();
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[3]/input')
-      ->click();
+    // Publish article.
+    $this->clickArticleSave(3);
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
@@ -295,15 +333,38 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'simple_sitemap_priority' => '0.9',
     ]);
 
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[1]/input')
-      ->click();
+    $this->clickArticleSave();
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
-    $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority', '0.9');
+    $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
+    $this->assertEquals(1, $domElements->length);
+    $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
+
+    // After sitemap.xml -> we have to open page without setting cookie before.
+    $this->getSession()
+      ->visit($this->buildUrl('admin/config/search/simplesitemap'));
+    $page = $this->getSession()->getPage();
+    $this->setFieldValues($page, [
+      'max_links' => '2',
+    ]);
+    $page->find('xpath', '//input[@id="edit-submit"]')->click();
+
+    $this->runCron();
+
+    // Check loc, that it's pointing to sitemap.xml file.
+    $this->drupalGet('sitemap.xml');
+    $content = $this->getSession()->getPage()->getContent();
+    $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
+    $lastSiteMapUrl = $domElements->item(0)->nodeValue;
+    $this->assertStringEndsWith('/sitemap.xml', $lastSiteMapUrl);
+
+    // Get 3rd sitemap.xml file and check that link exits there.
+    $this->getSession()->visit($this->buildUrl('sitemaps/3/sitemap.xml'));
+    $content = $this->getSession()->getPage()->getContent();
+    $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
     $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
 
@@ -315,12 +376,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->scrollElementInView('[name="simple_sitemap_index_content"]');
     $page->find('css', '[name="simple_sitemap_index_content"]')->click();
 
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[1]/input')
-      ->click();
+    $this->clickArticleSave();
 
     $this->runCron();
-    $this->drupalGet('sitemap.xml');
+    $this->drupalGet('sitemaps/3/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
