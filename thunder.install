@@ -5,6 +5,7 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\views\Entity\View;
 use Drupal\user\Entity\User;
 use \Drupal\Core\Entity\EntityStorageException;
 use \Drupal\metatag\Entity\MetatagDefaults;
@@ -52,7 +53,7 @@ function thunder_install() {
     ->save(TRUE);
 
   // Disable default media view, cause we have our own.
-  \Drupal\views\Entity\View::load('media')->setStatus(FALSE)->save();
+  View::load('media')->setStatus(FALSE)->save();
 
 }
 
@@ -132,7 +133,7 @@ function thunder_update_8003() {
     ->getStorage('field_storage_config')
     ->loadByProperties(array('type' => 'metatag'));
 
-  foreach ($field_storage_configs as $key => $field_storage) {
+  foreach ($field_storage_configs as $field_storage) {
     $field_name = $field_storage->getName();
 
     // Get the individual fields (field instances) associated with bundles.
