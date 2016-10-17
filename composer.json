@@ -63,7 +63,9 @@
         "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
       },
       "drupal/metatag": {
-        "Deactivate drupal console": "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
+        "Deactivate drupal console": "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch",
+        "metatag_update_8103 not working anymore": "https://www.drupal.org/files/issues/metatag_update_8103_not-2819549-2.patch",
+        "Metatag shows predefined global values every time in forms": "https://www.drupal.org/files/issues/metatag_shows-2817309-9.patch"
       },
       "drupal/slick": {
         "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"

@@ -112,3 +112,38 @@ function thunder_update_8002() {
       ->save();
   }
 }
+
+/**
+ * Fix metatag config.
+ */
+function thunder_update_8003() {
+
+  $sandbox = [];
+  module_load_include('install', 'metatag');
+
+  metatag_update_8102($sandbox);
+  metatag_update_8103();
+
+  // Reset the default field values.
+  $entity_manager = \Drupal::service('entity.manager');
+
+  // Get all of the field storage entities of type metatag.
+  $field_storage_configs = $entity_manager
+    ->getStorage('field_storage_config')
+    ->loadByProperties(array('type' => 'metatag'));
+
+  foreach ($field_storage_configs as $key => $field_storage) {
+    $field_name = $field_storage->getName();
+
+    // Get the individual fields (field instances) associated with bundles.
+    /** @var \Drupal\field\Entity\FieldConfig[] $fields */
+    $fields = $entity_manager->getStorage('field_config')
+      ->loadByProperties(array('field_name' => $field_name));
+
+    foreach ($fields as $field) {
+
+      $field->setDefaultValue(serialize([]));
+      $field->save();
+    }
+  }
+}
