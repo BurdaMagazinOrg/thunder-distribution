@@ -107,25 +107,22 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Create Twitter or Insagram Paragraph.
+   * Create Twitter or Instagram Paragraph.
    *
    * @param string $fieldName
    *   Field name.
-   * @param string $name
-   *   Name for paragraph.
-   * @param string $tweetUrl
+   * @param string $socialUrl
    *   Url to tweet or instagram.
    * @param string $type
    *   Type of paragraph (twitter|instagram).
    */
-  public function addTwitterParagraph($fieldName, $name, $tweetUrl, $type = "twitter") {
+  public function addSocialParagraph($fieldName, $socialUrl, $type) {
     $paragraphIndex = $this->addParagraph($fieldName, $type);
 
     /** @var DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][name][0][value]", $name);
-    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $tweetUrl);
+    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $socialUrl);
   }
 
   /**

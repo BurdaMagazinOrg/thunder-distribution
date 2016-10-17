@@ -49,3 +49,10 @@ function thunder_media_preprocess_views_view(&$variables) {
 function thunder_media_page_attachments(array &$page) {
   $page['#attached']['library'][] = 'thunder_media/gallery';
 }
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function thunder_media_menu_local_actions_alter(&$local_actions) {
+  $local_actions['media.add']['appears_on'][] = 'view.thunder_media.media_page_list';
+}
