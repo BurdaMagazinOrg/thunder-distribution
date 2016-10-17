@@ -64,6 +64,7 @@
       },
       "drupal/metatag": {
         "Deactivate drupal console": "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch",
+        "metatag_update_8103 not working anymore": "https://www.drupal.org/files/issues/metatag_update_8103_not-2819549-2.patch",
         "Metatag shows predefined global values every time in forms": "https://www.drupal.org/files/issues/metatag_shows-2817309-9.patch"
       },
       "drupal/slick": {
