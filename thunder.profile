@@ -220,3 +220,15 @@ function thunder_page_attachments(array &$attachments) {
     }
   }
 }
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function thunder_element_info_alter(array &$info) {
+
+  foreach ($info['details']['#pre_render'] as &$render) {
+    if ($render[1] == 'preRenderDetails') {
+      $render[0] = 'Drupal\thunder\Render\Element\Details';
+    }
+  }
+}
