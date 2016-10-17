@@ -40,7 +40,8 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" --no-progress
+
+    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" --no-progress
 }
 
 apply_patches() {
