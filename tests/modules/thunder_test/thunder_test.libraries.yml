@@ -1,7 +1,7 @@
 thunder_test_simulate_jquery:
   version: VERSION
   js:
-    js/jquery.simulate.js: {}
+      https://raw.githubusercontent.com/jquery/jquery-simulate/v1.0.1/jquery.simulate.js: { type: external }
   dependencies:
     - core/jquery
     - core/drupal
