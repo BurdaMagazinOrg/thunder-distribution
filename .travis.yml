@@ -17,11 +17,6 @@ env:
 
 sudo: false
 
-addons:
-  apt:
-    packages:
-      - nodejs
-
 # match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
   only:
