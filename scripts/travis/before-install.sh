@@ -61,10 +61,3 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     drush_download_thunder $UPDATE_BASE_PATH
 fi
 
-# globally require drupal coder for code tests
-composer global require drupal/coder
-
-# run phpcss before building, we only want to test the distribution files
-phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
-phpcs --standard=Drupal --report=summary -p .
-phpcs --standard=DrupalPractice --report=summary -p .
