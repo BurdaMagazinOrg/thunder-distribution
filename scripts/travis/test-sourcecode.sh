@@ -1,3 +1,6 @@
+# remove xdebug to make php execute faster
+phpenv config-rm xdebug.ini
+
 # globally require drupal coder for code tests
 composer global require drupal/coder
 

@@ -32,10 +32,6 @@ drush verify-makefile
 # install image magick
 printf "\n" | pecl install imagick
 
-
-# remove xdebug to make php execute faster
-phpenv config-rm xdebug.ini
-
 # Set MySQL Options
 mysql -e 'SET GLOBAL wait_timeout = 5400;'
 mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
