@@ -36,8 +36,8 @@ class ConfigurationForm extends ConfigFormBase {
 
     $form['enable_filename_transliteration'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Enable filename transliteration'),
-      '#description' => t('Enable this checkbox to clean filenames before saving the files.'),
+      '#title' => $this->t('Enable filename transliteration'),
+      '#description' => $this->t('Enable this checkbox to clean filenames before saving the files.'),
       '#default_value' => $config->get('enable_filename_transliteration'),
     );
 
