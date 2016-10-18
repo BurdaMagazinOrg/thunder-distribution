@@ -3,7 +3,7 @@ thunder_media.configuration_form:
   path: '/admin/config/thunder_media/configuration'
   defaults:
     _form: '\Drupal\thunder_media\Form\ConfigurationForm'
-    _title: 'ConfigurationForm'
+    _title: 'Thunder Media Configuration'
   requirements:
     _permission: 'administer site configuration'
   options:

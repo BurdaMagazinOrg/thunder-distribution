@@ -13,8 +13,8 @@ In order to execute tests:
 
 To successfully run drupal tests, a Browser with WebDriver is required. You can use one of following: 
 
-* [PhantomJS](http://phantomjs.org)
-* [Selenium Server Standalone](http://www.seleniumhq.org/download) (* Selenium requires FireFox Browser)
+- [PhantomJS](http://phantomjs.org)
+- [Selenium Server Standalone](http://www.seleniumhq.org/download) (* Selenium requires FireFox Browser)
 
 It's sufficient to run one of mentioned browsers:
 ```bash

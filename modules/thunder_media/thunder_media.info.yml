@@ -1,5 +1,5 @@
 name: 'Thunder Media'
-description: 'provide media bundles for thunder.'
+description: 'Provides media bundles for thunder.'
 type: module
 core: 8.x
 dependencies:
@@ -29,3 +29,4 @@ dependencies:
   - views
 version: 8.x-1.x-dev
 package: Thunder
+configure: thunder_media.configuration_form
