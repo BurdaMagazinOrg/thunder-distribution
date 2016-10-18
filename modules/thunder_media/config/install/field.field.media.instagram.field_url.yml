@@ -12,7 +12,7 @@ entity_type: media
 bundle: instagram
 label: Url
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

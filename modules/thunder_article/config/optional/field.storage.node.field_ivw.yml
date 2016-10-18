@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ivw_integration
+    - node
+id: node.field_ivw
+field_name: field_ivw
+entity_type: node
+type: ivw_integration_settings
+settings: {  }
+module: ivw_integration
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

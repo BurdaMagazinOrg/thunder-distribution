@@ -5,5 +5,4 @@
 /libraries
 /themes/infinite/
 .DS_Store
-tests/behat/behat.local.yml
 composer.lock
