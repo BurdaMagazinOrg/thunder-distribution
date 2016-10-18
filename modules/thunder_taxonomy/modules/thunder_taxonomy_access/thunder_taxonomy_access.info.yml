@@ -1,0 +1,8 @@
+name: 'Thunder Taxonomy access'
+description: 'Provide taxonomy access functions for Thunder.'
+type: module
+core: 8.x
+dependencies:
+  - taxonomy
+version: 8.x-1.x-dev
+package: Thunder

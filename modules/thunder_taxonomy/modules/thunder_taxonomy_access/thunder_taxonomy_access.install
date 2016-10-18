@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Contains Thunder taxonomy install / uninstall hooks.
+ * Contains Thunder taxonomy access install / uninstall hooks.
  */
 
 /**
  * Implements hook_install().
  */
-function thunder_taxonomy_install() {
+function thunder_taxonomy_access_install() {
   // Add our base fields to the schema.
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
 
@@ -17,7 +17,7 @@ function thunder_taxonomy_install() {
 /**
  * Implements hook_uninstall().
  */
-function thunder_taxonomy_uninstall() {
+function thunder_taxonomy_access_uninstall() {
   // Remove our base fields from the schema.
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
 }
