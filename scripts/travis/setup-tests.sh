@@ -6,6 +6,9 @@ cd ${TEST_DIR}/docroot
 # require Selenium2 Driver
 composer require "behat/mink-selenium2-driver"
 
+# globally require drupal coder for code tests
+composer global require drupal/coder
+
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 

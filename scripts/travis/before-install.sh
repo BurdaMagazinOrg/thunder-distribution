@@ -60,3 +60,8 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
     drush_download_thunder $UPDATE_BASE_PATH
 fi
+
+# run phpcss before building, we only want to test the distribution files
+phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+phpcs --standard=Drupal --report=summary -p .
+phpcs --standard=DrupalPractice --report=summary -p .
