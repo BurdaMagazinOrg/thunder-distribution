@@ -1,5 +1,6 @@
 /**
- * @file Media related javascripts.
+ * @file
+ * Media related javascripts.
  */
 
 (function ($) {
