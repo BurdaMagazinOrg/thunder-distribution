@@ -66,6 +66,28 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    // Check if this method is overridden.
+    $reflection = new \ReflectionClass($this);
+    foreach ($reflection->getMethods() as $method) {
+      if ($method->name == 'buildForm') {
+        if ($method->class != get_class($this)) {
+          return $form;
+        }
+      }
+    }
+
+    $form[$this->getBaseId()] = array(
+      '#type' => 'details',
+      '#title' => $this->pluginDefinition['label'],
+      '#open' => TRUE,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="install_modules_' . $this->getBaseId() . '"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
     return $form;
   }
 
@@ -73,67 +95,6 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
    * {@inheritdoc}
    */
   public function submitForm(array $formValues) {
-  }
-
-  /**
-   * Add custom field for form.
-   *
-   * @param string $entityType
-   *   Entity type.
-   * @param string $entityBundle
-   *   Entity type.
-   * @param string $fieldName
-   *   Field name.
-   * @param string $fieldLabel
-   *   Field label.
-   * @param string $fieldType
-   *   Field type.
-   * @param string $fieldWidget
-   *   Field widget.
-   */
-  protected function addField($entityType, $entityBundle, $fieldName, $fieldLabel, $fieldType, $fieldWidget) {
-
-    $fieldStorage = $this->entityTypeManager
-      ->getStorage('field_storage_config')
-      ->load("$entityType.$fieldName");
-    if (empty($fieldStorage)) {
-      $fieldStorageDefinition = array(
-        'field_name' => $fieldName,
-        'entity_type' => $entityType,
-        'type' => $fieldType,
-      );
-      $fieldStorage = $this->entityTypeManager
-        ->getStorage('field_storage_config')
-        ->create($fieldStorageDefinition);
-      $fieldStorage->save();
-    }
-    $fieldDefinition = array(
-      'label' => $fieldLabel,
-      'field_name' => $fieldStorage->getName(),
-      'entity_type' => $entityType,
-      'bundle' => $entityBundle,
-      'settings' => [
-        'display_default' => '1',
-        'display_field' => '1',
-      ],
-    );
-    $field = entity_create('field_config', $fieldDefinition);
-    $field->save();
-    entity_get_form_display($entityType, $entityBundle, 'default')
-      ->setComponent($fieldName, array(
-        'type' => $fieldWidget,
-      ))
-      ->save();
-  }
-
-  /**
-   * Check is optional module enabled.
-   *
-   * @return int
-   *   Return status as int 0|1.
-   */
-  public function isStandardlyEnabled() {
-    return 0;
   }
 
 }

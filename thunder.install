@@ -5,12 +5,17 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\views\Entity\View;
 use Drupal\user\Entity\User;
+use \Drupal\Core\Entity\EntityStorageException;
+use \Drupal\metatag\Entity\MetatagDefaults;
 
 /**
  * Install the thunder installation profile.
  */
 function thunder_install() {
+
+  drupal_get_messages();
 
   // Enable the admin theme.
   \Drupal::configFactory()
@@ -27,7 +32,7 @@ function thunder_install() {
   $profilePath = drupal_get_path('profile', 'thunder');
   \Drupal::configFactory()
     ->getEditable('thunder_base.settings')
-    ->set('logo.use_default', 0)
+    ->set('logo.use_default', FALSE)
     ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
     ->save(TRUE);
 
@@ -47,4 +52,99 @@ function thunder_install() {
     ->set('register', 'visitors_admin_approval')
     ->save(TRUE);
 
+  // Disable default media view, cause we have our own.
+  View::load('media')->setStatus(FALSE)->save();
+
+}
+
+/**
+ * Adds metatag configuration.
+ */
+function thunder_update_8001() {
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+    'metatag_open_graph',
+    'metatag_twitter_cards',
+  ]);
+
+  $configs = [
+    'metatag_defaults' => ['node__article'],
+    'image_style' => ['twitter', 'facebook'],
+  ];
+
+  foreach ($configs as $entity => $ids) {
+    foreach ($ids as $id) {
+      try {
+        \Drupal::service('config_update.config_update')->import($entity, $id);
+      }
+      catch (EntityStorageException $e) {
+      }
+    }
+  }
+
+  $meta = MetatagDefaults::load('global');
+  $tags = $meta->get('tags');
+  if (empty($tags['og_site_name'])) {
+    $tags['og_site_name'] = '[site:name]';
+  }
+  if (empty($tags['twitter_cards_type'])) {
+    $tags['twitter_cards_type'] = 'summary';
+  }
+  $meta->set('tags', $tags);
+  $meta->save();
+}
+
+/**
+ * Enable thunder_fia.
+ */
+function thunder_update_8002() {
+
+  if (\Drupal::moduleHandler()->moduleExists('fb_instant_articles')) {
+    $modules = \Drupal::configFactory()
+      ->getEditable('core.extension')
+      ->get('module');
+
+    $modules['thunder_fia'] = 1;
+
+    \Drupal::configFactory()
+      ->getEditable('core.extension')
+      ->set('module', $modules)
+      ->save();
+  }
+}
+
+/**
+ * Fix metatag config.
+ */
+function thunder_update_8003() {
+
+  $sandbox = [];
+  module_load_include('install', 'metatag');
+
+  metatag_update_8102($sandbox);
+  metatag_update_8103();
+
+  // Reset the default field values.
+  $entity_manager = \Drupal::service('entity.manager');
+
+  // Get all of the field storage entities of type metatag.
+  $field_storage_configs = $entity_manager
+    ->getStorage('field_storage_config')
+    ->loadByProperties(array('type' => 'metatag'));
+
+  foreach ($field_storage_configs as $field_storage) {
+    $field_name = $field_storage->getName();
+
+    // Get the individual fields (field instances) associated with bundles.
+    /** @var \Drupal\field\Entity\FieldConfig[] $fields */
+    $fields = $entity_manager->getStorage('field_config')
+      ->loadByProperties(array('field_name' => $field_name));
+
+    foreach ($fields as $field) {
+
+      $field->setDefaultValue(serialize([]));
+      $field->save();
+    }
+  }
 }

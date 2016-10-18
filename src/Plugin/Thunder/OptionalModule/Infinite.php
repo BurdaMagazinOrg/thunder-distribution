@@ -8,6 +8,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  * @ThunderOptionalModule(
  *   id = "infinite",
  *   label = @Translation("Infinite Theme"),
+ *   description = @Translation("Whenever a user reaches the end of an article, the Infinite Theme loads further relevant content."),
  *   type = "theme",
  * )
  */

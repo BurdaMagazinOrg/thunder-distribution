@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "ivw_integration",
  *   label = @Translation("IVW Integration"),
+ *   description = @Translation("Integration module for the German audience measurement organisation IVW."),
  *   type = "module",
  * )
  */
@@ -20,16 +21,8 @@ class IvwIntegration extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['ivw_integration'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('IVW'),
-      '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[ivw_integration]"]' => array('checked' => TRUE),
-        ),
-      ),
-    );
+    $form = parent::buildForm($form, $form_state);
+
     $form['ivw_integration']['ivw_site'] = array(
       '#type' => 'textfield',
       '#title' => t('IVW Site name'),
@@ -54,10 +47,6 @@ class IvwIntegration extends AbstractOptionalModule {
       ->set('site', (string) $formValues['ivw_site'])
       ->set('mobile_site', (string) $formValues['mobile_site'])
       ->save(TRUE);
-
-    $this->addField('node', 'article', 'field_ivw', 'IVW settings', 'ivw_integration_settings', 'ivw_integration_widget');
-    $this->addField('taxonomy_term', 'channel', 'field_ivw', 'IVW settings', 'ivw_integration_settings', 'ivw_integration_widget');
-
   }
 
 }

@@ -11,6 +11,8 @@ dependencies:
   - media_entity
   - menu_ui
   - metatag
+  - metatag_open_graph
+  - metatag_twitter_cards
   - node
   - paragraphs
   - path

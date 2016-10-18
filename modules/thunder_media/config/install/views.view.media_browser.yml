@@ -340,7 +340,7 @@ display:
           group_type: group
           admin_label: ''
           operator: '='
-          value: false
+          value: '0'
           group: 1
           exposed: true
           expose:

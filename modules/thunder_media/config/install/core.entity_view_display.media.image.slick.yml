@@ -1,0 +1,87 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.slick
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - media_entity.bundle.image
+  module:
+    - blazy
+id: media.image.slick
+targetEntityType: media
+bundle: image
+mode: slick
+content:
+  field_copyright:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: gallery
+      thumbnail_style: ''
+      responsive_image_style: ''
+      media_switch: ''
+      ratio: ''
+      sizes: ''
+      breakpoints:
+        xs:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        sm:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        md:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        lg:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        xl:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+      current_view_mode: slick
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      icon: false
+      layout: ''
+      cache: 0
+      item_id: ''
+      optionset: default
+      skin: ''
+    third_party_settings: {  }
+    type: blazy
+hidden:
+  created: true
+  field_brands: true
+  field_channel: true
+  field_description: true
+  field_events: true
+  field_expires: true
+  field_people: true
+  field_source: true
+  field_tags: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

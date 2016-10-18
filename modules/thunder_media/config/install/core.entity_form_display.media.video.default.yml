@@ -5,12 +5,10 @@ dependencies:
     - field.field.media.video.field_caption
     - field.field.media.video.field_copyright
     - field.field.media.video.field_description
-    - field.field.media.video.field_expires
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
     - media_entity.bundle.video
   module:
-    - datetime
     - text
     - video_embed_field
 id: media.video.default
@@ -32,11 +30,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_expires:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
   field_media_video_embed_field:
     weight: 1
     settings: {  }

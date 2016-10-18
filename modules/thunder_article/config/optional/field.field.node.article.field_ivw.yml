@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ivw
+    - node.type.article
+  module:
+    - ivw_integration
+id: node.article.field_ivw
+field_name: field_ivw
+entity_type: node
+bundle: article
+label: 'IVW settings'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: ivw_integration_settings

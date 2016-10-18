@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ThunderOptionalModule(
  *   id = "paragraphs_riddle_marketplace",
  *   label = @Translation("Riddle integration"),
+ *   description = @Translation("Riddle makes it easy to quickly create beautiful and highly shareable quizzes, tests, lists, polls, and more."),
  *   type = "module",
  * )
  */
@@ -20,16 +21,7 @@ class RiddleIntegration extends AbstractOptionalModule {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['paragraphs_riddle_marketplace'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Riddle'),
-      '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules[paragraphs_riddle_marketplace]"]' => array('checked' => TRUE),
-        ),
-      ),
-    );
+    $form = parent::buildForm($form, $form_state);
 
     $form['paragraphs_riddle_marketplace']['riddle_token'] = array(
       '#type' => 'textfield',
@@ -49,18 +41,6 @@ class RiddleIntegration extends AbstractOptionalModule {
     $this->configFactory->getEditable('riddle_marketplace.settings')
       ->set('riddle_marketplace.token', (string) $formValues['riddle_token'])
       ->save(TRUE);
-
-    /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = entity_load('field_config', 'node.article.field_paragraphs');
-
-    $settings = $field->getSetting('handler_settings');
-
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
-
-    $field->setSetting('handler_settings', $settings);
-
-    $field->save();
 
   }
 
