@@ -114,29 +114,21 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Click article save option based on option index.
+   * Click article save option based on index of action.
    *
-   * Option 2 - is dedicated for drop-down button and it should not be used.
-   *
-   * TODO: Improve xpath to use simpler indexing. (without skip index 2).
-   *
-   * @param int $optionIndex
-   *   Index for option that should be clicked. (1-default, 3-2nd option, ..)
+   * @param int $actionIndex
+   *   Index for option that should be clicked. (by default 1)
    */
-  protected function clickArticleSave($optionIndex = 1) {
+  protected function clickArticleSave($actionIndex = 1) {
     $this->scrollElementInView('[data-drupal-selector="edit-save"]');
     $page = $this->getSession()->getPage();
 
-    if ($optionIndex === 2) {
-      $optionIndex = 1;
-    }
-
-    if ($optionIndex !== 1) {
+    if ($actionIndex !== 1) {
       $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
         ->click();
     }
 
-    $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[' . $optionIndex . ']/input')
+    $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
       ->click();
   }
 
@@ -167,10 +159,35 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test Meta Tag default configuration and custom configuration for article.
+   * Check saved configuration on meta tag overview page.
    *
-   * TODO:
-   *   - check default preselection in from on article create.
+   * @param string $configurationUrl
+   *   Url to page where configuration should be set.
+   * @param array $configuration
+   *   List of configuration what will be set for meta tag.
+   */
+  protected function checkSavedConfiguration($configurationUrl, $configuration) {
+    $this->drupalGet('admin/config/search/metatag');
+    $page = $this->getSession()->getPage();
+
+    $this->expandAllTabs();
+
+    foreach ($configuration as $metaTagName => $metaTagValue) {
+      $metaTag = explode(' ', $metaTagName);
+      $fieldName = $this->getMetaTagFieldName($metaTag[1]);
+
+      $this->assertNotEquals(
+        NULL,
+        $page->find(
+          'xpath',
+          '//tr[.//a[contains(@href, "/' . $configurationUrl . '")]]/td[1]//table//tr[./td[text()="' . $fieldName . ':"] and ./td[text()="' . $metaTagValue . '"]]'
+        )
+      );
+    }
+  }
+
+  /**
+   * Test Meta Tag default configuration and custom configuration for article.
    */
   public function testArticleMetaTags() {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
@@ -194,13 +211,19 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $checkCustomMetaTags = $this->replaceTokens($checkCustomConfigs, static::$tokens);
 
     // Edit Global configuration.
-    $this->setMetaTagConfigurationForUrl('admin/config/search/metatag/global', $globalConfigs);
+    $configurationUrl = 'admin/config/search/metatag/global';
+    $this->setMetaTagConfigurationForUrl($configurationUrl, $globalConfigs);
+    $this->checkSavedConfiguration($configurationUrl, $globalConfigs);
 
     // Edit Content configuration.
-    $this->setMetaTagConfigurationForUrl('admin/config/search/metatag/node', $contentConfigs);
+    $configurationUrl = 'admin/config/search/metatag/node';
+    $this->setMetaTagConfigurationForUrl($configurationUrl, $contentConfigs);
+    $this->checkSavedConfiguration($configurationUrl, $contentConfigs);
 
     // Edit Article configuration.
-    $this->setMetaTagConfigurationForUrl('admin/config/search/metatag/node__article', $articleConfigs);
+    $configurationUrl = 'admin/config/search/metatag/node__article';
+    $this->setMetaTagConfigurationForUrl($configurationUrl, $articleConfigs);
+    $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
     // Create Article with default meta tags and check it.
     $this->createArticleWithFields();
@@ -314,7 +337,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/' . $articleId . '/edit');
 
     // Publish article.
-    $this->clickArticleSave(3);
+    $this->clickArticleSave(2);
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
