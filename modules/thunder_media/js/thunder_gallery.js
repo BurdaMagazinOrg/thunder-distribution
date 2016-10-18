@@ -1,9 +1,10 @@
 /**
- * @file
- * Media related javascripts.
+ * @file Media related javascripts.
  */
 
 (function ($) {
+  'use strict';
+
   /**
    * Registers behaviours related to thunder media.
    */
