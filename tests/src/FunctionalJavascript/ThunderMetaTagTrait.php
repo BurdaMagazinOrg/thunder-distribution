@@ -21,7 +21,7 @@ trait ThunderMetaTagTrait {
    * @param string $value
    *   Value for meta tag.
    */
-  public function setMetaTag(DocumentElement $page, $fieldName, $value) {
+  public function setFieldValue(DocumentElement $page, $fieldName, $value) {
     $isCheckboxTag = $this->getSession()
       ->evaluateScript("jQuery('input[name*=\"{$fieldName}[\"][type=\"checkbox\"]').length > 0");
 
@@ -29,6 +29,12 @@ trait ThunderMetaTagTrait {
       $this->setCheckboxMetaTag($page, $fieldName, $value);
 
       return;
+    }
+
+    // Clear Text Area - if field is "textarea".
+    $field = $page->findField($fieldName);
+    if ($field->getTagName() === 'textarea') {
+      $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val('');");
     }
 
     $this->scrollElementInView('[name="' . $fieldName . '"]');
@@ -157,7 +163,7 @@ trait ThunderMetaTagTrait {
    */
   public function setFieldValues(DocumentElement $page, array $fieldValues) {
     foreach ($fieldValues as $fieldName => $value) {
-      $this->setMetaTag($page, $fieldName, $value);
+      $this->setFieldValue($page, $fieldName, $value);
     }
   }
 
