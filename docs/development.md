@@ -32,3 +32,9 @@ php scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thund
 ```
 
 This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+
+----------
+
+## Coding style
+
+Documentation how to check your code for coding style issues can be found [here](https://github.com/BurdaMagazinOrg/thunder-dev-tools/blob/master/README.md#code-style-guidelines).
