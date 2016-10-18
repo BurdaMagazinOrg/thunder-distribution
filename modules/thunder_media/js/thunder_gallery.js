@@ -4,8 +4,6 @@
  */
 
 (function ($) {
-  'use strict';
-
   /**
    * Registers behaviours related to thunder media.
    */
