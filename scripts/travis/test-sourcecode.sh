@@ -19,4 +19,5 @@ set +x
 nvm install 4
 npm install -g eslint
 eslint .
+rm -rf ~/.nvm
 mv ~/.nvm-backup ~/.nvm
