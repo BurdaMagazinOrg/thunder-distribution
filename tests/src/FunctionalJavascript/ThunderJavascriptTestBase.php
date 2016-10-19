@@ -37,6 +37,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   protected $screenshotDirectory = '/tmp/thunder-travis-ci';
 
   /**
+   * Default user login role used for testing.
+   *
+   * @var string
+   */
+  protected static $defaultUserRole = 'editor';
+
+  /**
    * {@inheritdoc}
    */
   protected function initMink() {
@@ -103,13 +110,23 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     parent::setUp();
 
-    $editor = $this->drupalCreateUser();
-    $editor->addRole('editor');
-    $editor->save();
-    $this->drupalLogin($editor);
+    $this->logWithRole(static::$defaultUserRole);
 
     // Set window width/height.
     $this->getSession()->getDriver()->resizeWindow(1024, 768);
+  }
+
+  /**
+   * LogIn with defined role assigned to user.
+   *
+   * @param string $role
+   *   Role name that will be assigned to user.
+   */
+  protected function logWithRole($role) {
+    $editor = $this->drupalCreateUser();
+    $editor->addRole($role);
+    $editor->save();
+    $this->drupalLogin($editor);
   }
 
   /**
@@ -178,7 +195,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   public function scrollElementInView($cssSelector) {
     $this->getSession()
-      ->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . $cssSelector . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
+      ->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . addcslashes($cssSelector, '\'') . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
   }
 
   /**
@@ -238,6 +255,35 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->getSession()
       ->getDriver()
       ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+  }
+
+  /**
+   * Expand all tabs on page.
+   *
+   * It goes up to level 3 by default.
+   *
+   * @param int $maxLevel
+   *   Max depth of nested collapsed tabs.
+   */
+  public function expandAllTabs($maxLevel = 3) {
+    $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
+
+    $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+    for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
+      $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+    }
+  }
+
+  /**
+   * Execute Cron over UI.
+   */
+  public function runCron() {
+    $this->drupalGet('admin/config/system/cron');
+
+    $this->getSession()
+      ->getPage()
+      ->find('xpath', '//input[@name="op"]')
+      ->click();
   }
 
 }
