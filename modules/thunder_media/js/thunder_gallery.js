@@ -1,8 +1,8 @@
 /**
- * @file thunder_gallery.js
- *
+ * @file
  * Media related javascripts.
  */
+
 (function ($) {
   'use strict';
 
@@ -16,5 +16,3 @@
   };
 
 }(jQuery, Drupal, drupalSettings));
-
-
