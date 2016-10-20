@@ -17,7 +17,7 @@ Currently there are:
 Create a gallery by giving a name and select or upload some images. Galleries will be displayed as sliding images.
 
 ### Media
-Include an image or a video where ever you want in you content. Just select an existing from the Media-Browser or upload a new one.
+Include an image or a video where ever you want in your content. Just select an existing from the Media-Browser or upload a new one.
 
 ### Instagram
 An Instagram link is everything you need for this paragraph. Thunder will do the rest for you.
