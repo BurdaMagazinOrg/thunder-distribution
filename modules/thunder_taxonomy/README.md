@@ -1,6 +1,6 @@
 # Thunder taxonomy
 
-This modules contains configuration to Thunder's site-structure. By default Thunder offers 2 different taxonomies.
+This module contains configuration to Thunder's site-structure. By default Thunder offers 2 different taxonomies.
 
 ### Channel
 The channel taxonomy represents the overall site-structure. It enables you to cluster your content for different topics.
