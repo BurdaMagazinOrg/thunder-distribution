@@ -7,8 +7,9 @@
 
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\User;
-use \Drupal\Core\Entity\EntityStorageException;
-use \Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\field\Entity\FieldConfig;
 
 /**
  * Install the thunder installation profile.
@@ -146,5 +147,21 @@ function thunder_update_8003() {
       $field->setDefaultValue(serialize([]));
       $field->save();
     }
+  }
+}
+
+/**
+ * Require instagram and twitter url field.
+ */
+function thunder_update_8004() {
+
+  $config = FieldConfig::load('media.instagram.field_url');
+  if ($config) {
+    $config->setRequired(TRUE)->save();
+  }
+
+  $config = FieldConfig::load('media.twitter.field_url');
+  if ($config) {
+    $config->setRequired(TRUE)->save();
   }
 }
