@@ -12,11 +12,16 @@
    */
   Drupal.behaviors.mediaEntityBrowserView = {
     attach: function (context, settings) {
-      $('.views-row', context).once().click(function () {
+
+      $('.views-row', context).each(function () {
         var $row = $(this);
         var $input = $row.find('.views-field-entity-browser-select input');
-        $input.prop('checked', !$input.prop('checked'));
         $row[$input.prop('checked') ? 'addClass' : 'removeClass']('checked');
+
+        $row.click(function () {
+          $input.prop('checked', !$input.prop('checked'));
+          $row[$input.prop('checked') ? 'addClass' : 'removeClass']('checked');
+        });
       });
     }
   };
