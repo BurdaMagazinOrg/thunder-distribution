@@ -9,6 +9,8 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Admin Toolbar
 * Better Normalizers
 * Blazy
+* Crop
+* Ctools
 * Dropzonejs
 * Entity API
 * Entity Browser
@@ -23,6 +25,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Media entity slideshow
 * Media entity Instagram
 * Media entity twitter
+* Media expire
 * Paragraphs
 * Pathauto
 * Scheduler
@@ -37,13 +40,16 @@ Plus some base configuration:
 * A channel taxonomy
 * An article content type with some base fields
 * Image, gallery, social media and video media types
+* Pre configured role for editorial staff
 * A set of commonly used paragraph types
     * Gallery
     * Instagram
-    * Image
+    * Media (Image/Video)
     * Twitter
-    * Video
-* Pre configured role for editorial staff
+    * Text
+    * Quote
+
+[Here](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/8.x-1.x/modules/thunder_paragraphs/README.md) you can find more information about these paragraphs.
  
 ## What can be activated optionally?
 
@@ -54,6 +60,7 @@ Plus some base configuration:
 * Nexx Video Player
 * Facebook Instant Articles
 * Valiton Harbourmaster SSO
+* Thunder demo content
 
 
 [Here](https://burdamagazinorg.gitbooks.io/thunder/content/) you can find more information about these modules.
