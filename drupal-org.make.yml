@@ -46,6 +46,8 @@ projects:
     version: "1.0-alpha2"
     patch:
       - "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
+      - "https://www.drupal.org/files/issues/checkmark_indicator_for-2696915-23.patch"
+      - "https://www.drupal.org/files/issues/implement_maxfiles-2633346-6.patch"
 
   entity:
     type: "module"
@@ -139,10 +141,7 @@ projects:
 
   media_expire:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/media_expire.git"
-      revision: "2fc8008"
-      branch: "8.x-1.x"
+    version: "1.0-alpha2"
 
   metatag:
     type: "module"
