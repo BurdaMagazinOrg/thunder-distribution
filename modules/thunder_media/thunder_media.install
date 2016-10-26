@@ -5,6 +5,8 @@
  * Contains.
  */
 
+use \Drupal\image\Entity\ImageStyle;
+
 /**
  * Rename config object.
  */
@@ -16,4 +18,24 @@ function thunder_media_update_8001() {
       ->get('thunder_media.configuration')
       ->getRawData())
     ->save();
+}
+
+/**
+ * Change media_thumbnail image style.
+ */
+function thunder_media_update_8002() {
+
+  $imageStyle = ImageStyle::load('media_thumbnail');
+  /** @var \Drupal\image\ConfigurableImageEffectBase $effect */
+  foreach ($imageStyle->getEffects() as $effect) {
+    $config = $effect->getConfiguration();
+    if ($config['id'] == 'focal_point_scale_and_crop' && $config['data']['width'] == 241 && $config['data']['height'] == 138) {
+      $config['data']['width'] = 182;
+      $config['data']['height'] = 104;
+      $effect->setConfiguration($config);
+    }
+  }
+
+  $imageStyle->save();
+
 }
