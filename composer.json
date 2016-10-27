@@ -51,7 +51,6 @@
         "Implement maxFiles": "https://www.drupal.org/files/issues/implement_maxfiles-2633346-6.patch"
       },
       "drupal/entity_browser": {
-        "Refactory \\Drupal\\entity_browser\\Plugin\\Field\\FieldWidget\\EntityReferenceBrowserWidget::formElement to allow more advanced usecases": "https://www.drupal.org/files/issues/2802969-5.patch",
         "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
         "Incomplete schema for multi_step_display": "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
       },
@@ -92,7 +91,7 @@
     "drupal/default_content": "dev-1.x",
     "drupal/dropzonejs": "1.0-alpha2",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser": "1.0-alpha9",
+    "drupal/entity_browser": "1.0-alpha10",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "dev-1.x",

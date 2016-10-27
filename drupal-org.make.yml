@@ -55,9 +55,8 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha9"
+    version: "1.0-alpha10"
     patch:
-      - "https://www.drupal.org/files/issues/2802969-5.patch"
       - "https://www.drupal.org/files/issues/2764889_31.patch"
       - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
 
