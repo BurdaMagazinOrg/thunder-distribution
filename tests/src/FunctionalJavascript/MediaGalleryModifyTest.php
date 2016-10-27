@@ -129,7 +129,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
-    // Check that, 3nd image is file: reference.jpg.
+    // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'data-src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
@@ -156,7 +156,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    // Check that, 3nd image is not file: reference.jpg.
+    // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'data-src\').indexOf("reference.jpg")');
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
