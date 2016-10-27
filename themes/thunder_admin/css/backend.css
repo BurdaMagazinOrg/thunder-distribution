@@ -6,3 +6,12 @@
 .media-twitter {
   display: table;
 }
+
+div.field--widget-entity-browser-entity-reference div.entities-list > div {
+  width: 175px;
+  float: left;
+}
+
+div.field--widget-entity-browser-entity-reference  details.form-wrapper {
+  overflow: auto;
+}

@@ -46,7 +46,9 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Add missing EB widget schema": "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
+        "Add missing EB widget schema": "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch",
+        "Checkmark indicator for upload screen": "https://www.drupal.org/files/issues/checkmark_indicator_for-2696915-23.patch",
+        "Implement maxFiles": "https://www.drupal.org/files/issues/implement_maxfiles-2633346-6.patch"
       },
       "drupal/entity_browser": {
         "Refactory \\Drupal\\entity_browser\\Plugin\\Field\\FieldWidget\\EntityReferenceBrowserWidget::formElement to allow more advanced usecases": "https://www.drupal.org/files/issues/2802969-5.patch",
@@ -105,7 +107,7 @@
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
     "drupal/media_entity_twitter": "^1.0",
-    "drupal/media_expire": "dev-1.x",
+    "drupal/media_expire": "^1.0",
     "drupal/metatag": "1.0-beta10",
     "drupal/paragraphs": "1.0",
     "drupal/pathauto": "^1.0",

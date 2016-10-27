@@ -42,7 +42,7 @@ content:
     weight: 1
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
+      preview_image_style: medium
     third_party_settings: {  }
     type: image_image
   field_source:

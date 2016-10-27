@@ -31,8 +31,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $page = $this->getSession()->getPage();
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_BeforeOrderChange_' . date('Ymd_His') . '.png');
-
     $this->editParagraph($page, 'field_paragraphs', 0);
     $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
@@ -41,7 +39,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $this->getSession()
       ->getDriver()
-      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
+      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 200, dy: 0 });');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
@@ -118,7 +116,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Move new image -> that's 5th image in list, one row up.
     $this->getSession()
       ->getDriver()
-      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: 0, dy: -220 });');
+      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: 220, dy: -200 });');
 
     $this->submitEntityBrowser($page);
 
@@ -131,9 +129,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
-    // Check that, 2nd image is file: reference.jpg.
+    // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'data-src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
@@ -145,7 +143,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-1-remove-button');
+    $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-2-remove-button');
 
     $this->submitEntityBrowser($page);
 
@@ -158,9 +156,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    // Check that, 2nd image is not file: reference.jpg.
+    // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'data-src\').indexOf("reference.jpg")');
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 
