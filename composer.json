@@ -93,7 +93,6 @@
     "drupal/entity_browser": "1.0-alpha9",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
-    "drupal/features": "^3.0",
     "drupal/field_group": "dev-1.x",
     "drupal/focal_point": "1.0-beta3",
     "drupal/google_analytics": "^2.0",
