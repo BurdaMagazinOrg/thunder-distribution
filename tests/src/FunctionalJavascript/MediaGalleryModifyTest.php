@@ -116,7 +116,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Move new image -> that's 5th image in list, one row up.
     $this->getSession()
       ->getDriver()
-      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: 220, dy: -200 });');
+      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: -440, dy: 0 });');
 
     $this->submitEntityBrowser($page);
 
