@@ -70,10 +70,6 @@ projects:
       revision: "2a5210fec67a8d7f5c77a4ffffb0b49e5aa62f40"
       branch: "8.x-1.x"
 
-  features:
-    type: "module"
-    version: "3.0-rc1"
-
   field_group:
     type: "module"
     download:
