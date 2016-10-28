@@ -229,7 +229,7 @@ libraries:
     directory_name: "blazy"
     download:
       type: "get"
-      url: "https://github.com/dinbror/blazy/archive/1.6.2.zip"
+      url: "https://github.com/dinbror/blazy/archive/1.8.2.zip"
 
   slick_lib:
     type: "library"
