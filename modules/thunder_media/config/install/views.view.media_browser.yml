@@ -283,7 +283,7 @@ display:
           plugin_id: field
         entity_browser_select:
           id: entity_browser_select
-          table: media_field_data
+          table: media
           field: entity_browser_select
           relationship: none
           group_type: group
