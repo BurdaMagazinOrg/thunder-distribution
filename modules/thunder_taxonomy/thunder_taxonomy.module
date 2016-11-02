@@ -38,4 +38,6 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
   /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
 
   $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
+  $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
 }
+
