@@ -10,7 +10,7 @@ field_name: field_tags
 entity_type: node
 bundle: article
 label: Tags
-description: ''
+description: 'Use free-tagging to add more sorting. You are able to change the tags vocabulary <a href="/admin/structure/taxonomy/manage/tags" target="_blank">here</a>.'
 required: false
 translatable: true
 default_value: {  }

@@ -9,7 +9,7 @@ field_name: field_teaser_text
 entity_type: node
 bundle: article
 label: 'Teaser Text'
-description: 'This text is used for the Facebook and Google-Snippets.'
+description: 'The teaser text will be used for overview pages. Also it will be used for the Facebook and Google-Snippets.'
 required: false
 translatable: false
 default_value: {  }
