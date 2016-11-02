@@ -21,7 +21,9 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIf($account->hasPermission('access content') && $entity->status->value);
+        // Check for status and set 'published' or 'unpublished'.
+        $status = ($entity->status->value) ? 'published' : 'unpublished';
+        return AccessResult::allowedIf($account->hasPermission('access content') && $account->hasPermission('view ' . $status . ' terms in ' . $entity->bundle()));
 
       default:
         return parent::checkAccess($entity, $operation, $account);
