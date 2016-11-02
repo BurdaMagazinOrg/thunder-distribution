@@ -27,7 +27,7 @@ projects:
 
   config_update:
     type: "module"
-    version: "1.1"
+    version: "1.2"
 
   crop:
     type: "module"
@@ -90,14 +90,11 @@ projects:
 
   inline_entity_form:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "95b22227b926083e730870efc3e3b352b735be91"
-      branch: "8.x-1.x"
+    version: "1.0-beta1"
 
   ivw_integration:
     type: "module"
-    version: "1.0-rc3"
+    version: "1.0-rc4"
 
   libraries:
     type: "module"
@@ -140,11 +137,7 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta10"
-    patch:
-      - "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
-      - "https://www.drupal.org/files/issues/metatag_update_8103_not-2819549-2.patch"
-      - "https://www.drupal.org/files/issues/metatag_shows-2817309-9.patch"
+    version: "1.0-beta11"
 
   nexx_integration:
     type: "module"
@@ -163,7 +156,7 @@ projects:
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1.0-alpha5"
 
   scheduler:
     type: "module"
