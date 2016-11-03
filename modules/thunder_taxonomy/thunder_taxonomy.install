@@ -5,6 +5,9 @@
  * Contains Thunder taxonomy install / uninstall hooks.
  */
 
+use \Drupal\user\Entity\Role;
+use \Drupal\taxonomy\Entity\Vocabulary;
+
 /**
  * Implements hook_install().
  */
@@ -20,4 +23,31 @@ function thunder_taxonomy_install() {
 function thunder_taxonomy_uninstall() {
   // Remove our base fields from the schema.
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
+}
+
+/**
+ * Grant term access permissions.
+ */
+function thunder_taxonomy_update_8001() {
+
+  /** @var \Drupal\user\Entity\Role[] $roles */
+  $roles = Role::loadMultiple();
+
+  /** @var \Drupal\taxonomy\Entity\Vocabulary[] $vocabularies */
+  $vocabularies = Vocabulary::loadMultiple();
+
+  foreach ($roles as $role) {
+
+    foreach ($vocabularies as $vocabulary) {
+      if ($role->hasPermission('access content')) {
+        $role->grantPermission('view published terms in ' . $vocabulary->id());
+      }
+      if ($role->hasPermission('view own unpublished content')) {
+        $role->grantPermission('view unpublished terms in ' . $vocabulary->id());
+      }
+      $role->save();
+
+    }
+  }
+
 }
