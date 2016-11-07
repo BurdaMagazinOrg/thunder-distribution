@@ -25,6 +25,11 @@
   "license": "GPL-2.0+",
   "repositories": [
     {
+      "type": "git",
+      "name": "burdamagazinorg/thunder_admin",
+      "url": "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
+    },
+    {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
     }
@@ -72,6 +77,7 @@
     "burdamagazinorg/infinite_module": "^1.0",
     "burdamagazinorg/infinite_theme": "^1.0",
     "burdamagazinorg/nexx_integration": "^8.0",
+    "burdamagazinorg/thunder_admin": "dev-8.x-1.x",
     "composer/installers": "^1.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/adsense": "^1.0",
