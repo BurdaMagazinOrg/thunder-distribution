@@ -22,6 +22,7 @@ projects[default_content][type] = module
 projects[default_content][version] = 1.0-alpha3
 projects[dropzonejs][type] = module
 projects[dropzonejs][version] = 1.0-alpha3
+projects[dropzonejs][patch][] = https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch
 projects[entity][type] = module
 projects[entity][version] = 1.0-alpha3
 projects[entity_browser][type] = module
