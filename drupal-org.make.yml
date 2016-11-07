@@ -179,7 +179,7 @@ projects:
   thunder_admin:
     type: "theme"
     download:
-      url: "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
+      url: "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
       tag: "8.x-1.0-alpha1"
 
   token:
