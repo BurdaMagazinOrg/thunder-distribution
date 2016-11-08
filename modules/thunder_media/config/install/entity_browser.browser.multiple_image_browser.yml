@@ -34,7 +34,7 @@ widgets:
       max_filesize: 128M
       extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
       submit_text: 'Select entities'
-      auto_select: '1'
+      auto_select: true
     uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
     weight: -9
     label: 'Import image'
