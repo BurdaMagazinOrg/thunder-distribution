@@ -139,3 +139,8 @@ input[type="submit"][name="filter"] {
   background: white;
   border-top: 1px solid #b8b8b8;
 }
+
+.entities-list {
+  clear: left;
+  margin-bottom: 10px;
+}

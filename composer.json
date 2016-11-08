@@ -46,12 +46,14 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Create IEF widget which allows to edit the media entities after the upload": "https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch"
+        "Create IEF widget which allows to edit the media entities after the upload": "https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch",
+        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_5.patch"
       },
       "drupal/entity_browser": {
         "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
         "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
-        "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
+        "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
+        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_9.patch"
       },
       "drupal/focal_point": {
         "Add image effect schema": "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
