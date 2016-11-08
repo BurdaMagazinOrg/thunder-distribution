@@ -12,3 +12,5 @@ permissions:
   6: 'cancel account'
   7: 'change own username'
   8: 'access user profiles'
+  9: 'view published terms in channel'
+  10: 'view published terms in tags'

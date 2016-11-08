@@ -52,3 +52,5 @@ permissions:
   46: 'update media'
   47: 'access tour'
   48: 'dropzone upload files'
+  49: 'view unpublished terms in channel'
+  50: 'view unpublished terms in tags'
