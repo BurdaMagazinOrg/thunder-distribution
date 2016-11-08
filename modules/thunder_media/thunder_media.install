@@ -86,11 +86,19 @@ function thunder_media_update_8003() {
  * Enable auto_open for gallery browser.
  */
 function thunder_media_update_8004() {
-
-  $browser = 'gallery_browser';
-
   $configsToUpdate['display_configuration']['auto_open'] = TRUE;
 
   \Drupal::service('thunder_media.updater')
-    ->updateEntityBrowserConfig($browser, $configsToUpdate);
+    ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate);
+}
+
+/**
+ * Enable auto_select on multiple_image_browser.
+ */
+function thunder_media_update_8006() {
+  $configsToUpdate['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
+  $configsToUpdate['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
+
+  \Drupal::service('thunder_media.updater')
+    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate);
 }
