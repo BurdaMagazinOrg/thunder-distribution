@@ -53,7 +53,7 @@
         "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
         "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
         "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
-        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_9.patch"
+        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_12.patch"
       },
       "drupal/focal_point": {
         "Add image effect schema": "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
