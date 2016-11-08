@@ -28,7 +28,8 @@
 .entity-browser-form .entities-list {
   margin-bottom: 10px;
   clear: left;
-  padding-top: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #b8b8b8;
 }
 
 .entity-browser-form .entities-list:after {
@@ -55,7 +56,9 @@
 @media screen and (min-width:62.5em) { /* 1000px */
   .view-media-entity-browser .views-row {
     width: 19%;
-    margin: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 10px;
   }
 }
 

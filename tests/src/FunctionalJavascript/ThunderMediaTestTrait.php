@@ -41,10 +41,11 @@ trait ThunderMediaTestTrait {
         ->executeScript("jQuery('[name=\"entity_browser_select[$media]\"]').prop('checked', true);");
     }
 
-    $page->pressButton('Select entities');
-
     if ($entityBrowser == 'multiple_image_browser') {
       $page->pressButton('Use selected');
+    }
+    else {
+      $page->pressButton('Select entities');
     }
 
     $this->getSession()->switchToIFrame();
