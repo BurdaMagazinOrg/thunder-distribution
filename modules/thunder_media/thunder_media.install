@@ -93,6 +93,53 @@ function thunder_media_update_8004() {
 }
 
 /**
+ * Update dropzonejs widget file extension filtering for images.
+ */
+function thunder_media_update_8005() {
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $oldConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+  $oldConfig['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+  $oldConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+
+  $configsToUpdate['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'png gif jpg jpeg';
+  $configsToUpdate['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'png gif jpg jpeg';
+  $configsToUpdate['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'png gif jpg jpeg';
+
+  foreach ($configsToUpdate as $browser => $configuration) {
+
+    if (\Drupal::service('thunder_media.updater')
+      ->updateEntityBrowserConfig($browser, $configuration, $oldConfig[$browser])
+    ) {
+
+      $message = t('Image extensions filtering for "@configName" has been updated.', [
+        '@configName' => 'entity_browser.browser.' . $browser,
+      ]);
+
+      $updateLogger->info($message);
+    }
+    else {
+      $message = t('Image extensions filtering for "@configName" was not updated. Please ensure that file extensions are set to "@newExtensions" for upload image widget.', [
+        '@configName' => 'entity_browser.browser.' . $browser,
+        '@newExtensions' => 'png gif jpg jpeg',
+      ]);
+
+      $updateLogger->warning($message);
+    }
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
  * Enable auto_select on multiple_image_browser.
  */
 function thunder_media_update_8006() {
