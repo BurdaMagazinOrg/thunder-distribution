@@ -46,9 +46,7 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Add missing EB widget schema": "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch",
-        "Checkmark indicator for upload screen": "https://www.drupal.org/files/issues/checkmark_indicator_for-2696915-23.patch",
-        "Implement maxFiles": "https://www.drupal.org/files/issues/implement_maxfiles-2633346-7.patch"
+        "Create IEF widget which allows to edit the media entities after the upload": "https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch"
       },
       "drupal/entity_browser": {
         "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
@@ -84,7 +82,7 @@
     "drupal/crop": "^1.0",
     "drupal/ctools": "^3.0",
     "drupal/default_content": "dev-1.x",
-    "drupal/dropzonejs": "1.0-alpha2",
+    "drupal/dropzonejs": "1.0-alpha3",
     "drupal/entity": "^1.0",
     "drupal/entity_browser": "1.0-alpha10",
     "drupal/entity_reference_revisions": "^1.0",
