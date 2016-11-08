@@ -14,14 +14,27 @@
 
 .entity-browser-form .entities-list article.view-mode-thumbnail img {
   border: 2px solid #b8b8b8;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .entity-browser-form .entities-list .item-container {
-  margin: 2px;
+  margin: 4px;
+  width: 19%;
+  float: left;
 }
 
 .entity-browser-form .entities-list {
   margin-bottom: 10px;
+  clear: left;
+  padding-top: 20px;
+}
+
+.entity-browser-form .entities-list:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .view-media-entity-browser .views-row:hover .views-field-name {
@@ -138,9 +151,4 @@ input[type="submit"][name="filter"] {
   width: 100%;
   background: white;
   border-top: 1px solid #b8b8b8;
-}
-
-.entities-list {
-  clear: left;
-  margin-bottom: 10px;
 }

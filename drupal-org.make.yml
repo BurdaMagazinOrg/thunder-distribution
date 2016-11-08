@@ -46,7 +46,7 @@ projects:
     version: "1.0-alpha3"
     patch:
       - "https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch"
-      - "https://www.drupal.org/files/issues/2823670_5.patch"
+      - "https://www.drupal.org/files/issues/2823670_6.patch"
 
   entity:
     type: "module"

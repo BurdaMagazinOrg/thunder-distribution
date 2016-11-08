@@ -47,7 +47,7 @@
       },
       "drupal/dropzonejs": {
         "Create IEF widget which allows to edit the media entities after the upload": "https://www.drupal.org/files/issues/create_ief_widget_which-2776787-36.patch",
-        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_5.patch"
+        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_6.patch"
       },
       "drupal/entity_browser": {
         "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
