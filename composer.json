@@ -87,7 +87,7 @@
     "drupal/default_content": "dev-1.x",
     "drupal/dropzonejs": "1.0-alpha3",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser": "1.0-alpha10",
+    "drupal/entity_browser": "1.0-alpha11",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "dev-1.x",
