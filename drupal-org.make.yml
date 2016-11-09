@@ -56,7 +56,8 @@ projects:
     version: "1.0-alpha10"
     patch:
       - "https://www.drupal.org/files/issues/2764889_31.patch"
-      - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
+      - "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch"
+      - "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
 
   entity_reference_revisions:
     type: "module"
