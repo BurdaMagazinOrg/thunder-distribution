@@ -7,6 +7,25 @@
 
 use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
+use Psr\Log\LogLevel;
+
+/**
+ * Logging of update messages for displaying result in drush or update script.
+ *
+ * @param string $fullLog
+ *   String used to output update message to UI.
+ * @param string $message
+ *   Message that should be logged.
+ * @param string $level
+ *   Log level. By default: "ok" - because that's log level drush uses.
+ */
+function _log_update_message(&$fullLog, $message, $level = "ok") {
+  if (function_exists('drush_log')) {
+    drush_log($message, $level);
+  }
+
+  $fullLog .= $message . '<br /><br />';
+}
 
 /**
  * Rename config object.
@@ -90,6 +109,19 @@ function thunder_media_update_8004() {
 
   \Drupal::service('thunder_media.updater')
     ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate);
+}
+
+/**
+ * Enable auto_open for gallery browser.
+ */
+function thunder_media_update_8004() {
+
+  $browser = 'gallery_browser';
+
+  $configsToUpdate['display_configuration']['auto_open'] = TRUE;
+
+  \Drupal::service('thunder_media.updater')
+    ->updateEntityBrowserConfig($browser, $configsToUpdate);
 }
 
 /**
