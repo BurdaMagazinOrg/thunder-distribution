@@ -7,7 +7,6 @@
 
 use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
-use Psr\Log\LogLevel;
 
 /**
  * Logging of update messages for displaying result in drush or update script.
