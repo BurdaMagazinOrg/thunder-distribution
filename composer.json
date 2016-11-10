@@ -50,7 +50,6 @@
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_6.patch"
       },
       "drupal/entity_browser": {
-        "Entity Browser widget loses selected images in inline entity form": "https://www.drupal.org/files/issues/2764889_31.patch",
         "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
         "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
         "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_12.patch"

@@ -28,7 +28,6 @@ projects[entity][type] = module
 projects[entity][version] = 1.0-alpha3
 projects[entity_browser][type] = module
 projects[entity_browser][version] = 1.0-alpha11
-projects[entity_browser][patch][] = https://www.drupal.org/files/issues/2764889_31.patch
 projects[entity_browser][patch][] = https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch
 projects[entity_browser][patch][] = https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch
 projects[entity_browser][patch][] = https://www.drupal.org/files/issues/2822009_12.patch
