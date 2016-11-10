@@ -9,24 +9,6 @@ use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
 
 /**
- * Logging of update messages for displaying result in drush or update script.
- *
- * @param string $fullLog
- *   String used to output update message to UI.
- * @param string $message
- *   Message that should be logged.
- * @param string $level
- *   Log level. By default: "ok" - because that's log level drush uses.
- */
-function _log_update_message(&$fullLog, $message, $level = "ok") {
-  if (function_exists('drush_log')) {
-    drush_log($message, $level);
-  }
-
-  $fullLog .= $message . '<br /><br />';
-}
-
-/**
  * Rename config object.
  */
 function thunder_media_update_8001() {

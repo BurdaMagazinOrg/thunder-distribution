@@ -59,7 +59,7 @@ class Updater {
 
     $config = $ebConfig->get();
 
-    if (!empty($oldConfiguration) && DiffArray::diffAssocRecursive($oldConfiguration[$browser], $config)) {
+    if (!empty($oldConfiguration) && DiffArray::diffAssocRecursive($oldConfiguration, $config)) {
       return FALSE;
     }
 
@@ -83,9 +83,8 @@ class Updater {
       }
 
       $entityBrowserConfig->set($browser, $storage);
-      return TRUE;
     }
-    return FALSE;
+    return TRUE;
   }
 
 }
