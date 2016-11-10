@@ -66,26 +66,13 @@ class Updater {
 
       foreach ($configuration as $key => $value) {
 
-        $reflection = new \ReflectionClass($storage['entity_browser']);
-        $property = $reflection->getProperty($key);
+        $part = $storage['entity_browser']->getPluginCollections()[$key];
 
-        if (!$property->isProtected()) {
-
-          $storage['entity_browser']->$key = (NestedArray::mergeDeep($storage['entity_browser']->$key, $value));
-        }
-        else {
-
-          $part = call_user_func([
-            $storage['entity_browser'],
-            'get' . lcfirst($key),
-          ]);
-
-          $part->setConfiguration(NestedArray::mergeDeep($part->getConfiguration(), $value));
-        }
-
-        $entityBrowserConfig->set($browser, $storage);
+        $part->setConfiguration(NestedArray::mergeDeep($part->getConfiguration(), $value));
 
       }
+
+      $entityBrowserConfig->set($browser, $storage);
     }
   }
 
