@@ -14,6 +14,7 @@ display_configuration:
   width: '1070'
   height: ''
   link_text: 'Select entities'
+  auto_open: false
 selection_display: multi_step_display
 selection_display_configuration:
   entity_type: media

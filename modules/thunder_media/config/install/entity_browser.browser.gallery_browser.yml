@@ -10,6 +10,7 @@ display_configuration:
   width: '1070'
   height: ''
   link_text: 'Select entities'
+  auto_open: true
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: single
