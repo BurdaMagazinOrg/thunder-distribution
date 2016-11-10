@@ -81,3 +81,16 @@ function thunder_media_update_8003() {
     }
   }
 }
+
+/**
+ * Enable auto_open for gallery browser.
+ */
+function thunder_media_update_8004() {
+
+  $browser = 'gallery_browser';
+
+  $configsToUpdate['display_configuration']['auto_open'] = TRUE;
+
+  \Drupal::service('thunder_media.updater')
+    ->updateEntityBrowserConfig($browser, $configsToUpdate);
+}
