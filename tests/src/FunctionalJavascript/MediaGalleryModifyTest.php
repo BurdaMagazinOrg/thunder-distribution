@@ -110,9 +110,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->uploadFile($page, dirname(__FILE__) . '/../../fixtures/reference.jpg');
 
-    // Click Use Selected.
-    $this->clickButtonDrupalSelector($page, 'edit-submit');
-
     // Move new image -> that's 5th image in list, one row up.
     $this->getSession()
       ->getDriver()

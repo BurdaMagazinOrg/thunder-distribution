@@ -2,6 +2,10 @@
  * @media-entity media_entity_browser.view.css
  */
 
+.view-media-entity-browser {
+  margin-bottom: 10px;
+}
+
 .view-media-entity-browser .views-row {
   box-sizing: border-box;
   position: relative;
@@ -14,14 +18,28 @@
 
 .entity-browser-form .entities-list article.view-mode-thumbnail img {
   border: 2px solid #b8b8b8;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .entity-browser-form .entities-list .item-container {
-  margin: 2px;
+  margin: 4px;
+  width: 19%;
+  float: left;
 }
 
 .entity-browser-form .entities-list {
   margin-bottom: 10px;
+  clear: left;
+  padding-top: 10px;
+  border-top: 2px solid #b8b8b8;
+}
+
+.entity-browser-form .entities-list:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .view-media-entity-browser .views-row:hover .views-field-name {
@@ -42,7 +60,9 @@
 @media screen and (min-width:62.5em) { /* 1000px */
   .view-media-entity-browser .views-row {
     width: 19%;
-    margin: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 10px;
   }
 }
 
