@@ -37,11 +37,14 @@ trait ThunderMediaTestTrait {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
-      $this->getSession()
-        ->executeScript("jQuery('[name=\"entity_browser_select[$media]\"]').prop('checked', true);");
+      $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]")->click();
     }
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     if ($entityBrowser == 'multiple_image_browser') {
+      $this->getSession()->wait(200);
+      $this->assertSession()->assertWaitOnAjaxRequest();
+
       $page->pressButton('Use selected');
     }
     else {
