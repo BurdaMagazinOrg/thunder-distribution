@@ -102,3 +102,16 @@ function thunder_media_update_8006() {
   \Drupal::service('thunder_media.updater')
     ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate);
 }
+
+/**
+ * Make instagrams responsive.
+ */
+function thunder_media_update_8007() {
+  $config = \Drupal::configFactory()->getEditable('core.entity_view_display.media.instagram.default');
+
+  if ($config && !empty($config->get('content.field_url.settings'))) {
+    $config->set('content.field_url.settings.width', NULL);
+    $config->set('content.field_url.settings.height', NULL);
+    $config->save();
+  }
+}
