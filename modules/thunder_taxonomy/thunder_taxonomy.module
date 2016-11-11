@@ -43,14 +43,13 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
 }
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_taxonomy_overview_terms_alter().
  */
 function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {
 
   $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 2, TRUE),
     [t('Status')],
     array_slice($form['terms']['#header'], 2, NULL, TRUE));
-
 
   foreach ($form['terms'] as &$term) {
     if (is_array($term) && !empty($term['#term'])) {
