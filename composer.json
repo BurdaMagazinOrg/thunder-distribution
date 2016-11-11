@@ -61,7 +61,8 @@
         "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
       "drupal/media_entity": {
-        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
+        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch",
+        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-9.patch"
       },
       "drupal/slick": {
         "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"
