@@ -46,7 +46,7 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-4.patch",
+        "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch",
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_12.patch"
       },
       "drupal/entity_browser": {
