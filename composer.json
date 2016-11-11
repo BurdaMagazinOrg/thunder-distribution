@@ -107,7 +107,7 @@
     "drupal/pathauto": "^1.0",
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
-    "drupal/simple_sitemap": "^2.0",
+    "drupal/simple_sitemap": "2.6",
     "drupal/slick": "1.0-beta4",
     "drupal/slick_media": "^1.0",
     "drupal/token": "^1.0",
