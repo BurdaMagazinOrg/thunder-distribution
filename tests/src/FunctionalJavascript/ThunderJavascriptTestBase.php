@@ -221,6 +221,27 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Click on Button based on Drupal selector (data-drupal-selector).
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $cssSelector
+   *   Drupal selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
+
+    $this->scrollElementInView($cssSelector);
+    $editButton = $page->find('css', $cssSelector);
+    $editButton->click();
+
+    if ($waitAfterAction) {
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
    * Assert page title.
    *
    * @param string $expectedTitle
