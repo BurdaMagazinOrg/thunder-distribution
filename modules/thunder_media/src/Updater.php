@@ -5,6 +5,7 @@ namespace Drupal\thunder_media;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\user\SharedTempStoreFactory;
+use Drupal\Component\Utility\DiffArray;
 
 /**
  * Helper class to update configuration.
@@ -45,13 +46,22 @@ class Updater {
    *   Id of the entity browser.
    * @param array $configuration
    *   Configuration array to update.
+   * @param array $oldConfiguration
+   *   Only if current config is same like old config we are updating.
+   *
+   * @return bool
+   *   Indicates if config was updated or not.
    */
-  public function updateEntityBrowserConfig($browser, $configuration) {
+  public function updateEntityBrowserConfig($browser, $configuration, $oldConfiguration = []) {
 
     $ebConfig = $this->configFactory
       ->getEditable('entity_browser.browser.' . $browser);
 
     $config = $ebConfig->get();
+
+    if (!empty($oldConfiguration) && DiffArray::diffAssocRecursive($oldConfiguration, $config)) {
+      return FALSE;
+    }
 
     $ebConfig->setData(NestedArray::mergeDeep($config, $configuration));
     $ebConfig->save();
@@ -62,7 +72,7 @@ class Updater {
 
     $storage = $entityBrowserConfig->get($browser);
 
-    if ($storage) {
+    if (!empty($storage)) {
 
       foreach ($configuration as $key => $value) {
 
@@ -74,6 +84,7 @@ class Updater {
 
       $entityBrowserConfig->set($browser, $storage);
     }
+    return TRUE;
   }
 
 }

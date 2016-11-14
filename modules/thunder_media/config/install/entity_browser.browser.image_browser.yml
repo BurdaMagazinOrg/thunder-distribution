@@ -35,7 +35,7 @@ widgets:
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
-      extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
+      extensions: 'png gif jpg jpeg'
       submit_text: 'Select entities'
     uuid: 3c3b56e6-f111-4477-b9f8-c789b68d6f15
     weight: 3
