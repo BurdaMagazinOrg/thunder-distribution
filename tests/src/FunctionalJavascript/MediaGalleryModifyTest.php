@@ -55,6 +55,8 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $page->pressButton('Save and keep publish');
 
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
@@ -128,9 +130,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+
     // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'data-src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
