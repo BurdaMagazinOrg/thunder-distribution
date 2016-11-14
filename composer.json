@@ -47,7 +47,7 @@
       },
       "drupal/dropzonejs": {
         "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-4.patch",
-        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_6.patch"
+        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_12.patch"
       },
       "drupal/entity_browser": {
         "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
