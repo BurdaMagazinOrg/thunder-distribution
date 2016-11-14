@@ -50,7 +50,7 @@
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_12.patch"
       },
       "drupal/entity_browser": {
-        "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
+        "Adjust schema file": "https://www.drupal.org/files/issues/2812901_15.patch",
         "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
         "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_15.patch"
       },

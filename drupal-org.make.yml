@@ -56,7 +56,7 @@ projects:
     type: "module"
     version: "1.0-alpha11"
     patch:
-      - "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch"
+      - "https://www.drupal.org/files/issues/2812901_15.patch"
       - "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
       - "https://www.drupal.org/files/issues/2822009_15.patch"
 
