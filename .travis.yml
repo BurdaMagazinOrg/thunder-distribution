@@ -18,6 +18,7 @@ env:
 matrix:
   exclude:
   - php: 5.6
+    env: TRAVIS_EVENT_TYPE=pull_request
 
 sudo: false
 
