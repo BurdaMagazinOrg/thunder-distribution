@@ -52,7 +52,7 @@
       "drupal/entity_browser": {
         "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
         "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
-        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_12.patch"
+        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_15.patch"
       },
       "drupal/focal_point": {
         "Add image effect schema": "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
@@ -65,6 +65,9 @@
       },
       "drupal/slick": {
         "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"
+      },
+      "drupal/media_entity_instagram": {
+        "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
       }
     }
   },
@@ -97,7 +100,7 @@
     "drupal/libraries": "dev-3.x",
     "drupal/linkit": "4.1",
     "drupal/media_entity": "1.5",
-    "drupal/media_entity_instagram": "^1.0",
+    "drupal/media_entity_instagram": "1.2",
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
     "drupal/media_entity_twitter": "^1.0",

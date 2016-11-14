@@ -58,7 +58,7 @@ projects:
     patch:
       - "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch"
       - "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
-      - "https://www.drupal.org/files/issues/2822009_12.patch"
+      - "https://www.drupal.org/files/issues/2822009_15.patch"
 
   entity_reference_revisions:
     type: "module"
@@ -118,6 +118,8 @@ projects:
   media_entity_instagram:
     type: "module"
     version: "1.2"
+    patch:
+      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
 
   media_entity_image:
     type: "module"

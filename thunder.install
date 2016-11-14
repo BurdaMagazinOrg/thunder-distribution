@@ -239,3 +239,27 @@ function thunder_update_8005() {
   }
 
 }
+
+/**
+ * Adds instagram preview mode.
+ */
+function thunder_update_8006() {
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  $configs = [
+    'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
+  ];
+
+  foreach ($configs as $entity => $ids) {
+    foreach ($ids as $id) {
+      try {
+        \Drupal::service('config_update.config_update')->import($entity, $id);
+      }
+      catch (EntityStorageException $e) {
+      }
+    }
+  }
+}
