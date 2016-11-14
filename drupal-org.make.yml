@@ -46,7 +46,7 @@ projects:
     version: "1.0-alpha3"
     patch:
       - "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch"
-      - "https://www.drupal.org/files/issues/2823670_12.patch"
+      - "https://www.drupal.org/files/issues/2823670_6.patch"
 
   entity:
     type: "module"
