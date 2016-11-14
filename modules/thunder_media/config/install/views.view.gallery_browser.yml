@@ -135,7 +135,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: media_thumbnail
+            image_style: entity_browser_thumbnail
             image_link: ''
           group_column: ''
           group_columns: {  }
