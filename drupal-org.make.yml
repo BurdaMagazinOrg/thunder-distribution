@@ -45,7 +45,7 @@ projects:
     type: "module"
     version: "1.0-alpha3"
     patch:
-      - "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-4.patch"
+      - "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch"
       - "https://www.drupal.org/files/issues/2823670_12.patch"
 
   entity:
@@ -54,9 +54,9 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha11"
+    version: "1.0-alpha12"
     patch:
-      - "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch"
+      - "https://www.drupal.org/files/issues/2812901_15.patch"
       - "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
       - "https://www.drupal.org/files/issues/2822009_15.patch"
 

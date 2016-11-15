@@ -46,11 +46,11 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-4.patch",
+        "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch",
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_12.patch"
       },
       "drupal/entity_browser": {
-        "Adjust schema file": "https://www.drupal.org/files/issues/adjust_schema_file-2812901-8.patch",
+        "Adjust schema file": "https://www.drupal.org/files/issues/2812901_15.patch",
         "Open entity browser with one click from Entity Browser IEF widget": "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch",
         "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_15.patch"
       },
@@ -61,7 +61,8 @@
         "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
       "drupal/media_entity": {
-        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
+        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch",
+        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-9.patch"
       },
       "drupal/slick": {
         "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"
@@ -89,7 +90,7 @@
     "drupal/default_content": "dev-1.x",
     "drupal/dropzonejs": "1.0-alpha3",
     "drupal/entity": "^1.0",
-    "drupal/entity_browser": "1.0-alpha11",
+    "drupal/entity_browser": "1.0-alpha12",
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "dev-1.x",
