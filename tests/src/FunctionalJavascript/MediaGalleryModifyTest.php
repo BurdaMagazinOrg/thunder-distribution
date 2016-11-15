@@ -131,6 +131,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
     // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
@@ -159,6 +160,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
     // Check that, 3rd image is not file: reference.jpg.
