@@ -12,7 +12,7 @@ name: media_browser
 label: 'Media Browser'
 display: modal
 display_configuration:
-  width: '1070'
+  width: '1245'
   height: ''
   link_text: 'Select entities'
   auto_open: false

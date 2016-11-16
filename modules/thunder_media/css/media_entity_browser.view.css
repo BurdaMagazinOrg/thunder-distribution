@@ -20,11 +20,11 @@
   display: block;
   text-align: center;
   margin: 4px;
+  float: left;
 }
 
 .entity-browser-form .entities-list .item-container {
   width: 151px;
-  float: left;
 }
 
 .view-media-entity-browser .views-row img,
@@ -43,21 +43,16 @@
 }
 
 @media screen and (min-width:37.5em) { /* 600px */
-  .entity-browser-form .entities-list .item-container {
-    width: 182px;
-    float: left;
-  }
-
+  .entity-browser-form .entities-list .item-container,
   .view-media-entity-browser .views-row {
-    width: 48%;
-    float: left;
+    width: 32%;
   }
 }
 
-@media screen and (min-width:62.5em) { /* 1000px */
+@media screen and (min-width:50em) { /* 800px */
   .entity-browser-form .entities-list .item-container,
   .view-media-entity-browser .views-row {
-    width: 198px;
+    width: 15em;
   }
 }
 
