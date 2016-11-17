@@ -7,7 +7,7 @@ name: gallery_browser
 label: 'Gallery Browser'
 display: modal
 display_configuration:
-  width: '1070'
+  width: '1245'
   height: ''
   link_text: 'Select entities'
   auto_open: true

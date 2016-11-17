@@ -160,3 +160,50 @@ function thunder_media_update_8007() {
     $config->save();
   }
 }
+
+/**
+ * New image style for entity browser.
+ */
+function thunder_media_update_8008() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  try {
+    \Drupal::service('config_update.config_update')->import('image_style', 'entity_browser_thumbnail');
+
+    $message = t('New image style entity_browser_thumbnail created.');
+    $updateLogger->info($message);
+
+    $browsers = ['image_browser', 'media_browser', 'gallery_browser'];
+
+    foreach ($browsers as $browser) {
+
+      $config = \Drupal::configFactory()->getEditable('views.view.' . $browser);
+
+      if ($config) {
+
+        $key = 'display.default.display_options.fields.thumbnail__target_id.settings.image_style';
+
+        if ($config->get($key) == 'media_thumbnail') {
+          $config->set($key, 'entity_browser_thumbnail');
+          $config->save();
+
+          $message = t('@browser is now using image style entity_browser_thumbnail.', [
+            '@browser' => $browser,
+          ]);
+          $updateLogger->info($message);
+        }
+      }
+    }
+  }
+  catch (EntityStorageException $e) {
+    $message = t('Image style entity_browser_thumbnail was not created.');
+
+    $updateLogger->warning($message);
+  }
+}
