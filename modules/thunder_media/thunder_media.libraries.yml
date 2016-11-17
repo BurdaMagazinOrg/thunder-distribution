@@ -1,10 +1,8 @@
 gallery:
   version: VERSION
-  js:
-    js/thunder_gallery.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
+  css:
+    theme:
+      css/bartik_slick_fix.css: {}
 
 entity_browser_view:
   css:
