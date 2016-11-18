@@ -37,6 +37,8 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'image_browser',
     'media_browser',
+
+    // TODO: Legacy support, remove it with new major version.
     'gallery_browser',
   ];
 

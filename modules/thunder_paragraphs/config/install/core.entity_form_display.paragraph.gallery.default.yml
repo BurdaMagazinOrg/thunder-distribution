@@ -5,7 +5,6 @@ dependencies:
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
   module:
-    - entity_browser_entity_form
     - inline_entity_form
 id: paragraph.gallery.default
 targetEntityType: paragraph
@@ -13,18 +12,14 @@ bundle: gallery
 mode: default
 content:
   field_media:
-    type: inline_entity_form_complex
+    type: inline_entity_form_simple
     weight: 0
     settings:
+      form_mode: default
       override_labels: true
       label_singular: Gallery
       label_plural: Galleries
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: gallery_browser
+    third_party_settings: {  }
 hidden:
   created: true
   status: true
