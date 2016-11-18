@@ -26,6 +26,7 @@ widgets:
       view: media_browser
       view_display: entity_browser_1
       submit_text: 'Select entities'
+      auto_select: false
     uuid: 05782e5e-1928-4606-8b3f-f7c333701c25
     weight: -10
     label: 'Select existing'
@@ -36,6 +37,7 @@ widgets:
       bundle: video
       form_mode: default
       submit_text: 'Save entity'
+      auto_select: false
     uuid: 5d665b33-fbc8-435b-b560-e0e76e22f237
     weight: -8
     label: 'Embed video'
@@ -48,6 +50,7 @@ widgets:
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
       submit_text: 'Select entities'
+      auto_select: false
     uuid: f8ff2725-7c5a-4257-ab16-68b970aa421a
     weight: -9
     label: 'Import image'

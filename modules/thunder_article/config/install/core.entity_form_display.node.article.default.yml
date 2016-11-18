@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.image_browser
     - field.field.node.article.field_channel
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs

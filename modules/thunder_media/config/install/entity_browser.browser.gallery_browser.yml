@@ -21,6 +21,7 @@ widgets:
       view: gallery_browser
       view_display: entity_browser_1
       submit_text: 'Select entities'
+      auto_select: false
     uuid: 224e96b0-dad3-4b9a-8cca-d42f3217d2a0
     weight: 1
     label: 'Select existing'
