@@ -54,11 +54,10 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha12"
+    version: "1.0-beta1"
     patch:
-      - "https://www.drupal.org/files/issues/2812901_15.patch"
-      - "https://www.drupal.org/files/issues/open_entity_browser-2778305-16.patch"
-      - "https://www.drupal.org/files/issues/2822009_15.patch"
+      - "https://www.drupal.org/files/issues/responsive_modals_are-2828023-2.patch"
+      - "https://www.drupal.org/files/issues/2822009_17.patch"
 
   entity_reference_revisions:
     type: "module"

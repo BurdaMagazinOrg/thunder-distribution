@@ -113,7 +113,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->logWithRole(static::$defaultUserRole);
 
     // Set window width/height.
-    $this->getSession()->getDriver()->resizeWindow(1024, 768);
+    $this->getSession()->getDriver()->resizeWindow(1280, 768);
   }
 
   /**
