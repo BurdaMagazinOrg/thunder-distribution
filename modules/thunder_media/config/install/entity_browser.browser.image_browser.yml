@@ -25,6 +25,7 @@ widgets:
       view: image_browser
       view_display: entity_browser_1
       submit_text: 'Select entities'
+      auto_select: false
     uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
     weight: -10
     label: 'Select existing'
@@ -37,6 +38,7 @@ widgets:
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
       submit_text: 'Select entities'
+      auto_select: false
     uuid: 3c3b56e6-f111-4477-b9f8-c789b68d6f15
     weight: 3
     label: 'Import image'

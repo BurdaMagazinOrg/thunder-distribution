@@ -2,7 +2,7 @@ langcode: und
 status: true
 dependencies:
   config:
-    - image.style.media_thumbnail
+    - image.style.entity_browser_thumbnail
     - media_entity.bundle.image
     - media_entity.bundle.video
   module:
