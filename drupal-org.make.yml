@@ -45,8 +45,8 @@ projects:
     type: "module"
     version: "1.0-alpha3"
     patch:
-      - "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch"
-      - "https://www.drupal.org/files/issues/2823670_12.patch"
+      - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-7.patch"
+      - "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
 
   entity:
     type: "module"
@@ -113,6 +113,7 @@ projects:
     version: "1.5"
     patch:
       - "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
+      - "https://www.drupal.org/files/issues/2813685-21.patch"
 
   media_entity_instagram:
     type: "module"
