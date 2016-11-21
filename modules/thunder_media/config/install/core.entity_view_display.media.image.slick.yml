@@ -28,9 +28,9 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: gallery
+      image_style: ''
       thumbnail_style: ''
-      responsive_image_style: ''
+      responsive_image_style: media_image
       media_switch: ''
       ratio: ''
       sizes: ''
