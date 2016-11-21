@@ -58,9 +58,6 @@
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
-      "drupal/blazy": {
-        "Support PICTURE element": "https://www.drupal.org/files/issues/support_picture_element-2752865-18-D8.patch"
-      },
       "drupal/media_entity_instagram": {
         "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
       }
@@ -75,7 +72,7 @@
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
-    "drupal/blazy": "1.0-beta4",
+    "drupal/blazy": "dev-1.x",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
