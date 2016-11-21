@@ -21,8 +21,11 @@ if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar" ]; then
   wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar"
 fi
 
+# remove xdebug to make php execute faster
+phpenv config-rm xdebug.ini
+
 # Install Drush and drupalorg_drush module
-composer global require drush/drush:^8.1
+composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
 drush dl drupalorg_drush-7.x
 
