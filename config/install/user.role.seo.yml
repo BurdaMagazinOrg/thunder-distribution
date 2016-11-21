@@ -45,7 +45,6 @@ permissions:
   37: 'delete terms in tags'
   38: 'edit terms in tags'
   39: 'access toolbar'
-  40: 'access gallery_browser entity browser pages'
   41: 'access image_browser entity browser pages'
   42: 'access media_browser entity browser pages'
   43: 'access multiple_image_browser entity browser pages'

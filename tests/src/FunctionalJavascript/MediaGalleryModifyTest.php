@@ -32,9 +32,8 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
-    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]';
+    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $this->getSession()
@@ -43,15 +42,12 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
-    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
+    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]/div[2]');
     if (empty($secondElement)) {
       throw new \Exception('Second element in Gallery is not found');
     }
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
-
-    // Update Gallery.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
 
     $page->pressButton('Save and keep publish');
 
@@ -81,13 +77,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Remove 2nd Image.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current-items-1-remove-button');
-
-    // Update Gallery.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
+    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button');
 
     $page->pressButton('Save and keep publish');
 
@@ -107,10 +99,9 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->drupalGet("node/7/edit");
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
     $this->uploadFile($page, dirname(__FILE__) . '/../../fixtures/reference.jpg');
 
@@ -120,8 +111,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: -440, dy: 0 });');
 
     $this->submitEntityBrowser($page);
-
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
 
     $page->pressButton('Save and keep publish');
 
@@ -142,16 +131,13 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->drupalGet("node/7/edit");
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
     $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-2-remove-button');
 
     $this->submitEntityBrowser($page);
-
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
 
     $page->pressButton('Save and keep publish');
 
