@@ -22,7 +22,7 @@ if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar" ]; then
 fi
 
 # Install Drush and drupalorg_drush module
-composer global require drush/drush:~8
+composer global require drush/drush:^8
 phpenv rehash
 drush dl drupalorg_drush-7.x
 
