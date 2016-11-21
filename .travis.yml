@@ -38,8 +38,8 @@ mysql:
 
 before_install:
   - source ./scripts/travis/setup-environment.sh
-  - bash -x -e ./scripts/travis/test-source-code.sh
   - bash -x -e ./scripts/travis/before-install.sh
+  - bash -x -e ./scripts/travis/test-source-code.sh
 install:
   - bash -x -e ./scripts/travis/install-thunder.sh
 

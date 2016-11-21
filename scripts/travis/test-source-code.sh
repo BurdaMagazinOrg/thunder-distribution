@@ -1,9 +1,3 @@
-# remove xdebug to make php execute faster
-phpenv config-rm xdebug.ini
-
-# globally require drupal coder for code tests
-composer global require drupal/coder
-
 # run phpcs
 phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme --report=summary -p .
