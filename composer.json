@@ -46,8 +46,8 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "Dropzonejs in EB multi-step selection creates multiple entities": "https://www.drupal.org/files/issues/dropzonejs_in_eb-2825429-6.patch",
-        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_12.patch"
+        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-7.patch",
+        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
       },
       "drupal/entity_browser": {
         "Responsive modals are broken": "https://www.drupal.org/files/issues/responsive_modals_are-2828023-2.patch",
@@ -61,7 +61,7 @@
       },
       "drupal/media_entity": {
         "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch",
-        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-9.patch"
+        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
       "drupal/slick": {
         "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"
