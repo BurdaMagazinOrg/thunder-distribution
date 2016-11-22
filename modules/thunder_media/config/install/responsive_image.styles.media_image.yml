@@ -5,8 +5,8 @@ dependencies:
     - image.style.media_image
     - image.style.media_image_mobile
     - image.style.media_image_tablet
-  theme:
-    - bartik
+#  theme:
+#    - bartik
 id: media_image
 label: 'Media Image'
 image_style_mappings:
