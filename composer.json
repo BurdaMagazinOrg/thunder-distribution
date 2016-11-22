@@ -53,9 +53,6 @@
         "Responsive modals are broken": "https://www.drupal.org/files/issues/responsive_modals_are-2828023-2.patch",
         "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_17.patch"
       },
-      "drupal/focal_point": {
-        "Add image effect schema": "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
-      },
       "drupal/linkit": {
         "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
@@ -93,7 +90,7 @@
     "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "dev-1.x",
-    "drupal/focal_point": "1.0-beta3",
+    "drupal/focal_point": "^1.0",
     "drupal/google_analytics": "^2.0",
     "drupal/inline_entity_form": "^1.0",
     "drupal/ivw_integration": "^1.0",
