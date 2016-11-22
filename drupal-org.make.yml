@@ -79,9 +79,7 @@ projects:
 
   focal_point:
     type: "module"
-    version: "1.0-beta3"
-    patch:
-      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
+    version: "1.0-beta4"
 
   google_analytics:
     type: "module"
@@ -99,7 +97,7 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/libraries.git"
-      revision: "548f3c2c47596c5242e37b18000e7b2ec930f66a"
+      revision: "3ea00f23e31a5cd7cd4fed633a675f864b0b1e3c"
       branch: "8.x-3.x"
 
   linkit:

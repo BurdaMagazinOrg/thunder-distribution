@@ -32,6 +32,7 @@ drush_make_thunder() {
     rsync -a . ${TEST_DIR}/docroot/profiles/thunder --exclude docroot
 
     drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
+    composer install --working-dir=${TEST_DIR}/docroot
 }
 
 composer_create_thunder() {
