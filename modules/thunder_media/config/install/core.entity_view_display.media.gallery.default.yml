@@ -21,9 +21,6 @@ content:
       skin: classic
       skin_thumbnail: ''
       image_style: gallery
-      thumbnail_style: ''
-      responsive_image_style: ''
-      thumbnail_effect: ''
       thumbnail_position: ''
       media_switch: ''
       ratio: ''
@@ -39,7 +36,6 @@ content:
         field_description: '0'
         field_expires: '0'
         field_image: '0'
-        field_source: '0'
         field_tags: '0'
       cache: 0
       sizes: ''
@@ -85,15 +81,18 @@ content:
       preserve_keys: false
       thumbnail: ''
       visible_items: 0
+      thumbnail_effect: ''
       display: main
       skin_arrows: ''
       skin_dots: ''
-      item_id: ''
+      style: ''
       box_caption: ''
       box_caption_custom: ''
       box_style: ''
-      icon: false
-      dimension: ''
+      box_media_style: ''
+      icon: ''
+      responsive_image_style: ''
+      thumbnail_style: ''
       id: ''
       overlay: ''
     third_party_settings: {  }
