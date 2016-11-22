@@ -5,8 +5,6 @@ dependencies:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.instagram.field_media
     - paragraphs.paragraphs_type.instagram
-_core:
-  default_config_hash: 4M4s4GDfl38Pcts5qlA3Pwn-tmNDKeiEDK3jl4DozLU
 id: paragraph.instagram.preview
 targetEntityType: paragraph
 bundle: instagram

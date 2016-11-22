@@ -7,8 +7,6 @@ dependencies:
     - media_entity.bundle.instagram
   module:
     - media_entity_instagram
-_core:
-  default_config_hash: ycHDVc_IFFfb98bFSsh0keJjkVbsVbj25fo6AfmhdXc
 id: media.instagram.thumbnail
 targetEntityType: media
 bundle: instagram

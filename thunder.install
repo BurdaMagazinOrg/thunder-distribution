@@ -253,10 +253,19 @@ function thunder_update_8006() {
     'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
   ];
 
+  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
+
+  // Ensure that required view mode exists.
+  if (!empty($configReverter->getFromActive('entity_view_mode', 'media.thumbnail'))) {
+    $configReverter->import('entity_view_mode', 'media.thumbnail');
+  }
+
+  // Import listed configurations.
   foreach ($configs as $entity => $ids) {
     foreach ($ids as $id) {
       try {
-        \Drupal::service('config_update.config_update')->import($entity, $id);
+        $configReverter->import($entity, $id);
       }
       catch (EntityStorageException $e) {
       }
