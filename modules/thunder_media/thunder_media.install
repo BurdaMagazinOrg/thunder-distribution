@@ -262,11 +262,15 @@ function thunder_media_update_8009() {
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
   $updateLogger = Drupal::service('logger.thunder_update');
 
-  $config = \Drupal::configFactory()->getEditable('blazy.settings');
-  if ($config) {
-    $config->set('responsive_image', TRUE);
-    $config->save();
-    $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
+  if (\Drupal::moduleHandler()->moduleExists('blazy')
+    && \Drupal::moduleHandler()->moduleExists('responsive_image')) {
+
+    $config = \Drupal::configFactory()->getEditable('blazy.settings');
+    if ($config) {
+      $config->set('responsive_image', TRUE);
+      $config->save();
+      $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
+    }
   }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
