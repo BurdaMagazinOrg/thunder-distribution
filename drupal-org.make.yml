@@ -45,7 +45,7 @@ projects:
     type: "module"
     version: "1.0-alpha3"
     patch:
-      - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-9.patch"
+      - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-10.patch"
       - "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
 
   entity:
