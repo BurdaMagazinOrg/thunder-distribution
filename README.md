@@ -81,6 +81,14 @@ composer create-project 'burdamagazinorg/thunder-project:~8.1.0' MYPROJECT --sta
 
 For further information follow the [install instructions](https://www.drupal.org/documentation/install). 
 
+## Configuration
+
+In Thunder's default configuration, the automated cron module is disabled. For correct functioning of non-local sites, crons should be configured properly.
+There are two types of crons which should be configured:
+
+* [Configure cron](https://www.drupal.org/docs/7/setting-up-cron-for-drupal/configuring-cron-jobs-using-the-cron-command)
+* [Configure the schedulers cron](http://cgit.drupalcode.org/scheduler/tree/README.txt?h=8.x-1.x) (Used for automated article publishing)
+
 ## Development
 
 For Development information please take a look at [docs/development.md](docs/development.md).

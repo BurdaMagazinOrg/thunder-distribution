@@ -10,7 +10,7 @@ field_name: field_teaser_media
 entity_type: node
 bundle: article
 label: 'Teaser Media'
-description: ''
+description: 'The teaser image is displayed on overview pages. Additionally, it''s used in <a href="https://instantarticles.fb.com" target="_blank">Facebook Instant Articles</a>.'
 required: false
 translatable: false
 default_value: {  }
