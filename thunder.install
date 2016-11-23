@@ -257,7 +257,7 @@ function thunder_update_8006() {
   $configReverter = \Drupal::service('config_update.config_update');
 
   // Ensure that required view mode exists.
-  if (!empty($configReverter->getFromActive('entity_view_mode', 'media.thumbnail'))) {
+  if (empty($configReverter->getFromActive('entity_view_mode', 'media.thumbnail'))) {
     $configReverter->import('entity_view_mode', 'media.thumbnail');
   }
 
