@@ -5,25 +5,25 @@ dependencies:
     - image.style.media_image
     - image.style.media_image_mobile
     - image.style.media_image_tablet
-#  theme:
-#    - bartik
+  theme:
+    - thunder_base
 id: media_image
 label: 'Media Image'
 image_style_mappings:
   -
-    breakpoint_id: bartik.wide
+    breakpoint_id: thunder_base.wide
     multiplier: 1x
     image_mapping_type: image_style
     image_mapping: media_image
   -
-    breakpoint_id: bartik.narrow
+    breakpoint_id: thunder_base.narrow
     multiplier: 1x
     image_mapping_type: image_style
     image_mapping: media_image_tablet
   -
-    breakpoint_id: bartik.mobile
+    breakpoint_id: thunder_base.mobile
     multiplier: 1x
     image_mapping_type: image_style
     image_mapping: media_image_mobile
-breakpoint_group: bartik
+breakpoint_group: thunder_base
 fallback_image_style: media_image
