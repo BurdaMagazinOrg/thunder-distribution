@@ -1,5 +1,27 @@
 # Thunder Development
 
+# Install development environment
+
+## Requirements
+- [Acquia DevDesktop](https://dev.acquia.com/downloads)
+- [composer](https://getcomposer.org/)
+- [npm](https://nodejs.org/en/download/)
+
+```bash
+git clone git@github.com:BurdaMagazinOrg/thunder-distribution.git thunder-repo
+cd thunder-repo
+sh scripts/development/build-thunder.sh
+```
+
+This installs Thunder in a directory besides your checkout. Now we have to register the created docroot into Acquia's DevDesktop.
+After that we can install the site:
+```bash
+cd ../thunder
+bin/robo site:install devdesktop
+```
+
+After that Thunder is successfully installed. Start coding now.
+
 ----------
 
 ## Drupal Tests
