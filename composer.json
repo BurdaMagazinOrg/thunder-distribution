@@ -46,7 +46,7 @@
         "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
       },
       "drupal/dropzonejs": {
-        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-9.patch",
+        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11.patch",
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
       },
       "drupal/entity_browser": {
