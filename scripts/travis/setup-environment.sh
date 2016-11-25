@@ -23,7 +23,6 @@ else
     TEST_UPDATE=""
 fi
 
-TEST_UPDATE="true"
 export TEST_UPDATE;
 
 # base path for update tests
