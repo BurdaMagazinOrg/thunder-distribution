@@ -249,6 +249,10 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
   $configs = [
     'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
   ];
@@ -267,8 +271,17 @@ function thunder_update_8006() {
       try {
         $configReverter->import($entity, $id);
       }
-      catch (EntityStorageException $e) {
+      catch (\Exception $e) {
+        $updateLogger->warning(t('Unable to import @entity.@id config.', ['@id' => $id, '@entity' => $entity]));
       }
     }
   }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
