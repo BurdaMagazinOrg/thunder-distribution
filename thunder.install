@@ -272,7 +272,7 @@ function thunder_update_8006() {
         $configReverter->import($entity, $id);
       }
       catch (\Exception $e) {
-        $updateLogger->warning(t('Unable to import @id into @entity', ['@id' => $id, '@entity' => $entity]));
+        $updateLogger->warning(t('Unable to import @entity.@id config.', ['@id' => $id, '@entity' => $entity]));
       }
     }
   }
