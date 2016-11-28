@@ -207,3 +207,41 @@ function thunder_media_update_8008() {
     $updateLogger->warning($message);
   }
 }
+
+/**
+ * Set required fields for Image and Video bundles.
+ */
+function thunder_media_update_8009() {
+  // Config for required Video and Image media fields.
+  $configsToUpdate['field.field.media.image.field_image']['required'] = TRUE;
+  $configsToUpdate['field.field.media.video.field_media_video_embed_field']['required'] = TRUE;
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = Drupal::service('config.factory');
+
+  // Check that gallery paragraph uses complex widget.
+  foreach ($configsToUpdate as $configName => $newConfig) {
+    /** @var \Drupal\Core\Config\Config $paragraphConfig */
+    $config = $configFactory->getEditable($configName);
+
+    if (empty($config->getOriginal())) {
+      $updateLogger->warning(t('Unable to set field "@configName" as required.', ['@configName' => $configName]));
+    }
+    else {
+      $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
+      $config->save();
+    }
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
