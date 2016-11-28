@@ -5,6 +5,7 @@
  * Contains.
  */
 
+use \Drupal\Component\Utility\NestedArray;
 use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
 
@@ -201,11 +202,19 @@ function thunder_media_update_8008() {
       }
     }
   }
-  catch (EntityStorageException $e) {
+  catch (\Exception $e) {
     $message = t('Image style entity_browser_thumbnail was not created.');
 
     $updateLogger->warning($message);
   }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
 
 /**
