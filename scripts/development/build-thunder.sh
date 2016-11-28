@@ -5,7 +5,7 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../.."
 DEST_DIR="$BASE_DIR/../thunder"
 
 if [ $1 ] ; then
-  DEST_DIR="$BASE_DIR/../$1"
+  DEST_DIR="$1"
 fi
 
 composer create-project burdamagazinorg/thunder-project ${DEST_DIR} --stability dev --no-interaction --no-install
