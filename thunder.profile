@@ -165,7 +165,7 @@ function thunder_themes_installed($theme_list) {
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
 
-    // Set infinite image styles and gallery view mode
+    // Set infinite image styles and gallery view mode.
     \Drupal::configFactory()
       ->getEditable('core.entity_view_display.media.image.default')
       ->set('content.field_image.settings.image_style', 'inline_m')
