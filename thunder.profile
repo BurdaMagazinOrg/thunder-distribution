@@ -164,6 +164,17 @@ function thunder_themes_installed($theme_list) {
     \Drupal::configFactory()->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
+
+    // Set infinite image styles and gallery view mode
+    \Drupal::configFactory()
+      ->getEditable('core.entity_view_display.media.image.default')
+      ->set('content.field_image.settings.image_style', 'inline_m')
+      ->set('content.field_image.settings.responsive_image_style', '')
+      ->save(TRUE);
+    \Drupal::configFactory()
+      ->getEditable('core.entity_view_display.media.image.gallery')
+      ->set('content.field_media_images.settings.view_mode', 'gallery')
+      ->save(TRUE);
   }
 }
 
