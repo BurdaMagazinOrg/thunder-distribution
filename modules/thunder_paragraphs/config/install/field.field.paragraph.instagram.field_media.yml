@@ -9,7 +9,7 @@ id: paragraph.instagram.field_media
 field_name: field_media
 entity_type: paragraph
 bundle: instagram
-label: Medien
+label: Media
 description: ''
 required: true
 translatable: true
