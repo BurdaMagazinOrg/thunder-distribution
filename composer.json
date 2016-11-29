@@ -56,7 +56,6 @@
         "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
       "drupal/media_entity": {
-        "Add field formatter schema": "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch",
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
       "drupal/slick": {
@@ -95,7 +94,7 @@
     "drupal/ivw_integration": "^1.0",
     "drupal/libraries": "dev-3.x",
     "drupal/linkit": "4.1",
-    "drupal/media_entity": "1.5",
+    "drupal/media_entity": "1.6",
     "drupal/media_entity_instagram": "1.2",
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",

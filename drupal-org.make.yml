@@ -104,9 +104,8 @@ projects:
 
   media_entity:
     type: "module"
-    version: "1.5"
+    version: "1.6"
     patch:
-      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
       - "https://www.drupal.org/files/issues/2813685-21.patch"
 
   media_entity_instagram:

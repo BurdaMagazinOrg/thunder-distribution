@@ -1,4 +1,3 @@
-
 thunder_media.configuration_form:
   path: '/admin/config/thunder_media/configuration'
   defaults:
@@ -8,4 +7,3 @@ thunder_media.configuration_form:
     _permission: 'administer site configuration'
   options:
     _admin_route: TRUE
-
