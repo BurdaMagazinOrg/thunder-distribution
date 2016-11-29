@@ -273,6 +273,46 @@ function thunder_media_update_8010() {
     }
   }
 
+  // Config for required Video and Image media fields.
+  $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['image_style'] = '';
+  $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = Drupal::service('config.factory');
+
+  foreach ($configsToUpdate as $configName => $newConfig) {
+    /** @var \Drupal\Core\Config\Config $paragraphConfig */
+    $config = $configFactory->getEditable($configName);
+
+    if (empty($config->getOriginal())) {
+      $updateLogger->warning(t('Unable to set responsive image style for field "@configName".', ['@configName' => $configName]));
+    }
+    else {
+      $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
+      $config->save();
+    }
+  }
+
+  // Import image styles.
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  try {
+    \Drupal::service('config_update.config_update')->import('responsive_image_style', 'media_image');
+    \Drupal::service('config_update.config_update')->import('image_style', 'media_image_tablet');
+    \Drupal::service('config_update.config_update')->import('image_style', 'media_image_mobile');
+  }
+  catch (\Exception $e) {
+    $message = t('Responsive image styles was not created.');
+
+    $updateLogger->warning($message);
+  }
+
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
 
