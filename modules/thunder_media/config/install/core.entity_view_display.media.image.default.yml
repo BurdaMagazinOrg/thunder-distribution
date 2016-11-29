@@ -27,45 +27,53 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: media_image
+      image_style: ''
       thumbnail_style: ''
+      responsive_image_style: media_image
       media_switch: ''
       ratio: ''
       sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        sm:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        md:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        lg:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        xl:
-          image_style: ''
-          width: ''
-          breakpoint: ''
       current_view_mode: default
-      skin: ''
       background: false
-      layout: ''
       caption:
         title: '0'
         alt: '0'
-      responsive_image_style: ''
-      icon: false
+      breakpoints:
+        xs:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        sm:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        md:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        lg:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+        xl:
+          breakpoint: ''
+          image_style: ''
+          width: ''
+      box_caption: ''
+      box_caption_custom: ''
       box_style: ''
-      cache: -1
-      item_id: ''
+      iframe_lazy: true
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
       optionset: default
+      skin: ''
+      style: ''
+      grid: 0
+      grid_header: ''
+      grid_medium: 0
+      grid_small: 0
     third_party_settings: {  }
     type: blazy
 hidden:

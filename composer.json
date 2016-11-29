@@ -38,6 +38,9 @@
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "patches": {
+      "drupal/blazy": {
+        "No responsive images": "https://www.drupal.org/files/issues/blazy-beta4-6611ea18.patch"
+      },
       "drupal/core": {
         "Make it possible to specify a destination after the installation for distributions": "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"
       },
@@ -58,9 +61,6 @@
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
-      "drupal/slick": {
-        "Images not centered with bartik": "https://www.drupal.org/files/issues/slick-centered-images.patch"
-      },
       "drupal/media_entity_instagram": {
         "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
       }
@@ -75,7 +75,7 @@
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
-    "drupal/blazy": "^1.0",
+    "drupal/blazy": "1.0-beta4",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
@@ -106,7 +106,7 @@
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
     "drupal/simple_sitemap": "2.6",
-    "drupal/slick": "1.0-beta4",
+    "drupal/slick": "^1.0",
     "drupal/slick_media": "^1.0",
     "drupal/token": "^1.0",
     "drupal/video_embed_field": "^1.0",
