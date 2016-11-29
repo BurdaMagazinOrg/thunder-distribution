@@ -75,7 +75,7 @@
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
-    "drupal/blazy": "dev-1.x",
+    "drupal/blazy": "1.0-beta4",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
