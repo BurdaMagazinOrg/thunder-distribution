@@ -261,11 +261,15 @@ function thunder_media_update_8009() {
 function thunder_media_update_8010() {
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
   $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = Drupal::service('config.factory');
 
   if (\Drupal::moduleHandler()->moduleExists('blazy')
     && \Drupal::moduleHandler()->moduleExists('responsive_image')) {
 
-    $config = \Drupal::configFactory()->getEditable('blazy.settings');
+    $config = $configFactory->getEditable('blazy.settings');
     if ($config) {
       $config->set('responsive_image', TRUE);
       $config->save();
@@ -276,13 +280,6 @@ function thunder_media_update_8010() {
   // Config for required Video and Image media fields.
   $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['image_style'] = '';
   $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
-
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
-  $updateLogger->cleanLogs();
-
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = Drupal::service('config.factory');
 
   foreach ($configsToUpdate as $configName => $newConfig) {
     /** @var \Drupal\Core\Config\Config $paragraphConfig */
