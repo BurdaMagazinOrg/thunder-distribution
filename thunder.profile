@@ -172,7 +172,7 @@ function thunder_themes_installed($theme_list) {
       ->set('content.field_image.settings.responsive_image_style', '')
       ->save(TRUE);
     \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.image.gallery')
+      ->getEditable('core.entity_view_display.media.gallery.default')
       ->set('content.field_media_images.settings.view_mode', 'gallery')
       ->save(TRUE);
   }
