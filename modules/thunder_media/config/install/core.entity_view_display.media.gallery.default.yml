@@ -16,7 +16,7 @@ content:
     label: hidden
     settings:
       vanilla: true
-      optionset: default
+      optionset: thunder_gallery
       optionset_thumbnail: ''
       skin: classic
       skin_thumbnail: ''

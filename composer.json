@@ -38,9 +38,6 @@
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "patches": {
-      "drupal/blazy": {
-        "No responsive images": "https://www.drupal.org/files/issues/blazy-beta4-6611ea18.patch"
-      },
       "drupal/core": {
         "Make it possible to specify a destination after the installation for distributions": "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"
       },
@@ -75,7 +72,7 @@
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
-    "drupal/blazy": "1.0-beta4",
+    "drupal/blazy": "^1.0",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",

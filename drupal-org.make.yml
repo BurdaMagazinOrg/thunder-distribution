@@ -19,9 +19,7 @@ projects:
 
   blazy:
     type: "module"
-    version: "1.0-beta4"
-    patch:
-      - "https://www.drupal.org/files/issues/blazy-beta4-6611ea18.patch"
+    version: "1.0-beta5"
 
   breakpoint_js_settings:
     type: "module"
@@ -165,11 +163,11 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-beta4"
+    version: "1.0-beta5"
 
   slick_media:
     type: "module"
-    version: "1.0-beta3"
+    version: "1.0-beta6"
 
   token:
     type: "module"
