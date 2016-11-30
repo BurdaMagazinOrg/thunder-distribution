@@ -115,7 +115,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     // Check that, 2nd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-2 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
   }
 
