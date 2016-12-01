@@ -1,5 +1,40 @@
 # Change Log
 
+## [8.1.0-rc3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc3) 2016-12-01
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc2...8.x-1.0-rc3)
+
+Test improvements
+- Added tests for SEO functionality (Metatag, Sitemap)
+- Code style tests and fixes
+- Update tests to work with current module markup
+ 
+Config changes
+- Activated revisions for article and basic page
+- Media URLs are required for twitter and instagram entities
+- UX: better responsiveness on content list 
+- Improve image style for media thumbnails
+- UX: Add author filter to content overview
+- UX: Add sorting to entity browser views
+- Enable auto select on multiple_image_browser 
+- Reorganize node and term edit pages
+- Auto open media browser
+- reduce allowed allowed upload extensions in image browser
+- Label form element non-required in the entity form
+- Change gallery paragraph to simple widget
+- Use responsive images in gallery
+
+Fixes
+- Fix entity browser preselection after error
+- Add missing svg files for entity browser
+- UX dropzone: [Checkmark indicator for upload screen](https://www.drupal.org/node/2696915) 
+- UX dropzone: [Implement maxFiles](https://www.drupal.org/node/2633346) 
+- UX dropzone: [Improved MultiStep selection display](https://www.drupal.org/node/2823670) 
+- Fix term access for unpublished terms
+- UX media browser: [Open entity browser with one click from Entity Browser IEF widget](https://www.drupal.org/node/2778305) 
+- [Make instagram responsive](https://www.drupal.org/node/2807735) 
+- Fix PHP Notice 
+- Better entity browser usability on mobile devices
+
 ## [8.1.0-rc2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc2) 2016-10-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc1...8.x-1.0-rc2)
 
