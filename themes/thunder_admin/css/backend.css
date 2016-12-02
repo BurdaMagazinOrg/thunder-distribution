@@ -5,7 +5,6 @@
 div.field--widget-entity-browser-entity-reference div.entities-list > div {
   width: 175px;
   float: left;
-  margin: 10px 0;
 }
 
 div.field--widget-entity-browser-entity-reference  details.form-wrapper {
@@ -17,6 +16,11 @@ fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text {
 }
 
 @media all and (min-width: 900px) {
+
+  fieldset.article-teaser div.field--widget-entity-browser-entity-reference div.entities-list > div {
+    margin: 10px 0;
+  }
+
   fieldset.article-teaser .fieldset-wrapper {
     display: flex;
   }
