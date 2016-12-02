@@ -71,7 +71,7 @@ projects:
 
   field_group:
     type: "module"
-    version: "1.0-rc5"
+    version: "1.0-rc6"
 
   focal_point:
     type: "module"
