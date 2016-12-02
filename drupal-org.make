@@ -1,7 +1,7 @@
 core = 8.x
 api = 2
 projects[admin_toolbar][type] = module
-projects[admin_toolbar][version] = 1.17
+projects[admin_toolbar][version] = 1.18
 projects[adsense][type] = module
 projects[adsense][version] = 1.0-beta1
 projects[better_normalizers][type] = module
@@ -36,7 +36,7 @@ projects[fb_instant_articles][download][url] = http://git.drupal.org/project/fb_
 projects[fb_instant_articles][download][revision] = 2a5210fec67a8d7f5c77a4ffffb0b49e5aa62f40
 projects[fb_instant_articles][download][branch] = 8.x-1.x
 projects[field_group][type] = module
-projects[field_group][version] = 1.0-rc5
+projects[field_group][version] = 1.0-rc6
 projects[focal_point][type] = module
 projects[focal_point][version] = 1.0-beta4
 projects[google_analytics][type] = module
