@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: media_image_tablet
+label: 'Media Image Tablet'
+effects:
+  01bc24a2-2a89-4a4d-9935-f7c7c2fa88ab:
+    uuid: 01bc24a2-2a89-4a4d-9935-f7c7c2fa88ab
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 850
+      height: 478

@@ -31,31 +31,27 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $page = $this->getSession()->getPage();
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_BeforeOrderChange_' . date('Ymd_His') . '.png');
-
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
-    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]';
+    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $this->getSession()
       ->getDriver()
-      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 0, dy: 300 });');
+      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 200, dy: 0 });');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
-    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current"]/div[2]');
+    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]/div[2]');
     if (empty($secondElement)) {
       throw new \Exception('Second element in Gallery is not found');
     }
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
 
-    // Update Gallery.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
-
     $page->pressButton('Save and keep publish');
+
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
@@ -81,15 +77,13 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Remove 2nd Image.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-current-items-1-remove-button');
-
-    // Update Gallery.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
+    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button');
 
     $page->pressButton('Save and keep publish');
+
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()
@@ -105,24 +99,18 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->drupalGet("node/7/edit");
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
     $this->uploadFile($page, dirname(__FILE__) . '/../../fixtures/reference.jpg');
-
-    // Click Use Selected.
-    $this->clickButtonDrupalSelector($page, 'edit-submit');
 
     // Move new image -> that's 5th image in list, one row up.
     $this->getSession()
       ->getDriver()
-      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: 0, dy: -220 });');
+      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: -440, dy: 0 });');
 
     $this->submitEntityBrowser($page);
-
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
 
     $page->pressButton('Save and keep publish');
 
@@ -131,25 +119,25 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
-    // Check that, 2nd image is file: reference.jpg.
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+
+    // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
     $this->drupalGet("node/7/edit");
 
     $this->editParagraph($page, 'field_paragraphs', 0);
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-entities-0-actions-ief-entity-edit');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-1-remove-button');
+    $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-2-remove-button');
 
     $this->submitEntityBrowser($page);
-
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-form-inline-entity-form-entities-0-form-actions-ief-edit-save');
 
     $page->pressButton('Save and keep publish');
 
@@ -158,9 +146,12 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    // Check that, 2nd image is not file: reference.jpg.
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
+
+    // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 

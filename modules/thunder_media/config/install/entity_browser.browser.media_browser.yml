@@ -12,31 +12,21 @@ name: media_browser
 label: 'Media Browser'
 display: modal
 display_configuration:
-  width: '1070'
+  width: '1245'
   height: ''
   link_text: 'Select entities'
+  auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
-  ec1759ab-e969-4448-a9db-d3a70e123326:
-    settings:
-      media_entity_bundle: image
-      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
-      dropzone_description: 'Drop files here to upload them'
-      max_filesize: 128M
-      extensions: 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'
-      submit_text: 'Select entities'
-    uuid: ec1759ab-e969-4448-a9db-d3a70e123326
-    weight: -9
-    label: 'Import image'
-    id: dropzonejs_media_entity
   05782e5e-1928-4606-8b3f-f7c333701c25:
     settings:
       view: media_browser
       view_display: entity_browser_1
       submit_text: 'Select entities'
+      auto_select: false
     uuid: 05782e5e-1928-4606-8b3f-f7c333701c25
     weight: -10
     label: 'Select existing'
@@ -47,7 +37,21 @@ widgets:
       bundle: video
       form_mode: default
       submit_text: 'Save entity'
+      auto_select: false
     uuid: 5d665b33-fbc8-435b-b560-e0e76e22f237
     weight: -8
     label: 'Embed video'
     id: entity_form
+  f8ff2725-7c5a-4257-ab16-68b970aa421a:
+    settings:
+      media_entity_bundle: image
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 128M
+      extensions: 'png gif jpg jpeg'
+      submit_text: 'Select entities'
+      auto_select: false
+    uuid: f8ff2725-7c5a-4257-ab16-68b970aa421a
+    weight: -9
+    label: 'Import image'
+    id: dropzonejs_media_entity_inline_entity_form

@@ -21,9 +21,11 @@ function thunder_media_file_create(File $entity) {
     /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
     $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
 
-    $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
-
-    $entity->setFilename($cleanFilename);
+    // Check for needed pathinfo array keys.
+    if (!empty($pathinfo['filename']) && !empty($pathinfo['extension'])) {
+      $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+      $entity->setFilename($cleanFilename);
+    }
   }
 }
 
@@ -35,6 +37,8 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'image_browser',
     'media_browser',
+
+    // TODO: Legacy support, remove it with new major version.
     'gallery_browser',
   ];
 
@@ -54,5 +58,18 @@ function thunder_media_page_attachments(array &$page) {
  * Implements hook_menu_local_actions_alter().
  */
 function thunder_media_menu_local_actions_alter(&$local_actions) {
-  $local_actions['media.add']['appears_on'][] = 'view.thunder_media.media_page_list';
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  if ($view) {
+    $local_actions['media.add']['appears_on'][] = 'view.thunder_media.media_page_list';
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function thunder_media_menu_links_discovered_alter(&$links) {
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  if ($view) {
+    $links['entity.media.collection']['route_name'] = 'view.thunder_media.media_page_list';
+  }
 }

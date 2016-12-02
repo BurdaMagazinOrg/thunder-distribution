@@ -7,6 +7,7 @@ drush_download_thunder() {
     mkdir -p $DOWNLOAD_PATH
     cd $DOWNLOAD_PATH
     drush dl thunder --drupal-project-rename="docroot" -y
+    composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
 # update composer
@@ -21,8 +22,11 @@ if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar" ]; then
   wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar"
 fi
 
+# remove xdebug to make php execute faster
+phpenv config-rm xdebug.ini
+
 # Install Drush and drupalorg_drush module
-composer global require drush/drush:~8
+composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
 drush dl drupalorg_drush-7.x
 
@@ -31,10 +35,6 @@ drush verify-makefile
 
 # install image magick
 printf "\n" | pecl install imagick
-
-
-# remove xdebug to make php execute faster
-phpenv config-rm xdebug.ini
 
 # Set MySQL Options
 mysql -e 'SET GLOBAL wait_timeout = 5400;'
@@ -60,3 +60,4 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
     drush_download_thunder $UPDATE_BASE_PATH
 fi
+

@@ -3,6 +3,7 @@ global-styling:
   css:
     layout:
       css/thunder.css: {}
+      css/components/taxonomy-term.css: {}
 
 
 

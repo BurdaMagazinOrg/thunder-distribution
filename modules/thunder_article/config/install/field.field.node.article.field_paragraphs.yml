@@ -18,7 +18,7 @@ field_name: field_paragraphs
 entity_type: node
 bundle: article
 label: Paragraphs
-description: ''
+description: 'Add different types of content with various paragraphs.'
 required: false
 translatable: false
 default_value: {  }

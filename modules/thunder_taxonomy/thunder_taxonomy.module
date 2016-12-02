@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -38,4 +39,28 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
   /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
 
   $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
+  $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
+}
+
+/**
+ * Implements hook_form_taxonomy_overview_terms_alter().
+ */
+function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {
+
+  $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 2, TRUE),
+    [t('Status')],
+    array_slice($form['terms']['#header'], 2, NULL, TRUE));
+
+  foreach ($form['terms'] as &$term) {
+    if (is_array($term) && !empty($term['#term'])) {
+      $status['status'] = [
+        '#markup' => ($term['#term']->status->value) ? t('Published') : t('Unpublished'),
+        '#type' => 'item',
+      ];
+
+      $term = array_slice($term, 0, 3, TRUE) +
+        $status +
+        array_slice($term, 3, NULL, TRUE);
+    }
+  }
 }

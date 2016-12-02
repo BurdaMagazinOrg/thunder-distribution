@@ -11,3 +11,5 @@ permissions:
   - 'opt-in or out of tracking'
   - 'view media'
   - 'access user profiles'
+  - 'view published terms in channel'
+  - 'view published terms in tags'

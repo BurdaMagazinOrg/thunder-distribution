@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.multiple_image_browser
     - field.field.media.gallery.field_media_images
     - media_entity.bundle.gallery
   module:

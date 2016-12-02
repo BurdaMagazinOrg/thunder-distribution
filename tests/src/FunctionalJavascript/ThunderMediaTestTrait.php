@@ -37,14 +37,18 @@ trait ThunderMediaTestTrait {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
-      $this->getSession()
-        ->executeScript("jQuery('[name=\"entity_browser_select[$media]\"]').prop('checked', true);");
+      $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]")->click();
     }
-
-    $page->pressButton('Select entities');
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     if ($entityBrowser == 'multiple_image_browser') {
+      $this->getSession()->wait(200);
+      $this->assertSession()->assertWaitOnAjaxRequest();
+
       $page->pressButton('Use selected');
+    }
+    else {
+      $page->pressButton('Select entities');
     }
 
     $this->getSession()->switchToIFrame();
@@ -67,13 +71,13 @@ trait ThunderMediaTestTrait {
 
     $page = $this->getSession()->getPage();
 
-    $selector = "input[data-drupal-selector='edit-" . str_replace('_', '-', $fieldName) . "-form-inline-entity-form-name-0-value']";
+    $selector = "input[data-drupal-selector='edit-" . str_replace('_', '-', $fieldName) . "-0-inline-entity-form-name-0-value']";
     $this->assertSession()->elementExists('css', $selector);
 
     $nameField = $page->find('css', $selector);
     $nameField->setValue($name);
 
-    $this->selectMedia("{$fieldName}_form_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
+    $this->selectMedia("{$fieldName}_0_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
   }
 
 }

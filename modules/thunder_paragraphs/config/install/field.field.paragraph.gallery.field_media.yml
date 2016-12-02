@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: gallery
 label: Media
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
@@ -22,4 +22,6 @@ settings:
       gallery: gallery
     sort:
       field: _none
+    auto_create: false
+    auto_create_bundle: ''
 field_type: entity_reference
