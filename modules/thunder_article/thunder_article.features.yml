@@ -1,4 +1,0 @@
-bundle: thunder
-excluded:
-  - views.view.content
-required: true

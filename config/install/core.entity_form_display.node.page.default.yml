@@ -6,6 +6,7 @@ dependencies:
     - node.type.page
   module:
     - path
+    - scheduler
     - text
 id: node.page.default
 targetEntityType: node
@@ -25,6 +26,11 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
@@ -35,6 +41,11 @@ content:
     settings:
       display_label: true
     weight: 15
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    settings: {  }
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
@@ -56,5 +67,10 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

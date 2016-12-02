@@ -1,0 +1,12 @@
+.slick__slide .field.field--type-image {
+    margin: 0;
+}
+
+/* For slick galleries using blazy, with non-responsive image styles, this can help, if gallery takes too much vertical space.
+Background: Not loaded images have a 1x1 placeholder. This means, if the width is set to 900px, It will take 900px in height,
+ disregarding the set height. */
+/*
+.slick__slide.slide--loading .blazy {
+    height: 0;
+}
+*/

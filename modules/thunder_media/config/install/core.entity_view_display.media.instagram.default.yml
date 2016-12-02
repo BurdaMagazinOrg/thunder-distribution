@@ -16,8 +16,8 @@ content:
     weight: 0
     label: hidden
     settings:
-      width: 480
-      height: 640
+      width: null
+      height: null
     third_party_settings: {  }
 hidden:
   created: true

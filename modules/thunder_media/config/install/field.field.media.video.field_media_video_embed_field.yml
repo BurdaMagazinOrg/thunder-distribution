@@ -12,7 +12,7 @@ entity_type: media
 bundle: video
 label: 'Video URL'
 description: 'Vimeo and YouTube videos are supported. Just copy the video url inside this field'
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

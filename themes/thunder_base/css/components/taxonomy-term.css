@@ -1,0 +1,9 @@
+/* Unpublished term styles. */
+.term--unpublished {
+  padding: 20px 15px 0;
+  background-color: #fff4f4;
+}
+.term--unpublished .comment-text .comment-arrow {
+  border-left: 1px solid #fff4f4;
+  border-right: 1px solid #fff4f4;
+}

@@ -81,8 +81,6 @@ trait ThunderParagraphsTestTrait {
   public function addGalleryParagraph($fieldName, $name, $media) {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery');
 
-    $this->openIefComplex("{$fieldName}_{$paragraphIndex}_subform_field_media");
-
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
   }
 

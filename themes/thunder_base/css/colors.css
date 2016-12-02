@@ -18,17 +18,17 @@ body {
   border-bottom-color: #ffffff;
 }
 #header {
-  background-color: #00A0E6;
+  background-color: #00a0e6;
 }
 a,
 .link {
-  color: #00A0E6;
+  color: #00a0e6;
 }
 a:hover,
 a:focus,
 .link:hover,
 .link:focus {
-  color: #00558C;
+  color: #00558c;
 }
 a:active,
 .link:active {
