@@ -1,7 +1,7 @@
 core = 8.x
 api = 2
 projects[admin_toolbar][type] = module
-projects[admin_toolbar][version] = 1.17
+projects[admin_toolbar][version] = 1.18
 projects[adsense][type] = module
 projects[adsense][version] = 1.0-beta1
 projects[better_normalizers][type] = module

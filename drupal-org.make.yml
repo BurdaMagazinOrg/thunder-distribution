@@ -4,7 +4,7 @@ projects:
   # Missing modules: redirect
   admin_toolbar:
     type: "module"
-    version: "1.17"
+    version: "1.18"
 
   adsense:
     type: "module"
