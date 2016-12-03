@@ -8,7 +8,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.thumbnail
+    - image.style.medium
     - media_entity.bundle.image
   module:
     - datetime
@@ -42,7 +42,7 @@ content:
     weight: 1
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
+      preview_image_style: medium
     third_party_settings: {  }
     type: image_image
   field_source:

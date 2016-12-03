@@ -9,7 +9,7 @@ id: paragraph.twitter.field_media
 field_name: field_media
 entity_type: paragraph
 bundle: twitter
-label: Medien
+label: Media
 description: ''
 required: true
 translatable: true

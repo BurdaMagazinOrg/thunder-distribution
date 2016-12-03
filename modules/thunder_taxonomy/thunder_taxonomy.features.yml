@@ -1,4 +1,0 @@
-bundle: thunder
-excluded:
-  - core.entity_view_mode.taxonomy_term.token
-required: true

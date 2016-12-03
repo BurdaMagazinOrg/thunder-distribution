@@ -1,23 +1,42 @@
 # Thunder Development
 
+# Install development environment
+
+## Requirements
+- [Acquia DevDesktop](https://dev.acquia.com/downloads)
+- [composer](https://getcomposer.org/)
+- [npm](https://nodejs.org/en/download/)
+
+```bash
+git clone git@github.com:BurdaMagazinOrg/thunder-distribution.git thunder-repo
+cd thunder-repo
+sh scripts/development/build-thunder.sh
+```
+
+This installs Thunder in a directory besides your checkout. Now we have to register the created docroot into Acquia's DevDesktop.
+After that we can install the site:
+```bash
+cd ../thunder
+bin/robo site:install devdesktop
+```
+
+After that Thunder is successfully installed. Start coding now.
+
 ----------
 
-## Behat Tests
+## Drupal Tests
 
-Thunder distribution comes with [Behat](http://docs.behat.org) tests. They can be used to validate Thunder installation or to use provided context for your own project Behat tests.
+Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
 
-#### How to run Behat tests
-In order to execute Behat tests:
+#### How to run the tests
+In order to execute tests:
 
-1. Rename [behat.local.yml.example](../tests/behat/behat.local.yml.example) in your Thunder installation to "behat.local.yml"
-2. Change configuration in that file:
-* "base_url" - has to be URL of your Thunder installation
-* "drupal_root" - has to be Path to **docroot** of your Thunder installation
+1. Enable the simpletest module.
 
-To successfully run Behat tests, Browser with WebDriver is required. You can use one of following: 
+To successfully run drupal tests, a Browser with WebDriver is required. You can use one of following: 
 
-* [PhantomJS](http://phantomjs.org)
-* [Selenium Server Standalone](http://www.seleniumhq.org/download) (* Selenium requires FireFox Browser)
+- [PhantomJS](http://phantomjs.org)
+- [Selenium Server Standalone](http://www.seleniumhq.org/download) (* Selenium requires FireFox Browser)
 
 It's sufficient to run one of mentioned browsers:
 ```bash
@@ -28,7 +47,16 @@ or
 selenium-server -p 4444
 ```
 
-After that Behat tests can be executed (if you are in root folder of Thunder distribution and composer requirements are installed):
+After that drupal tests can be executed (if you are in root folder of Thunder installation and composer requirements are installed):
 ```bash
-vendor/bin/behat --config tests/behat/behat.travis.yml
+cd core/
+php scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder thunder
 ```
+
+This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+
+----------
+
+## Coding style
+
+Documentation how to check your code for coding style issues can be found [here](https://github.com/BurdaMagazinOrg/thunder-dev-tools/blob/master/README.md#code-style-guidelines).

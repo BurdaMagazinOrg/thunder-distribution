@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: entity_browser_thumbnail
+label: 'Entity Browser Thumbnail'
+effects:
+  781c5432-cd26-4408-8ceb-a6457da0aaf4:
+    uuid: 781c5432-cd26-4408-8ceb-a6457da0aaf4
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 319
+      height: 184
