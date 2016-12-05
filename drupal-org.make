@@ -1,5 +1,7 @@
 core = 8.x
 api = 2
+projects[access_unpublished][type] = module
+projects[access_unpublished][version] = 1.0-alpha2
 projects[admin_toolbar][type] = module
 projects[admin_toolbar][version] = 1.18
 projects[adsense][type] = module
