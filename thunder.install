@@ -285,3 +285,13 @@ function thunder_update_8006() {
 
   return $updateLogger->outputHtml();
 }
+
+/**
+ * Installs the responsive_preview module.
+ */
+function thunder_update_8101() {
+
+  \Drupal::service('module_installer')->install([
+    'responsive_preview',
+  ]);
+}
