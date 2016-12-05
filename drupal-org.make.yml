@@ -149,6 +149,10 @@ projects:
     type: "module"
     version: "1.0-beta1"
 
+  responsive_preview:
+    type: "module"
+    version: "1.0-alpha2"
+
   riddle_marketplace:
     type: "module"
     version: "1.0-alpha5"
