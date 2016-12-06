@@ -2,6 +2,10 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1.0-alpha2"
+
   admin_toolbar:
     type: "module"
     version: "1.18"

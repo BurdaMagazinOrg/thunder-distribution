@@ -295,3 +295,13 @@ function thunder_update_8101() {
     'responsive_preview',
   ]);
 }
+
+/**
+ * Installs the access_unpublished module.
+ */
+function thunder_update_8102() {
+
+  \Drupal::service('module_installer')->install([
+    'access_unpublished',
+  ]);
+}

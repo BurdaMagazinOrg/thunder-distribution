@@ -69,6 +69,7 @@
     "burdamagazinorg/nexx_integration": "^8.0",
     "composer/installers": "^1.0",
     "cweagans/composer-patches": "~1.0",
+    "drupal/access_unpublished": "^1.0",
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",

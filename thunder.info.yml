@@ -36,6 +36,7 @@ dependencies:
   - views
   - views_ui
 # contrib
+  - access_unpublished
   - admin_toolbar_tools
   - libraries
   - simple_sitemap
