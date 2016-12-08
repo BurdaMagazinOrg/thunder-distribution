@@ -210,6 +210,10 @@ projects:
       revision: "178d32195253207cc74097296e25079a23f0b2e5"
       branch: "8.x-1.x"
 
+  webform:
+    type: "module"
+    version: "5.0-beta2"
+
 libraries:
   dropzone:
     type: "library"
