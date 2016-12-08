@@ -41,6 +41,7 @@ dependencies:
   - libraries
   - simple_sitemap
   - responsive_preview
+  - webform_ui
 # thunder
   - thunder_article
   - thunder_media

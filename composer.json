@@ -110,7 +110,7 @@
     "drupal/token": "^1.0",
     "drupal/video_embed_field": "^1.0",
     "drupal/views_load_more": "dev-1.x",
-    "drupal/webform": "^1.0",
+    "drupal/webform": "^5.0",
     "valiton/harbourmaster": "~8.1"
   },
   "require-dev": {

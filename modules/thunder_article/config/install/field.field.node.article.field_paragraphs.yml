@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.twitter
+    - paragraphs.paragraphs_type.webform
   module:
     - entity_reference_revisions
 id: node.article.field_paragraphs
@@ -34,6 +35,7 @@ settings:
       instagram: instagram
       gallery: gallery
       twitter: twitter
+      webform: webform
     target_bundles_drag_drop:
       text:
         enabled: true
@@ -56,4 +58,7 @@ settings:
       twitter:
         enabled: true
         weight: 10
+      webform:
+        enabled: true
+        weight: 16
 field_type: entity_reference_revisions
