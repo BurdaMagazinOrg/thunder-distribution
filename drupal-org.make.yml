@@ -54,7 +54,7 @@ projects:
 
   entity:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1.0-alpha4"
 
   entity_browser:
     type: "module"
@@ -91,7 +91,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.0-rc5"
+    version: "1.0"
 
   libraries:
     type: "module"
