@@ -2,6 +2,10 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1.0-alpha2"
+
   admin_toolbar:
     type: "module"
     version: "1.18"
@@ -50,7 +54,7 @@ projects:
 
   entity:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1.0-alpha4"
 
   entity_browser:
     type: "module"
@@ -87,7 +91,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.0-rc5"
+    version: "1.0"
 
   libraries:
     type: "module"
@@ -148,6 +152,10 @@ projects:
   pathauto:
     type: "module"
     version: "1.0-beta1"
+
+  responsive_preview:
+    type: "module"
+    version: "1.0-alpha2"
 
   riddle_marketplace:
     type: "module"
