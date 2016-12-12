@@ -177,6 +177,12 @@ projects:
     type: "module"
     version: "1.0-beta6"
 
+  thunder_admin:
+    type: "theme"
+    download:
+      url: "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
+      tag: "8.x-1.0.1"
+
   token:
     type: "module"
     version: "1.0-beta2"
