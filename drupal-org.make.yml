@@ -148,10 +148,8 @@ projects:
 
   paragraphs:
     type: "module"
-    version: "1.0"
-    patch:
-      - "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch"
-      - "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
+    download:
+      branch: "8.x-1.x"
 
   pathauto:
     type: "module"
