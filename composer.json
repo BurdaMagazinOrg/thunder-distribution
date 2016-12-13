@@ -124,7 +124,7 @@
         "drupal/shariff": "1.1",
         "drupal/slick": "^1.0",
         "drupal/slick_media": "^1.0",
-        "drupal/thunder_admin": "dev-1.x",
+        "drupal/thunder_admin": "dev-2.x",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
