@@ -24,7 +24,7 @@ class ThunderBaseTest extends WebTestBase {
    * @return string
    *   The name of the button.
    */
-  protected function getButtonName($xpath) {
+  protected function getButtonName(array $xpath) {
     $retval = '';
     /** @var \SimpleXMLElement[] $elements */
     if ($elements = $this->xpath($xpath)) {
