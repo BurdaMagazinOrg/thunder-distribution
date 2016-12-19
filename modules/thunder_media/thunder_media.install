@@ -145,8 +145,13 @@ function thunder_media_update_8006() {
   $configsToUpdate['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
   $configsToUpdate['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
 
+  // Ensure that defined widgets exist, in other case wrong configuration could
+  // be generated.
+  $checkConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['uuid'] = '7d7f8f45-f628-48a3-84a8-c962c73f39e8';
+  $checkConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['uuid'] = '89532aea-140d-4b9e-96f4-2aa489c095cb';
+
   \Drupal::service('thunder_media.updater')
-    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate);
+    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate, $checkConfig);
 }
 
 /**
