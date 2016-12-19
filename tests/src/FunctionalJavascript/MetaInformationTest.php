@@ -102,7 +102,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $configuration
    *   List of configuration what will be set for meta tag.
    */
-  protected function setMetaTagConfigurationForUrl($pageUrl, $configuration) {
+  protected function setMetaTagConfigurationForUrl($pageUrl, array $configuration) {
     $this->drupalGet($pageUrl);
 
     $page = $this->getSession()->getPage();
@@ -166,7 +166,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $configuration
    *   List of configuration what will be set for meta tag.
    */
-  protected function checkSavedConfiguration($configurationUrl, $configuration) {
+  protected function checkSavedConfiguration($configurationUrl, array $configuration) {
     $this->drupalGet('admin/config/search/metatag');
     $page = $this->getSession()->getPage();
 
