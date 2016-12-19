@@ -52,7 +52,7 @@ class Updater {
    * @return bool
    *   Indicates if config was updated or not.
    */
-  public function updateEntityBrowserConfig($browser, $configuration, $oldConfiguration = []) {
+  public function updateEntityBrowserConfig($browser, array $configuration, array $oldConfiguration = []) {
 
     $ebConfig = $this->configFactory
       ->getEditable('entity_browser.browser.' . $browser);

@@ -19,7 +19,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, $entityBrowser, $medias) {
+  public function selectMedia($fieldName, $entityBrowser, array $medias) {
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
@@ -64,10 +64,10 @@ trait ThunderMediaTestTrait {
    *   Name of gallery.
    * @param string $fieldName
    *   Field name.
-   * @param string $medias
+   * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, $medias) {
+  public function createGallery($name, $fieldName, array $medias) {
 
     $page = $this->getSession()->getPage();
 
