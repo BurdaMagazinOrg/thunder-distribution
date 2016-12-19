@@ -64,10 +64,10 @@ trait ThunderMediaTestTrait {
    *   Name of gallery.
    * @param string $fieldName
    *   Field name.
-   * @param string $medias
+   * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, $medias) {
+  public function createGallery($name, $fieldName, array $medias) {
 
     $page = $this->getSession()->getPage();
 
