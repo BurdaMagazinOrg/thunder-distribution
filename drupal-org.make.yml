@@ -167,6 +167,12 @@ projects:
     type: "module"
     version: "1.0-alpha2"
 
+  shariff:
+    type: "module"
+    version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/2837982_2.patch"
+
   simple_sitemap:
     type: "module"
     version: "2.8"
@@ -231,6 +237,13 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/dinbror/blazy/archive/1.8.2.zip"
+
+  shariff_lib:
+    type: "library"
+    directory_name: "shariff"
+    download:
+      type: "get"
+      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
 
   slick_lib:
     type: "library"
