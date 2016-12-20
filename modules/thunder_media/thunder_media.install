@@ -302,7 +302,7 @@ function thunder_media_update_8010() {
     if (empty($config->getOriginal())) {
       $updateLogger->warning(t('Unable to set responsive image style for field "@configName".', ['@configName' => $configName]));
     }
-    elseif (isset($checkConfig[$configName]) && DiffArray::diffAssocRecursive($checkConfig, $config->getOriginal())) {
+    elseif (isset($checkConfig[$configName]) && DiffArray::diffAssocRecursive($checkConfig[$configName], $config->getOriginal())) {
       $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
     }
     else {
