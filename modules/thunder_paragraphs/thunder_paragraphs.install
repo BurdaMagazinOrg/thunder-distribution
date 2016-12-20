@@ -17,7 +17,7 @@ function thunder_paragraphs_update_8001() {
   // Config for Gallery paragraph field from display.
   $formDisplayConfig['content']['field_media']['type'] = 'inline_entity_form_simple';
   $formDisplayConfig['content']['field_media']['settings']['form_mode'] = 'default';
-  $formDisplayConfig['content']['field_media']['settings']['third_party_settings'] = [];
+  $formDisplayConfig['content']['field_media']['third_party_settings'] = [];
   $configsToUpdate['core.entity_form_display.paragraph.gallery.default'] = $formDisplayConfig;
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
@@ -29,7 +29,8 @@ function thunder_paragraphs_update_8001() {
 
   // Check that gallery paragraph uses complex widget.
   $configGalleryParagraph = $configFactory->getEditable('core.entity_form_display.paragraph.gallery.default');
-  if ($configGalleryParagraph->get('content.field_media.type') !== 'inline_entity_form_complex') {
+  $configGalleryField = $configFactory->get('field.field.paragraph.gallery.field_media');
+  if ($configGalleryParagraph->get('content.field_media.type') !== 'inline_entity_form_complex' || empty($configGalleryField)) {
     $updateLogger->warning('Unable to update Gallery paragraph.');
   }
   else {
