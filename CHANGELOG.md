@@ -1,7 +1,40 @@
 # Change Log
 
-## [8.1.0-rc3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc3) 2016-12-01
-[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc2...8.x-1.0-rc3)
+## [8.1.0-rc5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc5) 2016-12-01
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc4...8.x-1.0-rc5)
+
+rc4 introduced a bug where part of the configuration could be invalid after updating under some circumstances. This release just fixes this update bug.
+If you already upgraded to rc4 you can check if your update has the problem by exporting your configuration (do a drush config-export) and checking if the following files in the config directory are valid:
+
+- entity_browser.browser.gallery_browser.yml
+- entity_browser.browser.multiple_image_browser.yml
+
+I you do not have these files, it is ok, if you have them open them and check that they do not look like this:
+
+entity_browser.browser.gallery_browser.yml
+
+```
+display_configuration:
+  auto_open: true
+```
+
+entity_browser.browser.multiple_image_browser.yml
+
+```
+widgets:
+  7d7f8f45-f628-48a3-84a8-c962c73f39e8:
+    settings:
+      auto_select: true
+  89532aea-140d-4b9e-96f4-2aa489c095cb:
+    settings:
+      auto_select: true
+```
+
+As you can see, those configurations would be incomplete. If your Files look similar to the other entity_browser.browser.* config files, everything is fine.
+  
+
+## [8.1.0-rc4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc4) 2016-12-01
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc2...8.x-1.0-rc4)
 
 Test improvements
 - Added tests for SEO functionality (Metatag, Sitemap)
