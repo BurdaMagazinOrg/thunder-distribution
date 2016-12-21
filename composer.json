@@ -27,6 +27,10 @@
     {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
     }
   ],
   "extra": {
@@ -69,6 +73,7 @@
     "burdamagazinorg/nexx_integration": "^8.0",
     "composer/installers": "^1.0",
     "cweagans/composer-patches": "~1.0",
+    "drupal/access_unpublished": "^1.0",
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
     "drupal/better_normalizers": "dev-1.x",
@@ -100,11 +105,13 @@
     "drupal/metatag": "^1.0",
     "drupal/paragraphs": "1.0",
     "drupal/pathauto": "^1.0",
+    "drupal/responsive_preview": "^1.0",
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
     "drupal/simple_sitemap": "2.6",
     "drupal/slick": "^1.0",
     "drupal/slick_media": "^1.0",
+    "drupal/thunder_admin": "dev-8.x-1.x",
     "drupal/token": "^1.0",
     "drupal/video_embed_field": "^1.0",
     "drupal/views_load_more": "dev-1.x",

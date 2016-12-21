@@ -2,6 +2,10 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1.0-alpha2"
+
   admin_toolbar:
     type: "module"
     version: "1.18"
@@ -149,6 +153,10 @@ projects:
     type: "module"
     version: "1.0-beta1"
 
+  responsive_preview:
+    type: "module"
+    version: "1.0-alpha2"
+
   riddle_marketplace:
     type: "module"
     version: "1.0-alpha5"
@@ -168,6 +176,12 @@ projects:
   slick_media:
     type: "module"
     version: "1.0-beta6"
+
+  thunder_admin:
+    type: "theme"
+    download:
+      url: "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
+      tag: "8.x-1.0.1"
 
   token:
     type: "module"

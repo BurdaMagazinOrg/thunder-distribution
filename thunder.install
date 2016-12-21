@@ -285,3 +285,23 @@ function thunder_update_8006() {
 
   return $updateLogger->outputHtml();
 }
+
+/**
+ * Installs the responsive_preview module.
+ */
+function thunder_update_8101() {
+
+  \Drupal::service('module_installer')->install([
+    'responsive_preview',
+  ]);
+}
+
+/**
+ * Installs the access_unpublished module.
+ */
+function thunder_update_8102() {
+
+  \Drupal::service('module_installer')->install([
+    'access_unpublished',
+  ]);
+}
