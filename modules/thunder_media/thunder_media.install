@@ -5,6 +5,7 @@
  * Contains.
  */
 
+use \Drupal\Component\Utility\DiffArray;
 use \Drupal\Component\Utility\NestedArray;
 use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
@@ -145,8 +146,13 @@ function thunder_media_update_8006() {
   $configsToUpdate['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
   $configsToUpdate['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
 
+  // Ensure that defined widgets exist, in other case wrong configuration could
+  // be generated.
+  $checkConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['uuid'] = '7d7f8f45-f628-48a3-84a8-c962c73f39e8';
+  $checkConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['uuid'] = '89532aea-140d-4b9e-96f4-2aa489c095cb';
+
   \Drupal::service('thunder_media.updater')
-    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate);
+    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate, $checkConfig);
 }
 
 /**
@@ -286,12 +292,18 @@ function thunder_media_update_8010() {
   $configsToUpdate['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['width'] = 938;
   $configsToUpdate['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 527;
 
+  // List of configurations that should be checked for existence.
+  $checkConfig['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['uuid'] = '21ef239e-0d92-4fcc-84fc-17f4da42ae2f';
+
   foreach ($configsToUpdate as $configName => $newConfig) {
     /** @var \Drupal\Core\Config\Config $paragraphConfig */
     $config = $configFactory->getEditable($configName);
 
     if (empty($config->getOriginal())) {
       $updateLogger->warning(t('Unable to set responsive image style for field "@configName".', ['@configName' => $configName]));
+    }
+    elseif (isset($checkConfig[$configName]) && DiffArray::diffAssocRecursive($checkConfig[$configName], $config->getOriginal())) {
+      $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
     }
     else {
       $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
@@ -305,10 +317,12 @@ function thunder_media_update_8010() {
   ]);
 
   try {
-    \Drupal::service('config_update.config_update')->import('responsive_image_style', 'media_image');
-    \Drupal::service('config_update.config_update')->import('image_style', 'media_image_tablet');
-    \Drupal::service('config_update.config_update')->import('image_style', 'media_image_mobile');
-    \Drupal::service('config_update.config_update')->import('slick', 'thunder_gallery');
+    $configUpdater = \Drupal::service('config_update.config_update');
+
+    $configUpdater->import('responsive_image_style', 'media_image');
+    $configUpdater->import('image_style', 'media_image_tablet');
+    $configUpdater->import('image_style', 'media_image_mobile');
+    $configUpdater->import('slick', 'thunder_gallery');
   }
   catch (\Exception $e) {
     $message = t('Responsive image styles was not created.');
