@@ -59,6 +59,11 @@ class Updater {
 
     $config = $ebConfig->get();
 
+    // Check that configuration exists before executing update.
+    if (empty($config)) {
+      return FALSE;
+    }
+
     if (!empty($oldConfiguration) && DiffArray::diffAssocRecursive($oldConfiguration, $config)) {
       return FALSE;
     }
