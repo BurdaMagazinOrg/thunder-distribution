@@ -1,0 +1,14 @@
+thunder_1to1_1:
+    '#title': 'Update to Thunder 1.1'
+    '#description': '<p>We have lots of cool stuff for you in this release</p>'
+    install_configure1:
+        '#title': 'Installation and configuration of Drupal core'
+        '#description': '<p>Prepare for installation, run the installation script, and take the steps that should be done after the installation script has completed.</p><p>asdas</p>'
+        handbook_page: { '#text': 'Installation Guide', '#url': 'http://drupal.org/documentation/install' }
+thunder_1to1_2:
+    '#title': 'Update to Thunder 1.2'
+    '#description': '<p>We have lots of cool stuff for you in this release</p>'
+    install_configure2:
+        '#title': 'Installation and configuration of Drupal core'
+        '#description': '<p>Prepare for installation, run the installation script, and take the steps that should be done after the installation script has completed.</p><p>asdas</p>'
+        handbook_page: { '#text': 'Installation Guide', '#url': 'http://drupal.org/documentation/install' }

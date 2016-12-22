@@ -29,6 +29,10 @@ projects:
     type: "module"
     version: "1.0-rc1"
 
+  checklistapi:
+    type: "module"
+    version: "1.2"
+
   config_update:
     type: "module"
     version: "1.2"
