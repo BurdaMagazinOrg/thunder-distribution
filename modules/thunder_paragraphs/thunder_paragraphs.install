@@ -16,13 +16,30 @@ function thunder_paragraphs_update_8001() {
   // List of expected configurations, to ensure it's provided by our configs.
   $expectedConfigs['field.field.paragraph.gallery.field_media']['required'] = FALSE;
   $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['type'] = 'inline_entity_form_complex';
+  $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['settings']['allow_existing'] = TRUE;
+  $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['settings']['allow_new'] = TRUE;
+  $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['settings']['match_operator'] = 'CONTAINS';
   $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['third_party_settings']['entity_browser_entity_form']['entity_browser_id'] = 'gallery_browser';
 
   // Config for Gallery paragraph field and field from display.
   $newConfigs['field.field.paragraph.gallery.field_media']['required'] = TRUE;
   $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['type'] = 'inline_entity_form_simple';
   $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['settings']['form_mode'] = 'default';
-  $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['third_party_settings'] = [];
+
+  // Configurations that will be overwritten without nested merging.
+  $forcedConfigs['core.entity_form_display.paragraph.gallery.default'] = [
+    [
+      'key_path' => ['content', 'field_media', 'third_party_settings'],
+      'value' => [],
+    ],
+  ];
+
+  // Configurations that will be removed.
+  $obsoleteConfigs['core.entity_form_display.paragraph.gallery.default'] = [
+    ['content', 'field_media', 'settings', 'allow_existing'],
+    ['content', 'field_media', 'settings', 'allow_new'],
+    ['content', 'field_media', 'settings', 'match_operator'],
+  ];
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
   $updateLogger = \Drupal::service('logger.thunder_update');
@@ -41,7 +58,23 @@ function thunder_paragraphs_update_8001() {
       $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
     }
     else {
-      $config->setData(NestedArray::mergeDeep($configData, $newConfig));
+      $mergedConfig = NestedArray::mergeDeep($configData, $newConfig);
+
+      // Remove obsolite configurations.
+      if (isset($obsoleteConfigs[$configName])) {
+        foreach ($obsoleteConfigs[$configName] as $keyPath) {
+          NestedArray::unsetValue($mergedConfig, $keyPath);
+        }
+      }
+
+      // Set exact values for nested arrays.
+      if (isset($forcedConfigs[$configName])) {
+        foreach ($forcedConfigs[$configName] as $forcedValue) {
+          NestedArray::unsetValue($mergedConfig, $forcedValue['key_path'], $forcedValue['value']);
+        }
+      }
+
+      $config->setData($mergedConfig);
       $config->save();
     }
   }

@@ -173,8 +173,8 @@ function thunder_media_update_8006() {
  */
 function thunder_media_update_8007() {
   // List of configurations that should be checked for existence.
-  $expectedConfig['content']['field_url']['settings']['width'] = '480';
-  $expectedConfig['content']['field_url']['settings']['height'] = '640';
+  $expectedConfig['content']['field_url']['settings']['width'] = 480;
+  $expectedConfig['content']['field_url']['settings']['height'] = 640;
 
   // New configuration that should be applied.
   $newConfig['content']['field_url']['settings']['width'] = NULL;
@@ -368,4 +368,41 @@ function thunder_media_update_8011() {
     }
     $config->save();
   }
+}
+
+/**
+ * Change image media preview image style to medium image style.
+ */
+function thunder_media_update_8012() {
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_image']['settings']['preview_image_style'] = 'thumbnail';
+
+  // New configuration that should be applied.
+  $newConfig['content']['field_image']['settings']['preview_image_style'] = 'medium';
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  // Execute update of config with additional validation of existing config.
+  $updateExecuted = \Drupal::service('thunder_media.updater')
+    ->updateConfig('core.entity_form_display.media.image.default', $newConfig, $expectedConfig);
+
+  // Log result of update.
+  if ($updateExecuted) {
+    $updateLogger->info(t('Preview image style for media image is successfully updated.'));
+  }
+  else {
+    $updateLogger->warning(t('Preview image style for media image is skipped.'));
+  }
+
+  // Out-put collected update log.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
