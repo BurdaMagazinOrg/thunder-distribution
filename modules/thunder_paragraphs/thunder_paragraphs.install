@@ -60,7 +60,7 @@ function thunder_paragraphs_update_8001() {
     else {
       $mergedConfig = NestedArray::mergeDeep($configData, $newConfig);
 
-      // Remove obsolite configurations.
+      // Remove obsolete configurations.
       if (isset($obsoleteConfigs[$configName])) {
         foreach ($obsoleteConfigs[$configName] as $keyPath) {
           NestedArray::unsetValue($mergedConfig, $keyPath);
