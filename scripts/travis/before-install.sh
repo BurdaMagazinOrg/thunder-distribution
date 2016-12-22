@@ -6,7 +6,11 @@ drush_download_thunder() {
 
     mkdir -p $DOWNLOAD_PATH
     cd $DOWNLOAD_PATH
-    drush dl thunder --drupal-project-rename="docroot" -y
+    # WARNING: Should be reverted before merge of branch!
+    # Testing of update from RC2 on Travis CI.
+    drush dl thunder-8.x-1.0-rc2 --drupal-project-rename="docroot" -y
+
+#    drush dl thunder --drupal-project-rename="docroot" -y
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
