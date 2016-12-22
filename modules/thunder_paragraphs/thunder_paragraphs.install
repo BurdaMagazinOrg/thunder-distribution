@@ -5,7 +5,8 @@
  * Contains update hooks for Thunder Paragraphs module.
  */
 
-use Drupal\Component\Utility\NestedArray;
+use \Drupal\Component\Utility\DiffArray;
+use \Drupal\Component\Utility\NestedArray;
 
 /**
  * Change gallery paragraph to use simple inline form widget.
@@ -24,11 +25,11 @@ function thunder_paragraphs_update_8001() {
   $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['third_party_settings'] = [];
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger = \Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = Drupal::service('config.factory');
+  $configFactory = \Drupal::service('config.factory');
 
   foreach ($newConfigs as $configName => $newConfig) {
     /** @var \Drupal\Core\Config\Config $paragraphConfig */
