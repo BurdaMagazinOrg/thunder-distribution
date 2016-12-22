@@ -5,9 +5,6 @@
  * Contains.
  */
 
-use \Drupal\Component\Utility\DiffArray;
-use \Drupal\Component\Utility\NestedArray;
-use \Drupal\image\Entity\ImageStyle;
 use \Drupal\views\Entity\View;
 use \Drupal\entity_browser\Entity\EntityBrowser;
 
@@ -29,20 +26,17 @@ function thunder_media_update_8001() {
  */
 function thunder_media_update_8002() {
 
-  $imageStyle = ImageStyle::load('media_thumbnail');
-  if ($imageStyle) {
-    /** @var \Drupal\image\ConfigurableImageEffectBase $effect */
-    foreach ($imageStyle->getEffects() as $effect) {
-      $config = $effect->getConfiguration();
-      if ($config['id'] == 'focal_point_scale_and_crop' && $config['data']['width'] == 241 && $config['data']['height'] == 138) {
-        $config['data']['width'] = 182;
-        $config['data']['height'] = 104;
-        $effect->setConfiguration($config);
-      }
-    }
+  // List of configurations that should be checked for existence.
+  $expectedConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['width'] = 241;
+  $expectedConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['height'] = 138;
+  $expectedConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['id'] = 'focal_point_scale_and_crop';
 
-    $imageStyle->save();
-  }
+  // New configuration that should be applied.
+  $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['width'] = 182;
+  $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['height'] = 104;
+
+  \Drupal::service('thunder_media.updater')
+    ->updateConfig('image.style.media_thumbnail', $newConfig, $expectedConfig);
 }
 
 /**
@@ -89,10 +83,19 @@ function thunder_media_update_8003() {
  * Enable auto_open for gallery browser.
  */
 function thunder_media_update_8004() {
+  // List of configurations that should be checked for existence. We are trying
+  // to ensure, that active display settings are provided by our configuration.
+  $expectedConfig['display_configuration']['width'] = '1070';
+  $expectedConfig['display_configuration']['height'] = '';
+  $expectedConfig['display_configuration']['link_text'] = 'Select entities';
+
+  // This option is introduced with new version of entity browser module, so
+  // it didn't exist before, because of that it's not possible to check
+  // existing configuration value for this property.
   $configsToUpdate['display_configuration']['auto_open'] = TRUE;
 
   \Drupal::service('thunder_media.updater')
-    ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate);
+    ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate, $expectedConfig);
 }
 
 /**
@@ -103,17 +106,21 @@ function thunder_media_update_8005() {
   $updateLogger = Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
-  $oldConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
-  $oldConfig['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
-  $oldConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+  // List of expected configuration for listed entity browsers.
+  $expectedConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+  $expectedConfig['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
+  $expectedConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
 
-  $configsToUpdate['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'png gif jpg jpeg';
-  $configsToUpdate['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'png gif jpg jpeg';
-  $configsToUpdate['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'png gif jpg jpeg';
+  // New configuration for entity browsers that should be applied.
+  $newConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'png gif jpg jpeg';
+  $newConfig['image_browser']['widgets']['e6bbb585-adb6-4023-aece-e73d893491c9']['settings']['extensions'] = 'png gif jpg jpeg';
+  $newConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'png gif jpg jpeg';
 
-  foreach ($configsToUpdate as $browser => $configuration) {
+  foreach ($newConfig as $browser => $configuration) {
 
-    if (\Drupal::service('thunder_media.updater')->updateEntityBrowserConfig($browser, $configuration, $oldConfig[$browser])) {
+    if (\Drupal::service('thunder_media.updater')
+      ->updateEntityBrowserConfig($browser, $configuration, $expectedConfig[$browser])
+    ) {
 
       $message = t('Image extensions filtering for "@configName" has been updated.', [
         '@configName' => 'entity_browser.browser.' . $browser,
@@ -144,29 +151,37 @@ function thunder_media_update_8005() {
  * Enable auto_select on multiple_image_browser.
  */
 function thunder_media_update_8006() {
-  $configsToUpdate['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
-  $configsToUpdate['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
-
   // Ensure that defined widgets exist, in other case wrong configuration could
-  // be generated.
-  $checkConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['uuid'] = '7d7f8f45-f628-48a3-84a8-c962c73f39e8';
-  $checkConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['uuid'] = '89532aea-140d-4b9e-96f4-2aa489c095cb';
+  // be generated. It's not possible to check for existing value of updated
+  // configuration, because it's introduced with new entity browser
+  // functionality for auto select of entities in view and dropzonejs widgets.
+  // We are checking only that widgets previously provided by configuration are
+  // still exist and only they will be updated.
+  $expectedConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['uuid'] = '7d7f8f45-f628-48a3-84a8-c962c73f39e8';
+  $expectedConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['uuid'] = '89532aea-140d-4b9e-96f4-2aa489c095cb';
+
+  // New configuration that should be applied.
+  $newConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
+  $newConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
 
   \Drupal::service('thunder_media.updater')
-    ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate, $checkConfig);
+    ->updateEntityBrowserConfig('multiple_image_browser', $newConfig, $expectedConfig);
 }
 
 /**
  * Make instagrams responsive.
  */
 function thunder_media_update_8007() {
-  $config = \Drupal::configFactory()->getEditable('core.entity_view_display.media.instagram.default');
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_url']['settings']['width'] = '480';
+  $expectedConfig['content']['field_url']['settings']['height'] = '640';
 
-  if ($config && !empty($config->get('content.field_url.settings'))) {
-    $config->set('content.field_url.settings.width', NULL);
-    $config->set('content.field_url.settings.height', NULL);
-    $config->save();
-  }
+  // New configuration that should be applied.
+  $newConfig['content']['field_url']['settings']['width'] = NULL;
+  $newConfig['content']['field_url']['settings']['height'] = NULL;
+
+  \Drupal::service('thunder_media.updater')
+    ->updateConfig('core.entity_view_display.media.instagram.default', $newConfig, $expectedConfig);
 }
 
 /**
@@ -175,37 +190,38 @@ function thunder_media_update_8007() {
 function thunder_media_update_8008() {
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger = \Drupal::service('logger.thunder_update');
+
+  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
+  $mediaUpdater = \Drupal::service('thunder_media.updater');
 
   \Drupal::service('module_installer')->install([
     'config_update',
   ]);
 
+  // List of expected configuration for listed entity browser views.
+  $expectedConfig['image_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'media_thumbnail';
+  $expectedConfig['media_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'media_thumbnail';
+  $expectedConfig['gallery_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'media_thumbnail';
+
+  // New configuration for entity browser views that should be applied.
+  $newConfig['image_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'entity_browser_thumbnail';
+  $newConfig['media_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'entity_browser_thumbnail';
+  $newConfig['gallery_browser']['display']['default']['display_options']['fields']['thumbnail__target_id']['settings']['image_style'] = 'entity_browser_thumbnail';
+
   try {
-    \Drupal::service('config_update.config_update')->import('image_style', 'entity_browser_thumbnail');
+    \Drupal::service('config_update.config_update')
+      ->import('image_style', 'entity_browser_thumbnail');
 
     $message = t('New image style entity_browser_thumbnail created.');
     $updateLogger->info($message);
 
-    $browsers = ['image_browser', 'media_browser', 'gallery_browser'];
-
-    foreach ($browsers as $browser) {
-
-      $config = \Drupal::configFactory()->getEditable('views.view.' . $browser);
-
-      if ($config) {
-
-        $key = 'display.default.display_options.fields.thumbnail__target_id.settings.image_style';
-
-        if ($config->get($key) == 'media_thumbnail') {
-          $config->set($key, 'entity_browser_thumbnail');
-          $config->save();
-
-          $message = t('@browser is now using image style entity_browser_thumbnail.', [
-            '@browser' => $browser,
-          ]);
-          $updateLogger->info($message);
-        }
+    foreach ($newConfig as $view => $configuration) {
+      if ($mediaUpdater->updateConfig('views.view.' . $view, $configuration, $expectedConfig[$view])) {
+        $message = t('View "@view" is now using image style entity_browser_thumbnail.', [
+          '@view' => $view,
+        ]);
+        $updateLogger->info($message);
       }
     }
   }
@@ -228,6 +244,11 @@ function thunder_media_update_8008() {
  * Set required fields for Image and Video bundles.
  */
 function thunder_media_update_8009() {
+
+  // List of expected configurations that should be checked.
+  $expectedConfig['field.field.media.image.field_image']['required'] = FALSE;
+  $expectedConfig['field.field.media.video.field_media_video_embed_field']['required'] = FALSE;
+
   // Config for required Video and Image media fields.
   $configsToUpdate['field.field.media.image.field_image']['required'] = TRUE;
   $configsToUpdate['field.field.media.video.field_media_video_embed_field']['required'] = TRUE;
@@ -236,20 +257,13 @@ function thunder_media_update_8009() {
   $updateLogger = Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = Drupal::service('config.factory');
+  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
+  $mediaUpdater = \Drupal::service('thunder_media.updater');
 
   // Check that gallery paragraph uses complex widget.
   foreach ($configsToUpdate as $configName => $newConfig) {
-    /** @var \Drupal\Core\Config\Config $paragraphConfig */
-    $config = $configFactory->getEditable($configName);
-
-    if (empty($config->getOriginal())) {
+    if (!$mediaUpdater->updateConfig($configName, $newConfig, $expectedConfig[$configName])) {
       $updateLogger->warning(t('Unable to set field "@configName" as required.', ['@configName' => $configName]));
-    }
-    else {
-      $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
-      $config->save();
     }
   }
 
@@ -270,47 +284,8 @@ function thunder_media_update_8010() {
   $updateLogger = Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = Drupal::service('config.factory');
-
-  if (\Drupal::moduleHandler()->moduleExists('blazy')
-    && \Drupal::moduleHandler()->moduleExists('responsive_image')) {
-
-    $config = $configFactory->getEditable('blazy.settings');
-    if ($config) {
-      $config->set('responsive_image', TRUE);
-      $config->save();
-      $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
-    }
-  }
-
-  // Config for required Video and Image media fields.
-  $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['image_style'] = '';
-  $configsToUpdate['core.entity_view_display.media.image.default']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
-  $configsToUpdate['core.entity_view_display.media.gallery.default']['content']['field_media_images']['settings']['optionset'] = 'thunder_gallery';
-  $configsToUpdate['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['image_style'] = '';
-  $configsToUpdate['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
-  $configsToUpdate['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['width'] = 938;
-  $configsToUpdate['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 527;
-
-  // List of configurations that should be checked for existence.
-  $checkConfig['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['uuid'] = '21ef239e-0d92-4fcc-84fc-17f4da42ae2f';
-
-  foreach ($configsToUpdate as $configName => $newConfig) {
-    /** @var \Drupal\Core\Config\Config $paragraphConfig */
-    $config = $configFactory->getEditable($configName);
-
-    if (empty($config->getOriginal())) {
-      $updateLogger->warning(t('Unable to set responsive image style for field "@configName".', ['@configName' => $configName]));
-    }
-    elseif (isset($checkConfig[$configName]) && DiffArray::diffAssocRecursive($checkConfig[$configName], $config->getOriginal())) {
-      $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
-    }
-    else {
-      $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
-      $config->save();
-    }
-  }
+  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
+  $mediaUpdater = \Drupal::service('thunder_media.updater');
 
   // Import image styles.
   \Drupal::service('module_installer')->install([
@@ -329,6 +304,43 @@ function thunder_media_update_8010() {
     $message = t('Responsive image styles was not created.');
 
     $updateLogger->warning($message);
+  }
+
+  // Expected settings for blazy module.
+  $expectedBlazySettings['responsive_image'] = FALSE;
+
+  // New settings for blazy module.
+  $newBlazySettings['responsive_image'] = TRUE;
+
+  if (\Drupal::moduleHandler()->moduleExists('blazy')
+    && \Drupal::moduleHandler()->moduleExists('responsive_image')
+    && $mediaUpdater->updateConfig('blazy.settings', $newBlazySettings, $expectedBlazySettings)
+  ) {
+    $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
+  }
+
+  // Expected configurations for required Video and Image media fields.
+  $expectedConfigs['core.entity_view_display.media.image.default']['content']['field_image']['settings']['image_style'] = 'media_image';
+  $expectedConfigs['core.entity_view_display.media.image.default']['content']['field_image']['settings']['responsive_image_style'] = '';
+  $expectedConfigs['core.entity_view_display.media.gallery.default']['content']['field_media_images']['settings']['optionset'] = 'default';
+  $expectedConfigs['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['image_style'] = 'gallery';
+  $expectedConfigs['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['responsive_image_style'] = '';
+  $expectedConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['width'] = 925;
+  $expectedConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 520;
+
+  // Config for required Video and Image media fields.
+  $newConfigs['core.entity_view_display.media.image.default']['content']['field_image']['settings']['image_style'] = '';
+  $newConfigs['core.entity_view_display.media.image.default']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
+  $newConfigs['core.entity_view_display.media.gallery.default']['content']['field_media_images']['settings']['optionset'] = 'thunder_gallery';
+  $newConfigs['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['image_style'] = '';
+  $newConfigs['core.entity_view_display.media.image.slick']['content']['field_image']['settings']['responsive_image_style'] = 'media_image';
+  $newConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['width'] = 938;
+  $newConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 527;
+
+  foreach ($newConfigs as $configName => $newConfig) {
+    if (!$mediaUpdater->updateConfig($configName, $newConfig, $expectedConfigs[$configName])) {
+      $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
+    }
   }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {

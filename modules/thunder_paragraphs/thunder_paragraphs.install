@@ -11,14 +11,17 @@ use Drupal\Component\Utility\NestedArray;
  * Change gallery paragraph to use simple inline form widget.
  */
 function thunder_paragraphs_update_8001() {
-  // Config for Gallery paragraph field.
-  $configsToUpdate['field.field.paragraph.gallery.field_media']['required'] = TRUE;
 
-  // Config for Gallery paragraph field from display.
-  $formDisplayConfig['content']['field_media']['type'] = 'inline_entity_form_simple';
-  $formDisplayConfig['content']['field_media']['settings']['form_mode'] = 'default';
-  $formDisplayConfig['content']['field_media']['third_party_settings'] = [];
-  $configsToUpdate['core.entity_form_display.paragraph.gallery.default'] = $formDisplayConfig;
+  // List of expected configurations, to ensure it's provided by our configs.
+  $expectedConfigs['field.field.paragraph.gallery.field_media']['required'] = FALSE;
+  $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['type'] = 'inline_entity_form_complex';
+  $expectedConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['third_party_settings']['entity_browser_entity_form']['entity_browser_id'] = 'gallery_browser';
+
+  // Config for Gallery paragraph field and field from display.
+  $newConfigs['field.field.paragraph.gallery.field_media']['required'] = TRUE;
+  $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['type'] = 'inline_entity_form_simple';
+  $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['settings']['form_mode'] = 'default';
+  $newConfigs['core.entity_form_display.paragraph.gallery.default']['content']['field_media']['third_party_settings'] = [];
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
   $updateLogger = Drupal::service('logger.thunder_update');
@@ -27,23 +30,22 @@ function thunder_paragraphs_update_8001() {
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
   $configFactory = Drupal::service('config.factory');
 
-  // Check that gallery paragraph uses complex widget.
-  $configGalleryParagraph = $configFactory->getEditable('core.entity_form_display.paragraph.gallery.default');
-  $configGalleryField = $configFactory->get('field.field.paragraph.gallery.field_media');
-  if ($configGalleryParagraph->get('content.field_media.type') !== 'inline_entity_form_complex' || empty($configGalleryField)) {
-    $updateLogger->warning('Unable to update Gallery paragraph.');
-  }
-  else {
-    foreach ($configsToUpdate as $configName => $newConfig) {
-      /** @var \Drupal\Core\Config\Config $paragraphConfig */
-      $config = $configFactory->getEditable($configName);
+  foreach ($newConfigs as $configName => $newConfig) {
+    /** @var \Drupal\Core\Config\Config $paragraphConfig */
+    $config = $configFactory->getEditable($configName);
+    $configData = $config->get();
 
-      $config->setData(NestedArray::mergeDeep($config->get(), $newConfig));
+    // Check that configuration exists before executing update.
+    if (empty($configData) || DiffArray::diffAssocRecursive($expectedConfigs[$configName], $configData)) {
+      $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
+    }
+    else {
+      $config->setData(NestedArray::mergeDeep($configData, $newConfig));
       $config->save();
     }
-
-    $updateLogger->info('Gallery paragraph is updated.');
   }
+
+  $updateLogger->info('Gallery paragraph is updated.');
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
