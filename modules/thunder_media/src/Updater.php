@@ -96,6 +96,8 @@ class Updater {
 
     $config->setData(NestedArray::mergeDeep($configData, $configuration));
     $config->save();
+
+    return TRUE;
   }
 
   /**
