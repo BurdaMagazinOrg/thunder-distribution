@@ -33,7 +33,7 @@ third_party_settings:
         description: ''
         required_fields: true
         id: ''
-        classes: article-teaser
+        classes: 'content-form__form-section article-teaser'
     group_paragraphs:
       children:
         - field_paragraphs
@@ -43,9 +43,10 @@ third_party_settings:
       format_type: fieldset
       format_settings:
         label: Paragraphs
+        description: ''
         required_fields: true
         id: ''
-        classes: paragraphs-container
+        classes: 'content-form__form-section paragraphs-container'
     group_basis:
       children:
         - field_channel
@@ -56,10 +57,11 @@ third_party_settings:
       weight: 3
       format_type: fieldset
       format_settings:
-        id: ''
-        classes: ''
+        label: Basis
         description: ''
         required_fields: true
+        id: ''
+        classes: content-form__form-section
       label: Basis
 id: node.article.default
 targetEntityType: node
