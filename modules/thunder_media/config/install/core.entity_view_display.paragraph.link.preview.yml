@@ -1,0 +1,31 @@
+uuid: 1b017460-bd98-4e93-aab8-e12968c237fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.link.field_link
+    - paragraphs.paragraphs_type.link
+  module:
+    - link
+_core:
+  default_config_hash: QKtrAF4gpYDrigYZQcMJFvrXgz9IcpfzLH_plo4toNU
+id: paragraph.link.preview
+targetEntityType: paragraph
+bundle: link
+mode: preview
+content:
+  field_link:
+    type: link_separate
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true
