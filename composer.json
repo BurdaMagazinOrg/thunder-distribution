@@ -52,9 +52,6 @@
       "drupal/entity_browser": {
         "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_20.patch"
       },
-      "drupal/linkit": {
-        "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
-      },
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
@@ -90,7 +87,7 @@
     "drupal/inline_entity_form": "^1.0",
     "drupal/ivw_integration": "^1.0",
     "drupal/libraries": "dev-3.x",
-    "drupal/linkit": "4.1",
+    "drupal/linkit": "^4.0",
     "drupal/media_entity": "1.6",
     "drupal/media_entity_instagram": "1.2",
     "drupal/media_entity_image": "^1.0",
@@ -102,7 +99,7 @@
     "drupal/pathauto": "^1.0",
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
-    "drupal/simple_sitemap": "2.6",
+    "drupal/simple_sitemap": "^2.0",
     "drupal/slick": "1.0-beta5",
     "drupal/slick_media": "1.0-beta6",
     "drupal/token": "^1.0",
