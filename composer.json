@@ -110,7 +110,7 @@
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
     "drupal/simple_sitemap": "^2.0",
-    "drupal/shariff": "^1.0",
+    "drupal/shariff": "1.1",
     "drupal/slick": "1.0-beta5",
     "drupal/slick_media": "1.0-beta6",
     "drupal/thunder_admin": "dev-8.x-1.x",
