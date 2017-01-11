@@ -63,7 +63,7 @@
         "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
       },
       "drupal/shariff": {
-        "Add libraries support": "https://www.drupal.org/files/issues/2837982_2.patch"
+        "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch"
       }
     }
   },

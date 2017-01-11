@@ -169,9 +169,7 @@ projects:
 
   shariff:
     type: "module"
-    version: "1.0"
-    patch:
-      - "https://www.drupal.org/files/issues/2837982_2.patch"
+    version: "1.1"
 
   simple_sitemap:
     type: "module"
