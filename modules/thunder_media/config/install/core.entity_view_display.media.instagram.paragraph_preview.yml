@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.instagram.field_url
+    - media_entity.bundle.instagram
+  module:
+    - media_entity_instagram
+id: media.instagram.paragraph_preview
+targetEntityType: media
+bundle: instagram
+mode: paragraph_preview
+content:
+  field_url:
+    type: instagram_embed
+    weight: 0
+    label: hidden
+    settings:
+      width: 150
+      height: 90
+    third_party_settings: {  }
+  name:
+    type: string
+    weight: 1
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  thumbnail: true
+  uid: true

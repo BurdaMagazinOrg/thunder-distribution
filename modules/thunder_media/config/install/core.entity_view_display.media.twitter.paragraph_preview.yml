@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.twitter.field_url
+    - media_entity.bundle.twitter
+  module:
+    - media_entity_twitter
+id: media.twitter.paragraph_preview
+targetEntityType: media
+bundle: twitter
+mode: paragraph_preview
+content:
+  field_url:
+    type: twitter_embed
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string
+    weight: 1
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  thumbnail: true
+  uid: true
