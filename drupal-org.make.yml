@@ -102,9 +102,7 @@ projects:
 
   linkit:
     type: "module"
-    version: "4.1"
-    patch:
-      - "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
+    version: "4.2"
 
   media_entity:
     type: "module"
@@ -136,11 +134,11 @@ projects:
 
   metatag:
     type: "module"
-    version: "1.0-beta11"
+    version: "1.0-beta12"
 
   nexx_integration:
     type: "module"
-    version: "1.5"
+    version: "1.6"
 
   paragraphs:
     type: "module"
@@ -167,7 +165,7 @@ projects:
 
   simple_sitemap:
     type: "module"
-    version: "2.6"
+    version: "2.8"
 
   slick:
     type: "module"
@@ -185,7 +183,7 @@ projects:
 
   token:
     type: "module"
-    version: "1.0-beta2"
+    version: "1.0-rc1"
 
   harbourmaster:
     type: "module"
