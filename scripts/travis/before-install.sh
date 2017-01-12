@@ -38,7 +38,9 @@ yes '' | pecl install imagick
 
 # Install the PECL YAML extension for strict parsing. yes is used to
 # acknowledge all prompts.
-yes '' | pecl install yaml
+if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then yes '' | pecl install yaml; fi;
+if [[ $TRAVIS_PHP_VERSION = '7.*' ]] ; then yes '' | pecl install yaml-2.0.0; fi;
+
 
 # Set MySQL Options
 mysql -e 'SET GLOBAL wait_timeout = 5400;'
