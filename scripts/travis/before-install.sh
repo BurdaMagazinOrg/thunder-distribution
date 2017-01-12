@@ -34,7 +34,11 @@ drush dl drupalorg_drush-7.x
 drush verify-makefile
 
 # install image magick
-printf "\n" | pecl install imagick
+yes '' | pecl install imagick
+
+# Install the PECL YAML extension for strict parsing. yes is used to
+# acknowledge all prompts.
+yes '' | pecl install yaml
 
 # Set MySQL Options
 mysql -e 'SET GLOBAL wait_timeout = 5400;'
