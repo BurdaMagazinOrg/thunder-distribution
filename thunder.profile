@@ -231,3 +231,12 @@ function thunder_page_attachments(array &$attachments) {
     }
   }
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function thunder_toolbar_alter(&$items) {
+  if (!empty($items['admin_toolbar_tools'])) {
+    $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
+  }
+}
