@@ -1,5 +1,5 @@
 name: 'Thunder Article'
-description: Provide content related configs and code for thunder.
+description: 'Provide content related configs and code for thunder.'
 type: module
 core: 8.x
 dependencies:
