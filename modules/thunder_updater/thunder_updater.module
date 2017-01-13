@@ -10,10 +10,6 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_checklistapi_checklist_info().
- *
- * Defines a checklist based on
- * @link http://buytaert.net/drupal-learning-curve Dries Buytaert's Drupal learning curve @endlink
- * .
  */
 function thunder_updater_checklistapi_checklist_info() {
 

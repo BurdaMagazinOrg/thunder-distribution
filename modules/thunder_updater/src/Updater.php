@@ -1,11 +1,12 @@
 <?php
 
-namespace Drupal\thunder_media;
+namespace Drupal\thunder_updater;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
+use Drupal\checklistapi\ChecklistapiChecklist;
 
 /**
  * Helper class to update configuration.
@@ -90,6 +91,34 @@ class Updater {
       $entityBrowserConfig->set($browser, $storage);
     }
     return TRUE;
+  }
+
+  /**
+   * Checks one bulletpoint on a checklist.
+   *
+   * @param string $name
+   *   Name of the bulletpoint.
+   */
+  public function checkListPoint($name) {
+
+    /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
+    $thunderUpdaterConfig = $this->configFactory
+      ->getEditable('checklistapi.progress.thunder_updater');
+
+    if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$name")) {
+
+      $user = \Drupal::currentUser()->id();
+
+      $thunderUpdaterConfig
+        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$name", [
+          '#completed' => time(),
+          '#uid' => $user,
+        ])
+        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#completed_items") + 1)
+        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', time())
+        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
+        ->save();
+    }
   }
 
 }
