@@ -449,3 +449,21 @@ function thunder_media_update_8013() {
   // Output collected update log for UI update script.
   return $updateLogger->outputHtml();
 }
+
+/*** 81xx Thunder Media update patches ***/
+
+/**
+ * Remove "Language" filter from media browsers.
+ */
+function thunder_media_update_8101() {
+  $browsers = ['image_browser', 'media_browser'];
+
+  foreach ($browsers as $browser) {
+    /** @var \Drupal\views\Entity\View $view */
+    $view = View::load($browser);
+    if (!empty($view) && !empty($view->getDisplay('default')['display_options']['filters']['langcode'])) {
+      unset($view->getDisplay('default')['display_options']['filters']['langcode']);
+      $view->save();
+    }
+  }
+}
