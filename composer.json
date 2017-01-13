@@ -76,7 +76,7 @@
     "drupal/better_normalizers": "dev-1.x",
     "drupal/blazy": "1.0-beta5",
     "drupal/breakpoint_js_settings": "^1.0",
-    "drupal/checklistapi": "^8.0",
+    "drupal/checklistapi": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
     "drupal/crop": "^1.0",

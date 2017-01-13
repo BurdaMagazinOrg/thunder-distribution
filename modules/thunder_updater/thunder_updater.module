@@ -68,11 +68,16 @@ function thunder_updater_toolbar() {
         '#title' => t('Pending Thunder updates'),
         '#url' => Url::fromRoute($checklist->getRouteName()),
         '#attributes' => array(
-          'class' => array('toolbar-icon', 'toolbar-icon-system-admin-reports'),
+          'class' => array('toolbar-icon', 'toolbar-icon-thunder-updater'),
           'aria-pressed' => 'false',
         ),
       ),
       '#weight' => 500,
+      '#attached' => [
+        'library' => [
+          'thunder_updater/toolbar-button',
+        ],
+      ],
     );
   }
   return $items;
