@@ -124,7 +124,7 @@ class Updater {
   /**
    * Checks all the bulletpoints on a checklist.
    */
-  public function checkAllListPoint($status = TRUE) {
+  public function checkAllListPoints($status = TRUE) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -152,7 +152,7 @@ class Updater {
 
           if ($status) {
             $thunderUpdaterConfig
-              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$itemName", [
+              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName", [
                 '#completed' => time(),
                 '#uid' => \Drupal::currentUser()->id(),
               ]);
@@ -161,7 +161,7 @@ class Updater {
           }
           else {
             $thunderUpdaterConfig
-              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$itemName", 0);
+              ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName");
           }
         }
       };

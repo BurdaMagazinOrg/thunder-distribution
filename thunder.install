@@ -315,5 +315,5 @@ function thunder_update_8103() {
     'thunder_updater',
   ]);
 
-  \Drupal::service('thunder_updater')->checkAllListPoint(FALSE);
+  \Drupal::service('thunder_updater')->checkAllListPoints(FALSE);
 }
