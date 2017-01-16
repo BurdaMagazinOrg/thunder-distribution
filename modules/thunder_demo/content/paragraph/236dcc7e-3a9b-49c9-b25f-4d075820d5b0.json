@@ -4,21 +4,21 @@
             "href": ""
         },
         "type": {
-            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/media"
+            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/video"
         },
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/uid": [
             {
                 "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/revision_uid": [
             {
                 "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/field_media": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/field_video": [
             {
-                "href": "http:\/\/default\/media\/2?_format=hal_json"
+                "href": "http:\/\/default\/video\/2?_format=hal_json"
             }
         ]
     },
@@ -39,11 +39,11 @@
     ],
     "type": [
         {
-            "target_id": "media"
+            "target_id": "video"
         }
     ],
     "_embedded": {
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/uid": [
             {
                 "_links": {
                     "self": {
@@ -60,7 +60,7 @@
                 ]
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/revision_uid": [
             {
                 "_links": {
                     "self": {
@@ -77,14 +77,14 @@
                 ]
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/field_media": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/video\/field_video": [
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/media\/2?_format=hal_json"
+                        "href": "http:\/\/default\/video\/2?_format=hal_json"
                     },
                     "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+                        "href": "http:\/\/drupal.org\/rest\/type\/video\/video"
                     }
                 },
                 "uuid": [

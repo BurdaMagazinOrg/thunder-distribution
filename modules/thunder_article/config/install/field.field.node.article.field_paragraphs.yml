@@ -5,12 +5,13 @@ dependencies:
     - field.storage.node.field_paragraphs
     - node.type.article
     - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.instagram
     - paragraphs.paragraphs_type.link
-    - paragraphs.paragraphs_type.media
     - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.twitter
+    - paragraphs.paragraphs_type.video
   module:
     - entity_reference_revisions
 id: node.article.field_paragraphs
@@ -29,11 +30,12 @@ settings:
     target_bundles:
       text: text
       quote: quote
-      media: media
       link: link
       instagram: instagram
       gallery: gallery
       twitter: twitter
+      image: image
+      video: video
     target_bundles_drag_drop:
       text:
         enabled: true
@@ -42,8 +44,8 @@ settings:
         enabled: true
         weight: 3
       media:
-        enabled: true
         weight: 4
+        enabled: false
       link:
         enabled: true
         weight: 6
@@ -56,4 +58,10 @@ settings:
       twitter:
         enabled: true
         weight: 10
+      image:
+        enabled: true
+        weight: 11
+      video:
+        enabled: true
+        weight: 18
 field_type: entity_reference_revisions
