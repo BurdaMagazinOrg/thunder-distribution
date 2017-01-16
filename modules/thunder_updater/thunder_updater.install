@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Thunder_updater.module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function thunder_updater_install() {
+
+  \Drupal::service('thunder_updater')->checkAllListPoint();
+}

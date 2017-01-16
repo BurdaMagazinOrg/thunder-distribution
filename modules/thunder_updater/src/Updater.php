@@ -121,4 +121,55 @@ class Updater {
     }
   }
 
+  /**
+   * Checks all the bulletpoints on a checklist.
+   */
+  public function checkAllListPoint($status = TRUE) {
+
+    /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
+    $thunderUpdaterConfig = $this->configFactory
+      ->getEditable('checklistapi.progress.thunder_updater');
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', time())
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', \Drupal::currentUser()
+        ->id());
+
+    $checklist = checklistapi_checklist_load('thunder_updater');
+
+    $items = 0;
+
+    foreach ($checklist->items as $versionItems) {
+      foreach ($versionItems as $itemName => $item) {
+
+        $exclude = [
+          '#title',
+          '#description',
+          '#weight',
+        ];
+
+        if (!in_array($itemName, $exclude)) {
+
+          if ($status) {
+            $thunderUpdaterConfig
+              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$itemName", [
+                '#completed' => time(),
+                '#uid' => \Drupal::currentUser()->id(),
+              ]);
+
+            $items++;
+          }
+          else {
+            $thunderUpdaterConfig
+              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$itemName", 0);
+          }
+        }
+      };
+    }
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $items)
+      ->save();
+  }
+
 }

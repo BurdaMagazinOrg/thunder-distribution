@@ -10,7 +10,6 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\checklistapi\ChecklistapiChecklist;
 
 /**
  * Install the thunder installation profile.
@@ -316,13 +315,5 @@ function thunder_update_8103() {
     'thunder_updater',
   ]);
 
-  /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
-  $thunderUpdaterConfig = \Drupal::configFactory()
-    ->getEditable('checklistapi.progress.thunder_updater');
-
-  $thunderUpdaterConfig
-    ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', 0)
-    ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', time())
-    ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', \Drupal::currentUser()->id())
-    ->save();
+  \Drupal::service('thunder_updater')->checkAllListPoint(FALSE);
 }
