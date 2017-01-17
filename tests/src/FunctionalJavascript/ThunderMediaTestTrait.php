@@ -47,8 +47,11 @@ trait ThunderMediaTestTrait {
 
       $page->pressButton('Use selected');
     }
-    else {
-      $page->pressButton('Select entities');
+    elseif ($entityBrowser == 'image_browser') {
+      $page->pressButton('Select image');
+    }
+    elseif ($entityBrowser == 'video_browser') {
+      $page->pressButton('Select video');
     }
 
     $this->getSession()->switchToIFrame();

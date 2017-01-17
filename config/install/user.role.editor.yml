@@ -43,7 +43,6 @@ permissions:
   37: 'edit terms in tags'
   38: 'access toolbar'
   40: 'access image_browser entity browser pages'
-  41: 'access media_browser entity browser pages'
   42: 'access multiple_image_browser entity browser pages'
   43: 'access media overview'
   44: 'create media'
@@ -54,3 +53,4 @@ permissions:
   49: 'view unpublished terms in channel'
   50: 'view unpublished terms in tags'
   51: 'access responsive preview'
+  52: 'access video_browser entity browser pages'

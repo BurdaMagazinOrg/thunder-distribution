@@ -34,8 +34,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    // Add Media Image Paragraph.
-    $this->addMediaParagraph(static::$paragraphsField, ['media:5']);
+    // Add Image Paragraph.
+    $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
