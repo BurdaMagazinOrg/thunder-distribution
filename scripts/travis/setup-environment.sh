@@ -23,8 +23,6 @@ else
     TEST_UPDATE=""
 fi
 
-# WARNING: Should be reverted before merge of branch!
-TEST_UPDATE="true"
 export TEST_UPDATE;
 
 # base path for update tests
