@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
+    - entity_browser.browser.video_browser
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   module:
@@ -15,7 +15,7 @@ content:
   field_video:
     weight: 0
     settings:
-      entity_browser: image_browser
+      entity_browser: video_browser
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
