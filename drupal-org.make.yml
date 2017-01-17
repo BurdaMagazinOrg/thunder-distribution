@@ -19,7 +19,9 @@ projects:
 
   blazy:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-beta6"
+    patch:
+      - "https://www.drupal.org/files/issues/blazy-vanilla-settings-2841316.patch"
 
   breakpoint_js_settings:
     type: "module"
@@ -161,11 +163,11 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-beta6"
 
   slick_media:
     type: "module"
-    version: "1.0-beta6"
+    version: "1.0-beta7"
 
   token:
     type: "module"
@@ -187,7 +189,7 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta4"
+      tag: "8.x-1.0-beta5"
 
   video_embed_field:
     type: "module"
