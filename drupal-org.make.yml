@@ -46,7 +46,7 @@ projects:
     version: "1.0-alpha3"
     patch:
       - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch"
-      - "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
+      - "https://www.drupal.org/files/issues/2823670_17.patch"
 
   entity:
     type: "module"
@@ -54,9 +54,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-beta3"
-    patch:
-      - "https://www.drupal.org/files/issues/2822009_39.patch"
+    version: "1.0-beta4"
 
   entity_reference_revisions:
     type: "module"
