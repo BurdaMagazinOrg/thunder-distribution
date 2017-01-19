@@ -88,6 +88,7 @@ projects[scheduler][version] = 1.0-alpha2
 projects[shariff][type] = module
 projects[shariff][version] = 1.1
 projects[shariff][patch][] = https://www.drupal.org/files/issues/2842631.patch
+projects[shariff][patch][] = https://www.drupal.org/files/issues/2845000_2.patch
 projects[simple_sitemap][type] = module
 projects[simple_sitemap][version] = 2.8
 projects[slick][type] = module

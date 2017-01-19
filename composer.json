@@ -63,7 +63,8 @@
         "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
       },
       "drupal/shariff": {
-        "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch"
+        "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
+        "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_2.patch"
       }
     }
   },
