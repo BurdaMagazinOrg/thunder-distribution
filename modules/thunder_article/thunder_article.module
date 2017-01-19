@@ -39,5 +39,6 @@ function _thunder_article_form_alter_helper(array &$form, FormStateInterface $fo
  */
 function thunder_article_entity_type_alter(array &$entity_types) {
   /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  $entity_types['node']->setFormClass('default', 'Drupal\thunder_article\ThunderNodeForm');
   $entity_types['node']->setFormClass('edit', 'Drupal\thunder_article\ThunderNodeForm');
 }

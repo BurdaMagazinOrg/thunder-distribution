@@ -19,7 +19,7 @@ class ThunderNodeForm extends NodeForm {
     if ($element['publish']['#access'] && \Drupal::currentUser()->hasPermission('administer nodes')) {
       $element['save_continue'] = $element['publish'];
       $element['save_continue']['#value'] = t('Save and continue');
-      $element['save_continue']['#weight'] = $element['publish']['#weight'] - 1;
+      $element['save_continue']['#weight'] = min($element['publish']['#weight'], $element['unpublish']['#weight']) - 1;
     }
 
     return $element;
