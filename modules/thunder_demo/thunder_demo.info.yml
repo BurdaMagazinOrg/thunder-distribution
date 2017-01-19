@@ -8,3 +8,4 @@ dependencies:
   - better_normalizers
   - default_content
   - tour
+  - help
