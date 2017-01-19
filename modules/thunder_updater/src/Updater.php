@@ -115,13 +115,16 @@ class Updater {
           ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
             '#completed' => time(),
             '#uid' => $user,
-          ])
-          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#completed_items") + 1)
-          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
-          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
+          ]);
+
       }
     }
-    $thunderUpdaterConfig->save();
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
+      ->save();
   }
 
   /**
@@ -142,8 +145,6 @@ class Updater {
 
     $checklist = checklistapi_checklist_load('thunder_updater');
 
-    $items = 0;
-
     $exclude = [
       '#title',
       '#description',
@@ -159,8 +160,6 @@ class Updater {
                 '#completed' => $time,
                 '#uid' => $user,
               ]);
-
-            $items++;
           }
           else {
             $thunderUpdaterConfig
@@ -171,7 +170,7 @@ class Updater {
     }
 
     $thunderUpdaterConfig
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $items)
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->save();
   }
 
