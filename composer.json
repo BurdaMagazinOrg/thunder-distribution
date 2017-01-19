@@ -63,7 +63,7 @@
         "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
       },
       "drupal/checklistapi": {
-            "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-2.patch"
+            "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
       }
     }
   },
