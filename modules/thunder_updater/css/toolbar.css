@@ -8,5 +8,5 @@
 .toolbar-bar .toolbar-icon-thunder-updater:before,
 .toolbar-bar .toolbar-icon-thunder-updater:active:before,
 .toolbar-bar .toolbar-icon-thunder-updater.active:before {
-  background-image: url(../files/images/hand-o-up.svg);
+  background-image: url(../files/images/wrench.svg);
 }
