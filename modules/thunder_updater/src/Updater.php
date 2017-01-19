@@ -94,31 +94,34 @@ class Updater {
   }
 
   /**
-   * Checks one bulletpoint on a checklist.
+   * Checks an array of bulletpoints on a checklist.
    *
-   * @param string $name
-   *   Name of the bulletpoint.
+   * @param array $names
+   *   Array of the bulletpoints.
    */
-  public function checkListPoint($name) {
+  public function checkListPoints(array $names) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
-    if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$name")) {
+    $user = \Drupal::currentUser()->id();
+    $time = time();
 
-      $user = \Drupal::currentUser()->id();
+    foreach ($names as $name) {
+      if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
 
-      $thunderUpdaterConfig
-        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".$name", [
-          '#completed' => time(),
-          '#uid' => $user,
-        ])
-        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#completed_items") + 1)
-        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', time())
-        ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
-        ->save();
+        $thunderUpdaterConfig
+          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
+            '#completed' => time(),
+            '#uid' => $user,
+          ])
+          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', $thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#completed_items") + 1)
+          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
+      }
     }
+    $thunderUpdaterConfig->save();
   }
 
   /**
@@ -130,31 +133,31 @@ class Updater {
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
+    $user = \Drupal::currentUser()->id();
+    $time = time();
+
     $thunderUpdaterConfig
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', time())
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', \Drupal::currentUser()
-        ->id());
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
 
     $checklist = checklistapi_checklist_load('thunder_updater');
 
     $items = 0;
 
+    $exclude = [
+      '#title',
+      '#description',
+      '#weight',
+    ];
+
     foreach ($checklist->items as $versionItems) {
       foreach ($versionItems as $itemName => $item) {
-
-        $exclude = [
-          '#title',
-          '#description',
-          '#weight',
-        ];
-
         if (!in_array($itemName, $exclude)) {
-
           if ($status) {
             $thunderUpdaterConfig
               ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName", [
-                '#completed' => time(),
-                '#uid' => \Drupal::currentUser()->id(),
+                '#completed' => $time,
+                '#uid' => $user,
               ]);
 
             $items++;

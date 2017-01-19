@@ -26,7 +26,7 @@ function thunder_updater_checklistapi_checklist_info() {
     if ($key == '#url') {
       $value = Url::fromUri($value);
     }
-    if ($key == '#title' || $key == '#description' || $key == '#text') {
+    elseif (in_array($key, ['#title', '#description', '#weight'])) {
       // @codingStandardsIgnoreStart
       $value = t($value);
       // @codingStandardsIgnoreEnd
