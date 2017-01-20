@@ -318,7 +318,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/' . $articleId . '/edit');
 
     // Publish article.
-    $this->clickArticleSave(2);
+    $this->clickArticleSave(3);
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
