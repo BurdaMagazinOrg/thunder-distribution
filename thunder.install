@@ -316,4 +316,20 @@ function thunder_update_8103() {
   ]);
 
   \Drupal::service('thunder_updater')->checkAllListPoints(FALSE);
+
+  $updates = [
+    'v1_1__responsive_preview' => 'responsive_preview',
+    'v1_1__access_unpublished' => 'access_unpublished',
+  ];
+
+  $successful = [];
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  foreach ($updates as $update => $module) {
+    if ($moduleInstaller->install([$module])) {
+      $successful[] = $update;
+    }
+  }
+  \Drupal::service('thunder_updater')->checkListPoints($successful);
+
 }
