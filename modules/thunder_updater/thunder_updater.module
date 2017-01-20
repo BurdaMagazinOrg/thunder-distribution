@@ -29,7 +29,12 @@ function thunder_updater_checklistapi_checklist_info() {
         $value = Url::fromUri($value);
       }
       else {
-        $value = Url::fromUserInput($value);
+        try {
+          $value = Url::fromUserInput($value);
+        }
+        catch (\Exception $e) {
+          $value = '';
+        }
       }
     }
     elseif (in_array($key, ['#title', '#description', '#weight'])) {
