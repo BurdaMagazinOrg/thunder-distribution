@@ -1,0 +1,14 @@
+{
+  "name": "drupal/thunder_updater",
+  "type": "drupal-module",
+  "description": "Thunder Updater",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/thunder_updater",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/thunder_updater",
+    "source": "http://cgit.drupalcode.org/thunder_updater"
+  },
+  "require": { }
+}

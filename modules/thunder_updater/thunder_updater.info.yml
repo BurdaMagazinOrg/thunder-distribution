@@ -1,0 +1,7 @@
+name: Thunder Updater
+type: module
+description: Thunder Updater
+core: 8.x
+package: Thunder
+dependencies:
+  - config_update

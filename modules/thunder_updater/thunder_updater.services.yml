@@ -1,0 +1,26 @@
+services:
+  thunder_updater.config_diff:
+    class: Drupal\thunder_updater\UpdaterConfigDiffer
+    arguments: ['@string_translation']
+
+  thunder_updater.logger:
+    parent: logger.channel_base
+    arguments: ['thunder-updater']
+
+  thunder_updater.patch_handler:
+    class: Drupal\thunder_updater\UpdaterPatchHandler
+    arguments: ['@file_system', '@module_handler']
+
+  thunder_updater.merge_storage:
+    class: Drupal\thunder_updater\UpdaterMergeStorage
+
+  thunder_updater.null_storage:
+    class: Drupal\Core\Config\NullStorage
+
+  thunder_updater.merge_config_reverter:
+    class: Drupal\config_update\ConfigReverter
+    arguments: ['@entity.manager', '@config.storage', '@thunder_updater.merge_storage', '@thunder_updater.null_storage', '@config.factory', '@event_dispatcher']
+
+  thunder_updater.updater:
+    class: Drupal\thunder_updater\Updater
+    arguments: ['@thunder_updater.logger', '@thunder_updater.config_diff', '@config_update.config_list', '@config_update.config_update', '@thunder_updater.merge_storage', '@thunder_updater.merge_config_reverter', '@thunder_updater.patch_handler']
