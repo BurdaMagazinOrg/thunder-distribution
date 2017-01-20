@@ -1,0 +1,11 @@
+v1.1:
+    '#title': 'Update to Thunder 1.1'
+    '#description': '<p>We have lots of cool stuff for you in this release</p>'
+    v1_1__responsive_preview:
+        '#title': 'Enable the Responsive Preview module'
+        '#description': "<p>The Responsive Preview module provides content and theme administrators with a quick way to preview how their site's pages will appear at narrow and wide width dimensions.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/responsive_preview' }
+    v1_1__access_unpublished:
+        '#title': 'Enable the Access unpublish module'
+        '#description': "<p>Easy to use module grants access to view unpublished content to anyone who has a unique URL and appropriate permissions.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/access_unpublished' }

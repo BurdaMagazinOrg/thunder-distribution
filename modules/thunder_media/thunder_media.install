@@ -91,7 +91,7 @@ function thunder_media_update_8003() {
 function thunder_media_update_8004() {
   $configsToUpdate['display_configuration']['auto_open'] = TRUE;
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate);
 }
 
@@ -113,7 +113,7 @@ function thunder_media_update_8005() {
 
   foreach ($configsToUpdate as $browser => $configuration) {
 
-    if (\Drupal::service('thunder_media.updater')->updateEntityBrowserConfig($browser, $configuration, $oldConfig[$browser])) {
+    if (\Drupal::service('thunder_updater')->updateEntityBrowserConfig($browser, $configuration, $oldConfig[$browser])) {
 
       $message = t('Image extensions filtering for "@configName" has been updated.', [
         '@configName' => 'entity_browser.browser.' . $browser,
@@ -152,7 +152,7 @@ function thunder_media_update_8006() {
   $checkConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['uuid'] = '7d7f8f45-f628-48a3-84a8-c962c73f39e8';
   $checkConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['uuid'] = '89532aea-140d-4b9e-96f4-2aa489c095cb';
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateEntityBrowserConfig('multiple_image_browser', $configsToUpdate, $checkConfig);
 }
 

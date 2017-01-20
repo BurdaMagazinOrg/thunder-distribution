@@ -10,6 +10,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Extension\MissingDependencyException;
 
 /**
  * Install the thunder installation profile.
@@ -304,4 +305,60 @@ function thunder_update_8102() {
   \Drupal::service('module_installer')->install([
     'access_unpublished',
   ]);
+}
+
+/**
+ * Installs the thunder_updater module.
+ */
+function thunder_update_8103() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  try {
+    if (!$moduleInstaller->install(['thunder_updater'])) {
+      $updateLogger->warning(t('Unable to enable the Thunder Updater'));
+    }
+  }
+  catch (MissingDependencyException $e) {
+    $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
+  }
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->checkAllListPoints(FALSE);
+
+  // Now Thunder updater is enabled, we can start marking checkboxes.
+  $updates = [
+    'v1_1__responsive_preview' => 'responsive_preview',
+    'v1_1__access_unpublished' => 'access_unpublished',
+  ];
+
+  $successful = [];
+
+  foreach ($updates as $update => $module) {
+    try {
+      if ($moduleInstaller->install([$module])) {
+        $successful[] = $update;
+      }
+      else {
+        $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+      }
+    }
+    catch (MissingDependencyException $e) {
+      $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+    }
+
+  }
+  $thunderUpdater->checkListPoints($successful);
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
