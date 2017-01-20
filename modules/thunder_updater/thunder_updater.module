@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Url;
+use Drupal\Component\Utility\UrlHelper;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -24,7 +25,17 @@ function thunder_updater_checklistapi_checklist_info() {
 
   array_walk_recursive($tasks, function (&$value, $key) {
     if ($key == '#url') {
-      $value = Url::fromUri($value);
+      if (UrlHelper::isExternal($value)) {
+        $value = Url::fromUri($value);
+      }
+      else {
+        try {
+          $value = Url::fromUserInput($value);
+        }
+        catch (\Exception $e) {
+          $value = '';
+        }
+      }
     }
     elseif (in_array($key, ['#title', '#description', '#weight'])) {
       // @codingStandardsIgnoreStart

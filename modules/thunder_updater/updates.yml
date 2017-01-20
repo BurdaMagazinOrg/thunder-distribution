@@ -9,3 +9,10 @@ v1.1:
         '#title': 'Enable the Access unpublish module'
         '#description': "<p>Easy to use module grants access to view unpublished content to anyone who has a unique URL and appropriate permissions.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/access_unpublished' }
+    v1_1__shariff:
+        '#title': 'Enable the Shariff module'
+        '#description': "<p>Shariff module provides theme independent social buttons.</p><p>After shariff module is enabled, you can: <ul><li>Place social buttons as a block in block layout</li><li>Add social buttons as field to your content type</li></ul> </p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/shariff' }
+        extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
+        block_page: { '#text': 'Place a block', '#url': '/admin/structure/block' }
+        content_type_page: { '#text': 'Add as a field', '#url': '/admin/structure/types/manage/article/display' }

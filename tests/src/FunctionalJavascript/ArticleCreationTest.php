@@ -94,6 +94,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Link Paragraph.
     $this->assertSession()->linkExists('Link to Thunder');
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
+
+    // Check for sharing buttons.
+    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
+    $this->assertSession()->elementExists('css', '.shariff-button.facebook');
+    $this->assertSession()->elementExists('css', '.shariff-button.googleplus');
   }
 
 }

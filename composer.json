@@ -60,7 +60,11 @@
         "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
       },
       "drupal/checklistapi": {
-            "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
+        "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
+      },
+      "drupal/shariff": {
+        "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
+        "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_2.patch"
       }
     }
   },
@@ -107,6 +111,7 @@
     "drupal/riddle_marketplace": "^1.0",
     "drupal/scheduler": "^1.0",
     "drupal/simple_sitemap": "^2.0",
+    "drupal/shariff": "1.1",
     "drupal/slick": "1.0-beta5",
     "drupal/slick_media": "1.0-beta6",
     "drupal/thunder_admin": "dev-8.x-1.x",
@@ -115,6 +120,9 @@
     "drupal/views_load_more": "dev-1.x",
     "valiton/harbourmaster": "~8.1"
   },
+    "provide": {
+        "heiseonline/shariff": "master"
+    },
   "require-dev": {
     "burdamagazinorg/thunder-dev-tools": "dev-master",
     "behat/mink-selenium2-driver": "dev-master"
