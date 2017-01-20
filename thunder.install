@@ -327,8 +327,10 @@ function thunder_update_8103() {
     $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
   }
 
-  \Drupal::service('thunder_updater')->checkAllListPoints(FALSE);
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->checkAllListPoints(FALSE);
 
+  // Now Thunder updater is enabled, we can start marking checkboxes.
   $updates = [
     'v1_1__responsive_preview' => 'responsive_preview',
     'v1_1__access_unpublished' => 'access_unpublished',
@@ -350,7 +352,7 @@ function thunder_update_8103() {
     }
 
   }
-  \Drupal::service('thunder_updater')->checkListPoints($successful);
+  $thunderUpdater->checkListPoints($successful);
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
