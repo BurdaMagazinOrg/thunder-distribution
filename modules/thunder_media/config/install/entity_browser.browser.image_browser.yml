@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - media_entity.bundle.image
+    - views.view.image_browser
   module:
     - dropzonejs_eb_widget
     - media_entity
@@ -38,7 +39,6 @@ widgets:
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
       submit_text: 'Select entities'
-      auto_select: false
     uuid: 3c3b56e6-f111-4477-b9f8-c789b68d6f15
     weight: 3
     label: 'Import image'
