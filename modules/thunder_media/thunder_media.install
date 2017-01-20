@@ -456,14 +456,47 @@ function thunder_media_update_8013() {
  * Remove "Language" filter from media browsers.
  */
 function thunder_media_update_8101() {
-  $browsers = ['image_browser', 'media_browser'];
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
 
-  foreach ($browsers as $browser) {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Perform removal of language filters from relevant views.
+  $successfulUpdate = TRUE;
+  $viewIds = ['image_browser', 'media_browser'];
+
+  foreach ($viewIds as $viewId) {
     /** @var \Drupal\views\Entity\View $view */
-    $view = View::load($browser);
+    $view = View::load($viewId);
     if (!empty($view) && !empty($view->getDisplay('default')['display_options']['filters']['langcode'])) {
       unset($view->getDisplay('default')['display_options']['filters']['langcode']);
       $view->save();
+
+      $updateLogger->info(t('Language filter for media browser view "@view_id" is removed.', ['@view_id' => $viewId]));
+    }
+    else {
+      $successfulUpdate = FALSE;
+
+      $updateLogger->warning(t('Unable to remove Language filter for media browser view: @view_id.', ['@view_id' => $viewId]));
     }
   }
+
+  // If update is successful for all views, then check entry in checklist.
+  if ($successfulUpdate) {
+    $thunderUpdater->checkListPoints(['v1_1__remove_entity_browser_language_filter']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
