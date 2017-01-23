@@ -54,42 +54,76 @@ class Updater {
    */
   public function updateEntityBrowserConfig($browser, array $configuration, array $oldConfiguration = []) {
 
-    $ebConfig = $this->configFactory
-      ->getEditable('entity_browser.browser.' . $browser);
+    if ($this->updateConfig('entity_browser.browser.' . $browser, $configuration, $oldConfiguration)) {
+      $this->updateTempConfigStorage('entity_browser', $browser, $configuration);
 
-    $config = $ebConfig->get();
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Update configuration.
+   *
+   * It's possible to provide expected configuration that should be checked,
+   * before new configuration is applied in order to ensure existing
+   * configuration is expected one.
+   *
+   * @param string $configName
+   *   Configuration name that should be updated.
+   * @param array $configuration
+   *   Configuration array to update.
+   * @param array $expectedConfiguration
+   *   Only if current config is same like old config we are updating.
+   *
+   * @return bool
+   *   Returns TRUE if update of configuration was successful.
+   */
+  public function updateConfig($configName, array $configuration, array $expectedConfiguration = []) {
+    $config = $this->configFactory->getEditable($configName);
+
+    $configData = $config->get();
 
     // Check that configuration exists before executing update.
-    if (empty($config)) {
+    if (empty($configData)) {
       return FALSE;
     }
 
-    if (!empty($oldConfiguration) && DiffArray::diffAssocRecursive($oldConfiguration, $config)) {
+    if (!empty($expectedConfiguration) && DiffArray::diffAssocRecursive($expectedConfiguration, $configData)) {
       return FALSE;
     }
 
-    $ebConfig->setData(NestedArray::mergeDeep($config, $configuration));
-    $ebConfig->save();
+    $config->setData(NestedArray::mergeDeep($configData, $configuration));
+    $config->save();
 
-    // Update entity browser edit form.
-    $entityBrowserConfig = $this->tempStoreFactory
-      ->get('entity_browser.config');
+    return TRUE;
+  }
 
-    $storage = $entityBrowserConfig->get($browser);
+  /**
+   * Update CTools edit form state.
+   *
+   * @param string $configType
+   *   Configuration type.
+   * @param string $configName
+   *   Configuration name.
+   * @param array $configuration
+   *   Configuration what should be set for CTools form.
+   */
+  protected function updateTempConfigStorage($configType, $configName, array $configuration) {
+    $entityBrowserConfig = $this->tempStoreFactory->get($configType . '.config');
+
+    $storage = $entityBrowserConfig->get($configName);
 
     if (!empty($storage)) {
-
       foreach ($configuration as $key => $value) {
-
-        $part = $storage['entity_browser']->getPluginCollections()[$key];
+        $part = $storage[$configType]->getPluginCollections()[$key];
 
         $part->setConfiguration(NestedArray::mergeDeep($part->getConfiguration(), $value));
-
       }
 
-      $entityBrowserConfig->set($browser, $storage);
+      $entityBrowserConfig->set($configName, $storage);
     }
-    return TRUE;
   }
 
 }
