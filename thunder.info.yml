@@ -45,6 +45,7 @@ dependencies:
   - thunder_article
   - thunder_media
   - thunder_taxonomy
+  - thunder_updater
 themes:
   - thunder_base
   - thunder_admin

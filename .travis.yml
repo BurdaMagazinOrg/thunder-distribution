@@ -28,7 +28,6 @@ sudo: false
 branches:
   only:
     - master
-    - /^hotfix/
     - /^8\.([0-9]+|x)\-[0-9]+\.([0-9]+|x)$/
 
 mysql:
