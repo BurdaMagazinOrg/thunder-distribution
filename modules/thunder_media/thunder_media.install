@@ -371,7 +371,7 @@ function thunder_media_update_8011() {
 }
 
 /**
- * Change image media preview image style to medium image style.
+ * Change preview image style for image media bundle to "medium" image style.
  */
 function thunder_media_update_8012() {
 
@@ -391,10 +391,52 @@ function thunder_media_update_8012() {
 
   // Log result of update.
   if ($updateExecuted) {
-    $updateLogger->info(t('Preview image style for media image is successfully updated.'));
+    $updateLogger->info(t('Preview image style for image media bundle is successfully updated.'));
   }
   else {
-    $updateLogger->warning(t('Preview image style for media image is skipped.'));
+    $updateLogger->warning(t('Unable to change preview image style for image media bundle.'));
+  }
+
+  // Output collected update log for Drush update command.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  // Output collected update log for UI update script.
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Import slick media display view configuration.
+ */
+function thunder_media_update_8013() {
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  /** @var \Drupal\Core\Config\StorageInterface $configStorage */
+  $configStorage = \Drupal::service('config.storage');
+
+  if ($configStorage->exists('core.entity_view_display.media.image.slick')) {
+    $updateLogger->info(t('Configuration already exists.'));
+  }
+  else {
+    // Enable "config_update" module.
+    \Drupal::service('module_installer')->install(['config_update']);
+
+    /** @var \Drupal\config_update\ConfigRevertInterface $configUpdater */
+    $configUpdater = \Drupal::service('config_update.config_update');
+
+    try {
+      $configUpdater->import('entity_view_display', 'media.image.slick');
+
+      $updateLogger->info(t('Configuration successfully imported.'));
+    }
+    catch (\Exception $e) {
+      $updateLogger->warning(t('Unable to import configuration: core.entity_view_display.media.image.slick.yml.'));
+    }
   }
 
   // Output collected update log for Drush update command.
