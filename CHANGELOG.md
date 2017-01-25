@@ -1,5 +1,14 @@
 # Change Log
 
+## [8.1.0-rc6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc6) 2017-01-25
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc5...8.x-1.0-rc6)
+
+This release candidate mainly improves the updater service and updates most contrib modules to the newest versions. 
+An exception to the updates are the blazy and slick modules, which do not work properly after update.
+Additionally we now use the pecl yaml extension when validating our yml files, since it is more strict then the previously 
+used Symfony component.
+lat but not least, we introduced fixed creation dates for the demo articles to prevent having articles with exactly the same creation dates.
+
 ## [8.1.0-rc5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc5) 2016-12-01
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc4...8.x-1.0-rc5)
 
