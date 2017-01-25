@@ -16,3 +16,7 @@ v1.1:
         extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
         block_page: { '#text': 'Place a block', '#url': '/admin/structure/block' }
         content_type_page: { '#text': 'Add as a field', '#url': '/admin/structure/types/manage/article/display' }
+    v1_1__remove_entity_browser_language_filter:
+        '#title': 'Remove language filter from media browsers'
+        '#description': '<p>Language filtering should be removed in views used by media browsers. Media entities don''t have relation to language and filter doesn''t have effect.</p><p>In order to do that, you should make following steps:<ol><li>Go on views administration page.</li><li>Search for view that you want to edit (fe. "Image Browser", "Media Browser").</li><li>Click <b>Edit</b> to modify view.</li><li>On view editing page under <b>FILTER CRITERIA</b> find link <b>Media: Translation language (exposed)</b> and click it.</li><li>In pop-up dialog click <b>Remove</b> in bottom action bar.</li><li>Save view changes by clicking <b>Save</b> button.</li></ol> </p><p>Repeat described process for all views you need.</p>'
+        views_page: { '#text': 'Views administration page', '#url': '/admin/structure/views' }
