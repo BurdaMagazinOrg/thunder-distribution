@@ -28,7 +28,6 @@ else
     TEST_UPDATE=""
 fi
 
-echo $TEST_UPDATE;
 export TEST_UPDATE;
 
 # base path for update tests
