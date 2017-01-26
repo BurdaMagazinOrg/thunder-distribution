@@ -32,3 +32,7 @@ v1.1:
         '#description': "<p>Provides basic revert and update functionality for other modules. We use this module in the Thunder update hooks. So this should never be disabled.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/config_update' }
         extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
+    v1_1__image_video_paragraph:
+        '#title': 'Splitting media paragraph into video and image paragraph'
+        '#description': '<p>We think for editors it is more clearer to have a seperate video and image paragraph. So we installed that in an update hook for you. You can now decide by yourselve, if you want to use them.</p>'
+        views_page: { '#text': 'Enable image and video paragraph', '#url': '/admin/structure/types/manage/article/fields/node.article.field_paragraphs' }

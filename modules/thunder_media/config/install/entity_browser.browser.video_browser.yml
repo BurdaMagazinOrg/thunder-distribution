@@ -25,7 +25,6 @@ widgets:
       view: video_browser
       view_display: entity_browser_1
       submit_text: 'Select video'
-      auto_select: false
     uuid: 3dca5e79-d9a9-40c9-b987-74f649942ef8
     weight: 1
     label: 'Select existing'
@@ -36,7 +35,6 @@ widgets:
       bundle: video
       form_mode: default
       submit_text: 'Save video'
-      auto_select: false
     uuid: c36345c9-e363-4416-af1b-67f823e39f70
     weight: 2
     label: 'Create new video'
