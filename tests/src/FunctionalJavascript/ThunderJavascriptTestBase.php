@@ -287,6 +287,10 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * Click article save option based on index of action.
    *
+   * 1 - Save and continue.
+   * 2 - Save as unpublished (default).
+   * 3 - Save and publish.
+   *
    * @param int $actionIndex
    *   Index for option that should be clicked. (by default 2)
    */
