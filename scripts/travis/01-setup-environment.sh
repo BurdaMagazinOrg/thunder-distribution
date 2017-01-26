@@ -15,18 +15,20 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
 fi
 export LOCAL_COMPOSER_VENDOR_DIR
 
+# Update tests can be forced by adding [TEST_UPDATE=true] to your commits
 TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php "${TRAVIS_COMMIT_MESSAGE}" TEST_UPDATE`;
 
-echo "php out start $TEST_UPDATE_OVERRIDE end";
-
+if [[ ${TEST_UPDATE_OVERRIDE} == "true" ]]; then
+    TEST_UPDATE="true"
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
-if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+elif [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
     TEST_UPDATE="true"
 else
     TEST_UPDATE=""
 fi
 
+echo TEST_UPDATE;
 export TEST_UPDATE;
 
 # base path for update tests
