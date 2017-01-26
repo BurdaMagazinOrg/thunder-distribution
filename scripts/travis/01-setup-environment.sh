@@ -15,9 +15,7 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
 fi
 export LOCAL_COMPOSER_VENDOR_DIR
 
-
-COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}
-TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php ${COMMIT_MESSAGE} TEST_UPDATE`;
+TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php ${TRAVIS_COMMIT_MESSAGE} TEST_UPDATE`;
 
 echo $COMMIT_MESSAGE;
 echo $TEST_UPDATE_OVERRIDE;
