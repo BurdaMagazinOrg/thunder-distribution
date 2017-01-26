@@ -17,8 +17,10 @@ export LOCAL_COMPOSER_VENDOR_DIR
 
 
 COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}
-echo $COMMIT_MESSAGE
+TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php ${COMMIT_MESSAGE} TEST_UPDATE`;
 
+echo $COMMIT_MESSAGE;
+echo $TEST_UPDATE_OVERRIDE;
 
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
