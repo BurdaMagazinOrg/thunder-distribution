@@ -15,6 +15,11 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
 fi
 export LOCAL_COMPOSER_VENDOR_DIR
 
+
+COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}
+echo COMMIT_MESSAGE
+
+
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
 if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
