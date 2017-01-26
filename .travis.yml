@@ -35,7 +35,7 @@ mysql:
   username: root
   encoding: utf8
 
-# The main functionality is divided int different scripts, each is prefixed by a number which
+# The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
