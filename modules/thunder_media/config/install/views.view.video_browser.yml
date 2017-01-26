@@ -390,19 +390,17 @@ display:
           group: 1
           exposed: false
           expose:
-            operator_id: bundle_op
-            label: Bundle
-            description: 'Filter by type'
+            operator_id: ''
+            label: ''
+            description: ''
             use_operator: false
-            operator: bundle_op
-            identifier: provider
+            operator: ''
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-            reduce: false
           is_grouped: false
           group_info:
             label: ''

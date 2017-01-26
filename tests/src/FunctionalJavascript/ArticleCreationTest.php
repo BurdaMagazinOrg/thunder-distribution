@@ -37,6 +37,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Image Paragraph.
     $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
+    // Add Video paragraph.
+    $this->addImageParagraph(static::$paragraphsField, ['media:7']);
+
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
 

@@ -32,36 +32,33 @@ settings:
       quote: quote
       link: link
       instagram: instagram
-      gallery: gallery
       twitter: twitter
+      gallery: gallery
       image: image
       video: video
     target_bundles_drag_drop:
       text:
         enabled: true
-        weight: 2
+        weight: 1
       quote:
         enabled: true
-        weight: 3
-      media:
-        weight: 4
-        enabled: false
+        weight: 2
       link:
         enabled: true
-        weight: 6
+        weight: 3
       instagram:
         enabled: true
-        weight: 8
-      gallery:
-        enabled: true
-        weight: 9
+        weight: 4
       twitter:
         enabled: true
-        weight: 10
+        weight: 5
+      gallery:
+        enabled: true
+        weight: 6
       image:
         enabled: true
-        weight: 11
+        weight: 7
       video:
         enabled: true
-        weight: 18
+        weight: 8
 field_type: entity_reference_revisions
