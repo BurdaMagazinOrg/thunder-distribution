@@ -23,8 +23,6 @@ return find_variable_in_string($argv[1], $argv[2]);
  *   The variable name.
  */
 function find_variable_in_string($string, $variable) {
-  echo "string: $string = variable: $variable" . PHP_EOL;
-
   $expression = '/\[' . $variable . '=([^\]]*)\]/';
 
   if (preg_match($expression, $string, $matches)) {
