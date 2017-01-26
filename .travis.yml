@@ -28,6 +28,7 @@ sudo: false
 branches:
   only:
     - master
+    - feature/test-type-trigger
     - /^8\.([0-9]+|x)\-[0-9]+\.([0-9]+|x)$/
 
 mysql:
@@ -35,18 +36,21 @@ mysql:
   username: root
   encoding: utf8
 
+# The main functionality is divided int different scripts, each is prefixed by a number which
+# indicates the execution order
 before_install:
-  - source ./scripts/travis/setup-environment.sh
-  - bash -x -e ./scripts/travis/before-install.sh
-  - bash -x -e ./scripts/travis/test-source-code.sh
+  - bash -e ./scripts/travis/00-keep-travis-running.sh
+  - source ./scripts/travis/01-setup-environment.sh
+  - bash -x -e ./scripts/travis/02-before-install.sh
+  - bash -x -e ./scripts/travis/03-test-source-code.sh
 install:
-  - bash -x -e ./scripts/travis/install-thunder.sh
+  - bash -x -e ./scripts/travis/04-install-thunder.sh
 
 before_script:
-  - bash -x -e ./scripts/travis/setup-tests.sh
+  - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
-  - bash -x -e ./scripts/travis/run-tests.sh
+  - bash -x -e ./scripts/travis/06-run-tests.sh
 
 deploy:
   provider: s3
