@@ -17,7 +17,7 @@ export LOCAL_COMPOSER_VENDOR_DIR
 
 
 COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}
-echo COMMIT_MESSAGE
+echo $COMMIT_MESSAGE
 
 
 # For daily cron runs, current version from Drupal will be installed
