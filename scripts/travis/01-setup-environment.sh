@@ -15,9 +15,8 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
 fi
 export LOCAL_COMPOSER_VENDOR_DIR
 
-TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php ${TRAVIS_COMMIT_MESSAGE} TEST_UPDATE`;
+TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php "${TRAVIS_COMMIT_MESSAGE}" TEST_UPDATE`;
 
-echo $COMMIT_MESSAGE;
 echo $TEST_UPDATE_OVERRIDE;
 
 # For daily cron runs, current version from Drupal will be installed
