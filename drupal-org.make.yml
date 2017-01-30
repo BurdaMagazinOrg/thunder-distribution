@@ -16,10 +16,7 @@ projects:
 
   better_normalizers:
     type: "module"
-    download:
-      url: "https://git.drupal.org/project/better_normalizers.git"
-      revision: "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
-      branch: "8.x-1.x"
+    version: "1.0-beta1"
 
   blazy:
     type: "module"
