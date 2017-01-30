@@ -1,5 +1,16 @@
 # Change Log
 
+## [8.1.0](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0) 2017-01-30
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc6...8.x-1.0)
+
+Release of thunder 8.1.0. This is almost identical to the rc6. We fixed a small css bug, and added a fixed the version for
+entity_reference_revisions to the one of rc6.
+
+See also:
+
+- [Set entity_reference_revision to a strict version](https://www.drupal.org/node/2848067#comment-11899804)
+- [Set entity_reference_revision to a strict version](https://www.drupal.org/node/2848066#comment-11899801)
+
 ## [8.1.0-rc6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc6) 2017-01-25
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc5...8.x-1.0-rc6)
 

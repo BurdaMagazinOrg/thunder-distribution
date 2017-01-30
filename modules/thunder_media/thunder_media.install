@@ -9,6 +9,37 @@ use \Drupal\views\Entity\View;
 use \Drupal\entity_browser\Entity\EntityBrowser;
 
 /**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_media_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_media'] = [
+    8002 => $installThunderUpdaterHook,
+    8003 => $installThunderUpdaterHook,
+    8004 => $installThunderUpdaterHook,
+    8005 => $installThunderUpdaterHook,
+    8006 => $installThunderUpdaterHook,
+    8007 => $installThunderUpdaterHook,
+    8008 => $installThunderUpdaterHook,
+    8009 => $installThunderUpdaterHook,
+    8010 => $installThunderUpdaterHook,
+    8011 => $installThunderUpdaterHook,
+    8012 => $installThunderUpdaterHook,
+    8013 => $installThunderUpdaterHook,
+    8101 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Rename config object.
  */
 function thunder_media_update_8001() {
