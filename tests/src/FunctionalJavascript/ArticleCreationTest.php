@@ -62,7 +62,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save as unpublished');
+    $this->clickArticleSave();
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
