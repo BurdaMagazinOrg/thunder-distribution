@@ -53,3 +53,4 @@ permissions:
   48: 'dropzone upload files'
   49: 'view unpublished terms in channel'
   50: 'view unpublished terms in tags'
+  51: 'access responsive preview'

@@ -1,11 +1,12 @@
 <?php
 
-namespace Drupal\thunder_media;
+namespace Drupal\thunder_updater;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
+use Drupal\checklistapi\ChecklistapiChecklist;
 
 /**
  * Helper class to update configuration.
@@ -124,6 +125,87 @@ class Updater {
 
       $entityBrowserConfig->set($configName, $storage);
     }
+  }
+
+  /**
+   * Checks an array of bulletpoints on a checklist.
+   *
+   * @param array $names
+   *   Array of the bulletpoints.
+   */
+  public function checkListPoints(array $names) {
+
+    /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
+    $thunderUpdaterConfig = $this->configFactory
+      ->getEditable('checklistapi.progress.thunder_updater');
+
+    $user = \Drupal::currentUser()->id();
+    $time = time();
+
+    foreach ($names as $name) {
+      if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
+
+        $thunderUpdaterConfig
+          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
+            '#completed' => time(),
+            '#uid' => $user,
+          ]);
+
+      }
+    }
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
+      ->save();
+  }
+
+  /**
+   * Checks all the bulletpoints on a checklist.
+   */
+  public function checkAllListPoints($status = TRUE) {
+
+    /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
+    $thunderUpdaterConfig = $this->configFactory
+      ->getEditable('checklistapi.progress.thunder_updater');
+
+    $user = \Drupal::currentUser()->id();
+    $time = time();
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
+
+    $checklist = checklistapi_checklist_load('thunder_updater');
+
+    $exclude = [
+      '#title',
+      '#description',
+      '#weight',
+    ];
+
+    foreach ($checklist->items as $versionItems) {
+      foreach ($versionItems as $itemName => $item) {
+        if (!in_array($itemName, $exclude)) {
+          if ($status) {
+            $thunderUpdaterConfig
+              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName", [
+                '#completed' => $time,
+                '#uid' => $user,
+              ]);
+          }
+          else {
+            $thunderUpdaterConfig
+              ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName");
+          }
+        }
+      };
+    }
+
+    $thunderUpdaterConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+      ->save();
   }
 
 }

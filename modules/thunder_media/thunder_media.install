@@ -35,7 +35,7 @@ function thunder_media_update_8002() {
   $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['width'] = 182;
   $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['height'] = 104;
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateConfig('image.style.media_thumbnail', $newConfig, $expectedConfig);
 }
 
@@ -94,7 +94,7 @@ function thunder_media_update_8004() {
   // existing configuration value for this property.
   $configsToUpdate['display_configuration']['auto_open'] = TRUE;
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate, $expectedConfig);
 }
 
@@ -118,7 +118,7 @@ function thunder_media_update_8005() {
 
   foreach ($newConfig as $browser => $configuration) {
 
-    if (\Drupal::service('thunder_media.updater')
+    if (\Drupal::service('thunder_updater')
       ->updateEntityBrowserConfig($browser, $configuration, $expectedConfig[$browser])
     ) {
 
@@ -164,7 +164,7 @@ function thunder_media_update_8006() {
   $newConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
   $newConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateEntityBrowserConfig('multiple_image_browser', $newConfig, $expectedConfig);
 }
 
@@ -180,7 +180,7 @@ function thunder_media_update_8007() {
   $newConfig['content']['field_url']['settings']['width'] = NULL;
   $newConfig['content']['field_url']['settings']['height'] = NULL;
 
-  \Drupal::service('thunder_media.updater')
+  \Drupal::service('thunder_updater')
     ->updateConfig('core.entity_view_display.media.instagram.default', $newConfig, $expectedConfig);
 }
 
@@ -193,7 +193,7 @@ function thunder_media_update_8008() {
   $updateLogger = \Drupal::service('logger.thunder_update');
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_media.updater');
+  $mediaUpdater = \Drupal::service('thunder_updater');
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -258,7 +258,7 @@ function thunder_media_update_8009() {
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_media.updater');
+  $mediaUpdater = \Drupal::service('thunder_updater');
 
   // Check that gallery paragraph uses complex widget.
   foreach ($configsToUpdate as $configName => $newConfig) {
@@ -285,7 +285,7 @@ function thunder_media_update_8010() {
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_media.updater');
+  $mediaUpdater = \Drupal::service('thunder_updater');
 
   // Import image styles.
   \Drupal::service('module_installer')->install([
@@ -386,7 +386,7 @@ function thunder_media_update_8012() {
   $updateLogger->cleanLogs();
 
   // Execute update of config with additional validation of existing config.
-  $updateExecuted = \Drupal::service('thunder_media.updater')
+  $updateExecuted = \Drupal::service('thunder_updater')
     ->updateConfig('core.entity_form_display.media.image.default', $newConfig, $expectedConfig);
 
   // Log result of update.
@@ -447,5 +447,56 @@ function thunder_media_update_8013() {
   }
 
   // Output collected update log for UI update script.
+  return $updateLogger->outputHtml();
+}
+
+/*** 81xx Thunder Media update patches ***/
+
+/**
+ * Remove "Language" filter from media browsers.
+ */
+function thunder_media_update_8101() {
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Perform removal of language filters from relevant views.
+  $successfulUpdate = TRUE;
+  $viewIds = ['image_browser', 'media_browser'];
+
+  foreach ($viewIds as $viewId) {
+    /** @var \Drupal\views\Entity\View $view */
+    $view = View::load($viewId);
+    if (!empty($view) && !empty($view->getDisplay('default')['display_options']['filters']['langcode'])) {
+      unset($view->getDisplay('default')['display_options']['filters']['langcode']);
+      $view->save();
+
+      $updateLogger->info(t('Language filter for media browser view "@view_id" is removed.', ['@view_id' => $viewId]));
+    }
+    else {
+      $successfulUpdate = FALSE;
+
+      $updateLogger->warning(t('Unable to remove Language filter for media browser view: @view_id.', ['@view_id' => $viewId]));
+    }
+  }
+
+  // If update is successful for all views, then check entry in checklist.
+  if ($successfulUpdate) {
+    $thunderUpdater->checkListPoints(['v1_1__remove_entity_browser_language_filter']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
   return $updateLogger->outputHtml();
 }

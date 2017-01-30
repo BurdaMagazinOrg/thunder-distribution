@@ -18,6 +18,7 @@ dependencies:
   - path
   - pathauto
   - scheduler
+  - shariff
   - taxonomy
   - thunder_media
   - thunder_paragraphs
