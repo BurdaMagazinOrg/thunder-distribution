@@ -1,0 +1,12 @@
+/**
+ * @file
+ *
+ * Provides style override for field image in Bartik theme.
+ */
+
+/**
+ * Field image floating override in article paragraph.
+ */
+.node .paragraph .blazy.field--type-image {
+    float: none;
+}
