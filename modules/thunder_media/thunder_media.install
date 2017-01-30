@@ -33,6 +33,7 @@ function thunder_media_update_dependencies() {
     8011 => $installThunderUpdaterHook,
     8012 => $installThunderUpdaterHook,
     8013 => $installThunderUpdaterHook,
+    8101 => $installThunderUpdaterHook,
   ];
 
   return $dependencies;
