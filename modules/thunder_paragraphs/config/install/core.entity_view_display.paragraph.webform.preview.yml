@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.webform.field_webform
+    - paragraphs.paragraphs_type.webform
+  module:
+    - webform
+id: paragraph.webform.preview
+targetEntityType: paragraph
+bundle: webform
+mode: preview
+content:
+  field_webform:
+    weight: 0
+    label: hidden
+    settings:
+      label: '[webform:title] webform'
+    third_party_settings: {  }
+    type: webform_entity_reference_link
+hidden:
+  created: true
+  uid: true

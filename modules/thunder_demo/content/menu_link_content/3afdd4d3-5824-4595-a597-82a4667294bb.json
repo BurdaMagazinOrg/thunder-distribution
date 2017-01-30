@@ -1,0 +1,72 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/admin\/structure\/menu\/item\/4\/edit?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/menu_link_content\/menu_link_content"
+        }
+    },
+    "id": [
+        {
+            "value": "4"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "3afdd4d3-5824-4595-a597-82a4667294bb"
+        }
+    ],
+    "bundle": [
+        {
+            "value": "menu_link_content"
+        }
+    ],
+    "title": [
+        {
+            "value": "Contact"
+        }
+    ],
+    "menu_name": [
+        {
+            "value": "footer"
+        }
+    ],
+    "link": [
+        {
+            "uri": "internal:\/webform\/contact",
+            "title": "",
+            "options": []
+        }
+    ],
+    "external": [
+        {
+            "value": "0"
+        }
+    ],
+    "rediscover": [
+        {
+            "value": "1"
+        }
+    ],
+    "weight": [
+        {
+            "value": "0"
+        }
+    ],
+    "expanded": [
+        {
+            "value": "0"
+        }
+    ],
+    "enabled": [
+        {
+            "value": "1"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}
