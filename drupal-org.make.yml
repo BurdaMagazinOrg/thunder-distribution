@@ -14,6 +14,14 @@ projects:
     type: "module"
     version: "1.0-beta3"
 
+  amp:
+    type: "module"
+    version: "1.0"
+
+  amptheme:
+    type: "theme"
+    version: "1.0"
+
   better_normalizers:
     type: "module"
     version: "1.0-beta2"
