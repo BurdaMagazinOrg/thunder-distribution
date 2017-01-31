@@ -1,0 +1,26 @@
+{% if label_hidden %}
+    {% if multiple %}
+        <amp-carousel{{ attributes }} layout="responsive" type="slides" width="400" height="300">
+            {% for item in items %}
+                <div{{ item.attributes }}>{{ item.content }}</div>
+            {% endfor %}
+        </amp-carousel>
+    {% else %}
+        {% for item in items %}
+            <div{{ attributes }}>{{ item.content }}</div>
+        {% endfor %}
+    {% endif %}
+{% else %}
+    <div{{ attributes }}>
+        <div{{ title_attributes }}>{{ label }}</div>
+        {% if multiple %}
+        <amp-carousel layout="responsive" type="slides">
+            {% endif %}
+            {% for item in items %}
+                <div{{ item.attributes }}>{{ item.content }}</div>
+            {% endfor %}
+            {% if multiple %}
+        </amp-carousel>
+        {% endif %}
+    </div>
+{% endif %}
