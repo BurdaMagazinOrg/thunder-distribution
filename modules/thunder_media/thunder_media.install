@@ -569,15 +569,23 @@ function thunder_media_update_8102() {
     ],
   ];
 
+  $error = FALSE;
   foreach ($imports as $type => $entities) {
     foreach ($entities as $entity) {
       try {
         $configUpdater->import($type, $entity);
       }
       catch (\Exception $e) {
+        $error = TRUE;
         $updateLogger->warning(t('Unable to import config: @type -> @entity', ['@type' => $type, '@entity' => $entity]));
       }
     }
+  }
+
+  if (!$error) {
+    /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+    $thunderUpdater = \Drupal::service('thunder_updater');
+    $thunderUpdater->checkListPoints(['v1_1__image_video_paragraph_install']);
   }
 
   // Output log result depending on channel used for update execution.
