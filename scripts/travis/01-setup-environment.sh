@@ -53,4 +53,6 @@ do
  fi
 done
 
+echo $TEST_UPDATE
+
 # Do not place any code behind this line.
