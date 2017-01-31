@@ -48,7 +48,7 @@ ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD")
 for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
 do
  VALUE=$(echo $TRAVIS_COMMIT_MESSAGE | perl -lne "/[|\[]$VARIABLE_NAME=(.+?)[|\]]/ && print \$1")
- if [ -z "$VALUE" ]; then
+ if [[ $VALUE ]]; then
     export $VARIABLE_NAME=$VALUE
  fi
 done
