@@ -7,7 +7,6 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 export THUNDER_DIST_DIR=`echo $(pwd)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
 
-
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
 if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
