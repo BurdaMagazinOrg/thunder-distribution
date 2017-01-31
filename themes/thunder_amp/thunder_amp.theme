@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Preprocess html for thunder_amp theme.
+ */
+
+/**
  * Implements hook_preprocess_HOOK() for HTML document templates.
  *
  * Example of a preprocess hook for a subtheme that could be used to change

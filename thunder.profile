@@ -232,7 +232,8 @@ function thunder_themes_installed($theme_list) {
       ->save(TRUE);
   }
   if (in_array('thunder_amp', $theme_list)) {
-    // Set AMP theme to thunder_amp, if not set, or is one of the included themes.
+    // Set AMP theme to thunder_amp,
+    // if not set, or is one of the included themes.
     $ampThemeConfig = \Drupal::configFactory()->getEditable('amp.theme');
     $ampTheme = $ampThemeConfig->get('amptheme');
     if (empty($ampTheme) || $ampTheme == 'ampsubtheme_example' || $ampTheme == 'amptheme') {
