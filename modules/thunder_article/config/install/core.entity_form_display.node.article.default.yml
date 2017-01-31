@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.image_browser
     - field.field.node.article.field_channel
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
@@ -24,31 +25,20 @@ third_party_settings:
         - field_teaser_media
         - field_teaser_text
       parent_name: ''
-      weight: 7
+      weight: 4
       label: Teaser
       format_type: fieldset
       format_settings:
+        label: Teaser
         description: ''
-        classes: ''
-        id: ''
         required_fields: true
-    group_tags:
-      parent_name: ''
-      weight: 12
-      label: Tags
-      format_type: fieldset
-      format_settings:
-        label: Tags
         id: ''
-        classes: ''
-        required_fields: true
-      children:
-        - field_tags
+        classes: article-teaser
     group_paragraphs:
       children:
         - field_paragraphs
       parent_name: ''
-      weight: 9
+      weight: 6
       label: Paragraphs
       format_type: fieldset
       format_settings:
@@ -56,6 +46,21 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: paragraphs-container
+    group_basis:
+      children:
+        - field_channel
+        - title
+        - field_seo_title
+        - field_tags
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Basis
 id: node.article.default
 targetEntityType: node
 bundle: article
@@ -63,16 +68,16 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 1
     settings: {  }
     third_party_settings: {  }
   field_channel:
     type: options_select
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
   field_meta_tags:
-    weight: 13
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
@@ -88,14 +93,14 @@ content:
     third_party_settings: {  }
   field_seo_title:
     type: string_textfield
-    weight: 3
+    weight: 4
     settings:
       size: 65
       placeholder: ''
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 10
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -111,6 +116,7 @@ content:
       open: true
       field_widget_display_settings:
         view_mode: thumbnail
+      selection_mode: selection_append
     third_party_settings: {  }
     type: entity_browser_entity_reference
   field_teaser_text:
@@ -122,38 +128,38 @@ content:
     type: string_textarea
   langcode:
     type: language_select
-    weight: 5
+    weight: 2
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 8
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 5
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 15
+    weight: 12
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 14
+    weight: 11
     settings: {  }
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 7
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -168,7 +174,7 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 16
+    weight: 13
     settings: {  }
     third_party_settings: {  }
 hidden: {  }

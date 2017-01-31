@@ -4,7 +4,11 @@
 cd ${TEST_DIR}/docroot
 
 # require Selenium2 Driver
-composer require "behat/mink-selenium2-driver"
+if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
+    composer require "behat/mink-selenium2-driver" --no-progress --working-dir ${TEST_DIR}/docroot
+elif [[ ${INSTALL_METHOD} == "composer" ]]; then
+    composer require "behat/mink-selenium2-driver" --no-progress --working-dir ${TEST_DIR}
+fi
 
 # Final cache rebuild, to make sure every code change is respected
 drush cr

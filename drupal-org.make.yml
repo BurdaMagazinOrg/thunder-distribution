@@ -2,9 +2,13 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1.0-alpha2"
+
   admin_toolbar:
     type: "module"
-    version: "1.17"
+    version: "1.18"
 
   adsense:
     type: "module"
@@ -12,22 +16,25 @@ projects:
 
   better_normalizers:
     type: "module"
-    download:
-      url: "https://git.drupal.org/project/better_normalizers.git"
-      revision: "1cd9b4b50e91f5e595eb86813611dc368227c4b6"
-      branch: "8.x-1.x"
+    version: "1.0-beta1"
 
   blazy:
     type: "module"
-    version: "1.0-beta4"
+    version: "1.0-beta5"
 
   breakpoint_js_settings:
     type: "module"
     version: "1.0-rc1"
 
+  checklistapi:
+    type: "module"
+    version: "1.3"
+    patch:
+      - "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
+
   config_update:
     type: "module"
-    version: "1.1"
+    version: "1.3"
 
   crop:
     type: "module"
@@ -43,21 +50,18 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1.0-alpha3"
     patch:
-      - "https://www.drupal.org/files/issues/add_missing_eb_widget-2813143-2.patch"
+      - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch"
+      - "https://www.drupal.org/files/issues/2823670_17.patch"
 
   entity:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1.0-alpha4"
 
   entity_browser:
     type: "module"
-    version: "1.0-alpha9"
-    patch:
-      - "https://www.drupal.org/files/issues/2802969-5.patch"
-      - "https://www.drupal.org/files/issues/2764889_31.patch"
-      - "https://www.drupal.org/files/issues/incomplete_schema_for-2812901-2.patch"
+    version: "1.0-beta4"
 
   entity_reference_revisions:
     type: "module"
@@ -70,22 +74,13 @@ projects:
       revision: "2a5210fec67a8d7f5c77a4ffffb0b49e5aa62f40"
       branch: "8.x-1.x"
 
-  features:
-    type: "module"
-    version: "3.0-rc1"
-
   field_group:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/field_group.git"
-      revision: "77c5dfa28f7a4d7880bedc1cd2accf2d5986697c"
-      branch: "8.x-1.x"
+    version: "1.0-rc6"
 
   focal_point:
     type: "module"
-    version: "1.0-beta3"
-    patch:
-      - "https://www.drupal.org/files/issues/add_image_effect_schema-2812835-3.patch"
+    version: "1.0-beta4"
 
   google_analytics:
     type: "module"
@@ -93,37 +88,34 @@ projects:
 
   inline_entity_form:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/inline_entity_form.git"
-      revision: "95b22227b926083e730870efc3e3b352b735be91"
-      branch: "8.x-1.x"
+    version: "1.0-beta1"
 
   ivw_integration:
     type: "module"
-    version: "1.0-rc3"
+    version: "1.0"
 
   libraries:
     type: "module"
     download:
       url: "http://git.drupal.org/project/libraries.git"
-      revision: "548f3c2c47596c5242e37b18000e7b2ec930f66a"
+      revision: "3ea00f23e31a5cd7cd4fed633a675f864b0b1e3c"
       branch: "8.x-3.x"
 
   linkit:
     type: "module"
-    version: "4.1"
-    patch:
-      - "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
+    version: "4.2"
 
   media_entity:
     type: "module"
-    version: "1.5"
+    version: "1.6"
     patch:
-      - "https://www.drupal.org/files/issues/add_field_formatter-2812867-3.patch"
+      - "https://www.drupal.org/files/issues/2813685-21.patch"
 
   media_entity_instagram:
     type: "module"
     version: "1.2"
+    patch:
+      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
 
   media_entity_image:
     type: "module"
@@ -135,26 +127,19 @@ projects:
 
   media_entity_twitter:
     type: "module"
-    version: "1.2"
+    version: "1.3"
 
   media_expire:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/media_expire.git"
-      revision: "2fc8008"
-      branch: "8.x-1.x"
+    version: "1.0-alpha2"
 
   metatag:
     type: "module"
-    version: "1.0-beta10"
-    patch:
-      - "https://www.drupal.org/files/issues/metatag-deactivate_drupalconsole_services_0.patch"
-      - "https://www.drupal.org/files/issues/metatag_update_8103_not-2819549-2.patch"
-      - "https://www.drupal.org/files/issues/metatag_shows-2817309-9.patch"
+    version: "1.0-beta12"
 
   nexx_integration:
     type: "module"
-    version: "1.3"
+    version: "1.6"
 
   paragraphs:
     type: "module"
@@ -165,33 +150,48 @@ projects:
 
   pathauto:
     type: "module"
-    version: "1.0-beta1"
+    version: "1.0-beta2"
+
+  responsive_preview:
+    type: "module"
+    version: "1.0-alpha2"
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1.0-alpha5"
 
   scheduler:
     type: "module"
     version: "1.0-alpha2"
 
+  shariff:
+    type: "module"
+    version: "1.1"
+    patch:
+      - "https://www.drupal.org/files/issues/2842631.patch"
+      - "https://www.drupal.org/files/issues/2845000_2.patch"
+
   simple_sitemap:
     type: "module"
-    version: "2.6"
+    version: "2.8"
 
   slick:
     type: "module"
-    version: "1.0-beta4"
-    patch:
-      - "https://www.drupal.org/files/issues/slick-centered-images.patch"
+    version: "1.0-beta5"
 
   slick_media:
     type: "module"
-    version: "1.0-beta3"
+    version: "1.0-beta6"
+
+  thunder_admin:
+    type: "theme"
+    download:
+      url: "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
+      tag: "8.x-1.0.1"
 
   token:
     type: "module"
-    version: "1.0-beta2"
+    version: "1.0-rc1"
 
   harbourmaster:
     type: "module"
@@ -203,17 +203,17 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      tag: "8.x-1.0-beta4"
+      tag: "8.x-1.0-beta5"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta4"
+      tag: "8.x-1.0-beta5"
 
   video_embed_field:
     type: "module"
-    version: "1.3"
+    version: "1.4"
 
   views_load_more:
     type: "module"
@@ -234,7 +234,14 @@ libraries:
     directory_name: "blazy"
     download:
       type: "get"
-      url: "https://github.com/dinbror/blazy/archive/1.6.2.zip"
+      url: "https://github.com/dinbror/blazy/archive/1.8.2.zip"
+
+  shariff_lib:
+    type: "library"
+    directory_name: "shariff"
+    download:
+      type: "get"
+      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
 
   slick_lib:
     type: "library"

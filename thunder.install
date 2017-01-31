@@ -7,8 +7,10 @@
 
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\User;
-use \Drupal\Core\Entity\EntityStorageException;
-use \Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Extension\MissingDependencyException;
 
 /**
  * Install the thunder installation profile.
@@ -147,4 +149,216 @@ function thunder_update_8003() {
       $field->save();
     }
   }
+}
+
+/**
+ * Require instagram and twitter url field.
+ */
+function thunder_update_8004() {
+
+  $config = FieldConfig::load('media.instagram.field_url');
+  if ($config) {
+    $config->setRequired(TRUE)->save();
+  }
+
+  $config = FieldConfig::load('media.twitter.field_url');
+  if ($config) {
+    $config->setRequired(TRUE)->save();
+  }
+}
+
+/**
+ * Add author filter to content view.
+ */
+function thunder_update_8005() {
+
+  /** @var \Drupal\views\Entity\View $view */
+  $view = View::load('content');
+
+  if (empty($view->getDisplay('default')['display_options']['filters']['uid'])) {
+
+    $uid['uid'] = array(
+      'id' => 'uid',
+      'table' => 'node_field_data',
+      'field' => 'uid',
+      'relationship' => 'none',
+      'group_type' => 'group',
+      'admin_label' => '',
+      'operator' => 'in',
+      'value' =>
+        array(),
+      'group' => 1,
+      'exposed' => TRUE,
+      'expose' =>
+        array(
+          'operator_id' => 'uid_op',
+          'label' => 'Authored by',
+          'description' => '',
+          'use_operator' => FALSE,
+          'operator' => 'uid_op',
+          'identifier' => 'uid',
+          'required' => FALSE,
+          'remember' => FALSE,
+          'multiple' => FALSE,
+          'remember_roles' =>
+            array(
+              'authenticated' => 'authenticated',
+              'anonymous' => '0',
+              'editor' => '0',
+              'seo' => '0',
+              'administrator' => '0',
+            ),
+          'reduce' => FALSE,
+        ),
+      'is_grouped' => FALSE,
+      'group_info' =>
+        array(
+          'label' => '',
+          'description' => '',
+          'identifier' => '',
+          'optional' => TRUE,
+          'widget' => 'select',
+          'multiple' => FALSE,
+          'remember' => FALSE,
+          'default_group' => 'All',
+          'default_group_multiple' =>
+            array(),
+          'group_items' =>
+            array(),
+        ),
+      'entity_type' => 'node',
+      'entity_field' => 'uid',
+      'plugin_id' => 'user_name',
+    );
+
+    $newArray = array_slice($view->getDisplay('default')['display_options']['filters'], 0, 4, TRUE) +
+      $uid +
+      array_slice($view->getDisplay('default')['display_options']['filters'], 4, NULL, TRUE);
+
+    $view->getDisplay('default')['display_options']['filters'] = $newArray;
+    $view->save();
+  }
+
+}
+
+/**
+ * Adds instagram preview mode.
+ */
+function thunder_update_8006() {
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $configs = [
+    'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
+  ];
+
+  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
+
+  // Ensure that required view mode exists.
+  if (empty($configReverter->getFromActive('entity_view_mode', 'media.thumbnail'))) {
+    $configReverter->import('entity_view_mode', 'media.thumbnail');
+  }
+
+  // Import listed configurations.
+  foreach ($configs as $entity => $ids) {
+    foreach ($ids as $id) {
+      try {
+        $configReverter->import($entity, $id);
+      }
+      catch (\Exception $e) {
+        $updateLogger->warning(t('Unable to import @entity.@id config.', ['@id' => $id, '@entity' => $entity]));
+      }
+    }
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Installs the responsive_preview module.
+ */
+function thunder_update_8101() {
+
+  \Drupal::service('module_installer')->install([
+    'responsive_preview',
+  ]);
+}
+
+/**
+ * Installs the access_unpublished module.
+ */
+function thunder_update_8102() {
+
+  \Drupal::service('module_installer')->install([
+    'access_unpublished',
+  ]);
+}
+
+/**
+ * Installs the thunder_updater module.
+ */
+function thunder_update_8103() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  try {
+    if (!$moduleInstaller->install(['thunder_updater'])) {
+      $updateLogger->warning(t('Unable to enable the Thunder Updater'));
+    }
+  }
+  catch (MissingDependencyException $e) {
+    $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
+  }
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->checkAllListPoints(FALSE);
+
+  // Now Thunder updater is enabled, we can start marking checkboxes.
+  $updates = [
+    'v1_1__responsive_preview' => 'responsive_preview',
+    'v1_1__access_unpublished' => 'access_unpublished',
+  ];
+
+  $successful = [];
+
+  foreach ($updates as $update => $module) {
+    try {
+      if ($moduleInstaller->install([$module])) {
+        $successful[] = $update;
+      }
+      else {
+        $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+      }
+    }
+    catch (MissingDependencyException $e) {
+      $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+    }
+
+  }
+  $thunderUpdater->checkListPoints($successful);
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }

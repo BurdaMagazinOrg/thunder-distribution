@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * @file
+ * Thunder_updater.module.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Component\Utility\UrlHelper;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function thunder_updater_checklistapi_checklist_info() {
+
+  $definitions = [];
+  $definitions['thunder_updater'] = [
+    '#title' => t('Thunder update instructions'),
+    '#path' => '/admin/config/development/thunder-update',
+    '#description' => t('Provides steps to keep your Thunder site up to date.'),
+  ];
+
+  $tasks = Yaml::parse(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml');
+
+  array_walk_recursive($tasks, function (&$value, $key) {
+    if ($key == '#url') {
+      if (UrlHelper::isExternal($value)) {
+        $value = Url::fromUri($value);
+      }
+      else {
+        try {
+          $value = Url::fromUserInput($value);
+        }
+        catch (\Exception $e) {
+          $value = '';
+        }
+      }
+    }
+    elseif (in_array($key, ['#title', '#description', '#weight'])) {
+      // @codingStandardsIgnoreStart
+      $value = t($value);
+      // @codingStandardsIgnoreEnd
+    }
+  });
+
+  $definitions['thunder_updater'] += array_reverse($tasks);
+
+  return $definitions;
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function thunder_updater_toolbar() {
+
+  /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */
+  $checklist = checklistapi_checklist_load('thunder_updater');
+
+  $items = [];
+  // We are varying our cache by path and by permission.
+  $items['thunder_updater'] = [
+    '#cache' => [
+      'keys' => ['toolbar'],
+    ],
+  ];
+
+  \Drupal::service('renderer')->addCacheableDependency($items['thunder_updater'], $checklist->config);
+
+  if ($checklist->getPercentComplete() != 100) {
+    $items['thunder_updater'] += array(
+      '#type' => 'toolbar_item',
+      'tab' => array(
+        '#type' => 'link',
+        '#title' => t('Pending Thunder updates'),
+        '#url' => Url::fromRoute($checklist->getRouteName()),
+        '#attributes' => array(
+          'class' => array('toolbar-icon', 'toolbar-icon-thunder-updater'),
+          'aria-pressed' => 'false',
+        ),
+      ),
+      '#weight' => 500,
+      '#attached' => [
+        'library' => [
+          'thunder_updater/toolbar-button',
+        ],
+      ],
+    );
+  }
+  return $items;
+}

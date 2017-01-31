@@ -3,6 +3,5 @@ global-styling:
   css:
     layout:
       css/thunder.css: {}
-
-
-
+      css/components/taxonomy-term.css: {}
+      css/node-image-field-fix.css: {}

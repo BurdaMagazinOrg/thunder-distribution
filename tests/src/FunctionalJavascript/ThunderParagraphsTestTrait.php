@@ -61,7 +61,7 @@ trait ThunderParagraphsTestTrait {
    * @param array $media
    *   List of media identifiers.
    */
-  public function addMediaParagraph($fieldName, $media) {
+  public function addMediaParagraph($fieldName, array $media) {
     $paragraphIndex = $this->addParagraph($fieldName, 'media');
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_media", 'media_browser', $media);
@@ -78,10 +78,8 @@ trait ThunderParagraphsTestTrait {
    * @param array $media
    *   List of media identifiers.
    */
-  public function addGalleryParagraph($fieldName, $name, $media) {
+  public function addGalleryParagraph($fieldName, $name, array $media) {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery');
-
-    $this->openIefComplex("{$fieldName}_{$paragraphIndex}_subform_field_media");
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
   }

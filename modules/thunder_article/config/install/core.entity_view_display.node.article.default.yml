@@ -37,6 +37,10 @@ content:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+  shariff_field:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_channel: true
   field_meta_tags: true

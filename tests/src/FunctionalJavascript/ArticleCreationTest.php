@@ -62,20 +62,26 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save as unpublished');
+    $this->clickArticleSave();
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
 
-    $this->assertSession()->pageTextContains('Awesome text');
-    $this->assertSession()->pageTextContains('Awesome quote');
+    // Check Media paragraph.
+    $this->assertSession()
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img', 1);
 
+    // Check Text paragraph.
+    $this->assertSession()->pageTextContains('Awesome text');
+
+    // Check Gallery paragraph. Ensure that there are 2 images in gallery.
     $this->assertSession()
-      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img');
-    $this->assertSession()
-      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//img');
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//div[contains(@class, "slick-track")]/div[not(contains(@class, "slick-cloned"))]//img', 2);
+
+    // Check Quote paragraph.
+    $this->assertSession()->pageTextContains('Awesome quote');
 
     // Check that one Instagram widget is on page.
     $this->getSession()
@@ -88,6 +94,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Link Paragraph.
     $this->assertSession()->linkExists('Link to Thunder');
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
+
+    // Check for sharing buttons.
+    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
+    $this->assertSession()->elementExists('css', '.shariff-button.facebook');
+    $this->assertSession()->elementExists('css', '.shariff-button.googleplus');
   }
 
 }

@@ -38,6 +38,61 @@ function thunder_install_tasks(&$install_state) {
 }
 
 /**
+ * Implements hook_install_tasks_alter().
+ */
+function thunder_install_tasks_alter(array &$tasks, array $install_state) {
+  $tasks['install_finished']['function'] = 'thunder_post_install_redirect';
+}
+
+/**
+ * Starts the tour after the installation.
+ *
+ * @param array $install_state
+ *   The current install state.
+ *
+ * @return array
+ *   A renderable array with a redirect header.
+ */
+function thunder_post_install_redirect(array &$install_state) {
+  install_finished($install_state);
+
+  // Clear all messages.
+  drupal_get_messages();
+
+  $success_message = t('Congratulations, you installed @drupal!', array(
+    '@drupal' => drupal_install_profile_distribution_name(),
+  ));
+  drupal_set_message($success_message);
+
+  $output = [
+    '#title' => t('Ready to rock'),
+    'info' => [
+      '#markup' => t('Congratulations, you installed Thunder! If you are not redirected in 5 seconds, <a href="@url">click here</a> to proceed to your site.', [
+        '@url' => '/?tour=1',
+      ]),
+    ],
+    '#attached' => [
+      'http_header' => [
+        ['Cache-Control', 'no-cache'],
+      ],
+    ],
+  ];
+
+  // The installer doesn't make it easy (possible?) to return a redirect
+  // response, so set a redirection META tag in the output.
+  $meta_redirect = [
+    '#tag' => 'meta',
+    '#attributes' => [
+      'http-equiv' => 'refresh',
+      'content' => '0;url=/?tour=1',
+    ],
+  ];
+  $output['#attached']['html_head'][] = [$meta_redirect, 'meta_redirect'];
+
+  return $output;
+}
+
+/**
  * Installs the thunder modules in a batch.
  *
  * @param array $install_state
@@ -46,7 +101,7 @@ function thunder_install_tasks(&$install_state) {
  * @return array
  *   A batch array to execute.
  */
-function thunder_module_install(&$install_state) {
+function thunder_module_install(array &$install_state) {
 
   $modules = $install_state['thunder_additional_modules'];
 
@@ -164,6 +219,17 @@ function thunder_themes_installed($theme_list) {
     \Drupal::configFactory()->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
+
+    // Set infinite image styles and gallery view mode.
+    \Drupal::configFactory()
+      ->getEditable('core.entity_view_display.media.image.default')
+      ->set('content.field_image.settings.image_style', 'inline_m')
+      ->set('content.field_image.settings.responsive_image_style', '')
+      ->save(TRUE);
+    \Drupal::configFactory()
+      ->getEditable('core.entity_view_display.media.gallery.default')
+      ->set('content.field_media_images.settings.view_mode', 'gallery')
+      ->save(TRUE);
   }
 }
 
@@ -218,5 +284,14 @@ function thunder_page_attachments(array &$attachments) {
       $tag = &$html_head[0];
       $tag['#attributes']['content'] = 'Drupal 8 (Thunder | http://www.thunder.org)';
     }
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function thunder_toolbar_alter(&$items) {
+  if (!empty($items['admin_toolbar_tools'])) {
+    $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
   }
 }

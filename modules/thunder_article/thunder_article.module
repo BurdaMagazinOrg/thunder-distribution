@@ -29,7 +29,16 @@ function thunder_article_form_node_article_form_alter(&$form, FormStateInterface
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The formstate object.
  */
-function _thunder_article_form_alter_helper(&$form, FormStateInterface $form_state) {
+function _thunder_article_form_alter_helper(array &$form, FormStateInterface $form_state) {
   // Add CSS file for layout optimization.
   $form['#attached']['library'][] = 'thunder_article/article_form_styling';
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function thunder_article_entity_type_alter(array &$entity_types) {
+  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  $entity_types['node']->setFormClass('default', 'Drupal\thunder_article\ThunderNodeForm');
+  $entity_types['node']->setFormClass('edit', 'Drupal\thunder_article\ThunderNodeForm');
 }

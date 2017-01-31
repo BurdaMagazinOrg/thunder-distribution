@@ -1,0 +1,4 @@
+services:
+  thunder_updater:
+    class: Drupal\thunder_updater\Updater
+    arguments: ['@user.shared_tempstore', '@config.factory']

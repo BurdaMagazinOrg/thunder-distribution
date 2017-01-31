@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: media_image_mobile
+label: 'Media Image Mobile'
+effects:
+  d279f197-6922-4491-869f-75848f9b491a:
+    uuid: d279f197-6922-4491-869f-75848f9b491a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 560
+      height: 315

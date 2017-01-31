@@ -9,7 +9,7 @@ field_name: field_seo_title
 entity_type: node
 bundle: article
 label: 'SEO Title'
-description: 'Put the major keyword to the beginning.'
+description: 'The SEO Title is used for the automatic generation of the Url. It''s best to put the major keywords at the beginning.'
 required: true
 translatable: false
 default_value: {  }

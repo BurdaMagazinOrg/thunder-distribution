@@ -4,12 +4,12 @@ dependencies:
   module:
     - focal_point
 name: media_thumbnail
-label: 'Media thumbnail (241x138)'
+label: 'Media thumbnail (182x104)'
 effects:
   8a41a5b5-469d-4918-879e-460f26e08700:
     uuid: 8a41a5b5-469d-4918-879e-460f26e08700
     id: focal_point_scale_and_crop
     weight: 1
     data:
-      width: 241
-      height: 138
+      width: 182
+      height: 104

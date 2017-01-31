@@ -6,7 +6,7 @@
 install_thunder() {
     cd $1
 
-    drush si thunder --db-url=mysql://root:@localhost/drupal -y
+    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y
     drush en simpletest -y
 }
 
@@ -32,15 +32,17 @@ drush_make_thunder() {
     rsync -a . ${TEST_DIR}/docroot/profiles/thunder --exclude docroot
 
     drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
+    composer install --working-dir=${TEST_DIR}/docroot
 }
 
 composer_create_thunder() {
     cd ${THUNDER_DIST_DIR}
-    composer create-project burdamagazinorg/thunder-infrastructure ${TEST_DIR} --stability dev --no-interaction --no-install
+    composer create-project burdamagazinorg/thunder-project ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" --no-progress
+    composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
+    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" --no-progress
 }
 
 apply_patches() {

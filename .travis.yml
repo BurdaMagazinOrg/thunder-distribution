@@ -8,12 +8,19 @@ cache:
   - "travis_selenium"
 
 php:
-  - 5.6
   - 7.0
+  - 5.6
 
 env:
   - INSTALL_METHOD=drush_make
   - INSTALL_METHOD=composer
+
+matrix:
+  exclude:
+  - php: 5.6
+    env: INSTALL_METHOD=composer
+  - php: 7.0
+    env: INSTALL_METHOD=drush_make
 
 sudo: false
 
@@ -21,7 +28,6 @@ sudo: false
 branches:
   only:
     - master
-    - /^hotfix/
     - /^8\.([0-9]+|x)\-[0-9]+\.([0-9]+|x)$/
 
 mysql:
@@ -32,7 +38,7 @@ mysql:
 before_install:
   - source ./scripts/travis/setup-environment.sh
   - bash -x -e ./scripts/travis/before-install.sh
-
+  - bash -x -e ./scripts/travis/test-source-code.sh
 install:
   - bash -x -e ./scripts/travis/install-thunder.sh
 

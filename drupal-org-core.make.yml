@@ -4,6 +4,4 @@ core: 8.x
 projects:
   drupal:
     type: core
-    version: 8.2.1
-    patch:
-      - "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"
+    version: 8.2.5
