@@ -41,18 +41,16 @@ export SELENIUM_PATH
 #
 # To override multiple variables us something like this:
 # git commit -m="Your other commit message [TEST_UPDATE=true|INSTALL_METHOD=composer]"
-
-# These are the variables, that are allowed to be overridden
-ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD")
-
-for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
-do
- VALUE=$(echo $TRAVIS_COMMIT_MESSAGE | perl -lne "/[|\[]$VARIABLE_NAME=(.+?)[|\]]/ && print \$1")
- if [[ $VALUE ]]; then
-    export $VARIABLE_NAME=$VALUE
- fi
-done
-
-echo $TEST_UPDATE
-
+if [[ ${TRAVIS_EVENT_TYPE} == "pull_request" ]]; then
+    # These are the variables, that are allowed to be overridden
+    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD")
+    COMMIT_MESSAGE=$(git log --no-merges -1 --pretty="%B")
+    for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
+    do
+        VALUE=$(echo $COMMIT_MESSAGE | perl -lne "/[|\[]$VARIABLE_NAME=(.+?)[|\]]/ && print \$1")
+        if [[ $VALUE ]]; then
+            export $VARIABLE_NAME=$VALUE
+        fi
+    done
+fi
 # Do not place any code behind this line.
