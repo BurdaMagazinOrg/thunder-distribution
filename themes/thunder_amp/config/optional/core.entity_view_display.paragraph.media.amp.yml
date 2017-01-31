@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.amp
+    - field.field.paragraph.media.field_media
+    - paragraphs.paragraphs_type.media
+id: paragraph.media.amp
+targetEntityType: paragraph
+bundle: media
+mode: amp
+content:
+  field_media:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: amp
+      link: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true
