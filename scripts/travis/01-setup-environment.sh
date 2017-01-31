@@ -15,14 +15,10 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
 fi
 export LOCAL_COMPOSER_VENDOR_DIR
 
-# Update tests can be forced by adding [TEST_UPDATE=true] to your commits
-TEST_UPDATE_OVERRIDE=`./scripts/travis/message-parser.php "${TRAVIS_COMMIT_MESSAGE}" TEST_UPDATE`;
 
-if [[ ${TEST_UPDATE_OVERRIDE} == "true" ]]; then
-    TEST_UPDATE="true"
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
-elif [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
     TEST_UPDATE="true"
 else
     TEST_UPDATE=""
@@ -38,3 +34,23 @@ export DISPLAY=:99.0
 
 SELENIUM_PATH="$PWD/travis_selenium"
 export SELENIUM_PATH
+
+# Manual overrides of environment variables by commit messages. To override a variable add something like this to
+# your commit message:
+# git commit -m="Your commit message [TEST_UPDATE=true]"
+#
+# To override multiple variables us something like this:
+# git commit -m="Your other commit message [TEST_UPDATE=true|INSTALL_METHOD=composer]"
+
+# These are the variables, that are allowed to be overridden
+ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD")
+
+for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
+do
+ VALUE=$(echo $TRAVIS_COMMIT_MESSAGE | perl -lne "/[|\[]$VARIABLE_NAME=(.+?)[|\]]/ && print \$1")
+ if [ -z "$VALUE" ]; then
+    export $VARIABLE_NAME=$VALUE
+ fi
+done
+
+# Do not place any code behind this line.
