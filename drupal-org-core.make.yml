@@ -5,5 +5,3 @@ projects:
   drupal:
     type: core
     version: 8.2.5
-    patch:
-      - "https://www.drupal.org/files/issues/make_it_possible_to-2776605-2.patch"

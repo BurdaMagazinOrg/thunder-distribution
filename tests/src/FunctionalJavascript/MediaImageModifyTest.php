@@ -86,7 +86,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and keep published');
+    $page->pressButton('Save and keep publish');
 
     // Edit media and check are fields correct.
     $this->drupalGet("media/$mediaId/edit");
