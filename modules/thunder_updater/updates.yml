@@ -24,3 +24,5 @@ v1.1:
         '#title': 'Enable the Metatag Facebook module'
         '#description': "<p>A set of meta tags specially for controlling advanced functionality with Facebook.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/metatag' }
+        extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
+        configure_page: { '#text': 'Configure module', '#url': '/admin/config/search/metatag' }
