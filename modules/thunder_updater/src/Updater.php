@@ -4,6 +4,9 @@ namespace Drupal\thunder_updater;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\thunder\ThunderUpdateLogger;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
@@ -28,16 +31,26 @@ class Updater {
   protected $tempStoreFactory;
 
   /**
+   * Module installer service.
+   *
+   * @var ModuleInstallerInterface
+   */
+  protected $moduleInstaller;
+
+  /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
    * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
    *   A temporary key-value store service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory service.
+   * @param ModuleInstallerInterface $moduleInstaller
+   *   Module installer service.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
+    $this->moduleInstaller = $moduleInstaller;
   }
 
   /**
@@ -206,6 +219,37 @@ class Updater {
     $thunderUpdaterConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->save();
+  }
+
+  /**
+   * Installs a module, checks updater checkbox and works with logger.
+   *
+   * @param array $modules
+   *   Key is name of the checkbox, value name of the module.
+   * @param ThunderUpdateLogger $updateLogger
+   *   Logger service.
+   */
+  public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
+
+    $this->checkAllListPoints(FALSE);
+
+    $successful = [];
+
+    foreach ($modules as $update => $module) {
+      try {
+        if ($this->moduleInstaller->install([$module])) {
+          $successful[] = $update;
+        }
+        else {
+          $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+        }
+      }
+      catch (MissingDependencyException $e) {
+        $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+      }
+
+    }
+    $this->checkListPoints($successful);
   }
 
 }

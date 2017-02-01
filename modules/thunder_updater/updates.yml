@@ -20,3 +20,9 @@ v1.1:
         '#title': 'Remove language filter from media browsers'
         '#description': '<p>Language filtering should be removed in views used by media browsers. Media entities don''t have relation to language and filter doesn''t have effect.</p><p>In order to do that, you should make following steps:<ol><li>Go on views administration page.</li><li>Search for view that you want to edit (fe. "Image Browser", "Media Browser").</li><li>Click <b>Edit</b> to modify view.</li><li>On view editing page under <b>FILTER CRITERIA</b> find link <b>Media: Translation language (exposed)</b> and click it.</li><li>In pop-up dialog click <b>Remove</b> in bottom action bar.</li><li>Save view changes by clicking <b>Save</b> button.</li></ol> </p><p>Repeat described process for all views you need.</p>'
         views_page: { '#text': 'Views administration page', '#url': '/admin/structure/views' }
+    v1_1__metatag_facebook:
+        '#title': 'Enable the Metatag Facebook module'
+        '#description': "<p>A set of meta tags specially for controlling advanced functionality with Facebook.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/metatag' }
+        extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
+        configure_page: { '#text': 'Configure module', '#url': '/admin/config/search/metatag' }
