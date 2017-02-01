@@ -28,9 +28,7 @@ projects:
 
   checklistapi:
     type: "module"
-    version: "1.3"
-    patch:
-      - "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
+    version: "1.4"
 
   config_update:
     type: "module"
