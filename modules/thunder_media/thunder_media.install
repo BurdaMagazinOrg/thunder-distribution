@@ -7,6 +7,7 @@
 
 use \Drupal\views\Entity\View;
 use \Drupal\entity_browser\Entity\EntityBrowser;
+use \Drupal\user\Entity\Role;
 
 /**
  * Update hook dependencies.
@@ -583,6 +584,13 @@ function thunder_media_update_8102() {
   }
 
   if (!$error) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo']);
+    foreach ($roles as $role) {
+      $role->grantPermission('access video_browser entity browser pages');
+      $role->save();
+    }
+
     /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
     $thunderUpdater = \Drupal::service('thunder_updater');
     $thunderUpdater->checkListPoints(['v1_1__image_video_paragraph_install']);
