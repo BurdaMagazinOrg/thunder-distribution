@@ -65,4 +65,3 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
     drush_download_thunder $UPDATE_BASE_PATH
 fi
-
