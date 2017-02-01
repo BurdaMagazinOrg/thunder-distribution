@@ -336,23 +336,34 @@ function thunder_update_8103() {
     'v1_1__access_unpublished' => 'access_unpublished',
   ];
 
-  $successful = [];
+  $thunderUpdater->installModules($updates, $updateLogger);
 
-  foreach ($updates as $update => $module) {
-    try {
-      if ($moduleInstaller->install([$module])) {
-        $successful[] = $update;
-      }
-      else {
-        $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
-      }
-    }
-    catch (MissingDependencyException $e) {
-      $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
-    }
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
 
+    return '';
   }
-  $thunderUpdater->checkListPoints($successful);
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Installs the metatag_facebook module.
+ */
+function thunder_update_8104() {
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  // Now Thunder updater is enabled, we can start marking checkboxes.
+  $updates = [
+    'v1_1__metatag_facebook' => 'metatag_facebook',
+  ];
+
+  $thunderUpdater->installModules($updates, $updateLogger);
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
