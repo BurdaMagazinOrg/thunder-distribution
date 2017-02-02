@@ -19,6 +19,7 @@ content:
     weight: 4
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_paragraphs:
     type: entity_reference_paragraphs
     weight: 2
@@ -29,11 +30,13 @@ content:
       add_mode: dropdown
       form_display_mode: default
     third_party_settings: {  }
+    region: content
   langcode:
     type: language_select
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
   name:
     type: string_textfield
     weight: 1
@@ -41,16 +44,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 5
     third_party_settings: {  }
+    region: content
 hidden:
   description: true

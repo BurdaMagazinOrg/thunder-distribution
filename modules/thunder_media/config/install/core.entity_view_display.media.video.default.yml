@@ -23,12 +23,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
   field_description:
     type: text_default
     weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_media_video_embed_field:
     weight: 0
     label: hidden
@@ -39,6 +41,7 @@ content:
       height: 480
     third_party_settings: {  }
     type: video_embed_field_video
+    region: content
 hidden:
   created: true
   field_caption: true
