@@ -78,6 +78,9 @@
             },
             "drupal/better_normalizers": {
                 "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
+            },
+            "drupal/blazy": {
+                "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
             }
         }
     },

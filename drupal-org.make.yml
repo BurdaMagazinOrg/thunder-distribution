@@ -26,6 +26,8 @@ projects:
   blazy:
     type: "module"
     version: "1.0-beta5"
+    patch:
+      - "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
 
   breakpoint_js_settings:
     type: "module"
