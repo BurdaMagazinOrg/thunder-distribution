@@ -17,6 +17,8 @@ projects:
   better_normalizers:
     type: "module"
     version: "1.0-beta1"
+    patch:
+      - "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
 
   blazy:
     type: "module"
@@ -66,6 +68,8 @@ projects:
   entity_reference_revisions:
     type: "module"
     version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/2849136-4.patch"
 
   fb_instant_articles:
     type: "module"
