@@ -69,7 +69,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $this->drupalLogout();
     }
 
-    $this->drupalGet('user');
+    $this->drupalGet('user/login');
     $this->submitForm(array(
       'name' => $account->getUsername(),
       'pass' => $account->passRaw,
@@ -101,6 +101,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->loggedInUser = FALSE;
     $this->container->get('current_user')
       ->setAccount(new AnonymousUserSession());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getHtmlOutputHeaders() {
+    return '';
   }
 
   /**
