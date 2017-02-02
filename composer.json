@@ -73,10 +73,10 @@
                 "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
                 "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_2.patch"
             },
-            "drupal/entity_reference_revision": {
+            "drupal/entity_reference_revisions": {
                 "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
             },
-            "drupal/better_normalizer": {
+            "drupal/better_normalizers": {
                 "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
             }
         }
