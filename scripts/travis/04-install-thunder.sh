@@ -6,7 +6,7 @@
 install_thunder() {
     cd $1
 
-    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y
+    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y thunder_module_configure_form.install_modules_thunder_demo
     drush en simpletest -y
 
     php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
