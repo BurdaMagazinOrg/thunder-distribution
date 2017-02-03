@@ -8,7 +8,7 @@ install_thunder() {
 
     sqlite3 thunder.db "create table aTable(field1 int); drop table aTable;"
 
-    php ./core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 --sqlite thunder.db --class "Drupal\thunder\Tests\Installer\ThunderInstallerTest"
+    php ./core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 --dburl=mysql://root@127.0.0.1/drupal --sqlite thunder.db --class "Drupal\thunder\Tests\Installer\ThunderInstallerTest"
 
     drush en simpletest -y
 }
