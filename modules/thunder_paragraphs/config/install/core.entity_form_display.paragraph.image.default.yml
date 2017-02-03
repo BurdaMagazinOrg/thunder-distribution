@@ -25,6 +25,7 @@ content:
         view_mode: thumbnail
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
 hidden:
   created: true
   status: true

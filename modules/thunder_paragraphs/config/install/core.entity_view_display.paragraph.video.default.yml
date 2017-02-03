@@ -17,7 +17,6 @@ content:
       link: false
     third_party_settings: {  }
     region: content
-=======
     type: entity_reference_entity_view
 hidden:
   created: true
