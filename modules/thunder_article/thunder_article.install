@@ -5,8 +5,10 @@
  * Thunder Article install hooks.
  */
 
+use \Drupal\Core\Entity\Entity\EntityViewDisplay;
+
 /**
- * Implements hook_update().
+ * Enable thunder_paragraphs.
  */
 function thunder_article_update_8001() {
 
@@ -21,4 +23,49 @@ function thunder_article_update_8001() {
     ->set('module', $modules)
     ->save();
 
+}
+
+/*** 81xx Thunder Article update patches ***/
+
+/**
+ * Enable shariff module.
+ */
+function thunder_article_update_8101() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+    'shariff',
+  ]);
+
+  try {
+    $configUpdater = \Drupal::service('config_update.config_update');
+    $configUpdater->import('simple', 'shariff.settings');
+  }
+  catch (\Exception $e) {
+    $updateLogger->warning(t('Unable to import shariff.settings.'));
+  }
+
+  $display = EntityViewDisplay::load('node.article.default');
+
+  if ($display) {
+    $display->setComponent('shariff_field', [
+      'weight' => $display->getHighestWeight() + 1,
+      'region' => 'content',
+    ])->save();
+  }
+  else {
+    $updateLogger->warning(t('Unable to place shariff field.'));
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
