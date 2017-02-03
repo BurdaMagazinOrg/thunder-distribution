@@ -13,8 +13,7 @@ fi
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 
-# Run the webserver
-drush runserver --default-server=builtin 8080 &>/dev/null &
+
 
 # Run Selenium2 Server
 bash -e /etc/init.d/xvfb start
