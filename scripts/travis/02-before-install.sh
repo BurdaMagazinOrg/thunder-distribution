@@ -18,8 +18,8 @@ if [ ! -d "$SELENIUM_PATH" ]; then
   mkdir -p $SELENIUM_PATH;
 fi
 
-if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar" ]; then
-  wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-2.53.1.jar"
+if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar" ]; then
+  wget http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar"
 fi
 
 # remove xdebug to make php execute faster
