@@ -38,8 +38,6 @@ mysql:
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
-  - if [[ "$(php -v | grep 'PHP 5')" ]]; then echo yes | pecl install apcu-4.0.8; fi
-  - if [[ "$(php -v | grep 'PHP 7')" ]]; then echo yes | pecl install apcu; fi
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
