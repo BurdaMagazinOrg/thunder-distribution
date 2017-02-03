@@ -46,8 +46,11 @@ elif [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then
 fi;
 
 # Set MySQL Options
-mysql -e 'SET GLOBAL wait_timeout = 5400;'
-mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
+mysql -e "SET GLOBAL wait_timeout = 5400;"
+mysql -e "SHOW VARIABLES LIKE 'wait_timeout';"
+mysql -e "CREATE DATABASE drupal;"
+mysql -e "CREATE USER 'thunder'@'localhost' IDENTIFIED BY 'thunder';"
+mysql -e "GRANT ALL ON drupal.* TO 'thunder'@'localhost';"
 
 # PHP conf tweaks
 echo 'max_execution_time = 120' >> drupal.php.ini;
