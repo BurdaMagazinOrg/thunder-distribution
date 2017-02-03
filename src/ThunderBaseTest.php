@@ -15,6 +15,4 @@ class ThunderBaseTest extends BrowserTestBase {
 
   protected $profile = 'thunder';
 
-  protected $strictConfigSchema = FALSE;
-
 }
