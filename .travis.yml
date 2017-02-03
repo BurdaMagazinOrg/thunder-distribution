@@ -30,6 +30,8 @@ branches:
     - master
     - develop
 
+sudo: required
+
 mysql:
   database: drupal
   username: root
