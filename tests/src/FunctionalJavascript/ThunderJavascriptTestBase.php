@@ -85,6 +85,9 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $this->drupalLogout();
     }
 
+    // Add waiting time, before opening of new page.
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
     $this->drupalGet('user');
     $this->submitForm(array(
       'name' => $account->getUsername(),
