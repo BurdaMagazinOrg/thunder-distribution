@@ -47,6 +47,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     // @see WebTestBase::translatePostValues()
     $this->parameters = $this->installParameters();
 
+    $this->parameters['forms']['install_settings_form']['mysql']['prefix'] = "";
+
     // Set up a minimal container (required by WebTestBase).
     // @see install_begin_request()
     $request = Request::create($GLOBALS['base_url'] . '/core/install.php');
@@ -120,6 +122,11 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
+  protected function tearDown() {}
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setUpLanguage() {
     // Verify that the distribution name appears.
     $this->assertRaw('thunder');
@@ -151,7 +158,12 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpModules() {
 
-    $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
+    $foo = NULL;
+    $edit = [
+      'install_modules_thunder_demo' => &$foo,
+    ];
+
+    $this->drupalPostForm(NULL, $edit, $this->translations['Save and continue']);
   }
 
   /**

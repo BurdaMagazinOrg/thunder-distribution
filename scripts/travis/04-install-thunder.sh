@@ -6,7 +6,10 @@
 install_thunder() {
     cd $1
 
-    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y thunder_module_configure_form.install_modules_thunder_demo
+    sqlite3 thunder.db "create table aTable(field1 int); drop table aTable;"
+
+    php ./core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 --sqlite thunder.db --class "Drupal\thunder\Tests\Installer\ThunderInstallerTest"
+
     drush en simpletest -y
 }
 
