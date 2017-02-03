@@ -40,8 +40,12 @@ yes '' | pecl install imagick
 # acknowledge all prompts.
 if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
   yes '' | pecl install yaml;
+  yes '' | pecl install apcu-4.0.8;
+ echo "apc.enabled=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+ echo "apc.enable_cli=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 elif [[ $TRAVIS_PHP_VERSION = '7.0' ]] ; then
  yes '' | pecl install yaml-2.0.0;
+ yes '' | pecl install apcu;
 fi;
 
 # Set MySQL Options
