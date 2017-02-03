@@ -2,14 +2,16 @@
 
 namespace Drupal\thunder;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Class ThunderBaseTest.
  *
  * @package Drupal\thunder
  */
-class ThunderBaseTest extends WebTestBase {
+class ThunderBaseTest extends BrowserTestBase {
+
+  use ThunderTestTrait;
 
   protected $profile = 'thunder';
 

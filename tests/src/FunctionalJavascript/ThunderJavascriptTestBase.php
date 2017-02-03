@@ -4,14 +4,12 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
-use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\SafeMarkup;
-use Drupal\Core\Database\Database;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\Tests\BrowserTestBase;
-use Symfony\Component\HttpFoundation\Request;
+use Drupal\thunder\ThunderTestTrait;
 
 /**
  * Base class for Thunder Javascript functional tests.
@@ -19,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
  * @package Drupal\Tests\thunder\FunctionalJavascript
  */
 abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
+
+  use ThunderTestTrait;
 
   /**
    * Modules to enable.
@@ -85,7 +85,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $this->drupalLogout();
     }
 
-    $this->drupalGet('user/login');
+    $this->drupalGet('user');
     $this->submitForm(array(
       'name' => $account->getUsername(),
       'pass' => $account->passRaw,
@@ -124,65 +124,6 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected function getHtmlOutputHeaders() {
     return '';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function installDrupal() {
-    $this->initUserSession();
-    $this->prepareSettings();
-    $this->doInstall();
-    $this->initSettings();
-    $request = Request::createFromGlobals();
-    $container = $this->initKernel($request);
-    $this->initConfig($container);
-    $this->installModulesFromClassProperty($container);
-    $this->rebuildAll();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function prepareSettings() {
-    parent::prepareSettings();
-
-    // Remember the profile which was used.
-    $settings['settings']['install_profile'] = (object) [
-      'value' => $this->profile,
-      'required' => TRUE,
-    ];
-    // Generate a hash salt.
-    $settings['settings']['hash_salt'] = (object) [
-      'value'    => Crypt::randomBytesBase64(55),
-      'required' => TRUE,
-    ];
-
-    // Since the installer isn't run, add the database settings here too.
-    $settings['databases']['default'] = (object) [
-      'value' => Database::getConnectionInfo(),
-      'required' => TRUE,
-    ];
-
-    $this->writeSettings($settings);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function doInstall() {
-
-    if (!empty($_SERVER['thunderDumpFile'])) {
-      $file = $_SERVER['thunderDumpFile'];
-      // Load the database.
-      if (substr($file, -3) == '.gz') {
-        $file = "compress.zlib://$file";
-      }
-      require $file;
-    }
-    else {
-      parent::doInstall();
-    }
   }
 
   /**
