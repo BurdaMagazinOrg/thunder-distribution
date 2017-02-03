@@ -34,6 +34,8 @@ class ThunderInstallerTest extends InstallerTestBase {
       'pass_raw' => $this->randomMachineName(),
     ));
 
+    $this->siteDirectory = 'sites/default';
+
     // If any $settings are defined for this test, copy and prepare an actual
     // settings.php, so as to resemble a regular installation.
     if (!empty($this->settings)) {
