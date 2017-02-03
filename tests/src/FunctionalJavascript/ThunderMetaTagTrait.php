@@ -22,11 +22,20 @@ trait ThunderMetaTagTrait {
    *   Value for meta tag.
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
+    // If field is checkbox list, then use custom functionality to set values.
     $isCheckboxTag = $this->getSession()
       ->evaluateScript("jQuery('input[name*=\"{$fieldName}[\"][type=\"checkbox\"]').length > 0");
-
     if ($isCheckboxTag) {
       $this->setCheckboxMetaTag($page, $fieldName, $value);
+
+      return;
+    }
+
+    // If field is date field, then use custom method for setting date value.
+    $isDateFieldTag = $this->getSession()
+      ->evaluateScript("jQuery('input[name=\"{$fieldName}\"][data-drupal-date-format]').length > 0");
+    if ($isDateFieldTag) {
+      $this->fillDateField($fieldName, $value);
 
       return;
     }

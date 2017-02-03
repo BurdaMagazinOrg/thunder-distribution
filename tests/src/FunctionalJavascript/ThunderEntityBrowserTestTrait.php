@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Element\NodeElement;
 
 /**
  * Trait with support for handling Entity Browser actions.
@@ -111,6 +112,39 @@ trait ThunderEntityBrowserTestTrait {
     );
 
     $this->assertSession()->assertWaitOnAjaxRequest();
+  }
+
+  /**
+   * Drag element in document with defined offset position.
+   *
+   * @param \Behat\Mink\Element\NodeElement $element
+   *   Element that will be dragged.
+   * @param int $offsetX
+   *   Vertical offset for element drag in pixels.
+   * @param int $offsetY
+   *   Horizontal offset for element drag in pixels.
+   */
+  protected function dragDropElement(NodeElement $element, $offsetX, $offsetY) {
+    $elemXpath = $element->getXpath();
+
+    $jsCode = "var fireMouseEvent = function (type, element, x, y) {"
+      . "  var event = document.createEvent('MouseEvents');"
+      . "  event.initMouseEvent(type, true, (type !== 'mousemove'), window, 0, 0, 0, x, y, false, false, false, false, 0, element);"
+      . "  element.dispatchEvent(event); };";
+
+    // XPath provided by getXpath uses single quote (') to encapsulate strings,
+    // that's why xpath has to be quited with double quites in javascript code.
+    $jsCode .= "(function() {" .
+      "  var dragElement = document.evaluate(\"{$elemXpath}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;" .
+      "  var pos = dragElement.getBoundingClientRect();" .
+      "  var centerX = Math.floor((pos.left + pos.right) / 2);" .
+      "  var centerY = Math.floor((pos.top + pos.bottom) / 2);" .
+      "  fireMouseEvent('mousedown', dragElement, centerX, centerY);" .
+      "  fireMouseEvent('mousemove', document, centerX + {$offsetX}, centerY + {$offsetY});" .
+      "  fireMouseEvent('mouseup', dragElement, centerX + {$offsetX}, centerY + {$offsetY});" .
+      "})();";
+
+    $this->getSession()->executeScript($jsCode);
   }
 
 }
