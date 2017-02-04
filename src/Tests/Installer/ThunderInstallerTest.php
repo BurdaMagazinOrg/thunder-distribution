@@ -124,7 +124,9 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown() {}
+  protected function tearDown() {
+    copy(DRUPAL_ROOT . '/' . $this->siteDirectory . '/settings.php', DRUPAL_ROOT . '/sites/default/settings.php');
+  }
 
   /**
    * {@inheritdoc}
