@@ -17,8 +17,6 @@ fi
 
 export TEST_UPDATE;
 
-export TEST_INSTALLER;
-
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
