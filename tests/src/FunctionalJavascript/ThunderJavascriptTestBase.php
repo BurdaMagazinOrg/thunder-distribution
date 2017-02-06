@@ -282,21 +282,21 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
-   * Set date for date field.
+   * Set value directly to field value, without formatting applied.
    *
    * @param string $fieldName
-   *   Date field name.
-   * @param string $isoDate
-   *   Date in ISO format (YYYY-MM-DD).
+   *   Field name.
+   * @param string $rawValue
+   *   Raw value for field.
    */
-  public function fillDateField($fieldName, $isoDate) {
+  public function setRawFieldValue($fieldName, $rawValue) {
     // Set date over jQuery, because browser drivers handle input value
     // differently. fe. (Firefox will set it as "value" for field, but Chrome
-    // will use it as text for that input field, and that depends on format used
-    // to display date. That's why it's better to set it directly to value,
-    // independently from format used.
+    // will use it as text for that input field, and in that case final value
+    // depends on format used for input field. That's why it's better to set it
+    // directly to value, independently from format used.
     $this->getSession()
-      ->executeScript("jQuery('[name=\"{$fieldName}\"]').val('{$isoDate}')");
+      ->executeScript("jQuery('[name=\"{$fieldName}\"]').val('{$rawValue}')");
   }
 
   /**

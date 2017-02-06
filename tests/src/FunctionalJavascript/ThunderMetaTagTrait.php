@@ -23,19 +23,17 @@ trait ThunderMetaTagTrait {
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
     // If field is checkbox list, then use custom functionality to set values.
-    $isCheckboxTag = $this->getSession()
-      ->evaluateScript("jQuery('input[name*=\"{$fieldName}[\"][type=\"checkbox\"]').length > 0");
-    if ($isCheckboxTag) {
+    $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
+    if (!empty($checkboxes)) {
       $this->setCheckboxMetaTag($page, $fieldName, $value);
 
       return;
     }
 
-    // If field is date field, then use custom method for setting date value.
-    $isDateFieldTag = $this->getSession()
-      ->evaluateScript("jQuery('input[name=\"{$fieldName}\"][type=\"date\"]').length > 0");
-    if ($isDateFieldTag) {
-      $this->fillDateField($fieldName, $value);
+    // If field is date/time field, then set value directly to field.
+    $dateTimeFields = $page->findAll('xpath', "//input[(@type=\"date\" or @type=\"time\") and @name=\"{$fieldName}\"]");
+    if (!empty($dateTimeFields)) {
+      $this->setRawFieldValue($fieldName, $value);
 
       return;
     }
