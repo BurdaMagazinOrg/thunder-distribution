@@ -121,6 +121,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    */
   protected function createArticleWithFields(array $fieldValues = NULL) {
     $this->drupalGet('node/add/article');
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page = $this->getSession()->getPage();
 
@@ -133,6 +134,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     if (isset($fieldValues)) {
       $this->expandAllTabs();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+
       $this->setFieldValues($page, $fieldValues);
     }
 
