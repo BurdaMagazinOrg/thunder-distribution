@@ -33,7 +33,7 @@ trait ThunderMetaTagTrait {
 
     // If field is date field, then use custom method for setting date value.
     $isDateFieldTag = $this->getSession()
-      ->evaluateScript("jQuery('input[name=\"{$fieldName}\"][data-drupal-date-format]').length > 0");
+      ->evaluateScript("jQuery('input[name=\"{$fieldName}\"][type=\"date\"]').length > 0");
     if ($isDateFieldTag) {
       $this->fillDateField($fieldName, $value);
 
