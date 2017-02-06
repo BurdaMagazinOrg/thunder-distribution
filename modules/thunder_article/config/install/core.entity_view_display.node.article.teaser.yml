@@ -26,16 +26,19 @@ content:
       view_mode: thumbnail
       link: false
     third_party_settings: {  }
+    region: content
   field_teaser_text:
     type: basic_string
     weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    region: content
   links:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_channel: true
   field_meta_tags: true
@@ -43,3 +46,4 @@ hidden:
   field_seo_title: true
   field_tags: true
   langcode: true
+  shariff_field: true

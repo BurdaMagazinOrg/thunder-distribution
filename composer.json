@@ -1,127 +1,146 @@
 {
-  "name": "burdamagazinorg/thunder",
-  "description": "The thunder distribution",
-  "type": "drupal-profile",
-  "authors": [
-    {
-      "name": "Daniel Bosen",
-      "email": "daniel.bosen@burda.com"
+    "name": "burdamagazinorg/thunder",
+    "description": "The thunder distribution",
+    "type": "drupal-profile",
+    "authors": [
+        {
+            "name": "Daniel Bosen",
+            "email": "daniel.bosen@burda.com"
+        },
+        {
+            "name": "Christian Fritsch",
+            "email": "christian.fritsch@burda.com"
+        },
+        {
+            "name": "Mladen Todorovic",
+            "email": "mladen.todorovic@burda.com"
+        },
+        {
+            "name": "Timo Welde",
+            "email": "welde@galaniproject.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "GPL-2.0+",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "patches": {
+            "drupal/paragraphs": {
+                "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch",
+                "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
+            },
+            "drupal/dropzonejs": {
+                "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch",
+                "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_17.patch"
+            },
+            "drupal/media_entity": {
+                "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
+            },
+            "drupal/media_entity_instagram": {
+                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
+            },
+            "drupal/checklistapi": {
+                "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
+            },
+            "drupal/shariff": {
+                "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
+                "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_2.patch"
+            },
+            "drupal/entity_reference_revisions": {
+                "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
+            },
+            "drupal/better_normalizers": {
+                "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
+            },
+            "drupal/blazy": {
+                "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
+            }
+        }
     },
-    {
-      "name": "Christian Fritsch",
-      "email": "christian.fritsch@burda.com"
+    "require": {
+        "burdamagazinorg/infinite_module": "^1.0",
+        "burdamagazinorg/infinite_theme": "^1.0",
+        "burdamagazinorg/nexx_integration": "^8.0",
+        "composer/installers": "^1.0",
+        "cweagans/composer-patches": "~1.0",
+        "drupal/access_unpublished": "^1.0",
+        "drupal/adsense": "^1.0",
+        "drupal/admin_toolbar": "^1.0",
+        "drupal/better_normalizers": "dev-1.x",
+        "drupal/blazy": "1.0-beta5",
+        "drupal/breakpoint_js_settings": "^1.0",
+        "drupal/checklistapi": "1.3",
+        "drupal/core": "^8.3.0",
+        "drupal/config_update": "^1.0",
+        "drupal/crop": "^1.0",
+        "drupal/ctools": "^3.0",
+        "drupal/default_content": "^1.0",
+        "drupal/dropzonejs": "1.0-alpha3",
+        "drupal/entity": "^1.0",
+        "drupal/entity_browser": "^1.0",
+        "drupal/entity_reference_revisions": "1.0",
+        "drupal/fb_instant_articles": "dev-1.x",
+        "drupal/field_group": "^1.0",
+        "drupal/focal_point": "^1.0",
+        "drupal/google_analytics": "^2.0",
+        "drupal/inline_entity_form": "^1.0",
+        "drupal/ivw_integration": "^1.0",
+        "drupal/libraries": "dev-3.x",
+        "drupal/linkit": "^4.0",
+        "drupal/media_entity": "1.6",
+        "drupal/media_entity_instagram": "1.2",
+        "drupal/media_entity_image": "^1.0",
+        "drupal/media_entity_slideshow": "^1.0",
+        "drupal/media_entity_twitter": "^1.0",
+        "drupal/media_expire": "^1.0",
+        "drupal/metatag": "^1.0",
+        "drupal/paragraphs": "1.0",
+        "drupal/pathauto": "^1.0",
+        "drupal/responsive_preview": "^1.0",
+        "drupal/riddle_marketplace": "^1.0",
+        "drupal/scheduler": "^1.0",
+        "drupal/simple_sitemap": "^2.0",
+        "drupal/shariff": "1.1",
+        "drupal/slick": "1.0-beta5",
+        "drupal/slick_media": "1.0-beta6",
+        "drupal/thunder_admin": "dev-8.x-1.x",
+        "drupal/token": "^1.0",
+        "drupal/video_embed_field": "^1.0",
+        "drupal/views_load_more": "dev-1.x",
+        "valiton/harbourmaster": "~8.1"
     },
-    {
-      "name": "Mladen Todorovic",
-      "email": "mladen.todorovic@burda.com"
-    },
-    {
-      "name": "Timo Welde",
-      "email": "welde@galaniproject.de"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "license": "GPL-2.0+",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
-    }
-  ],
-  "extra": {
-    "installer-paths": {
-      "docroot/core": ["type:drupal-core"],
-      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
-    },
-    "patches": {
-      "drupal/paragraphs": {
-        "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch",
-        "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
-      },
-      "drupal/dropzonejs": {
-        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch",
-        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/2823670_17.patch"
-      },
-      "drupal/media_entity": {
-        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
-      },
-      "drupal/media_entity_instagram": {
-        "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
-      },
-      "drupal/checklistapi": {
-        "Config schema validation fails": "https://www.drupal.org/files/issues/config_schema-2843860-8.patch"
-      },
-      "drupal/shariff": {
-        "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
-        "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_2.patch"
-      }
-    }
-  },
-  "require": {
-    "burdamagazinorg/infinite_module": "^1.0",
-    "burdamagazinorg/infinite_theme": "^1.0",
-    "burdamagazinorg/nexx_integration": "^8.0",
-    "composer/installers": "^1.0",
-    "cweagans/composer-patches": "~1.0",
-    "drupal/access_unpublished": "^1.0",
-    "drupal/adsense": "^1.0",
-    "drupal/admin_toolbar": "^1.0",
-    "drupal/better_normalizers": "^1.0",
-    "drupal/blazy": "1.0-beta5",
-    "drupal/breakpoint_js_settings": "^1.0",
-    "drupal/checklistapi": "1.3",
-    "drupal/core": "^8.0",
-    "drupal/config_update": "^1.0",
-    "drupal/crop": "^1.0",
-    "drupal/ctools": "^3.0",
-    "drupal/default_content": "^1.0",
-    "drupal/dropzonejs": "1.0-alpha3",
-    "drupal/entity": "^1.0",
-    "drupal/entity_browser": "^1.0",
-    "drupal/entity_reference_revisions": "1.0",
-    "drupal/fb_instant_articles": "dev-1.x",
-    "drupal/field_group": "^1.0",
-    "drupal/focal_point": "^1.0",
-    "drupal/google_analytics": "^2.0",
-    "drupal/inline_entity_form": "^1.0",
-    "drupal/ivw_integration": "^1.0",
-    "drupal/libraries": "dev-3.x",
-    "drupal/linkit": "^4.0",
-    "drupal/media_entity": "1.6",
-    "drupal/media_entity_instagram": "1.2",
-    "drupal/media_entity_image": "^1.0",
-    "drupal/media_entity_slideshow": "^1.0",
-    "drupal/media_entity_twitter": "^1.0",
-    "drupal/media_expire": "^1.0",
-    "drupal/metatag": "^1.0",
-    "drupal/paragraphs": "1.0",
-    "drupal/pathauto": "^1.0",
-    "drupal/responsive_preview": "^1.0",
-    "drupal/riddle_marketplace": "^1.0",
-    "drupal/scheduler": "^1.0",
-    "drupal/simple_sitemap": "^2.0",
-    "drupal/shariff": "1.1",
-    "drupal/slick": "1.0-beta5",
-    "drupal/slick_media": "1.0-beta6",
-    "drupal/thunder_admin": "dev-8.x-1.x",
-    "drupal/token": "^1.0",
-    "drupal/video_embed_field": "^1.0",
-    "drupal/views_load_more": "dev-1.x",
-    "valiton/harbourmaster": "~8.1"
-  },
     "provide": {
         "heiseonline/shariff": "master"
     },
-  "require-dev": {
-    "burdamagazinorg/thunder-dev-tools": "dev-master",
-    "behat/mink-selenium2-driver": "dev-master"
-  }
+    "require-dev": {
+        "burdamagazinorg/thunder-dev-tools": "dev-master",
+        "behat/mink-selenium2-driver": "dev-master"
+    }
 }
