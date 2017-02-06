@@ -6,6 +6,7 @@
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export THUNDER_DIST_DIR=`echo $(pwd)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
+export TEST_INSTALLER="false"
 
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
@@ -34,7 +35,7 @@ export SELENIUM_PATH
 # git commit -m="Your other commit message [TEST_UPDATE=true|INSTALL_METHOD=composer]"
 if [[ ${TRAVIS_EVENT_TYPE} == "pull_request" ]]; then
     # These are the variables, that are allowed to be overridden
-    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD")
+    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD" "TEST_INSTALLER")
     COMMIT_MESSAGE=$(git log --no-merges -1 --pretty="%B")
     for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
     do
