@@ -6,7 +6,7 @@
 install_thunder() {
     cd $1
 
-    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y
+    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://root:@localhost/drupal -y thunder_module_configure_form.install_modules_thunder_demo
     drush en simpletest -y
 }
 
@@ -53,6 +53,12 @@ apply_patches() {
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
 }
+
+create_testing_dump() {
+    cd ${TEST_DIR}/docroot
+
+    php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
+}
 # Build current revision of thunder
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
@@ -68,5 +74,7 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 else
     install_thunder ${TEST_DIR}/docroot
 fi
+
+create_testing_dump
 
 apply_patches
