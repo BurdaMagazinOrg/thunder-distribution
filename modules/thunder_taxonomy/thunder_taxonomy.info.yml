@@ -3,6 +3,7 @@ description: 'Provide taxonomy functions for Thunder.'
 type: module
 core: 8.x
 dependencies:
+  - config_update
   - ctools
   - entity_reference_revisions
   - field

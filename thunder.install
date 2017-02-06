@@ -358,9 +358,34 @@ function thunder_update_8104() {
   $updateLogger = \Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
-  // Now Thunder updater is enabled, we can start marking checkboxes.
   $updates = [
     'v1_1__metatag_facebook' => 'metatag_facebook',
+  ];
+
+  $thunderUpdater->installModules($updates, $updateLogger);
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Installs the config_update module.
+ */
+function thunder_update_8105() {
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $updates = [
+    'v1_1__config_update' => 'config_update',
   ];
 
   $thunderUpdater->installModules($updates, $updateLogger);

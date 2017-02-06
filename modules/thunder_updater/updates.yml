@@ -25,3 +25,8 @@ v1.1:
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/metatag' }
         extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
         configure_page: { '#text': 'Configure module', '#url': '/admin/config/search/metatag' }
+    v1_1__config_update:
+        '#title': 'Enable the Config Update module'
+        '#description': "<p>Provides basic revert and update functionality for other modules. We use this module in the Thunder update hooks. So this should never be disabled.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/config_update' }
+        extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }

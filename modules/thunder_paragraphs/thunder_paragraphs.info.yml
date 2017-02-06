@@ -3,6 +3,7 @@ description: 'Provide paragaphs functions for Thunder.'
 type: module
 core: 8.x
 dependencies:
+  - config_update
   - entity_browser
   - entity_browser_entity_form
   - field
