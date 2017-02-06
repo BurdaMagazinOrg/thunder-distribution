@@ -8,7 +8,7 @@ cache:
   - "travis_selenium"
 
 php:
-  - 7.0
+  - 7.1
   - 5.6
 
 env:
@@ -19,7 +19,7 @@ matrix:
   exclude:
   - php: 5.6
     env: INSTALL_METHOD=composer
-  - php: 7.0
+  - php: 7.1
     env: INSTALL_METHOD=drush_make
 
 sudo: false
