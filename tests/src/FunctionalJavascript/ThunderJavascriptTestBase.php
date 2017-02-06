@@ -9,6 +9,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\thunder\ThunderTestTrait;
 
 /**
  * Base class for Thunder Javascript functional tests.
@@ -16,6 +17,21 @@ use Drupal\Tests\BrowserTestBase;
  * @package Drupal\Tests\thunder\FunctionalJavascript
  */
 abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
+
+  use ThunderTestTrait;
+
+  /**
+   * Modules to enable.
+   *
+   * The test runner will merge the $modules lists from this class, the class
+   * it extends, and so on up the class hierarchy. It is not necessary to
+   * include modules in your list that a parent class has already declared.
+   *
+   * @var string[]
+   *
+   * @see \Drupal\Tests\BrowserTestBase::installDrupal()
+   */
+  protected static $modules = ['thunder_demo'];
 
   /**
    * The profile to install as a basis for testing.

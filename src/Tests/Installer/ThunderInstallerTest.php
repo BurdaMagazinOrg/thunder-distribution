@@ -34,6 +34,8 @@ class ThunderInstallerTest extends InstallerTestBase {
       'pass_raw' => $this->randomMachineName(),
     ));
 
+    $this->siteDirectory = 'sites/default';
+
     // If any $settings are defined for this test, copy and prepare an actual
     // settings.php, so as to resemble a regular installation.
     if (!empty($this->settings)) {
@@ -46,6 +48,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     // suitable for a programmed \Drupal::formBuilder()->submitForm().
     // @see WebTestBase::translatePostValues()
     $this->parameters = $this->installParameters();
+
+    $this->parameters['forms']['install_settings_form']['mysql']['prefix'] = "";
 
     // Set up a minimal container (required by WebTestBase).
     // @see install_begin_request()
@@ -120,6 +124,13 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
+  protected function tearDown() {
+    copy(DRUPAL_ROOT . '/' . $this->siteDirectory . '/settings.php', DRUPAL_ROOT . '/sites/default/settings.php');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setUpLanguage() {
     // Verify that the distribution name appears.
     $this->assertRaw('thunder');
@@ -151,7 +162,12 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpModules() {
 
-    $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
+    $foo = NULL;
+    $edit = [
+      'install_modules_thunder_demo' => &$foo,
+    ];
+
+    $this->drupalPostForm(NULL, $edit, $this->translations['Save and continue']);
   }
 
   /**

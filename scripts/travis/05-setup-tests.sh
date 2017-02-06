@@ -5,16 +5,15 @@ cd ${TEST_DIR}/docroot
 
 # require Selenium2 Driver
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    composer require "behat/mink-selenium2-driver" --no-progress --working-dir ${TEST_DIR}/docroot
+    composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" --no-progress --working-dir ${TEST_DIR}/docroot
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    composer require "behat/mink-selenium2-driver" --no-progress --working-dir ${TEST_DIR}
+    composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" --no-progress --working-dir ${TEST_DIR}
 fi
 
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 
-# Run the webserver
-drush runserver --default-server=builtin 8080 &>/dev/null &
+
 
 # Run Selenium2 Server
 bash -e /etc/init.d/xvfb start
