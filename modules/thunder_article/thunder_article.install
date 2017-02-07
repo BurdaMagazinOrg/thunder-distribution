@@ -52,7 +52,7 @@ function thunder_article_update_8101() {
       'region' => 'content',
     ])->save();
 
-    $updater->markUpdatesSuccessful(['v1_1__shariff']);
+    $updater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
   }
   else {
     $updateLogger->warning(t('Unable to place shariff field.'));

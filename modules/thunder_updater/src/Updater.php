@@ -146,8 +146,10 @@ class Updater {
    *
    * @param array $names
    *   Array of update ids.
+   * @param bool $checkListPoints
+   *   Indicates the corresponding checkbox should be checked.
    */
-  public function markUpdatesSuccessful(array $names) {
+  public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
 
     foreach ($names as $name) {
 
@@ -163,7 +165,10 @@ class Updater {
       }
     }
 
-    $this->checkListPoints($names);
+    if ($checkListPoints) {
+      $this->checkListPoints($names);
+    }
+
   }
 
   /**
