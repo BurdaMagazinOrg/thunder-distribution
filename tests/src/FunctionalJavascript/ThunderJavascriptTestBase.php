@@ -63,10 +63,19 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function initMink() {
+    $sauceUser = getenv('SAUCE_USERNAME');
+    $sauceKey = getenv('SAUCE_ACCESS_KEY');
+
     $this->minkDefaultDriverArgs = [
       'chrome',
-      NULL,
-      'http://127.0.0.1:4444/wd/hub',
+      [
+        'browserName' => 'chrome',
+        'version' => '55.0',
+        'platform' => 'macOS 10.12',
+        'screenResolution' => '1400x1050',
+        'tunnelIdentifier' => getenv('TRAVIS_JOB_NUMBER'),
+      ],
+      "https://{$sauceUser}:{$sauceKey}@ondemand.saucelabs.com:443/wd/hub",
     ];
 
     try {
