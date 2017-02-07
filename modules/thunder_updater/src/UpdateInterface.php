@@ -18,4 +18,15 @@ interface UpdateInterface extends ContentEntityInterface, EntityChangedInterface
    */
   public function wasSuccessfulByHook();
 
+  /**
+   * Set successful_by_hook field value.
+   *
+   * @param bool $success
+   *   Update was successful or not.
+   *
+   * @return mixed
+   *   This object.
+   */
+  public function setSuccessfulByHook($success);
+
 }

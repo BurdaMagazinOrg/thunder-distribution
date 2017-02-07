@@ -15,7 +15,6 @@ use Drupal\thunder_updater\UpdateInterface;
  *   id = "thunder_updater_update",
  *   label = @Translation("Update"),
  *   base_table = "thunder_updater_update",
- *   admin_permission = "administer content_entity_example entity",
  *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",

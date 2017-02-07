@@ -293,9 +293,9 @@ class Updater {
         }
       }
       catch (MissingDependencyException $e) {
+        $this->markUpdatesFailed([$update]);
         $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
       }
-
     }
     $this->markUpdatesSuccessful($successful);
   }
