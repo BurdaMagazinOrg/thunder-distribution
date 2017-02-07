@@ -15,7 +15,7 @@ use Drupal\checklistapi\ChecklistapiChecklist;
 /**
  * Helper class to update configuration.
  */
-class Updater {
+class Updater implements UpdaterInterface {
 
   /**
    * Site configFactory object.
@@ -55,17 +55,7 @@ class Updater {
   }
 
   /**
-   * Update entity browser configuration.
-   *
-   * @param string $browser
-   *   Id of the entity browser.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $oldConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Indicates if config was updated or not.
+   * {@inheritdoc}
    */
   public function updateEntityBrowserConfig($browser, array $configuration, array $oldConfiguration = []) {
 
@@ -79,21 +69,7 @@ class Updater {
   }
 
   /**
-   * Update configuration.
-   *
-   * It's possible to provide expected configuration that should be checked,
-   * before new configuration is applied in order to ensure existing
-   * configuration is expected one.
-   *
-   * @param string $configName
-   *   Configuration name that should be updated.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $expectedConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Returns TRUE if update of configuration was successful.
+   * {@inheritdoc}
    */
   public function updateConfig($configName, array $configuration, array $expectedConfiguration = []) {
     $config = $this->configFactory->getEditable($configName);
@@ -142,12 +118,7 @@ class Updater {
   }
 
   /**
-   * Marks a list of updates as successful.
-   *
-   * @param array $names
-   *   Array of update ids.
-   * @param bool $checkListPoints
-   *   Indicates the corresponding checkbox should be checked.
+   * {@inheritdoc}
    */
   public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
 
@@ -172,10 +143,7 @@ class Updater {
   }
 
   /**
-   * Marks a list of updates as failed.
-   *
-   * @param array $names
-   *   Array of update ids.
+   * {@inheritdoc}
    */
   public function markUpdatesFailed(array $names) {
 
@@ -195,10 +163,7 @@ class Updater {
   }
 
   /**
-   * Marks a list of updates.
-   *
-   * @param bool $status
-   *   Checkboxes enabled or disabled.
+   * {@inheritdoc}
    */
   public function markAllUpdates($status = TRUE) {
 
@@ -312,12 +277,7 @@ class Updater {
   }
 
   /**
-   * Installs a module, checks updater checkbox and works with logger.
-   *
-   * @param array $modules
-   *   Key is name of the checkbox, value name of the module.
-   * @param ThunderUpdateLogger $updateLogger
-   *   Logger service.
+   * {@inheritdoc}
    */
   public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
 
