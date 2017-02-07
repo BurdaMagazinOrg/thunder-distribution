@@ -63,20 +63,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function initMink() {
-    $sauceUser = getenv('SAUCE_USERNAME');
-    $sauceKey = getenv('SAUCE_ACCESS_KEY');
-
-    $this->minkDefaultDriverArgs = [
-      'chrome',
-      [
-        'browserName' => 'chrome',
-        'version' => '55.0',
-        'platform' => 'macOS 10.12',
-        'screenResolution' => '1400x1050',
-        'tunnelIdentifier' => getenv('TRAVIS_JOB_NUMBER'),
-      ],
-      "https://{$sauceUser}:{$sauceKey}@ondemand.saucelabs.com:443/wd/hub",
-    ];
+    $this->minkDefaultDriverArgs = $this->getDriverArgs();
 
     try {
       return BrowserTestBase::initMink();
@@ -84,6 +71,44 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     catch (Exception $e) {
       $this->markTestSkipped('An unexpected error occurred while starting Mink: ' . $e->getMessage());
     }
+  }
+
+  /**
+   * Get Web Driver arguments.
+   *
+   * Driver arguments depends on used environment where tests are executed.
+   * Currently it supports local environment (locally and on Travis CI) and
+   * SauceLabs environment on Travis CI.
+   *
+   * @return array
+   *   Returns default driver arguments.
+   */
+  protected function getDriverArgs() {
+    $desiredCapabilities = NULL;
+    $webDriverUrl = 'http://127.0.0.1:4444/wd/hub';
+
+    // Get Sauce Labs variables from environment, if Sauce Labs build is set.
+    if (!empty(getenv('SAUCE_LABS_ENABLED'))) {
+      $sauceUser = getenv('SAUCE_USERNAME');
+      $sauceKey = getenv('SAUCE_ACCESS_KEY');
+
+      $desiredCapabilities = [
+        'browserName' => 'chrome',
+        'version' => '55.0',
+        'platform' => 'macOS 10.12',
+        'screenResolution' => '1400x1050',
+        'tunnelIdentifier' => getenv('TRAVIS_JOB_NUMBER'),
+        'name' => get_class($this),
+      ];
+
+      $webDriverUrl = "https://{$sauceUser}:{$sauceKey}@ondemand.saucelabs.com:443/wd/hub";
+    }
+
+    return [
+      'chrome',
+      $desiredCapabilities,
+      $webDriverUrl,
+    ];
   }
 
   /**
