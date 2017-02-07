@@ -11,7 +11,9 @@ v1.1:
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/access_unpublished' }
     v1_1__shariff:
         '#title': 'Shariff module'
-        '#description': "<p>Shariff module provides theme independent social buttons.</p><p>We enabled that module for you and placed the social buttons in your article.</p><p><b>Please check these changes!</b></p><p>Instead of using a field, it's also possible to add a block with social buttons.</p>"
+        '#description': "<p>Shariff module provides theme independent social buttons.</p>"
+        '#description_successful': "<p>We enabled that module for you and placed the social buttons in your article.</p><p><b>Please check these changes!</b></p><p>Instead of using a field, it's also possible to add a block with social buttons.</p>"
+        '#description_failed': "<p>After shariff module is enabled, you can: <ul><li>Place social buttons as a block in block layout</li><li>Add social buttons as field to your content type</li></ul> </p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/shariff' }
         content_type_page: { '#text': 'Check article display', '#url': '/admin/structure/types/manage/article/display' }
         block_page: { '#text': 'Place a block', '#url': '/admin/structure/block' }

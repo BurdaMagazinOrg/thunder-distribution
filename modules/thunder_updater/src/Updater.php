@@ -7,6 +7,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\thunder\ThunderUpdateLogger;
+use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
@@ -141,12 +142,62 @@ class Updater {
   }
 
   /**
+   * Marks a list of updates as successful.
+   *
+   * @param array $names
+   *   Array of update ids.
+   */
+  public function markUpdatesSuccessful(array $names) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(TRUE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => TRUE,
+        ])->save();
+      }
+    }
+
+    $this->checkListPoints($names);
+  }
+
+  /**
+   * Marks a list of updates as failed.
+   *
+   * @param array $names
+   *   Array of update ids.
+   */
+  public function markUpdatesFailed(array $names) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(FALSE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => FALSE,
+        ])->save();
+      }
+    }
+
+    $this->checkListPoints($names);
+  }
+
+  /**
    * Checks an array of bulletpoints on a checklist.
    *
    * @param array $names
    *   Array of the bulletpoints.
    */
-  public function checkListPoints(array $names) {
+  protected function checkListPoints(array $names) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -177,7 +228,7 @@ class Updater {
   /**
    * Checks all the bulletpoints on a checklist.
    */
-  public function checkAllListPoints($status = TRUE) {
+  protected function checkAllListPoints($status = TRUE) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -231,8 +282,6 @@ class Updater {
    */
   public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
 
-    $this->checkAllListPoints(FALSE);
-
     $successful = [];
 
     foreach ($modules as $update => $module) {
@@ -242,6 +291,7 @@ class Updater {
         }
         else {
           $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+          $this->markUpdatesFailed($update);
         }
       }
       catch (MissingDependencyException $e) {
@@ -249,7 +299,7 @@ class Updater {
       }
 
     }
-    $this->checkListPoints($successful);
+    $this->markUpdatesSuccessful($successful);
   }
 
 }

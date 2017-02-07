@@ -36,6 +36,9 @@ function thunder_article_update_8101() {
   $updateLogger = Drupal::service('logger.thunder_update');
   $updateLogger->cleanLogs();
 
+  /** @var \Drupal\thunder_updater\Updater $updater */
+  $updater = Drupal::service('thunder_updater');
+
   \Drupal::service('module_installer')->install([
     'config_update',
     'shariff',
@@ -48,9 +51,12 @@ function thunder_article_update_8101() {
       'weight' => $display->getHighestWeight() + 1,
       'region' => 'content',
     ])->save();
+
+    $updater->markUpdatesSuccessful(['v1_1__shariff']);
   }
   else {
     $updateLogger->warning(t('Unable to place shariff field.'));
+    $updater->markUpdatesFailed(['v1_1__shariff']);
   }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
