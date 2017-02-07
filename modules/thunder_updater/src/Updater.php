@@ -190,6 +190,35 @@ class Updater {
   }
 
   /**
+   * Marks a list of updates.
+   *
+   * @param bool $status
+   *   Checkboxes enabled or disabled.
+   */
+  public function markAllUpdates($status = TRUE) {
+
+    $checklist = checklistapi_checklist_load('thunder_updater');
+
+    foreach ($checklist->items as $versionItems) {
+      foreach ($versionItems as $update => $item) {
+
+        if ($update = Update::load($update)) {
+          $update->setSuccessfulByHook($status)
+            ->save();
+        }
+        else {
+          Update::create([
+            'id' => $update,
+            'successful_by_hook' => $status,
+          ])->save();
+        }
+      }
+    }
+
+    $this->checkAllListPoints($status);
+  }
+
+  /**
    * Checks an array of bulletpoints on a checklist.
    *
    * @param array $names
@@ -225,6 +254,9 @@ class Updater {
 
   /**
    * Checks all the bulletpoints on a checklist.
+   *
+   * @param bool $status
+   *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
 
