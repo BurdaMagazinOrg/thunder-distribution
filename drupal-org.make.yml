@@ -147,7 +147,7 @@ projects:
 
   nexx_integration:
     type: "module"
-    version: "1.6"
+    version: "1.7"
 
   paragraphs:
     type: "module"
