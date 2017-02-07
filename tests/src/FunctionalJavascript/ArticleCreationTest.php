@@ -34,8 +34,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    // Add Media Image Paragraph.
-    $this->addMediaParagraph(static::$paragraphsField, ['media:5']);
+    // Add Image Paragraph.
+    $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
@@ -58,6 +58,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
+    // Add Video paragraph.
+    $this->addVideoParagraph(static::$paragraphsField, ['media:7']);
+
     $this->scrollElementInView('#edit-actions');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
@@ -69,7 +72,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
 
-    // Check Media paragraph.
+    // Check Image paragraph.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img', 1);
 
@@ -99,6 +102,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->elementExists('css', '.shariff-button.twitter');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
     $this->assertSession()->elementExists('css', '.shariff-button.googleplus');
+
+    // Check Video paragraph.
+    $this->getSession()
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length === 1");
   }
 
 }

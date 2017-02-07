@@ -7,6 +7,8 @@
 
 use \Drupal\views\Entity\View;
 use \Drupal\entity_browser\Entity\EntityBrowser;
+use \Drupal\user\Entity\Role;
+use \Drupal\field\Entity\FieldConfig;
 
 /**
  * Update hook dependencies.
@@ -521,6 +523,94 @@ function thunder_media_update_8101() {
   else {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
     $thunderUpdater->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Introduce image and video paragraph.
+ */
+function thunder_media_update_8102() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  $configUpdater = \Drupal::service('config_update.config_update');
+
+  $imports = [
+    'paragraphs_type' => ['image', 'video'],
+    'field_storage_config' => ['paragraph.field_image', 'paragraph.field_video'],
+    'field_config' => [
+      'paragraph.image.field_image',
+      'paragraph.video.field_video',
+    ],
+    'view' => ['video_browser'],
+    'system.simple' => ['entity_browser.browser.video_browser'],
+    'entity_form_display' => [
+      'paragraph.video.default',
+      'paragraph.image.default',
+    ],
+    'entity_view_display' => [
+      'paragraph.video.default',
+      'paragraph.image.default',
+      'paragraph.image.preview',
+      'paragraph.video.preview',
+    ],
+  ];
+
+  $error = FALSE;
+  foreach ($imports as $type => $entities) {
+    foreach ($entities as $entity) {
+      try {
+        $configUpdater->import($type, $entity);
+      }
+      catch (\Exception $e) {
+        $error = TRUE;
+        $updateLogger->warning(t('Unable to import config: @type -> @entity', ['@type' => $type, '@entity' => $entity]));
+      }
+    }
+  }
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  if (!$error) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo']);
+    foreach ($roles as $role) {
+      $role->grantPermission('access video_browser entity browser pages');
+      $role->save();
+    }
+
+    /** @var \Drupal\field\Entity\FieldConfig $field */
+    $field = FieldConfig::load('node.article.field_paragraphs');
+    $settings = $field->getSetting('handler_settings');
+
+    $settings['target_bundles']['image'] = 'image';
+    $settings['target_bundles']['video'] = 'video';
+    $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
+    $settings['target_bundles_drag_drop']['video'] = ['enabled' => TRUE, 'weight' => 10];
+
+    $field->setSetting('handler_settings', $settings);
+    $field->save();
+
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+  }
+  else {
+    $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
   }
 
   // Output log result depending on channel used for update execution.

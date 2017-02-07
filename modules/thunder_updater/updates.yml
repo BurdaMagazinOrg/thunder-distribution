@@ -32,3 +32,8 @@ v1.1:
         '#description': "<p>Provides basic revert and update functionality for other modules. We use this module in the Thunder update hooks. So this should never be disabled.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/config_update' }
         extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
+    v1_1__image_video_paragraph:
+        '#title': 'Installation of image and video paragraph type'
+        '#description': '<p>We think for editors it is more clearer to have a seperate video and image paragraph.</p>'
+        '#description_successful': '<p>So we installed that in an update hook for you. You can now decide by yourselve, if you want to use them.</p>'
+        '#description_failed': '<p>During the update, all the following config objects should be installed, but there was an error: <ul><li>paragraphs.paragraphs_type.image.yml</li><li>paragraphs.paragraphs_type.video.yml</li><li>field.storage.paragraph.field_image.yml</li><li>field.storage.paragraph.field_video.yml</li><li>field.field.paragraph.image.field_image.yml</li><li>field.field.paragraph.video.field_video.yml</li><li>views.view.video_browser.yml</li><li>entity_browser.browser.video_browser.yml</li><li>core.entity_form_display.paragraph.image.default.yml</li><li>core.entity_form_display.paragraph.video.default.yml</li><li>core.entity_view_display.paragraph.image.default.yml</li><li>core.entity_view_display.paragraph.image.preview.yml</li><li>core.entity_view_display.paragraph.video.default.yml</li><li>core.entity_view_display.paragraph.video.preview.yml</li></ul></p>'
