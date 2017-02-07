@@ -187,8 +187,6 @@ class Updater {
         ])->save();
       }
     }
-
-    $this->checkListPoints($names);
   }
 
   /**
@@ -291,7 +289,7 @@ class Updater {
         }
         else {
           $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
-          $this->markUpdatesFailed($update);
+          $this->markUpdatesFailed([$update]);
         }
       }
       catch (MissingDependencyException $e) {
