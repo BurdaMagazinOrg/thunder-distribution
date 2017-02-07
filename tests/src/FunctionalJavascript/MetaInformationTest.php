@@ -254,7 +254,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
-    $unPublishDiffSeconds = 5;
+    $unPublishDiffSeconds = 10;
     $unPublishTimestamp = strtotime("+{$unPublishDiffSeconds} seconds");
     $unPublishFieldValues = [
       'unpublish_on[0][value][date]' => date('Y-m-d', $unPublishTimestamp),
