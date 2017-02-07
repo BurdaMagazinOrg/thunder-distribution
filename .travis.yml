@@ -37,7 +37,10 @@ mysql:
   encoding: utf8
 
 addons:
-  sauce_connect: true
+  apt:
+    packages:
+      - google-chrome-stable
+#  sauce_connect: true
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
