@@ -36,6 +36,7 @@ branches:
   only:
     - master
     - develop
+    - feature/thunder-ux
 
 mysql:
   database: drupal
