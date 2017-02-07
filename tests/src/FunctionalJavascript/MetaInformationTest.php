@@ -121,7 +121,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    */
   protected function createArticleWithFields(array $fieldValues = NULL) {
     $this->drupalGet('node/add/article');
-    $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page = $this->getSession()->getPage();
 
@@ -134,8 +133,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     if (isset($fieldValues)) {
       $this->expandAllTabs();
-      $this->assertSession()->assertWaitOnAjaxRequest();
-
       $this->setFieldValues($page, $fieldValues);
     }
 
@@ -254,7 +251,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
-    $unPublishDiffSeconds = 10;
+    $unPublishDiffSeconds = 5;
     $unPublishTimestamp = strtotime("+{$unPublishDiffSeconds} seconds");
     $unPublishFieldValues = [
       'unpublish_on[0][value][date]' => date('Y-m-d', $unPublishTimestamp),
