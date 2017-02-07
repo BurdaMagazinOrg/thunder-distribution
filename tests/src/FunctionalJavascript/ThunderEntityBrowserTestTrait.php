@@ -112,6 +112,11 @@ trait ThunderEntityBrowserTestTrait {
     );
 
     $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // In case of gallery image upload we should wait additionally so that all
+    // command for auto selection are executed.
+    $this->getSession()->wait(200);
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
   /**
