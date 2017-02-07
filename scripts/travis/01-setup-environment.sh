@@ -21,8 +21,9 @@ export TEST_UPDATE;
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
-# Setup Selenium2 parameters
+# Setup Selenium parameters
 export DISPLAY=:99.0
+export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 SELENIUM_PATH="$PWD/travis_selenium"
 export SELENIUM_PATH
