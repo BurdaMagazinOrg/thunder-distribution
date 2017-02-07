@@ -26,7 +26,7 @@ fi
 if [ ! -f "$SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION" ]; then
   wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -O "$SELENIUM_PATH/chromedriver.zip"
 
-  unzip $SELENIUM_PATH/chromedriver.zip -d $SELENIUM_PATH
+  unzip -o $SELENIUM_PATH/chromedriver.zip -d $SELENIUM_PATH
   mv $SELENIUM_PATH/chromedriver $SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION
 fi
 
