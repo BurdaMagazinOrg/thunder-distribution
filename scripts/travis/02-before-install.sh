@@ -22,11 +22,12 @@ if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar" ]; then
   wget http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar"
 fi
 
-# download required Selenium2 Driver
-if [ ! -f "$SELENIUM_PATH/chromedriver" ]; then
-  wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip -O "$SELENIUM_PATH/chromedriver.zip"
+# download required Selenium Chrome Driver
+if [ ! -f "$SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION" ]; then
+  wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -O "$SELENIUM_PATH/chromedriver.zip"
 
   unzip $SELENIUM_PATH/chromedriver.zip -d $SELENIUM_PATH
+  mv $SELENIUM_PATH/chromedriver $SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION
 fi
 
 # remove xdebug to make php execute faster

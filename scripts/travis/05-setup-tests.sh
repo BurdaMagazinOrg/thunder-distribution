@@ -19,4 +19,4 @@ drush runserver --default-server=builtin 8080 &>/dev/null &
 # Run Selenium2 Server
 bash -e /etc/init.d/xvfb start
 sleep 3
-java -jar -Dwebdriver.chrome.driver="${SELENIUM_PATH}/chromedriver" "${SELENIUM_PATH}/selenium-server-standalone-3.0.1.jar" > /dev/null 2>&1 &
+java -jar -Dwebdriver.chrome.driver="${SELENIUM_PATH}/chromedriver-$CHROME_DRIVER_VERSION" "${SELENIUM_PATH}/selenium-server-standalone-3.0.1.jar" > /dev/null 2>&1 &
