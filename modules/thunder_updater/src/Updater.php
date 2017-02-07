@@ -200,15 +200,19 @@ class Updater {
     $checklist = checklistapi_checklist_load('thunder_updater');
 
     foreach ($checklist->items as $versionItems) {
-      foreach ($versionItems as $update => $item) {
+      foreach ($versionItems as $key => $item) {
 
-        if ($update = Update::load($update)) {
+        if (!is_array($item)) {
+          continue;
+        }
+
+        if ($update = Update::load($key)) {
           $update->setSuccessfulByHook($status)
             ->save();
         }
         else {
           Update::create([
-            'id' => $update,
+            'id' => $key,
             'successful_by_hook' => $status,
           ])->save();
         }
