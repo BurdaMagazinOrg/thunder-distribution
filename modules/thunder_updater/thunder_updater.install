@@ -10,5 +10,5 @@
  */
 function thunder_updater_install() {
 
-  \Drupal::service('thunder_updater')->checkAllListPoints();
+  \Drupal::service('thunder_updater')->markAllUpdates();
 }

@@ -516,10 +516,11 @@ function thunder_media_update_8101() {
 
   // If update is successful for all views, then check entry in checklist.
   if ($successfulUpdate) {
-    $thunderUpdater->checkListPoints(['v1_1__remove_entity_browser_language_filter']);
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
   }
   else {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
   }
 
   // Output log result depending on channel used for update execution.

@@ -195,7 +195,7 @@ projects:
   thunder_admin:
     type: "theme"
     download:
-      url: "https://git.drupal.org/sandbox/chr.fritsch/2825442.git"
+      url: "https://git.drupal.org/project/thunder_admin.git"
       tag: "8.x-1.0.1"
 
   token:

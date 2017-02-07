@@ -7,6 +7,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\thunder\ThunderUpdateLogger;
+use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
@@ -14,7 +15,7 @@ use Drupal\checklistapi\ChecklistapiChecklist;
 /**
  * Helper class to update configuration.
  */
-class Updater {
+class Updater implements UpdaterInterface {
 
   /**
    * Site configFactory object.
@@ -54,17 +55,7 @@ class Updater {
   }
 
   /**
-   * Update entity browser configuration.
-   *
-   * @param string $browser
-   *   Id of the entity browser.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $oldConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Indicates if config was updated or not.
+   * {@inheritdoc}
    */
   public function updateEntityBrowserConfig($browser, array $configuration, array $oldConfiguration = []) {
 
@@ -78,21 +69,7 @@ class Updater {
   }
 
   /**
-   * Update configuration.
-   *
-   * It's possible to provide expected configuration that should be checked,
-   * before new configuration is applied in order to ensure existing
-   * configuration is expected one.
-   *
-   * @param string $configName
-   *   Configuration name that should be updated.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $expectedConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Returns TRUE if update of configuration was successful.
+   * {@inheritdoc}
    */
   public function updateConfig($configName, array $configuration, array $expectedConfiguration = []) {
     $config = $this->configFactory->getEditable($configName);
@@ -141,12 +118,87 @@ class Updater {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(TRUE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => TRUE,
+        ])->save();
+      }
+    }
+
+    if ($checkListPoints) {
+      $this->checkListPoints($names);
+    }
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function markUpdatesFailed(array $names) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(FALSE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => FALSE,
+        ])->save();
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function markAllUpdates($status = TRUE) {
+
+    $checklist = checklistapi_checklist_load('thunder_updater');
+
+    foreach ($checklist->items as $versionItems) {
+      foreach ($versionItems as $key => $item) {
+
+        if (!is_array($item)) {
+          continue;
+        }
+
+        if ($update = Update::load($key)) {
+          $update->setSuccessfulByHook($status)
+            ->save();
+        }
+        else {
+          Update::create([
+            'id' => $key,
+            'successful_by_hook' => $status,
+          ])->save();
+        }
+      }
+    }
+
+    $this->checkAllListPoints($status);
+  }
+
+  /**
    * Checks an array of bulletpoints on a checklist.
    *
    * @param array $names
    *   Array of the bulletpoints.
    */
-  public function checkListPoints(array $names) {
+  protected function checkListPoints(array $names) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -176,8 +228,11 @@ class Updater {
 
   /**
    * Checks all the bulletpoints on a checklist.
+   *
+   * @param bool $status
+   *   Checkboxes enabled or disabled.
    */
-  public function checkAllListPoints($status = TRUE) {
+  protected function checkAllListPoints($status = TRUE) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -222,16 +277,9 @@ class Updater {
   }
 
   /**
-   * Installs a module, checks updater checkbox and works with logger.
-   *
-   * @param array $modules
-   *   Key is name of the checkbox, value name of the module.
-   * @param ThunderUpdateLogger $updateLogger
-   *   Logger service.
+   * {@inheritdoc}
    */
   public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
-
-    $this->checkAllListPoints(FALSE);
 
     $successful = [];
 
@@ -242,14 +290,15 @@ class Updater {
         }
         else {
           $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+          $this->markUpdatesFailed([$update]);
         }
       }
       catch (MissingDependencyException $e) {
+        $this->markUpdatesFailed([$update]);
         $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
       }
-
     }
-    $this->checkListPoints($successful);
+    $this->markUpdatesSuccessful($successful);
   }
 
 }
