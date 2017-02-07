@@ -45,13 +45,10 @@ function thunder_article_update_8101() {
   ]);
 
   $display = EntityViewDisplay::load('node.article.default');
-
-  if ($display) {
+  if ($display && !$display->getComponent('shariff_field')) {
     $display->setComponent('shariff_field', [
-      'weight' => $display->getHighestWeight() + 1,
       'region' => 'content',
     ])->save();
-
     $updater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
   }
   else {
