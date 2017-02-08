@@ -607,6 +607,14 @@ function thunder_media_update_8102() {
     $field->setSetting('handler_settings', $settings);
     $field->save();
 
+    // List of expected configuration for listed entity browsers.
+    $expectedConfig['display_configuration']['link_text'] = 'Select entities';
+    $expectedConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select entities';
+    // New configuration for entity browsers that should be applied.
+    $newConfig['display_configuration']['link_text'] = 'Select image';
+    $newConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
+    $thunderUpdater->updateEntityBrowserConfig('image_browser', $newConfig, $expectedConfig);
+
     $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
   }
   else {
