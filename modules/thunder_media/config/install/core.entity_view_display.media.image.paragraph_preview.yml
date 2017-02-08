@@ -13,32 +13,29 @@ dependencies:
     - media_entity.bundle.image
   module:
     - image
-    - text
 id: media.image.paragraph_preview
 targetEntityType: media
 bundle: image
 mode: paragraph_preview
 content:
-  field_description:
-    type: text_default
+  field_copyright:
+    type: string
     weight: 2
+    region: content
     label: inline
-    settings: {  }
-    third_party_settings: {  }
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: nbsp
   field_image:
+    type: image
     weight: 0
+    region: content
     label: hidden
     settings:
       image_style: paragraph_preview_thumbnail
       image_link: ''
-    third_party_settings: {  }
-    type: image
-  field_source:
-    type: string
-    weight: 3
-    label: inline
-    settings:
-      link_to_entity: false
     third_party_settings: {  }
   name:
     type: string
@@ -47,14 +44,16 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_brands: true
   field_channel: true
-  field_copyright: true
+  field_description: true
   field_events: true
   field_expires: true
   field_people: true
+  field_source: true
   field_tags: true
   langcode: true
   thumbnail: true

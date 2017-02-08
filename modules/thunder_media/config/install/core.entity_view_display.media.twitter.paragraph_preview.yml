@@ -3,30 +3,45 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.twitter.field_author
+    - field.field.media.twitter.field_content
     - field.field.media.twitter.field_url
+    - image.style.paragraph_preview_thumbnail
     - media_entity.bundle.twitter
   module:
-    - media_entity_twitter
+    - image
 id: media.twitter.paragraph_preview
 targetEntityType: media
 bundle: twitter
 mode: paragraph_preview
 content:
-  field_url:
-    type: twitter_embed
-    weight: 0
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  name:
+  field_author:
     type: string
     weight: 1
+    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  field_content:
+    type: basic_string
+    weight: 2
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: paragraph_preview_thumbnail
+      image_link: ''
+    third_party_settings: {  }
 hidden:
   created: true
+  field_url: true
   langcode: true
-  thumbnail: true
+  name: true
   uid: true

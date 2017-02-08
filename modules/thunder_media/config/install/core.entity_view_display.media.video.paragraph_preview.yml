@@ -12,18 +12,21 @@ dependencies:
     - media_entity.bundle.video
   module:
     - image
-    - text
 id: media.video.paragraph_preview
 targetEntityType: media
 bundle: video
 mode: paragraph_preview
 content:
-  field_description:
-    type: text_default
+  field_copyright:
+    type: string
     weight: 2
+    region: content
     label: inline
-    settings: {  }
-    third_party_settings: {  }
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: nbsp
   name:
     type: string
     weight: 1
@@ -31,6 +34,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
   thumbnail:
     type: image
     weight: 0
@@ -39,10 +43,11 @@ content:
       image_style: paragraph_preview_thumbnail
       image_link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_caption: true
-  field_copyright: true
+  field_description: true
   field_media_video_embed_field: true
   field_source: true
   langcode: true

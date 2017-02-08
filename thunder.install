@@ -415,6 +415,11 @@ function thunder_update_8106() {
   $updateLogger->cleanLogs();
 
   $configs = [
+    'field_storage_config' => ['media.field_author', 'media.field_content'],
+    'field_config' => [
+      'media.twitter.field_author',
+      'media.twitter.field_content',
+    ],
     'entity_view_mode' => [
       'media.paragraph_preview',
     ],
@@ -474,13 +479,20 @@ function thunder_update_8106() {
   if (\Drupal::service('thunder_media.updater')->updateConfig('core.entity_view_display.paragraph.gallery.preview', $newConfig, $oldConfig)) {
   }
 
-  $oldConfig['content']['field_media']['settings']['view_mode'] = 'thumbnail';
-  $newConfig['content']['field_media']['settings']['view_mode'] = 'paragraph_preview';
+  // Switch view modes.
+  $formDisplays = [
+    'core.entity_view_display.paragraph.instagram.preview' => 'field_media',
+    'core.entity_view_display.paragraph.image.preview' => 'field_image',
+    'core.entity_view_display.paragraph.video.preview' => 'field_video',
+  ];
 
-  if (\Drupal::service('thunder_media.updater')->updateConfig('core.entity_view_display.paragraph.instagram.preview', $newConfig, $oldConfig)) {
-  }
+  foreach ($formDisplays as $formDisplay => $fieldName) {
+    $oldConfig = $newConfig = [];
 
-  if (\Drupal::service('thunder_media.updater')->updateConfig('core.entity_view_display.paragraph.media.preview', $newConfig, $oldConfig)) {
+    $oldConfig['content'][$fieldName]['settings']['view_mode'] = 'thumbnail';
+    $newConfig['content'][$fieldName]['settings']['view_mode'] = 'paragraph_preview';
+
+    \Drupal::service('thunder_media.updater')->updateConfig($formDisplay, $newConfig, $oldConfig);
   }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {

@@ -120,6 +120,12 @@ function thunder_media_form_media_gallery_edit_form_alter(&$form, FormStateInter
     $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds classes to theme media:gallery form.
+ */
 function thunder_media_form_media_gallery_form_alter(&$form, FormStateInterface $form_state) {
   if (isset($form['field_media_images'])) {
     $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
@@ -134,7 +140,7 @@ function thunder_media_form_media_gallery_form_alter(&$form, FormStateInterface 
  * @param string $media_type
  *   The type of media.
  */
-function _thunder_media_media_field_widget_form_alter_helper(&$widget, $media_type) {
+function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $media_type) {
   // Process the media field widget.
   $widget['#attributes']['class'][] = 'media-form__items-widget';
   if (isset($widget['current']['items'])) {

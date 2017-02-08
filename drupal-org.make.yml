@@ -62,6 +62,10 @@ projects:
       - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch"
       - "https://www.drupal.org/files/issues/2823670_17.patch"
 
+  empty_fields:
+    type: "module"
+    version: "1.0-alpha1"
+
   entity:
     type: "module"
     version: "1.0-alpha4"
