@@ -595,17 +595,30 @@ function thunder_media_update_8102() {
       $role->save();
     }
 
-    /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = FieldConfig::load('node.article.field_paragraphs');
-    $settings = $field->getSetting('handler_settings');
+    $fieldConfigs = [
+      'node.article.field_paragraphs',
+      'taxonomy_term.channel.field_paragraphs',
+      'taxonomy_term.tag.field_paragraphs',
+    ];
+    foreach ($fieldConfigs as $fieldConfig) {
 
-    $settings['target_bundles']['image'] = 'image';
-    $settings['target_bundles']['video'] = 'video';
-    $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
-    $settings['target_bundles_drag_drop']['video'] = ['enabled' => TRUE, 'weight' => 10];
+      /** @var \Drupal\field\Entity\FieldConfig $field */
+      $field = FieldConfig::load($fieldConfig);
+      if ($field) {
+        $settings = $field->getSetting('handler_settings');
 
-    $field->setSetting('handler_settings', $settings);
-    $field->save();
+        $settings['target_bundles']['image'] = 'image';
+        $settings['target_bundles']['video'] = 'video';
+        $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
+        $settings['target_bundles_drag_drop']['video'] = ['enabled' => TRUE, 'weight' => 10];
+
+        $field->setSetting('handler_settings', $settings);
+        $field->save();
+      }
+      else {
+        $error = TRUE;
+      }
+    }
 
     // List of expected configuration for listed entity browsers.
     $expectedConfig['display_configuration']['link_text'] = 'Select entities';
@@ -613,11 +626,15 @@ function thunder_media_update_8102() {
     // New configuration for entity browsers that should be applied.
     $newConfig['display_configuration']['link_text'] = 'Select image';
     $newConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
-    $thunderUpdater->updateEntityBrowserConfig('image_browser', $newConfig, $expectedConfig);
-
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    if ($thunderUpdater->updateEntityBrowserConfig('image_browser', $newConfig, $expectedConfig)) {
+      $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    }
+    else {
+      $error = TRUE;
+    }
   }
-  else {
+
+  if ($error) {
     $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
   }
 
