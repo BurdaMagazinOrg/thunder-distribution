@@ -345,8 +345,11 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
     for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
       $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+      $this->assertSession()->assertWaitOnAjaxRequest();
     }
   }
 
