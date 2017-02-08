@@ -463,7 +463,7 @@ function thunder_update_8106() {
   $newConfig['third_party_settings']['field_group']['group_paragraphs']['format_settings']['classes'] = 'content-form__form-section paragraphs-container';
   $newConfig['third_party_settings']['field_group']['group_basis']['format_settings']['classes'] = 'content-form__form-section';
 
-  if (\Drupal::service('thunder_media.updater')->updateConfig('core.entity_form_display.node.article.default', $newConfig, $oldConfig)) {
+  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_form_display.node.article.default', $newConfig, $oldConfig)) {
   }
 
   $oldConfig['content']['field_media']['type'] = 'media_thumbnail';
@@ -476,7 +476,7 @@ function thunder_update_8106() {
   $newConfig['content']['field_media']['settings']['view_mode'] = 'paragraph_preview';
   $newConfig['content']['field_media']['settings']['link'] = FALSE;
 
-  if (\Drupal::service('thunder_media.updater')->updateConfig('core.entity_view_display.paragraph.gallery.preview', $newConfig, $oldConfig)) {
+  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_view_display.paragraph.gallery.preview', $newConfig, $oldConfig)) {
   }
 
   // Switch view modes.
@@ -492,7 +492,7 @@ function thunder_update_8106() {
     $oldConfig['content'][$fieldName]['settings']['view_mode'] = 'thumbnail';
     $newConfig['content'][$fieldName]['settings']['view_mode'] = 'paragraph_preview';
 
-    \Drupal::service('thunder_media.updater')->updateConfig($formDisplay, $newConfig, $oldConfig);
+    \Drupal::service('thunder_updater')->updateConfig($formDisplay, $newConfig, $oldConfig);
   }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
