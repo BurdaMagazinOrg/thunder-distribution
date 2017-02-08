@@ -26,7 +26,7 @@ export DISPLAY=:99.0
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 # Get latest ChromeDriver version
-CHROME_DRIVER_VERSION=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+CHROME_DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 export CHROME_DRIVER_VERSION
 
 # Selenium related environment variables
