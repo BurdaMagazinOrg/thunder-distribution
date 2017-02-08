@@ -18,13 +18,15 @@ if [ ! -d "$SELENIUM_PATH" ]; then
   mkdir -p $SELENIUM_PATH;
 fi
 
-if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar" ]; then
-  wget http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar -O "$SELENIUM_PATH/selenium-server-standalone-3.0.1.jar"
+if [ ! -f "$SELENIUM_PATH/selenium-server-standalone-$SELENIUM_VERSION.jar" ]; then
+  SELENIUM_MINOR_VERSION=$(echo $SELENIUM_VERSION | cut -d. -f1-2)
+
+  wget "http://selenium-release.storage.googleapis.com/$SELENIUM_MINOR_VERSION/selenium-server-standalone-$SELENIUM_VERSION.jar" -O "$SELENIUM_PATH/selenium-server-standalone-$SELENIUM_VERSION.jar"
 fi
 
 # download required Selenium Chrome Driver
 if [ ! -f "$SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION" ]; then
-  wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -O "$SELENIUM_PATH/chromedriver.zip"
+  wget "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip" -O "$SELENIUM_PATH/chromedriver.zip"
 
   unzip -o $SELENIUM_PATH/chromedriver.zip -d $SELENIUM_PATH
   mv $SELENIUM_PATH/chromedriver $SELENIUM_PATH/chromedriver-$CHROME_DRIVER_VERSION
@@ -56,6 +58,8 @@ fi;
 # Set MySQL Options
 mysql -e "SET GLOBAL wait_timeout = 5400;"
 mysql -e "SHOW VARIABLES LIKE 'wait_timeout';"
+
+# Prepare MySQL user and database
 mysql -e "CREATE DATABASE drupal;"
 mysql -e "CREATE USER 'thunder'@'localhost' IDENTIFIED BY 'thunder';"
 mysql -e "GRANT ALL ON drupal.* TO 'thunder'@'localhost';"

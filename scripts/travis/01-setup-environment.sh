@@ -25,11 +25,16 @@ export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 export DISPLAY=:99.0
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
+# Get latest ChromeDriver version
 CHROME_DRIVER_VERSION=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 export CHROME_DRIVER_VERSION
 
+# Selenium related environment variables
 SELENIUM_PATH="$PWD/travis_selenium"
 export SELENIUM_PATH
+
+SELENIUM_VERSION="3.0.1"
+export SELENIUM_VERSION
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:
