@@ -606,7 +606,6 @@ function thunder_media_update_8102() {
       $field = FieldConfig::load($fieldConfig);
       if ($field) {
         $settings = $field->getSetting('handler_settings');
-
         $settings['target_bundles']['image'] = 'image';
         $settings['target_bundles']['video'] = 'video';
         $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
