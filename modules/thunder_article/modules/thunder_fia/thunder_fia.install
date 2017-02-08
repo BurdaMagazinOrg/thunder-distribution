@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Add FIA view mode for users.
+ */
+function thunder_fia_update_8001() {
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+  $configUpdate = \Drupal::service('config_update.config_update');
+
+  if (empty($configUpdate->getFromActive('entity_view_mode', 'user.facebook_instant_articles_rss'))) {
+    $configUpdate->import('entity_view_mode', 'user.facebook_instant_articles_rss');
+  }
+
+}
