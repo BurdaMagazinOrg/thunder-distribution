@@ -29,9 +29,12 @@ class ThunderNodeForm extends NodeForm {
       }
 
       if ($this->moduleHandler->moduleExists('inline_entity_form')) {
-        // @codingStandardsIgnoreStart
-        \Drupal\inline_entity_form\ElementSubmit::addCallback($element['save_continue'], $form);
-        // @codingStandardsIgnoreEnd
+        $widget_state = $form_state->get('inline_entity_form');
+        if (!is_null($widget_state)) {
+          // @codingStandardsIgnoreStart
+          \Drupal\inline_entity_form\ElementSubmit::addCallback($element['save_continue'], $form);
+          // @codingStandardsIgnoreEnd
+        }
       }
 
     }
