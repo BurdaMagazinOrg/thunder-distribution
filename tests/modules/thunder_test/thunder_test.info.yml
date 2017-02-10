@@ -1,6 +1,0 @@
-name: 'Thunder test'
-type: module
-description: 'Support module for the thunder tests.'
-core: 8.x
-package: Testing
-version: VERSION

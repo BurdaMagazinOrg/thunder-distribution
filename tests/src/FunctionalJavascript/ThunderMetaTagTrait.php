@@ -22,11 +22,18 @@ trait ThunderMetaTagTrait {
    *   Value for meta tag.
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
-    $isCheckboxTag = $this->getSession()
-      ->evaluateScript("jQuery('input[name*=\"{$fieldName}[\"][type=\"checkbox\"]').length > 0");
-
-    if ($isCheckboxTag) {
+    // If field is checkbox list, then use custom functionality to set values.
+    $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
+    if (!empty($checkboxes)) {
       $this->setCheckboxMetaTag($page, $fieldName, $value);
+
+      return;
+    }
+
+    // If field is date/time field, then set value directly to field.
+    $dateTimeFields = $page->findAll('xpath', "//input[(@type=\"date\" or @type=\"time\") and @name=\"{$fieldName}\"]");
+    if (!empty($dateTimeFields)) {
+      $this->setRawFieldValue($fieldName, $value);
 
       return;
     }
@@ -39,6 +46,8 @@ trait ThunderMetaTagTrait {
 
     $this->scrollElementInView('[name="' . $fieldName . '"]');
     $page->fillField($fieldName, $value);
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
   /**
