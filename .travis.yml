@@ -22,7 +22,14 @@ matrix:
   - php: 7.1
     env: INSTALL_METHOD=drush_make
 
-sudo: false
+# Use newer distribution on Travis CI (Ubuntu 14.04 - Trusty)
+dist: trusty
+
+# Currently there is problem with chrome browser on Travis CI docker environment,
+# but when we enable "sudo" requirement, non-docker environment is used and problem
+# does not appear there.
+# Here is related issue: https://github.com/travis-ci/travis-ci/issues/7150
+sudo: required
 
 # match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
@@ -34,6 +41,11 @@ mysql:
   database: drupal
   username: root
   encoding: utf8
+
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
