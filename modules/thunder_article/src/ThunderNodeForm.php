@@ -27,6 +27,16 @@ class ThunderNodeForm extends NodeForm {
       if ($node->isNew() || $element['unpublish']['#weight'] < $element['publish']['#weight']) {
         $element['save_continue']['#published_status'] = FALSE;
       }
+
+      if ($this->moduleHandler->moduleExists('inline_entity_form')) {
+        $widget_state = $form_state->get('inline_entity_form');
+        if (!is_null($widget_state)) {
+          // @codingStandardsIgnoreStart
+          \Drupal\inline_entity_form\ElementSubmit::addCallback($element['save_continue'], $form);
+          // @codingStandardsIgnoreEnd
+        }
+      }
+
     }
 
     return $element;
@@ -40,7 +50,15 @@ class ThunderNodeForm extends NodeForm {
     parent::save($form, $form_state);
 
     if (in_array('save_continue', $form_state->getTriggeringElement()['#parents'])) {
-      $form_state->setRedirect('entity.node.edit_form', ['node' => $this->entity->id()]);
+
+      $options = [];
+      $query = $this->getRequest()->query;
+      if ($query->has('destination')) {
+        $options['query']['destination'] = $query->get('destination');
+        $query->remove('destination');
+      }
+
+      $form_state->setRedirect('entity.node.edit_form', ['node' => $this->entity->id()], $options);
     }
   }
 
