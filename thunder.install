@@ -419,6 +419,8 @@ function thunder_update_8106() {
     'field_config' => [
       'media.twitter.field_author',
       'media.twitter.field_content',
+      'media.instagram.field_author',
+      'media.instagram.field_content',
     ],
     'entity_view_mode' => [
       'media.paragraph_preview',

@@ -2,6 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.instagram.field_author
+    - field.field.media.instagram.field_content
     - field.field.media.instagram.field_url
     - media_entity.bundle.instagram
   module:
@@ -17,11 +19,13 @@ content:
     label: hidden
     settings:
       width: null
-      height: null
+      hidecaption: false
     third_party_settings: {  }
     region: content
 hidden:
   created: true
+  field_author: true
+  field_content: true
   langcode: true
   name: true
   thumbnail: true
