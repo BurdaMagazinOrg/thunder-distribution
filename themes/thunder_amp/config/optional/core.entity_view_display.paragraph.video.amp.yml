@@ -3,14 +3,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.amp
-    - field.field.paragraph.media.field_media
-    - paragraphs.paragraphs_type.media
-id: paragraph.media.amp
+    - field.field.paragraph.video.field_video
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.amp
 targetEntityType: paragraph
-bundle: media
+bundle: video
 mode: amp
 content:
-  field_media:
+  field_video:
     type: entity_reference_entity_view
     weight: 0
     label: hidden

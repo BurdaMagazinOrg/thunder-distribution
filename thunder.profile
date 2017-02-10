@@ -232,10 +232,23 @@ function thunder_themes_installed($theme_list) {
       ->save(TRUE);
   }
   if (in_array('thunder_amp', $theme_list)) {
+    // Install AMP module.
+    \Drupal::service('module_installer')->install(['amp'], TRUE);
+    \Drupal::service('config.installer')->installOptionalConfig();
+
     \Drupal::configFactory()
       ->getEditable('amp.settings')
       ->set('amp_library_process_full_html', 1)
       ->save(TRUE);
+
+    // Set AMP theme to thunder_amp,
+    // if not set, or is one of the included themes.
+    $ampThemeConfig = \Drupal::configFactory()->getEditable('amp.theme');
+    $ampTheme = $ampThemeConfig->get('amptheme');
+    if (empty($ampTheme) || $ampTheme == 'ampsubtheme_example' || $ampTheme == 'amptheme') {
+      $ampThemeConfig->set('amptheme', 'thunder_amp')
+        ->save(TRUE);
+    }
   }
   if (in_array('amptheme', $theme_list)) {
     \Drupal::service('module_installer')->install(['amp'], TRUE);
