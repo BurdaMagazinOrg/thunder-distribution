@@ -227,7 +227,6 @@ class InstalledConfigurationTest extends BrowserTestBase {
     /** @var \Drupal\config_update\ConfigDiffer $configDiffer */
     $configDiffer = \Drupal::service('config_update.config_diff');
 
-    $differentConfigs = [];
     $differentConfigNames = [];
     foreach ($activeList as $activeConfigName) {
       // Skip incorrect configuration from contribution modules.
@@ -255,11 +254,6 @@ class InstalledConfigurationTest extends BrowserTestBase {
       // Check is configuration same as in Yaml file.
       if (!$configDiffer->same($fileConfig, $activeConfig)) {
         $differentConfigNames[] = $activeConfigName;
-
-        $differentConfigs[$activeConfigName] = [
-          'active' => $activeConfig,
-          'file' => $fileConfig,
-        ];
       }
     }
 
