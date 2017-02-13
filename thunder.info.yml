@@ -37,6 +37,7 @@ dependencies:
 # contrib
   - access_unpublished
   - admin_toolbar_tools
+  - diff
   - libraries
   - simple_sitemap
   - responsive_preview

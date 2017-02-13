@@ -51,6 +51,10 @@ projects:
     type: "module"
     version: "1.0-alpha4"
 
+  diff:
+    type: "module"
+    version: "1.0-rc1"
+
   dropzonejs:
     type: "module"
     version: "1.0-alpha5"
