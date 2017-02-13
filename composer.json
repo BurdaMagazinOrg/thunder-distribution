@@ -86,7 +86,7 @@
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
-        "drupal/better_normalizers": "dev-1.x",
+        "drupal/better_normalizers": "1.0-beta2",
         "drupal/blazy": "1.0-rc1",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",

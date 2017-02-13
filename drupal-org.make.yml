@@ -12,14 +12,11 @@ projects:
 
   adsense:
     type: "module"
-    version: "1.0-beta1"
+    version: "1.0-beta2"
 
   better_normalizers:
     type: "module"
-    download:
-      url: "http://git.drupal.org/project/better_normalizers.git"
-      revision: "df09fc0f4c9f56e9d2544c86d0bd4609bbc4bce5"
-      branch: "8.x-1.x"
+    version: "1.0-beta2"
     patch:
       - "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
 
