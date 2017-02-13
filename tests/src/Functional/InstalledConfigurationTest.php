@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Config\Schema\SchemaCheckTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\thunder\ThunderTestTrait;
 
@@ -22,6 +23,7 @@ use Drupal\thunder\ThunderTestTrait;
 class InstalledConfigurationTest extends BrowserTestBase {
 
   use ThunderTestTrait;
+  use SchemaCheckTrait;
 
   /**
    * Modules to enable.
@@ -204,6 +206,9 @@ class InstalledConfigurationTest extends BrowserTestBase {
     /** @var \Drupal\config_update\ConfigReverter $configUpdate */
     $configUpdate = \Drupal::service('config_update.config_update');
 
+    /** @var \Drupal\Core\Config\TypedConfigManager $typedConfigManager */
+    $typedConfigManager = \Drupal::service('config.typed');
+
     $activeStorage = \Drupal::service('config.storage');
     $installStorage = \Drupal::service('config_update.extension_storage');
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
@@ -228,6 +233,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
     $configDiffer = \Drupal::service('config_update.config_diff');
 
     $differentConfigNames = [];
+    $schemaCheckFail = [];
     foreach ($activeList as $activeConfigName) {
       // Skip incorrect configuration from contribution modules.
       if (in_array($activeConfigName, static::$ignoreContribSettings)) {
@@ -237,6 +243,22 @@ class InstalledConfigurationTest extends BrowserTestBase {
       // Get configuration from file and active configuration.
       $activeConfig = $configUpdate->getFromActive('', $activeConfigName);
       $fileConfig = $configUpdate->getFromExtension('', $activeConfigName);
+
+      // Validate fetched configuration against corresponding schema.
+      if ($typedConfigManager->hasConfigSchema($activeConfigName)) {
+        // Validate active configuration.
+        if ($this->checkConfigSchema($typedConfigManager, $activeConfigName, $activeConfig) !== TRUE) {
+          $schemaCheckFail['active'][] = $activeConfigName;
+        }
+
+        // Validate configuration from file.
+        if ($this->checkConfigSchema($typedConfigManager, $activeConfigName, $fileConfig) !== TRUE) {
+          $schemaCheckFail['file'][] = $activeConfigName;
+        }
+      }
+      else {
+        $schemaCheckFail['no-schema'][] = $activeConfigName;
+      }
 
       // Apply ignore for defined configurations and custom properties.
       if (array_key_exists($activeConfigName, static::$ignoreConfigKeys)) {
@@ -257,9 +279,14 @@ class InstalledConfigurationTest extends BrowserTestBase {
       }
     }
 
-    // Output different configuration names.
-    if (!empty($differentConfigNames)) {
-      echo 'Different configurations: ' . PHP_EOL . print_r($differentConfigNames, TRUE) . PHP_EOL;
+    // Output different configuration names and failed schema checks.
+    if (!empty($differentConfigNames) || !empty($schemaCheckFail)) {
+      $errorOutput = [
+        'configuration-diff' => $differentConfigNames,
+        'schema-check' => $schemaCheckFail,
+      ];
+
+      throw new \Exception('Configuration difference is found: ' . print_r($errorOutput, TRUE));
     }
   }
 
