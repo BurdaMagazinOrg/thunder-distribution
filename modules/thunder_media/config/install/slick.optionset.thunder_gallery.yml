@@ -13,6 +13,7 @@ weight: -10
 group: ''
 skin: default
 breakpoints: 0
+optimized: false
 options:
   options__active_tab: edit-options-settings
   settings:

@@ -172,18 +172,16 @@ class InstalledConfigurationTest extends BrowserTestBase {
   /**
    * List of contribution settings that should be ignored.
    *
-   * TODO: Add list of Drupal tickets.
-   *
    * All these settings exists in module configuration Yaml files, but they are
    * not in sync with configuration that is set after installation.
    *
    * @var array
    */
   protected static $ignoreContribSettings = [
-    // Slick media module.
+    // Slick media module. Issue: https://www.drupal.org/node/2852030
     'core.entity_view_mode.media.slick',
 
-    // Paragraphs module.
+    // Paragraphs module. Issue: https://www.drupal.org/node/2852025
     'core.entity_view_mode.paragraph.preview',
 
     // Focal Point module. Issue: https://www.drupal.org/node/2851587
@@ -267,7 +265,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
 
     // Output different configuration names.
     if (!empty($differentConfigNames)) {
-      echo 'Different configurations: ' . PHP_EOL . print_r($differentConfigs, TRUE) . PHP_EOL;
+      echo 'Different configurations: ' . PHP_EOL . print_r($differentConfigNames, TRUE) . PHP_EOL;
     }
   }
 
