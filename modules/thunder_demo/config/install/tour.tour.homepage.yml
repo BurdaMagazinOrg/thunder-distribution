@@ -24,7 +24,7 @@ tips:
     weight: 2
     attributes:
       data-id: content
-      data-options: tipLocation: left
+      data-options: 'tipLocation: left'
   main_menu:
     id: main_menu
     plugin: text
@@ -49,7 +49,7 @@ tips:
     weight: 5
     attributes:
       data-id: toolbar-tab-tour
-      data-options: nubPosition: top-right
+      data-options: 'nubPosition: top-right'
   next_step:
     id: next_step
     plugin: text

@@ -74,16 +74,16 @@ tips:
     weight: 8
     attributes:
       data-id: edit-advanced
-      data-options: tipLocation: left
+      data-options: 'tipLocation: left'
   article-actions:
     id: article-actions
     plugin: text
-    label: Main actions
+    label: 'Main actions'
     body: '<p>You can preview, save, publish and unpublish the article here.</p><p>Try clicking the down arrow in the "Save and continue" button to reveal the hidden options.</p>'
     weight: 9
     attributes:
       data-id: edit-actions
-      data-options: tipLocation: top
+      data-options: 'tipLocation: top'
   article-last:
     id: article-last
     plugin: text
