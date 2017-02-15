@@ -15,23 +15,23 @@ tips:
   article:
     id: article
     plugin: text
-    label: 'Add new article'
-    body: '<p>In this tour we will explain you the different parts of an article.</p><p>Lets start!</p>'
+    label: 'Article creation page'
+    body: '<p>On this step we''ll explain you the different parts of an article.</p><p>Lets start!</p>'
     weight: 1
   article-channel:
     id: article-channel
     plugin: text
-    label: Channel
-    body: '<p>Choose a “Channel” in which your article will be published.</p><p>"Channels" reflects the site hierarchy.</p>'
-    weight: 1
+    label: 'Channel selection'
+    body: '<p>Channels reflect the site structure. Administrators can easily add, remove, modify and organize them using a simple UI.</p><p>Choose the one in which your article will be published.</p>'
+    weight: 2
     attributes:
       data-id: edit-field-channel
   article-title:
     id: article-title
     plugin: text
     label: Title
-    body: '<p>Enter the title of your article.</p><p>"Title" is used as main heading in your article.</p>'
-    weight: 1
+    body: '<p>Enter the title of your article, which is used as main heading of your article.</p>'
+    weight: 3
     attributes:
       data-id: edit-title-wrapper
   article-seo-title:
@@ -39,15 +39,15 @@ tips:
     plugin: text
     label: Seo-Title
     body: '<p>Enter the same or a different title, which is optimized for search engines.</p><p>It will be used to generate the url and as browser title.</p>'
-    weight: 1
+    weight: 4
     attributes:
       data-id: edit-field-seo-title-wrapper
   article-teaser-media:
     id: article-teaser-media
     plugin: text
     label: 'Teaser media'
-    body: '<p>Enter the information that will be published at the front page. First upload or select a teaser image.</p>'
-    weight: 1
+    body: '<p>Enter the information that will be used for teasers (on the front page for example). First upload or select a teaser image by clicking on the "Select entities" button.</p><p>Take your time! I am not going anywhere. ;)</p>'
+    weight: 5
     attributes:
       data-id: edit-field-teaser-media
   article-teaser-text:
@@ -55,14 +55,38 @@ tips:
     plugin: text
     label: 'Teaser text'
     body: '<p>Type the text which will appear at the front page and which will be used for Facebook and Google-Snippets, too.</p>'
-    weight: 1
+    weight: 6
     attributes:
       data-id: edit-field-teaser-text-wrapper
   article-paragraphs:
     id: article-paragraphs
     plugin: text
     label: Paragraphs
-    body: '<p>The paragraphs section represents the main article content. Here you can add your text and various types of media. To get an introduction, follow <a href="/node/7/edit?tour=1">this</a>.</p>'
-    weight: 1
+    body: '<p>The paragraphs section represents the main article content. Here you can add your text and various types of media. It is easier to explain this part on an existing article, which we''ll do on our next stop.</p><p>But let me show you few more neat things first.</p>'
+    weight: 7
     attributes:
       data-class: 'paragraphs-container .fieldset-legend'
+  article-advanced:
+    id: article-advanced
+    plugin: text
+    label: Advanced
+    body: '<p>They let you configure advanced settings related to the article. You will use this part when dealing with SEO, article promotion, scheduling, etc.</p><p>Click on the section titles to expand them and see what they offer.</p>'
+    weight: 8
+    attributes:
+      data-id: edit-advanced
+      data-options: 'tipLocation: left'
+  article-actions:
+    id: article-actions
+    plugin: text
+    label: 'Main actions'
+    body: '<p>You can preview, save, publish and unpublish the article here.</p><p>Try clicking the down arrow in the "Save and continue" button to reveal the hidden options.</p>'
+    weight: 9
+    attributes:
+      data-id: edit-actions
+      data-options: 'tipLocation: top'
+  article-last:
+    id: article-last
+    plugin: text
+    label: 'What''s next?'
+    body: '<p>You have just learned how to create an article. What do you want to do next?</p><p><em>Ah, right!</em> I promised you that <a href="/node/7/edit?tour=1">I''ll teach you more about paragraphs</a>.'
+    weight: 10
