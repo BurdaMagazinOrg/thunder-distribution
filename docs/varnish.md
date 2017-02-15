@@ -1,6 +1,6 @@
 # Tag-based cache invalidation for Varnish
 
-This is guide how to setup Varnish in order to use effective cache invalidation method. The idea behind is that cache tags provided by Drupal 8 are used to invalidate cache (sometimes this action will be called "purge" in the following documentation). In order to achieve tag-based cache invalidation, few modules have to be installed and configured to work in combination with customized cache invalidation scripts provided for Varnish.
+This is guide on how to setup Varnish in order to use effective cache invalidation. The idea behind it is that cache tags provided by Drupal 8 are used to invalidate cache (sometimes this action will be called "purge" in the following documentation). In order to achieve tag-based cache invalidation a few modules have to be installed and configured to work in combination with customized cache invalidation scripts provided for Varnish.
 
 ### Requirements
 
@@ -9,7 +9,7 @@ This is guide how to setup Varnish in order to use effective cache invalidation 
 
 #### Setup Varnish
 
-The first step is to setup Varnish to accept commands provided by Purge module. At first, we will add the list of servers (IPs) that are allowed to do cache invalidation. That are usually your Drupal 8 servers. The reason for whitelisting Drupal 8 servers is to avoid possible DOS attacks from public IP addresses. At beginning of Varnish script file the following code should be added:
+The first step is to setup Varnish to accept commands provided by Purge module. At first, we will add the list of servers (IPs) that are allowed to do cache invalidation. That are usually your Drupal 8 servers. The reason for whitelisting Drupal 8 servers is to avoid possible DOS attacks from public IP addresses. At the beginning of the Varnish script file the following code should be added:
 ```varnish
 # Whitelist of Purger servers.
 acl purgers {
@@ -19,7 +19,7 @@ acl purgers {
     # "192.168.1.0"/24;
 }
 ```
-Provided example will whitelist only localhost server to do invalidation of cache.
+The provided example will whitelist only localhost server to do invalidation of cache.
 
 After that, we need to add a script that will actually handle cache invalidation. Following script code should be added in ```vcl_recv``` subroutine:
 ```varnish
@@ -43,7 +43,7 @@ if (req.method == "BAN") {
   return (synth(200, "Ban added."));
 }
 ```
-Following script will accept "BAN" command from Drupal 8 Purge module and process it accordingly.
+The following script will accept "BAN" commands from Drupal 8 Purge module and process it accordingly.
 
 After these changes varnish can be restarted and it's ready to accept cache invalidation requests from Drupal 8 Purge module.
 
@@ -69,11 +69,11 @@ To enable modules over drush, execute following command:
 drush en purge, purge_tokens, purge_ui, purge_processor_lateruntime, purge_queuer_coretags, purge_purger_http, purge_purger_http_tagsheader
 ```
 
-After these modules are enabled, Drupal should provide additional header ```Purge-Cache-Tags```. That header property contains all cache tags for the loaded page.
+After these modules are enabled, Drupal should provide the ```Purge-Cache-Tags``` header. That header property contains all cache tags for the loaded page.
 
 #### Setup Drupal site to use Purge
 
-On Drupal 8 site open: Configuration -> Development -> Performance page, link to it is: ```admin/config/development/performance```. Enable caching and set it realy high, idealy max period (1 year). Save configuration and after that open Purge configuration page, link to it is: ```admin/config/development/performance/purge```.
+On the Drupal 8 site open: Configuration -> Development -> Performance page (```admin/config/development/performance```). Enable caching and set it really high, ideally max period (1 year). Save configuration and after that open Purge configuration page (```admin/config/development/performance/purge```).
 
 On that page do following configuration:
 1. Click "Add Purger"
