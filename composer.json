@@ -70,7 +70,7 @@
                 "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
             },
             "drupal/better_normalizers": {
-                "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-2.patch"
+                "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch"
             },
             "drupal/blazy": {
                 "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch",
@@ -86,7 +86,7 @@
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
-        "drupal/better_normalizers": "dev-1.x",
+        "drupal/better_normalizers": "1.0-beta2",
         "drupal/blazy": "1.0-rc1",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
@@ -122,8 +122,8 @@
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "1.1",
-        "drupal/slick": "1.0-rc1",
-        "drupal/slick_media": "1.0-rc1",
+        "drupal/slick": "^1.0",
+        "drupal/slick_media": "^1.0",
         "drupal/thunder_admin": "dev-1.x",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
