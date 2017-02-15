@@ -13,6 +13,46 @@ tips:
   homepage:
     id: homepage
     plugin: text
-    label: 'Welcome and thank you for installing Thunder!'
-    body: '<p>What would you like to try first?</p><p><a href="/node/add/article?tour=1">Create a new article</a><br/><a href="/node/7/edit?tour=1">Introduction to paragraphs</a></p><p>Or just discover Thunder on your own. You can always restart this tour in the top right corner.'
+    label: 'Welcome and thank you for trying Thunder!'
+    body: 'This tour will lead you through its most interesting features. Let''s explore the basic structure of a site first.'
     weight: 1
+  main_content:
+    id: main_content
+    plugin: text
+    label: 'Main content region'
+    body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media asstes and many more here.'
+    weight: 2
+    attributes:
+      data-id: content
+      data-options: 'tipLocation: left'
+  main_menu:
+    id: main_menu
+    plugin: text
+    label: 'Main menu'
+    body: '<p>Main site navigation. You can currently see the links to the two channels that we pre-created for you. All menus in Thunder are easy to modify so they can suit your needs.</p><p><em>Hint: try hovering the menu and look for the pencil icon.</em>'
+    weight: 3
+    attributes:
+      data-class: menu--main
+  admin_menu:
+    id: admin_menu
+    plugin: text
+    label: 'Admin menu'
+    body: '<p>It lets you do the editorial and administrative tasks. Hover over the "Content" link  and see what happens. Don''t worry I''ll wait so you can take your time.</p><p>Neat, ha?</p>'
+    weight: 4
+    attributes:
+      data-class: toolbar-icon-system-admin-content
+  restart_tour:
+    id: restart_tour
+    plugin: text
+    label: 'Need some more time to explore on your own?'
+    body: 'You can stop the tour at any time and re-start it by pressing this button.'
+    weight: 5
+    attributes:
+      data-id: toolbar-tab-tour
+      data-options: 'nubPosition: top-right'
+  next_step:
+    id: next_step
+    plugin: text
+    label: 'Are you ready?'
+    body: '<p>We are! Let''s continue with <a href="/node/add/article?tour=1">the basic content creation</a>.</p>'
+    weight: 6
