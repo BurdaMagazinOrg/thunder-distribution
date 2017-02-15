@@ -159,7 +159,7 @@ projects:
 
   responsive_preview:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1.0-alpha3"
 
   riddle_marketplace:
     type: "module"
@@ -182,7 +182,7 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-rc1"
+    version: "1.0-rc2"
 
   slick_media:
     type: "module"
