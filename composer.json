@@ -60,7 +60,7 @@
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
             },
             "drupal/media_entity_instagram": {
-                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
+                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-38.patch"
             },
             "drupal/shariff": {
                 "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
