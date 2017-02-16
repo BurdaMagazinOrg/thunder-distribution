@@ -9,6 +9,7 @@ use \Drupal\views\Entity\View;
 use \Drupal\entity_browser\Entity\EntityBrowser;
 use \Drupal\user\Entity\Role;
 use \Drupal\field\Entity\FieldConfig;
+use \Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
  * Update hook dependencies.
@@ -635,6 +636,65 @@ function thunder_media_update_8102() {
 
   if ($error) {
     $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Adjust instagrams preview in backend.
+ */
+function thunder_media_update_8103() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['hidden']['thumbnail'] = TRUE;
+  $expectedConfig['content']['field_url'] = [
+    'type' => 'instagram_embed',
+    'weight' => 0,
+    'region' => 'content',
+    'label' => 'hidden',
+    'settings' => [
+      'width' => 241,
+      'height' => 313,
+    ],
+    'third_party_settings' => [],
+  ];
+
+  // New configuration that should be applied.
+  $newConfig['content']['thumbnail'] = [
+    'type' => 'image',
+    'weight' => 0,
+    'region' => 'content',
+    'label' => 'hidden',
+    'settings' => [
+      'image_style' => 'media_thumbnail',
+      'image_link' => '',
+    ],
+    'third_party_settings' => [],
+  ];
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
+    $display = EntityViewDisplay::load('media.instagram.thumbnail');
+    $display->removeComponent('field_url')
+      ->save();
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
+
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__instagram_edit_preview']);
   }
 
   // Output log result depending on channel used for update execution.
