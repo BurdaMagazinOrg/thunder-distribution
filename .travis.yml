@@ -36,7 +36,6 @@ branches:
   only:
     - master
     - develop
-    - feature/verbose-phpcs
 
 mysql:
   database: drupal
