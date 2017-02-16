@@ -9,9 +9,6 @@ use Drupal\Core\Render\Element;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 
-/**
- * Implements hook_theme().
- */
 function thunder_fia_theme($existing, $type, $render, $path) {
   $theme = array();
   $files = scandir(DRUPAL_ROOT . '/' . $path . '/templates');
