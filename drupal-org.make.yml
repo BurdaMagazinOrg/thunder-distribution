@@ -131,7 +131,7 @@ projects:
     type: "module"
     version: "1.2"
     patch:
-      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-42.patch"
+      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-43.patch"
 
   media_entity_image:
     type: "module"
