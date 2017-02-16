@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.amp_metadata_content_image_min_696px_wide
+    - image.style.media_image_tablet
     - media_entity.bundle.image
   module:
     - amp
@@ -29,7 +29,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: amp_metadata_content_image_min_696px_wide
+      image_style: media_image_tablet
       image_link: ''
       amp_layout: responsive
       amp_fixed_height: '300'
