@@ -1,10 +1,10 @@
 # Tag-based cache invalidation for Varnish
 
-This is guide on how to setup Varnish in order to use effective cache invalidation. The idea behind it is that cache tags provided by Drupal 8 are used to invalidate cache (sometimes this action will be called "purge" in the following documentation). In order to achieve tag-based cache invalidation a few modules have to be installed and configured to work in combination with customized cache invalidation scripts provided for Varnish.
+This is guide on how to setup Varnish in order to use effective cache invalidation. The idea behind it is that cache tags provided by Drupal 8 are used to invalidate cache (sometimes this action will be called "purge" in the following documentation). In order to achieve tag-based cache invalidation a few modules have to be installed and configured to work in combination with customized cache invalidation subroutines provided for Varnish.
 
 ### Requirements
 
-1. Varnish service
+1. Varnish service (https://varnish-cache.org)
 2. Purge Drupal 8 module (https://www.drupal.org/project/purge)
 
 #### Setup Varnish
@@ -13,6 +13,7 @@ In order to install Varnish on your platform you can follow installation and con
 On the same Wiki site, you can find several helpful examples of [Varnish configurations relevant for Drupal 8](https://www.varnish-software.com/wiki/content/tutorials/drupal/drupal_vcl.html).
 
 All code examples provided in this documentation should be placed in Varnish script file. By default Varnish uses ```/etc/varnish/default.vcl```, but on different platforms VCL script file can be placed in other location. 
+
 The first step is to setup Varnish to accept commands provided by Purge module. At first, we will add the list of servers (IPs) that are allowed to do cache invalidation. That are usually your Drupal 8 servers. The reason for whitelisting Drupal 8 servers is to avoid possible DOS attacks from public IP addresses. At the beginning of the Varnish script file the following code should be added:
 ```varnish
 # Whitelist of Purger servers.
@@ -49,7 +50,7 @@ if (req.method == "BAN") {
 ```
 The following script will accept "BAN" commands from Drupal 8 Purge module and process it accordingly.
 
-Since ```Purge-Cache-Tags``` header has tendency to get quite big, it would be wise to remove it from response before it's sent to user's browser. That can be achieved with adding following code in ```vcl_deliver``` subroutine:
+Since ```Purge-Cache-Tags``` header has tendency to be quite big, it would be wise to remove it from response before it's sent to user's browser. That can be achieved with adding following code in ```vcl_deliver``` subroutine:
 ```varnish
   # Purge's headers can become quite big, so it should be cleaned before response is returned.
   unset resp.http.Purge-Cache-Tags;
@@ -98,7 +99,15 @@ On that page do following configuration:
 
 With this created Purger for Varnish, everything should work.
 
-#### Clear and rebuild cache
+#### Steps of integration on live system with existing Varnish
+
+On live system integration can be done in following order:
+1. Modify existing Varnish script and reload it without loosing current cached pages. Here is guide [how to reload it](https://ma.ttias.be/reload-varnish-vcl-without-losing-cache-data).
+2. Install Purge modules and enable them (after this step Varnish will receive requests with ```Purge-Cache-Tags``` header and collect them).
+3. Add purger for tag-based cache invalidation as it's explained in documentation.
+4. The last step should be to increase caching time to maximum (already cached pages will be invalidated over time and tag-based cache invalidation will take over).
+
+#### Clearing and rebuilding of cache
 
 If you want to clear all cache on your site and rebuild it, most common way is to use ```drush cache-rebuild``` command, but currently that command will not trigger Purger and Varnish will still keep old cached pages. If you clear cache over user interface in administration page: Configuration -> Development -> Performance (```admin/config/development/performance```), then also Varnish cache will be properly invalidated.
 In order to use ```drush``` command for Varnish cache invalidation, one additional module has to be installed:
@@ -112,11 +121,3 @@ drush cache-rebuild
 
 drush p-invalidate tag '.+'
 ```
-
-#### Steps of integration on live system with existing Varnish
-
-On live system integration can be done in following order:
-1. Modify existing Varnish script and reload it. Here is guide [hot to do it](https://ma.ttias.be/reload-varnish-vcl-without-losing-cache-data)
-2. Install Purge modules and enable them (with this step Varnish will receive requests with ```Purge-Cache-Tags``` header and collect them)
-3. Add purger for tag-based cache invalidation as it's explained in documentation
-4. The last step should be to increase caching time to maximum (already cached pages will be invalidated over time and tag-based cache invalidation will take over)
