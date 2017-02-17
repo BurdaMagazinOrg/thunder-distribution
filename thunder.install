@@ -57,6 +57,8 @@ function thunder_install() {
   // Disable default media view, cause we have our own.
   View::load('media')->setStatus(FALSE)->save();
 
+  \Drupal::service('thunder_updater')->markAllUpdates();
+
 }
 
 /**
