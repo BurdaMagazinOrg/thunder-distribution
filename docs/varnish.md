@@ -9,10 +9,14 @@ This is guide on how to setup Varnish in order to use effective cache invalidati
 
 #### Setup Varnish
 
+In order to install Varnish on your platform you can follow installation and configuration tutorial provided on [Varnish Wiki](https://www.varnish-software.com/wiki/content/tutorials/varnish/varnish_ubuntu.html).
+On the same Wiki site, you can find several helpful examples of [Varnish configurations relevant for Drupal 8](https://www.varnish-software.com/wiki/content/tutorials/drupal/drupal_vcl.html).
+
+All code examples provided in this documentation should be placed in Varnish script file. By default Varnish uses ```/etc/varnish/default.vcl```, but on different platforms VCL script file can be placed in other location. 
 The first step is to setup Varnish to accept commands provided by Purge module. At first, we will add the list of servers (IPs) that are allowed to do cache invalidation. That are usually your Drupal 8 servers. The reason for whitelisting Drupal 8 servers is to avoid possible DOS attacks from public IP addresses. At the beginning of the Varnish script file the following code should be added:
 ```varnish
 # Whitelist of Purger servers.
-acl purgers {
+acl whitelisted_purgers {
     "127.0.0.1";
     # Add any other IP addresses that your Drupal 8 runs on and that you
     # want to allow cache invalidation requests from. For example:
@@ -23,20 +27,20 @@ The provided example will whitelist only localhost server to do invalidation of 
 
 After that, we need to add a script that will actually handle cache invalidation. Following script code should be added in ```vcl_recv``` subroutine:
 ```varnish
-# Only allow BAN requests from whitelisted IP addresses, listed in the 'purgers' ACL.
+# Only allow BAN requests from whitelisted IP addresses, listed in the 'whitelisted_purgers' ACL.
 if (req.method == "BAN") {
   # Check is client IP whitelisted for cache invalidation.
-  if (!client.ip ~ purgers) {
-	return (synth(403, "Not allowed."));
+  if (!client.ip ~ whitelisted_purgers) {
+    return (synth(403, "Not allowed."));
   }
 
   # Logic for the ban, using the Purge-Cache-Tags header. For more info
   # see https://github.com/geerlingguy/drupal-vm/issues/397.
   if (req.http.Purge-Cache-Tags) {
-	ban("obj.http.Purge-Cache-Tags ~ " + req.http.Purge-Cache-Tags);
+    ban("obj.http.Purge-Cache-Tags ~ " + req.http.Purge-Cache-Tags);
   }
   else {
-	return (synth(403, "Purge-Cache-Tags header missing."));
+    return (synth(403, "Purge-Cache-Tags header missing."));
   }
 
   # Throw a synthetic page so the request won't go to the backend.
@@ -45,8 +49,13 @@ if (req.method == "BAN") {
 ```
 The following script will accept "BAN" commands from Drupal 8 Purge module and process it accordingly.
 
-After these changes varnish can be restarted and it's ready to accept cache invalidation requests from Drupal 8 Purge module.
+Since ```Purge-Cache-Tags``` header has tendency to get quite big, it would be wise to remove it from response before it's sent to user's browser. That can be achieved with adding following code in ```vcl_deliver``` subroutine:
+```varnish
+  # Purge's headers can become quite big, so it should be cleaned before response is returned.
+  unset resp.http.Purge-Cache-Tags;
+```
 
+After these changes varnish can be restarted and it's ready to accept cache invalidation requests from Drupal 8 Purge module.
 
 #### Install Drupal 8 Purge modules
 
@@ -88,3 +97,26 @@ On that page do following configuration:
 10. Click "Save Configuration"
 
 With this created Purger for Varnish, everything should work.
+
+#### Clear and rebuild cache
+
+If you want to clear all cache on your site and rebuild it, most common way is to use ```drush cache-rebuild``` command, but currently that command will not trigger Purger and Varnish will still keep old cached pages. If you clear cache over user interface in administration page: Configuration -> Development -> Performance (```admin/config/development/performance```), then also Varnish cache will be properly invalidated.
+In order to use ```drush``` command for Varnish cache invalidation, one additional module has to be installed:
+```bash
+drush en purge_drush
+```
+
+After that it's possible to use following combination of commands to clear all cache in Drupal 8 site and Varnish:
+```bash
+drush cache-rebuild
+
+drush p-invalidate tag '.+'
+```
+
+#### Steps of integration on live system with existing Varnish
+
+On live system integration can be done in following order:
+1. Modify existing Varnish script and reload it. Here is guide [hot to do it](https://ma.ttias.be/reload-varnish-vcl-without-losing-cache-data)
+2. Install Purge modules and enable them (with this step Varnish will receive requests with ```Purge-Cache-Tags``` header and collect them)
+3. Add purger for tag-based cache invalidation as it's explained in documentation
+4. The last step should be to increase caching time to maximum (already cached pages will be invalidated over time and tag-based cache invalidation will take over)
