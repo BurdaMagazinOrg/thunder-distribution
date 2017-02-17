@@ -10,12 +10,6 @@ use Drupal\thunder\ThunderTestTrait;
 /**
  * Test for checking of configuration after install of thunder profile.
  *
- * TODO:
- * - optional configuration test generalization, because of dependencies.
- * - check config against schema.
- *     That can be later used to verify update hooks.
- * - check configuration for other our modules (fe. facebook, amp, riddle, etc.)
- *
  * @package Drupal\Tests\thunder\Kernel
  *
  * @group Thunder
@@ -36,7 +30,23 @@ class InstalledConfigurationTest extends BrowserTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['config_update', 'thunder_demo'];
+  protected static $modules = [
+    'config_update',
+    'thunder_demo',
+    'google_analytics',
+
+    // Additional modules.
+    // DOES NOT WORK! LIST:
+    // 'thunder_fia',
+    // CHECKED LIST:
+    // 'nexx_integration',
+    // 'paragraphs_riddle_marketplace',
+    // 'ivw_integration',
+    // There is already commit that should be pushed to drupal.org HM sandbox.
+    // 'harbourmaster',
+    // 'adsense', // Issue: https://www.drupal.org/node/2853128
+    // end of list.
+  ];
 
   /**
    * The profile to install as a basis for testing.
@@ -44,6 +54,13 @@ class InstalledConfigurationTest extends BrowserTestBase {
    * @var string
    */
   protected $profile = 'thunder';
+
+  /**
+   * Theme name that will be used on installation of test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stable';
 
   /**
    * Ignore list of Core related configurations.
@@ -56,6 +73,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
     'system.site',
     'core.extension',
     'system.performance',
+    'system.theme',
 
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
@@ -64,6 +82,8 @@ class InstalledConfigurationTest extends BrowserTestBase {
     'system.action.user_remove_role_action.administrator',
     'system.action.user_remove_role_action.editor',
     'system.action.user_remove_role_action.seo',
+    'system.action.user_add_role_action.harbourmaster',
+    'system.action.user_remove_role_action.harbourmaster',
 
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
@@ -142,19 +162,6 @@ class InstalledConfigurationTest extends BrowserTestBase {
       'status' => TRUE,
     ],
 
-    // Pathauto module, optional settings.
-    'system.action.pathauto_update_alias_user' => [
-      'dependencies' => [
-        'module' => TRUE,
-      ],
-    ],
-    'system.action.pathauto_update_alias_node' => [
-      'dependencies' => [
-        'module' => TRUE,
-      ],
-    ],
-
-
     // Changed on installation.
     'views.view.glossary' => [
       'dependencies' => [
@@ -167,6 +174,66 @@ class InstalledConfigurationTest extends BrowserTestBase {
       'display' => [
         'block_1' => ['cache_metadata' => ['max-age' => TRUE]],
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
+    ],
+
+    // Infinite Theme - adjusted by Thunder hooks.
+    'infinite.settings' => [
+      'logo' => TRUE,
+    ],
+
+    // Infinite Theme - adjusted by Shariff module hooks.
+    'core.entity_view_display.node.article.teaser_landscape_l' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.teaser_landscape_m' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.teaser_portrait_m' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.teaser_portrait_s' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.teaser_square_m' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.teaser_square_s' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.lazyloading' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.presenter_full' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.presenter_half' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+    'core.entity_view_display.node.article.presenter_home_selectable' => [
+      'hidden' => ['shariff_field' => TRUE],
+    ],
+
+    // Infinite Theme - changed by Thunder.
+    'core.entity_view_display.media.gallery.default' => [
+      'content' => [
+        'field_media_images' => [
+          'settings' => [
+            'view_mode' => TRUE,
+          ],
+        ],
+      ],
+    ],
+
+    // Infinite Theme - changed by Thunder in order to use Slick gallery.
+    'core.entity_view_display.media.image.default' => [
+      'content' => [
+        'field_image' => [
+          'settings' => [
+            'image_style' => TRUE,
+            'responsive_image_style' => TRUE,
+          ],
+        ],
       ],
     ],
   ];
@@ -200,9 +267,72 @@ class InstalledConfigurationTest extends BrowserTestBase {
   ];
 
   /**
+   * Set default theme for test.
+   *
+   * @param string $defaultTheme
+   *   Default Theme.
+   */
+  protected function setDefaultTheme($defaultTheme) {
+    \Drupal::service('theme_installer')->install([$defaultTheme]);
+
+    $theme_config = \Drupal::configFactory()->getEditable('system.theme');
+    $theme_config->set('default', $defaultTheme);
+    $theme_config->save();
+  }
+
+  /**
+   * Return cleaned-up configurations provided as argument.
+   *
+   * @param array $configurations
+   *   List of configurations that will be cleaned-up and returned.
+   * @param string $configurationName
+   *   Configuration name for provided configurations.
+   *
+   * @return array
+   *   Returns cleaned-up configurations.
+   */
+  protected function cleanupConfigurations(array $configurations, $configurationName) {
+    /** @var \Drupal\Core\Config\ExtensionInstallStorage $optionalStorage */
+    $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
+
+    $configCleanup = [];
+
+    // Apply ignore for defined configurations and custom properties.
+    if (array_key_exists($configurationName, static::$ignoreConfigKeys)) {
+      $configCleanup = static::$ignoreConfigKeys[$configurationName];
+    }
+
+    // Ignore configuration dependencies in case of optional configuration.
+    if ($optionalStorage->exists($configurationName)) {
+      $configCleanup = NestedArray::mergeDeep(
+        $configCleanup,
+        ['dependencies' => TRUE]
+      );
+    }
+
+    // If configuration doesn't require cleanup, just return configurations as
+    // they are.
+    if (empty($configCleanup)) {
+      return $configurations;
+    }
+
+    // Apply cleanup for configurations.
+    foreach ($configurations as $index => $arrayToOverwrite) {
+      $configurations[$index] = NestedArray::mergeDeep(
+        $arrayToOverwrite,
+        $configCleanup
+      );
+    }
+
+    return $configurations;
+  }
+
+  /**
    * Compare active configuration with configuration Yaml files.
    */
   public function testInstalledConfiguration() {
+    $this->setDefaultTheme($this->defaultTheme);
+
     /** @var \Drupal\config_update\ConfigReverter $configUpdate */
     $configUpdate = \Drupal::service('config_update.config_update');
 
@@ -211,6 +341,8 @@ class InstalledConfigurationTest extends BrowserTestBase {
 
     $activeStorage = \Drupal::service('config.storage');
     $installStorage = \Drupal::service('config_update.extension_storage');
+
+    /** @var \Drupal\Core\Config\ExtensionInstallStorage $optionalStorage */
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
 
     // Get list of configurations (active, install and optional).
@@ -260,20 +392,16 @@ class InstalledConfigurationTest extends BrowserTestBase {
         $schemaCheckFail['no-schema'][] = $activeConfigName;
       }
 
-      // Apply ignore for defined configurations and custom properties.
-      if (array_key_exists($activeConfigName, static::$ignoreConfigKeys)) {
-        $activeConfig = NestedArray::mergeDeep(
+      // Clean up configuration if it's required.
+      list($activeConfig, $fileConfig) = $this->cleanupConfigurations(
+        [
           $activeConfig,
-          static::$ignoreConfigKeys[$activeConfigName]
-        );
-
-        $fileConfig = NestedArray::mergeDeep(
           $fileConfig,
-          static::$ignoreConfigKeys[$activeConfigName]
-        );
-      }
+        ],
+        $activeConfigName
+      );
 
-      // Check is configuration same as in Yaml file.
+      // Check is active configuration same as in Yaml file.
       if (!$configDiffer->same($fileConfig, $activeConfig)) {
         $differentConfigNames[] = $activeConfigName;
       }
