@@ -46,9 +46,6 @@
       },
       "drupal/media_entity_instagram": {
         "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
-      },
-      "drupal/dropzonejs": {
-        "Fix missing schema": "https://www.drupal.org/files/issues/fixing_schema_errors-2854144-2.patch"
       }
     }
   },
