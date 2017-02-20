@@ -23,6 +23,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_image:
     weight: 0
     label: hidden
@@ -76,6 +77,7 @@ content:
       grid_small: 0
     third_party_settings: {  }
     type: blazy
+    region: content
 hidden:
   created: true
   field_brands: true

@@ -17,6 +17,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   langcode: true

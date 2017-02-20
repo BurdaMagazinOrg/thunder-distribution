@@ -26,6 +26,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
   field_tags:
     type: entity_reference_label
     weight: 1
@@ -33,10 +34,17 @@ content:
     settings:
       link: true
     third_party_settings: {  }
+    region: content
   links:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
+  shariff_field:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_channel: true
   field_meta_tags: true

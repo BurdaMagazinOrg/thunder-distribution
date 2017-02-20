@@ -4,21 +4,21 @@
             "href": ""
         },
         "type": {
-            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/media"
+            "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/image"
         },
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/uid": [
             {
                 "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/revision_uid": [
             {
                 "href": "http:\/\/default\/user\/1?_format=hal_json"
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/field_media": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/field_image": [
             {
-                "href": "http:\/\/default\/media\/5?_format=hal_json"
+                "href": "http:\/\/default\/image\/5?_format=hal_json"
             }
         ]
     },
@@ -39,11 +39,11 @@
     ],
     "type": [
         {
-            "target_id": "media"
+            "target_id": "image"
         }
     ],
     "_embedded": {
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/uid": [
             {
                 "_links": {
                     "self": {
@@ -60,7 +60,7 @@
                 ]
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/revision_uid": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/revision_uid": [
             {
                 "_links": {
                     "self": {
@@ -77,14 +77,14 @@
                 ]
             }
         ],
-        "http:\/\/drupal.org\/rest\/relation\/paragraph\/media\/field_media": [
+        "http:\/\/drupal.org\/rest\/relation\/paragraph\/image\/field_image": [
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/media\/5?_format=hal_json"
+                        "href": "http:\/\/default\/image\/5?_format=hal_json"
                     },
                     "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/media\/image"
+                        "href": "http:\/\/drupal.org\/rest\/type\/image\/image"
                     }
                 },
                 "uuid": [

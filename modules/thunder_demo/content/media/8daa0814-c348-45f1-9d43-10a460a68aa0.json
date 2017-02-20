@@ -8,7 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/media\/instagram\/thumbnail": [
             {
-                "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/instagram.png"
+                "href": "http:\/\/default\/sites\/default\/files\/instagram-thumbnails\/BEiRGTJQJzm.jpg"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/instagram\/uid": [
@@ -52,7 +52,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/sites\/default\/files\/media-icons\/generic\/instagram.png"
+                        "href": "http:\/\/default\/sites\/default\/files\/instagram-thumbnails\/BEiRGTJQJzm.jpg"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
@@ -60,7 +60,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "eb297c9a-6166-4f9d-8529-17ca40523685"
+                        "value": "372a6e28-de43-491d-9e6f-ee0e93747879"
                     }
                 ],
                 "alt": "Thumbnail",

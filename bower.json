@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "slick": "slick-carousel#^1.6.0",
+    "blazy": "blazy#^1.8.2",
     "dropzone": "dropzone#^4.3.0",
-    "blazy": "blazy#^1.8.2"
+    "slick": "slick-carousel#^1.6.0",
+    "shariff": "shariff#^1.24.1"
   },
   "name": "thunder",
   "private": true

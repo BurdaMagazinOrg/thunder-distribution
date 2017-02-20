@@ -20,6 +20,7 @@ content:
       label_plural: ''
     third_party_settings: {  }
     type: inline_entity_form_simple
+    region: content
 hidden:
   created: true
   status: true

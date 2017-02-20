@@ -26,6 +26,7 @@ content:
       autoplay: false
       responsive: false
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_caption: true

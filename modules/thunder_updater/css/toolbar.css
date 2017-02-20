@@ -1,0 +1,12 @@
+/**
+ * Toolbar tab icon.
+ */
+
+.toolbar-bar .toolbar-icon-thunder-updater.toolbar-item {
+  color: orangered;
+}
+.toolbar-bar .toolbar-icon-thunder-updater:before,
+.toolbar-bar .toolbar-icon-thunder-updater:active:before,
+.toolbar-bar .toolbar-icon-thunder-updater.active:before {
+  background-image: url(../files/images/wrench.svg);
+}
