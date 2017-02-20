@@ -4,4 +4,4 @@ core: 8.x
 projects:
   drupal:
     type: core
-    version: 8.3.0-alpha1
+    version: 8.3.0-beta1
