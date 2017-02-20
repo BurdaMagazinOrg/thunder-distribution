@@ -13,15 +13,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
   use ThunderParagraphsTestTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
-   */
-  public static $modules = [
-    'thunder_test',
-  ];
-
-  /**
    * Test order change for Gallery.
    *
    * @throws \Exception
@@ -36,9 +27,8 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
-    $this->getSession()
-      ->getDriver()
-      ->executeScript('jQuery(\'' . $cssSelector . ' div[data-entity-id="media:8"]\').simulate( "drag", { moves: 1, dx: 200, dy: 0 });');
+    $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
+    $this->dragDropElement($dragElement, 200, 0);
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
@@ -49,7 +39,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
 
-    $page->pressButton('Save and keep publish');
+    $this->clickArticleSave();
 
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
@@ -81,7 +71,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Remove 2nd Image.
     $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button');
 
-    $page->pressButton('Save and keep publish');
+    $this->clickArticleSave();
 
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
@@ -103,16 +93,15 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->uploadFile($page, dirname(__FILE__) . '/../../fixtures/reference.jpg');
+    $this->uploadFile($page, realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
 
-    // Move new image -> that's 5th image in list, one row up.
-    $this->getSession()
-      ->getDriver()
-      ->executeScript('jQuery(\'#edit-selected > div:nth(4)\').simulate( "drag", { moves: 1, dx: -440, dy: 0 });');
+    // Move new image -> that's 5th image in list, to 3rd position.
+    $dragElement = $this->xpath("//*[@id='edit-selected']/div[5]")[0];
+    $this->dragDropElement($dragElement, -440, 0);
 
     $this->submitEntityBrowser($page);
 
-    $page->pressButton('Save and keep publish');
+    $this->clickArticleSave();
 
     // Check that, there are 5 images in gallery.
     $numberOfImages = $this->getSession()
@@ -125,7 +114,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
-    $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
+    $this->assertNotEquals(-1, $fileNamePosition, 'For 3rd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
     $this->drupalGet("node/7/edit");
@@ -139,7 +128,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->submitEntityBrowser($page);
 
-    $page->pressButton('Save and keep publish');
+    $this->clickArticleSave();
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()

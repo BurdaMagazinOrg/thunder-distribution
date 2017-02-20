@@ -3,6 +3,7 @@ description: 'Provide content related configs and code for thunder.'
 type: module
 core: 8.x
 dependencies:
+  - config_update
   - entity_browser
   - entity_reference_revisions
   - field
@@ -12,12 +13,14 @@ dependencies:
   - menu_ui
   - metatag
   - metatag_open_graph
+  - metatag_facebook
   - metatag_twitter_cards
   - node
   - paragraphs
   - path
   - pathauto
   - scheduler
+  - shariff
   - taxonomy
   - thunder_media
   - thunder_paragraphs

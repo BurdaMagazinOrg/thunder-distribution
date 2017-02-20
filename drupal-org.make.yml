@@ -2,6 +2,10 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1.0-alpha2"
+
   admin_toolbar:
     type: "module"
     version: "1.18"
@@ -13,14 +17,23 @@ projects:
   better_normalizers:
     type: "module"
     version: "1.0-beta2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch"
 
   blazy:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-rc1"
+    patch:
+      - "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
+      - "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch"
 
   breakpoint_js_settings:
     type: "module"
     version: "1.0-rc1"
+
+  checklistapi:
+    type: "module"
+    version: "1.4"
 
   config_update:
     type: "module"
@@ -53,6 +66,8 @@ projects:
   entity_reference_revisions:
     type: "module"
     version: "1.2"
+    patch:
+      - "https://www.drupal.org/files/issues/2849136-4.patch"
 
   fb_instant_articles:
     type: "module"
@@ -102,7 +117,7 @@ projects:
     type: "module"
     version: "1.2"
     patch:
-      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
+      - "https://www.drupal.org/files/issues/make_posts_responsive-2807735-42.patch"
 
   media_entity_image:
     type: "module"
@@ -126,7 +141,7 @@ projects:
 
   nexx_integration:
     type: "module"
-    version: "1.6"
+    version: "1.7"
 
   paragraphs:
     type: "module"
@@ -136,6 +151,10 @@ projects:
     type: "module"
     version: "1.0-rc1"
 
+  responsive_preview:
+    type: "module"
+    version: "1.0-alpha3"
+
   riddle_marketplace:
     type: "module"
     version: "1.0-alpha5"
@@ -144,17 +163,30 @@ projects:
     type: "module"
     version: "1.0-alpha2"
 
+  shariff:
+    type: "module"
+    version: "1.1"
+    patch:
+      - "https://www.drupal.org/files/issues/2842631.patch"
+      - "https://www.drupal.org/files/issues/2845000_2.patch"
+
   simple_sitemap:
     type: "module"
     version: "2.8"
 
   slick:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-rc2"
 
   slick_media:
     type: "module"
-    version: "1.0-beta6"
+    version: "1.0-rc1"
+
+  thunder_admin:
+    type: "theme"
+    download:
+      url: "https://git.drupal.org/project/thunder_admin.git"
+      tag: "8.x-1.0.1"
 
   token:
     type: "module"
@@ -202,6 +234,13 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/dinbror/blazy/archive/1.8.2.zip"
+
+  shariff_lib:
+    type: "library"
+    directory_name: "shariff"
+    download:
+      type: "get"
+      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
 
   slick_lib:
     type: "library"

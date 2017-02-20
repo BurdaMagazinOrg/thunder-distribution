@@ -54,17 +54,32 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Add Media paragraph.
+   * Add Image paragraph.
    *
    * @param string $fieldName
    *   Field name.
    * @param array $media
    *   List of media identifiers.
    */
-  public function addMediaParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'media');
+  public function addImageParagraph($fieldName, array $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'image');
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_media", 'media_browser', $media);
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
+
+  }
+
+  /**
+   * Add Video paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param array $media
+   *   List of media identifiers.
+   */
+  public function addVideoParagraph($fieldName, array $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'video');
+
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
 
   }
 

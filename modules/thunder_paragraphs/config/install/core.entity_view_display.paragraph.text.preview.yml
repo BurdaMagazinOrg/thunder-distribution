@@ -19,6 +19,7 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   uid: true

@@ -25,6 +25,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
+    region: content
   field_teaser_media:
     type: entity_reference_entity_view
     weight: 1
@@ -33,10 +34,12 @@ content:
       view_mode: square_m
       link: false
     third_party_settings: {  }
+    region: content
   links:
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_meta_tags: true
   field_paragraphs: true
@@ -44,3 +47,4 @@ hidden:
   field_tags: true
   field_teaser_text: true
   langcode: true
+  shariff_field: true

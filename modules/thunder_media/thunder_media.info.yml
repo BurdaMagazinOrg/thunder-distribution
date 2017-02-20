@@ -4,6 +4,7 @@ type: module
 core: 8.x
 dependencies:
   - blazy
+  - config_update
   - datetime
   - dropzonejs_eb_widget
   - entity_browser

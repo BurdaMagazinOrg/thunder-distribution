@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Tests the interactive installer installing the standard profile.
  *
- * @group Thunder
+ * @group ThunderInstaller
  */
 class ThunderInstallerTest extends InstallerTestBase {
 
@@ -84,6 +84,10 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Configure modules.
     $this->setUpModules();
 
+    // Click link, we don't get redirected automatically in tests.
+    $this->clickLink('click here');
+    $this->isInstalled = TRUE;
+
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
@@ -148,8 +152,6 @@ class ThunderInstallerTest extends InstallerTestBase {
   protected function setUpModules() {
 
     $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
-    $this->isInstalled = TRUE;
-
   }
 
   /**

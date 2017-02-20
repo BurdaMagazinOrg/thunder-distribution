@@ -23,6 +23,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_description:
     type: text_textarea
     weight: 4
@@ -30,11 +31,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_media_video_embed_field:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: video_embed_field_textfield
+    region: content
   name:
     type: string_textfield
     weight: 0
@@ -42,6 +45,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_caption: true

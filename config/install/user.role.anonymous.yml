@@ -13,3 +13,4 @@ permissions:
   - 'access user profiles'
   - 'view published terms in channel'
   - 'view published terms in tags'
+  - 'access_unpublished node article'

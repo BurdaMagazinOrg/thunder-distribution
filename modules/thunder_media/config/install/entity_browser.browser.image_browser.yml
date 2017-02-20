@@ -14,7 +14,7 @@ display: modal
 display_configuration:
   width: '1245'
   height: ''
-  link_text: 'Select entities'
+  link_text: 'Select image'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
@@ -25,7 +25,7 @@ widgets:
     settings:
       view: image_browser
       view_display: entity_browser_1
-      submit_text: 'Select entities'
+      submit_text: 'Select image'
       auto_select: false
     uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
     weight: -10

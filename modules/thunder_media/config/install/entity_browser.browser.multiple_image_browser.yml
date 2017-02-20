@@ -14,7 +14,7 @@ display: modal
 display_configuration:
   width: '1245'
   height: ''
-  link_text: 'Select entities'
+  link_text: 'Select images'
   auto_open: false
 selection_display: multi_step_display
 selection_display_configuration:
@@ -34,7 +34,7 @@ widgets:
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
-      submit_text: 'Select entities'
+      submit_text: 'Import images'
       auto_select: true
     uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
     weight: -9
@@ -44,7 +44,7 @@ widgets:
     settings:
       view: image_browser
       view_display: entity_browser_1
-      submit_text: 'Select entities'
+      submit_text: 'Select images'
       auto_select: true
     uuid: 7d7f8f45-f628-48a3-84a8-c962c73f39e8
     weight: -10
