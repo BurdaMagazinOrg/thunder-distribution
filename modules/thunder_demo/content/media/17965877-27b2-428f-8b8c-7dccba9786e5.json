@@ -8,12 +8,12 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/media\/image\/thumbnail": [
             {
-                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/image\/field_image": [
             {
-                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
             }
         ]
     },
@@ -47,7 +47,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
@@ -68,7 +68,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+                        "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/file\/file"

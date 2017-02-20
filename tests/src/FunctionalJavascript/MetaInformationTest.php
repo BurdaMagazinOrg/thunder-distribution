@@ -88,7 +88,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     '[node:title]' => 'Test Note Title',
 
     // For testing Media:1 is used for teaser.
-    '[node:field_teaser_media:entity:field_image:facebook]' => 'LIKE:/files/styles/facebook/public/2016-05/thunder_1.jpg?itok=',
+    '[node:field_teaser_media:entity:field_image:facebook]' => 'LIKE:/files/styles/facebook/public/2016-05/thunder.jpg?itok=',
     '[node:field_teaser_media:entity:field_image:facebook:mimetype]' => 'image/jpeg',
     '[node:field_teaser_media:entity:field_image:facebook:height]' => '630',
     '[node:field_teaser_media:entity:field_image:facebook:width]' => '1200',
@@ -121,6 +121,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    */
   protected function createArticleWithFields(array $fieldValues = NULL) {
     $this->drupalGet('node/add/article');
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page = $this->getSession()->getPage();
 

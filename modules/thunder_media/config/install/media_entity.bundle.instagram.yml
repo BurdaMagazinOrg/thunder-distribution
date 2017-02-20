@@ -20,6 +20,4 @@ queue_thumbnail_downloads: false
 new_revision: false
 type_configuration:
   source_field: field_url
-field_map:
-  username: field_author
-  caption: field_content
+field_map: {  }
