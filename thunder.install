@@ -276,7 +276,10 @@ function thunder_update_8006() {
   $updateLogger = Drupal::service('thunder_updater.logger');
 
   $configs = [
-    'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
+    'entity_view_display' => [
+      'paragraph.instagram.preview',
+      'media.instagram.thumbnail',
+    ],
   ];
 
   /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
@@ -294,7 +297,10 @@ function thunder_update_8006() {
         $configReverter->import($entity, $id);
       }
       catch (\Exception $e) {
-        $updateLogger->warning(t('Unable to import @entity.@id config.', ['@id' => $id, '@entity' => $entity]));
+        $updateLogger->warning(t('Unable to import @entity.@id config.', [
+          '@id' => $id,
+          '@entity' => $entity,
+        ]));
       }
     }
   }
@@ -655,4 +661,105 @@ function thunder_update_8111() {
 
   // Output logged result of update hook execution.
   return $updateLogger->output();
+}
+
+/**
+ * Installs new thunder admin theme.
+ */
+function thunder_update_8107() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  $configs = [
+    'field_storage_config' => ['media.field_author', 'media.field_content'],
+    'field_config' => [
+      'media.twitter.field_author',
+      'media.twitter.field_content',
+      'media.instagram.field_author',
+      'media.instagram.field_content',
+    ],
+    'entity_view_mode' => [
+      'media.paragraph_preview',
+    ],
+    'entity_view_display' => [
+      'media.gallery.paragraph_preview',
+      'media.image.paragraph_preview',
+      'media.instagram.paragraph_preview',
+      'media.twitter.paragraph_preview',
+      'media.video.paragraph_preview',
+      'paragraph.link.preview',
+      'paragraph.twitter.preview',
+    ],
+    'image_style' => [
+      'paragraph_preview_thumbnail',
+    ],
+  ];
+
+  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
+
+  // Import listed configurations.
+  foreach ($configs as $entity => $ids) {
+    foreach ($ids as $id) {
+      try {
+        $configReverter->import($entity, $id);
+      }
+      catch (\Exception $e) {
+        $updateLogger->warning(t('Unable to import @entity.@id config.', [
+          '@id' => $id,
+          '@entity' => $entity,
+        ]));
+      }
+    }
+  }
+
+  $oldConfig['third_party_settings']['field_group']['group_teaser']['format_settings']['classes'] = 'article-teaser';
+  $oldConfig['third_party_settings']['field_group']['group_paragraphs']['format_settings']['classes'] = 'paragraphs-container';
+  $oldConfig['third_party_settings']['field_group']['group_basis']['format_settings']['classes'] = '';
+
+  $newConfig['third_party_settings']['field_group']['group_teaser']['format_settings']['classes'] = 'content-form__form-section article-teaser';
+  $newConfig['third_party_settings']['field_group']['group_paragraphs']['format_settings']['classes'] = 'content-form__form-section paragraphs-container';
+  $newConfig['third_party_settings']['field_group']['group_basis']['format_settings']['classes'] = 'content-form__form-section';
+
+  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_form_display.node.article.default', $newConfig, $oldConfig)) {
+  }
+
+  $oldConfig['content']['field_media']['type'] = 'media_thumbnail';
+  $oldConfig['content']['field_media']['settings']['image_style'] = 'media_thumbnail';
+  $oldConfig['content']['field_media']['settings']['image_link'] = '';
+
+  $newConfig['content']['field_media']['type'] = 'entity_reference_entity_view';
+  $newConfig['content']['field_media']['settings']['image_link'] = NULL;
+  $newConfig['content']['field_media']['settings']['image_style'] = NULL;
+  $newConfig['content']['field_media']['settings']['view_mode'] = 'paragraph_preview';
+  $newConfig['content']['field_media']['settings']['link'] = FALSE;
+
+  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_view_display.paragraph.gallery.preview', $newConfig, $oldConfig)) {
+  }
+
+  // Switch view modes.
+  $formDisplays = [
+    'core.entity_view_display.paragraph.instagram.preview' => 'field_media',
+    'core.entity_view_display.paragraph.image.preview' => 'field_image',
+    'core.entity_view_display.paragraph.video.preview' => 'field_video',
+  ];
+
+  foreach ($formDisplays as $formDisplay => $fieldName) {
+    $oldConfig = $newConfig = [];
+
+    $oldConfig['content'][$fieldName]['settings']['view_mode'] = 'thumbnail';
+    $newConfig['content'][$fieldName]['settings']['view_mode'] = 'paragraph_preview';
+
+    \Drupal::service('thunder_updater')->updateConfig($formDisplay, $newConfig, $oldConfig);
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }

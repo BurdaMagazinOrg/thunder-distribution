@@ -3,22 +3,21 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
-    - field.field.paragraph.image.field_image
-    - paragraphs.paragraphs_type.image
-id: paragraph.image.preview
+    - field.field.paragraph.twitter.field_media
+    - paragraphs.paragraphs_type.twitter
+id: paragraph.twitter.preview
 targetEntityType: paragraph
-bundle: image
+bundle: twitter
 mode: preview
 content:
-  field_image:
+  field_media:
+    type: entity_reference_entity_view
     weight: 0
     label: hidden
     settings:
       view_mode: paragraph_preview
       link: false
     third_party_settings: {  }
-    region: content
-    type: entity_reference_entity_view
 hidden:
   created: true
   uid: true

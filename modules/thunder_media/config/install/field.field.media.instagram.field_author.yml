@@ -1,0 +1,19 @@
+uuid: 0d123b26-1574-4d9c-9e48-cb5f44d7c8b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_author
+    - media_entity.bundle.instagram
+id: media.instagram.field_author
+field_name: field_author
+entity_type: media
+bundle: instagram
+label: Author
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

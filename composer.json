@@ -91,6 +91,7 @@
         "drupal/default_content": "^1.0",
         "drupal/diff": "^1.0",
         "drupal/dropzonejs": "^1.0",
+        "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
         "drupal/entity_browser": "^1.0",
         "drupal/entity_reference_revisions": "^1.0",
