@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\block\Entity\Block;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -249,6 +250,23 @@ function thunder_themes_installed($theme_list) {
       $ampThemeConfig->set('amptheme', 'thunder_amp')
         ->save(TRUE);
     }
+
+    // Disable unused blocks.
+    /** @var \Drupal\block\Entity\Block[] $blocks */
+    $blocks = Block::loadMultiple([
+      'thunder_amp_account_menu',
+      'thunder_amp_breadcrumbs',
+      'thunder_amp_footer',
+      'thunder_amp_local_actions',
+      'thunder_amp_local_tasks',
+      'thunder_amp_main_menu',
+      'thunder_amp_messages',
+      'thunder_amp_tools',
+    ]);
+    foreach ($blocks as $block) {
+      $block->disable()->save();
+    }
+
   }
   if (in_array('amptheme', $theme_list)) {
     \Drupal::service('module_installer')->install(['amp'], TRUE);
