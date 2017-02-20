@@ -79,6 +79,69 @@ All Thunder pull requests are execute on [Travis CI](https://travis-ci.org/Burda
 
 We support some test execution options. They can be provided in commit message in square brackets []. Here is list of options supported:
 - TEST_UPDATE - allowed values: (true), this option will execute custom test path, where update (including execution of update hooks) from latest released version will be tested. This option should be used in case of pull request with update hooks or module update.
-- INSTALL_METHOD - allowed values: (drush_make, composer), this options overwrites default install method and it allows to test PH P5.6 and 7.1 with same install method.
+- INSTALL_METHOD - allowed values: (drush_make, composer), this options overwrites default install method and it allows to test PHP 5.6 and 7.1 with same install method.
 - TEST_INSTALLER - allowed values: (true), this option will execute additional tests, that tests installation of Thunder with default language (English) and German. These tests require significant more time to be executed.
 - SAUCE_LABS_ENABLED - allowed values: (true), this option will execute tests on [Sauce Labs](https://saucelabs.com), where screenshots and videos of test executions are available for additional investigation of possible problems. This option significantly increases execution time of tests.
+
+----------
+
+## Updating Thunder
+
+Thunder tries to provide updates for every change that was made. That could be changes on existing configurations or adding of new configurations.
+
+### Writing update hooks
+
+To support the creation of update hooks, Thunder provides the thunder_updater module. That contains several methods to e.g. update existing configuration or enabling modules.
+
+All the helper methods can be found in the [UpdaterInterface](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/modules/thunder_updater/src/UpdaterInterface.php).
+
+#### Importing new configuration
+
+To import new configuration, the Drupal\config_update\ConfigReverter::import() method could be used.
+```php
+  $configUpdater = \Drupal::service('config_update.config_update');
+
+  try {
+    $configUpdater->import('paragraphs_type', 'image');
+  }
+  catch (\Exception $e) {
+    $error = TRUE;
+    $updateLogger->warning(t('Unable to import config'));
+  }
+
+```
+It imports configuration, that's in a modules config directory. 
+
+#### Updating existing configuration
+
+Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state. 
+
+```php
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_url'] = [
+    'type' => 'instagram_embed',
+    'weight' => 0,
+    'label' => 'hidden',
+    'settings' => [
+      'width' => 241,
+      'height' => 313,
+    ],
+    'third_party_settings' => [],
+  ];
+
+  // New configuration that should be applied.
+  $newConfig['content']['thumbnail'] = [
+    'type' => 'image',
+    'weight' => 0,
+    'region' => 'content',
+    'label' => 'hidden',
+    'settings' => [
+      'image_style' => 'media_thumbnail',
+      'image_link' => '',
+    ],
+    'third_party_settings' => [],
+  ];
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig);
+```
