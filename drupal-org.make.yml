@@ -49,14 +49,11 @@ projects:
 
   default_content:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1.0-alpha4"
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha3"
-    patch:
-      - "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch"
-      - "https://www.drupal.org/files/issues/2823670_17.patch"
+    version: "1.0-alpha4"
 
   entity:
     type: "module"
@@ -148,10 +145,7 @@ projects:
 
   paragraphs:
     type: "module"
-    version: "1.0"
-    patch:
-      - "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch"
-      - "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
+    version: "1.1"
 
   pathauto:
     type: "module"
