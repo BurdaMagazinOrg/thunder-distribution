@@ -54,6 +54,8 @@ projects:
   diff:
     type: "module"
     version: "1.0-rc1"
+    patch:
+      - "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
 
   dropzonejs:
     type: "module"
