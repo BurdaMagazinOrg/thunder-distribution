@@ -36,9 +36,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
     'google_analytics',
 
     // Additional modules.
-    // DOES NOT WORK! LIST:
     // 'thunder_fia',
-    // CHECKED LIST:
     // 'nexx_integration',
     // 'paragraphs_riddle_marketplace',
     // 'ivw_integration',
@@ -67,7 +65,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $ignoreCoreSettings = [
+  protected static $ignoreCoreConfigs = [
     'checklistapi.progress.thunder_updater',
     'thunder_base.settings',
     'system.site',
@@ -177,6 +175,18 @@ class InstalledConfigurationTest extends BrowserTestBase {
       ],
     ],
 
+    // Diff Module: changed on installation of module when additional library
+    // exists on system: mkalkbrenner/php-htmldiff-advanced.
+    'diff.settings' => [
+      'general_settings' => [
+        'layout_plugins' => [
+          'visual_inline' => [
+            'enabled' => TRUE,
+          ],
+        ],
+      ],
+    ],
+
     // Infinite Theme - adjusted by Thunder hooks.
     'infinite.settings' => [
       'logo' => TRUE,
@@ -236,6 +246,11 @@ class InstalledConfigurationTest extends BrowserTestBase {
         ],
       ],
     ],
+
+    // Diff module. Issue: https://www.drupal.org/node/2854581.
+    'core.entity_view_mode.node.diff' => [
+      'langcode' => TRUE,
+    ],
   ];
 
   /**
@@ -246,7 +261,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $ignoreContribSettings = [
+  protected static $ignoreConfigs = [
     // Slick media module. Issue: https://www.drupal.org/node/2852030
     'core.entity_view_mode.media.slick',
 
@@ -275,9 +290,9 @@ class InstalledConfigurationTest extends BrowserTestBase {
   protected function setDefaultTheme($defaultTheme) {
     \Drupal::service('theme_installer')->install([$defaultTheme]);
 
-    $theme_config = \Drupal::configFactory()->getEditable('system.theme');
-    $theme_config->set('default', $defaultTheme);
-    $theme_config->save();
+    $themeConfig = \Drupal::configFactory()->getEditable('system.theme');
+    $themeConfig->set('default', $defaultTheme);
+    $themeConfig->save();
   }
 
   /**
@@ -355,7 +370,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
     $this->assertEquals([], $installListDiff, "All required configurations should be installed.");
 
     // Filter active list.
-    $activeList = array_diff($activeList, static::$ignoreCoreSettings);
+    $activeList = array_diff($activeList, static::$ignoreCoreConfigs);
 
     // Check that all active configuration are provided by Yaml files.
     $activeListDiff = array_diff($activeList, $installList, $optionalList);
@@ -368,7 +383,7 @@ class InstalledConfigurationTest extends BrowserTestBase {
     $schemaCheckFail = [];
     foreach ($activeList as $activeConfigName) {
       // Skip incorrect configuration from contribution modules.
-      if (in_array($activeConfigName, static::$ignoreContribSettings)) {
+      if (in_array($activeConfigName, static::$ignoreConfigs)) {
         continue;
       }
 
