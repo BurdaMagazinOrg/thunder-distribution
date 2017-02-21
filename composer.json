@@ -136,7 +136,9 @@
         "bower-asset/shariff": "^1.24"
     },
     "provide": {
-        "heiseonline/shariff": "master",
+        "heiseonline/shariff": "master"
+    },
+    "replace": {
         "bower-asset/jquery": "*"
     },
     "require-dev": {
