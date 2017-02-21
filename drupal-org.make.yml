@@ -240,6 +240,13 @@ projects:
     type: "module"
     version: "1"
 
+  views_autocomplete_filters:
+    type: "module"
+    download:
+      url: "https://git.drupal.org/project/views_autocomplete_filters.git"
+      revision: "2915a742434bbb38b36edda4e98754698da33aed"
+      branch: "8.x-1.x"
+
   views_load_more:
     type: "module"
     download:

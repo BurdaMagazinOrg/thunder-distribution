@@ -30,5 +30,6 @@ dependencies:
   - drupal:views
   - field_group:field_group
   - empty_fields:empty_fields
+  - views_autocomplete_filters:views_autocomplete_filters
 package: Thunder
 configure: thunder_media.configuration_form

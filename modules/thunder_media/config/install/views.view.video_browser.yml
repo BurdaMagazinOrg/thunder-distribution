@@ -9,6 +9,7 @@ dependencies:
     - image
     - media_entity
     - user
+    - views_autocomplete_filters
 id: video_browser
 label: 'Video Browser'
 module: views
@@ -443,6 +444,13 @@ display:
               editor: '0'
               seo: '0'
               administrator: '0'
+            autocomplete_filter: 1
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: name
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 0
           is_grouped: false
           group_info:
             label: ''
