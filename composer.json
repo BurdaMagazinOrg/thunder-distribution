@@ -41,6 +41,11 @@
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
+            "docroot/libraries/{$name}/": [
+                "type:drupal-library",
+                "vendor:bower-asset",
+                "vendor:npm-asset"
+            ],
             "docroot/profiles/contrib/{$name}": [
                 "type:drupal-profile"
             ],
