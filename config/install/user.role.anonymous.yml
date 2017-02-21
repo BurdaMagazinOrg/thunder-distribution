@@ -7,10 +7,10 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
-  - 'use text format restricted_html'
-  - 'opt-in or out of tracking'
-  - 'view media'
   - 'access user profiles'
+  - 'access_unpublished node article'
+  - 'opt-in or out of tracking'
+  - 'use text format restricted_html'
+  - 'view media'
   - 'view published terms in channel'
   - 'view published terms in tags'
-  - 'access_unpublished node article'
