@@ -164,24 +164,11 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->assertText($this->rootUser->getUsername());
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
-    $query = \Drupal::database()->select('watchdog', 'w');
-
-    /** @var \Drupal\Core\Database\Statement $results */
-    $results = $query->fields('w', array(
-      'wid',
-      'uid',
-      'severity',
-      'type',
-      'timestamp',
-      'message',
-      'variables',
-      'link',
-    ))
-      ->condition('severity', 4, '<')
-      ->execute();
+    $query = \Drupal::database()->select('watchdog', 'w')
+      ->condition('severity', 4, '<');
 
     // We have one expected warning from the simple_sitemap module.
-    $this->assertEqual(count($results->fetchAll()), 1);
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), 1);
 
   }
 
