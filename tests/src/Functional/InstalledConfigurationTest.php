@@ -4,8 +4,7 @@ namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\Schema\SchemaCheckTrait;
-use Drupal\Tests\BrowserTestBase;
-use Drupal\thunder\ThunderTestTrait;
+use Drupal\thunder\ThunderBaseTest;
 
 /**
  * Test for checking of configuration after install of thunder profile.
@@ -14,9 +13,8 @@ use Drupal\thunder\ThunderTestTrait;
  *
  * @group Thunder
  */
-class InstalledConfigurationTest extends BrowserTestBase {
+class InstalledConfigurationTest extends ThunderBaseTest {
 
-  use ThunderTestTrait;
   use SchemaCheckTrait;
 
   /**
@@ -31,7 +29,6 @@ class InstalledConfigurationTest extends BrowserTestBase {
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
   protected static $modules = [
-    'config_update',
     'thunder_demo',
     'google_analytics',
 
@@ -45,13 +42,6 @@ class InstalledConfigurationTest extends BrowserTestBase {
     // 'adsense', // Issue: https://www.drupal.org/node/2853128
     // end of list.
   ];
-
-  /**
-   * The profile to install as a basis for testing.
-   *
-   * @var string
-   */
-  protected $profile = 'thunder';
 
   /**
    * Theme name that will be used on installation of test.
