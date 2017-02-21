@@ -180,7 +180,8 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->condition('severity', 4, '<')
       ->execute();
 
-    $this->assertEqual(count($results->fetchAll()), 0);
+    // We have one expected warning from the simple_sitemap module.
+    $this->assertEqual(count($results->fetchAll()), 1);
 
   }
 
