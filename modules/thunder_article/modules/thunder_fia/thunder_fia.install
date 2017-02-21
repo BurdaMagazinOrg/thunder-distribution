@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Install, update and uninstall functions for the thunder_fia module.
+ */
+
+/**
  * Add FIA view mode for users.
  */
 function thunder_fia_update_8001() {
