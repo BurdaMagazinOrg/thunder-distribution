@@ -162,6 +162,14 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->assertResponse(200);
     // Confirm that we are logged-in after installation.
     $this->assertText($this->rootUser->getUsername());
+
+    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
+    $query = \Drupal::database()->select('watchdog', 'w')
+      ->condition('severity', 4, '<');
+
+    // We have one expected warning from the simple_sitemap module.
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), 1);
+
   }
 
 }
