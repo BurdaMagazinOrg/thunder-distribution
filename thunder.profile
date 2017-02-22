@@ -211,7 +211,7 @@ function thunder_themes_installed($theme_list) {
     $profilePath = drupal_get_path('profile', 'thunder');
     \Drupal::configFactory()
       ->getEditable('infinite.settings')
-      ->set('logo.use_default', 0)
+      ->set('logo.use_default', FALSE)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
       ->save(TRUE);
 
