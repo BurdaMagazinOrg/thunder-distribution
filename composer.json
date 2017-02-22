@@ -41,7 +41,6 @@
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "docroot/libraries/slick": ["bower-asset/slick-carousel"],
             "docroot/libraries/{$name}/": [
                 "type:drupal-library",
                 "vendor:bower-asset",
