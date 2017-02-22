@@ -11,7 +11,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @package Drupal\Tests\thunder\Kernel
  *
- * @group Thunder
+ * @group ThunderConfig
  */
 class InstalledConfigurationTest extends ThunderBaseTest {
 
