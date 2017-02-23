@@ -31,12 +31,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $modules = [
     'thunder_demo',
     'google_analytics',
+    'nexx_integration',
+    'ivw_integration',
 
     // Additional modules.
     // 'thunder_fia',
-    // 'nexx_integration',
     // 'paragraphs_riddle_marketplace',
-    // 'ivw_integration',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
     // 'adsense', // Issue: https://www.drupal.org/node/2853128
