@@ -33,9 +33,9 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'google_analytics',
     'nexx_integration',
     'ivw_integration',
-    'thunder_fia',
 
     // Additional modules.
+    // 'thunder_fia',
     // 'paragraphs_riddle_marketplace',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
@@ -240,6 +240,27 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // Diff module. Issue: https://www.drupal.org/node/2854581.
     'core.entity_view_mode.node.diff' => [
       'langcode' => TRUE,
+    ],
+
+    // The thunder profile changes article and channel taxonomy when ivw module
+    // is installed.
+    'core.entity_form_display.node.article.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.taxonomy_term.channel.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
     ],
   ];
 
