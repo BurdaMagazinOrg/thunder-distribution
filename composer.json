@@ -134,7 +134,7 @@
         "drupal/thunder_admin": ">=1",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
-        "drupal/views_autocomplete_filters": "dev-1.x",
+        "drupal/views_autocomplete_filters": "^1.0",
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
         "bower-asset/dropzone": "^4.2",

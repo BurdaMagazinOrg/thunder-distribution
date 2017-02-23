@@ -465,7 +465,7 @@ display:
             group_items: {  }
           entity_type: media
           entity_field: name
-          plugin_id: string
+          plugin_id: views_autocomplete_filters_string
       sorts:
         created:
           id: created
