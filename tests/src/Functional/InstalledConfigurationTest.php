@@ -33,9 +33,9 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'google_analytics',
     'nexx_integration',
     'ivw_integration',
+    'thunder_fia',
 
     // Additional modules.
-    // 'thunder_fia',
     // 'paragraphs_riddle_marketplace',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
