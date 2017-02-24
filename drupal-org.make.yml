@@ -100,7 +100,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   libraries:
     type: "module"
@@ -147,7 +147,7 @@ projects:
 
   nexx_integration:
     type: "module"
-    version: "1.7"
+    version: "1.8"
 
   paragraphs:
     type: "module"
