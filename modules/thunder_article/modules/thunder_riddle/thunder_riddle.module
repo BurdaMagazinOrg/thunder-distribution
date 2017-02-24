@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Thunder riddle install hooks.
+ */
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function thunder_riddle_menu_local_actions_alter(&$local_actions) {
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  if ($view) {
+    $local_actions['riddle_marketplace.import']['appears_on'][] = 'view.thunder_media.media_page_list';
+  }
+}

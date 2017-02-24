@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.riddle_browser
+  module:
+    - views
+name: riddle_browser
+label: 'Riddle Browser'
+display: modal
+display_configuration:
+  width: '1245'
+  height: ''
+  link_text: 'Select riddle'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: single
+widget_selector_configuration: {  }
+widgets:
+  81f5b7e2-b2f5-4e58-ab48-8c5f2eb130bf:
+    settings:
+      view: riddle_browser
+      view_display: entity_browser_1
+      submit_text: 'Select riddle'
+      auto_select: false
+    uuid: 81f5b7e2-b2f5-4e58-ab48-8c5f2eb130bf
+    weight: 1
+    label: view
+    id: view

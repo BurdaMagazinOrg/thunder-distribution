@@ -1,0 +1,8 @@
+name: 'Thunder Riddle integration'
+description: 'Provide an integration with riddle marketplace.'
+type: module
+core: 8.x
+dependencies:
+  - media_riddle_marketplace
+version: 8.x-1.x-dev
+package: Thunder

@@ -256,15 +256,15 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (in_array('paragraphs_riddle_marketplace', $modules)) {
+  if (in_array('thunder_riddle', $modules)) {
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = entity_load('field_config', 'node.article.field_paragraphs');
 
     $settings = $field->getSetting('handler_settings');
 
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
+    $settings['target_bundles']['riddle'] = 'riddle';
+    $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
 
     $field->setSetting('handler_settings', $settings);
 
