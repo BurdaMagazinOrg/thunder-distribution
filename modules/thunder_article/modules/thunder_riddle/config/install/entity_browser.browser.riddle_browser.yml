@@ -27,4 +27,4 @@ widgets:
     uuid: 81f5b7e2-b2f5-4e58-ab48-8c5f2eb130bf
     weight: 1
     label: view
-    id: view
+    id: riddle_view
