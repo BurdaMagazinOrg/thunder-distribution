@@ -12,7 +12,7 @@ div.field--widget-entity-browser-entity-reference  details.form-wrapper {
 }
 
 fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text {
-  padding: 0 10px
+  padding: 0 10px;
 }
 
 @media all and (min-width: 900px) {
