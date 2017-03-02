@@ -89,8 +89,6 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entityManager
    *   EntityManager (entity.manager) service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
    */
   public function __construct(EntityManagerInterface $entityManager, ConfigFactoryInterface $configFactory) {
     $this->entityManager = $entityManager;

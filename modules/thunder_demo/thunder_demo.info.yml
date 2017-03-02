@@ -3,8 +3,9 @@ type: module
 description: Provide demo content.
 package: Thunder
 core: 8.x
+version: 8.x-1.x-dev
 dependencies:
-  - better_normalizers:better_normalizers
-  - default_content:default_content
-  - drupal:tour
-  - drupal:help
+  - better_normalizers
+  - default_content
+  - tour
+  - help

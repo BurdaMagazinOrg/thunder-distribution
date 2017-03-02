@@ -3,8 +3,9 @@ description: 'Provide an integration with facebook instant articles.'
 type: module
 core: 8.x
 dependencies:
-  - thunder:thunder_article
-  - thunder:thunder_paragraphs
-  - thunder:thunder_media
-  - fb_instant_articles:fb_instant_articles
+  - thunder_article
+  - thunder_paragraphs
+  - thunder_media
+  - fb_instant_articles
+version: 8.x-1.x-dev
 package: Thunder
