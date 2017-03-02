@@ -7,5 +7,4 @@ dependencies:
   - thunder_paragraphs
   - thunder_media
   - fb_instant_articles
-version: 8.x-1.x-dev
 package: Thunder

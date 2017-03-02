@@ -24,5 +24,4 @@ dependencies:
   - thunder_taxonomy
   - user
   - views
-version: 8.x-1.x-dev
 package: Thunder

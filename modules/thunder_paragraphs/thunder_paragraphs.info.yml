@@ -12,5 +12,4 @@ dependencies:
   - paragraphs
   - text
   - thunder_media
-version: 8.x-1.x-dev
 package: Thunder
