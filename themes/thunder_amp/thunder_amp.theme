@@ -14,3 +14,13 @@
 function thunder_amp_preprocess_html(&$variables) {
 
 }
+
+function thunder_amp_preprocess_video_embed_iframe__youtube(&$variables) {
+  $explodedUrl = explode('/', $variables['url']);
+  $variables['videoid'] = end($explodedUrl);
+}
+
+function thunder_amp_preprocess_media_entity_twitter_tweet(&$variables) {
+  $explodedUrl = explode('/', $variables['path']);
+  $variables['tweetid'] = end($explodedUrl);
+}
