@@ -52,7 +52,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * Site configFactory object.
    *
-   * @var ConfigFactoryInterface
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 

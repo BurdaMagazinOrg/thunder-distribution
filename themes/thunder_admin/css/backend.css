@@ -35,7 +35,7 @@ fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text {
     border-right: 1px solid #ccc;
   }
 
-  fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-media details.form-wrapper summary{
+  fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-media details.form-wrapper summary {
     text-transform: none;
   }
 
@@ -43,7 +43,7 @@ fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text {
     margin: 14px;
   }
 
-  fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text .form-item-field-teaser-text-0-value{
+  fieldset.article-teaser .fieldset-wrapper .field--name-field-teaser-text .form-item-field-teaser-text-0-value {
     margin-top: 4px;
   }
 }

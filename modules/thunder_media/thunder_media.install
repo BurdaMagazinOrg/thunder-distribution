@@ -5,8 +5,8 @@
  * Contains.
  */
 
-use \Drupal\views\Entity\View;
-use \Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\views\Entity\View;
+use Drupal\entity_browser\Entity\EntityBrowser;
 
 /**
  * Rename config object.
@@ -357,7 +357,7 @@ function thunder_media_update_8010() {
  */
 function thunder_media_update_8011() {
 
-  /** @var EntityBrowser[] $browsers */
+  /** @var \Drupal\entity_browser\Entity\EntityBrowser[] $browsers */
   $browsers = EntityBrowser::loadMultiple();
   foreach ($browsers as $browser) {
     $config = Drupal::configFactory()->getEditable('entity_browser.browser.' . $browser->getConfigTarget());
