@@ -180,6 +180,10 @@ projects:
       - "https://www.drupal.org/files/issues/2842631.patch"
       - "https://www.drupal.org/files/issues/2845000_2.patch"
 
+  simple_gmap:
+    type: "module"
+    version: "1.2"
+
   simple_sitemap:
     type: "module"
     version: "2.8"
