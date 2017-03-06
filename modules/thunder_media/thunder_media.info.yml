@@ -3,31 +3,30 @@ description: 'Provides media bundles for thunder.'
 type: module
 core: 8.x
 dependencies:
-  - blazy
-  - config_update
-  - datetime
-  - dropzonejs_eb_widget
-  - entity_browser
-  - entity_browser_entity_form
-  - field
-  - file
-  - focal_point
-  - image
-  - link
-  - media_entity
-  - media_entity_image
-  - media_entity_instagram
-  - media_entity_slideshow
-  - media_entity_twitter
-  - media_expire
-  - responsive_image
-  - slick_media
-  - taxonomy
-  - text
-  - user
-  - video_embed_field
-  - video_embed_media
-  - views
-version: 8.x-1.x-dev
+  - blazy:blazy
+  - config_update:config_update
+  - drupal:datetime
+  - dropzonejs:dropzonejs_eb_widget
+  - entity_browser:entity_browser
+  - entity_browser:entity_browser_entity_form
+  - drupal:field
+  - drupal:file
+  - focal_point:focal_point
+  - drupal:image
+  - drupal:link
+  - media_entity:media_entity
+  - media_entity_image:media_entity_image
+  - media_entity_instagram:media_entity_instagram
+  - media_entity_slideshow:media_entity_slideshow
+  - media_entity_twitter:media_entity_twitter
+  - media_expire:media_expire
+  - drupal:responsive_image
+  - slick_media:slick_media
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:user
+  - video_embed_field:video_embed_field
+  - video_embed_field:video_embed_media
+  - drupal:views
 package: Thunder
 configure: thunder_media.configuration_form

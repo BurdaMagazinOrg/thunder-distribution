@@ -4,4 +4,3 @@ thunder_media.configuration_form:
   description: 'Thunder Media configuration'
   parent: system.admin_config_media
   weight: 99
-

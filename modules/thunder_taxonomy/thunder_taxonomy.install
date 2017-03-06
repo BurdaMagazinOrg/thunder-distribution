@@ -5,8 +5,8 @@
  * Contains Thunder taxonomy install / uninstall hooks.
  */
 
-use \Drupal\user\Entity\Role;
-use \Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\user\Entity\Role;
+use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Implements hook_install().

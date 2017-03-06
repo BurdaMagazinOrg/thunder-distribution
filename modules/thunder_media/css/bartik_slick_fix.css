@@ -1,5 +1,5 @@
 .slick__slide .field.field--type-image {
-    margin: 0;
+  margin: 0;
 }
 
 /* For slick galleries using blazy, with non-responsive image styles, this can help, if gallery takes too much vertical space.
