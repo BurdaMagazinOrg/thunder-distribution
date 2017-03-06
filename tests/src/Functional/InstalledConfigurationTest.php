@@ -31,15 +31,15 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $modules = [
     'thunder_demo',
     'google_analytics',
+    'nexx_integration',
+    'ivw_integration',
+    'adsense',
 
     // Additional modules.
     // 'thunder_fia',
-    // 'nexx_integration',
     // 'paragraphs_riddle_marketplace',
-    // 'ivw_integration',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
-    // 'adsense', // Issue: https://www.drupal.org/node/2853128
     // end of list.
   ];
 
@@ -240,6 +240,27 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // Diff module. Issue: https://www.drupal.org/node/2854581.
     'core.entity_view_mode.node.diff' => [
       'langcode' => TRUE,
+    ],
+
+    // The thunder profile changes article and channel taxonomy when ivw module
+    // is installed.
+    'core.entity_form_display.node.article.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.taxonomy_term.channel.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
     ],
   ];
 
