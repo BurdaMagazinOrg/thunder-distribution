@@ -115,7 +115,7 @@ projects:
 
   liveblog:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1.0-alpha3"
 
   media_entity:
     type: "module"
