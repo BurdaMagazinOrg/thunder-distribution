@@ -65,8 +65,11 @@ class Liveblog extends AbstractOptionalModule {
       ->set('cluster', $formValues['pusher_cluster'])
       ->save(TRUE);
 
-    $this->configFactory->getEditable('liveblog.settings')
-      ->set('notification_channel', 'liveblog_pusher')
-      ->save(TRUE);
+    if ($formValues['pusher_app_id'] && $formValues['pusher_key'] && $formValues['pusher_secret']) {
+      $this->configFactory->getEditable('liveblog.settings')
+        ->set('notification_channel', 'liveblog_pusher')
+        ->save(TRUE);
+    }
   }
+
 }
