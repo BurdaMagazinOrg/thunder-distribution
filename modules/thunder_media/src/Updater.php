@@ -15,14 +15,14 @@ class Updater {
   /**
    * Site configFactory object.
    *
-   * @var ConfigFactoryInterface
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
    * Temp store factory.
    *
-   * @var SharedTempStoreFactory
+   * @var \Drupal\user\SharedTempStoreFactory
    */
   protected $tempStoreFactory;
 
