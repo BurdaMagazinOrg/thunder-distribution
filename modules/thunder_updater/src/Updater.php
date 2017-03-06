@@ -6,6 +6,8 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\thunder\ThunderUpdateLogger;
 use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
@@ -16,27 +18,34 @@ use Drupal\checklistapi\ChecklistapiChecklist;
  * Helper class to update configuration.
  */
 class Updater implements UpdaterInterface {
-
+  use StringTranslationTrait;
   /**
    * Site configFactory object.
    *
-   * @var ConfigFactoryInterface
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
    * Temp store factory.
    *
-   * @var SharedTempStoreFactory
+   * @var \Drupal\user\SharedTempStoreFactory
    */
   protected $tempStoreFactory;
 
   /**
    * Module installer service.
    *
-   * @var ModuleInstallerInterface
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
   protected $moduleInstaller;
+
+  /**
+   * The account object.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $account;
 
   /**
    * Constructs the PathBasedBreadcrumbBuilder.
@@ -45,13 +54,16 @@ class Updater implements UpdaterInterface {
    *   A temporary key-value store service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory service.
-   * @param ModuleInstallerInterface $moduleInstaller
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    *   Module installer service.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
+    $this->account = $account;
   }
 
   /**
@@ -204,7 +216,7 @@ class Updater implements UpdaterInterface {
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
-    $user = \Drupal::currentUser()->id();
+    $user = $this->account->id();
     $time = time();
 
     foreach ($names as $name) {
@@ -238,7 +250,7 @@ class Updater implements UpdaterInterface {
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
-    $user = \Drupal::currentUser()->id();
+    $user = $this->account->id();
     $time = time();
 
     $thunderUpdaterConfig
@@ -289,13 +301,13 @@ class Updater implements UpdaterInterface {
           $successful[] = $update;
         }
         else {
-          $updateLogger->warning(t('Unable to enable @module.', ['@module' => $module]));
+          $updateLogger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
           $this->markUpdatesFailed([$update]);
         }
       }
       catch (MissingDependencyException $e) {
         $this->markUpdatesFailed([$update]);
-        $updateLogger->warning(t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+        $updateLogger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
       }
     }
     $this->markUpdatesSuccessful($successful);

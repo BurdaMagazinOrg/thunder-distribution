@@ -27,5 +27,4 @@ dependencies:
   - thunder:thunder_taxonomy
   - drupal:user
   - drupal:views
-version: 8.x-1.x-dev
 package: Thunder
