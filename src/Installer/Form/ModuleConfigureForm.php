@@ -74,7 +74,11 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#type' => 'container',
     );
 
-    foreach ($this->optionalModulesManager->getDefinitions() as $provider) {
+    $providers = $this->optionalModulesManager->getDefinitions();
+
+    uasort($providers, static::sortWeights());
+
+    foreach ($providers as $provider) {
 
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
@@ -126,6 +130,27 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $form_state->setBuildInfo($buildInfo);
 
+  }
+
+  /**
+   * Returns a sorting function to sort an array by weights.
+   *
+   * If an array element doesn't provide a weight, it will be set to 0.
+   * If two elements have the same weight, they are sorted by label.
+   *
+   * @return \Closure
+   *    The sorting function
+   */
+  private static function sortWeights() {
+    return function ($a, $b) {
+      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
+      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
+
+      if ($a_weight == $b_weight) {
+        return ($a['label'] > $b['label']) ? 1 : -1;
+      }
+      return ($a_weight > $b_weight) ? 1 : -1;
+    };
   }
 
 }
