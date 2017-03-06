@@ -8,5 +8,5 @@
  * Field image floating override in article paragraph.
  */
 .node .paragraph .blazy.field--type-image {
-    float: none;
+  float: none;
 }

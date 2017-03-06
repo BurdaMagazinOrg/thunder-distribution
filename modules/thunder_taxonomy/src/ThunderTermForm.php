@@ -116,7 +116,7 @@ class ThunderTermForm extends TermForm {
    *
    * @param string $entity_type_id
    *   The entity type identifier.
-   * @param Term $term
+   * @param \Drupal\taxonomy\Entity\Term $term
    *   The term updated with the submitted values.
    * @param array $form
    *   The complete form array.

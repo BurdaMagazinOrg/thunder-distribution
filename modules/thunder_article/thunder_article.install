@@ -5,7 +5,7 @@
  * Thunder Article install hooks.
  */
 
-use \Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
  * Enable thunder_paragraphs.

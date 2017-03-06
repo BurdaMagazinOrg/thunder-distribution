@@ -25,7 +25,7 @@ class ModuleConfigureForm extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
-   * @param OptionalModulesManager $optionalModulesManager
+   * @param \Drupal\thunder\OptionalModulesManager $optionalModulesManager
    *   The factory for configuration objects.
    */
   public function __construct(ConfigFactoryInterface $config_factory, OptionalModulesManager $optionalModulesManager) {
