@@ -4,12 +4,13 @@ dependencies:
   config:
     - field.storage.taxonomy_term.field_paragraphs
     - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.instagram
     - paragraphs.paragraphs_type.link
-    - paragraphs.paragraphs_type.media
     - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.twitter
+    - paragraphs.paragraphs_type.video
     - taxonomy.vocabulary.channel
   module:
     - entity_reference_revisions
@@ -30,10 +31,11 @@ settings:
       gallery: gallery
       instagram: instagram
       link: link
-      media: media
+      image: image
       quote: quote
       text: text
       twitter: twitter
+      video: video
     target_bundles_drag_drop:
       gallery:
         enabled: true
@@ -44,9 +46,12 @@ settings:
       link:
         enabled: true
         weight: 10
-      media:
+      image:
         enabled: true
         weight: 11
+      media:
+        weight: 11
+        enabled: false
       quote:
         enabled: true
         weight: 12
@@ -56,4 +61,7 @@ settings:
       twitter:
         enabled: true
         weight: 14
+      video:
+        enabled: true
+        weight: 18
 field_type: entity_reference_revisions

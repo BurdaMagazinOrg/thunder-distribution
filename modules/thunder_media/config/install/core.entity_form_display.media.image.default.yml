@@ -26,6 +26,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_description:
     type: text_textarea
     weight: 5
@@ -33,11 +34,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_expires:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
   field_image:
     weight: 1
     settings:
@@ -45,6 +48,7 @@ content:
       preview_image_style: medium
     third_party_settings: {  }
     type: image_image
+    region: content
   field_source:
     type: string_textfield
     weight: 4
@@ -52,6 +56,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   name:
     type: string_textfield
     weight: 0
@@ -59,6 +64,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_tags: true

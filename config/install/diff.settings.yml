@@ -1,0 +1,16 @@
+general_settings:
+  radio_behavior: linear
+  context_lines_leading: 1
+  context_lines_trailing: 1
+  revision_pager_limit: 50
+  layout_plugins:
+    split_fields:
+      enabled: true
+      weight: -50
+    visual_inline:
+      enabled: false
+      weight: -49
+    unified_fields:
+      enabled: true
+      weight: -48
+  visual_inline_theme: admin

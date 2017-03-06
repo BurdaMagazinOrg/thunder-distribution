@@ -3,14 +3,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.facebook_instant_articles_rss
-    - field.field.paragraph.media.field_media
-    - paragraphs.paragraphs_type.media
-id: paragraph.media.facebook_instant_articles_rss
+    - field.field.paragraph.video.field_video
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.facebook_instant_articles_rss
 targetEntityType: paragraph
-bundle: media
+bundle: video
 mode: facebook_instant_articles_rss
 content:
-  field_media:
+  field_video:
     type: entity_reference_entity_view
     weight: 0
     label: hidden

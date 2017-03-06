@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Url;
-use Drupal\Component\Utility\UrlHelper;
 use Symfony\Component\Yaml\Yaml;
+use Drupal\thunder_updater\Entity\Update;
 
 /**
  * Implements hook_checklistapi_checklist_info().
@@ -23,21 +23,26 @@ function thunder_updater_checklistapi_checklist_info() {
 
   $tasks = Yaml::parse(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml');
 
-  array_walk_recursive($tasks, function (&$value, $key) {
-    if ($key == '#url') {
-      if (UrlHelper::isExternal($value)) {
-        $value = Url::fromUri($value);
-      }
-      else {
-        try {
-          $value = Url::fromUserInput($value);
+  foreach ($tasks as $version => $updates) {
+    foreach ($updates as $key => $update) {
+      if (is_array($update)) {
+        $entry = Update::load($key);
+        $status = ($entry && $entry->wasSuccessfulByHook()) ? TRUE : FALSE;
+        if ($status && !empty($update['#description_successful'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_successful'];
         }
-        catch (\Exception $e) {
-          $value = '';
+        elseif (!$status && !empty($update['#description_failed'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_failed'];
         }
       }
     }
-    elseif (in_array($key, ['#title', '#description', '#weight'])) {
+  }
+
+  array_walk_recursive($tasks, function (&$value, $key) {
+    if ($key == '#url') {
+      $value = Url::fromUri($value);
+    }
+    elseif (in_array($key, ['#title', '#weight'])) {
       // @codingStandardsIgnoreStart
       $value = t($value);
       // @codingStandardsIgnoreEnd

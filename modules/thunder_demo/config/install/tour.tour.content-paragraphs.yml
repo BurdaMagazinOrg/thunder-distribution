@@ -20,43 +20,75 @@ tips:
     weight: 1
     attributes:
       data-class: 'paragraphs-container .fieldset-legend'
+  article-paragraphs-actions:
+    id: article-paragraphs-actions
+    plugin: text
+    label: 'Paragraph actions'
+    body: '<p>Each paragraph comes with it''s actions, which let you edit or remove it.</p>'
+    weight: 2
+    attributes:
+      data-id: edit-field-paragraphs-0-top-links-edit-button
   article-paragraphs-gallery:
     id: article-paragraphs-gallery
     plugin: text
     label: Gallery
-    body: '<p>This is a gallery. On "Edit" you are able to add more images, change the order or delete some images.</p>'
-    weight: 1
+    body: '<p>This is a gallery. By using the "Edit" button you''re able to add or delete images and change their order.</p>'
+    weight: 3
     attributes:
       data-id: edit-field-paragraphs-0-top
   article-paragraphs-text:
     id: article-paragraphs-text
     plugin: text
     label: Text
-    body: '<p>This is a normal text field with a WYSIWYG editor.</p>'
-    weight: 1
+    body: '<p>This is a simple text paragraph with a WYSIWYG editor.</p>'
+    weight: 4
     attributes:
       data-id: edit-field-paragraphs-1-top
   article-paragraphs-instagram:
     id: article-paragraphs-instagram
     plugin: text
     label: Instagram
-    body: '<p>This is an instagram card. Just add the url of an instagram post and the widget will automaticly shown.</p>'
-    weight: 1
+    body: '<p>In order to display an Instagram card just paste in the url of the post and Thunder will do the rest for you. How smart!</p>'
+    weight: 5
     attributes:
       data-id: edit-field-paragraphs-2-top
   article-paragraphs-media:
     id: article-paragraphs-media
     plugin: text
     label: Media
-    body: '<p>A media item could be an image or a video. You can select one from your previous ones, or upload a new one.</p>'
-    weight: 1
+    body: '<p>A media item can be an image or a video. You can select one from the library or upload a new one.</p>'
+    weight: 6
     attributes:
       data-id: edit-field-paragraphs-3-top
   article-paragraphs-twitter:
     id: article-paragraphs-twitter
     plugin: text
     label: Twitter
-    body: '<p>This is a twitter card. It behaves in the same way like an instagram paragraph.</p>'
-    weight: 1
+    body: '<p>Tweet paragraphs behave exactly the same as Instagram. Give Thunder a tweet URL and relax!</p>'
+    weight: 7
     attributes:
       data-id: edit-field-paragraphs-4-top
+  article-paragraphs-more:
+    id: article-paragraphs-more
+    plugin: text
+    label: 'Add more'
+    body: '<p>Use this button to add another paragraph. Do you find the "Text" paragraph too boring? Click the dropbutton arrow and see what happens!</p>'
+    weight: 8
+    attributes:
+      data-id: edit-field-paragraphs-add-more-add-more-button-text
+      data-options: 'tipLocation: top'
+  article-paragraphs-drag:
+    id: article-paragraphs-drag
+    plugin: text
+    label: 'Reorder paragprahs'
+    body: '<p>Paragraphs can be reordered using this handle.</p>'
+    weight: 9
+    attributes:
+      data-class: field-multiple-drag
+      data-options: 'tipLocation: right'
+  article-paragraphs-last:
+    id: article-paragraphs-last
+    plugin: text
+    label: 'What a tool!'
+    body: '<p>Amazed? You should be! Paragraphs are a great tool that lets you structure your content the way you need it to be. It is specially useful if you''re planning to publish the content to various destinations such as smartphones, TVs and tablets.</p><p>Now we''ve learned how to create content. It is time <a href="/admin/content?tour">to see where we can manage it</a>.</p>'
+    weight: 10

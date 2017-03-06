@@ -3,6 +3,7 @@
 namespace Drupal\thunder_media\Tests;
 
 use Drupal\Core\StreamWrapper\PublicStream;
+use Drupal\file\Entity\File;
 use Drupal\thunder\ThunderBaseTest;
 
 /**
@@ -49,17 +50,17 @@ class FilenameTransliterationTest extends ThunderBaseTest {
       'files[file_test_upload]' => drupal_realpath('public://foo°.png'),
     );
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
-    $this->assertResponse(200, 'Received a 200 response for posted test file.');
-    $this->assertRaw(t('You WIN!'), 'Found the success message.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->responseContains(t('You WIN!'));
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
     $max_fid_after = db_query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
 
-    $file = file_load($max_fid_after);
+    $file = File::load($max_fid_after);
 
-    $this->assertIdentical('foodeg.png', $file->getFilename());
-    $this->assertIdentical('temporary://foodeg.png', $file->getFileUri());
+    $this->assertSame('foodeg.png', $file->getFilename());
+    $this->assertSame('temporary://foodeg.png', $file->getFileUri());
 
   }
 

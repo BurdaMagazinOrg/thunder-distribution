@@ -4,6 +4,12 @@ namespace Drupal\thunder_updater;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\thunder\ThunderUpdateLogger;
+use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
@@ -11,21 +17,35 @@ use Drupal\checklistapi\ChecklistapiChecklist;
 /**
  * Helper class to update configuration.
  */
-class Updater {
-
+class Updater implements UpdaterInterface {
+  use StringTranslationTrait;
   /**
    * Site configFactory object.
    *
-   * @var ConfigFactoryInterface
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
    * Temp store factory.
    *
-   * @var SharedTempStoreFactory
+   * @var \Drupal\user\SharedTempStoreFactory
    */
   protected $tempStoreFactory;
+
+  /**
+   * Module installer service.
+   *
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
+   */
+  protected $moduleInstaller;
+
+  /**
+   * The account object.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $account;
 
   /**
    * Constructs the PathBasedBreadcrumbBuilder.
@@ -34,24 +54,20 @@ class Updater {
    *   A temporary key-value store service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory service.
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
+   *   Module installer service.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
+    $this->moduleInstaller = $moduleInstaller;
+    $this->account = $account;
   }
 
   /**
-   * Update entity browser configuration.
-   *
-   * @param string $browser
-   *   Id of the entity browser.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $oldConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Indicates if config was updated or not.
+   * {@inheritdoc}
    */
   public function updateEntityBrowserConfig($browser, array $configuration, array $oldConfiguration = []) {
 
@@ -65,21 +81,7 @@ class Updater {
   }
 
   /**
-   * Update configuration.
-   *
-   * It's possible to provide expected configuration that should be checked,
-   * before new configuration is applied in order to ensure existing
-   * configuration is expected one.
-   *
-   * @param string $configName
-   *   Configuration name that should be updated.
-   * @param array $configuration
-   *   Configuration array to update.
-   * @param array $expectedConfiguration
-   *   Only if current config is same like old config we are updating.
-   *
-   * @return bool
-   *   Returns TRUE if update of configuration was successful.
+   * {@inheritdoc}
    */
   public function updateConfig($configName, array $configuration, array $expectedConfiguration = []) {
     $config = $this->configFactory->getEditable($configName);
@@ -128,18 +130,93 @@ class Updater {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(TRUE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => TRUE,
+        ])->save();
+      }
+    }
+
+    if ($checkListPoints) {
+      $this->checkListPoints($names);
+    }
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function markUpdatesFailed(array $names) {
+
+    foreach ($names as $name) {
+
+      if ($update = Update::load($name)) {
+        $update->setSuccessfulByHook(FALSE)
+          ->save();
+      }
+      else {
+        Update::create([
+          'id' => $name,
+          'successful_by_hook' => FALSE,
+        ])->save();
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function markAllUpdates($status = TRUE) {
+
+    $checklist = checklistapi_checklist_load('thunder_updater');
+
+    foreach ($checklist->items as $versionItems) {
+      foreach ($versionItems as $key => $item) {
+
+        if (!is_array($item)) {
+          continue;
+        }
+
+        if ($update = Update::load($key)) {
+          $update->setSuccessfulByHook($status)
+            ->save();
+        }
+        else {
+          Update::create([
+            'id' => $key,
+            'successful_by_hook' => $status,
+          ])->save();
+        }
+      }
+    }
+
+    $this->checkAllListPoints($status);
+  }
+
+  /**
    * Checks an array of bulletpoints on a checklist.
    *
    * @param array $names
    *   Array of the bulletpoints.
    */
-  public function checkListPoints(array $names) {
+  protected function checkListPoints(array $names) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
-    $user = \Drupal::currentUser()->id();
+    $user = $this->account->id();
     $time = time();
 
     foreach ($names as $name) {
@@ -163,14 +240,17 @@ class Updater {
 
   /**
    * Checks all the bulletpoints on a checklist.
+   *
+   * @param bool $status
+   *   Checkboxes enabled or disabled.
    */
-  public function checkAllListPoints($status = TRUE) {
+  protected function checkAllListPoints($status = TRUE) {
 
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
 
-    $user = \Drupal::currentUser()->id();
+    $user = $this->account->id();
     $time = time();
 
     $thunderUpdaterConfig
@@ -206,6 +286,31 @@ class Updater {
     $thunderUpdaterConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
+
+    $successful = [];
+
+    foreach ($modules as $update => $module) {
+      try {
+        if ($this->moduleInstaller->install([$module])) {
+          $successful[] = $update;
+        }
+        else {
+          $updateLogger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
+          $this->markUpdatesFailed([$update]);
+        }
+      }
+      catch (MissingDependencyException $e) {
+        $this->markUpdatesFailed([$update]);
+        $updateLogger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+      }
+    }
+    $this->markUpdatesSuccessful($successful);
   }
 
 }

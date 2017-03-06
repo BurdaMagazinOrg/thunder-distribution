@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - thunder_demo
+id: content-list
+label: 'Content listing'
+module: thunder_demo
+routes:
+  -
+    route_name: view.content.page_1
+  -
+    route_name: system.admin_content
+tips:
+  first:
+    id: first
+    plugin: text
+    label: 'Content listing page'
+    body: '<p>We are on the content lising page. It allows you to browse your content, see some details, edit and execute actions on it.</p><p>Let''s go step by step.</p>'
+    weight: 1
+  filters:
+    id: filters
+    plugin: text
+    label: Filters
+    body: '<p>Filters can be used to search the content based on author, type, title and other parameters. Hit "Filter" when you entered the desired values.</p>'
+    weight: 2
+    attributes:
+      data-id: views-exposed-form-content-page-1
+  actions:
+    id: actions
+    plugin: text
+    label: Actions
+    body: '<p>They let you execute actions on multiple content items at once. Check which actions are offered in the drop-down.</p>'
+    weight: 3
+    attributes:
+      data-id: edit-node-bulk-form--2
+  actions-checkbox:
+    id: actions-checkbox
+    plugin: text
+    label: Actions
+    body: '<p>In order to define which items to execute an action on use the checkboxes. The one in the header row will select all items on a page and the ones in the rows below will select corresponding individual items.</p>'
+    weight: 4
+    attributes:
+      data-class: 'views-table .select-all'
+      data-options: 'tipLocation: right'
+  sort:
+    id: sort
+    plugin: text
+    label: Sorting
+    body: '<p>Click on the links in the header row to sort the list. Arrow next to the active sort link indicates the sort direction (ascending or descending).</p>'
+    weight: 5
+    attributes:
+      data-class: 'views-table #view-changed-table-column'
+      data-options: 'nubPosition: top-right'
+  operations:
+    id: operations
+    plugin: text
+    label: 'Content operations'
+    body: '<p>Use content operations dropbutton to edit or delete a given content item.</p>'
+    weight: 6
+    attributes:
+      data-class: 'views-table tr:nth-child(2) .views-field-operations'
+      data-options: 'tipLocation: left'
+  last:
+    id: last
+    plugin: text
+    label: 'That''s it for now'
+    body: '<p>Nice! Let us just mention that it is very easy to modify most of things on this page (as it is the case with any listing in Thunder). A very powerfull module called "Views" can be used to do that. Details about it are out of scope for this tour. For now just keep in mind that you will be able to tweak it if you need to.</p><p>This is it for now. I hope that you enjoyed our company. Now you can navigate back to the <a href="/">front page</a> and start exploring on your own.'
+    weight: 7

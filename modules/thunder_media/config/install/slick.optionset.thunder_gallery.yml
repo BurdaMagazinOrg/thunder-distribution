@@ -4,8 +4,6 @@ dependencies:
   enforced:
     module:
       - slick
-_core:
-  default_config_hash: SVy48utsf4KUVUlWN4SVRrgkTEeEcXJsQnz7WCg7atA
 id: thunder_gallery
 name: thunder_gallery
 label: 'Thunder Gallery'
@@ -13,6 +11,7 @@ weight: -10
 group: ''
 skin: default
 breakpoints: 0
+optimized: false
 options:
   options__active_tab: edit-options-settings
   settings:

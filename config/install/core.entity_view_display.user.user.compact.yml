@@ -21,6 +21,7 @@ content:
       image_link: content
     third_party_settings: {  }
     label: hidden
+    region: content
 hidden:
   langcode: true
   member_for: true

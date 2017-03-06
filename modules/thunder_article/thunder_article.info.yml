@@ -3,27 +3,28 @@ description: 'Provide content related configs and code for thunder.'
 type: module
 core: 8.x
 dependencies:
-  - entity_browser
-  - entity_reference_revisions
-  - field
-  - field_group
-  - linkit
-  - media_entity
-  - menu_ui
-  - metatag
-  - metatag_open_graph
-  - metatag_twitter_cards
-  - node
-  - paragraphs
-  - path
-  - pathauto
-  - scheduler
-  - shariff
-  - taxonomy
-  - thunder_media
-  - thunder_paragraphs
-  - thunder_taxonomy
-  - user
-  - views
-version: 8.x-1.x-dev
+  - config_update:config_update
+  - entity_browser:entity_browser
+  - entity_reference_revisions:entity_reference_revisions
+  - drupal:field
+  - field_group:field_group
+  - linkit:linkit
+  - media_entity:media_entity
+  - drupal:menu_ui
+  - metatag:metatag
+  - metatag:metatag_open_graph
+  - metatag:metatag_facebook
+  - metatag:metatag_twitter_cards
+  - drupal:node
+  - paragraphs:paragraphs
+  - drupal:path
+  - pathauto:pathauto
+  - scheduler:scheduler
+  - shariff:shariff
+  - drupal:taxonomy
+  - thunder:thunder_media
+  - thunder:thunder_paragraphs
+  - thunder:thunder_taxonomy
+  - drupal:user
+  - drupal:views
 package: Thunder

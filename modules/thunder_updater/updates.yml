@@ -10,13 +10,40 @@ v1.1:
         '#description': "<p>Easy to use module grants access to view unpublished content to anyone who has a unique URL and appropriate permissions.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/access_unpublished' }
     v1_1__shariff:
-        '#title': 'Enable the Shariff module'
-        '#description': "<p>Shariff module provides theme independent social buttons.</p><p>After shariff module is enabled, you can: <ul><li>Place social buttons as a block in block layout</li><li>Add social buttons as field to your content type</li></ul> </p>"
+        '#title': 'Shariff module'
+        '#description': "<p>Shariff module provides theme independent social buttons.</p>"
+        '#description_successful': "<p>We enabled that module for you and placed the social buttons in your article.</p><p><b>Please check these changes!</b></p><p>Instead of using a field, it's also possible to add a block with social buttons.</p>"
+        '#description_failed': "<p>After shariff module is enabled, you can: <ul><li>Place social buttons as a block in block layout</li><li>Add social buttons as field to your content type</li></ul> </p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/shariff' }
-        extension_page: { '#text': 'Enable module', '#url': '/admin/modules' }
-        block_page: { '#text': 'Place a block', '#url': '/admin/structure/block' }
-        content_type_page: { '#text': 'Add as a field', '#url': '/admin/structure/types/manage/article/display' }
+        content_type_page: { '#text': 'Check article display', '#url': 'internal:/admin/structure/types/manage/article/display' }
+        block_page: { '#text': 'Place a block', '#url': 'internal:/admin/structure/block' }
     v1_1__remove_entity_browser_language_filter:
         '#title': 'Remove language filter from media browsers'
         '#description': '<p>Language filtering should be removed in views used by media browsers. Media entities don''t have relation to language and filter doesn''t have effect.</p><p>In order to do that, you should make following steps:<ol><li>Go on views administration page.</li><li>Search for view that you want to edit (fe. "Image Browser", "Media Browser").</li><li>Click <b>Edit</b> to modify view.</li><li>On view editing page under <b>FILTER CRITERIA</b> find link <b>Media: Translation language (exposed)</b> and click it.</li><li>In pop-up dialog click <b>Remove</b> in bottom action bar.</li><li>Save view changes by clicking <b>Save</b> button.</li></ol> </p><p>Repeat described process for all views you need.</p>'
-        views_page: { '#text': 'Views administration page', '#url': '/admin/structure/views' }
+        views_page: { '#text': 'Views administration page', '#url': 'internal:/admin/structure/views' }
+    v1_1__metatag_facebook:
+        '#title': 'Enable the Metatag Facebook module'
+        '#description': "<p>A set of meta tags specially for controlling advanced functionality with Facebook.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/metatag' }
+        extension_page: { '#text': 'Enable module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/search/metatag' }
+    v1_1__config_update:
+        '#title': 'Enable the Config Update module'
+        '#description': "<p>Provides basic revert and update functionality for other modules. We use this module in the Thunder update hooks. So this should never be disabled.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/config_update' }
+        extension_page: { '#text': 'Enable module', '#url': 'internal:/admin/modules' }
+    v1_1__image_video_paragraph:
+        '#title': 'Installation of image and video paragraph type'
+        '#description': '<p>We think for editors it is more clearer to have a seperate video and image paragraph.</p>'
+        '#description_successful': '<p>So we installed that in an update hook for you. You can now decide by yourselve, if you want to use them.</p>'
+        '#description_failed': '<p>During the update, all the following config objects should be installed, but there was an error: <ul><li>paragraphs.paragraphs_type.image.yml</li><li>paragraphs.paragraphs_type.video.yml</li><li>field.storage.paragraph.field_image.yml</li><li>field.storage.paragraph.field_video.yml</li><li>field.field.paragraph.image.field_image.yml</li><li>field.field.paragraph.video.field_video.yml</li><li>views.view.video_browser.yml</li><li>entity_browser.browser.video_browser.yml</li><li>core.entity_form_display.paragraph.image.default.yml</li><li>core.entity_form_display.paragraph.video.default.yml</li><li>core.entity_view_display.paragraph.image.default.yml</li><li>core.entity_view_display.paragraph.image.preview.yml</li><li>core.entity_view_display.paragraph.video.default.yml</li><li>core.entity_view_display.paragraph.video.preview.yml</li></ul></p>'
+    v1_1__instagram_edit_preview:
+        '#title': 'Adjust instagram preview'
+        '#description': '<p>The instagram module now provides thumbnails of instragrams, which should be used for the preview.</p>'
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> Go on "Configure instagram preview" and use the Thumnail field with image style "Media thumbnail" instead of the URL field.<p>'
+        configure_page: { '#text': 'Configure instagram preview', '#url': 'internal:/admin/structure/media/manage/instagram/display/thumbnail' }
+    v1_1__diff:
+        '#title': 'Enable the Diff module'
+        '#description': "<p>Allows the user to compare revisions with different layouts.</p>"
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/diff' }
+        extension_page: { '#text': 'Enable module', '#url': 'internal:/admin/modules' }

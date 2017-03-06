@@ -5,8 +5,11 @@
  * Contains.
  */
 
-use \Drupal\views\Entity\View;
-use \Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\views\Entity\View;
+use Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\user\Entity\Role;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
  * Update hook dependencies.
@@ -388,7 +391,7 @@ function thunder_media_update_8010() {
  */
 function thunder_media_update_8011() {
 
-  /** @var EntityBrowser[] $browsers */
+  /** @var \Drupal\entity_browser\Entity\EntityBrowser[] $browsers */
   $browsers = EntityBrowser::loadMultiple();
   foreach ($browsers as $browser) {
     $config = Drupal::configFactory()->getEditable('entity_browser.browser.' . $browser->getConfigTarget());
@@ -516,10 +519,181 @@ function thunder_media_update_8101() {
 
   // If update is successful for all views, then check entry in checklist.
   if ($successfulUpdate) {
-    $thunderUpdater->checkListPoints(['v1_1__remove_entity_browser_language_filter']);
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
   }
   else {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Introduce image and video paragraph.
+ */
+function thunder_media_update_8102() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+  ]);
+
+  $configUpdater = \Drupal::service('config_update.config_update');
+
+  $imports = [
+    'paragraphs_type' => ['image', 'video'],
+    'field_storage_config' => ['paragraph.field_image', 'paragraph.field_video'],
+    'field_config' => [
+      'paragraph.image.field_image',
+      'paragraph.video.field_video',
+    ],
+    'view' => ['video_browser'],
+    'system.simple' => ['entity_browser.browser.video_browser'],
+    'entity_form_display' => [
+      'paragraph.video.default',
+      'paragraph.image.default',
+    ],
+    'entity_view_display' => [
+      'paragraph.video.default',
+      'paragraph.image.default',
+      'paragraph.image.preview',
+      'paragraph.video.preview',
+    ],
+  ];
+
+  $error = FALSE;
+  foreach ($imports as $type => $entities) {
+    foreach ($entities as $entity) {
+      try {
+        $configUpdater->import($type, $entity);
+      }
+      catch (\Exception $e) {
+        $error = TRUE;
+        $updateLogger->warning(t('Unable to import config: @type -> @entity', ['@type' => $type, '@entity' => $entity]));
+      }
+    }
+  }
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  if (!$error) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo']);
+    foreach ($roles as $role) {
+      $role->grantPermission('access video_browser entity browser pages');
+      $role->save();
+    }
+
+    $fieldConfigs = [
+      'node.article.field_paragraphs',
+      'taxonomy_term.channel.field_paragraphs',
+      'taxonomy_term.tag.field_paragraphs',
+    ];
+    foreach ($fieldConfigs as $fieldConfig) {
+
+      /** @var \Drupal\field\Entity\FieldConfig $field */
+      $field = FieldConfig::load($fieldConfig);
+      if ($field) {
+        $settings = $field->getSetting('handler_settings');
+        $settings['target_bundles']['image'] = 'image';
+        $settings['target_bundles']['video'] = 'video';
+        $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
+        $settings['target_bundles_drag_drop']['video'] = ['enabled' => TRUE, 'weight' => 10];
+
+        $field->setSetting('handler_settings', $settings);
+        $field->save();
+      }
+      else {
+        $error = TRUE;
+      }
+    }
+
+    // List of expected configuration for listed entity browsers.
+    $expectedConfig['display_configuration']['link_text'] = 'Select entities';
+    $expectedConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select entities';
+    // New configuration for entity browsers that should be applied.
+    $newConfig['display_configuration']['link_text'] = 'Select image';
+    $newConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
+    if ($thunderUpdater->updateEntityBrowserConfig('image_browser', $newConfig, $expectedConfig)) {
+      $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    }
+    else {
+      $error = TRUE;
+    }
+  }
+
+  if ($error) {
+    $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
+  }
+
+  // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Adjust instagrams preview in backend.
+ */
+function thunder_media_update_8103() {
+
+  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_update');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['hidden']['thumbnail'] = TRUE;
+  $expectedConfig['content']['field_url'] = [
+    'type' => 'instagram_embed',
+    'weight' => 0,
+    'label' => 'hidden',
+    'settings' => [
+      'width' => 241,
+      'height' => 313,
+    ],
+    'third_party_settings' => [],
+  ];
+
+  // New configuration that should be applied.
+  $newConfig['content']['thumbnail'] = [
+    'type' => 'image',
+    'weight' => 0,
+    'region' => 'content',
+    'label' => 'hidden',
+    'settings' => [
+      'image_style' => 'media_thumbnail',
+      'image_link' => '',
+    ],
+    'third_party_settings' => [],
+  ];
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
+    $display = EntityViewDisplay::load('media.instagram.thumbnail');
+    $display->removeComponent('field_url')
+      ->save();
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
+
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__instagram_edit_preview']);
   }
 
   // Output log result depending on channel used for update execution.

@@ -34,7 +34,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterFocalPointChange_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and keep publish');
+    $page->pressButton('Save and keep published');
 
     $media = Media::load($mediaId);
     $img = $media->get('field_image')->target_id;
@@ -47,7 +47,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
 
     $image1 = new Imagick($derivativeUri);
-    $image2 = new Imagick(dirname(__FILE__) . '/../../fixtures/reference.jpg');
+    $image2 = new Imagick(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
 
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
@@ -71,14 +71,14 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->clickButtonDrupalSelector($page, 'edit-field-image-0-remove-button');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $page->findField('files[field_image_0]')
-      ->attachFile(dirname(__FILE__) . '/../../fixtures/reference.jpg');
+      ->attachFile(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page->fillField('name[0][value]', "Media {$mediaId}");
     $page->fillField('field_image[0][alt]', "Media {$mediaId} Alt Text");
     $page->fillField('field_image[0][title]', "Media {$mediaId} Title");
-    $page->fillField('field_expires[0][value][date]', '2022-12-18');
-    $page->fillField('field_expires[0][value][time]', '01:02:03');
+    $this->setRawFieldValue('field_expires[0][value][date]', '2022-12-18');
+    $this->setRawFieldValue('field_expires[0][value][time]', '01:02:03');
     $page->fillField('field_copyright[0][value]', "Media {$mediaId} Copyright");
     $page->fillField('field_source[0][value]', "Media {$mediaId} Source");
 
@@ -86,7 +86,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and keep publish');
+    $page->pressButton('Save and keep published');
 
     // Edit media and check are fields correct.
     $this->drupalGet("media/$mediaId/edit");

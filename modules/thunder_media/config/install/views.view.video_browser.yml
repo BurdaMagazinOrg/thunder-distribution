@@ -3,15 +3,14 @@ status: true
 dependencies:
   config:
     - image.style.entity_browser_thumbnail
-    - media_entity.bundle.image
     - media_entity.bundle.video
   module:
     - entity_browser
     - image
     - media_entity
     - user
-id: media_browser
-label: 'Media Browser'
+id: video_browser
+label: 'Video Browser'
 module: views
 description: ''
 tag: ''
@@ -387,42 +386,33 @@ display:
           admin_label: ''
           operator: in
           value:
-            image: image
             video: video
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: bundle_op
-            label: Bundle
-            description: 'Filter by type'
+            operator_id: ''
+            label: ''
+            description: ''
             use_operator: false
-            operator: bundle_op
-            identifier: Bundle
+            operator: ''
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
-            reduce: true
           is_grouped: false
           group_info:
-            label: Bundle
-            description: null
-            identifier: bundle
+            label: ''
+            description: ''
+            identifier: ''
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items:
-              1: {  }
-              2: {  }
-              3: {  }
+            group_items: {  }
           entity_type: media
           entity_field: bundle
           plugin_id: bundle
@@ -439,7 +429,7 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Media name'
+            label: 'Video name'
             description: 'Filter by name'
             use_operator: false
             operator: name_op
@@ -468,47 +458,6 @@ display:
           entity_type: media
           entity_field: name
           plugin_id: string
-        bundle_1:
-          id: bundle_1
-          table: media_field_data
-          field: bundle
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            image: image
-            video: video
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: media
-          entity_field: bundle
-          plugin_id: bundle
       sorts:
         created:
           id: created

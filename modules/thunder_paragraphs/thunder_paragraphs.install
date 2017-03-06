@@ -5,8 +5,8 @@
  * Contains update hooks for Thunder Paragraphs module.
  */
 
-use \Drupal\Component\Utility\DiffArray;
-use \Drupal\Component\Utility\NestedArray;
+use Drupal\Component\Utility\DiffArray;
+use Drupal\Component\Utility\NestedArray;
 
 /**
  * Change gallery paragraph to use simple inline form widget.

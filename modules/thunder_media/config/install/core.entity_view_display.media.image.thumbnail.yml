@@ -26,6 +26,7 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
 hidden:
   created: true
   field_brands: true

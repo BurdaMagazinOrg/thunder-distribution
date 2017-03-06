@@ -54,17 +54,32 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Add Media paragraph.
+   * Add Image paragraph.
    *
    * @param string $fieldName
    *   Field name.
    * @param array $media
    *   List of media identifiers.
    */
-  public function addMediaParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'media');
+  public function addImageParagraph($fieldName, array $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'image');
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_media", 'media_browser', $media);
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
+
+  }
+
+  /**
+   * Add Video paragraph.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param array $media
+   *   List of media identifiers.
+   */
+  public function addVideoParagraph($fieldName, array $media) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'video');
+
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
 
   }
 
@@ -117,7 +132,7 @@ trait ThunderParagraphsTestTrait {
   public function addSocialParagraph($fieldName, $socialUrl, $type) {
     $paragraphIndex = $this->addParagraph($fieldName, $type);
 
-    /** @var DocumentElement $page */
+    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $socialUrl);
@@ -136,7 +151,7 @@ trait ThunderParagraphsTestTrait {
   public function addLinkParagraph($fieldName, $urlText, $url) {
     $paragraphIndex = $this->addParagraph($fieldName, 'link');
 
-    /** @var DocumentElement $page */
+    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_link][0][title]", $urlText);

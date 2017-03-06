@@ -17,8 +17,9 @@ content:
     label: hidden
     settings:
       width: null
-      height: null
+      hidecaption: false
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   langcode: true
