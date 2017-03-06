@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ *
+ * The install file.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Configures form and view display of the field_embed_media.
+ */
+function thunder_liveblog_install() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('core.entity_form_display.liveblog_post.liveblog_post.default');
+  if ($config) {
+    if ($content = $config->get('content')) {
+      $content['field_embed_media'] = [
+        'type' => 'entity_reference_paragraphs',
+        'weight' => 0,
+        'settings' => [
+          'title' => 'Paragraph',
+          'title_plural' => 'Paragraphs',
+          'edit_mode' => 'open',
+          'add_mode' => 'dropdown',
+          'form_display_mode' => 'default',
+        ],
+        'third_party_settings' => [],
+      ];
+
+      $config->set('content', $content)->save();
+    }
+
+    if ($dependencies = $config->get('dependencies')) {
+      $dependencies['config'][] = 'field.field.liveblog_post.liveblog_post.field_embed_media';
+
+      $config->set('dependencies', $dependencies)->save();
+    }
+  }
+
+  $config = $config_factory->getEditable('core.entity_view_display.liveblog_post.liveblog_post.default');
+  if ($config) {
+    if ($content = $config->get('content')) {
+      $content['field_embed_media'] = [
+        'type' => 'entity_reference_revisions_entity_view',
+        'label' => 'above',
+        'weight' => 3,
+        'settings' => [
+          'view_mode' => 'default',
+          'link' => '',
+        ],
+        'third_party_settings' => [],
+      ];
+
+      $config->set('content', $content)->save();
+    }
+
+    if ($dependencies = $config->get('dependencies')) {
+      $dependencies['config'][] = 'field.field.liveblog_post.liveblog_post.field_embed_media';
+
+      $config->set('dependencies', $dependencies)->save();
+    }
+  }
+}
