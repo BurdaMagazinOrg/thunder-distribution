@@ -3,13 +3,13 @@ description: 'Provide paragaphs functions for Thunder.'
 type: module
 core: 8.x
 dependencies:
-  - entity_browser
-  - entity_browser_entity_form
-  - field
-  - inline_entity_form
-  - link
-  - media_entity
-  - paragraphs
-  - text
-  - thunder_media
+  - entity_browser:entity_browser
+  - entity_browser:entity_browser_entity_form
+  - drupal:field
+  - inline_entity_form:inline_entity_form
+  - drupal:link
+  - media_entity:media_entity
+  - paragraphs:paragraphs
+  - drupal:text
+  - thunder:thunder_media
 package: Thunder
