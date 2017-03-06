@@ -139,7 +139,7 @@ class ModuleConfigureForm extends ConfigFormBase {
    * If two elements have the same weight, they are sorted by label.
    *
    * @return \Closure
-   *    The sorting function
+   *   The sorting function
    */
   private static function sortWeights() {
     return function ($a, $b) {
