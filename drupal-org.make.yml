@@ -113,6 +113,10 @@ projects:
     type: "module"
     version: "4.2"
 
+  liveblog:
+    type: "module"
+    version: "1.0-alpha2"
+
   media_entity:
     type: "module"
     version: "1.6"
