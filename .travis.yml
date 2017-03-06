@@ -36,6 +36,7 @@ branches:
   only:
     - master
     - develop
+    - feature/code-styles
 
 mysql:
   database: drupal
