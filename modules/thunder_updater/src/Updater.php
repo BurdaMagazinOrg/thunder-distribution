@@ -10,6 +10,7 @@ use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
+use Drupal\Core\Config\ConfigNameException;
 
 /**
  * Helper class to update configuration.
@@ -68,6 +69,13 @@ class Updater implements UpdaterInterface {
   protected $checklist;
 
   /**
+   * The config helper service.
+   *
+   * @var ConfigHelper
+   */
+  protected $configHelper;
+
+  /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
    * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
@@ -85,7 +93,7 @@ class Updater implements UpdaterInterface {
    * @param \Drupal\thunder_updater\UpdateChecklist $checklist
    *   Update Checklist service.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist, ConfigHelper $configHelper) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
@@ -93,6 +101,7 @@ class Updater implements UpdaterInterface {
     $this->configHandler = $configHandler;
     $this->logger = $logger;
     $this->checklist = $checklist;
+    $this->configHelper = $configHelper;
   }
 
   /**
@@ -350,6 +359,26 @@ class Updater implements UpdaterInterface {
     }
 
     return $successfulImport;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function revertConfig($configName, UpdateLogger $updateLogger, $hash = NULL) {
+    try {
+      if (!$this->configHelper->isModified($configName, $hash)) {
+        $config = ConfigName::createByFullName($configName);
+        $this->configReverter->revert($config->getType(), $config->getName());
+        return TRUE;
+      }
+      else {
+        $updateLogger->warning($this->t('Config @config is already modified and will not be touched.', ['@config' => $configName]));
+      }
+    }
+    catch (ConfigNameException $exception) {
+      $updateLogger->warning($this->t('Config @config does not exists.', ['@config' => $configName]));
+    }
+    return FALSE;
   }
 
 }

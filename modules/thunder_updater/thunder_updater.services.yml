@@ -14,7 +14,7 @@ services:
     arguments: ['@config_update.config_list', '@config_update.config_update', '@thunder_updater.config_differ', '@thunder_updater.config_diff_transformer', '@module_handler', '@serialization.yaml']
   thunder_updater:
     class: Drupal\thunder_updater\Updater
-    arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@config_update.config_update', '@thunder_updater.config_handler', '@thunder_updater.logger', '@thunder_updater.update_checklist']
+    arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@config_update.config_update', '@thunder_updater.config_handler', '@thunder_updater.logger', '@thunder_updater.update_checklist', '@thunder_updater.config.helper']
   thunder_updater.config.helper:
     class: Drupal\thunder_updater\ConfigHelper
     arguments: ['@config.storage']

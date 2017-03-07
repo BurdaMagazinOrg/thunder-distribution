@@ -75,4 +75,19 @@ interface UpdaterInterface {
    */
   public function checklist();
 
+  /**
+   * Reverts a configuration object.
+   *
+   * @param string $configName
+   *   Full name of the configuration.
+   * @param \Drupal\thunder_updater\UpdateLogger $updateLogger
+   *   The update logger service.
+   * @param string $hash
+   *   A hash to check if config was changed.
+   *
+   * @return bool
+   *   Indicates if revert was successful.
+   */
+  public function revertConfig($configName, UpdateLogger $updateLogger, $hash = NULL);
+
 }
