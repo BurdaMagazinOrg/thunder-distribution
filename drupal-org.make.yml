@@ -79,6 +79,8 @@ projects:
   entity_browser:
     type: "module"
     version: "1"
+    patch:
+      - "https://www.drupal.org/files/issues/provide_inline_entity-2858438-2.patch"
 
   entity_reference_revisions:
     type: "module"

@@ -39,6 +39,7 @@ projects[entity][type] = module
 projects[entity][version] = 1
 projects[entity_browser][type] = module
 projects[entity_browser][version] = 1
+projects[entity_browser][patch][] = https://www.drupal.org/files/issues/provide_inline_entity-2858438-2.patch
 projects[entity_reference_revisions][type] = module
 projects[entity_reference_revisions][version] = 1
 projects[fb_instant_articles][type] = module

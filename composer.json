@@ -66,6 +66,9 @@
             },
             "drupal/amptheme": {
                 "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
+            },
+            "drupal/entity_browser": {
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/provide_inline_entity-2858438-2.patch"
             }
         }
     },
@@ -93,7 +96,7 @@
         "drupal/dropzonejs": "^1.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
-        "drupal/entity_browser": "^1.0",
+        "drupal/entity_browser": "1.0",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
         "drupal/field_group": "^1.0",
