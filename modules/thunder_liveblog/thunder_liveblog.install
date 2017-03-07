@@ -61,4 +61,32 @@ function thunder_liveblog_install() {
       $config->set('dependencies', $dependencies)->save();
     }
   }
+
+  // Add permissions to thunder users.
+  $liveblog_permissions = [
+    'add liveblog_post entity',
+    'create liveblog content',
+    'delete any liveblog content',
+    'delete liveblog revisions',
+    'delete liveblog_post entity',
+    'delete own liveblog content',
+    'edit any liveblog content',
+    'edit liveblog_post entity',
+    'edit own liveblog content',
+    'revert liveblog revisions',
+    'view liveblog revisions',
+  ];
+  $config = $config_factory->getEditable('user.role.editor');
+  if ($config) {
+    $permissions = $config->get('permissions');
+    $permissions = array_merge($permissions, $liveblog_permissions);
+    $config->set('permissions', $permissions)->save(TRUE);
+  }
+  $config = $config_factory->getEditable('user.role.seo');
+  if ($config) {
+    $permissions = $config->get('permissions');
+    $permissions = array_merge($permissions, $liveblog_permissions);
+    $config->set('permissions', $permissions)->save(TRUE);
+  }
+
 }
