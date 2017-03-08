@@ -62,6 +62,66 @@ function thunder_liveblog_install() {
     }
   }
 
+  // Add paragraphs to Liveblog content-type.
+  $config = $config_factory->getEditable('core.entity_view_display.node.liveblog.default');
+  if ($config) {
+    if ($content = $config->get('content')) {
+      unset($content['body']);
+      $content['field_paragraphs'] = [
+        'weight' => 1,
+        'label' => 'above',
+        'settings' => [
+          'view_mode' => 'default',
+          'link' => '',
+        ],
+        'third_party_settings' => [],
+        'type' => 'entity_reference_revisions_entity_view',
+        'region' => 'content',
+      ];
+
+      $config->set('content', $content)->save();
+    }
+
+    if ($dependencies = $config->get('dependencies')) {
+      unset($dependencies['config']['field.field.node.liveblog.body']);
+      $dependencies['config'][] = 'field.field.node.liveblog.field_paragraphs';
+
+      $config->set('dependencies', $dependencies)->save();
+    }
+  }
+  $config = $config_factory->getEditable('core.entity_form_display.node.liveblog.default');
+  if ($config) {
+    if ($content = $config->get('content')) {
+      unset($content['body']);
+      $content['field_paragraphs'] = [
+        'weight' => 9,
+        'settings' => [
+          'title' => 'Paragraph',
+          'title_plural' => 'Paragraphs',
+          'edit_mode' => 'open',
+          'add_mode' => 'dropdown',
+          'form_display_mode' => 'default',
+          'default_paragraph_type' => '',
+        ],
+        'third_party_settings' => [],
+        'type' => 'entity_reference_paragraphs',
+        'region' => 'content',
+      ];
+
+      $config->set('content', $content)->save();
+    }
+
+    if ($dependencies = $config->get('dependencies')) {
+      unset($dependencies['config']['field.field.node.liveblog.body']);
+      unset($dependencies['module']['text']);
+      $dependencies['config'][] = 'field.field.node.liveblog.field_paragraphs';
+      $dependencies['module'][] = 'entity_reference_revisions';
+
+      $config->set('dependencies', $dependencies)->save();
+    }
+  }
+  $config_factory->getEditable('field.field.node.liveblog.body')->delete();
+
   // Add permissions to thunder users.
   $liveblog_permissions = [
     'add liveblog_post entity',
