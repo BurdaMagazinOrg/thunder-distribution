@@ -76,17 +76,13 @@ function thunder_liveblog_install() {
     'revert liveblog revisions',
     'view liveblog revisions',
   ];
-  $config = $config_factory->getEditable('user.role.editor');
-  if ($config) {
-    $permissions = $config->get('permissions');
-    $permissions = array_merge($permissions, $liveblog_permissions);
-    $config->set('permissions', $permissions)->save(TRUE);
-  }
-  $config = $config_factory->getEditable('user.role.seo');
-  if ($config) {
-    $permissions = $config->get('permissions');
-    $permissions = array_merge($permissions, $liveblog_permissions);
-    $config->set('permissions', $permissions)->save(TRUE);
+  foreach (['user.role.editor', 'user.role.seo'] as $role) {
+    $config = $config_factory->getEditable($role);
+    if ($config) {
+      $permissions = $config->get('permissions');
+      $permissions = array_merge($permissions, $liveblog_permissions);
+      $config->set('permissions', $permissions)->save(TRUE);
+    }
   }
 
 }
