@@ -25,7 +25,7 @@ class Liveblog extends AbstractOptionalModule {
 
     $form['thunder_liveblog']['description'] = [
       '#type' => 'item',
-      '#markup' => $this->t('Register a new account at <a href=":pusher_url" target="_blank">:pusher_url</a>, create a new app and note down your keys. You can provide theme right here or at a later stage on the liveblog settings form',
+      '#markup' => $this->t('Register a new account at <a href=":pusher_url" target="_blank">:pusher_url</a>, create a new app and note down your keys and cluster. You can provide them right here or at a later stage on the liveblog settings form.',
         [':pusher_url' => 'http://pusher.com']),
     ];
 
