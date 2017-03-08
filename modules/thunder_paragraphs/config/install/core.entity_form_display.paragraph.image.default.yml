@@ -21,7 +21,7 @@ content:
       open: true
       selection_mode: selection_append
       field_widget_display_settings:
-        form_mode: default
+        form_mode: inline
       field_widget_edit: false
     third_party_settings: {  }
     type: entity_browser_entity_reference

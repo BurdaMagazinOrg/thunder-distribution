@@ -94,7 +94,9 @@ projects:
 
   field_group:
     type: "module"
-    version: "1"
+    version: "1.0-rc6"
+    patch:
+      - "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"
 
   focal_point:
     type: "module"
