@@ -263,6 +263,13 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
+
+    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    'core.entity_view_display.liveblog_post.liveblog_post.default' => [
+      'content' => [
+        'location' => TRUE,
+      ],
+    ],
   ];
 
   /**
