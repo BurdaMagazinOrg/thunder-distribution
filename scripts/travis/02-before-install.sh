@@ -52,10 +52,6 @@ if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
   yes '' | pecl install yaml;
 elif [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then
  yes '' | pecl install yaml-2.0.0;
-
- if ! pecl list | grep apcu >/dev/null 2>&1 ; then
-   yes '' | pecl install apcu;
- fi;
 fi;
 
 # Set MySQL Options
