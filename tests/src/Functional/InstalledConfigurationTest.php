@@ -34,11 +34,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'nexx_integration',
     'ivw_integration',
     'adsense',
-    'thunder_liveblog',
 
     // Additional modules.
     // 'thunder_fia',
     // 'paragraphs_riddle_marketplace',
+    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    // 'thunder_liveblog',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
     // end of list.
@@ -261,13 +262,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'dependencies' => [
         'config' => TRUE,
         'module' => TRUE,
-      ],
-    ],
-
-    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
-    'core.entity_view_display.liveblog_post.liveblog_post.default' => [
-      'content' => [
-        'location' => TRUE,
       ],
     ],
   ];
