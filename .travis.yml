@@ -36,7 +36,6 @@ branches:
   only:
     - master
     - develop
-    - feature/fix-apcu-install
 
 mysql:
   database: drupal
