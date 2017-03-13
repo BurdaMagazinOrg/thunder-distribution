@@ -32,8 +32,8 @@ function thunder_article_update_8001() {
  */
 function thunder_article_update_8101() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_updater\Updater $updater */

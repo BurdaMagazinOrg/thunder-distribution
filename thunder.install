@@ -252,8 +252,8 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   $configs = [
@@ -314,8 +314,8 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   $moduleInstaller = \Drupal::service('module_installer');
@@ -356,8 +356,8 @@ function thunder_update_8104() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -382,8 +382,8 @@ function thunder_update_8105() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -408,8 +408,8 @@ function thunder_update_8106() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
 
   $updates = [

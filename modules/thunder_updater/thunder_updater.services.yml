@@ -2,3 +2,5 @@ services:
   thunder_updater:
     class: Drupal\thunder_updater\Updater
     arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@current_user']
+  logger.thunder_updater:
+    class: Drupal\thunder_updater\UpdateLogger
