@@ -10,7 +10,6 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\Core\Extension\MissingDependencyException;
 
 /**
  * Install the thunder installation profile.
@@ -314,20 +313,15 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  if (!$moduleInstaller->install(['thunder_updater'])) {
+    throw new \Exception(t('Unable to enable the Thunder Updater'));
+  }
+
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = Drupal::service('logger.thunder_updater');
   $updateLogger->cleanLogs();
-
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  try {
-    if (!$moduleInstaller->install(['thunder_updater'])) {
-      $updateLogger->warning(t('Unable to enable the Thunder Updater'));
-    }
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
-  }
 
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->markAllUpdates(FALSE);
