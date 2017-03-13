@@ -76,7 +76,7 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $providers = $this->optionalModulesManager->getDefinitions();
 
-    uasort($providers, static::sortWeights());
+    static::sortByWeights($providers);
 
     foreach ($providers as $provider) {
 
@@ -138,11 +138,11 @@ class ModuleConfigureForm extends ConfigFormBase {
    * If an array element doesn't provide a weight, it will be set to 0.
    * If two elements have the same weight, they are sorted by label.
    *
-   * @return \Closure
-   *   The sorting function
+   * @param array $array
+   *   The array to be sorted.
    */
-  private static function sortWeights() {
-    return function ($a, $b) {
+  private static function sortByWeights(array &$array) {
+    uasort($array, function ($a, $b) {
       $a_weight = isset($a['weight']) ? $a['weight'] : 0;
       $b_weight = isset($b['weight']) ? $b['weight'] : 0;
 
@@ -150,7 +150,7 @@ class ModuleConfigureForm extends ConfigFormBase {
         return ($a['label'] > $b['label']) ? 1 : -1;
       }
       return ($a_weight > $b_weight) ? 1 : -1;
-    };
+    });
   }
 
 }
