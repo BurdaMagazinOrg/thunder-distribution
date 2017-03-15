@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class ThunderInstallerTest extends InstallerTestBase {
 
+  protected $expectedInstallerIssues = 1;
+
   /**
    * {@inheritdoc}
    */
@@ -168,7 +170,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->condition('severity', 4, '<');
 
     // We have one expected warning from the simple_sitemap module.
-    $this->assertEqual($query->countQuery()->execute()->fetchField(), 1);
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), $this->expectedInstallerIssues);
 
   }
 
