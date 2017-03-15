@@ -40,6 +40,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // 'paragraphs_riddle_marketplace',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
+    // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
+    // 'amp'
     // end of list.
   ];
 
