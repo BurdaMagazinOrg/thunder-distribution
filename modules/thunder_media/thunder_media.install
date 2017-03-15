@@ -137,7 +137,7 @@ function thunder_media_update_8004() {
  */
 function thunder_media_update_8005() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // List of expected configuration for listed entity browsers.
@@ -224,7 +224,7 @@ function thunder_media_update_8007() {
 function thunder_media_update_8008() {
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
   $mediaUpdater = \Drupal::service('thunder_updater');
@@ -288,7 +288,7 @@ function thunder_media_update_8009() {
   $configsToUpdate['field.field.media.video.field_media_video_embed_field']['required'] = TRUE;
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
@@ -315,7 +315,7 @@ function thunder_media_update_8009() {
  */
 function thunder_media_update_8010() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
@@ -416,7 +416,7 @@ function thunder_media_update_8012() {
   $newConfig['content']['field_image']['settings']['preview_image_style'] = 'medium';
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // Execute update of config with additional validation of existing config.
@@ -447,7 +447,7 @@ function thunder_media_update_8012() {
  */
 function thunder_media_update_8013() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\Core\Config\StorageInterface $configStorage */
@@ -491,7 +491,7 @@ function thunder_media_update_8013() {
  */
 function thunder_media_update_8101() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
@@ -542,7 +542,7 @@ function thunder_media_update_8101() {
 function thunder_media_update_8102() {
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   \Drupal::service('module_installer')->install([
@@ -654,7 +654,7 @@ function thunder_media_update_8102() {
 function thunder_media_update_8103() {
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // List of configurations that should be checked for existence.

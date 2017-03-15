@@ -252,7 +252,7 @@ function thunder_update_8006() {
   ]);
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $configs = [
@@ -320,7 +320,7 @@ function thunder_update_8103() {
   }
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_updater');
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $thunderUpdater = \Drupal::service('thunder_updater');
@@ -351,7 +351,7 @@ function thunder_update_8104() {
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -377,7 +377,7 @@ function thunder_update_8105() {
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -403,7 +403,7 @@ function thunder_update_8106() {
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_updater');
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
