@@ -163,9 +163,11 @@ function thunder_themes_installed($theme_list) {
 
   if (in_array('infinite', $theme_list)) {
 
-    $configs = Drupal::configFactory()->listAll('block.block.infinite_');
+    $configFactory = \Drupal::configFactory();
+
+    $configs = $configFactory->listAll('block.block.infinite_');
     foreach ($configs as $config) {
-      Drupal::configFactory()->getEditable($config)->delete();
+      $configFactory->getEditable($config)->delete();
     }
 
     \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
@@ -209,25 +211,24 @@ function thunder_themes_installed($theme_list) {
     $display->save();
 
     $profilePath = drupal_get_path('profile', 'thunder');
-    \Drupal::configFactory()
-      ->getEditable('infinite.settings')
+    $configFactory->getEditable('infinite.settings')
       ->set('logo.use_default', FALSE)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
+      ->set('favicon.use_default', FALSE)
+      ->set('favicon.path', $profilePath . '/themes/thunder_base/favicon.ico')
       ->save(TRUE);
 
     // Set default pages.
-    \Drupal::configFactory()->getEditable('system.site')
+    $configFactory->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
 
     // Set infinite image styles and gallery view mode.
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.image.default')
+    $configFactory->getEditable('core.entity_view_display.media.image.default')
       ->set('content.field_image.settings.image_style', 'inline_m')
       ->set('content.field_image.settings.responsive_image_style', '')
       ->save(TRUE);
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.gallery.default')
+    $configFactory->getEditable('core.entity_view_display.media.gallery.default')
       ->set('content.field_media_images.settings.view_mode', 'gallery')
       ->save(TRUE);
   }
