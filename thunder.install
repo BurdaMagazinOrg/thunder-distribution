@@ -315,9 +315,7 @@ function thunder_update_8103() {
 
   $moduleInstaller = \Drupal::service('module_installer');
 
-  if (!$moduleInstaller->install(['thunder_updater'])) {
-    throw new \Exception(t('Unable to enable the Thunder Updater'));
-  }
+  $moduleInstaller->install(['thunder_updater']);
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = Drupal::service('thunder_updater.logger');
