@@ -26,6 +26,7 @@ function thunder_liveblog_install() {
           'form_display_mode' => 'default',
         ],
         'third_party_settings' => [],
+        'region' => 'content',
       ];
 
       $config->set('content', $content)->save();
@@ -50,6 +51,7 @@ function thunder_liveblog_install() {
           'link' => '',
         ],
         'third_party_settings' => [],
+        'region' => 'content',
       ];
 
       $config->set('content', $content)->save();
