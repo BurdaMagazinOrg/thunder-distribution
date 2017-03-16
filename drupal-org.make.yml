@@ -8,7 +8,7 @@ projects:
 
   adsense:
     type: "module"
-    version: "1.0-beta2"
+    version: "1.0-beta3"
 
   better_normalizers:
     type: "module"
@@ -79,7 +79,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   libraries:
     type: "module"
@@ -126,7 +126,7 @@ projects:
 
   nexx_integration:
     type: "module"
-    version: "1.6"
+    version: "1.8"
 
   paragraphs:
     type: "module"
