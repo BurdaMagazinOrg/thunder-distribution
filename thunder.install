@@ -501,6 +501,10 @@ function thunder_update_8107() {
         }
       }
     }
+
+    \Drupal::entityTypeManager()->getStorage('paragraph_type')
+      ->load('paragraphs_riddle_marketplace')
+      ->delete();
   }
 
   if ($successful) {

@@ -14,3 +14,17 @@ function thunder_riddle_menu_local_actions_alter(&$local_actions) {
     $local_actions['riddle_marketplace.import']['appears_on'][] = 'view.thunder_media.media_page_list';
   }
 }
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function thunder_riddle_preprocess_views_view(&$variables) {
+
+  $thunder_media_browser = [
+    'riddle_browser',
+  ];
+
+  if (in_array($variables['view']->id(), $thunder_media_browser)) {
+    $variables['view_array']['#attached']['library'][] = 'thunder_riddle/entity_browser_view';
+  }
+}
