@@ -44,7 +44,7 @@ function thunder_liveblog_install() {
     if ($content = $config->get('content')) {
       $content['field_embed_media'] = [
         'type' => 'entity_reference_revisions_entity_view',
-        'label' => 'above',
+        'label' => 'hidden',
         'weight' => 3,
         'settings' => [
           'view_mode' => 'default',
@@ -71,7 +71,7 @@ function thunder_liveblog_install() {
       unset($content['body']);
       $content['field_paragraphs'] = [
         'weight' => 1,
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => [
           'view_mode' => 'default',
           'link' => '',
