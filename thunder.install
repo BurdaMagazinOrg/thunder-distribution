@@ -12,6 +12,25 @@ use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
 
 /**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder'] = [
+    8006 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Install the thunder installation profile.
  */
 function thunder_install() {
@@ -313,9 +332,7 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  $moduleInstaller->install(['thunder_updater']);
+  \Drupal::service('module_installer')->install(['thunder_updater']);
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = Drupal::service('thunder_updater.logger');

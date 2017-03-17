@@ -9,6 +9,25 @@ use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 
 /**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_paragraphs_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_paragraphs'] = [
+    8101 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Change gallery paragraph to use simple inline form widget.
  */
 function thunder_paragraphs_update_8001() {

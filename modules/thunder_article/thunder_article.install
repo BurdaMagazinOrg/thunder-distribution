@@ -8,6 +8,25 @@
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_article_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_article'] = [
+    8101 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Enable thunder_paragraphs.
  */
 function thunder_article_update_8001() {
