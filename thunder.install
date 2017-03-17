@@ -460,12 +460,15 @@ function thunder_update_8107() {
         'type' => 'paragraphs_riddle_marketplace',
       ]);
 
+    $paragraphFields = [];
     foreach ($paragraphs as $oldParagraph) {
 
       $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
 
       $host = $oldParagraph->getParentEntity();
       if ($host) {
+
+        $paragraphFields[] = $host->getEntityTypeId() . '.' . $host->bundle() . '.' . $fieldName;
 
         foreach ($host->get($fieldName)->getValue() as $delta => $field) {
           if ($field['target_id'] == $oldParagraph->id()) {
@@ -502,9 +505,32 @@ function thunder_update_8107() {
       }
     }
 
-    \Drupal::entityTypeManager()->getStorage('paragraph_type')
-      ->load('paragraphs_riddle_marketplace')
-      ->delete();
+    if ($successful) {
+      try {
+
+        foreach ($paragraphFields as $paragraphField) {
+
+          /** @var \Drupal\field\Entity\FieldConfig $field */
+          $field = entity_load('field_config', $paragraphField);
+
+          $settings = $field->getSetting('handler_settings');
+
+          unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
+          unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
+
+          $field->setSetting('handler_settings', $settings);
+
+          $field->save();
+        }
+
+        \Drupal::entityTypeManager()->getStorage('paragraphs_type')
+          ->load('paragraphs_riddle_marketplace')
+          ->delete();
+      }
+      catch (\Exception $e) {
+        $successful = FALSE;
+      }
+    }
   }
 
   if ($successful) {
