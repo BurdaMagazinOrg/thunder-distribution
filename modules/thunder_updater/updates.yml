@@ -47,3 +47,9 @@ v1.1:
         '#description': "<p>Allows the user to compare revisions with different layouts.</p>"
         handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/diff' }
         extension_page: { '#text': 'Enable module', '#url': 'internal:/admin/modules' }
+    v1_1__entity_browser_view_items:
+        '#title': 'Improve entity browser views'
+        '#description': "<p>It's better to have 24 items in the entity browser views instead of 20.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> Go to the views page and increase the numbers of items per page.<p>'
+        video_view: { '#text': 'Video browser', '#url': 'internal:/admin/structure/views/view/video_browser' }
+        image_view: { '#text': 'Image browser', '#url': 'internal:/admin/structure/views/view/image_browser' }

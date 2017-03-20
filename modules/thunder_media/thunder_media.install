@@ -705,3 +705,45 @@ function thunder_media_update_8103() {
 
   return $updateLogger->outputHtml();
 }
+
+/**
+ * Increase number of items in entity browser.
+ */
+function thunder_media_update_8104() {
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 20;
+
+  // New configuration that should be applied.
+  $newConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 24;
+
+  $success = TRUE;
+
+  foreach (['video_browser', 'image_browser'] as $item) {
+    if (!$thunderUpdater->updateConfig('views.view.' . $item, $newConfig, $expectedConfig)) {
+      $success = FALSE;
+    }
+  }
+
+  if ($success) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__entity_browser_view_items']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust entity browser view config'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__entity_browser_view_items']);
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
