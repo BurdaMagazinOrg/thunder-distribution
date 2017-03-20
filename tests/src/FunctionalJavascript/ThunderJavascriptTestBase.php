@@ -70,15 +70,15 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     }
 
     $this->drupalGet('user');
-    $this->submitForm(array(
+    $this->submitForm([
       'name' => $account->getUsername(),
       'pass' => $account->passRaw,
-    ), t('Log in'));
+    ], t('Log in'));
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     $account->sessionId = $this->getSession()
       ->getCookie($this->getSessionName());
-    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', array('name' => $account->getUsername())));
+    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', ['name' => $account->getUsername()]));
 
     $this->loggedInUser = $account;
     $this->container->get('current_user')->setAccount($account);
@@ -92,7 +92,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     // idea being if you were properly logged out you should be seeing a login
     // screen.
     $assert_session = $this->assertSession();
-    $this->drupalGet('user/logout', array('query' => array('destination' => 'user')));
+    $this->drupalGet('user/logout', ['query' => ['destination' => 'user']]);
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
 

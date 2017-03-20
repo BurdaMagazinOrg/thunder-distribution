@@ -87,10 +87,10 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * {@inheritdoc}
    */
   public function getSummary() {
-    $summary = array(
+    $summary = [
       '#theme' => 'image_resize_summary',
       '#data' => $this->configuration,
-    );
+    ];
     $summary += parent::getSummary();
 
     return $summary;
@@ -100,11 +100,11 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array(
+    return [
       'landscape' => NULL,
       'portrait' => NULL,
       'ratio_adjustment' => 1,
-    );
+    ];
   }
 
   /**
@@ -112,22 +112,22 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $image_styles = image_style_options(FALSE);
-    $form['landscape'] = array(
+    $form['landscape'] = [
       '#type' => 'select',
       '#title' => t('Landscape image style'),
       '#options' => $image_styles,
       '#default_value' => $this->configuration['landscape'],
       '#description' => t('Select the image style for landscape images'),
       '#required' => TRUE,
-    );
-    $form['portrait'] = array(
+    ];
+    $form['portrait'] = [
       '#type' => 'select',
       '#title' => t('Portrait'),
       '#options' => $image_styles,
       '#default_value' => $this->configuration['portrait'],
       '#description' => t('Select the image style for portrait images'),
       '#required' => TRUE,
-    );
+    ];
     return $form;
   }
 

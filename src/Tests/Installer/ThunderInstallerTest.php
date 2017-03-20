@@ -27,12 +27,12 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->isInstalled = FALSE;
 
     // Define information about the user 1 account.
-    $this->rootUser = new UserSession(array(
+    $this->rootUser = new UserSession([
       'uid' => 1,
       'name' => 'admin',
       'mail' => 'admin@example.com',
       'pass_raw' => $this->randomMachineName(),
-    ));
+    ]);
 
     // If any $settings are defined for this test, copy and prepare an actual
     // settings.php, so as to resemble a regular installation.

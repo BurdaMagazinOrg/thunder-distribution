@@ -34,12 +34,12 @@ class ConfigurationForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('thunder_media.settings');
 
-    $form['enable_filename_transliteration'] = array(
+    $form['enable_filename_transliteration'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable filename transliteration'),
       '#description' => $this->t('Enable this checkbox to clean filenames before saving the files.'),
       '#default_value' => $config->get('enable_filename_transliteration'),
-    );
+    ];
 
     return parent::buildForm($form, $form_state);
   }

@@ -35,7 +35,7 @@ class ThunderUpdateLogger extends AbstractLogger {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = array()) {
+  public function log($level, $message, array $context = []) {
     $this->logs[] = [$level, $message, $context];
   }
 

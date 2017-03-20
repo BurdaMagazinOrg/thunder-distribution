@@ -65,38 +65,38 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['description'] = array(
+    $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
-    );
+    ];
 
-    $form['install_modules'] = array(
+    $form['install_modules'] = [
       '#type' => 'container',
-    );
+    ];
 
     foreach ($this->optionalModulesManager->getDefinitions() as $provider) {
 
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
-      $form['install_modules_' . $provider['id']] = array(
+      $form['install_modules_' . $provider['id']] = [
         '#type' => 'checkbox',
         '#title' => $provider['label'],
         '#description' => isset($provider['description']) ? $provider['description'] : '',
         '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
-      );
+      ];
 
       $form = $instance->buildForm($form, $form_state);
 
     }
     $form['#title'] = $this->t('Install & configure modules');
 
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['save'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['save'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save and continue'),
       '#button_type' => 'primary',
-      '#submit' => array('::submitForm'),
-    );
+      '#submit' => ['::submitForm'],
+    ];
 
     return $form;
   }

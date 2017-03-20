@@ -134,7 +134,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       foreach (array_reverse($channels) as $term) {
         $term = $this->entityManager->getTranslationFromContext($term);
         $breadcrumb->addCacheableDependency($term);
-        $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', array('taxonomy_term' => $term->id()));
+        $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
       }
     }
     if (!$links || '/' . $links[0]->getUrl()->getInternalPath() != $this->configFactory->get('system.site')->get('page.front')) {

@@ -19,9 +19,9 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    * Installer step: Select language.
    */
   protected function setUpLanguage() {
-    $edit = array(
+    $edit = [
       'langcode' => $this->langcode,
-    );
+    ];
     $this->drupalPostForm(NULL, $edit, 'Save and continue');
   }
 
