@@ -22,17 +22,17 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
  */
 function thunder_install_tasks(&$install_state) {
 
-  $tasks = array(
-    'thunder_module_configure_form' => array(
+  $tasks = [
+    'thunder_module_configure_form' => [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
       'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ),
-    'thunder_module_install' => array(
+    ],
+    'thunder_module_install' => [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
-    ),
-  );
+    ],
+  ];
 
   return $tasks;
 }
@@ -107,12 +107,12 @@ function thunder_module_install(array &$install_state) {
 
   $batch = [];
   if ($modules) {
-    $operations = array();
+    $operations = [];
     foreach ($modules as $module) {
-      $operations[] = array(
+      $operations[] = [
         '_thunder_install_module_batch',
-        array(array($module), $module, $install_state['form_state_values']),
-      );
+        [[$module], $module, $install_state['form_state_values']],
+      ];
     }
 
     $batch = [
@@ -153,7 +153,7 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
   }
 
   $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', array('%module_name' => $module_name));
+  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
 }
 
 /**
@@ -245,14 +245,14 @@ function thunder_modules_installed($modules) {
     $fieldWidget = 'ivw_integration_widget';
 
     entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
 
     entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
   }
 
   // Enable riddle paragraph in field_paragraphs.

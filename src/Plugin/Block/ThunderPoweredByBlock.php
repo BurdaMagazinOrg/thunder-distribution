@@ -25,7 +25,7 @@ class ThunderPoweredByBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return array('#markup' => '<span>' . $this->t('Powered by <a href=":poweredby">Thunder</a>', array(':poweredby' => 'http://www.thunder.org')) . '</span>');
+    return ['#markup' => '<span>' . $this->t('Powered by <a href=":poweredby">Thunder</a>', [':poweredby' => 'http://www.thunder.org']) . '</span>'];
   }
 
 }
