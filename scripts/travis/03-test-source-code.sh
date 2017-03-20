@@ -7,5 +7,9 @@ phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme -
 phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme --ignore=thunder.info.yml -p .
 
 # JS ESLint checking
+set -x
+source ~/.nvm/nvm.sh
+set +x
+nvm install 6
 npm install -g eslint
 eslint .
