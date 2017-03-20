@@ -73,24 +73,24 @@ function thunder_updater_toolbar() {
   \Drupal::service('renderer')->addCacheableDependency($items['thunder_updater'], $checklist->config);
 
   if ($checklist->getPercentComplete() != 100) {
-    $items['thunder_updater'] += array(
+    $items['thunder_updater'] += [
       '#type' => 'toolbar_item',
-      'tab' => array(
+      'tab' => [
         '#type' => 'link',
         '#title' => t('Pending Thunder updates'),
         '#url' => Url::fromRoute($checklist->getRouteName()),
-        '#attributes' => array(
-          'class' => array('toolbar-icon', 'toolbar-icon-thunder-updater'),
+        '#attributes' => [
+          'class' => ['toolbar-icon', 'toolbar-icon-thunder-updater'],
           'aria-pressed' => 'false',
-        ),
-      ),
+        ],
+      ],
       '#weight' => 500,
       '#attached' => [
         'library' => [
           'thunder_updater/toolbar-button',
         ],
       ],
-    );
+    ];
   }
   return $items;
 }
