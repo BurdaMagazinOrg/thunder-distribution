@@ -21,14 +21,14 @@ class ThunderTermForm extends TermForm {
     $form['status']['#access'] = FALSE;
 
     // Create sidebar group.
-    $form['advanced'] = array(
+    $form['advanced'] = [
       '#type' => 'container',
-      '#attributes' => array('class' => array('entity-meta')),
+      '#attributes' => ['class' => ['entity-meta']],
       '#weight' => 99,
-    );
+    ];
 
     // Use the same form like node edit.
-    $form['#theme'] = array('node_edit_form');
+    $form['#theme'] = ['node_edit_form'];
     $form['#attached']['library'][] = 'seven/node-form';
 
     // Move relations into sidebar.
@@ -36,20 +36,20 @@ class ThunderTermForm extends TermForm {
 
     // Move pathauto into sidebar.
     $term = $form_state->getFormObject()->getEntity();
-    $form['path_settings'] = array(
+    $form['path_settings'] = [
       '#type' => 'details',
       '#title' => t('URL path settings'),
       '#open' => !empty($form['path']['widget'][0]['alias']['#value']),
       '#group' => 'advanced',
       '#access' => !empty($form['path']['#access']) && $term->hasField('path') && $term->get('path')->access('edit'),
-      '#attributes' => array(
-        'class' => array('path-form'),
-      ),
-      '#attached' => array(
-        'library' => array('path/drupal.path'),
-      ),
+      '#attributes' => [
+        'class' => ['path-form'],
+      ],
+      '#attached' => [
+        'library' => ['path/drupal.path'],
+      ],
       '#weight' => 30,
-    );
+    ];
     $form['path']['#group'] = 'path_settings';
 
     // Update callback for status change.

@@ -17,7 +17,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
    *
    * @var array
    */
-  public static $modules = array('file_test', 'file');
+  public static $modules = ['file_test', 'file'];
 
   /**
    * {@inheritdoc}
@@ -36,7 +36,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
    */
   public function testFileTransliteration() {
 
-    $account = $this->drupalCreateUser(array('access site reports'));
+    $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);
 
     $original = drupal_get_path('module', 'simpletest') . '/files';
@@ -44,10 +44,10 @@ class FilenameTransliterationTest extends ThunderBaseTest {
     file_unmanaged_copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
 
     // Upload with replace to guarantee there's something there.
-    $edit = array(
+    $edit = [
       'file_test_replace' => FILE_EXISTS_RENAME,
       'files[file_test_upload]' => drupal_realpath('public://foo°.png'),
-    );
+    ];
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
     $this->assertResponse(200, 'Received a 200 response for posted test file.');
     $this->assertRaw(t('You WIN!'), 'Found the success message.');
