@@ -2,8 +2,6 @@
 
 namespace Drupal\thunder_updater;
 
-use Drupal\thunder\ThunderUpdateLogger;
-
 /**
  * Interface for the Update entity.
  */
@@ -74,9 +72,9 @@ interface UpdaterInterface {
    *
    * @param array $modules
    *   Key is name of the checkbox, value name of the module.
-   * @param \Drupal\thunder\ThunderUpdateLogger $updateLogger
+   * @param \Drupal\thunder_updater\UpdateLogger $updateLogger
    *   Logger service.
    */
-  public function installModules(array $modules, ThunderUpdateLogger $updateLogger);
+  public function installModules(array $modules, UpdateLogger $updateLogger);
 
 }

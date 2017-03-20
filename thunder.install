@@ -10,7 +10,25 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder'] = [
+    8006 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
 
 /**
  * Install the thunder installation profile.
@@ -252,8 +270,8 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $configs = [
@@ -314,20 +332,11 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  \Drupal::service('module_installer')->install(['thunder_updater']);
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
-
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  try {
-    if (!$moduleInstaller->install(['thunder_updater'])) {
-      $updateLogger->warning(t('Unable to enable the Thunder Updater'));
-    }
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
-  }
 
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->markAllUpdates(FALSE);
@@ -356,8 +365,8 @@ function thunder_update_8104() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -382,8 +391,8 @@ function thunder_update_8105() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -408,8 +417,8 @@ function thunder_update_8106() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [

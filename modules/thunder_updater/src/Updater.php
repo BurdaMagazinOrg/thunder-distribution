@@ -8,7 +8,6 @@ use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\thunder\ThunderUpdateLogger;
 use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
@@ -291,7 +290,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
+  public function installModules(array $modules, UpdateLogger $updateLogger) {
 
     $successful = [];
 
