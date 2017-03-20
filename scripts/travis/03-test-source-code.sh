@@ -7,6 +7,14 @@ phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme -
 phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme --ignore=thunder.info.yml -p .
 
 # JS ESLint checking
-nvm install 5
+mv ~/.nvm ~/.nvm-backup
+git clone https://github.com/creationix/nvm.git ~/.nvm
+(cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)
+set -x
+source ~/.nvm/nvm.sh
+set +x
+nvm install 6
 npm install -g eslint
 eslint .
+rm -rf ~/.nvm
+mv ~/.nvm-backup ~/.nvm
