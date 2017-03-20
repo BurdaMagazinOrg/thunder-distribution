@@ -439,13 +439,20 @@ function thunder_update_8106() {
 
 /**
  * Installs the thunder_riddle module.
+ *
+ * This replaces the riddle paragraphs by a new one, using media_entity as
+ * a base. After that you are able to select riddles out of the entity browser.
  */
 function thunder_update_8107() {
 
+  if (!\Drupal::moduleHandler()->moduleExists('paragraphs_riddle_marketplace')) {
+    return NULL;
+  }
+
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $successful = TRUE;
@@ -477,7 +484,7 @@ function thunder_update_8107() {
             $media = \Drupal::entityTypeManager()->getStorage('media')
               ->loadByProperties([
                 'bundle' => 'riddle',
-                'field_riddle_id' => end(explode('/', $oldParagraph->get('field_link')->uri)),
+                'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
               ]);
 
             $media = current($media);
@@ -494,10 +501,16 @@ function thunder_update_8107() {
             ]);
 
             if ($host->save()) {
-              $updateLogger->warning(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-              $oldParagraph->delete();
+              $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+              try {
+                $oldParagraph->delete();
+              }
+              catch (EntityStorageException $storageException) {
+                $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+              }
             }
             else {
+              $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
               $successful = FALSE;
             }
           }
@@ -511,7 +524,7 @@ function thunder_update_8107() {
         foreach ($paragraphFields as $paragraphField) {
 
           /** @var \Drupal\field\Entity\FieldConfig $field */
-          $field = entity_load('field_config', $paragraphField);
+          $field = \Drupal::entityTypeManager()->getStorage('field_config')->load($paragraphField);
 
           $settings = $field->getSetting('handler_settings');
 
