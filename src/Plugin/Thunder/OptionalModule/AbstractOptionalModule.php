@@ -77,16 +77,16 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
       }
     }
 
-    $form[$this->getBaseId()] = array(
+    $form[$this->getBaseId()] = [
       '#type' => 'details',
       '#title' => $this->pluginDefinition['label'],
       '#open' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="install_modules_' . $this->getBaseId() . '"]' => array('checked' => TRUE),
-        ),
-      ),
-    );
+      '#states' => [
+        'visible' => [
+          ':input[name="install_modules_' . $this->getBaseId() . '"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
 
     return $form;
   }

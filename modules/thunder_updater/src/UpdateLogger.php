@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder;
+namespace Drupal\thunder_updater;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
@@ -12,9 +12,9 @@ use Psr\Log\LogLevel;
  * And it also provides output of logs for Drush command, when update is
  * executed over drush command.
  *
- * @package Drupal\thunder
+ * @package Drupal\thunder_updater
  */
-class ThunderUpdateLogger extends AbstractLogger {
+class UpdateLogger extends AbstractLogger {
 
   /**
    * Container for logs.
@@ -35,7 +35,7 @@ class ThunderUpdateLogger extends AbstractLogger {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = array()) {
+  public function log($level, $message, array $context = []) {
     $this->logs[] = [$level, $message, $context];
   }
 

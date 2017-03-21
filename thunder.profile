@@ -22,17 +22,17 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
  */
 function thunder_install_tasks(&$install_state) {
 
-  $tasks = array(
-    'thunder_module_configure_form' => array(
+  $tasks = [
+    'thunder_module_configure_form' => [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
       'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ),
-    'thunder_module_install' => array(
+    ],
+    'thunder_module_install' => [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
-    ),
-  );
+    ],
+  ];
 
   return $tasks;
 }
@@ -59,9 +59,9 @@ function thunder_post_install_redirect(array &$install_state) {
   // Clear all messages.
   drupal_get_messages();
 
-  $success_message = t('Congratulations, you installed @drupal!', array(
+  $success_message = t('Congratulations, you installed @drupal!', [
     '@drupal' => drupal_install_profile_distribution_name(),
-  ));
+  ]);
   drupal_set_message($success_message);
 
   $output = [
@@ -107,12 +107,12 @@ function thunder_module_install(array &$install_state) {
 
   $batch = [];
   if ($modules) {
-    $operations = array();
+    $operations = [];
     foreach ($modules as $module) {
-      $operations[] = array(
+      $operations[] = [
         '_thunder_install_module_batch',
-        array(array($module), $module, $install_state['form_state_values']),
-      );
+        [[$module], $module, $install_state['form_state_values']],
+      ];
     }
 
     $batch = [
@@ -153,7 +153,7 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
   }
 
   $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', array('%module_name' => $module_name));
+  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
 }
 
 /**
@@ -163,9 +163,11 @@ function thunder_themes_installed($theme_list) {
 
   if (in_array('infinite', $theme_list)) {
 
-    $configs = Drupal::configFactory()->listAll('block.block.infinite_');
+    $configFactory = \Drupal::configFactory();
+
+    $configs = $configFactory->listAll('block.block.infinite_');
     foreach ($configs as $config) {
-      Drupal::configFactory()->getEditable($config)->delete();
+      $configFactory->getEditable($config)->delete();
     }
 
     \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
@@ -209,25 +211,24 @@ function thunder_themes_installed($theme_list) {
     $display->save();
 
     $profilePath = drupal_get_path('profile', 'thunder');
-    \Drupal::configFactory()
-      ->getEditable('infinite.settings')
+    $configFactory->getEditable('infinite.settings')
       ->set('logo.use_default', FALSE)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
+      ->set('favicon.use_default', FALSE)
+      ->set('favicon.path', $profilePath . '/themes/thunder_base/favicon.ico')
       ->save(TRUE);
 
     // Set default pages.
-    \Drupal::configFactory()->getEditable('system.site')
+    $configFactory->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
 
     // Set infinite image styles and gallery view mode.
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.image.default')
+    $configFactory->getEditable('core.entity_view_display.media.image.default')
       ->set('content.field_image.settings.image_style', 'inline_m')
       ->set('content.field_image.settings.responsive_image_style', '')
       ->save(TRUE);
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.gallery.default')
+    $configFactory->getEditable('core.entity_view_display.media.gallery.default')
       ->set('content.field_media_images.settings.view_mode', 'gallery')
       ->save(TRUE);
   }
@@ -244,14 +245,14 @@ function thunder_modules_installed($modules) {
     $fieldWidget = 'ivw_integration_widget';
 
     entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
 
     entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
   }
 
   // Enable riddle paragraph in field_paragraphs.

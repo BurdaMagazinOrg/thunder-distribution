@@ -10,7 +10,25 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder'] = [
+    8006 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
 
 /**
  * Install the thunder installation profile.
@@ -135,7 +153,7 @@ function thunder_update_8003() {
   // Get all of the field storage entities of type metatag.
   $field_storage_configs = $entity_manager
     ->getStorage('field_storage_config')
-    ->loadByProperties(array('type' => 'metatag'));
+    ->loadByProperties(['type' => 'metatag']);
 
   foreach ($field_storage_configs as $field_storage) {
     $field_name = $field_storage->getName();
@@ -143,7 +161,7 @@ function thunder_update_8003() {
     // Get the individual fields (field instances) associated with bundles.
     /** @var \Drupal\field\Entity\FieldConfig[] $fields */
     $fields = $entity_manager->getStorage('field_config')
-      ->loadByProperties(array('field_name' => $field_name));
+      ->loadByProperties(['field_name' => $field_name]);
 
     foreach ($fields as $field) {
 
@@ -179,7 +197,7 @@ function thunder_update_8005() {
 
   if (empty($view->getDisplay('default')['display_options']['filters']['uid'])) {
 
-    $uid['uid'] = array(
+    $uid['uid'] = [
       'id' => 'uid',
       'table' => 'node_field_data',
       'field' => 'uid',
@@ -188,11 +206,11 @@ function thunder_update_8005() {
       'admin_label' => '',
       'operator' => 'in',
       'value' =>
-        array(),
+        [],
       'group' => 1,
       'exposed' => TRUE,
       'expose' =>
-        array(
+        [
           'operator_id' => 'uid_op',
           'label' => 'Authored by',
           'description' => '',
@@ -203,18 +221,18 @@ function thunder_update_8005() {
           'remember' => FALSE,
           'multiple' => FALSE,
           'remember_roles' =>
-            array(
+            [
               'authenticated' => 'authenticated',
               'anonymous' => '0',
               'editor' => '0',
               'seo' => '0',
               'administrator' => '0',
-            ),
+            ],
           'reduce' => FALSE,
-        ),
+        ],
       'is_grouped' => FALSE,
       'group_info' =>
-        array(
+        [
           'label' => '',
           'description' => '',
           'identifier' => '',
@@ -224,14 +242,14 @@ function thunder_update_8005() {
           'remember' => FALSE,
           'default_group' => 'All',
           'default_group_multiple' =>
-            array(),
+            [],
           'group_items' =>
-            array(),
-        ),
+            [],
+        ],
       'entity_type' => 'node',
       'entity_field' => 'uid',
       'plugin_id' => 'user_name',
-    );
+    ];
 
     $newArray = array_slice($view->getDisplay('default')['display_options']['filters'], 0, 4, TRUE) +
       $uid +
@@ -252,8 +270,8 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $configs = [
@@ -314,20 +332,11 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  \Drupal::service('module_installer')->install(['thunder_updater']);
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
-
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  try {
-    if (!$moduleInstaller->install(['thunder_updater'])) {
-      $updateLogger->warning(t('Unable to enable the Thunder Updater'));
-    }
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning(t('Unable to enable the Thunder Updater because of missing dependencies.'));
-  }
 
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->markAllUpdates(FALSE);
@@ -356,8 +365,8 @@ function thunder_update_8104() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -382,8 +391,8 @@ function thunder_update_8105() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
@@ -408,8 +417,8 @@ function thunder_update_8106() {
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   $updates = [
