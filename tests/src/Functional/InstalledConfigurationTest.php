@@ -38,6 +38,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // Additional modules.
     // 'thunder_fia',
     // 'paragraphs_riddle_marketplace',
+    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    // 'thunder_liveblog',
     // There is already commit that should be pushed to drupal.org HM sandbox.
     // 'harbourmaster',
     // end of list.

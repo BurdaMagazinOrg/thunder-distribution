@@ -103,6 +103,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
+        "drupal/liveblog": "^1.0",
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "1.2",
         "drupal/media_entity_image": "^1.0",

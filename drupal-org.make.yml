@@ -113,6 +113,10 @@ projects:
     type: "module"
     version: "4.2"
 
+  liveblog:
+    type: "module"
+    version: "1.0-alpha6"
+
   media_entity:
     type: "module"
     version: "1.6"
@@ -175,6 +179,10 @@ projects:
     patch:
       - "https://www.drupal.org/files/issues/2842631.patch"
       - "https://www.drupal.org/files/issues/2845000_2.patch"
+
+  simple_gmap:
+    type: "module"
+    version: "1.2"
 
   simple_sitemap:
     type: "module"
@@ -254,3 +262,10 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/kenwheeler/slick/archive/1.6.0.zip"
+
+  pusher:
+    type: "library"
+    directory_name: "pusher"
+    download:
+      type: "get"
+      url: "https://github.com/pusher/pusher-http-php/archive/master.zip"

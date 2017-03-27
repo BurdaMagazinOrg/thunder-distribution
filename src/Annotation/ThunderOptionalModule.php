@@ -36,4 +36,11 @@ class ThunderOptionalModule extends Plugin {
    */
   public $type;
 
+  /**
+   * The weight of the plugin in relation to other plugins.
+   *
+   * @var int
+   */
+  public $weight;
+
 }
