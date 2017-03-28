@@ -93,7 +93,8 @@ class Updater implements UpdaterInterface {
     }
 
     // Config already in new state.
-    if (empty(DiffArray::diffAssocRecursive($configuration, $configData))) {
+    $mergedData = NestedArray::mergeDeep($expectedConfiguration, $configuration);
+    if (empty(DiffArray::diffAssocRecursive($mergedData, $configData))) {
       return TRUE;
     }
 
