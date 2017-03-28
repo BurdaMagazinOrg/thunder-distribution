@@ -92,6 +92,11 @@ class Updater implements UpdaterInterface {
       return FALSE;
     }
 
+    // Config already in new state.
+    if (empty(DiffArray::diffAssocRecursive($configuration, $configData))) {
+      return TRUE;
+    }
+
     if (!empty($expectedConfiguration) && DiffArray::diffAssocRecursive($expectedConfiguration, $configData)) {
       return FALSE;
     }
