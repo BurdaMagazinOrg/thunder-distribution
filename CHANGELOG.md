@@ -1,5 +1,16 @@
 # Change Log
 
+## [8.1.2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.2) 2017-03-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.1...8.x-1.2)
+
+Release of thunder 8.1.2. We updated all the contrib modules, including Linkit. Linkit had a security release on [2017-03-21](https://www.drupal.org/project/linkit/releases/8.x-4.3)
+
+## [8.1.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.1) 2017-03-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0...8.x-1.1)
+
+Release of thunder 8.1.1. In this small release we updated all the contrib modules, and fixed a lot of coding style issues.
+We also added some new tours, but they will just appear for new installations.
+
 ## [8.1.0](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0) 2017-01-30
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc6...8.x-1.0)
 
