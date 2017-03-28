@@ -41,11 +41,11 @@ projects:
 
   crop:
     type: "module"
-    version: "1.0"
+    version: "1.1"
 
   ctools:
     type: "module"
-    version: "3.0-alpha27"
+    version: "3.0-beta1"
 
   default_content:
     type: "module"
@@ -59,7 +59,7 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha5"
+    version: "1.0-alpha6"
 
   entity:
     type: "module"
@@ -67,7 +67,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-rc1"
+    version: "1.0-rc2"
 
   entity_reference_revisions:
     type: "module"
@@ -111,7 +111,7 @@ projects:
 
   linkit:
     type: "module"
-    version: "4.2"
+    version: "4.3"
 
   liveblog:
     type: "module"
@@ -167,7 +167,7 @@ projects:
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha5"
+    version: "1.0-alpha6"
 
   scheduler:
     type: "module"
