@@ -144,4 +144,4 @@ Before Drupal\thunder_updater\Updater::updateConfig() updates existing configura
 
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig);
-```
+``` 

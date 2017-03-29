@@ -9,6 +9,8 @@ namespace Drupal\thunder\Tests\Installer;
  */
 class ThunderInstallerGermanTest extends ThunderInstallerTest {
 
+  protected $expectedInstallerIssues = 2;
+
   protected $langcode = 'de';
 
   protected $translations = [
