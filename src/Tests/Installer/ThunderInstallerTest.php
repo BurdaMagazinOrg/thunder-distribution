@@ -167,8 +167,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     $query = \Drupal::database()->select('watchdog', 'w')
       ->condition('severity', 4, '<');
 
-    // We have one expected warning from the simple_sitemap module.
-    $this->assertEqual($query->countQuery()->execute()->fetchField(), 1);
+    // Check that there are no warnings in the log after installation.
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);
 
   }
 
