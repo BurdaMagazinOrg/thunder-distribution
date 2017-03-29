@@ -461,13 +461,14 @@ function thunder_update_8107() {
     // Import Riddles.
     \Drupal::service('media_riddle_marketplace')->createMediaEntities();
 
+    $entityTypeManager = \Drupal::entityTypeManager();
+
     /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-    $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')
+    $paragraphs = $entityTypeManager->getStorage('paragraph')
       ->loadByProperties([
         'type' => 'paragraphs_riddle_marketplace',
       ]);
 
-    $paragraphFields = [];
     foreach ($paragraphs as $oldParagraph) {
 
       $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
@@ -475,13 +476,11 @@ function thunder_update_8107() {
       $host = $oldParagraph->getParentEntity();
       if ($host) {
 
-        $paragraphFields[] = $host->getEntityTypeId() . '.' . $host->bundle() . '.' . $fieldName;
-
         foreach ($host->get($fieldName)->getValue() as $delta => $field) {
           if ($field['target_id'] == $oldParagraph->id()) {
 
             /* @var \Drupal\media_entity\Entity\Media */
-            $media = \Drupal::entityTypeManager()->getStorage('media')
+            $media = $entityTypeManager->getStorage('media')
               ->loadByProperties([
                 'bundle' => 'riddle',
                 'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
@@ -521,10 +520,10 @@ function thunder_update_8107() {
     if ($successful) {
       try {
 
-        foreach ($paragraphFields as $paragraphField) {
+        $fieldConfigs = $entityTypeManager->getStorage('field_config')
+          ->loadByProperties(['field_type' => 'entity_reference_revisions']);
 
-          /** @var \Drupal\field\Entity\FieldConfig $field */
-          $field = \Drupal::entityTypeManager()->getStorage('field_config')->load($paragraphField);
+        foreach ($fieldConfigs as $field) {
 
           $settings = $field->getSetting('handler_settings');
 
@@ -536,9 +535,13 @@ function thunder_update_8107() {
           $field->save();
         }
 
-        \Drupal::entityTypeManager()->getStorage('paragraphs_type')
-          ->load('paragraphs_riddle_marketplace')
-          ->delete();
+        $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
+          ->load('paragraphs_riddle_marketplace');
+
+        if ($paragraphType) {
+          $paragraphType->delete();
+        }
+
       }
       catch (\Exception $e) {
         $successful = FALSE;
