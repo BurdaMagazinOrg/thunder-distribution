@@ -4,7 +4,7 @@
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.1...8.x-1.2)
 
 - Update Linkit to 4.3 because of a security release on [2017-03-21](https://www.drupal.org/project/linkit/releases/8.x-4.3)
-- Update of contrib modules
+- Update of contrib modules.
 - Set a fixed version in build-thunder.make to get Thunder up and running on simplytest.me
 
 ## [8.1.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.1) 2017-03-20
