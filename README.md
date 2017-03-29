@@ -49,7 +49,7 @@ Plus some base configuration:
     * Text
     * Quote
 
-[Here](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/8.x-1.x/modules/thunder_paragraphs/README.md) you can find more information about these paragraphs.
+[Here](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/modules/thunder_paragraphs/README.md) you can find more information about these paragraphs.
  
 ## What can be activated optionally?
 
