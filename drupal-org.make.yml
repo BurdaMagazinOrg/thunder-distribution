@@ -186,7 +186,7 @@ projects:
 
   simple_sitemap:
     type: "module"
-    version: "2.8"
+    version: "2.9"
 
   slick:
     type: "module"
