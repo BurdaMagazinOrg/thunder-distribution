@@ -34,6 +34,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'nexx_integration',
     'ivw_integration',
     'adsense',
+    'thunder_riddle',
 
     // Additional modules.
     // 'thunder_fia',
