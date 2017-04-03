@@ -40,7 +40,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // 'paragraphs_riddle_marketplace',
     // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
     // 'thunder_liveblog',
-    // There is already commit that should be pushed to drupal.org HM sandbox.
+    // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
     // 'harbourmaster',
     // end of list.
   ];
@@ -277,9 +277,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $ignoreConfigs = [
     // Slick media module. Issue: https://www.drupal.org/node/2852030
     'core.entity_view_mode.media.slick',
-
-    // Paragraphs module. Issue: https://www.drupal.org/node/2852025
-    'core.entity_view_mode.paragraph.preview',
 
     // Focal Point module. Issue: https://www.drupal.org/node/2851587
     'crop.type.focal_point',
