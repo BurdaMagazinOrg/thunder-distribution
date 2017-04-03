@@ -264,6 +264,21 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
+
+    // Riddle paragraph is added dynamically by thunder profile on
+    // thunder_riddle installation.
+    'field.field.node.article.field_paragraphs' => [
+      'settings' => [
+        'handler_settings' => [
+          'target_bundles' => [
+            'riddle' => TRUE,
+          ],
+          'target_bundles_drag_drop' => [
+            'riddle' => TRUE,
+          ],
+        ],
+      ],
+    ],
   ];
 
   /**
