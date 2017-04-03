@@ -447,11 +447,8 @@ function thunder_update_8107() {
 
   $entityTypeManager = \Drupal::entityTypeManager();
 
-  /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-  $paragraphs = $entityTypeManager->getStorage('paragraph')
-    ->loadByProperties([
-      'type' => 'paragraphs_riddle_marketplace',
-    ]);
+  $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
+    ->load('paragraphs_riddle_marketplace');
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -460,11 +457,17 @@ function thunder_update_8107() {
   $updateLogger->cleanLogs();
 
   $successful = TRUE;
-  if (!empty($paragraphs)) {
+  if (!empty($paragraphType)) {
     if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
 
       // Import Riddles.
       \Drupal::service('media_riddle_marketplace')->createMediaEntities();
+
+      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+      $paragraphs = $entityTypeManager->getStorage('paragraph')
+        ->loadByProperties([
+          'type' => 'paragraphs_riddle_marketplace',
+        ]);
 
       foreach ($paragraphs as $oldParagraph) {
 
@@ -532,12 +535,7 @@ function thunder_update_8107() {
             $field->save();
           }
 
-          $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
-            ->load('paragraphs_riddle_marketplace');
-
-          if ($paragraphType) {
-            $paragraphType->delete();
-          }
+          $paragraphType->delete();
 
         }
         catch (\Exception $e) {
