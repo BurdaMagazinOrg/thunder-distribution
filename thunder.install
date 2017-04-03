@@ -445,9 +445,13 @@ function thunder_update_8106() {
  */
 function thunder_update_8107() {
 
-  if (!\Drupal::moduleHandler()->moduleExists('paragraphs_riddle_marketplace')) {
-    return NULL;
-  }
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+  $paragraphs = $entityTypeManager->getStorage('paragraph')
+    ->loadByProperties([
+      'type' => 'paragraphs_riddle_marketplace',
+    ]);
 
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -456,100 +460,94 @@ function thunder_update_8107() {
   $updateLogger->cleanLogs();
 
   $successful = TRUE;
-  if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
+  if (!empty($paragraphs)) {
+    if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
 
-    // Import Riddles.
-    \Drupal::service('media_riddle_marketplace')->createMediaEntities();
+      // Import Riddles.
+      \Drupal::service('media_riddle_marketplace')->createMediaEntities();
 
-    $entityTypeManager = \Drupal::entityTypeManager();
+      foreach ($paragraphs as $oldParagraph) {
 
-    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-    $paragraphs = $entityTypeManager->getStorage('paragraph')
-      ->loadByProperties([
-        'type' => 'paragraphs_riddle_marketplace',
-      ]);
+        $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
 
-    foreach ($paragraphs as $oldParagraph) {
+        $host = $oldParagraph->getParentEntity();
+        if ($host) {
 
-      $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
+          foreach ($host->get($fieldName)->getValue() as $delta => $field) {
+            if ($field['target_id'] == $oldParagraph->id()) {
 
-      $host = $oldParagraph->getParentEntity();
-      if ($host) {
+              /* @var \Drupal\media_entity\Entity\Media */
+              $media = $entityTypeManager->getStorage('media')
+                ->loadByProperties([
+                  'bundle' => 'riddle',
+                  'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
+                ]);
 
-        foreach ($host->get($fieldName)->getValue() as $delta => $field) {
-          if ($field['target_id'] == $oldParagraph->id()) {
+              $media = current($media);
 
-            /* @var \Drupal\media_entity\Entity\Media */
-            $media = $entityTypeManager->getStorage('media')
-              ->loadByProperties([
-                'bundle' => 'riddle',
-                'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
+              $paragraph = Paragraph::create([
+                'type' => 'riddle',
+                'field_riddle' => $media->id(),
+              ]);
+              $paragraph->save();
+
+              $host->get($fieldName)->set($delta, [
+                'target_id' => $paragraph->id(),
+                'target_revision_id' => $paragraph->getRevisionId(),
               ]);
 
-            $media = current($media);
-
-            $paragraph = Paragraph::create([
-              'type' => 'riddle',
-              'field_riddle' => $media->id(),
-            ]);
-            $paragraph->save();
-
-            $host->get($fieldName)->set($delta, [
-              'target_id' => $paragraph->id(),
-              'target_revision_id' => $paragraph->getRevisionId(),
-            ]);
-
-            if ($host->save()) {
-              $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-              try {
-                $oldParagraph->delete();
+              if ($host->save()) {
+                $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                try {
+                  $oldParagraph->delete();
+                }
+                catch (EntityStorageException $storageException) {
+                  $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                }
               }
-              catch (EntityStorageException $storageException) {
-                $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+              else {
+                $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                $successful = FALSE;
               }
-            }
-            else {
-              $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-              $successful = FALSE;
             }
           }
         }
       }
-    }
 
-    if ($successful) {
-      try {
+      if ($successful) {
+        try {
 
-        $fieldConfigs = $entityTypeManager->getStorage('field_config')
-          ->loadByProperties(['field_type' => 'entity_reference_revisions']);
+          $fieldConfigs = $entityTypeManager->getStorage('field_config')
+            ->loadByProperties(['field_type' => 'entity_reference_revisions']);
 
-        foreach ($fieldConfigs as $field) {
+          foreach ($fieldConfigs as $field) {
 
-          $settings = $field->getSetting('handler_settings');
+            $settings = $field->getSetting('handler_settings');
 
-          unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
-          unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
+            unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
+            unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
 
-          $field->setSetting('handler_settings', $settings);
+            $field->setSetting('handler_settings', $settings);
 
-          $field->save();
+            $field->save();
+          }
+
+          $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
+            ->load('paragraphs_riddle_marketplace');
+
+          if ($paragraphType) {
+            $paragraphType->delete();
+          }
+
         }
-
-        $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
-          ->load('paragraphs_riddle_marketplace');
-
-        if ($paragraphType) {
-          $paragraphType->delete();
+        catch (\Exception $e) {
+          $successful = FALSE;
         }
-
-      }
-      catch (\Exception $e) {
-        $successful = FALSE;
       }
     }
-  }
-  else {
-    $successful = FALSE;
+    else {
+      $successful = FALSE;
+    }
   }
 
   if ($successful) {
