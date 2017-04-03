@@ -547,7 +547,8 @@ function thunder_update_8107() {
         $successful = FALSE;
       }
     }
-  } else {
+  }
+  else {
     $successful = FALSE;
   }
 
