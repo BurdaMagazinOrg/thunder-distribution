@@ -13,10 +13,15 @@ projects:
   better_normalizers:
     type: "module"
     version: "1.0-beta2"
+    patch:
+      - "https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch"
 
   blazy:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-rc1"
+    patch:
+      - "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
+      - "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch"
 
   breakpoint_js_settings:
     type: "module"
@@ -28,7 +33,7 @@ projects:
 
   crop:
     type: "module"
-    version: "1.1"
+    version: "1.2"
 
   ctools:
     type: "module"
@@ -53,6 +58,8 @@ projects:
   entity_reference_revisions:
     type: "module"
     version: "1.2"
+    patch:
+      - "https://www.drupal.org/files/issues/2849136-4.patch"
 
   fb_instant_articles:
     type: "module"
@@ -150,11 +157,11 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-beta5"
+    version: "1.0-rc2"
 
   slick_media:
     type: "module"
-    version: "1.0-beta6"
+    version: "1.0-rc1"
 
   token:
     type: "module"
