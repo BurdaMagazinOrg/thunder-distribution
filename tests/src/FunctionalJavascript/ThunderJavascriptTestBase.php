@@ -159,6 +159,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * {@inheritdoc}
    */
+  protected function getHtmlOutputHeaders() {
+    return '';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
 
     parent::setUp();
