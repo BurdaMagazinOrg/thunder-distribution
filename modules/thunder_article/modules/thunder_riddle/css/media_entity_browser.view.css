@@ -1,0 +1,7 @@
+/**
+ * @media-entity media_entity_browser.view.css
+ */
+
+.view-media-entity-browser .views-row .views-field-name {
+  display: block;
+}
