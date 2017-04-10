@@ -96,6 +96,7 @@ content:
       overlay: ''
     third_party_settings: {  }
     type: slick_media
+    region: content
 hidden:
   created: true
   langcode: true
