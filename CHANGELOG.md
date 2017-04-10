@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.1.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.2) 2017-10-04
+## [8.1.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.3) 2017-04-10
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.2...8.x-1.3)
 
 - Update to drupal 8.3
