@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_update().
+ * Enable thunder_paragraphs.
  */
 function thunder_article_update_8001() {
 

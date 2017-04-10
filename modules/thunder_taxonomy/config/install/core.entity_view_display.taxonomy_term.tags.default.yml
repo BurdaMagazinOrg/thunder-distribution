@@ -19,6 +19,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
+    region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     weight: 0
@@ -27,6 +28,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   description: true
   langcode: true

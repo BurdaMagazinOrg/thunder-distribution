@@ -9,6 +9,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\thunder\ThunderTestTrait;
 
 /**
  * Base class for Thunder Javascript functional tests.
@@ -16,6 +17,21 @@ use Drupal\Tests\BrowserTestBase;
  * @package Drupal\Tests\thunder\FunctionalJavascript
  */
 abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
+
+  use ThunderTestTrait;
+
+  /**
+   * Modules to enable.
+   *
+   * The test runner will merge the $modules lists from this class, the class
+   * it extends, and so on up the class hierarchy. It is not necessary to
+   * include modules in your list that a parent class has already declared.
+   *
+   * @var string[]
+   *
+   * @see \Drupal\Tests\BrowserTestBase::installDrupal()
+   */
+  protected static $modules = ['thunder_demo'];
 
   /**
    * The profile to install as a basis for testing.
@@ -47,11 +63,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function initMink() {
-    $this->minkDefaultDriverArgs = [
-      'firefox',
-      NULL,
-      'http://127.0.0.1:4444/wd/hub',
-    ];
+    $this->minkDefaultDriverArgs = $this->getDriverArgs();
 
     try {
       return BrowserTestBase::initMink();
@@ -62,12 +74,53 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Get Web Driver arguments.
+   *
+   * Driver arguments depends on used environment where tests are executed.
+   * Currently it supports local environment (locally and on Travis CI) and
+   * SauceLabs environment on Travis CI.
+   *
+   * @return array
+   *   Returns default driver arguments.
+   */
+  protected function getDriverArgs() {
+    $desiredCapabilities = NULL;
+    $webDriverUrl = 'http://127.0.0.1:4444/wd/hub';
+
+    // Get Sauce Labs variables from environment, if Sauce Labs build is set.
+    if (!empty(getenv('SAUCE_LABS_ENABLED'))) {
+      $sauceUser = getenv('SAUCE_USERNAME');
+      $sauceKey = getenv('SAUCE_ACCESS_KEY');
+
+      $desiredCapabilities = [
+        'browserName' => 'chrome',
+        'version' => '55.0',
+        'platform' => 'macOS 10.12',
+        'screenResolution' => '1400x1050',
+        'tunnelIdentifier' => getenv('TRAVIS_JOB_NUMBER'),
+        'name' => get_class($this),
+      ];
+
+      $webDriverUrl = "https://{$sauceUser}:{$sauceKey}@ondemand.saucelabs.com:443/wd/hub";
+    }
+
+    return [
+      'chrome',
+      $desiredCapabilities,
+      $webDriverUrl,
+    ];
+  }
+
+  /**
    * {@inheritdoc}
    */
   protected function drupalLogin(AccountInterface $account) {
     if ($this->loggedInUser) {
       $this->drupalLogout();
     }
+
+    // Add waiting time, before opening of new page.
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     $this->drupalGet('user');
     $this->submitForm([
@@ -101,6 +154,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->loggedInUser = FALSE;
     $this->container->get('current_user')
       ->setAccount(new AnonymousUserSession());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getHtmlOutputHeaders() {
+    return '';
   }
 
   /**
@@ -256,6 +316,24 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Set value directly to field value, without formatting applied.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $rawValue
+   *   Raw value for field.
+   */
+  public function setRawFieldValue($fieldName, $rawValue) {
+    // Set date over jQuery, because browser drivers handle input value
+    // differently. fe. (Firefox will set it as "value" for field, but Chrome
+    // will use it as text for that input field, and in that case final value
+    // depends on format used for input field. That's why it's better to set it
+    // directly to value, independently from format used.
+    $this->getSession()
+      ->executeScript("jQuery('[name=\"{$fieldName}\"]').val('{$rawValue}')");
+  }
+
+  /**
    * Expand all tabs on page.
    *
    * It goes up to level 3 by default.
@@ -267,8 +345,11 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
     for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
       $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+      $this->assertSession()->assertWaitOnAjaxRequest();
     }
   }
 
