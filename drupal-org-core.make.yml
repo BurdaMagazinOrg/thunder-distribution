@@ -5,4 +5,3 @@ projects:
   drupal:
     type: core
     version: 8.3.0
-
