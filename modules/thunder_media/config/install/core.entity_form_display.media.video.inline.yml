@@ -1,4 +1,3 @@
-uuid: 125e8478-fa5f-4949-811c-cb97bf7cd267
 langcode: en
 status: true
 dependencies:
@@ -53,8 +52,6 @@ third_party_settings:
         effect: none
         speed: fast
       label: Bottom
-_core:
-  default_config_hash: zjSwDZ2XIK2D63HMpszPvkPdXUm2GZ-MO_zoev-Dlyw
 id: media.video.inline
 targetEntityType: media
 bundle: video

@@ -666,7 +666,7 @@ function thunder_update_8111() {
 /**
  * Installs new thunder admin theme.
  */
-function thunder_update_8107() {
+function thunder_update_8108() {
 
   /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
   $updateLogger = Drupal::service('logger.thunder_update');

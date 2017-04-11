@@ -18,6 +18,7 @@ content:
       view_mode: paragraph_preview
       link: false
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   uid: true

@@ -21,6 +21,7 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: media_thumbnail
+    region: content
   name:
     type: string
     weight: 1
@@ -28,6 +29,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   langcode: true
