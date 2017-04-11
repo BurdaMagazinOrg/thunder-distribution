@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.1.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.3) 2017-04-10
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.2...8.x-1.3)
+
+- Update to drupal 8.3
+- Updates for slick, blazy, slick_media, crop, simple_sitemap
+- Added Drupal 8.3 compatibility patches for blazy, better_normalizers and entity_reference_revisions
+
 ## [8.1.2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.2) 2017-03-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.1...8.x-1.2)
 
