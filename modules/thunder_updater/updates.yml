@@ -53,3 +53,7 @@ v1.1:
         '#description_failed': '<p><strong>There was a problem during the update.</strong> Go to the views page and increase the numbers of items per page.<p>'
         video_view: { '#text': 'Video browser', '#url': 'internal:/admin/structure/views/view/video_browser' }
         image_view: { '#text': 'Image browser', '#url': 'internal:/admin/structure/views/view/image_browser' }
+    v1_1__thunder_riddle:
+        '#title': 'Use new riddle media integration'
+        '#description': "<p>We want to use the new riddle media integration. It's much more user-friendly than the old way. You can select riddles from the entity browser now</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to convert you current riddles into new media_entity based ones.<p>'

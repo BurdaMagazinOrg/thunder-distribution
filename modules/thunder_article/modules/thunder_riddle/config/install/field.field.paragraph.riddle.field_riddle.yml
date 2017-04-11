@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_riddle
+    - media_entity.bundle.riddle
+    - paragraphs.paragraphs_type.riddle
+id: paragraph.riddle.field_riddle
+field_name: field_riddle
+entity_type: paragraph
+bundle: riddle
+label: Riddle
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      riddle: riddle
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

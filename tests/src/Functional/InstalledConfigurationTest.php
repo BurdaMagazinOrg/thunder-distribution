@@ -34,10 +34,10 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'nexx_integration',
     'ivw_integration',
     'adsense',
+    'thunder_riddle',
 
     // Additional modules.
     // 'thunder_fia',
-    // 'paragraphs_riddle_marketplace',
     // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
     // 'thunder_liveblog',
     // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
@@ -262,6 +262,24 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'dependencies' => [
         'config' => TRUE,
         'module' => TRUE,
+      ],
+    ],
+
+    // Riddle paragraph is added dynamically by thunder profile on
+    // thunder_riddle installation.
+    'field.field.node.article.field_paragraphs' => [
+      'dependencies' => [
+        'config' => TRUE,
+      ],
+      'settings' => [
+        'handler_settings' => [
+          'target_bundles' => [
+            'riddle' => TRUE,
+          ],
+          'target_bundles_drag_drop' => [
+            'riddle' => TRUE,
+          ],
+        ],
       ],
     ],
   ];
