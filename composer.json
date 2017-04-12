@@ -34,6 +34,23 @@
         }
     ],
     "extra": {
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
         "patches": {
             "drupal/media_entity": {
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
