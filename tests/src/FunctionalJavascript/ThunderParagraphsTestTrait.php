@@ -12,11 +12,21 @@ use Behat\Mink\Element\DocumentElement;
 trait ThunderParagraphsTestTrait {
 
   /**
-   * Counter used to count number of added Paragraphs.
+   * Get number of paragraphs for defined field on current page.
    *
-   * @var int
+   * @param string $fieldName
+   *   Paragraph field name.
+   *
+   * @return int
+   *   Returns number of paragraphs.
    */
-  protected $paragraphCount;
+  protected function getNumberOfParagraphs($fieldName) {
+    $fieldNamePart = str_replace('_', '-', $fieldName);
+
+    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr");
+
+    return count($paragraphRows);
+  }
 
   /**
    * Add paragraph for field with defined paragraph type.
@@ -25,9 +35,13 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param string $type
    *   Type of the paragraph.
+   *
+   * @return int
+   *   Returns index for added paragraph.
    */
   public function addParagraph($fieldName, $type) {
     $page = $this->getSession()->getPage();
+    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
 
     $toggleButtonSelector = '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button';
     $toggleButton = $page->find('css', $toggleButtonSelector);
@@ -41,16 +55,9 @@ trait ThunderParagraphsTestTrait {
     $page->pressButton($addMoreButtonName);
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    if (!isset($this->paragraphCount[$fieldName])) {
-      $this->paragraphCount[$fieldName] = 0;
-    }
-    else {
-      $this->paragraphCount[$fieldName]++;
-    }
+    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $this->paragraphCount[$fieldName] . '-subform"]');
-
-    return $this->paragraphCount[$fieldName];
+    return $nextParagraphIndex;
   }
 
   /**
