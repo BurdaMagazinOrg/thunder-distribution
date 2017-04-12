@@ -11,8 +11,8 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 class MetaInformationTest extends ThunderJavascriptTestBase {
 
+  use ThunderArticleTestTrait;
   use ThunderMetaTagTrait;
-  use ThunderMediaTestTrait;
 
   /**
    * Default user login role used for testing.
@@ -119,23 +119,18 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
    */
-  protected function createArticleWithFields(array $fieldValues = NULL) {
-    $this->drupalGet('node/add/article');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+  protected function createArticleWithFields(array $fieldValues = []) {
 
-    $page = $this->getSession()->getPage();
+    $fieldValues += [
+      'title[0][value]' => static::$tokens['[node:title]'],
+      'field_seo_title[0][value]' => static::$tokens['[node:field_seo_title]'],
+      'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
+    ];
 
-    $page->selectFieldOption('field_channel', 1);
-    $page->fillField('title[0][value]', static::$tokens['[node:title]']);
-    $page->fillField('field_seo_title[0][value]', static::$tokens['[node:field_seo_title]']);
-    $page->fillField('field_teaser_text[0][value]', static::$tokens['[node:field_teaser_text]']);
+    $this->articleFillNew($fieldValues);
 
+    $this->getSession()->getPage()->selectFieldOption('field_channel', 1);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
-
-    if (isset($fieldValues)) {
-      $this->expandAllTabs();
-      $this->setFieldValues($page, $fieldValues);
-    }
 
     $this->clickArticleSave();
   }
