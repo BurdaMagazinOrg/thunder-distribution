@@ -34,23 +34,6 @@
         }
     ],
     "extra": {
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ]
-        },
         "patches": {
             "drupal/media_entity": {
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
@@ -80,9 +63,7 @@
     "require": {
         "burdamagazinorg/infinite_module": "^1.0",
         "burdamagazinorg/infinite_theme": "^1.0",
-        "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
-        "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
