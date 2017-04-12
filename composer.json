@@ -63,8 +63,6 @@
     "require": {
         "burdamagazinorg/infinite_module": "^1.0",
         "burdamagazinorg/infinite_theme": "^1.0",
-        "composer/installers": "^1.0",
-        "oomphinc/composer-installers-extender": "^1.1",
         "cweagans/composer-patches": "~1.0",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
@@ -119,10 +117,8 @@
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24"
     },
-    "provide": {
-        "heiseonline/shariff": "master"
-    },
     "replace": {
+        "heiseonline/shariff": "*",
         "bower-asset/jquery": "*",
         "bower-asset/jqueryui": "*",
         "bower-asset/backbone": "*",
