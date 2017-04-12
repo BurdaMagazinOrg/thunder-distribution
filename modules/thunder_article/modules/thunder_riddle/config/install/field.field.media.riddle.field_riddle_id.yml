@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_riddle_id
+    - media_entity.bundle.riddle
+id: media.riddle.field_riddle_id
+field_name: field_riddle_id
+entity_type: media
+bundle: riddle
+label: 'Riddle Id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -10,6 +10,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Update hook dependencies.
@@ -426,6 +427,134 @@ function thunder_update_8106() {
   ];
 
   $thunderUpdater->installModules($updates, $updateLogger);
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Installs the thunder_riddle module.
+ *
+ * This replaces the riddle paragraphs by a new one, using media_entity as
+ * a base. After that you are able to select riddles out of the entity browser.
+ */
+function thunder_update_8107() {
+
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
+    ->load('paragraphs_riddle_marketplace');
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  $successful = TRUE;
+  if (!empty($paragraphType)) {
+    if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
+
+      // Import Riddles.
+      \Drupal::service('media_riddle_marketplace')->createMediaEntities();
+
+      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+      $paragraphs = $entityTypeManager->getStorage('paragraph')
+        ->loadByProperties([
+          'type' => 'paragraphs_riddle_marketplace',
+        ]);
+
+      foreach ($paragraphs as $oldParagraph) {
+
+        $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
+
+        $host = $oldParagraph->getParentEntity();
+        if ($host) {
+
+          foreach ($host->get($fieldName)->getValue() as $delta => $field) {
+            if ($field['target_id'] == $oldParagraph->id()) {
+
+              /* @var \Drupal\media_entity\Entity\Media */
+              $media = $entityTypeManager->getStorage('media')
+                ->loadByProperties([
+                  'bundle' => 'riddle',
+                  'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
+                ]);
+
+              $media = current($media);
+
+              $paragraph = Paragraph::create([
+                'type' => 'riddle',
+                'field_riddle' => $media->id(),
+              ]);
+              $paragraph->save();
+
+              $host->get($fieldName)->set($delta, [
+                'target_id' => $paragraph->id(),
+                'target_revision_id' => $paragraph->getRevisionId(),
+              ]);
+
+              if ($host->save()) {
+                $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                try {
+                  $oldParagraph->delete();
+                }
+                catch (EntityStorageException $storageException) {
+                  $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                  $successful = FALSE;
+                }
+              }
+              else {
+                $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                $successful = FALSE;
+              }
+            }
+          }
+        }
+      }
+
+      if ($successful) {
+        try {
+
+          $fieldConfigs = $entityTypeManager->getStorage('field_config')
+            ->loadByProperties(['field_type' => 'entity_reference_revisions']);
+
+          foreach ($fieldConfigs as $field) {
+
+            $settings = $field->getSetting('handler_settings');
+
+            unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
+            unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
+
+            $field->setSetting('handler_settings', $settings);
+
+            $field->save();
+          }
+
+          $paragraphType->delete();
+
+        }
+        catch (\Exception $e) {
+          $successful = FALSE;
+        }
+      }
+    }
+    else {
+      $successful = FALSE;
+    }
+  }
+
+  if ($successful) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_riddle']);
+  }
+  else {
+    $thunderUpdater->markUpdatesFailed(['v1_1__thunder_riddle']);
+  }
 
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
