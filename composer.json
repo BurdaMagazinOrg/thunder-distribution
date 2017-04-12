@@ -102,7 +102,7 @@
         "drupal/paragraphs": "^1.0",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/riddle_marketplace": "^1.0",
+        "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "1.1",

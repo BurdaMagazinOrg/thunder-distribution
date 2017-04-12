@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.riddle.field_riddle
+    - paragraphs.paragraphs_type.riddle
+id: paragraph.riddle.default
+targetEntityType: paragraph
+bundle: riddle
+mode: default
+content:
+  field_riddle:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden: {  }
