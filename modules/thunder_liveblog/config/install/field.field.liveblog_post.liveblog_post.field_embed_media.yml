@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.liveblog_post.field_embed_media
+    - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.instagram
     - paragraphs.paragraphs_type.twitter
   module:
@@ -22,28 +23,32 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      instagram: instagram
+      image: image
       twitter: twitter
+      instagram: instagram
     target_bundles_drag_drop:
       gallery:
-        weight: 8
+        weight: -17
         enabled: false
-      instagram:
+      image:
         enabled: true
-        weight: 9
-      link:
-        weight: 10
-        enabled: false
-      media:
-        weight: 11
-        enabled: false
-      quote:
-        weight: 12
-        enabled: false
-      text:
-        weight: 13
-        enabled: false
+        weight: -16
       twitter:
         enabled: true
-        weight: 14
+        weight: -15
+      instagram:
+        enabled: true
+        weight: -14
+      link:
+        weight: -13
+        enabled: false
+      quote:
+        weight: -12
+        enabled: false
+      text:
+        weight: -11
+        enabled: false
+      video:
+        weight: -10
+        enabled: false
 field_type: entity_reference_revisions
