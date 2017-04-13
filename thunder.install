@@ -664,97 +664,258 @@ function thunder_update_8111() {
 }
 
 /**
- * Installs new thunder admin theme.
+ * Installs new Thunder Admin theme.
  */
 function thunder_update_8108() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
-
-  $configs = [
-    'field_storage_config' => ['media.field_author', 'media.field_content'],
-    'field_config' => [
-      'media.twitter.field_author',
-      'media.twitter.field_content',
-      'media.instagram.field_author',
-      'media.instagram.field_content',
-    ],
-    'entity_view_mode' => [
-      'media.paragraph_preview',
-    ],
-    'entity_view_display' => [
-      'media.gallery.paragraph_preview',
-      'media.image.paragraph_preview',
-      'media.instagram.paragraph_preview',
-      'media.twitter.paragraph_preview',
-      'media.video.paragraph_preview',
-      'paragraph.link.preview',
-      'paragraph.twitter.preview',
-    ],
-    'image_style' => [
-      'paragraph_preview_thumbnail',
-    ],
-  ];
 
   /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
   $configReverter = \Drupal::service('config_update.config_update');
 
-  // Import listed configurations.
-  foreach ($configs as $entity => $ids) {
-    foreach ($ids as $id) {
-      try {
-        $configReverter->import($entity, $id);
-      }
-      catch (\Exception $e) {
-        $updateLogger->warning(t('Unable to import @entity.@id config.', [
-          '@id' => $id,
-          '@entity' => $entity,
-        ]));
-      }
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Order is important, because of dependencies.
+  $importConfigs = [
+    ['entity_form_mode', 'media.inline'],
+    ['image_style', 'paragraph_preview_thumbnail'],
+    ['entity_view_mode', 'media.paragraph_preview'],
+    ['field_storage_config', 'media.field_author'],
+    ['field_storage_config', 'media.field_content'],
+    ['field_config', 'media.twitter.field_author'],
+    ['field_config', 'media.twitter.field_content'],
+    ['field_config', 'media.instagram.field_author'],
+    ['field_config', 'media.instagram.field_content'],
+    ['entity_view_display', 'media.gallery.paragraph_preview'],
+    ['entity_view_display', 'media.image.paragraph_preview'],
+    ['entity_view_display', 'media.twitter.paragraph_preview'],
+    ['entity_view_display', 'media.instagram.paragraph_preview'],
+    ['entity_view_display', 'media.video.paragraph_preview'],
+    ['entity_view_display', 'paragraph.link.preview'],
+    ['entity_view_display', 'paragraph.twitter.preview'],
+    ['entity_form_display', 'media.image.inline'],
+    ['entity_form_display', 'media.video.inline'],
+  ];
+
+  $successfulUpdate = TRUE;
+
+  // Import configurations.
+  foreach ($importConfigs as $importEntry) {
+    try {
+      $configReverter->import($importEntry[0], $importEntry[1]);
+      $updateLogger->info(t('Configuration @type.@name has been successfully imported.', [
+        '@type' => $importEntry[0],
+        '@name' => $importEntry[1],
+      ]));
+    }
+    catch (\Exception $e) {
+      $successfulUpdate = FALSE;
+      $updateLogger->warning(t('Unable to import @type.@name config.', [
+        '@type' => $importEntry[0],
+        '@name' => $importEntry[1],
+      ]));
     }
   }
 
-  $oldConfig['third_party_settings']['field_group']['group_teaser']['format_settings']['classes'] = 'article-teaser';
-  $oldConfig['third_party_settings']['field_group']['group_paragraphs']['format_settings']['classes'] = 'paragraphs-container';
-  $oldConfig['third_party_settings']['field_group']['group_basis']['format_settings']['classes'] = '';
-
-  $newConfig['third_party_settings']['field_group']['group_teaser']['format_settings']['classes'] = 'content-form__form-section article-teaser';
-  $newConfig['third_party_settings']['field_group']['group_paragraphs']['format_settings']['classes'] = 'content-form__form-section paragraphs-container';
-  $newConfig['third_party_settings']['field_group']['group_basis']['format_settings']['classes'] = 'content-form__form-section';
-
-  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_form_display.node.article.default', $newConfig, $oldConfig)) {
-  }
-
-  $oldConfig['content']['field_media']['type'] = 'media_thumbnail';
-  $oldConfig['content']['field_media']['settings']['image_style'] = 'media_thumbnail';
-  $oldConfig['content']['field_media']['settings']['image_link'] = '';
-
-  $newConfig['content']['field_media']['type'] = 'entity_reference_entity_view';
-  $newConfig['content']['field_media']['settings']['image_link'] = NULL;
-  $newConfig['content']['field_media']['settings']['image_style'] = NULL;
-  $newConfig['content']['field_media']['settings']['view_mode'] = 'paragraph_preview';
-  $newConfig['content']['field_media']['settings']['link'] = FALSE;
-
-  if (\Drupal::service('thunder_updater')->updateConfig('core.entity_view_display.paragraph.gallery.preview', $newConfig, $oldConfig)) {
-  }
-
-  // Switch view modes.
-  $formDisplays = [
-    'core.entity_view_display.paragraph.instagram.preview' => 'field_media',
-    'core.entity_view_display.paragraph.image.preview' => 'field_image',
-    'core.entity_view_display.paragraph.video.preview' => 'field_video',
+  // Update configurations groups. Here are listed configurations that can be
+  // applied for more then one configuration entry So to avoid duplication of
+  // arrays this is used.
+  $expectedConfigGroups = [
+    'entity_form_display:paragraph:default:field' => [
+      'settings' => [
+        'field_widget_display' => 'rendered_entity',
+        'field_widget_edit' => TRUE,
+      ],
+    ],
+    'entity_view_display:paragraph:preview:field' => [
+      'settings' => [
+        'view_mode' => 'thumbnail',
+      ],
+    ],
   ];
 
-  foreach ($formDisplays as $formDisplay => $fieldName) {
-    $oldConfig = $newConfig = [];
+  $newConfigGroups = [
+    'entity_form_display:paragraph:default:field' => [
+      'settings' => [
+        'field_widget_display' => 'inline_entity_form',
+        'field_widget_edit' => FALSE,
+        'field_widget_display_settings' => [
+          'form_mode' => 'inline',
+        ],
+      ],
+    ],
+    'entity_view_display:paragraph:preview:field' => [
+      'settings' => [
+        'view_mode' => 'paragraph_preview',
+      ],
+    ],
+    'entity_form_display:media' => [
+      'hidden' => [
+        'field_author' => TRUE,
+        'field_content' => TRUE,
+      ],
+    ],
+  ];
 
-    $oldConfig['content'][$fieldName]['settings']['view_mode'] = 'thumbnail';
-    $newConfig['content'][$fieldName]['settings']['view_mode'] = 'paragraph_preview';
+  // Here is list of all expected configurations for configurations that will
+  // be updated.
+  $expectedConfigs = [
+    'core.entity_form_display.node.article.default' => [
+      'third_party_settings' => [
+        'field_group' => [
+          'group_teaser' => ['format_settings' => ['classes' => 'article-teaser']],
+          'group_paragraphs' => ['format_settings' => ['classes' => 'paragraphs-container']],
+          'group_basis' => ['format_settings' => ['classes' => '']],
+        ],
+      ],
+    ],
+    'core.entity_view_display.paragraph.gallery.preview' => [
+      'content' => [
+        'field_media' => [
+          'type' => 'media_thumbnail',
+          'settings' => [
+            'image_style' => 'media_thumbnail',
+            'image_link' => '',
+          ],
+        ],
+      ],
+    ],
+    'media_entity.bundle.twitter' => [
+      'type_configuration' => [
+        'generate_thumbnails' => FALSE,
+      ],
+      'field_map' => [],
+    ],
+    'core.entity_form_display.paragraph.image.default' => [
+      'content' => [
+        'field_image' => $expectedConfigGroups['entity_form_display:paragraph:default:field'],
+      ],
+    ],
+    'core.entity_form_display.paragraph.video.default' => [
+      'content' => [
+        'field_video' => $expectedConfigGroups['entity_form_display:paragraph:default:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.image.preview' => [
+      'content' => [
+        'field_image' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.instagram.preview' => [
+      'content' => [
+        'field_media' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.video.preview' => [
+      'content' => [
+        'field_video' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+  ];
 
-    \Drupal::service('thunder_updater')->updateConfig($formDisplay, $newConfig, $oldConfig);
+  // All new configurations that should be updated.
+  $newConfigs = [
+    'core.entity_form_display.node.article.default' => [
+      'third_party_settings' => [
+        'field_group' => [
+          'group_teaser' => ['format_settings' => ['classes' => 'content-form__form-section article-teaser']],
+          'group_paragraphs' => ['format_settings' => ['classes' => 'content-form__form-section paragraphs-container']],
+          'group_basis' => ['format_settings' => ['classes' => 'content-form__form-section']],
+        ],
+      ],
+    ],
+    'core.entity_view_display.paragraph.gallery.preview' => [
+      'content' => [
+        'field_media' => [
+          'type' => 'entity_reference_entity_view',
+          'settings' => [
+            'image_style' => NULL,
+            'image_link' => NULL,
+            'view_mode' => 'paragraph_preview',
+            'link' => FALSE,
+          ],
+        ],
+      ],
+    ],
+    'media_entity.bundle.twitter' => [
+      'type_configuration' => [
+        'generate_thumbnails' => TRUE,
+      ],
+      'field_map' => [
+        'user' => 'field_author',
+        'content' => 'field_content',
+      ],
+      'third_party_settings' => [
+        'crop' => [
+          'image_field' => NULL,
+        ],
+        'media_expire' => [
+          'enable_expiring' => NULL,
+          'expire_field' => NULL,
+          'fallback_media' => NULL,
+        ],
+      ],
+    ],
+    'core.entity_form_display.paragraph.image.default' => [
+      'content' => [
+        'field_image' => $newConfigGroups['entity_form_display:paragraph:default:field'],
+      ],
+    ],
+    'core.entity_form_display.paragraph.video.default' => [
+      'content' => [
+        'field_video' => $newConfigGroups['entity_form_display:paragraph:default:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.image.preview' => [
+      'content' => [
+        'field_image' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.instagram.preview' => [
+      'content' => [
+        'field_media' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+    'core.entity_view_display.paragraph.video.preview' => [
+      'content' => [
+        'field_video' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
+      ],
+    ],
+    'core.entity_form_display.media.instagram.default' => $newConfigGroups['entity_form_display:media'],
+    'core.entity_form_display.media.twitter.default' => $newConfigGroups['entity_form_display:media'],
+    'core.entity_view_display.media.instagram.default' => $newConfigGroups['entity_form_display:media'],
+    'core.entity_view_display.media.instagram.thumbnail' => $newConfigGroups['entity_form_display:media'],
+    'core.entity_view_display.media.twitter.default' => $newConfigGroups['entity_form_display:media'],
+  ];
+
+  // Process update of configuration with logging of fails and successes.
+  foreach ($newConfigs as $configName => $newConfig) {
+    $expectedConfig = [];
+    if (isset($expectedConfigs[$configName])) {
+      $expectedConfig = $expectedConfigs[$configName];
+    }
+
+    if ($thunderUpdater->updateConfig($configName, $newConfig, $expectedConfig)) {
+      $updateLogger->info(t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
+    }
+    else {
+      $successfulUpdate = FALSE;
+      $updateLogger->warning(t('Unable to update configuration for @configName.', ['@configName' => $configName]));
+    }
   }
 
+  // Set update checklist.
+  if ($successfulUpdate) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_admin_ux']);
+  }
+  else {
+    $thunderUpdater->markUpdatesFailed(['v1_1__thunder_admin_ux']);
+  }
+
+  // Output logged messages to related chanel of update execution.
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
 

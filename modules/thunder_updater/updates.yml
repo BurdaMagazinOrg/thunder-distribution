@@ -86,3 +86,7 @@ v1.1:
         extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
         amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
         thunder_amp: { '#text': 'Thunder AMP theme README', '#url': 'https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md' }
+    v1_1__thunder_admin_ux:
+        '#title': 'New Thunder Admin UX'
+        '#description': "<p>Thunder now comes with new improved administration user interface.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> New Thunder Admin UX require plenty new configurations to be adjusted and imported in order to use it properly. We suggest you to take a look at execution of update hook for enabling new administration theme and manually adjust missing configurations.<p>'
