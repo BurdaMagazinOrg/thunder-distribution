@@ -1,0 +1,17 @@
+name: 'Thunder Liveblog'
+description: 'Integrates with the Paragraphs module and Thunder for media embeding'
+type: module
+core: 8.x
+dependencies:
+  - entity_reference_revisions:entity_reference_revisions
+  - drupal:field
+  - drupal:link
+  - liveblog:liveblog
+  - liveblog:liveblog_pusher
+  - drupal:options
+  - paragraphs:paragraphs
+  - simple_gmap:simple_gmap
+  - drupal:text
+  - thunder:thunder
+  - thunder:thunder_paragraphs
+  - drupal:user

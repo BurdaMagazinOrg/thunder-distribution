@@ -136,8 +136,8 @@ function thunder_media_update_8004() {
  * Update dropzonejs widget file extension filtering for images.
  */
 function thunder_media_update_8005() {
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // List of expected configuration for listed entity browsers.
@@ -223,8 +223,8 @@ function thunder_media_update_8007() {
  */
 function thunder_media_update_8008() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
   $mediaUpdater = \Drupal::service('thunder_updater');
@@ -287,8 +287,8 @@ function thunder_media_update_8009() {
   $configsToUpdate['field.field.media.image.field_image']['required'] = TRUE;
   $configsToUpdate['field.field.media.video.field_media_video_embed_field']['required'] = TRUE;
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
@@ -314,8 +314,8 @@ function thunder_media_update_8009() {
  * Activate support for responsive images with Blazy.
  */
 function thunder_media_update_8010() {
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_media\Updater $mediaUpdater */
@@ -415,8 +415,8 @@ function thunder_media_update_8012() {
   // New configuration that should be applied.
   $newConfig['content']['field_image']['settings']['preview_image_style'] = 'medium';
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // Execute update of config with additional validation of existing config.
@@ -446,8 +446,8 @@ function thunder_media_update_8012() {
  * Import slick media display view configuration.
  */
 function thunder_media_update_8013() {
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\Core\Config\StorageInterface $configStorage */
@@ -490,8 +490,8 @@ function thunder_media_update_8013() {
  * Remove "Language" filter from media browsers.
  */
 function thunder_media_update_8101() {
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
@@ -541,8 +541,8 @@ function thunder_media_update_8101() {
  */
 function thunder_media_update_8102() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   \Drupal::service('module_installer')->install([
@@ -599,7 +599,7 @@ function thunder_media_update_8102() {
     $fieldConfigs = [
       'node.article.field_paragraphs',
       'taxonomy_term.channel.field_paragraphs',
-      'taxonomy_term.tag.field_paragraphs',
+      'taxonomy_term.tags.field_paragraphs',
     ];
     foreach ($fieldConfigs as $fieldConfig) {
 
@@ -617,6 +617,7 @@ function thunder_media_update_8102() {
       }
       else {
         $error = TRUE;
+        $updateLogger->warning(t('Unable to change field config for @fieldConfig.', ['@fieldConfig' => $fieldConfig]));
       }
     }
 
@@ -631,6 +632,7 @@ function thunder_media_update_8102() {
     }
     else {
       $error = TRUE;
+      $updateLogger->warning(t('Unable to update image entity browser configuration.'));
     }
   }
 
@@ -653,8 +655,8 @@ function thunder_media_update_8102() {
  */
 function thunder_media_update_8103() {
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
   $updateLogger->cleanLogs();
 
   // List of configurations that should be checked for existence.
@@ -697,6 +699,48 @@ function thunder_media_update_8103() {
   }
 
   // Output log result depending on channel used for update execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Increase number of items per page to 24 in entity browser.
+ */
+function thunder_media_update_8104() {
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 20;
+
+  // New configuration that should be applied.
+  $newConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 24;
+
+  $success = TRUE;
+
+  foreach (['video_browser', 'image_browser'] as $item) {
+    if (!$thunderUpdater->updateConfig('views.view.' . $item, $newConfig, $expectedConfig)) {
+      $success = FALSE;
+    }
+  }
+
+  if ($success) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__entity_browser_view_items']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust entity browser view config'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__entity_browser_view_items']);
+  }
+
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
 

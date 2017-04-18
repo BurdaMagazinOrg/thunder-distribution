@@ -49,11 +49,11 @@ projects:
 
   crop:
     type: "module"
-    version: "1.0"
+    version: "1.2"
 
   ctools:
     type: "module"
-    version: "3.0-alpha27"
+    version: "3.0-beta1"
 
   default_content:
     type: "module"
@@ -67,7 +67,7 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha5"
+    version: "1.0-alpha6"
 
   entity:
     type: "module"
@@ -75,7 +75,7 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1.0-rc1"
+    version: "1.0-rc2"
 
   entity_reference_revisions:
     type: "module"
@@ -119,7 +119,11 @@ projects:
 
   linkit:
     type: "module"
-    version: "4.2"
+    version: "4.3"
+
+  liveblog:
+    type: "module"
+    version: "1.0-alpha6"
 
   media_entity:
     type: "module"
@@ -171,7 +175,7 @@ projects:
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha5"
+    version: "2.0-alpha1"
 
   scheduler:
     type: "module"
@@ -184,9 +188,13 @@ projects:
       - "https://www.drupal.org/files/issues/2842631.patch"
       - "https://www.drupal.org/files/issues/2845000_2.patch"
 
+  simple_gmap:
+    type: "module"
+    version: "1.2"
+
   simple_sitemap:
     type: "module"
-    version: "2.8"
+    version: "2.9"
 
   slick:
     type: "module"
@@ -262,3 +270,10 @@ libraries:
     download:
       type: "get"
       url: "https://github.com/kenwheeler/slick/archive/1.6.0.zip"
+
+  pusher:
+    type: "library"
+    directory_name: "pusher"
+    download:
+      type: "get"
+      url: "https://github.com/pusher/pusher-http-php/archive/master.zip"

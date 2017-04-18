@@ -1,0 +1,6 @@
+entity_browser_view:
+  css:
+    theme:
+      css/media_entity_browser.view.css: {}
+  dependencies:
+    - thunder_media/entity_browser_view

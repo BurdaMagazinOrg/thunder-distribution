@@ -22,6 +22,7 @@ content:
       image_style: media_thumbnail
       image_link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_url: true

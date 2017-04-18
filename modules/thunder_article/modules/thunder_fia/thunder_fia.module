@@ -13,7 +13,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  * Implements hook_theme().
  */
 function thunder_fia_theme($existing, $type, $render, $path) {
-  $theme = array();
+  $theme = [];
   $files = scandir(DRUPAL_ROOT . '/' . $path . '/templates');
   foreach ($files as $file) {
     if ($file === '.' || $file === '..') {
@@ -21,7 +21,7 @@ function thunder_fia_theme($existing, $type, $render, $path) {
     }
     $file = str_replace('-', '_', $file);
     $file = basename($file, '.html.twig');
-    $base = array();
+    $base = [];
     preg_match('/([a-z]*)_/', $file, $base);
     $theme[$file] = [
       'path' => $path . '/templates',
@@ -60,9 +60,9 @@ function thunder_fia_preprocess_views_view_row_fia(&$variables) {
 
     // Change author name to "firstname lastname".
     $owner = $node->getOwner();
-    $variables['options']['author'] = array(
+    $variables['options']['author'] = [
       '#markup' => '<a>' . $owner->first_name->value . ' ' . $owner->last_name->value . '</a>',
-    );
+    ];
   }
 }
 

@@ -37,6 +37,7 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'image_browser',
     'video_browser',
+    'riddle_browser',
 
     // TODO: Legacy support, remove it with new major version.
     'media_browser',

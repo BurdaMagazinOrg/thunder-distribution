@@ -8,7 +8,6 @@ use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\thunder\ThunderUpdateLogger;
 use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
@@ -91,6 +90,12 @@ class Updater implements UpdaterInterface {
     // Check that configuration exists before executing update.
     if (empty($configData)) {
       return FALSE;
+    }
+
+    // Config already in new state.
+    $mergedData = NestedArray::mergeDeep($expectedConfiguration, $configuration);
+    if (empty(DiffArray::diffAssocRecursive($mergedData, $configData))) {
+      return TRUE;
     }
 
     if (!empty($expectedConfiguration) && DiffArray::diffAssocRecursive($expectedConfiguration, $configData)) {
@@ -291,7 +296,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function installModules(array $modules, ThunderUpdateLogger $updateLogger) {
+  public function installModules(array $modules, UpdateLogger $updateLogger) {
 
     $successful = [];
 

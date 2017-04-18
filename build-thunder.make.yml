@@ -7,4 +7,5 @@ projects:
     type: profile
     download:
       type: git
-      branch: 8.x-1.x
+      branch: master
+      tag: 8.1.3

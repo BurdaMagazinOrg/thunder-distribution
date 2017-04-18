@@ -34,11 +34,13 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'nexx_integration',
     'ivw_integration',
     'adsense',
+    'thunder_riddle',
 
     // Additional modules.
     // 'thunder_fia',
-    // 'paragraphs_riddle_marketplace',
-    // There is already commit that should be pushed to drupal.org HM sandbox.
+    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    // 'thunder_liveblog',
+    // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
     // 'harbourmaster',
     // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
     // 'amp'
@@ -264,6 +266,24 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
+
+    // Riddle paragraph is added dynamically by thunder profile on
+    // thunder_riddle installation.
+    'field.field.node.article.field_paragraphs' => [
+      'dependencies' => [
+        'config' => TRUE,
+      ],
+      'settings' => [
+        'handler_settings' => [
+          'target_bundles' => [
+            'riddle' => TRUE,
+          ],
+          'target_bundles_drag_drop' => [
+            'riddle' => TRUE,
+          ],
+        ],
+      ],
+    ],
   ];
 
   /**
@@ -277,9 +297,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $ignoreConfigs = [
     // Slick media module. Issue: https://www.drupal.org/node/2852030
     'core.entity_view_mode.media.slick',
-
-    // Paragraphs module. Issue: https://www.drupal.org/node/2852025
-    'core.entity_view_mode.paragraph.preview',
 
     // Focal Point module. Issue: https://www.drupal.org/node/2851587
     'crop.type.focal_point',

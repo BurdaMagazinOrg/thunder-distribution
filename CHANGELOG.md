@@ -1,5 +1,26 @@
 # Change Log
 
+## [8.1.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.3) 2017-04-10
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.2...8.x-1.3)
+
+- Update to drupal 8.3
+- Updates for slick, blazy, slick_media, crop, simple_sitemap
+- Added Drupal 8.3 compatibility patches for blazy, better_normalizers and entity_reference_revisions
+
+## [8.1.2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.2) 2017-03-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.1...8.x-1.2)
+
+- Update Linkit to 4.3 because of a security release on [2017-03-21](https://www.drupal.org/project/linkit/releases/8.x-4.3)
+- Update of contrib modules.
+- Set a fixed version in build-thunder.make to get Thunder up and running on simplytest.me
+
+## [8.1.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.1) 2017-03-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0...8.x-1.1)
+
+- Update of contrib modules
+- Fixing coding style issues
+- Adding new tours (they will just appear for new installations)
+
 ## [8.1.0](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0) 2017-01-30
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc6...8.x-1.0)
 
