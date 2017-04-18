@@ -27,6 +27,10 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "extra": {
@@ -78,6 +82,7 @@
         "burdamagazinorg/infinite_theme": "^1.0",
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
+        "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
@@ -125,10 +130,22 @@
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
-        "valiton/harbourmaster": "~8.1"
+        "valiton/harbourmaster": "~8.1",
+        "bower-asset/dropzone": "^4.2",
+        "bower-asset/blazy": "^1.6.0",
+        "bower-asset/slick-carousel": "^1.6",
+        "bower-asset/shariff": "^1.24"
     },
-    "provide": {
-        "heiseonline/shariff": "master"
+    "replace": {
+        "heiseonline/shariff": "*",
+        "bower-asset/jquery": "*",
+        "bower-asset/jqueryui": "*",
+        "bower-asset/backbone": "*",
+        "bower-asset/underscore": "*",
+        "npm-asset/jquery": "*",
+        "npm-asset/jqueryui": "*",
+        "npm-asset/backbone": "*",
+        "npm-asset/underscore": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
