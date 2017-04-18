@@ -80,7 +80,7 @@ projects:
     type: "module"
     version: "1"
     patch:
-      - "https://www.drupal.org/files/issues/provide_inline_entity-2858438-2.patch"
+      - "https://www.drupal.org/files/issues/2858438_3.patch"
 
   entity_reference_revisions:
     type: "module"
