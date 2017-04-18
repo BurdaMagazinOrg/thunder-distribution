@@ -32,7 +32,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->setFieldValue($page, 'name[0][value]', 'New Section');
     $this->addImageParagraph('field_paragraphs', ['media:5']);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
-    $this->clickArticleSave(1);
+    $this->clickArticleSave();
 
     // Create 1. Article.
     $this->articleFillNew([
