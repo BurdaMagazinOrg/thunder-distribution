@@ -34,6 +34,7 @@ projects:
     patch:
       - "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
       - "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch"
+      - "https://www.drupal.org/files/issues/exception_if_configured-2871085-2.patch"
 
   breakpoint_js_settings:
     type: "module"
