@@ -4,12 +4,15 @@ projects:
   # Missing modules: redirect
   access_unpublished:
     type: "module"
+    version: "1"
 
   admin_toolbar:
     type: "module"
+    version: "1"
 
   adsense:
     type: "module"
+    version: "1"
 
   better_normalizers:
     type: "module"
@@ -26,21 +29,27 @@ projects:
 
   breakpoint_js_settings:
     type: "module"
+    version: "1"
 
   checklistapi:
     type: "module"
+    version: "1"
 
   config_update:
     type: "module"
+    version: "1"
 
   crop:
     type: "module"
+    version: "1"
 
   ctools:
     type: "module"
+    version: "3"
 
   default_content:
     type: "module"
+    version: "1"
 
   diff:
     type: "module"
@@ -50,12 +59,15 @@ projects:
 
   dropzonejs:
     type: "module"
+    version: "1"
 
   entity:
     type: "module"
+    version: "1"
 
   entity_browser:
     type: "module"
+    version: "1"
 
   entity_reference_revisions:
     type: "module"
@@ -71,18 +83,23 @@ projects:
 
   field_group:
     type: "module"
+    version: "1"
 
   focal_point:
     type: "module"
+    version: "1"
 
   google_analytics:
     type: "module"
+    version: "2"
 
   inline_entity_form:
     type: "module"
+    version: "1"
 
   ivw_integration:
     type: "module"
+    version: "1"
 
   libraries:
     type: "module"
@@ -92,9 +109,11 @@ projects:
 
   linkit:
     type: "module"
+    version: "4"
 
   liveblog:
     type: "module"
+    version: "1"
 
   media_entity:
     type: "module"
@@ -110,36 +129,47 @@ projects:
 
   media_entity_image:
     type: "module"
+    version: "1"
 
   media_entity_slideshow:
     type: "module"
+    version: "1"
 
   media_entity_twitter:
     type: "module"
+    version: "1"
 
   media_expire:
     type: "module"
+    version: "1"
 
   metatag:
     type: "module"
+    version: "1"
 
   nexx_integration:
     type: "module"
+    version: "1"
 
   paragraphs:
     type: "module"
+    version: "1"
 
   pathauto:
     type: "module"
+    version: "1"
 
   responsive_preview:
     type: "module"
+    version: "1"
 
   riddle_marketplace:
     type: "module"
+    version: "2"
 
   scheduler:
     type: "module"
+    version: "1"
 
   shariff:
     type: "module"
@@ -150,15 +180,19 @@ projects:
 
   simple_gmap:
     type: "module"
+    version: "1"
 
   simple_sitemap:
     type: "module"
+    version: "2"
 
   slick:
     type: "module"
+    version: "1"
 
   slick_media:
     type: "module"
+    version: "1"
 
   thunder_admin:
     type: "theme"
@@ -168,6 +202,7 @@ projects:
 
   token:
     type: "module"
+    version: "1"
 
   harbourmaster:
     type: "module"
@@ -185,10 +220,11 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta6"
+      tag: "8.x-1.0-beta5"
 
   video_embed_field:
     type: "module"
+    version: "1"
 
   views_load_more:
     type: "module"
