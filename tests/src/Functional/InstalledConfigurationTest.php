@@ -42,6 +42,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // 'thunder_liveblog',
     // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
     // 'harbourmaster',
+    // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
+    // 'amp'
     // end of list.
   ];
 

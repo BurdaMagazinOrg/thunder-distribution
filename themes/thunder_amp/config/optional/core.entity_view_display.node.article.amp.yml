@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.amp
+    - field.field.node.article.field_channel
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_paragraphs
+    - field.field.node.article.field_seo_title
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_teaser_media
+    - field.field.node.article.field_teaser_text
+    - node.type.article
+  module:
+    - entity_reference_revisions
+    - user
+id: node.article.amp
+targetEntityType: node
+bundle: article
+mode: amp
+content:
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: amp
+      link: ''
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_label
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  links:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_channel: true
+  field_meta_tags: true
+  field_seo_title: true
+  field_teaser_media: true
+  field_teaser_text: true
+  langcode: true
