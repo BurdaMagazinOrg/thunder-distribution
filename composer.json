@@ -55,7 +55,8 @@
       },
       "drupal/blazy": {
         "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch",
-        "Images of gallery will not be loaded": "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch"
+        "Images of gallery will not be loaded": "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch",
+        "Exception if configured image style does not exists anymore": "https://www.drupal.org/files/issues/exception_if_configured-2871085-2.patch"
       }
     }
   },
