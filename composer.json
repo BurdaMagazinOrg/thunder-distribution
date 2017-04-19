@@ -56,7 +56,7 @@
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
             },
             "drupal/media_entity_instagram": {
-                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-42.patch"
+                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-43.patch"
             },
             "drupal/shariff": {
                 "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
@@ -82,6 +82,8 @@
         "burdamagazinorg/infinite_theme": "^1.0",
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
+        "drupal/amp": "^1.0",
+        "drupal/amptheme": "^1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",

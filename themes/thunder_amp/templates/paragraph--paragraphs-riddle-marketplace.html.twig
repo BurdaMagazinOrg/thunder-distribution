@@ -1,0 +1,10 @@
+{{ attach_library('amp/amp.iframe') }}
+<amp-iframe
+        width="375" height="462"
+        {# Heights can be used to prevent having empty space under the riddle, on bigger screens #}
+        {#heights="(max-width: 375px) 462px, (max-width: 425px) 490px, (max-width:543px) 560px, 600px"#}
+        layout="responsive"
+        frameborder="0"
+        sandbox="allow-scripts allow-same-origin"
+        src="{{ paragraph.field_link.uri }}">
+</amp-iframe>
