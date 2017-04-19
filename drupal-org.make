@@ -17,6 +17,7 @@ projects[blazy][type] = module
 projects[blazy][version] = 1.0-rc1
 projects[blazy][patch][] = https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch
 projects[blazy][patch][] = https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch
+projects[blazy][patch][] = https://www.drupal.org/files/issues/exception_if_configured-2871085-2.patch
 projects[breakpoint_js_settings][type] = module
 projects[breakpoint_js_settings][version] = 1.0-rc1
 projects[checklistapi][type] = module
