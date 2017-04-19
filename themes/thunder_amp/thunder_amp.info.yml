@@ -1,0 +1,10 @@
+name: Thunder AMP
+type: theme
+base theme: amptheme
+description: An AMP subtheme for Thunder.
+package: Custom
+core: 8.x
+regions:
+  header: Header
+  content: Content
+  footer: Footer
