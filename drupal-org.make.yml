@@ -16,11 +16,11 @@ projects:
 
   amp:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   amptheme:
     type: "theme"
-    version: "1.0"
+    version: "1"
 
   better_normalizers:
     type: "module"
