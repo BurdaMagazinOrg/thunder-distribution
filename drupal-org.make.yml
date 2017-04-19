@@ -4,7 +4,7 @@ projects:
   # Missing modules: redirect
   admin_toolbar:
     type: "module"
-    version: "1.18"
+    version: "1.19"
 
   adsense:
     type: "module"
@@ -37,11 +37,11 @@ projects:
 
   ctools:
     type: "module"
-    version: "3.0-beta1"
+    version: "3.0-beta2"
 
   default_content:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1.0-alpha5"
 
   dropzonejs:
     type: "module"
@@ -86,7 +86,7 @@ projects:
 
   ivw_integration:
     type: "module"
-    version: "1.2"
+    version: "1.3"
 
   libraries:
     type: "module"
@@ -157,7 +157,7 @@ projects:
 
   slick:
     type: "module"
-    version: "1.0-rc2"
+    version: "1.0-rc3"
 
   slick_media:
     type: "module"
@@ -177,13 +177,13 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      tag: "8.x-1.0-beta5"
+      tag: "8.x-1.0-beta6"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta5"
+      tag: "8.x-1.0-beta7"
 
   video_embed_field:
     type: "module"
