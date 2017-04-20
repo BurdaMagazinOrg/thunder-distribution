@@ -7,5 +7,5 @@ projects:
     type: profile
     download:
       type: git
-      branch: master
+      branch: develop
       tag: 8.2.0-beta1
