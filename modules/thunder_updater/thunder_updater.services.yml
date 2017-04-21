@@ -7,3 +7,9 @@ services:
     arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@thunder_updater.logger', '@thunder_updater.update_checklist']
   thunder_updater.logger:
     class: Drupal\thunder_updater\UpdateLogger
+  thunder_updater.config_differ:
+    class: Drupal\thunder_updater\ConfigDiffer
+    arguments: ['@string_translation']
+  thunder_updater.config_handler:
+    class: Drupal\thunder_updater\ConfigHandler
+    arguments: ['@config_update.config_list', '@config_update.config_update', '@thunder_updater.config_differ', '@serialization.yaml']

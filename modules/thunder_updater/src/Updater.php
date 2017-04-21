@@ -132,6 +132,39 @@ class Updater implements UpdaterInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function executeUpdate(array $updateDefinitions, UpdateLogger $updateLogger) {
+    $successfulUpdate = TRUE;
+
+    foreach ($updateDefinitions as $configName => $configChange) {
+      $expectedConfig = $configChange['expected_config'];
+      $updateActions = $configChange['update_actions'];
+
+      $newConfig = [];
+      // Add configuration that is changed.
+      if (isset($updateActions['change'])) {
+        $newConfig = array_merge($newConfig, $updateActions['change']);
+      }
+
+      // Add configuration that is added.
+      if (isset($updateActions['add'])) {
+        $newConfig = array_merge($newConfig, $updateActions['add']);
+      }
+
+      if ($this->updateConfig($configName, $newConfig, $expectedConfig)) {
+        $updateLogger->info($this->t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
+      }
+      else {
+        $successfulUpdate = FALSE;
+        $updateLogger->warning($this->t('Unable to update configuration for @configName.', ['@configName' => $configName]));
+      }
+    }
+
+    return $successfulUpdate;
+  }
+
+  /**
    * Update CTools edit form state.
    *
    * @param string $configType

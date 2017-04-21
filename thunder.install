@@ -678,6 +678,12 @@ function thunder_update_8108() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
+  /** @var \Drupal\Component\Serialization\SerializationInterface $serializer */
+  $serializer = Drupal::service('serialization.yaml');
+
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+  $moduleHandler = Drupal::service('module_handler');
+
   // Order is important, because of dependencies.
   $importConfigs = [
     ['entity_form_mode', 'media.inline'],
@@ -720,191 +726,20 @@ function thunder_update_8108() {
     }
   }
 
-  // Update configurations groups. Here are listed configurations that can be
-  // applied for more then one configuration entry So to avoid duplication of
-  // arrays this is used.
-  $expectedConfigGroups = [
-    'entity_form_display:paragraph:default:field' => [
-      'settings' => [
-        'field_widget_display' => 'rendered_entity',
-        'field_widget_edit' => TRUE,
-      ],
-    ],
-    'entity_view_display:paragraph:preview:field' => [
-      'settings' => [
-        'view_mode' => 'thumbnail',
-      ],
-    ],
-  ];
+  // Load configuration update definitions from Yaml files. Merge them and pass
+  // to updater to execute them.
+  $updateDefinitions = array_merge(
+    $serializer->decode(file_get_contents($moduleHandler->getModule('thunder_media')
+      ->getPath() . '/config/update/thunder_media__thunder_update_8108.yml')),
+    $serializer->decode(file_get_contents($moduleHandler->getModule('thunder_paragraphs')
+      ->getPath() . '/config/update/thunder_paragraphs__thunder_update_8108.yml')),
+    $serializer->decode(file_get_contents($moduleHandler->getModule('thunder_article')
+      ->getPath() . '/config/update/thunder_article__thunder_update_8108.yml'))
+  );
 
-  $newConfigGroups = [
-    'entity_form_display:paragraph:default:field' => [
-      'settings' => [
-        'field_widget_display' => 'inline_entity_form',
-        'field_widget_edit' => FALSE,
-        'field_widget_display_settings' => [
-          'form_mode' => 'inline',
-        ],
-      ],
-    ],
-    'entity_view_display:paragraph:preview:field' => [
-      'settings' => [
-        'view_mode' => 'paragraph_preview',
-      ],
-    ],
-    'entity_form_display:media' => [
-      'hidden' => [
-        'field_author' => TRUE,
-        'field_content' => TRUE,
-      ],
-    ],
-  ];
-
-  // Here is list of all expected configurations for configurations that will
-  // be updated.
-  $expectedConfigs = [
-    'core.entity_form_display.node.article.default' => [
-      'third_party_settings' => [
-        'field_group' => [
-          'group_teaser' => ['format_settings' => ['classes' => 'article-teaser']],
-          'group_paragraphs' => ['format_settings' => ['classes' => 'paragraphs-container']],
-          'group_basis' => ['format_settings' => ['classes' => '']],
-        ],
-      ],
-    ],
-    'core.entity_view_display.paragraph.gallery.preview' => [
-      'content' => [
-        'field_media' => [
-          'type' => 'media_thumbnail',
-          'settings' => [
-            'image_style' => 'media_thumbnail',
-            'image_link' => '',
-          ],
-        ],
-      ],
-    ],
-    'media_entity.bundle.twitter' => [
-      'type_configuration' => [
-        'generate_thumbnails' => FALSE,
-      ],
-      'field_map' => [],
-    ],
-    'core.entity_form_display.paragraph.image.default' => [
-      'content' => [
-        'field_image' => $expectedConfigGroups['entity_form_display:paragraph:default:field'],
-      ],
-    ],
-    'core.entity_form_display.paragraph.video.default' => [
-      'content' => [
-        'field_video' => $expectedConfigGroups['entity_form_display:paragraph:default:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.image.preview' => [
-      'content' => [
-        'field_image' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.instagram.preview' => [
-      'content' => [
-        'field_media' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.video.preview' => [
-      'content' => [
-        'field_video' => $expectedConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-  ];
-
-  // All new configurations that should be updated.
-  $newConfigs = [
-    'core.entity_form_display.node.article.default' => [
-      'third_party_settings' => [
-        'field_group' => [
-          'group_teaser' => ['format_settings' => ['classes' => 'content-form__form-section article-teaser']],
-          'group_paragraphs' => ['format_settings' => ['classes' => 'content-form__form-section paragraphs-container']],
-          'group_basis' => ['format_settings' => ['classes' => 'content-form__form-section']],
-        ],
-      ],
-    ],
-    'core.entity_view_display.paragraph.gallery.preview' => [
-      'content' => [
-        'field_media' => [
-          'type' => 'entity_reference_entity_view',
-          'settings' => [
-            'image_style' => NULL,
-            'image_link' => NULL,
-            'view_mode' => 'paragraph_preview',
-            'link' => FALSE,
-          ],
-        ],
-      ],
-    ],
-    'media_entity.bundle.twitter' => [
-      'type_configuration' => [
-        'generate_thumbnails' => TRUE,
-      ],
-      'field_map' => [
-        'user' => 'field_author',
-        'content' => 'field_content',
-      ],
-      'third_party_settings' => [
-        'crop' => [
-          'image_field' => NULL,
-        ],
-        'media_expire' => [
-          'enable_expiring' => NULL,
-          'expire_field' => NULL,
-          'fallback_media' => NULL,
-        ],
-      ],
-    ],
-    'core.entity_form_display.paragraph.image.default' => [
-      'content' => [
-        'field_image' => $newConfigGroups['entity_form_display:paragraph:default:field'],
-      ],
-    ],
-    'core.entity_form_display.paragraph.video.default' => [
-      'content' => [
-        'field_video' => $newConfigGroups['entity_form_display:paragraph:default:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.image.preview' => [
-      'content' => [
-        'field_image' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.instagram.preview' => [
-      'content' => [
-        'field_media' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-    'core.entity_view_display.paragraph.video.preview' => [
-      'content' => [
-        'field_video' => $newConfigGroups['entity_view_display:paragraph:preview:field'],
-      ],
-    ],
-    'core.entity_form_display.media.instagram.default' => $newConfigGroups['entity_form_display:media'],
-    'core.entity_form_display.media.twitter.default' => $newConfigGroups['entity_form_display:media'],
-    'core.entity_view_display.media.instagram.default' => $newConfigGroups['entity_form_display:media'],
-    'core.entity_view_display.media.instagram.thumbnail' => $newConfigGroups['entity_form_display:media'],
-    'core.entity_view_display.media.twitter.default' => $newConfigGroups['entity_form_display:media'],
-  ];
-
-  // Process update of configuration with logging of fails and successes.
-  foreach ($newConfigs as $configName => $newConfig) {
-    $expectedConfig = [];
-    if (isset($expectedConfigs[$configName])) {
-      $expectedConfig = $expectedConfigs[$configName];
-    }
-
-    if ($thunderUpdater->updateConfig($configName, $newConfig, $expectedConfig)) {
-      $updateLogger->info(t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
-    }
-    else {
-      $successfulUpdate = FALSE;
-      $updateLogger->warning(t('Unable to update configuration for @configName.', ['@configName' => $configName]));
-    }
+  // Execute update of configurations with logging of fails and successes.
+  if (!$thunderUpdater->executeUpdate($updateDefinitions, $updateLogger)) {
+    $successfulUpdate = FALSE;
   }
 
   // Set update checklist.
