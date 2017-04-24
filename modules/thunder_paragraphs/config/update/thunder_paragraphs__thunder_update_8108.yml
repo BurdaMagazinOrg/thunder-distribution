@@ -4,8 +4,6 @@ core.entity_form_display.paragraph.image.default:
       field_image:
         settings:
           field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
           field_widget_edit: true
   update_actions:
     change:
@@ -22,8 +20,6 @@ core.entity_form_display.paragraph.video.default:
       field_video:
         settings:
           field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
           field_widget_edit: true
   update_actions:
     change:

@@ -144,12 +144,12 @@ class Updater implements UpdaterInterface {
       $newConfig = [];
       // Add configuration that is changed.
       if (isset($updateActions['change'])) {
-        $newConfig = array_merge($newConfig, $updateActions['change']);
+        $newConfig = NestedArray::mergeDeep($newConfig, $updateActions['change']);
       }
 
       // Add configuration that is added.
       if (isset($updateActions['add'])) {
-        $newConfig = array_merge($newConfig, $updateActions['add']);
+        $newConfig = NestedArray::mergeDeep($newConfig, $updateActions['add']);
       }
 
       if ($this->updateConfig($configName, $newConfig, $expectedConfig)) {
