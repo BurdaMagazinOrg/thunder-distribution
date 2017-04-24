@@ -1,0 +1,20 @@
+block.block.thunder_admin_breadcrumbs:
+  expected_config:
+    region: breadcrumb
+    weight: 0
+  update_actions:
+    change:
+      region: header
+      weight: -2
+block.block.thunder_admin_page_title:
+  expected_config:
+    weight: -30
+  update_actions:
+    change:
+      weight: -3
+block.block.thunder_admin_primary_local_tasks:
+  expected_config:
+    weight: 0
+  update_actions:
+    change:
+      weight: -1

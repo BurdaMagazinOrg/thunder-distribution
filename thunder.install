@@ -734,7 +734,9 @@ function thunder_update_8108() {
     $serializer->decode(file_get_contents($moduleHandler->getModule('thunder_paragraphs')
       ->getPath() . '/config/update/thunder_paragraphs__thunder_update_8108.yml')),
     $serializer->decode(file_get_contents($moduleHandler->getModule('thunder_article')
-      ->getPath() . '/config/update/thunder_article__thunder_update_8108.yml'))
+      ->getPath() . '/config/update/thunder_article__thunder_update_8108.yml')),
+    $serializer->decode(file_get_contents($moduleHandler->getModule('thunder')
+      ->getPath() . '/config/update/thunder__thunder_update_8108.yml'))
   );
 
   // Execute update of configurations with logging of fails and successes.
