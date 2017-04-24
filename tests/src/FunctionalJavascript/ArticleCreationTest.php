@@ -43,7 +43,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
       'media:1',
       'media:5',
-    ]);
+    ], 1);
 
     // Add Quote Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
@@ -80,7 +80,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Gallery paragraph. Ensure that there are 2 images in gallery.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//div[contains(@class, "slick-track")]/div[not(contains(@class, "slick-cloned"))]//img', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//div[contains(@class, "slick-track")]/div[not(contains(@class, "slick-cloned"))]//img', 2);
 
     // Check Quote paragraph.
     $this->assertSession()->pageTextContains('Awesome quote');

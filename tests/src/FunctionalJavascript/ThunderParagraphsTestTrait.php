@@ -39,7 +39,47 @@ trait ThunderParagraphsTestTrait {
    * @return int
    *   Returns index for added paragraph.
    */
-  public function addParagraph($fieldName, $type) {
+  public function addParagraph($fieldName, $type, $position = NULL) {
+    $page = $this->getSession()->getPage();
+    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
+
+    $fieldSelector = str_replace('_', '-', $fieldName);
+    if ($position === NULL || $position > $this->getNumberOfParagraphs($fieldName)) {
+      $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
+    }
+    else {
+      $addButtonSelector = "input[name='${fieldName}_${position}_add_modal']";
+    }
+
+    $addButton = $page->find('css', $addButtonSelector);
+    $this->scrollElementInView($addButtonSelector);
+
+    $addButton->click();
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    $page->find('xpath', "//ul[@class='paragraphs-add-dialog-list']/li/button[@data-type='$type']")
+      ->click();
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+
+    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
+
+    return $nextParagraphIndex;
+  }
+
+  /**
+   * Add paragraph for field with defined paragraph type.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $type
+   *   Type of the paragraph.
+   *
+   * @return int
+   *   Returns index for added paragraph.
+   */
+  public function addParagraphByDropdown($fieldName, $type) {
     $page = $this->getSession()->getPage();
     $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
 
@@ -99,8 +139,8 @@ trait ThunderParagraphsTestTrait {
    * @param array $media
    *   List of media identifiers.
    */
-  public function addGalleryParagraph($fieldName, $name, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'gallery');
+  public function addGalleryParagraph($fieldName, $name, array $media, $position) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
   }
