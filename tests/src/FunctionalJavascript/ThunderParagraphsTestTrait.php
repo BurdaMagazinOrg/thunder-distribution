@@ -31,10 +31,14 @@ trait ThunderParagraphsTestTrait {
   /**
    * Add paragraph for field with defined paragraph type.
    *
+   * This uses paragrpahs modal widget.
+   *
    * @param string $fieldName
    *   Field name.
    * @param string $type
    *   Type of the paragraph.
+   * @param int $position
+   *   Position of the paragraph.
    *
    * @return int
    *   Returns index for added paragraph.
@@ -62,7 +66,6 @@ trait ThunderParagraphsTestTrait {
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
 
     return $nextParagraphIndex;
@@ -70,6 +73,8 @@ trait ThunderParagraphsTestTrait {
 
   /**
    * Add paragraph for field with defined paragraph type.
+   *
+   * This uses paragrpahs dropdown widget.
    *
    * @param string $fieldName
    *   Field name.
@@ -138,6 +143,8 @@ trait ThunderParagraphsTestTrait {
    *   Name of the gallery.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
   public function addGalleryParagraph($fieldName, $name, array $media, $position) {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
