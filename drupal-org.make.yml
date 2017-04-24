@@ -4,23 +4,23 @@ projects:
   # Missing modules: redirect
   access_unpublished:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1"
 
   admin_toolbar:
     type: "module"
-    version: "1.18"
+    version: "1"
 
   adsense:
     type: "module"
-    version: "1.0-beta3"
+    version: "1"
 
   amp:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   amptheme:
     type: "theme"
-    version: "1.0"
+    version: "1"
 
   better_normalizers:
     type: "module"
@@ -34,30 +34,31 @@ projects:
     patch:
       - "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch"
       - "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch"
+      - "https://www.drupal.org/files/issues/exception_if_configured-2871085-2.patch"
 
   breakpoint_js_settings:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
 
   checklistapi:
     type: "module"
-    version: "1.4"
+    version: "1"
 
   config_update:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   crop:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   ctools:
     type: "module"
-    version: "3.0-beta1"
+    version: "3"
 
   default_content:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1"
 
   diff:
     type: "module"
@@ -67,15 +68,15 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha6"
+    version: "1"
 
   entity:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1"
 
   entity_browser:
     type: "module"
-    version: "1.0-rc2"
+    version: "1"
 
   entity_reference_revisions:
     type: "module"
@@ -87,43 +88,41 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/fb_instant_articles.git"
-      revision: "2a5210fec67a8d7f5c77a4ffffb0b49e5aa62f40"
       branch: "8.x-1.x"
 
   field_group:
     type: "module"
-    version: "1.0-rc6"
+    version: "1"
 
   focal_point:
     type: "module"
-    version: "1.0-beta4"
+    version: "1"
 
   google_analytics:
     type: "module"
-    version: "2.1"
+    version: "2"
 
   inline_entity_form:
     type: "module"
-    version: "1.0-beta1"
+    version: "1"
 
   ivw_integration:
     type: "module"
-    version: "1.1"
+    version: "1"
 
   libraries:
     type: "module"
     download:
       url: "http://git.drupal.org/project/libraries.git"
-      revision: "3ea00f23e31a5cd7cd4fed633a675f864b0b1e3c"
       branch: "8.x-3.x"
 
   linkit:
     type: "module"
-    version: "4.3"
+    version: "4"
 
   liveblog:
     type: "module"
-    version: "1.0-alpha6"
+    version: "1"
 
   media_entity:
     type: "module"
@@ -139,47 +138,47 @@ projects:
 
   media_entity_image:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   media_entity_slideshow:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   media_entity_twitter:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   media_expire:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1"
 
   metatag:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   nexx_integration:
     type: "module"
-    version: "1.8"
+    version: "1"
 
   paragraphs:
     type: "module"
-    version: "1.1"
+    version: "1"
 
   pathauto:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
 
   responsive_preview:
     type: "module"
-    version: "1.0-alpha3"
+    version: "1"
 
   riddle_marketplace:
     type: "module"
-    version: "2.0-alpha1"
+    version: "2"
 
   scheduler:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1"
 
   shariff:
     type: "module"
@@ -190,19 +189,19 @@ projects:
 
   simple_gmap:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   simple_sitemap:
     type: "module"
-    version: "2.9"
+    version: "2"
 
   slick:
     type: "module"
-    version: "1.0-rc2"
+    version: "1"
 
   slick_media:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
 
   thunder_admin:
     type: "theme"
@@ -212,7 +211,7 @@ projects:
 
   token:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
 
   harbourmaster:
     type: "module"
@@ -230,17 +229,16 @@ projects:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta5"
+      tag: "8.x-1.0-beta6"
 
   video_embed_field:
     type: "module"
-    version: "1.4"
+    version: "1"
 
   views_load_more:
     type: "module"
     download:
       url: "https://git.drupal.org/project/views_load_more.git"
-      revision: "178d32195253207cc74097296e25079a23f0b2e5"
       branch: "8.x-1.x"
 
 libraries:

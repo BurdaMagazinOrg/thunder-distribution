@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.1.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.4) 2017-04-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.3...8.x-1.4)
+
+- Security update to Drupal 8.3.1
+- catching up with contrib module updates
+- Fixes https://www.drupal.org/node/2869222 (Deinstall Thunder Base Theme creates WSOD and reinstalling is not possible)
+
 ## [8.1.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.3) 2017-04-10
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.2...8.x-1.3)
 
