@@ -111,9 +111,11 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addImageParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'image');
+  public function addImageParagraph($fieldName, array $media, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
 
@@ -126,9 +128,11 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addVideoParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'video');
+  public function addVideoParagraph($fieldName, array $media, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
 
@@ -146,7 +150,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addGalleryParagraph($fieldName, $name, array $media, $position) {
+  public function addGalleryParagraph($fieldName, $name, array $media, $position = NULL) {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
@@ -161,9 +165,11 @@ trait ThunderParagraphsTestTrait {
    *   Text for paragraph.
    * @param string $type
    *   Type of text paragraph.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addTextParagraph($fieldName, $text, $type = 'text') {
-    $paragraphIndex = $this->addParagraph($fieldName, $type);
+  public function addTextParagraph($fieldName, $text, $type = 'text', $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     $this->fillCkEditor(
       $this->getSession()->getPage(),
@@ -181,9 +187,11 @@ trait ThunderParagraphsTestTrait {
    *   Url to tweet or instagram.
    * @param string $type
    *   Type of paragraph (twitter|instagram).
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addSocialParagraph($fieldName, $socialUrl, $type) {
-    $paragraphIndex = $this->addParagraph($fieldName, $type);
+  public function addSocialParagraph($fieldName, $socialUrl, $type, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
@@ -200,9 +208,11 @@ trait ThunderParagraphsTestTrait {
    *   Text that will be displayed for link.
    * @param string $url
    *   Link url.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addLinkParagraph($fieldName, $urlText, $url) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'link');
+  public function addLinkParagraph($fieldName, $urlText, $url, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'link', $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
