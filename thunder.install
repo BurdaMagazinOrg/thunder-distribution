@@ -602,7 +602,6 @@ function thunder_update_8108() {
   return $updateLogger->outputHtml();
 }
 
-
 /**
  * Change paragraphs add mode to use the modal.
  */
