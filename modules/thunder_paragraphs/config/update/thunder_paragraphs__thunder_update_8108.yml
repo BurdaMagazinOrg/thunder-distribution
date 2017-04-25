@@ -14,6 +14,12 @@ core.entity_form_display.paragraph.image.default:
             field_widget_display_settings:
               form_mode: inline
             field_widget_edit: false
+    remove:
+      content:
+        field_image:
+          settings:
+            field_widget_display_settings:
+              view_mode: thumbnail
 core.entity_form_display.paragraph.video.default:
   expected_config:
     content:
@@ -30,6 +36,12 @@ core.entity_form_display.paragraph.video.default:
             field_widget_display_settings:
               form_mode: inline
             field_widget_edit: false
+    remove:
+      content:
+        field_video:
+          settings:
+            field_widget_display_settings:
+              view_mode: thumbnail
 core.entity_view_display.paragraph.gallery.preview:
   expected_config:
     content:
@@ -39,6 +51,12 @@ core.entity_view_display.paragraph.gallery.preview:
           image_style: media_thumbnail
         type: media_thumbnail
   update_actions:
+    remove:
+      content:
+        field_media:
+          settings:
+            image_link: false
+            image_style: media_thumbnail
     change:
       content:
         field_media:

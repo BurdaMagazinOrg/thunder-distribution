@@ -214,6 +214,13 @@ class ConfigHandler {
 
         $listUpdate[$diffOp->type] = array_merge($listUpdate[$diffOp->type], $diffOp->closing);
       }
+      elseif ($diffOp->type === 'remove' && !empty($diffOp->orig)) {
+        if (!isset($listUpdate[$diffOp->type])) {
+          $listUpdate[$diffOp->type] = [];
+        }
+
+        $listUpdate[$diffOp->type] = array_merge($listUpdate[$diffOp->type], $diffOp->orig);
+      }
     }
 
     foreach ($listUpdate as $action => $edits) {

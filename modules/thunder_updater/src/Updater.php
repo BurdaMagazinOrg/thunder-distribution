@@ -105,7 +105,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function updateConfig($configName, array $configuration, array $expectedConfiguration = []) {
+  public function updateConfig($configName, array $configuration, array $expectedConfiguration = [], array $removeKeys = []) {
     $config = $this->configFactory->getEditable($configName);
 
     $configData = $config->get();
@@ -115,7 +115,7 @@ class Updater implements UpdaterInterface {
       return FALSE;
     }
 
-    // Config already in new state.
+    // Check if configuration is already in new state.
     $mergedData = NestedArray::mergeDeep($expectedConfiguration, $configuration);
     if (empty(DiffArray::diffAssocRecursive($mergedData, $configData))) {
       return TRUE;
@@ -123,6 +123,13 @@ class Updater implements UpdaterInterface {
 
     if (!empty($expectedConfiguration) && DiffArray::diffAssocRecursive($expectedConfiguration, $configData)) {
       return FALSE;
+    }
+
+    // Remove configuration keys from config.
+    if (!empty($removeKeys)) {
+      foreach ($removeKeys as $keyPath) {
+        NestedArray::unsetValue($configData, $keyPath);
+      }
     }
 
     $config->setData(NestedArray::mergeDeep($configData, $configuration));
@@ -141,6 +148,12 @@ class Updater implements UpdaterInterface {
       $expectedConfig = $configChange['expected_config'];
       $updateActions = $configChange['update_actions'];
 
+      // Define configuration keys that should be removed.
+      $removeKeys = [];
+      if (isset($updateActions['remove'])) {
+        $removeKeys = $this->getFlatKeys($updateActions['remove']);
+      }
+
       $newConfig = [];
       // Add configuration that is changed.
       if (isset($updateActions['change'])) {
@@ -152,7 +165,7 @@ class Updater implements UpdaterInterface {
         $newConfig = NestedArray::mergeDeep($newConfig, $updateActions['add']);
       }
 
-      if ($this->updateConfig($configName, $newConfig, $expectedConfig)) {
+      if ($this->updateConfig($configName, $newConfig, $expectedConfig, $removeKeys)) {
         $updateLogger->info($this->t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
       }
       else {
@@ -162,6 +175,50 @@ class Updater implements UpdaterInterface {
     }
 
     return $successfulUpdate;
+  }
+
+  /**
+   * Get flatten array keys as list of paths.
+   *
+   * Example:
+   *   $nestedArray = [
+   *      'a' => [
+   *          'b' => [
+   *              'c' => 'c1',
+   *          ],
+   *          'bb' => 'bb1'
+   *      ],
+   *      'aa' => 'aa1'
+   *   ]
+   *
+   * Result: [
+   *   ['a', 'b', 'c'],
+   *   ['a', 'bb']
+   *   ['aa']
+   * ]
+   *
+   * @param array $nestedArray
+   *   Array with nested keys.
+   *
+   * @return array
+   *   List of flattened keys.
+   */
+  public function getFlatKeys(array $nestedArray) {
+    $keys = [];
+    foreach ($nestedArray as $key => $value) {
+      if (is_array($value) && !empty($value)) {
+        $listOfSubKeys = $this->getFlatKeys($value);
+
+        foreach ($listOfSubKeys as $subKeys) {
+          $keys[] = array_merge([$key], $subKeys);
+        }
+      }
+      else {
+        $keys[] = [$key];
+      }
+    }
+
+    return $keys;
   }
 
   /**
