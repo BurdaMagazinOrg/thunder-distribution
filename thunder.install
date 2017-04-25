@@ -601,3 +601,46 @@ function thunder_update_8108() {
 
   return $updateLogger->outputHtml();
 }
+
+
+/**
+ * Change paragraphs add mode to use the modal.
+ */
+function thunder_update_8108() {
+
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
+
+  // New configuration that should be applied.
+  $newConfig['content']['field_paragraphs']['settings']['add_mode'] = 'modal';
+
+  $success = TRUE;
+
+  foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
+    if (!$thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
+      $success = FALSE;
+    }
+  }
+
+  if ($success) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__paragraphs_modal']);
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}

@@ -57,3 +57,10 @@ v1.1:
         '#title': 'Use new riddle media integration'
         '#description': "<p>We want to use the new riddle media integration. It's much more user-friendly than the old way. You can select riddles from the entity browser now</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to convert you current riddles into new media_entity based ones.<p>'
+    v1_1__paragraphs_modal:
+        '#title': 'Use new paragraphs modal add mode'
+        '#description': "<p>We want to use the new paragraphs modal add mode. It's much more user-friendly and allows in-between placing of new paragraphs</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the new modal mode. Check the form displays where paragraph fields are used and select the modal mode on your own<p>'
+        form_article_page: { '#text': 'Article form display', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+        form_channel_page: { '#text': 'Channel form display', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/form-display' }
+        form_tags_page: { '#text': 'Tags form display', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/form-display' }
