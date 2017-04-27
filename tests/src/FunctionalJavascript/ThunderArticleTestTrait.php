@@ -25,11 +25,10 @@ trait ThunderArticleTestTrait {
 
     $this->drupalGet('node/add/article');
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $page = $this->getSession()->getPage();
 
-    if (isset($fieldValues)) {
+    if (!empty($fieldValues)) {
       $this->expandAllTabs();
-      $this->setFieldValues($page, $fieldValues);
+      $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     }
 
   }
