@@ -185,7 +185,7 @@ projects:
     version: "1.1"
     patch:
       - "https://www.drupal.org/files/issues/2842631.patch"
-      - "https://www.drupal.org/files/issues/2845000_2.patch"
+      - "https://www.drupal.org/files/issues/2845000_4.patch"
 
   simple_gmap:
     type: "module"
@@ -260,7 +260,7 @@ libraries:
     directory_name: "shariff"
     download:
       type: "get"
-      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
+      url: "https://api.github.com/repos/heiseonline/shariff/zipball/861477a753769e1b4623abdd96ecbaec5bf63822"
 
   slick_lib:
     type: "library"
