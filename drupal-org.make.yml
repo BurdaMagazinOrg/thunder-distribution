@@ -260,7 +260,7 @@ libraries:
     directory_name: "shariff"
     download:
       type: "get"
-      url: "https://api.github.com/repos/heiseonline/shariff/zipball/861477a753769e1b4623abdd96ecbaec5bf63822"
+      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
 
   slick_lib:
     type: "library"
