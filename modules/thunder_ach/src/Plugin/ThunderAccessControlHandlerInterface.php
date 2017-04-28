@@ -31,7 +31,7 @@ interface ThunderAccessControlHandlerInterface extends ConfigurablePluginInterfa
    *   (optional) The user session for which to check access, or NULL to check
    *   access for the current user. Defaults to NULL.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the handler should control access.
    */
   public function applies(EntityInterface $entity, $operation, AccountInterface $account = NULL);
@@ -101,4 +101,5 @@ interface ThunderAccessControlHandlerInterface extends ConfigurablePluginInterfa
    *   The access result.
    */
   public function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL);
+
 }

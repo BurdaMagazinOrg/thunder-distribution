@@ -7,9 +7,7 @@ use Drupal\Component\Annotation\Plugin;
 /**
  * Defines an featured content processor annotation object.
  *
- * Plugin Namespace: Plugin\thunder_ach
- *
- * For a working example, see \Drupal\thunder_ach\Plugin\thunder_ach\...
+ * Plugin Namespace: Plugin\thunder_ach.
  *
  * @see \Drupal\thunder_ach\AccessControlHandlerManager
  * @see \Drupal\thunder_ach\Plugin\AccessControlHandlerInterface
@@ -30,7 +28,7 @@ class ThunderAccessControlHandler extends Plugin {
   /**
    * The plugin weight.
    *
-   * @var integer
+   * @var int
    */
   public $weight;
 

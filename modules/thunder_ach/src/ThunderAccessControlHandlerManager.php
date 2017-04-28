@@ -56,7 +56,7 @@ class ThunderAccessControlHandlerManager extends DefaultPluginManager {
     if (!empty($entity_type)) {
       $handlers = $this->limitHandlers($handlers, $entity_type);
     }
-    uasort($handlers, array('Drupal\Component\Utility\SortArray', 'sortByWeightElement'));
+    uasort($handlers, ['Drupal\Component\Utility\SortArray', 'sortByWeightElement']);
     foreach ($handlers as $plugin_id => $handler) {
       // Execute the processor plugin.
       $instances[$plugin_id] = $this->createInstance($plugin_id, $handler);
@@ -76,7 +76,7 @@ class ThunderAccessControlHandlerManager extends DefaultPluginManager {
    * @return \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface[]
    *   List of access control handlers for the given entity type.
    */
-  protected function limitHandlers($handlers, $entity_type) {
+  protected function limitHandlers(array $handlers, $entity_type) {
     return array_filter($handlers, function ($handler) use ($entity_type) {
       if (is_array($handler)) {
         return $entity_type === $handler['entity_type'];

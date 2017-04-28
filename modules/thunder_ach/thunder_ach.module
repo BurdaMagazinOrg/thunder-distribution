@@ -4,7 +4,6 @@
  * @file
  * Main functions for 'Thunder access control handler' module.
  */
-use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Implements hook_entity_type_alter().

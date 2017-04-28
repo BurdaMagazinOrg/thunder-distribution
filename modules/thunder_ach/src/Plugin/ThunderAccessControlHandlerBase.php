@@ -8,7 +8,6 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface;
 
 /**
  * Provides a base class for ThunderAccessControlHandler plugins.
@@ -19,13 +18,6 @@ use Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface;
  * @see plugin_api
  */
 abstract class ThunderAccessControlHandlerBase extends PluginBase implements ThunderAccessControlHandlerInterface {
-
-  /**
-   * The plugin ID of this processor.
-   *
-   * @var string
-   */
-  protected $plugin_id;
 
   /**
    * Name of the entity type the handler controls access for.
@@ -88,7 +80,7 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
    * {@inheritdoc}
    */
   public function getEntityType() {
-    return $this->entity_type;
+    return $this->entityType;
   }
 
   /**
