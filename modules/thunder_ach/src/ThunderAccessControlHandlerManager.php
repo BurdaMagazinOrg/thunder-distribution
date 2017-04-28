@@ -79,7 +79,7 @@ class ThunderAccessControlHandlerManager extends DefaultPluginManager {
   protected function limitHandlers(array $handlers, $entity_type) {
     return array_filter($handlers, function ($handler) use ($entity_type) {
       if (is_array($handler)) {
-        return $entity_type === $handler['entity_type'];
+        return $entity_type === $handler['type'];
       }
       /* @var $handler \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface */
       return $entity_type === $handler->getEntityType();

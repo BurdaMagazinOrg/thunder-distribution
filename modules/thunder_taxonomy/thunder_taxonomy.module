@@ -41,6 +41,14 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
 }
 
 /**
+ * Implements hook_thunder_ach_handler_info_alter().
+ */
+function thunder_taxonomy_thunder_ach_handler_info_alter(&$handlers) {
+  // Remove default term handler as its functionality is covered by term_status.
+  unset($handlers['term']);
+}
+
+/**
  * Implements hook_form_taxonomy_overview_terms_alter().
  */
 function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {

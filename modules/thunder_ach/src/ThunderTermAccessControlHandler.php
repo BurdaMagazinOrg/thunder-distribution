@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_ach;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
@@ -43,7 +44,7 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    $result = parent::checkAccess($entity, $operation, $account);
+    $result = AccessResult::neutral();
     /* @var $handler \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface */
     foreach ($this->handlers as $handler) {
       if (!$handler->applies($entity, $operation, $account)) {
@@ -58,7 +59,7 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    $result = parent::checkCreateAccess($account, $context, $entity_bundle);
+    $result = AccessResult::neutral();
     /* @var $handler \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface */
     foreach ($this->handlers as $handler) {
       $result = $result->orIf($handler->checkCreateAccess($account, $context, $entity_bundle));
@@ -70,7 +71,7 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
-    $result = parent::checkFieldAccess($operation, $field_definition, $account, $items);
+    $result = AccessResult::neutral();
     /* @var $handler \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface */
     foreach ($this->handlers as $handler) {
       $result = $result->orIf($handler->checkFieldAccess($operation, $field_definition, $account, $items));

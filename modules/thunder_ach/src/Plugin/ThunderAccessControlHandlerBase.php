@@ -24,7 +24,7 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
    *
    * @var string
    */
-  public $entityType;
+  public $type;
 
   /**
    * {@inheritdoc}
@@ -39,8 +39,8 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
    * {@inheritdoc}
    */
   public function setConfiguration(array $configuration) {
-    if (isset($configuration['entity_type'])) {
-      $this->entityType = $configuration['entity_type'];
+    if (isset($configuration['type'])) {
+      $this->type = $configuration['type'];
     }
     if (isset($configuration['settings'])) {
       $this->settings = (array) $configuration['settings'];
@@ -54,7 +54,7 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
   public function getConfiguration() {
     return [
       'id' => $this->getPluginId(),
-      'entity_type' => $this->entityType,
+      'type' => $this->entityType,
       'settings' => $this->settings,
     ];
   }
@@ -64,7 +64,7 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
    */
   public function defaultConfiguration() {
     return [
-      'entity_type' => $this->pluginDefinition['entity_type'],
+      'type' => $this->pluginDefinition['type'],
       'settings' => $this->pluginDefinition['settings'],
     ];
   }
@@ -80,7 +80,7 @@ abstract class ThunderAccessControlHandlerBase extends PluginBase implements Thu
    * {@inheritdoc}
    */
   public function getEntityType() {
-    return $this->entityType;
+    return $this->type;
   }
 
   /**
