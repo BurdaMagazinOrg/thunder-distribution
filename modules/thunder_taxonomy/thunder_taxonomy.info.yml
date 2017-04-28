@@ -12,5 +12,6 @@ dependencies:
   - drupal:path
   - pathauto:pathauto
   - drupal:taxonomy
+  - thunder:thunder_ach
   - thunder:thunder_paragraphs
 package: Thunder

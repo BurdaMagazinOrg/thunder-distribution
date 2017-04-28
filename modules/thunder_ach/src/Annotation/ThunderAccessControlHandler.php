@@ -37,6 +37,6 @@ class ThunderAccessControlHandler extends Plugin {
    *
    * @var string
    */
-  public $entity_type;
+  public $type;
 
 }
