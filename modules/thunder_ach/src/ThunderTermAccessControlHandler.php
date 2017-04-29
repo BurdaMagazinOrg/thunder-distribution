@@ -71,7 +71,7 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
-    $result = AccessResult::neutral();
+    $result = AccessResult::allowed();
     /* @var $handler \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface */
     foreach ($this->handlers as $handler) {
       $result = $result->orIf($handler->checkFieldAccess($operation, $field_definition, $account, $items));
