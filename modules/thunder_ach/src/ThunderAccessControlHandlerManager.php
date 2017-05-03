@@ -38,31 +38,25 @@ class ThunderAccessControlHandlerManager extends DefaultPluginManager {
    * Get a list of all registered handler instances sorted by weight.
    *
    * @param string $entity_type
-   *   (Optional) Limit handlers to the given entity type.
+   *   Limit handlers to the given entity type.
    *
    * @return \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface[]
    *   List of processor plugin instances, optionally limited to an entity type.
    */
-  public function getHandlers($entity_type = NULL) {
+  public function getHandlers($entity_type) {
     $instances = &drupal_static(__FUNCTION__, []);
-    if (!empty($instances)) {
-      if (empty($entity_type)) {
-        return $instances;
-      }
-      return $this->limitHandlers($instances, $entity_type);
+    if (!empty($instances[$entity_type])) {
+      return $instances[$entity_type];
     }
     /* @var $handlers \Drupal\thunder_ach\Plugin\ThunderAccessControlHandlerInterface[] */
-    $handlers = $this->getDefinitions();
-    if (!empty($entity_type)) {
-      $handlers = $this->limitHandlers($handlers, $entity_type);
-    }
+    $handlers = $this->limitHandlers($this->getDefinitions(), $entity_type);
     uasort($handlers, ['Drupal\Component\Utility\SortArray', 'sortByWeightElement']);
     foreach ($handlers as $plugin_id => $handler) {
       // Execute the processor plugin.
-      $instances[$plugin_id] = $this->createInstance($plugin_id, $handler);
+      $instances[$entity_type][$plugin_id] = $this->createInstance($plugin_id, $handler);
     }
 
-    return $instances;
+    return $instances[$entity_type];
   }
 
   /**
