@@ -1,10 +1,13 @@
 <?php
 
-namespace Drupal\Tests\thunder\FunctionalJavascript;
+namespace Drupal\Tests\thunder\FunctionalJavascript\Update;
 
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
 use Drupal\media_entity\Entity\Media;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 
 /**
  * Test for update hook changes.
@@ -14,17 +17,50 @@ use Drupal\media_entity\Entity\Media;
  *
  * @group Thunder
  *
- * @package Drupal\Tests\thunder\FunctionalJavascript
+ * @package Drupal\Tests\thunder\FunctionalJavascript\Update
  */
-class UpdateHookChangeTest extends ThunderJavascriptTestBase {
+class ThunderMedia extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderParagraphsTestTrait;
 
   /**
+   * Test that entity browsers does not have language filters anymore.
+   */
+  public function test8101() {
+    // Open article creation page but without setting any element in form.
+    $this->articleFillNew([]);
+
+    /** @var \Behat\Mink\Element\DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
+    // Open teaser entity browser.
+    $buttonName = 'field_teaser_media_entity_browser_entity_browser';
+    $this->scrollElementInView("[name=\"{$buttonName}\"]");
+    $page->pressButton($buttonName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->getSession()->switchToIFrame('entity_browser_iframe_image_browser');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Check that status and name filtering fields exist, but not langcode.
+    $this->assertSession()
+      ->elementNotExists('xpath', '//*[@data-drupal-selector="edit-langcode"]');
+    $this->assertSession()
+      ->elementExists('xpath', '//*[@data-drupal-selector="edit-status"]');
+    $this->assertSession()
+      ->elementExists('xpath', '//*[@data-drupal-selector="edit-name"]');
+
+    // Close entity browser.
+    $this->getSession()->switchToIFrame();
+    $page->find('xpath', '//*[contains(@class, "ui-dialog-titlebar-close")]')
+      ->click();
+    $this->assertSession()->assertWaitOnAjaxRequest();
+  }
+
+  /**
    * Test that Video and Image entity browser uses 24 images per page.
    */
-  public function testUpdateMedia8104() {
+  public function test8104() {
     file_unmanaged_copy(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'), PublicStream::basePath());
     $file = File::create([
       'uri' => 'public://reference.jpg',
@@ -99,39 +135,6 @@ class UpdateHookChangeTest extends ThunderJavascriptTestBase {
 
     $pagerPageElements = $page->findAll('xpath', '//*[@id="entity-browser-video-browser-form"]//nav/ul/li[@class="pager__item" or @class="pager__item is-active"]');
     $this->assertEquals(3, count($pagerPageElements));
-  }
-
-  /**
-   * Test that entity browsers does not have language filters anymore.
-   */
-  public function testUpdateMedia8101() {
-    // Open article creation page but without setting any element in form.
-    $this->articleFillNew([]);
-
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
-
-    // Open teaser entity browser.
-    $buttonName = 'field_teaser_media_entity_browser_entity_browser';
-    $this->scrollElementInView("[name=\"{$buttonName}\"]");
-    $page->pressButton($buttonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->getSession()->switchToIFrame('entity_browser_iframe_image_browser');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    // Check that status and name filtering fields exist, but not langcode.
-    $this->assertSession()
-      ->elementNotExists('xpath', '//*[@data-drupal-selector="edit-langcode"]');
-    $this->assertSession()
-      ->elementExists('xpath', '//*[@data-drupal-selector="edit-status"]');
-    $this->assertSession()
-      ->elementExists('xpath', '//*[@data-drupal-selector="edit-name"]');
-
-    // Close entity browser.
-    $this->getSession()->switchToIFrame();
-    $page->find('xpath', '//*[contains(@class, "ui-dialog-titlebar-close")]')
-      ->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
 }
