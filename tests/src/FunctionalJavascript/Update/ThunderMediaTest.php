@@ -19,7 +19,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript\Update
  */
-class ThunderMedia extends ThunderJavascriptTestBase {
+class ThunderMediaTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderParagraphsTestTrait;
