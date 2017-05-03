@@ -43,9 +43,8 @@ trait ThunderParagraphsTestTrait {
     $page = $this->getSession()->getPage();
     $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
 
-    $toggleButtonSelector = '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button';
-    $toggleButton = $page->find('css', $toggleButtonSelector);
-    $this->scrollElementInView($toggleButtonSelector);
+    $toggleButtonXpath = '//ul[.//*[@data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-add-more-add-more-button-text"]]/li[contains(@class,"dropbutton-toggle")]/button';
+    $toggleButton = $page->find('xpath', $toggleButtonXpath);
 
     $toggleButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
