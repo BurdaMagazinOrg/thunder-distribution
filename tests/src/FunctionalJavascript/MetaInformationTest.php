@@ -122,6 +122,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected function createArticleWithFields(array $fieldValues = []) {
 
     $fieldValues += [
+      'field_channel' => 1,
       'title[0][value]' => static::$tokens['[node:title]'],
       'field_seo_title[0][value]' => static::$tokens['[node:field_seo_title]'],
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
@@ -129,7 +130,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->articleFillNew($fieldValues);
 
-    $this->getSession()->getPage()->selectFieldOption('field_channel', 1);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
     $this->clickArticleSave();

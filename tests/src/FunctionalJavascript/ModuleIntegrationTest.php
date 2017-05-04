@@ -3,7 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Testing of Diff module integration.
+ * Testing of module integrations.
  *
  * @group Thunder
  *
@@ -12,7 +12,8 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
-  use ThunderMediaTestTrait;
+  use ThunderArticleTestTrait;
+  use ThunderMetaTagTrait;
 
   /**
    * Column in diff table used for previous text.
@@ -33,27 +34,27 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    *
    * @param string $fieldName
    *   Human defined field name.
-   * @param array $from
+   * @param array $previous
    *   Associative array with previous text per row.
-   * @param array $fromHighlighted
+   * @param array $previousHighlighted
    *   Previous highlighted texts.
-   * @param array $to
+   * @param array $new
    *   Associative array with new text per row.
-   * @param array $toHighlighted
+   * @param array $newHighlighted
    *   New highlighted texts.
    */
-  protected function validateDiff($fieldName, array $from = [], array $fromHighlighted = [], array $to = [], array $toHighlighted = []) {
+  protected function validateDiff($fieldName, array $previous = [], array $previousHighlighted = [], array $new = [], array $newHighlighted = []) {
     // Check for old Text.
-    $this->checkFullText($fieldName, static::$previousTextColumn, $from);
+    $this->checkFullText($fieldName, static::$previousTextColumn, $previous);
 
     // Check for new Text.
-    $this->checkFullText($fieldName, static::$newTextColumn, $to);
+    $this->checkFullText($fieldName, static::$newTextColumn, $new);
 
     // Check for highlighted Deleted text.
-    $this->checkHighlightedText($fieldName, static::$previousTextColumn, $fromHighlighted);
+    $this->checkHighlightedText($fieldName, static::$previousTextColumn, $previousHighlighted);
 
     // Check for highlighted Added text.
-    $this->checkHighlightedText($fieldName, static::$newTextColumn, $toHighlighted);
+    $this->checkHighlightedText($fieldName, static::$newTextColumn, $newHighlighted);
   }
 
   /**
@@ -90,18 +91,18 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   protected function checkHighlightedText($fieldName, $columnIndex, array $highlightedTextRows) {
     $page = $this->getSession()->getPage();
 
-    foreach ($highlightedTextRows as $indexRow => $expectedHighlightedTexts) {
-      foreach ($expectedHighlightedTexts as $indexHighlighted => $expectedHighlightedText) {
+    foreach ($highlightedTextRows as $indexRow => $expectedTexts) {
+      foreach ($expectedTexts as $indexHighlighted => $expectedText) {
         $highlightedText = $page->find('xpath', "//tr[./td[text()=\"{$fieldName}\"]]/following-sibling::tr[{$indexRow}]/td[{$columnIndex}]/span[" . ($indexHighlighted + 1) . "]")
           ->getText();
 
-        $this->assertEquals($expectedHighlightedText, htmlspecialchars_decode($highlightedText, ENT_QUOTES | ENT_HTML401));
+        $this->assertEquals($expectedText, htmlspecialchars_decode($highlightedText, ENT_QUOTES | ENT_HTML401));
       }
     }
   }
 
   /**
-   * Test Diff module integration.
+   * Testing integration of "diff" module.
    */
   public function testDiffModule() {
 
@@ -136,58 +137,119 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Validate that diff is correct.
     $this->validateDiff(
       'Teaser Text',
-      [
-        '1' => $initialTeaserText,
-      ],
+      ['1' => $initialTeaserText],
       [],
-      [
-        '1' => $teaserText,
-      ],
-      [
-        '1' => ['Start with Text.', '. End with Text'],
-      ]
+      ['1' => $teaserText],
+      ['1' => ['Start with Text.', '. End with Text']]
     );
 
     $this->validateDiff(
       'Teaser Media',
-      [
-        '1' => 'DrupalCon Logo',
-      ],
-      [
-        '1' => ['DrupalCon Logo'],
-      ],
-      [
-        '1' => 'Thunder',
-      ],
-      [
-        '1' => ['Thunder'],
-      ]
+      ['1' => 'DrupalCon Logo'],
+      ['1' => ['DrupalCon Logo']],
+      ['1' => 'Thunder'],
+      ['1' => ['Thunder']]
     );
 
     $this->validateDiff(
       'Paragraphs > Text',
-      [
-        '1' => '',
-      ],
+      ['1' => ''],
       [],
-      [
-        '1' => '<p>' . $newParagraphText . '</p>',
-        '2' => '',
-      ],
+      ['1' => '<p>' . $newParagraphText . '</p>', '2' => ''],
       []
     );
 
     $this->validateDiff(
       'Paragraphs > Image',
-      [
-        '1' => '',
-      ],
+      ['1' => ''],
       [],
-      [
-        '1' => 'Thunder City',
-      ],
+      ['1' => 'Thunder City'],
       []
     );
+  }
+
+  /**
+   * Testing integration of "access_unpublished" module.
+   */
+  public function testAccessUnpublished() {
+
+    // Create article and save it as unpublished.
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Article 1',
+      'field_seo_title[0][value]' => 'Article 1',
+    ]);
+    $this->addTextParagraph('field_paragraphs', 'Article Text 1');
+    $this->clickArticleSave(2);
+
+    // Edit article and generate access unpubplished token.
+    $this->drupalGet('node/10/edit');
+    $this->expandAllTabs();
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')
+      ->click();
+    $this->waitUntilVisible('[data-drupal-selector="edit-token-table-1-link"]', 5000);
+    $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="edit-token-table-1-link"]');
+    $tokenUrl = $copyToClipboard->getAttribute('data-clipboard-text');
+
+    // Log-Out and check that URL with token works, but not URL without it.
+    $this->drupalLogout();
+    $this->drupalGet($tokenUrl);
+    $this->assertSession()->pageTextContains('Article Text 1');
+    $this->drupalGet('article-1');
+    $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
+    $this->assertEquals(1, count($noAccess));
+
+    // Log-In and delete token -> check page can't be accessed.
+    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalGet('node/10/edit');
+    $this->drupalGet('access_unpublished/delete/1');
+    $this->drupalGet('node/10/edit');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->clickArticleSave(2);
+
+    // Log-Out and check that URL with token doesn't work anymore.
+    $this->drupalLogout();
+    $this->drupalGet($tokenUrl);
+    $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
+    $this->assertEquals(1, count($noAccess));
+
+    // Log-In and publish article.
+    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalGet('node/10/edit');
+    $this->clickArticleSave(3);
+
+    // Log-Out and check that URL to article works.
+    $this->drupalLogout();
+    $this->drupalGet('article-1');
+    $this->assertSession()->pageTextContains('Article Text 1');
+  }
+
+  /**
+   * Testing integration of "metatag_facebook" module.
+   */
+  public function testFacebookMetaTags() {
+
+    $facebookMetaTags = $this->generateMetaTagConfiguration([
+      [
+        'facebook fb:admins' => 'zuck',
+        'facebook fb:pages' => 'some-fancy-fb-page-url',
+        'facebook fb:app_id' => '1121151812167212,1121151812167213',
+      ],
+    ]);
+
+    // Create Article with facebook meta tags and check it.
+    $fieldValues = $this->generateMetaTagFieldValues($facebookMetaTags, 'field_meta_tags[0]');
+    $fieldValues += [
+      'field_channel' => 1,
+      'title[0][value]' => 'Test FB MetaTags Article',
+      'field_seo_title[0][value]' => 'Facebook MetaTags',
+      'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
+    ];
+    $this->articleFillNew($fieldValues);
+    $this->clickArticleSave();
+
+    $this->checkMetaTags($facebookMetaTags);
   }
 
 }

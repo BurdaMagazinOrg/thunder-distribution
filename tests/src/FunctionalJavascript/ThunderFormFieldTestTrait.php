@@ -64,11 +64,19 @@ trait ThunderFormFieldTestTrait {
       return;
     }
 
-    // Clear Text Area - if field is "textarea".
+    // Handle specific types of form fields.
     $field = $page->findField($fieldName);
-    if ($field->getTagName() === 'textarea') {
+    $fieldTag = $field->getTagName();
+    if ($fieldTag === 'textarea') {
+      // Clear text first, before setting value for "textarea" field.
       $this->getSession()
         ->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val('');");
+    }
+    elseif ($fieldTag === 'select') {
+      // Handling of dropdown list.
+      $page->selectFieldOption($fieldName, $value);
+
+      return;
     }
 
     $this->scrollElementInView('[name="' . $fieldName . '"]');
