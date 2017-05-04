@@ -10,7 +10,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class ArticleCreationTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
-  use ThunderMediaTestTrait;
+  use ThunderArticleTestTrait;
 
   /**
    * Filed name for paragraphs in article content.
@@ -25,12 +25,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   public function testCreateArticle() {
     $this->drupalGet('node/add/article');
 
-    $page = $this->getSession()->getPage();
-
-    $page->selectFieldOption('field_channel', 1);
-
-    $page->fillField('title[0][value]', 'Test article');
-    $page->fillField('field_seo_title[0][value]', 'Massive gaining seo traffic text');
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Test article',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+    ]);
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
