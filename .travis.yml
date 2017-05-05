@@ -66,6 +66,3 @@ before_script:
 
 script:
   - bash -x -e ./scripts/travis/06-run-tests.sh
-
-after_script:
-  - artifacts upload
