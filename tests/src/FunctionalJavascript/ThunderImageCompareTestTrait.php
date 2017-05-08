@@ -26,6 +26,8 @@ trait ThunderImageCompareTestTrait {
    */
   protected $fileSystem;
 
+  protected $screenShotPrefix = 'test_ss_';
+
   /**
    * Set generate mode.
    *
@@ -51,6 +53,19 @@ trait ThunderImageCompareTestTrait {
   }
 
   /**
+   * Set size of browser window.
+   *
+   * @param array $windowSize
+   *   New size for window. Associative array with width and height keys.
+   */
+  protected function setWindowSize(array $windowSize) {
+    $this->getSession()
+      ->getDriver()
+      ->resizeWindow($windowSize['width'], $windowSize['height']);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+  }
+
+  /**
    * Compare screen part to image of previous screenshot.
    *
    * @param string $expectedImageFile
@@ -69,30 +84,25 @@ trait ThunderImageCompareTestTrait {
    */
   public function compareScreenToImage($expectedImageFile, array $imageSize = [], array $windowSize = [], $threshold = 0.01) {
     $tempScreenShotFile = $this->getFileSystem()
-      ->tempnam(FileSystem::getOsTemporaryDirectory(), 'test_ss_');
+      ->tempnam(FileSystem::getOsTemporaryDirectory(), $this->screenShotPrefix);
 
     if (!$tempScreenShotFile) {
       throw new \Exception('Unable to get temporally file name.');
     }
 
     // Resizing of window before making screenshot.
-    if (!empty($windowSize)) {
-      $this->getSession()
-        ->getDriver()
-        ->resizeWindow($windowSize['width'], $windowSize['height']);
-      $this->assertSession()->assertWaitOnAjaxRequest();
+    $adjustWindowForScreenshot = !empty($windowSize);
+    if ($adjustWindowForScreenshot) {
+      $this->setWindowSize($windowSize);
     }
 
+    // Create screenshot and fetch full path to it.
     $this->createScreenshot($tempScreenShotFile);
     $tempScreenShotFile = realpath($tempScreenShotFile);
 
     // Set windows size back to previous size, before continuing.
-    if (!empty($windowSize)) {
-      $baseWindowSize = $this->getWindowSize();
-      $this->getSession()
-        ->getDriver()
-        ->resizeWindow($baseWindowSize['width'], $baseWindowSize['height']);
-      $this->assertSession()->assertWaitOnAjaxRequest();
+    if ($adjustWindowForScreenshot) {
+      $this->setWindowSize($this->getWindowSize());
     }
 
     // Crop screenshot.
