@@ -6,6 +6,7 @@
  */
 
 use Drupal\views\Entity\View;
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
@@ -556,6 +557,42 @@ function thunder_update_8107() {
     $thunderUpdater->markUpdatesFailed(['v1_1__thunder_riddle']);
   }
 
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Adjust access permissions related to "access_unpublished" module.
+ */
+function thunder_update_8108() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // Granting permissions only for "anonymous" and "authenticated" user roles.
+  $roles = Role::loadMultiple(['anonymous', 'authenticated']);
+
+  foreach ($roles as $role) {
+    if ($role->hasPermission('access content')) {
+      $role->grantPermission('access_unpublished node article');
+      if ($role->save()) {
+        $updateLogger->info(t('Permission for accessing unpublished node with generated token Url is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      else {
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+    }
+    else {
+      $updateLogger->info(t('Skipping @user_role user role, because of non-sufficient permissions.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  // Output logged result of update hook execution.
   if (function_exists('drush_log') && PHP_SAPI === 'cli') {
     $updateLogger->outputDrush();
 
