@@ -139,7 +139,7 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
     $this->assertEquals(3, count($pagerPageElements));
 
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2')));
-    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_1_1350x768'), [], ['width' => 1350, 'height' => 768]));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_1350x768'), [], ['width' => 1350, 'height' => 768]));
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_768x768'), [], ['width' => 768, 'height' => 768]));
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_440x768'), [], ['width' => 440, 'height' => 768]));
   }
