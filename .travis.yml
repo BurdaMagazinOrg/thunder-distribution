@@ -36,6 +36,7 @@ branches:
   only:
     - master
     - develop
+    - feature/visual-regression-testing
 
 mysql:
   database: drupal
