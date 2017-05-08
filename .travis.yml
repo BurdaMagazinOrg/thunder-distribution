@@ -45,7 +45,7 @@ mysql:
 
 addons:
   artifacts:
-    region: eu-central-1
+    region: eu-west-1
     paths:
       - /tmp/thunder-travis-ci
   apt:
