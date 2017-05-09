@@ -339,8 +339,12 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     // Testing of preview for single article.
     $topArticleCssSelector = '#block-thunder-base-content div.node__meta';
-    $midArticleCssSelector = '#block-thunder-base-content div.field__item:nth-child(3)';
+    $midArticleCssSelector = '#block-thunder-base-content div.field__items > div.field__item:nth-child(3)';
     $bottomArticleCssSelector = 'div.shariff';
+
+    // Wait for CSS easing javascript.
+    $waitTopImage = "jQuery('#block-thunder-base-content div.field__items > div.field__item:nth-child(1) img.b-loaded').css('opacity') === '1'";
+    $waitMidGallery = "jQuery('#block-thunder-base-content div.field__items > div.field__item:nth-child(3) div.slick-active img.b-loaded').css('opacity') === '1'";
 
     $this->drupalGet('node/8/edit');
 
@@ -348,16 +352,20 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->setWindowSize($windowSize);
     $this->selectDevice('iphone_7');
     $this->scrollToInDevicePreview($topArticleCssSelector);
+    $this->getSession()->wait(5000, $waitTopImage);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar1')));
     $this->scrollToInDevicePreview($midArticleCssSelector);
+    $this->getSession()->wait(5000, $waitMidGallery);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar2')));
     $this->scrollToInDevicePreview($bottomArticleCssSelector);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar3')));
 
     $this->changeDeviceRotation();
     $this->scrollToInDevicePreview($topArticleCssSelector);
+    $this->getSession()->wait(5000, $waitTopImage);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar4')));
     $this->scrollToInDevicePreview($midArticleCssSelector);
+    $this->getSession()->wait(5000, $waitMidGallery);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar5')));
     $this->scrollToInDevicePreview($bottomArticleCssSelector);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar6')));
@@ -366,16 +374,20 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->setWindowSize($windowSize);
     $this->selectDevice('ipad_air_2');
     $this->scrollToInDevicePreview($topArticleCssSelector);
+    $this->getSession()->wait(5000, $waitTopImage);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar7')));
     $this->scrollToInDevicePreview($midArticleCssSelector);
+    $this->getSession()->wait(5000, $waitMidGallery);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar8')));
     $this->scrollToInDevicePreview($bottomArticleCssSelector);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar9')));
 
     $this->changeDeviceRotation();
     $this->scrollToInDevicePreview($topArticleCssSelector);
+    $this->getSession()->wait(5000, $waitTopImage);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar10')));
     $this->scrollToInDevicePreview($midArticleCssSelector);
+    $this->getSession()->wait(5000, $waitMidGallery);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar11')));
     $this->scrollToInDevicePreview($bottomArticleCssSelector);
     $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test_device_preview_ar12')));
