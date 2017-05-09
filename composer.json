@@ -44,9 +44,6 @@
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
       },
-      "drupal/entity_reference_revisions": {
-        "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
-      },
       "drupal/blazy": {
         "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch",
         "Images of gallery will not be loaded": "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch",
@@ -72,7 +69,7 @@
     "drupal/dropzonejs": "^1.0",
     "drupal/entity": "^1.0",
     "drupal/entity_browser": "^1.0",
-    "drupal/entity_reference_revisions": "1.2",
+    "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "^1.0",
     "drupal/focal_point": "^1.0",
