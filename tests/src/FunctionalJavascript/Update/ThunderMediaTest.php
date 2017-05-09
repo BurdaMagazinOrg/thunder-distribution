@@ -12,9 +12,6 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 /**
  * Test for update hook changes.
  *
- * TODO: future improvements
- *  -> introduce UI regressions tests for different window sizes.
- *
  * @group Thunder
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript\Update
@@ -61,9 +58,9 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
    * Test that Video and Image entity browser uses 24 images per page.
    */
   public function test8104() {
-    file_unmanaged_copy(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'), PublicStream::basePath());
+    file_unmanaged_copy(realpath(dirname(__FILE__) . '/../../../fixtures/thunder.jpg'), PublicStream::basePath() . '/testing_thunder.jpg');
     $file = File::create([
-      'uri' => 'public://reference.jpg',
+      'uri' => 'public://testing_thunder.jpg',
       'status' => FILE_STATUS_PERMANENT,
     ]);
     $file->save();
@@ -111,6 +108,11 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
     $pagerPageElements = $page->findAll('xpath', '//*[@id="entity-browser-image-browser-form"]//nav/ul/li[@class="pager__item" or @class="pager__item is-active"]');
     $this->assertEquals(3, count($pagerPageElements));
 
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_1')));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_1_1350x768'), [], ['width' => 1350, 'height' => 768]));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_1_768x768'), [], ['width' => 768, 'height' => 768]));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_1_440x768'), [], ['width' => 440, 'height' => 768]));
+
     // Close entity browser.
     $this->getSession()->switchToIFrame();
     $page->find('xpath', '//*[contains(@class, "ui-dialog-titlebar-close")]')
@@ -135,6 +137,11 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
 
     $pagerPageElements = $page->findAll('xpath', '//*[@id="entity-browser-video-browser-form"]//nav/ul/li[@class="pager__item" or @class="pager__item is-active"]');
     $this->assertEquals(3, count($pagerPageElements));
+
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2')));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_1350x768'), [], ['width' => 1350, 'height' => 768]));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_768x768'), [], ['width' => 768, 'height' => 768]));
+    $this->assertTrue($this->compareScreenToImage($this->getScreenshotFile('test8104_2_440x768'), [], ['width' => 440, 'height' => 768]));
   }
 
 }
