@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Behat\Mink\Element\DocumentElement;
+
 /**
  * Testing of module integrations.
  *
@@ -399,7 +401,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   public function testLiveblog() {
     if (\Drupal::service('module_installer')->install(['thunder_liveblog'])) {
 
-      // Configure Pusher
+      // Configure Pusher.
       $this->logWithRole('administrator');
 
       $page = $this->getSession()->getPage();
@@ -418,7 +420,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
       $this->logWithRole(static::$defaultUserRole);
 
-      // Add liveblog node
+      // Add liveblog node.
       $fieldValues = [
         'title[0][value]' => 'Test Liveblog',
         'field_highlights[values][3]' => 'element',
@@ -428,10 +430,10 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       $this->drupalGet('node/add/liveblog');
       $this->assertSession()->assertWaitOnAjaxRequest();
       $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
-      $this->clickArticleSave(2); // 2 saves it as published in this case.
+      // 2 saves it as published in this case.
+      $this->clickArticleSave(2);
 
-
-      // Add first post
+      // Add first post.
       $page = $this->getSession()->getPage();
 
       $this->liveblogSetTitle($page, 'Normal post');
@@ -454,7 +456,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       $this->waitUntilVisible('article[data-postid="2"]', 10000);
       $this->waitUntilVisible('article[data-postid="2"] img.b-loaded', 10000);
 
-      // Add post with twitter
+      // Add post with twitter.
       $this->liveblogSetTitle($page, 'Twitter post');
 
       $this->clickDropButton('field_embed_media_twitter_add_more');
@@ -470,8 +472,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       $this->waitUntilVisible('article[data-postid="3"]', 10000);
       $this->waitUntilVisible('[data-tweet-id="778001033142284288"]', 10000);
 
-
-      // Add post with instagram
+      // Add post with instagram.
       $this->liveblogSetTitle($page, 'Instagram post');
 
       $this->clickDropButton('field_embed_media_instagram_add_more');
@@ -487,8 +488,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       $this->waitUntilVisible('article[data-postid="4"]', 10000);
       $this->waitUntilVisible('iframe.instagram-media-rendered', 10000);
 
-
-      // Check site with anonymous user
+      // Check site with anonymous user.
       $url = $this->getUrl();
       $this->drupalLogout();
 
@@ -507,11 +507,27 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     }
   }
 
-  protected function liveblogSetTitle($page, $title) {
+  /**
+   * Set the title of a liveblog post.
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $title
+   *   The title.
+   */
+  protected function liveblogSetTitle(DocumentElement $page, $title) {
     $this->setFieldValue($page, 'title[0][value]', $title);
   }
 
-  protected function liveblogSetBody($page, $body) {
+  /**
+   * Set the body of a liveblog post.
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $body
+   *   The body.
+   */
+  protected function liveblogSetBody(DocumentElement $page, $body) {
     $this->fillCkEditor(
       $page,
       "textarea[name='body[0][value]']",
@@ -519,12 +535,23 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     );
   }
 
+  /**
+   * Submit the liveblog post.
+   */
   protected function liveblogSubmit() {
     $this->scrollElementInView('[data-drupal-selector="edit-submit"]');
     $this->click('input[data-drupal-selector="edit-submit"]');
   }
 
-  protected function clickDropButton($fieldName, $toggle=true) {
+  /**
+   * Click a button within a dropdown button field.
+   *
+   * @param string $fieldName
+   *   The [name] attribute of the button to be clicked.
+   * @param bool $toggle
+   *   Whether the dropdown button should be expanded before clicking.
+   */
+  protected function clickDropButton($fieldName, $toggle = TRUE) {
     $page = $this->getSession()->getPage();
 
     if ($toggle) {
