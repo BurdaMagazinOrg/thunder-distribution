@@ -36,24 +36,24 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     // Create 1. Article.
     $this->articleFillNew([
+      'field_channel' => 3,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
       'field_tags[target_id]' => 'New Section, Tag1',
       'field_teaser_text[0][value]' => 'Teaser 1',
     ]);
-    $this->getSession()->getPage()->selectFieldOption('field_channel', 3);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:17']);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->clickArticleSave(3);
 
     // Create 2. Article.
     $this->articleFillNew([
+      'field_channel' => 3,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
       'field_tags[target_id]' => 'New Section, Tag2',
       'field_teaser_text[0][value]' => 'Teaser 2',
     ]);
-    $this->getSession()->getPage()->selectFieldOption('field_channel', 3);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:16']);
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
     $this->clickArticleSave(3);
