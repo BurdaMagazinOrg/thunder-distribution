@@ -217,7 +217,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and publish article.
     $this->logWithRole(static::$defaultUserRole);
     $this->drupalGet('node/10/edit');
-    $this->clickArticleSave(3);
+    $this->clickArticleSave(2);
 
     // Log-Out and check that URL to article works.
     $this->drupalLogout();
