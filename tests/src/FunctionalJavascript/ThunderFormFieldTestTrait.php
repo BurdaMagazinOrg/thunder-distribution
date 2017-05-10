@@ -49,6 +49,7 @@ trait ThunderFormFieldTestTrait {
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
     // If field is checkbox list, then use custom functionality to set values.
+    // TODO needs documentation
     $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
     if (!empty($checkboxes)) {
       $this->setCheckbox($page, $fieldName, $value);
