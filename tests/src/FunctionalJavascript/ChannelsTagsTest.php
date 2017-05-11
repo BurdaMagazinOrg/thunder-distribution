@@ -44,7 +44,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     ]);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:17']);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->clickArticleSave(3);
+    $this->clickArticleSave(2);
 
     // Create 2. Article.
     $this->articleFillNew([
@@ -56,7 +56,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     ]);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:16']);
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
-    $this->clickArticleSave(3);
+    $this->clickArticleSave(2);
 
     // Check is everything created properly for Article 1.
     $this->drupalGet('article-1');
