@@ -22,8 +22,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     // Media ID used for testing.
     $mediaId = 9;
 
-    $page = $this->getSession()->getPage();
-
     $this->drupalGet("media/$mediaId/edit");
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeFocalPointChange_' . date('Ymd_His') . '.png');

@@ -41,7 +41,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->clickArticleSave();
 
-
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
