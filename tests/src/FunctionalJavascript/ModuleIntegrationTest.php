@@ -399,7 +399,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * Testing integration of "liveblog" module.
    */
   public function testLiveblog() {
-    $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), true);
+    $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), TRUE);
     if (empty($pusherCredentials)) {
       $this->fail("pusher credentials not provided.");
       return;
