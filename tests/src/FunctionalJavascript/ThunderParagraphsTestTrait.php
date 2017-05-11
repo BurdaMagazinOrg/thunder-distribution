@@ -72,39 +72,6 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Add paragraph for field with defined paragraph type.
-   *
-   * This uses paragrpahs dropdown widget.
-   *
-   * @param string $fieldName
-   *   Field name.
-   * @param string $type
-   *   Type of the paragraph.
-   *
-   * @return int
-   *   Returns index for added paragraph.
-   */
-  public function addParagraphByDropdown($fieldName, $type) {
-    $page = $this->getSession()->getPage();
-    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
-
-    $toggleButtonXpath = '//ul[.//*[@data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-add-more-add-more-button-text"]]/li[contains(@class,"dropbutton-toggle")]/button';
-    $toggleButton = $page->find('xpath', $toggleButtonXpath);
-
-    $toggleButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $addMoreButtonName = "{$fieldName}_{$type}_add_more";
-    $this->scrollElementInView("[name=\"$addMoreButtonName\"]");
-    $page->pressButton($addMoreButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
-
-    return $nextParagraphIndex;
-  }
-
-  /**
    * Add Image paragraph.
    *
    * @param string $fieldName

@@ -605,8 +605,9 @@ function thunder_update_8108() {
 /**
  * Change paragraphs add mode to use the modal.
  */
-function thunder_update_8108() {
+function thunder_update_8109() {
 
+  /** @var \Drupal\thunder_updater\UpdateLogger $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
@@ -622,7 +623,11 @@ function thunder_update_8108() {
   $success = TRUE;
 
   foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
-    if (!$thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
+    if ($thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
+      $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
+    }
+    else {
+      $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
       $success = FALSE;
     }
   }
