@@ -430,8 +430,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       $this->drupalGet('node/add/liveblog');
       $this->assertSession()->assertWaitOnAjaxRequest();
       $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
-      // 2 saves it as published in this case.
-      $this->clickArticleSave(2);
+      // 1 saves it as published in this case.
+      $this->clickArticleSave(1);
 
       // Add first post.
       $page = $this->getSession()->getPage();
