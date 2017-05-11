@@ -57,9 +57,10 @@ v1.1:
         '#title': 'Use new riddle media integration'
         '#description': "<p>We want to use the new riddle media integration. It's much more user-friendly than the old way. You can select riddles from the entity browser now</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to convert you current riddles into new media_entity based ones.<p>'
-v2.0:
-    '#title': 'Update to Thunder 2.0'
-    '#description': '<p>We have even more cool stuff for you in this release</p>'
-    v2_0__thunder_liveblog:
+    v1_1__thunder_liveblog:
         '#title': 'Use liveblog module'
         '#description': '<p>If you want to do liveblogging, this is THE module for you!</p><p>Since this module is optional, we did not enable it automatically. To do this manually, go to the "Extend" page and enable the "Thunder Liveblog" module.</p><p>You will also need to register a Pusher account at <a href="http://pusher.com" target="_blank">http://pusher.com</a>, create a new app and note down your keys and cluster. You can provide them at the <a href="/admin/config/content/liveblog" target="_blank">Liveblog configuration page.</a></p><p>Now you are set up and can start using it, by adding a new Liveblog content.</p>'
+    v1_1__thunder_liveblog_image:
+        '#title': 'Add image paragraph to liveblog posts'
+        '#description': "<p>Instead of adding images in the ckeditor, this allows you to place an image as an embedded media at the top of the post.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> Go to "Structure" -> "Liveblog posts" -> "Manage fields" and click on "Edit" next to the field "Embed media". Here you can select the image paragraph.</p>'

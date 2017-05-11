@@ -148,3 +148,28 @@ function thunder_liveblog_install() {
   }
 
 }
+
+/**
+ * Adds image to the list of available paragraphs.
+ */
+function thunder_liveblog_update_8101() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\field\Entity\FieldConfig $field */
+  $field = \Drupal\field\Entity\FieldConfig::load('liveblog_post.liveblog_post.field_embed_media');
+
+  if ($field) {
+
+    $settings = $field->getSetting('handler_settings');
+
+    $settings['target_bundles']['image'] = 'image';
+    $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => -17];
+
+    $field->setSetting('handler_settings', $settings);
+
+    $field->save();
+
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_liveblog_image']);
+  }
+}
