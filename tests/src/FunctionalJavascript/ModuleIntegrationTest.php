@@ -180,7 +180,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Article 1',
     ]);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->clickArticleSave(2);
+    $this->clickArticleSave();
 
     // Edit article and generate access unpubplished token.
     $this->drupalGet('node/10/edit');
@@ -206,7 +206,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('access_unpublished/delete/1');
     $this->drupalGet('node/10/edit');
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->clickArticleSave(2);
+    $this->clickArticleSave();
 
     // Log-Out and check that URL with token doesn't work anymore.
     $this->drupalLogout();
@@ -217,7 +217,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and publish article.
     $this->logWithRole(static::$defaultUserRole);
     $this->drupalGet('node/10/edit');
-    $this->clickArticleSave(3);
+    $this->clickArticleSave(2);
 
     // Log-Out and check that URL to article works.
     $this->drupalLogout();
