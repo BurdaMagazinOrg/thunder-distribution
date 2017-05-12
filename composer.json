@@ -55,18 +55,8 @@
             "drupal/media_entity": {
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
             },
-            "drupal/media_entity_instagram": {
-                "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-43.patch"
-            },
-            "drupal/shariff": {
-                "Fix schema issues": "https://www.drupal.org/files/issues/2842631.patch",
-                "Fix issue with two pup-up windows": "https://www.drupal.org/files/issues/2845000_4.patch"
-            },
             "drupal/entity_reference_revisions": {
                 "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
-            },
-            "drupal/better_normalizers": {
-                "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch"
             },
             "drupal/blazy": {
                 "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch",
@@ -92,7 +82,7 @@
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
-        "drupal/better_normalizers": "1.0-beta2",
+        "drupal/better_normalizers": "^1.0",
         "drupal/blazy": "1.0-rc1",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
@@ -116,7 +106,7 @@
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
         "drupal/media_entity": "1.6",
-        "drupal/media_entity_instagram": "1.2",
+        "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
@@ -129,7 +119,7 @@
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
-        "drupal/shariff": "1.1",
+        "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
         "drupal/slick_media": "^1.0",
         "drupal/thunder_admin": "dev-1.x",
