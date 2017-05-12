@@ -20,9 +20,6 @@ update_thunder() {
 
     # Execute all required updates
     drush updatedb -y
-
-    # Adjust theme logo paths, because it can be different in case of composer build
-    drush -y php-eval "Drupal::configFactory()->getEditable('thunder_base.settings')->set('logo.path', drupal_get_path('profile', 'thunder') . '/themes/thunder_base/images/Thunder-white_400x90.png')->save(TRUE);"
 }
 
 drush_make_thunder() {
