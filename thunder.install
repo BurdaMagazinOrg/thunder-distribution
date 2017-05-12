@@ -648,3 +648,39 @@ function thunder_update_8109() {
 
   return $updateLogger->outputHtml();
 }
+
+/**
+ * Adjust access permissions related to "responsive_preview" module.
+ */
+function thunder_update_8110() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    if ($role->hasPermission('access content')) {
+      $role->grantPermission('access responsive preview');
+      if ($role->save()) {
+        $updateLogger->info(t('Permission for accessing responsive preview is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      else {
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+    }
+    else {
+      $updateLogger->info(t('Skipping @user_role user role, because of non-sufficient permissions.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  // Output logged result of update hook execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
