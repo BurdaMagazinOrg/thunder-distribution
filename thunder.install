@@ -761,17 +761,17 @@ function thunder_update_8114() {
     'v1_1__views_autocomplete_filters' => 'views_autocomplete_filters',
   ];
 
-  if ($thunderUpdater->installModules($updates, $updateLogger)) {
+  if ($thunderUpdater->installModules($updates)) {
 
     $hash = 'MpLF2dxW81TfwiOqZu8eu2IjlpqUGsObEVy5jajIVdw';
     if (!$thunderUpdater->revertConfig('views.view.image_browser', $updateLogger, $hash)) {
-      $thunderUpdater->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
     }
 
     $hash = 'T4BCkJ-e9xYXdW4IAcPjSpdgzDKirI3HHSJ12HQ-J2Q';
     if (!$thunderUpdater->revertConfig('views.view.video_browser', $updateLogger, $hash)) {
-      $thunderUpdater->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
     }
   }
-  return $thunderUpdater->logger()->output();
+  return $updateLogger->output();
 }
