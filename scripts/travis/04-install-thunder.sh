@@ -20,6 +20,9 @@ update_thunder() {
 
     # Execute all required updates
     drush updatedb -y
+
+    # Adjust theme logo path because it can be different in case of composer build
+    drush -y config-set "thunder_base.settings" "logo.path" "profiles/contrib/thunder/themes/thunder_base/images/Thunder-white_400x90.png"
 }
 
 drush_make_thunder() {
