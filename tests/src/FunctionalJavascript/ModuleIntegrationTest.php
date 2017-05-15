@@ -590,11 +590,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->getSession()->switchToIFrame('entity_browser_iframe_riddle_browser');
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    // Click button to load Riddles.
+    // Click button to load Riddles and compare thumbnails.
     $this->clickButtonDrupalSelector($page, 'edit-import-riddle');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    // Compare thumbnails.
     $this->compareScreenToImage(
       $this->getScreenshotFile('test_riddle_eb_list'),
       ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 115]
