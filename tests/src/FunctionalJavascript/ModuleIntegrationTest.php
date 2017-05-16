@@ -592,9 +592,11 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     // Click button to load Riddles and compare thumbnails.
     $this->clickButtonDrupalSelector($page, 'edit-import-riddle');
-    $this->compareScreenToImage(
-      $this->getScreenshotFile('test_riddle_eb_list'),
-      ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 115]
+    $this->assertTrue(
+      $this->compareScreenToImage(
+        $this->getScreenshotFile('test_riddle_eb_list'),
+        ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 115]
+      )
     );
 
     // Close entity browser.
