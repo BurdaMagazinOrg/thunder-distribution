@@ -306,6 +306,30 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Click a button within a dropdown button field.
+   *
+   * @param string $fieldName
+   *   The [name] attribute of the button to be clicked.
+   * @param bool $toggle
+   *   Whether the dropdown button should be expanded before clicking.
+   */
+  protected function clickDropButton($fieldName, $toggle = TRUE) {
+    $page = $this->getSession()->getPage();
+
+    if ($toggle) {
+      $toggleButtonXpath = '//ul[.//*[@name="' . $fieldName . '"]]/li[contains(@class,"dropbutton-toggle")]/button';
+      $toggleButton = $page->find('xpath', $toggleButtonXpath);
+      $toggleButton->click();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+
+    $this->scrollElementInView('[name="' . $fieldName . '"]');
+
+    $page->pressButton($fieldName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+  }
+
+  /**
    * Assert page title.
    *
    * @param string $expectedTitle
