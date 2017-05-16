@@ -155,6 +155,10 @@ function thunder_liveblog_install() {
  * Adds image to the list of available paragraphs.
  */
 function thunder_liveblog_update_8101() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -170,8 +174,26 @@ function thunder_liveblog_update_8101() {
 
     $field->setSetting('handler_settings', $settings);
 
-    $field->save();
+    try {
+      $field->save();
 
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_liveblog_image']);
+      $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_liveblog_image']);
+      $updateLogger->info(t('Image paragraph added to the liveblog post field "embed_media".'));
+    } catch (Exception $e) {
+      $updateLogger->error(t('There was an error, while saving the liveblog post field "embed_media", please try to add the image paragraph manually.'));
+      $thunderUpdater->markUpdatesFailed(['v1_1__thunder_liveblog_image']);
+    }
   }
+  else {
+    $updateLogger->warning(t('Liveblog post field "embed_media" was not found. Please try to add the image paragraph manually.'));
+  }
+
+  // Output logged result of update hook execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
 }
