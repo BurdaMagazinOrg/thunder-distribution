@@ -8,6 +8,7 @@ projects[adsense][type] = module
 projects[adsense][version] = 1
 projects[amp][type] = module
 projects[amp][version] = 1
+projects[amp][patch][] = https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch
 projects[amptheme][type] = theme
 projects[amptheme][version] = 1
 projects[better_normalizers][type] = module
