@@ -17,6 +17,8 @@ projects:
   amp:
     type: "module"
     version: "1"
+    patch:
+      - "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
 
   amptheme:
     type: "theme"
