@@ -240,7 +240,7 @@ function thunder_themes_installed($theme_list) {
 
     \Drupal::configFactory()
       ->getEditable('amp.settings')
-      ->set('amp_library_process_full_html', 1)
+      ->set('amp_library_process_full_html', TRUE)
       ->save(TRUE);
 
     // Set AMP theme to thunder_amp,
