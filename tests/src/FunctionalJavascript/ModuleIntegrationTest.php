@@ -446,7 +446,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->liveblogSetTitle($page, 'Normal post');
     $this->liveblogSetBody($page, "This is a normal text");
-    $this->liveblogSubmit();
+    $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="1"]', 10000);
 
@@ -459,7 +459,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->liveblogSetBody($page, 'Very nice image post you have here!');
 
-    $this->liveblogSubmit();
+    $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="2"]', 10000);
     $this->waitUntilVisible('article[data-postid="2"] img.b-loaded', 10000);
@@ -475,7 +475,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->liveblogSetBody($page, 'Very nice twitter post you have here!');
 
-    $this->liveblogSubmit();
+    $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="3"]', 10000);
     $this->waitUntilVisible('[data-tweet-id="778001033142284288"]', 10000);
@@ -491,7 +491,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->liveblogSetBody($page, 'Very nice instagram post you have here!');
 
-    $this->liveblogSubmit();
+    $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="4"]', 10000);
     $this->waitUntilVisible('iframe.instagram-media-rendered', 10000);
@@ -511,6 +511,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->waitUntilVisible('article[data-postid="3"]');
     $this->waitUntilVisible('article[data-postid="2"]');
     $this->waitUntilVisible('article[data-postid="1"]');
+
   }
 
   /**
@@ -539,14 +540,6 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       "textarea[name='body[0][value]']",
       $body
     );
-  }
-
-  /**
-   * Submit the liveblog post.
-   */
-  protected function liveblogSubmit() {
-    $this->scrollElementInView('[data-drupal-selector="edit-submit"]');
-    $this->click('input[data-drupal-selector="edit-submit"]');
   }
 
   /**
