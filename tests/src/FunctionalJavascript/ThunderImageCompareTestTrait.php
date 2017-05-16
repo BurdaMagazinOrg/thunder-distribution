@@ -26,6 +26,11 @@ trait ThunderImageCompareTestTrait {
    */
   protected $fileSystem;
 
+  /**
+   * Prefix for temporally created screenshots.
+   *
+   * @var string
+   */
   protected $screenShotPrefix = 'test_ss_';
 
   /**

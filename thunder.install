@@ -601,3 +601,86 @@ function thunder_update_8108() {
 
   return $updateLogger->outputHtml();
 }
+
+/**
+ * Change paragraphs add mode to use the modal.
+ */
+function thunder_update_8109() {
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
+
+  // New configuration that should be applied.
+  $newConfig['content']['field_paragraphs']['settings']['add_mode'] = 'modal';
+
+  $success = TRUE;
+
+  foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
+    if ($thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
+      $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
+    }
+    else {
+      $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
+      $success = FALSE;
+    }
+  }
+
+  if ($success) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__paragraphs_modal']);
+  }
+
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}
+
+/**
+ * Adjust access permissions related to "responsive_preview" module.
+ */
+function thunder_update_8110() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+  $updateLogger->cleanLogs();
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    if ($role->hasPermission('access content')) {
+      $role->grantPermission('access responsive preview');
+      if ($role->save()) {
+        $updateLogger->info(t('Permission for accessing responsive preview is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      else {
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+    }
+    else {
+      $updateLogger->info(t('Skipping @user_role user role, because of non-sufficient permissions.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  // Output logged result of update hook execution.
+  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+    $updateLogger->outputDrush();
+
+    return '';
+  }
+
+  return $updateLogger->outputHtml();
+}

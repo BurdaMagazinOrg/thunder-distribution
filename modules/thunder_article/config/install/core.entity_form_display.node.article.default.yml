@@ -91,8 +91,9 @@ content:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: preview
-      add_mode: dropdown
+      add_mode: modal
       form_display_mode: default
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   field_seo_title:
@@ -161,9 +162,9 @@ content:
     region: content
   scheduler_settings:
     weight: 11
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   sticky:
     type: boolean_checkbox
     settings:

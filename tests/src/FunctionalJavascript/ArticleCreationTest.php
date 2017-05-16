@@ -39,17 +39,17 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
 
-    // Add Gallery Paragraph.
+    // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
       'media:1',
       'media:5',
-    ]);
+    ], 1);
 
     // Add Quote Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
 
-    // Add Twitter Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter');
+    // Add Twitter Paragraph between Text and Quote.
+    $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BK3VVUtAuJ3/', 'instagram');
@@ -57,8 +57,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
-    // Add Video paragraph.
-    $this->addVideoParagraph(static::$paragraphsField, ['media:7']);
+    // Add Video paragraph at the beginning.
+    $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
 
     $this->scrollElementInView('#edit-actions');
 
@@ -73,7 +73,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Image paragraph.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//img', 1);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//img', 1);
 
     // Check Text paragraph.
     $this->assertSession()->pageTextContains('Awesome text');

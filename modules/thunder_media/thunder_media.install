@@ -487,7 +487,7 @@ function thunder_media_update_8013() {
 /*** 81xx Thunder Media update patches ***/
 
 /**
- * Remove "Language" filter from media browsers.
+ * Remove "Language" filter and add descriptions from media browsers.
  */
 function thunder_media_update_8101() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
@@ -515,6 +515,26 @@ function thunder_media_update_8101() {
 
       $updateLogger->warning(t('Unable to remove Language filter for media browser view: @view_id.', ['@view_id' => $viewId]));
     }
+  }
+
+  // Update names and descriptions for Image view.
+  $expectedImageViewConfig['display']['default']['display_options']['filters']['status']['group_info']['description'] = '';
+  $expectedImageViewConfig['display']['default']['display_options']['filters']['status']['group_info']['default_group'] = 'All';
+  $expectedImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['label'] = 'Media name';
+  $expectedImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['description'] = '';
+
+  $newImageViewConfig['display']['default']['display_options']['filters']['status']['group_info']['description'] = 'Filter by status';
+  $newImageViewConfig['display']['default']['display_options']['filters']['status']['group_info']['default_group'] = '1';
+  $newImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['label'] = 'Image name';
+  $newImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['description'] = 'Filter by name';
+
+  if ($thunderUpdater->updateConfig('views.view.image_browser', $newImageViewConfig, $expectedImageViewConfig)) {
+    $updateLogger->info(t('Entity browser image view filter descriptions and names are updated.'));
+  }
+  else {
+    $successfulUpdate = FALSE;
+
+    $updateLogger->warning(t('Unable to change entity browser image view filter descriptions and names.'));
   }
 
   // If update is successful for all views, then check entry in checklist.
@@ -621,23 +641,34 @@ function thunder_media_update_8102() {
       }
     }
 
-    // List of expected configuration for listed entity browsers.
-    $expectedConfig['display_configuration']['link_text'] = 'Select entities';
-    $expectedConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select entities';
+    // Update gallery and image entity browser settings.
+    $expectedConfigs['multiple_image_browser']['display_configuration']['link_text'] = 'Select entities';
+    $expectedConfigs['multiple_image_browser']['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['submit_text'] = 'Select entities';
+    $expectedConfigs['image_browser']['display_configuration']['link_text'] = 'Select entities';
+    $expectedConfigs['image_browser']['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select entities';
+
     // New configuration for entity browsers that should be applied.
-    $newConfig['display_configuration']['link_text'] = 'Select image';
-    $newConfig['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
-    if ($thunderUpdater->updateEntityBrowserConfig('image_browser', $newConfig, $expectedConfig)) {
-      $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
-    }
-    else {
-      $error = TRUE;
-      $updateLogger->warning(t('Unable to update image entity browser configuration.'));
+    $newConfigs['multiple_image_browser']['display_configuration']['link_text'] = 'Select images';
+    $newConfigs['multiple_image_browser']['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['submit_text'] = 'Select images';
+    $newConfigs['image_browser']['display_configuration']['link_text'] = 'Select image';
+    $newConfigs['image_browser']['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
+
+    foreach ($newConfigs as $browserId => $newConfig) {
+      if ($thunderUpdater->updateEntityBrowserConfig($browserId, $newConfig, $expectedConfigs[$browserId])) {
+        $updateLogger->info(t('Text for @browser_id entity browser is adjusted.', ['@browser_id' => $browserId]));
+      }
+      else {
+        $error = TRUE;
+        $updateLogger->warning(t('Unable to update @browser_id entity browser configuration.', ['@browser_id' => $browserId]));
+      }
     }
   }
 
   if ($error) {
     $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
+  }
+  else {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
   }
 
   // Output log result depending on channel used for update execution.
