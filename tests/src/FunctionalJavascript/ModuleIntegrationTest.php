@@ -573,7 +573,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->clickArticleSave();
 
-    $this->drupalGet('/amp-article', ['query' => ['amp' => 1]]);
+    $this->drupalGet('/node/10', ['query' => ['amp' => 1]]);
 
     // Text paragraph.
     $this->assertSession()->pageTextContains('Article Text 1');
