@@ -81,6 +81,9 @@
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
+            },
+            "drupal/amptheme": {
+                "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
             }
         }
     },

@@ -11,6 +11,7 @@ projects[amp][version] = 1
 projects[amp][patch][] = https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch
 projects[amptheme][type] = theme
 projects[amptheme][version] = 1
+projects[amptheme][patch][] = https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch
 projects[better_normalizers][type] = module
 projects[better_normalizers][version] = 1.0-beta2
 projects[better_normalizers][patch][] = https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch
