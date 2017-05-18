@@ -551,57 +551,34 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       return;
     }
 
-    // Create article and save it as unpublished.
-    $this->articleFillNew([
-      'field_channel' => 1,
-      'title[0][value]' => 'AMP Article',
-      'field_seo_title[0][value]' => 'AMP Article',
-    ]);
-
-    // Add all paragraph types.
-    $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->addImageParagraph('field_paragraphs', ['media:1']);
-    $this->addGalleryParagraph('field_paragraphs', 'AMP Gallery', [
-      'media:5',
-      'media:6',
-      'media:10',
-    ]);
-    $this->addLinkParagraph('field_paragraphs', 'Google', 'https://google.de');
-    $this->addVideoParagraph('field_paragraphs', ['media:7']);
-    $this->addSocialParagraph('field_paragraphs', 'https://www.instagram.com/p/BT8qRIdBz7Q/', 'instagram');
-    $this->addSocialParagraph('field_paragraphs', 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter');
-
-    $this->clickArticleSave();
-
-    $this->drupalGet('/node/10', ['query' => ['amp' => 1]]);
+    $this->drupalGet('/node/6', ['query' => ['amp' => 1]]);
 
     // Text paragraph.
-    $this->assertSession()->pageTextContains('Article Text 1');
+    $this->assertSession()->pageTextContains('Board Member Philipp Welte explains');
 
     // Image paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--image amp-img');
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--image amp-img img');
 
+    $this->drupalGet('/node/7', ['query' => ['amp' => 1]]);
+
     // Gallery paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--gallery amp-carousel');
     // Images in gallery paragraph.
-    $this->assertSession()->elementsCount('css', '.paragraph--type--gallery amp-carousel amp-img', 3);
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--gallery amp-carousel amp-img');
+    $this->assertSession()->elementsCount('css', '.paragraph--type--gallery amp-carousel amp-img', 5);
 
-    // Link paragraph.
-    $this->assertSession()->linkExists('Google');
+    // Instagram Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"] iframe');
 
     // Video Paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"]');
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"] iframe');
 
-    // Instagram Paragraph.
-    $this->assertSession()->elementExists('css', '.paragraph--type--instagram amp-instagram[data-shortcode="BT8qRIdBz7Q"]');
-    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--instagram amp-instagram[data-shortcode="BT8qRIdBz7Q"] iframe');
-
     // Twitter Paragraph.
-    $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="776417570756976640"]');
-    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="776417570756976640"] iframe');
+    $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"] iframe');
 
   }
 
