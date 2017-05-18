@@ -74,3 +74,6 @@ v1.1:
     v1_1__thunder_amp:
         '#title': 'Use AMP (Accelerated Mobile Pages by Google)'
         '#description': '<p>This module optimises your articles for AMP, so that they load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to "Appearance" and activate the `Thunder AMP` theme.</p><p>ATTENTION: If you are not using a composer workflow, due to licensing issues, you first have to download the AMP library. With composer installed execute the command `composer require lullabot/amp` in the docroot of your installation.</p>'
+        handbook_page: { '#text': 'Module page', '#url': 'internal:/admin/config/content/amp' }
+        extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
+        amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
