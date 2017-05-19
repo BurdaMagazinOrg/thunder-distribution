@@ -12,7 +12,6 @@ use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
-use Psr\Log\LoggerInterface;
 
 /**
  * Helper class to update configuration.
@@ -50,7 +49,7 @@ class Updater implements UpdaterInterface {
   /**
    * Logger service.
    *
-   * @var \Psr\Log\LoggerInterface
+   * @var \Drupal\thunder_updater\UpdateLogger
    */
   protected $logger;
 
@@ -65,10 +64,10 @@ class Updater implements UpdaterInterface {
    *   Module installer service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
-   * @param \Psr\Log\LoggerInterface $logger
+   * @param \Drupal\thunder_updater\UpdateLogger $logger
    *   Update logger.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account, LoggerInterface $logger) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account, UpdateLogger $logger) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
@@ -79,7 +78,7 @@ class Updater implements UpdaterInterface {
   /**
    * Get update logger service.
    *
-   * @return \Psr\Log\LoggerInterface
+   * @return \Drupal\thunder_updater\UpdateLogger
    *   Returns update logger.
    */
   public function getLogger() {
@@ -325,6 +324,8 @@ class Updater implements UpdaterInterface {
       try {
         if ($this->moduleInstaller->install([$module])) {
           $successful[] = $update;
+
+          $this->logger->info($this->t('Module @module is successfully enabled.', ['@module' => $module]));
         }
         else {
           $this->logger->warning($this->t('Unable to enable @module.', ['@module' => $module]));

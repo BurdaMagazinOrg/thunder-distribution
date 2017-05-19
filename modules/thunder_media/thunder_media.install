@@ -5,6 +5,7 @@
  * Contains.
  */
 
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\views\Entity\View;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
@@ -455,9 +456,16 @@ function thunder_media_update_8101() {
     $view = View::load($viewId);
     if (!empty($view) && !empty($view->getDisplay('default')['display_options']['filters']['langcode'])) {
       unset($view->getDisplay('default')['display_options']['filters']['langcode']);
-      $view->save();
 
-      $updateLogger->info(t('Language filter for media browser view "@view_id" is removed.', ['@view_id' => $viewId]));
+      try {
+        $view->save();
+        $updateLogger->info(t('Language filter for media browser view "@view_id" is removed.', ['@view_id' => $viewId]));
+      }
+      catch (EntityStorageException $storageException) {
+        $successfulUpdate = FALSE;
+
+        $updateLogger->warning(t('Unable to save changes for view: @view_id.', ['@view_id' => $viewId]));
+      }
     }
     else {
       $successfulUpdate = FALSE;
@@ -535,25 +543,39 @@ function thunder_media_update_8102() {
     ],
   ];
 
-  $error = FALSE;
+  $successfulUpdate = TRUE;
+
   foreach ($imports as $type => $entities) {
     foreach ($entities as $entity) {
       try {
         $configUpdater->import($type, $entity);
+
+        $updateLogger->info(t('Successfully imported configuration: @type -> @entity', ['@type' => $type, '@entity' => $entity]));
       }
       catch (\Exception $e) {
-        $error = TRUE;
+        $successfulUpdate = FALSE;
+
         $updateLogger->warning(t('Unable to import config: @type -> @entity', ['@type' => $type, '@entity' => $entity]));
       }
     }
   }
 
-  if (!$error) {
+  if ($successfulUpdate) {
     /** @var \Drupal\user\Entity\Role[] $roles */
     $roles = Role::loadMultiple(['editor', 'seo']);
     foreach ($roles as $role) {
-      $role->grantPermission('access video_browser entity browser pages');
-      $role->save();
+      try {
+        $role->grantPermission('access video_browser entity browser pages');
+        $role->save();
+
+        $updateLogger->info(t('Permission for accessing video browser is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      catch (EntityStorageException $storageException) {
+        $successfulUpdate = FALSE;
+
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+
     }
 
     $fieldConfigs = [
@@ -572,11 +594,21 @@ function thunder_media_update_8102() {
         $settings['target_bundles_drag_drop']['image'] = ['enabled' => TRUE, 'weight' => 10];
         $settings['target_bundles_drag_drop']['video'] = ['enabled' => TRUE, 'weight' => 10];
 
-        $field->setSetting('handler_settings', $settings);
-        $field->save();
+        try {
+          $field->setSetting('handler_settings', $settings);
+          $field->save();
+
+          $updateLogger->info(t('Field @field_id successfully changed.', ['@field_id' => $field->id()]));
+        }
+        catch (EntityStorageException $storageException) {
+          $successfulUpdate = FALSE;
+
+          $updateLogger->warning(t('Unable to save changes for @field_id field.', ['@field_id' => $field->id()]));
+        }
       }
       else {
-        $error = TRUE;
+        $successfulUpdate = FALSE;
+
         $updateLogger->warning(t('Unable to change field config for @fieldConfig.', ['@fieldConfig' => $fieldConfig]));
       }
     }
@@ -598,17 +630,18 @@ function thunder_media_update_8102() {
         $updateLogger->info(t('Text for @browser_id entity browser is adjusted.', ['@browser_id' => $browserId]));
       }
       else {
-        $error = TRUE;
+        $successfulUpdate = FALSE;
+
         $updateLogger->warning(t('Unable to update @browser_id entity browser configuration.', ['@browser_id' => $browserId]));
       }
     }
   }
 
-  if ($error) {
-    $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
+  if ($successfulUpdate) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
   }
   else {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -654,6 +687,7 @@ function thunder_media_update_8103() {
     $display = EntityViewDisplay::load('media.instagram.thumbnail');
     $display->removeComponent('field_url')->save();
 
+    $updateLogger->info(t('Configuration is successfully changed for instagram thumbnail.'));
     $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
   }
   else {
@@ -680,19 +714,24 @@ function thunder_media_update_8104() {
   // New configuration that should be applied.
   $newConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 24;
 
-  $success = TRUE;
+  $successfulUpdate = TRUE;
 
-  foreach (['video_browser', 'image_browser'] as $item) {
-    if (!$thunderUpdater->updateConfig('views.view.' . $item, $newConfig, $expectedConfig)) {
-      $success = FALSE;
+  foreach (['video_browser', 'image_browser'] as $viewId) {
+    if ($thunderUpdater->updateConfig('views.view.' . $viewId, $newConfig, $expectedConfig)) {
+      $updateLogger->info(t('Configuration is successfully changed for @view view.', ['@view' => $viewId]));
+    }
+    else {
+      $successfulUpdate = FALSE;
+
+      $updateLogger->warning(t('Unable to adjust entity browser view config'));
     }
   }
 
-  if ($success) {
+  if ($successfulUpdate) {
     $thunderUpdater->markUpdatesSuccessful(['v1_1__entity_browser_view_items']);
   }
   else {
-    $updateLogger->warning(t('Unable to adjust entity browser view config'));
+    $updateLogger->warning(t('Unable to adjust entity browser view configs. Please perform this process manually.'));
     $thunderUpdater->markUpdatesFailed(['v1_1__entity_browser_view_items']);
   }
 

@@ -327,6 +327,8 @@ function thunder_update_8102() {
  */
 function thunder_update_8103() {
 
+  // We let exception bubble in this case, since it's not possible to continue
+  // with execution of update hooks without "thunder_updater" service.
   \Drupal::service('module_installer')->install(['thunder_updater']);
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
@@ -404,7 +406,7 @@ function thunder_update_8107() {
   $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
     ->load('paragraphs_riddle_marketplace');
 
-  $successful = TRUE;
+  $successfulUpdate = TRUE;
   if (!empty($paragraphType)) {
     if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
 
@@ -451,7 +453,7 @@ function thunder_update_8107() {
                     '@name' => $host->label(),
                   ]
                 ));
-                $successful = FALSE;
+                $successfulUpdate = FALSE;
 
                 // Since paragraph is not created - skip further execution.
                 continue;
@@ -473,19 +475,19 @@ function thunder_update_8107() {
                 }
                 catch (EntityStorageException $storageException) {
                   $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-                  $successful = FALSE;
+                  $successfulUpdate = FALSE;
                 }
               }
               catch (EntityStorageException $storageException) {
                 $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-                $successful = FALSE;
+                $successfulUpdate = FALSE;
               }
             }
           }
         }
       }
 
-      if ($successful) {
+      if ($successfulUpdate) {
         try {
           $fieldConfigs = $entityTypeManager->getStorage('field_config')
             ->loadByProperties(['field_type' => 'entity_reference_revisions']);
@@ -497,27 +499,27 @@ function thunder_update_8107() {
             unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
 
             $field->setSetting('handler_settings', $settings);
-
             $field->save();
           }
 
           $paragraphType->delete();
           $updateLogger->info(t('Old riddle paragraph type is successfully removed.'));
-
         }
         catch (\Exception $e) {
+          $successfulUpdate = FALSE;
+
           $updateLogger->warning(t('Removing of old riddle paragraph type has failed.'));
-          $successful = FALSE;
         }
       }
     }
     else {
+      $successfulUpdate = FALSE;
+
       $updateLogger->warning(t('Riddle module is not available.'));
-      $successful = FALSE;
     }
   }
 
-  if ($successful) {
+  if ($successfulUpdate) {
     $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_riddle']);
   }
   else {
@@ -545,7 +547,7 @@ function thunder_update_8108() {
 
         $updateLogger->info(t('Permission for accessing unpublished node with generated token Url is granted for @user_role user role.', ['@user_role' => $role->id()]));
       }
-      catch (\Exception $e) {
+      catch (EntityStorageException $storageException) {
         $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
       }
     }
@@ -573,19 +575,20 @@ function thunder_update_8109() {
   // New configuration that should be applied.
   $newConfig['content']['field_paragraphs']['settings']['add_mode'] = 'modal';
 
-  $success = TRUE;
+  $successfulUpdate = TRUE;
 
   foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
     if ($thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
       $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
     }
     else {
+      $successfulUpdate = FALSE;
+
       $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
-      $success = FALSE;
     }
   }
 
-  if ($success) {
+  if ($successfulUpdate) {
     $thunderUpdater->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
   }
   else {
@@ -614,7 +617,7 @@ function thunder_update_8110() {
 
         $updateLogger->info(t('Permission for accessing responsive preview is granted for @user_role user role.', ['@user_role' => $role->id()]));
       }
-      catch (\Exception $e) {
+      catch (EntityStorageException $storageException) {
         $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
       }
     }

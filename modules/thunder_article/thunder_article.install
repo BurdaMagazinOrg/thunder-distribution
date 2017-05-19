@@ -59,12 +59,15 @@ function thunder_article_update_8101() {
     'config_update',
     'shariff',
   ]);
+  $updateLogger->info(t('Shariff module is successfully installed.'));
 
   $display = EntityViewDisplay::load('node.article.default');
   if ($display && !$display->getComponent('shariff_field')) {
     $display->setComponent('shariff_field', [
       'region' => 'content',
     ])->save();
+
+    $updateLogger->info(t('Shariff field is added for article.'));
     $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
   }
   else {
