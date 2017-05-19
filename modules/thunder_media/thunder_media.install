@@ -136,9 +136,9 @@ function thunder_media_update_8004() {
  * Update dropzonejs widget file extension filtering for images.
  */
 function thunder_media_update_8005() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   // List of expected configuration for listed entity browsers.
   $expectedConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
@@ -151,11 +151,7 @@ function thunder_media_update_8005() {
   $newConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'png gif jpg jpeg';
 
   foreach ($newConfig as $browser => $configuration) {
-
-    if (\Drupal::service('thunder_updater')
-      ->updateEntityBrowserConfig($browser, $configuration, $expectedConfig[$browser])
-    ) {
-
+    if ($thunderUpdater->updateEntityBrowserConfig($browser, $configuration, $expectedConfig[$browser])) {
       $message = t('Image extensions filtering for "@configName" has been updated.', [
         '@configName' => 'entity_browser.browser.' . $browser,
       ]);
@@ -172,13 +168,7 @@ function thunder_media_update_8005() {
     }
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -223,11 +213,9 @@ function thunder_media_update_8007() {
  */
 function thunder_media_update_8008() {
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-
-  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -265,19 +253,17 @@ function thunder_media_update_8008() {
     $updateLogger->warning($message);
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
  * Set required fields for Image and Video bundles.
  */
 function thunder_media_update_8009() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   // List of expected configurations that should be checked.
   $expectedConfig['field.field.media.image.field_image']['required'] = FALSE;
@@ -287,39 +273,23 @@ function thunder_media_update_8009() {
   $configsToUpdate['field.field.media.image.field_image']['required'] = TRUE;
   $configsToUpdate['field.field.media.video.field_media_video_embed_field']['required'] = TRUE;
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_updater');
-
   // Check that gallery paragraph uses complex widget.
   foreach ($configsToUpdate as $configName => $newConfig) {
-    if (!$mediaUpdater->updateConfig($configName, $newConfig, $expectedConfig[$configName])) {
+    if (!$thunderUpdater->updateConfig($configName, $newConfig, $expectedConfig[$configName])) {
       $updateLogger->warning(t('Unable to set field "@configName" as required.', ['@configName' => $configName]));
     }
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
  * Activate support for responsive images with Blazy.
  */
 function thunder_media_update_8010() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  /** @var \Drupal\thunder_media\Updater $mediaUpdater */
-  $mediaUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   // Import image styles.
   \Drupal::service('module_installer')->install([
@@ -348,7 +318,7 @@ function thunder_media_update_8010() {
 
   if (\Drupal::moduleHandler()->moduleExists('blazy')
     && \Drupal::moduleHandler()->moduleExists('responsive_image')
-    && $mediaUpdater->updateConfig('blazy.settings', $newBlazySettings, $expectedBlazySettings)
+    && $thunderUpdater->updateConfig('blazy.settings', $newBlazySettings, $expectedBlazySettings)
   ) {
     $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
   }
@@ -372,18 +342,12 @@ function thunder_media_update_8010() {
   $newConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 527;
 
   foreach ($newConfigs as $configName => $newConfig) {
-    if (!$mediaUpdater->updateConfig($configName, $newConfig, $expectedConfigs[$configName])) {
+    if (!$thunderUpdater->updateConfig($configName, $newConfig, $expectedConfigs[$configName])) {
       $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
     }
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -409,19 +373,22 @@ function thunder_media_update_8011() {
  */
 function thunder_media_update_8012() {
 
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
+
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_image']['settings']['preview_image_style'] = 'thumbnail';
 
   // New configuration that should be applied.
   $newConfig['content']['field_image']['settings']['preview_image_style'] = 'medium';
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
   // Execute update of config with additional validation of existing config.
-  $updateExecuted = \Drupal::service('thunder_updater')
-    ->updateConfig('core.entity_form_display.media.image.default', $newConfig, $expectedConfig);
+  $updateExecuted = $thunderUpdater->updateConfig(
+    'core.entity_form_display.media.image.default',
+    $newConfig,
+    $expectedConfig
+  );
 
   // Log result of update.
   if ($updateExecuted) {
@@ -431,15 +398,8 @@ function thunder_media_update_8012() {
     $updateLogger->warning(t('Unable to change preview image style for image media bundle.'));
   }
 
-  // Output collected update log for Drush update command.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
   // Output collected update log for UI update script.
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -448,7 +408,6 @@ function thunder_media_update_8012() {
 function thunder_media_update_8013() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   /** @var \Drupal\Core\Config\StorageInterface $configStorage */
   $configStorage = \Drupal::service('config.storage');
@@ -473,15 +432,8 @@ function thunder_media_update_8013() {
     }
   }
 
-  // Output collected update log for Drush update command.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  // Output collected update log for UI update script.
-  return $updateLogger->outputHtml();
+  // Output collected update log.
+  return $updateLogger->output();
 }
 
 /*** 81xx Thunder Media update patches ***/
@@ -490,12 +442,9 @@ function thunder_media_update_8013() {
  * Remove "Language" filter and add descriptions from media browsers.
  */
 function thunder_media_update_8101() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   // Perform removal of language filters from relevant views.
   $successfulUpdate = TRUE;
@@ -547,13 +496,7 @@ function thunder_media_update_8101() {
   }
 
   // Output log result depending on channel used for update execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -561,9 +504,9 @@ function thunder_media_update_8101() {
  */
 function thunder_media_update_8102() {
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -604,9 +547,6 @@ function thunder_media_update_8102() {
       }
     }
   }
-
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
 
   if (!$error) {
     /** @var \Drupal\user\Entity\Role[] $roles */
@@ -672,13 +612,7 @@ function thunder_media_update_8102() {
   }
 
   // Output log result depending on channel used for update execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -686,9 +620,9 @@ function thunder_media_update_8102() {
  */
 function thunder_media_update_8103() {
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['hidden']['thumbnail'] = TRUE;
@@ -716,13 +650,11 @@ function thunder_media_update_8103() {
     'third_party_settings' => [],
   ];
 
-  $thunderUpdater = \Drupal::service('thunder_updater');
   if ($thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
     $display = EntityViewDisplay::load('media.instagram.thumbnail');
-    $display->removeComponent('field_url')
-      ->save();
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
+    $display->removeComponent('field_url')->save();
 
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
@@ -730,13 +662,7 @@ function thunder_media_update_8103() {
   }
 
   // Output log result depending on channel used for update execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -744,11 +670,9 @@ function thunder_media_update_8103() {
  */
 function thunder_media_update_8104() {
 
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
+  $updateLogger = $thunderUpdater->getLogger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 20;
@@ -772,11 +696,5 @@ function thunder_media_update_8104() {
     $thunderUpdater->markUpdatesFailed(['v1_1__entity_browser_view_items']);
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }

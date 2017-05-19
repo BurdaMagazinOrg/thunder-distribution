@@ -155,18 +155,15 @@ function thunder_liveblog_install() {
  * Adds image to the list of available paragraphs.
  */
 function thunder_liveblog_update_8101() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
   /** @var \Drupal\field\Entity\FieldConfig $field */
   $field = FieldConfig::load('liveblog_post.liveblog_post.field_embed_media');
 
   if ($field) {
-
     $settings = $field->getSetting('handler_settings');
 
     $settings['target_bundles']['image'] = 'image';
@@ -190,11 +187,5 @@ function thunder_liveblog_update_8101() {
   }
 
   // Output logged result of update hook execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }

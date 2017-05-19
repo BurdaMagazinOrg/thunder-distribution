@@ -12,6 +12,7 @@ use Drupal\thunder_updater\Entity\Update;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\checklistapi\ChecklistapiChecklist;
+use Psr\Log\LoggerInterface;
 
 /**
  * Helper class to update configuration.
@@ -47,6 +48,13 @@ class Updater implements UpdaterInterface {
   protected $account;
 
   /**
+   * Logger service.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
    * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
@@ -57,12 +65,25 @@ class Updater implements UpdaterInterface {
    *   Module installer service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   Update logger.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account, LoggerInterface $logger) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
     $this->account = $account;
+    $this->logger = $logger;
+  }
+
+  /**
+   * Get update logger service.
+   *
+   * @return \Psr\Log\LoggerInterface
+   *   Returns update logger.
+   */
+  public function getLogger() {
+    return $this->logger;
   }
 
   /**
@@ -296,7 +317,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function installModules(array $modules, UpdateLogger $updateLogger) {
+  public function installModules(array $modules) {
 
     $successful = [];
 
@@ -306,13 +327,13 @@ class Updater implements UpdaterInterface {
           $successful[] = $update;
         }
         else {
-          $updateLogger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
+          $this->logger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
           $this->markUpdatesFailed([$update]);
         }
       }
       catch (MissingDependencyException $e) {
         $this->markUpdatesFailed([$update]);
-        $updateLogger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+        $this->logger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
       }
     }
     $this->markUpdatesSuccessful($successful);

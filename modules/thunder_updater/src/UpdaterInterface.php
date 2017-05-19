@@ -72,9 +72,7 @@ interface UpdaterInterface {
    *
    * @param array $modules
    *   Key is name of the checkbox, value name of the module.
-   * @param \Drupal\thunder_updater\UpdateLogger $updateLogger
-   *   Logger service.
    */
-  public function installModules(array $modules, UpdateLogger $updateLogger);
+  public function installModules(array $modules);
 
 }

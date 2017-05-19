@@ -274,7 +274,6 @@ function thunder_update_8006() {
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   $configs = [
     'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
@@ -300,13 +299,7 @@ function thunder_update_8006() {
     }
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -336,28 +329,18 @@ function thunder_update_8103() {
 
   \Drupal::service('module_installer')->install(['thunder_updater']);
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
+
   $thunderUpdater->markAllUpdates(FALSE);
 
   // Now Thunder updater is enabled, we can start marking checkboxes.
-  $updates = [
+  $thunderUpdater->installModules([
     'v1_1__responsive_preview' => 'responsive_preview',
     'v1_1__access_unpublished' => 'access_unpublished',
-  ];
+  ]);
 
-  $thunderUpdater->installModules($updates, $updateLogger);
-
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $thunderUpdater->getLogger()->output();
 }
 
 /**
@@ -365,25 +348,14 @@ function thunder_update_8103() {
  */
 function thunder_update_8104() {
 
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  $updates = [
+  $thunderUpdater->installModules([
     'v1_1__metatag_facebook' => 'metatag_facebook',
-  ];
+  ]);
 
-  $thunderUpdater->installModules($updates, $updateLogger);
-
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $thunderUpdater->getLogger()->output();
 }
 
 /**
@@ -391,25 +363,14 @@ function thunder_update_8104() {
  */
 function thunder_update_8105() {
 
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  $updates = [
+  $thunderUpdater->installModules([
     'v1_1__config_update' => 'config_update',
-  ];
+  ]);
 
-  $thunderUpdater->installModules($updates, $updateLogger);
-
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $thunderUpdater->getLogger()->output();
 }
 
 /**
@@ -417,25 +378,14 @@ function thunder_update_8105() {
  */
 function thunder_update_8106() {
 
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  $updates = [
+  $thunderUpdater->installModules([
     'v1_1__diff' => 'diff',
-  ];
+  ]);
 
-  $thunderUpdater->installModules($updates, $updateLogger);
-
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $thunderUpdater->getLogger()->output();
 }
 
 /**
@@ -446,16 +396,13 @@ function thunder_update_8106() {
  */
 function thunder_update_8107() {
 
-  $entityTypeManager = \Drupal::entityTypeManager();
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->getLogger();
 
+  $entityTypeManager = \Drupal::entityTypeManager();
   $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
     ->load('paragraphs_riddle_marketplace');
-
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   $successful = TRUE;
   if (!empty($paragraphType)) {
@@ -486,22 +433,41 @@ function thunder_update_8107() {
                   'bundle' => 'riddle',
                   'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
                 ]);
-
               $media = current($media);
 
-              $paragraph = Paragraph::create([
-                'type' => 'riddle',
-                'field_riddle' => $media->id(),
-              ]);
-              $paragraph->save();
+              // Create new Riddle paragraph for media.
+              try {
+                $paragraph = Paragraph::create([
+                  'type' => 'riddle',
+                  'field_riddle' => $media->id(),
+                ]);
+                $paragraph->save();
+              }
+              catch (EntityStorageException $storageException) {
+                $updateLogger->warning(t(
+                  'Could not create paragraph for @riddle in @name.',
+                  [
+                    '@riddle' => $media->label(),
+                    '@name' => $host->label(),
+                  ]
+                ));
+                $successful = FALSE;
 
+                // Since paragraph is not created - skip further execution.
+                continue;
+              }
+
+              // Add new paragraph to parent entity.
               $host->get($fieldName)->set($delta, [
                 'target_id' => $paragraph->id(),
                 'target_revision_id' => $paragraph->getRevisionId(),
               ]);
 
-              if ($host->save()) {
+              try {
+                $host->save();
                 $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+
+                // After successful saving -> remove old paragraph.
                 try {
                   $oldParagraph->delete();
                 }
@@ -510,7 +476,7 @@ function thunder_update_8107() {
                   $successful = FALSE;
                 }
               }
-              else {
+              catch (EntityStorageException $storageException) {
                 $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
                 $successful = FALSE;
               }
@@ -521,12 +487,10 @@ function thunder_update_8107() {
 
       if ($successful) {
         try {
-
           $fieldConfigs = $entityTypeManager->getStorage('field_config')
             ->loadByProperties(['field_type' => 'entity_reference_revisions']);
 
           foreach ($fieldConfigs as $field) {
-
             $settings = $field->getSetting('handler_settings');
 
             unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
@@ -538,14 +502,17 @@ function thunder_update_8107() {
           }
 
           $paragraphType->delete();
+          $updateLogger->info(t('Old riddle paragraph type is successfully removed.'));
 
         }
         catch (\Exception $e) {
+          $updateLogger->warning(t('Removing of old riddle paragraph type has failed.'));
           $successful = FALSE;
         }
       }
     }
     else {
+      $updateLogger->warning(t('Riddle module is not available.'));
       $successful = FALSE;
     }
   }
@@ -557,13 +524,7 @@ function thunder_update_8107() {
     $thunderUpdater->markUpdatesFailed(['v1_1__thunder_riddle']);
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -572,18 +533,19 @@ function thunder_update_8107() {
 function thunder_update_8108() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   // Granting permissions only for "anonymous" and "authenticated" user roles.
   $roles = Role::loadMultiple(['anonymous', 'authenticated']);
 
   foreach ($roles as $role) {
     if ($role->hasPermission('access content')) {
-      $role->grantPermission('access_unpublished node article');
-      if ($role->save()) {
+      try {
+        $role->grantPermission('access_unpublished node article');
+        $role->save();
+
         $updateLogger->info(t('Permission for accessing unpublished node with generated token Url is granted for @user_role user role.', ['@user_role' => $role->id()]));
       }
-      else {
+      catch (\Exception $e) {
         $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
       }
     }
@@ -593,13 +555,7 @@ function thunder_update_8108() {
   }
 
   // Output logged result of update hook execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -607,12 +563,9 @@ function thunder_update_8108() {
  */
 function thunder_update_8109() {
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $thunderUpdater */
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
+  $updateLogger = $thunderUpdater->getLogger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
@@ -640,13 +593,7 @@ function thunder_update_8109() {
     $thunderUpdater->markUpdatesFailed(['v1_1__paragraphs_modal']);
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
 
 /**
@@ -655,18 +602,19 @@ function thunder_update_8109() {
 function thunder_update_8110() {
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   // Granting permissions only for "editor" and "seo" user roles.
   $roles = Role::loadMultiple(['editor', 'seo']);
 
   foreach ($roles as $role) {
     if ($role->hasPermission('access content')) {
-      $role->grantPermission('access responsive preview');
-      if ($role->save()) {
+      try {
+        $role->grantPermission('access responsive preview');
+        $role->save();
+
         $updateLogger->info(t('Permission for accessing responsive preview is granted for @user_role user role.', ['@user_role' => $role->id()]));
       }
-      else {
+      catch (\Exception $e) {
         $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
       }
     }
@@ -676,11 +624,5 @@ function thunder_update_8110() {
   }
 
   // Output logged result of update hook execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
