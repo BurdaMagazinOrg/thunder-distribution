@@ -560,7 +560,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->elementExists('css', '.paragraph--type--image amp-img');
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--image amp-img img');
 
-    $this->drupalGet('/node/7', ['query' => ['amp' => 1]]);
+    $this->drupalGet('/node/7', ['query' => ['amp' => 1], 'fragment' => 'development=1']);
 
     // Gallery paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--gallery amp-carousel');
@@ -579,6 +579,9 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Twitter Paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"]');
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"] iframe');
+
+    $this->getSession()->executeScript('AMPValidationSuccess = false; console.info = function(message) { if (message === "AMP validation successful.") { AMPValidationSuccess = true } }; amp.validator.validateUrlAndLog(document.location.href, document);');
+    $this->assertJsCondition('AMPValidationSuccess === true', 10000, 'AMP validation successful.');
 
   }
 
