@@ -32,7 +32,7 @@ content:
       image_style: media_image_tablet
       image_link: ''
       amp_layout: responsive
-      amp_fixed_height: '300'
+      amp_fixed_height: 300
     third_party_settings: {  }
     type: amp_image
 hidden:
