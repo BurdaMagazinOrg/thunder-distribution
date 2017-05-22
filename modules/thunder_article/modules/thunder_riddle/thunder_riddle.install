@@ -14,7 +14,7 @@ use Drupal\user\Entity\Role;
  * of Riddle entity browser.
  */
 function thunder_riddle_install() {
-  $logger = Drupal::logger('thunder_riddle');
+  $logger = \Drupal::logger('thunder_riddle');
 
   /** @var \Drupal\user\RoleInterface[] $roles */
   $roles = Role::loadMultiple(['editor', 'seo']);
