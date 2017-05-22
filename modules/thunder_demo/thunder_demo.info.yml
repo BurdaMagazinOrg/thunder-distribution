@@ -8,3 +8,4 @@ dependencies:
   - default_content:default_content
   - drupal:tour
   - drupal:help
+  - drupal:rest
