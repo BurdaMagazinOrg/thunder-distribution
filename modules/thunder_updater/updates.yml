@@ -71,3 +71,10 @@ v1.1:
         '#title': 'Add image paragraph to liveblog posts'
         '#description': "<p>Instead of adding images in the ckeditor, this allows you to place an image as an embedded media at the top of the post.</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> Go to "Structure" -> "Liveblog posts" -> "Manage fields" and click on "Edit" next to the field "Embed media". Here you can select the image paragraph.</p>'
+    v1_1__thunder_amp:
+        '#title': 'Use AMP (Accelerated Mobile Pages by Google)'
+        '#description': '<p>This module optimises your articles for AMP, so that they load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to "Appearance" and activate the `Thunder AMP` theme. This will install all necessary modules, themes and configs to use it with Thunder.</p><p>ATTENTION: If you are not using a composer workflow, due to licensing issues, you first have to download the AMP library. With composer installed execute the command `composer require lullabot/amp` in the docroot of your installation.</p><p>CUSTOMISATION: If you want to make your own AMP theme, please refer to the README of the Thunder AMP theme.</p>'
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/amp' }
+        extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
+        amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
+        thunder_amp: { '#text': 'Thunder AMP theme', '#url': 'https://github.com/BurdaMagazinOrg/thunder-distribution/tree/develop/themes/thunder_amp' }
