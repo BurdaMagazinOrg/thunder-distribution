@@ -45,7 +45,7 @@ class UpdateLogger extends AbstractLogger {
    * @return array
    *   Returns collected logs, since last clear.
    */
-  public function cleanLogs() {
+  protected function cleanLogs() {
     $logs = $this->logs;
     $this->logs = [];
 
@@ -58,7 +58,7 @@ class UpdateLogger extends AbstractLogger {
    * @return string
    *   Returns HTML.
    */
-  public function outputHtml() {
+  protected function outputHtml() {
     $fullLog = '';
 
     $currentLogs = $this->cleanLogs();
@@ -75,7 +75,7 @@ class UpdateLogger extends AbstractLogger {
    * @throws \RuntimeException
    *   When method is not executed in drush environment.
    */
-  public function outputDrush() {
+  protected function outputDrush() {
     // Check for "drush_log" should be done by caller.
     if (!function_exists('drush_log')) {
       throw new \RuntimeException('Required global method "drush_log" is not available.');
@@ -92,6 +92,22 @@ class UpdateLogger extends AbstractLogger {
 
       drush_log($logEntry[1], $drushLogLevel);
     }
+  }
+
+  /**
+   * Output log result, depending on channel used and clean log.
+   *
+   * @return string
+   *   Returns HTML string in case of non drush execution.
+   */
+  public function output() {
+    if (function_exists('drush_log') && PHP_SAPI === 'cli') {
+      $this->outputDrush();
+
+      return '';
+    }
+
+    return $this->outputHtml();
   }
 
 }

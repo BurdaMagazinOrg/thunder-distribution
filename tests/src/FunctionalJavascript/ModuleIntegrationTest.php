@@ -542,4 +542,128 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     );
   }
 
+  /**
+   * Testing integration of "thunder_riddle" module.
+   */
+  public function testRiddle() {
+    $riddleToken = getenv('RIDDLE_TOKEN');
+
+    if (empty($riddleToken)) {
+      $this->fail("Riddle token is not available.");
+
+      return;
+    }
+
+    if (!\Drupal::service('module_installer')->install(['thunder_riddle'])) {
+      $this->fail("Unable to install Thunder Riddle integration module.");
+
+      return;
+    }
+
+    $this->logWithRole('administrator');
+
+    // Adjust settings for Riddle.
+    $this->drupalGet('admin/config/content/riddle_marketplace');
+    $page = $this->getSession()->getPage();
+    $this->setFieldValues($page, [
+      'token' => $riddleToken,
+    ]);
+    $this->clickButtonDrupalSelector($page, 'edit-submit');
+
+    // Log as editor user.
+    $this->logWithRole(static::$defaultUserRole);
+
+    // Fill article form with base fields.
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Article 1',
+      'field_seo_title[0][value]' => 'Article 1',
+    ]);
+
+    // Check loading of Riddles from riddle.com and creation of Riddle media.
+    $paragraphIndex = $this->addParagraph('field_paragraphs', 'riddle');
+
+    $buttonName = "field_paragraphs_{$paragraphIndex}_subform_field_riddle_entity_browser_entity_browser";
+    $this->scrollElementInView("[name=\"{$buttonName}\"]");
+    $page->pressButton($buttonName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->getSession()->switchToIFrame('entity_browser_iframe_riddle_browser');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Click button to load Riddles and compare thumbnails.
+    $this->clickButtonDrupalSelector($page, 'edit-import-riddle');
+    $this->assertTrue(
+      $this->compareScreenToImage(
+        $this->getScreenshotFile('test_riddle_eb_list'),
+        ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 115]
+      )
+    );
+
+    // Close entity browser.
+    $this->getSession()->switchToIFrame();
+    $page->find('xpath', '//*[contains(@class, "ui-dialog-titlebar-close")]')->click();
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Select first riddle.
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:24']);
+
+    // Select second riddle.
+    $paragraphIndex = $this->addParagraph('field_paragraphs', 'riddle');
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:25']);
+
+    // Save article as unpublished.
+    $this->clickArticleSave();
+
+    // Assert that riddle iframes are correctly generated.
+    $this->drupalGet('node/10');
+
+    $this->assertSession()
+      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//iframe[contains(@src, "https://www.riddle.com/a/114982")]');
+    $this->assertSession()
+      ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//iframe[contains(@src, "https://www.riddle.com/a/114979")]');
+  }
+
+  /**
+   * Testing integration of "AMP" module and theme.
+   */
+  public function testAmpIntegration() {
+    if (!\Drupal::service('theme_installer')->install(['thunder_amp'])) {
+      $this->fail("thunder_amp theme couldn't be installed.");
+      return;
+    }
+
+    $this->drupalGet('/node/6', ['query' => ['amp' => 1]]);
+
+    // Text paragraph.
+    $this->assertSession()->pageTextContains('Board Member Philipp Welte explains');
+
+    // Image paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--image amp-img');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--image amp-img img');
+
+    $this->drupalGet('/node/7', ['query' => ['amp' => 1], 'fragment' => 'development=1']);
+
+    // Gallery paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--gallery amp-carousel');
+    // Images in gallery paragraph.
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--gallery amp-carousel amp-img');
+    $this->assertSession()->elementsCount('css', '.paragraph--type--gallery amp-carousel amp-img', 5);
+
+    // Instagram Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"] iframe');
+
+    // Video Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"] iframe');
+
+    // Twitter Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"] iframe');
+
+    $this->getSession()->executeScript('AMPValidationSuccess = false; console.info = function(message) { if (message === "AMP validation successful.") { AMPValidationSuccess = true } }; amp.validator.validateUrlAndLog(document.location.href, document);');
+    $this->assertJsCondition('AMPValidationSuccess === true', 10000, 'AMP validation successful.');
+
+  }
+
 }

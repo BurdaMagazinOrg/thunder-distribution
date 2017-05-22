@@ -68,6 +68,12 @@
             },
             "drupal/paragraphs": {
                 "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/sorting_of_paragraphs-2828110-6.patch"
+            },
+            "drupal/amp": {
+                "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
+            },
+            "drupal/amptheme": {
+                "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
             }
         }
     },
@@ -76,8 +82,8 @@
         "burdamagazinorg/infinite_theme": "^1.0",
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
-        "drupal/amp": "^1.0",
-        "drupal/amptheme": "^1.0",
+        "drupal/amp": "1.0",
+        "drupal/amptheme": "1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",

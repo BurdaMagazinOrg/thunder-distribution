@@ -287,6 +287,42 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   ];
 
   /**
+   * Configuration key path separator.
+   *
+   * @var string
+   */
+  protected static $configPathSeparator = '::';
+
+  /**
+   * Ignore configuration list values. Path to key is separated by '::'.
+   *
+   * Example:
+   * 'field.field.node.article.field_example' => [
+   *   'settings::settings_part1::list_part' => [
+   *      'ignore_entry1',
+   *      'ignore_entry5',
+   *   ]
+   * ]
+   *
+   * TODO: use this functionality for more strict "dependencies" checking.
+   *
+   * @var array
+   */
+  protected static $ignoreConfigListValues = [
+    // Riddle permissions are added dynamically by thunder_riddle installation.
+    'user.role.editor' => [
+      'permissions' => [
+        'access riddle_browser entity browser pages',
+      ],
+    ],
+    'user.role.seo' => [
+      'permissions' => [
+        'access riddle_browser entity browser pages',
+      ],
+    ],
+  ];
+
+  /**
    * List of contribution settings that should be ignored.
    *
    * All these settings exists in module configuration Yaml files, but they are
@@ -341,10 +377,20 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
 
     $configCleanup = [];
+    $ignoreListRules = [];
 
     // Apply ignore for defined configurations and custom properties.
     if (array_key_exists($configurationName, static::$ignoreConfigKeys)) {
       $configCleanup = static::$ignoreConfigKeys[$configurationName];
+    }
+
+    if (array_key_exists($configurationName, static::$ignoreConfigListValues)) {
+      foreach (static::$ignoreConfigListValues[$configurationName] as $keyPath => $ignoreValues) {
+        $ignoreListRules[] = [
+          'key_path' => explode(static::$configPathSeparator, $keyPath),
+          'ignore_values' => $ignoreValues,
+        ];
+      }
     }
 
     // Ignore configuration dependencies in case of optional configuration.
@@ -357,7 +403,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
 
     // If configuration doesn't require cleanup, just return configurations as
     // they are.
-    if (empty($configCleanup)) {
+    if (empty($configCleanup) && empty($ignoreListRules)) {
       return $configurations;
     }
 
@@ -367,9 +413,49 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         $arrayToOverwrite,
         $configCleanup
       );
+
+      foreach ($ignoreListRules as $ignoreRule) {
+        $list = $this->cleanupConfigList(
+          NestedArray::getValue($configurations[$index], $ignoreRule['key_path']),
+          $ignoreRule['ignore_values']
+        );
+
+        NestedArray::setValue($configurations[$index], $ignoreRule['key_path'], $list);
+      }
     }
 
     return $configurations;
+  }
+
+  /**
+   * Clean up configuration list values.
+   *
+   * @param array $list
+   *   List of values in configuration object.
+   * @param array $ignoreValues
+   *   Array with list of values that should be ignored.
+   *
+   * @return array
+   *   Return cleaned-up list.
+   */
+  protected function cleanupConfigList(array $list, array $ignoreValues) {
+    $cleanList = $list;
+
+    if (!empty($cleanList)) {
+      foreach ($ignoreValues as $ignoreValue) {
+        if (!in_array($ignoreValue, $cleanList)) {
+          $cleanList[] = $ignoreValue;
+        }
+      }
+    }
+    else {
+      $cleanList = $ignoreValues;
+    }
+
+    // Sorting is required to get same order for configuration compare.
+    sort($cleanList);
+
+    return $cleanList;
   }
 
   /**
