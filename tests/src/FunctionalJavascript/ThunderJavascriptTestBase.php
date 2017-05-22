@@ -273,7 +273,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $cssSelector = 'input[data-drupal-selector="' . $drupalSelector . '"]';
+    $cssSelector = '[data-drupal-selector="' . $drupalSelector . '"]';
 
     $this->scrollElementInView($cssSelector);
     $editButton = $page->find('css', $cssSelector);

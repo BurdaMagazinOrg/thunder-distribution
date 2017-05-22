@@ -62,7 +62,6 @@ function thunder_paragraphs_update_8001() {
 
   /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = \Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
 
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
   $configFactory = \Drupal::service('config.factory');
@@ -100,11 +99,5 @@ function thunder_paragraphs_update_8001() {
 
   $updateLogger->info('Gallery paragraph is updated.');
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }
