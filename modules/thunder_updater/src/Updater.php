@@ -47,6 +47,13 @@ class Updater implements UpdaterInterface {
   protected $account;
 
   /**
+   * Logger service.
+   *
+   * @var \Drupal\thunder_updater\UpdateLogger
+   */
+  protected $logger;
+
+  /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
    * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
@@ -57,12 +64,22 @@ class Updater implements UpdaterInterface {
    *   Module installer service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
+   * @param \Drupal\thunder_updater\UpdateLogger $logger
+   *   Update logger.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account, UpdateLogger $logger) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
     $this->account = $account;
+    $this->logger = $logger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function logger() {
+    return $this->logger;
   }
 
   /**
@@ -296,7 +313,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function installModules(array $modules, UpdateLogger $updateLogger) {
+  public function installModules(array $modules) {
 
     $successful = [];
 
@@ -304,15 +321,17 @@ class Updater implements UpdaterInterface {
       try {
         if ($this->moduleInstaller->install([$module])) {
           $successful[] = $update;
+
+          $this->logger->info($this->t('Module @module is successfully enabled.', ['@module' => $module]));
         }
         else {
-          $updateLogger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
+          $this->logger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
           $this->markUpdatesFailed([$update]);
         }
       }
       catch (MissingDependencyException $e) {
         $this->markUpdatesFailed([$update]);
-        $updateLogger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+        $this->logger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
       }
     }
     $this->markUpdatesSuccessful($successful);

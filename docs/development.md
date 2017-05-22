@@ -95,20 +95,55 @@ To support the creation of update hooks, Thunder provides the thunder_updater mo
 
 All the helper methods can be found in the [UpdaterInterface](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/modules/thunder_updater/src/UpdaterInterface.php).
 
+Outputting results of update hook is highly recommended for that we have provided UpdateLogger, it handles output of result properly for `drush` or  UI (`update.php`) update workflow.
+That's why every update hook that changes something should log what is changed and was it successful or it has failed. And last line in update hook should be returning of UpdateLogger output.
+UpdateLogger service is also used by Thunder Updater and it can be retrieved from it. Here are two examples how to get and use UpdateLogger.
+All text logged as as INFO, will be outputted as success in `drush` output.
+
+```php
+  // Get service directly.
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+
+  // Log change success or failures.
+  if (...) {
+    $updateLogger->info('Change is successful.');
+  }
+  else {
+    $updateLogger->warning('Change has failed.');
+  }
+
+  // At end of update hook return result of UpdateLogger::output().
+  return $updateLogger->output();
+```
+
+Other way to get UpdateLogger is from Thunder Updater service.
+```php
+  // Get service from Thunder Updater service.
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  ...
+
+  // At end of update hook return result of UpdateLogger::output().
+  return $updateLogger->output();
+```
+
 #### Importing new configuration
 
 To import new configuration, the Drupal\config_update\ConfigReverter::import() method could be used.
 ```php
   $configUpdater = \Drupal::service('config_update.config_update');
 
+  $successfulUpdate = TRUE;
   try {
     $configUpdater->import('paragraphs_type', 'image');
   }
   catch (\Exception $e) {
-    $error = TRUE;
+    $successfulUpdate = FALSE;
     $updateLogger->warning(t('Unable to import config'));
   }
-
 ```
 It imports configuration, that's in a modules config directory. 
 
