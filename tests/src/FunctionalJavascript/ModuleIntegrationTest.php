@@ -494,7 +494,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="4"]', 10000);
-    $this->waitUntilVisible('iframe.instagram-media-rendered', 10000);
+    $this->waitUntilVisible('iframe[src^="https://www.instagram.com/p/BNU5k6jhds9/"]', 10000);
 
     // Check site with anonymous user.
     $url = $this->getUrl();
