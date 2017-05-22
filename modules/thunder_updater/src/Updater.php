@@ -76,12 +76,9 @@ class Updater implements UpdaterInterface {
   }
 
   /**
-   * Get update logger service.
-   *
-   * @return \Drupal\thunder_updater\UpdateLogger
-   *   Returns update logger.
+   * {@inheritdoc}
    */
-  public function getLogger() {
+  public function logger() {
     return $this->logger;
   }
 

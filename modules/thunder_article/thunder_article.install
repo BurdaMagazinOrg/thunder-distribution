@@ -53,7 +53,7 @@ function thunder_article_update_8101() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   \Drupal::service('module_installer')->install([
     'config_update',

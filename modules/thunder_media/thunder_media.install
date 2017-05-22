@@ -139,7 +139,7 @@ function thunder_media_update_8004() {
 function thunder_media_update_8005() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of expected configuration for listed entity browsers.
   $expectedConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
@@ -216,7 +216,7 @@ function thunder_media_update_8008() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -264,7 +264,7 @@ function thunder_media_update_8009() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of expected configurations that should be checked.
   $expectedConfig['field.field.media.image.field_image']['required'] = FALSE;
@@ -290,7 +290,7 @@ function thunder_media_update_8009() {
 function thunder_media_update_8010() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // Import image styles.
   \Drupal::service('module_installer')->install([
@@ -376,7 +376,7 @@ function thunder_media_update_8012() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_image']['settings']['preview_image_style'] = 'thumbnail';
@@ -445,7 +445,7 @@ function thunder_media_update_8013() {
 function thunder_media_update_8101() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // Perform removal of language filters from relevant views.
   $successfulUpdate = TRUE;
@@ -514,7 +514,7 @@ function thunder_media_update_8102() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -655,7 +655,7 @@ function thunder_media_update_8103() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['hidden']['thumbnail'] = TRUE;
@@ -706,7 +706,7 @@ function thunder_media_update_8104() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 20;

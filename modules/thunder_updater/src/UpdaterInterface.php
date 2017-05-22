@@ -75,4 +75,12 @@ interface UpdaterInterface {
    */
   public function installModules(array $modules);
 
+  /**
+   * Get update logger service.
+   *
+   * @return \Drupal\thunder_updater\UpdateLogger
+   *   Returns update logger.
+   */
+  public function logger();
+
 }

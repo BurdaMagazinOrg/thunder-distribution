@@ -342,7 +342,7 @@ function thunder_update_8103() {
     'v1_1__access_unpublished' => 'access_unpublished',
   ]);
 
-  return $thunderUpdater->getLogger()->output();
+  return $thunderUpdater->logger()->output();
 }
 
 /**
@@ -357,7 +357,7 @@ function thunder_update_8104() {
     'v1_1__metatag_facebook' => 'metatag_facebook',
   ]);
 
-  return $thunderUpdater->getLogger()->output();
+  return $thunderUpdater->logger()->output();
 }
 
 /**
@@ -372,7 +372,7 @@ function thunder_update_8105() {
     'v1_1__config_update' => 'config_update',
   ]);
 
-  return $thunderUpdater->getLogger()->output();
+  return $thunderUpdater->logger()->output();
 }
 
 /**
@@ -387,7 +387,7 @@ function thunder_update_8106() {
     'v1_1__diff' => 'diff',
   ]);
 
-  return $thunderUpdater->getLogger()->output();
+  return $thunderUpdater->logger()->output();
 }
 
 /**
@@ -400,7 +400,7 @@ function thunder_update_8107() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   $entityTypeManager = \Drupal::entityTypeManager();
   $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
@@ -567,7 +567,7 @@ function thunder_update_8109() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->getLogger();
+  $updateLogger = $thunderUpdater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
