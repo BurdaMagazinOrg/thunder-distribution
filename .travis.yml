@@ -36,6 +36,7 @@ branches:
   only:
     - master
     - develop
+    - feature/stabilize-tests
 
 mysql:
   database: drupal
