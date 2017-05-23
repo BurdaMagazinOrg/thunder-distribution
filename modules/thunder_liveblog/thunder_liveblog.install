@@ -173,13 +173,10 @@ function thunder_liveblog_update_8101() {
 
     try {
       $field->save();
-
-      $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_liveblog_image']);
       $updateLogger->info(t('Image paragraph added to the liveblog post field "embed_media".'));
     }
     catch (Exception $e) {
       $updateLogger->error(t('There was an error, while saving the liveblog post field "embed_media", please try to add the image paragraph manually.'));
-      $thunderUpdater->markUpdatesFailed(['v1_1__thunder_liveblog_image']);
     }
   }
   else {
