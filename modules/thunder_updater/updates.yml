@@ -14,7 +14,7 @@ v1.1:
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/access_unpublished' }
         extension_page: { '#text': 'Enable Access Unpublish', '#url': 'internal:/admin/modules' }
-        configuration_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/access_unpublished/settings' }
+        configuration_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/content/access_unpublished' }
     v1_1__shariff:
         '#title': 'Shariff'
         '#description': '<p>This module provides highly customizable social buttons.</p>'
