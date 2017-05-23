@@ -205,8 +205,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and delete token -> check page can't be accessed.
     $this->logWithRole(static::$defaultUserRole);
     $this->drupalGet('node/10/edit');
-    $this->drupalGet('access_unpublished/delete/1');
-    $this->drupalGet('node/10/edit');
+    $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->clickArticleSave();
 
