@@ -205,8 +205,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and delete token -> check page can't be accessed.
     $this->logWithRole(static::$defaultUserRole);
     $this->drupalGet('node/10/edit');
-    $this->drupalGet('access_unpublished/delete/1');
-    $this->drupalGet('node/10/edit');
+    $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->clickArticleSave();
 
@@ -420,6 +419,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'plugin_settings[key]' => $pusherCredentials['key'],
       'plugin_settings[secret]' => $pusherCredentials['secret'],
       'plugin_settings[cluster]' => $pusherCredentials['cluster'],
+      'channel_prefix' => getenv('TRAVIS_JOB_NUMBER') ? 'travis-' . getenv('TRAVIS_JOB_NUMBER') : 'liveblog-test',
     ];
     $this->setFieldValues($page, $fieldValues);
     $this->click('input[data-drupal-selector="edit-submit"]');
@@ -460,6 +460,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->liveblogSetBody($page, 'Very nice image post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
+    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_ImagePost_' . date('Ymd_His') . '.png');
 
     $this->waitUntilVisible('article[data-postid="2"]', 10000);
     $this->waitUntilVisible('article[data-postid="2"] img.b-loaded', 10000);
@@ -468,6 +469,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->liveblogSetTitle($page, 'Twitter post');
 
     $this->clickDropButton('field_embed_media_twitter_add_more');
+    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
     $this->setFieldValue($page,
       'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]',
       'https://twitter.com/tweetsauce/status/778001033142284288'
@@ -476,6 +478,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->liveblogSetBody($page, 'Very nice twitter post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
+    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_' . date('Ymd_His') . '.png');
 
     $this->waitUntilVisible('article[data-postid="3"]', 10000);
     $this->waitUntilVisible('[data-tweet-id="778001033142284288"]', 10000);
@@ -484,6 +487,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->liveblogSetTitle($page, 'Instagram post');
 
     $this->clickDropButton('field_embed_media_instagram_add_more');
+    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
     $this->setFieldValue($page,
       'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]',
       'https://www.instagram.com/p/BNU5k6jhds9/'
@@ -492,6 +496,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->liveblogSetBody($page, 'Very nice instagram post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
+    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_' . date('Ymd_His') . '.png');
 
     $this->waitUntilVisible('article[data-postid="4"]', 10000);
     $this->waitUntilVisible('iframe[src^="https://www.instagram.com/p/BNU5k6jhds9/"]', 10000);
