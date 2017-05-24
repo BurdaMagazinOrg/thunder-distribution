@@ -8,4 +8,4 @@ projects:
     download:
       type: git
       branch: develop
-      tag: 8.2.0-beta2
+      tag: 8.2.0-rc1
