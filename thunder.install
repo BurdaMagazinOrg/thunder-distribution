@@ -629,3 +629,30 @@ function thunder_update_8110() {
   // Output logged result of update hook execution.
   return $updateLogger->output();
 }
+
+/**
+ * Adjust permissions related to "video_embed_field" module.
+ */
+function thunder_update_8111() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    try {
+      $role->grantPermission('never autoplay videos');
+      $role->save();
+
+      $updateLogger->info(t('Permission for never autoplay videos is granted for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+    catch (EntityStorageException $storageException) {
+      $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+
+  }
+
+  // Output logged result of update hook execution.
+  return $updateLogger->output();
+}
