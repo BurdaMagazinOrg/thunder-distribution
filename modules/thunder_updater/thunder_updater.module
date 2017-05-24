@@ -41,6 +41,9 @@ function thunder_updater_checklistapi_checklist_info() {
   array_walk_recursive($tasks, function (&$value, $key) {
     if ($key == '#url') {
       $value = Url::fromUri($value);
+      if ($value->isExternal()) {
+        $value->setOption('attributes', ['target' => '_blank']);
+      }
     }
     elseif (in_array($key, ['#title', '#weight'])) {
       // @codingStandardsIgnoreStart
