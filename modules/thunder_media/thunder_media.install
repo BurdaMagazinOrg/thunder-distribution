@@ -727,12 +727,8 @@ function thunder_media_update_8104() {
     }
   }
 
-  if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__entity_browser_view_items']);
-  }
-  else {
-    $updateLogger->warning(t('Unable to adjust entity browser view configs. Please perform this process manually.'));
-    $thunderUpdater->markUpdatesFailed(['v1_1__entity_browser_view_items']);
+  if (!$successfulUpdate) {
+    $updateLogger->warning(t('We were unable to adjust entity browser view configs to display 24 instead of 20 items.'));
   }
 
   return $updateLogger->output();
