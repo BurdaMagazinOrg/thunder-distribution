@@ -419,6 +419,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'plugin_settings[key]' => $pusherCredentials['key'],
       'plugin_settings[secret]' => $pusherCredentials['secret'],
       'plugin_settings[cluster]' => $pusherCredentials['cluster'],
+      'channel_prefix' => getenv('TRAVIS_JOB_NUMBER') ? 'travis-' . getenv('TRAVIS_JOB_NUMBER') : 'liveblog-test',
     ];
     $this->setFieldValues($page, $fieldValues);
     $this->click('input[data-drupal-selector="edit-submit"]');
