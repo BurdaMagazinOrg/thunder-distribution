@@ -1,0 +1,5 @@
+name: 'Thunder access control handler'
+description: 'Provide custom extensible access control handlers.'
+type: module
+core: 8.x
+package: Thunder

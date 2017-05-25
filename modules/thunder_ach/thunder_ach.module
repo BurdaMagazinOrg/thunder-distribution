@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Main functions for 'Thunder access control handler' module.
+ */
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function thunder_ach_entity_type_alter(array &$entity_types) {
+  /* @var $entity_types EntityTypeInterface[] */
+  $entity_types['node']->setAccessClass('Drupal\thunder_ach\ThunderNodeAccessControlHandler');
+  if (isset($entity_types['comment'])) {
+    $entity_types['comment']->setAccessClass('Drupal\thunder_ach\ThunderCommentAccessControlHandler');
+  }
+  if (isset($entity_types['taxonomy_term'])) {
+    $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_ach\ThunderTermAccessControlHandler');
+  }
+}

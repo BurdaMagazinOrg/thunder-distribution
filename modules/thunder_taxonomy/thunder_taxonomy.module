@@ -37,9 +37,15 @@ function thunder_taxonomy_entity_base_field_info(EntityTypeInterface $entity_typ
  */
 function thunder_taxonomy_entity_type_alter(array &$entity_types) {
   /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
-
-  $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
   $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
+}
+
+/**
+ * Implements hook_thunder_ach_handler_info_alter().
+ */
+function thunder_taxonomy_thunder_ach_handler_info_alter(&$handlers) {
+  // Remove default term handler as its functionality is covered by term_status.
+  unset($handlers['term']);
 }
 
 /**

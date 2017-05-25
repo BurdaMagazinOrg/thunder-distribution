@@ -1,0 +1,4 @@
+services:
+  plugin.manager.thunder_ach:
+    class: Drupal\thunder_ach\ThunderAccessControlHandlerManager
+    parent: default_plugin_manager
