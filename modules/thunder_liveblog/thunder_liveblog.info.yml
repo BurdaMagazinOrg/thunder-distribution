@@ -2,6 +2,8 @@ name: 'Thunder Liveblog'
 description: 'Integrates with the Paragraphs module and Thunder for media embeding'
 type: module
 core: 8.x
+package: Thunder
+
 dependencies:
   - entity_reference_revisions:entity_reference_revisions
   - drupal:field
