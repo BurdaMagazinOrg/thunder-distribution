@@ -43,20 +43,6 @@
       },
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
-      },
-      "drupal/media_entity_instagram": {
-        "Make posts responsive": "https://www.drupal.org/files/issues/make_posts_responsive-2807735-13.patch"
-      },
-      "drupal/entity_reference_revisions": {
-        "EntityReferenceRevisionsServiceProvider should check for rest module": "https://www.drupal.org/files/issues/2849136-4.patch"
-      },
-      "drupal/better_normalizers": {
-        "Add rest dependency": "https://www.drupal.org/files/issues/add_rest_dependency-2849133-8.patch"
-      },
-      "drupal/blazy": {
-        "Drupal 8.3 error": "https://www.drupal.org/files/issues/drupal_8_3_error-2849191-2.patch",
-        "Images of gallery will not be loaded": "https://www.drupal.org/files/issues/blazy-gallery-not-loaded-2846560.patch",
-        "Exception if configured image style does not exists anymore": "https://www.drupal.org/files/issues/exception_if_configured-2871085-2.patch"
       }
     }
   },
@@ -67,8 +53,8 @@
     "cweagans/composer-patches": "~1.0",
     "drupal/adsense": "^1.0",
     "drupal/admin_toolbar": "^1.0",
-    "drupal/better_normalizers": "1.0-beta2",
-    "drupal/blazy": "1.0-rc1",
+    "drupal/better_normalizers": "^1.0",
+    "drupal/blazy": "^1.0",
     "drupal/breakpoint_js_settings": "^1.0",
     "drupal/core": "^8.0",
     "drupal/config_update": "^1.0",
@@ -78,7 +64,7 @@
     "drupal/dropzonejs": "^1.0",
     "drupal/entity": "^1.0",
     "drupal/entity_browser": "^1.0",
-    "drupal/entity_reference_revisions": "1.2",
+    "drupal/entity_reference_revisions": "^1.0",
     "drupal/fb_instant_articles": "dev-1.x",
     "drupal/field_group": "^1.0",
     "drupal/focal_point": "^1.0",
@@ -88,7 +74,7 @@
     "drupal/libraries": "dev-3.x",
     "drupal/linkit": "^4.0",
     "drupal/media_entity": "1.6",
-    "drupal/media_entity_instagram": "1.2",
+    "drupal/media_entity_instagram": "^1.0",
     "drupal/media_entity_image": "^1.0",
     "drupal/media_entity_slideshow": "^1.0",
     "drupal/media_entity_twitter": "^1.0",
