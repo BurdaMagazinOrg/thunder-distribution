@@ -17,7 +17,6 @@ use Drupal\paragraphs\Entity\Paragraph;
  * Update hook dependencies.
  *
  * 1. Dependency on Thunder Updater module.
- * 2. Dependency on Riddle update before Riddle paragraph migration.
  *
  * @return mixed
  *   Returns list of update hook dependencies.
@@ -28,7 +27,6 @@ function thunder_update_dependencies() {
 
   $dependencies['thunder'] = [
     8006 => $installThunderUpdaterHook,
-    8107 => ['riddle_marketplace' => 8200],
   ];
 
   return $dependencies;
