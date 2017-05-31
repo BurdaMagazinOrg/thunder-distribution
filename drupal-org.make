@@ -42,7 +42,6 @@ projects[ivw_integration][type] = module
 projects[ivw_integration][version] = 1.3
 projects[libraries][type] = module
 projects[libraries][download][url] = http://git.drupal.org/project/libraries.git
-projects[libraries][download][revision] = 3ea00f23e31a5cd7cd4fed633a675f864b0b1e3c
 projects[libraries][download][branch] = 8.x-3.x
 projects[linkit][type] = module
 projects[linkit][version] = 4.3

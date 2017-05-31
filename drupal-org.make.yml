@@ -85,7 +85,6 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/project/libraries.git"
-      revision: "3ea00f23e31a5cd7cd4fed633a675f864b0b1e3c"
       branch: "8.x-3.x"
 
   linkit:
