@@ -2,16 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - crop
-    - media_expire
     - media_riddle_marketplace
-third_party_settings:
-  crop:
-    image_field: null
-  media_expire:
-    enable_expiring: null
-    expire_field: null
-    fallback_media: null
 id: riddle
 label: Riddle
 description: ''
@@ -22,3 +13,4 @@ type_configuration:
   source_field: field_riddle_id
 field_map:
   status: status
+third_party_settings: {  }
