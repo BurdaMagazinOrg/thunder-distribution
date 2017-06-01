@@ -110,7 +110,6 @@ projects[infinite_module][download][url] = http://git.drupal.org/sandbox/gos77/2
 projects[infinite_module][download][tag] = 8.x-1.0-beta6
 projects[infinite][type] = theme
 projects[infinite][download][url] = http://git.drupal.org/sandbox/gos77/2677750.git
-projects[infinite][download][tag] = 8.x-1.0-beta6
 projects[infinite][download][tag] = 8.x-1.0-beta7
 projects[video_embed_field][type] = module
 projects[video_embed_field][version] = 1
