@@ -19,6 +19,7 @@ use Drupal\thunder\ThunderTestTrait;
 abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
   use ThunderTestTrait;
+  use ThunderImageCompareTestTrait;
 
   /**
    * Modules to enable.
@@ -167,13 +168,31 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
-
     parent::setUp();
 
     $this->logWithRole(static::$defaultUserRole);
 
     // Set window width/height.
-    $this->getSession()->getDriver()->resizeWindow(1280, 768);
+    $windowSize = $this->getWindowSize();
+    $this->getSession()->getDriver()->resizeWindow($windowSize['width'], $windowSize['height']);
+
+    // Set flag to generate screenshots instead of comparing them.
+    if (!empty($_SERVER['generateMode'])) {
+      $this->setGenerateMode(strtolower($_SERVER['generateMode']) === 'true');
+    }
+  }
+
+  /**
+   * Get base window size.
+   *
+   * @return array
+   *   Return
+   */
+  protected function getWindowSize() {
+    return [
+      'width' => 1280,
+      'height' => 768,
+    ];
   }
 
   /**
@@ -215,13 +234,21 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * @throws \Exception
    */
   protected function getScreenshotFolder() {
-    if (!is_dir($this->screenshotDirectory)) {
-      if (mkdir($this->screenshotDirectory, 0777, TRUE) === FALSE) {
-        throw new \Exception('Unable to create directory: ' . $this->screenshotDirectory);
+    $dir = $this->screenshotDirectory;
+
+    // Use Travis Job ID for sub folder.
+    $travisId = getenv('TRAVIS_JOB_ID');
+    if (!empty($travisId)) {
+      $dir .= '/' . $travisId;
+    }
+
+    if (!is_dir($dir)) {
+      if (mkdir($dir, 0777, TRUE) === FALSE) {
+        throw new \Exception('Unable to create directory: ' . $dir);
       }
     }
 
-    return realpath($this->screenshotDirectory);
+    return realpath($dir);
   }
 
   /**
@@ -246,7 +273,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $cssSelector = 'input[data-drupal-selector="' . $drupalSelector . '"]';
+    $cssSelector = '[data-drupal-selector="' . $drupalSelector . '"]';
 
     $this->scrollElementInView($cssSelector);
     $editButton = $page->find('css', $cssSelector);
@@ -276,6 +303,30 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     if ($waitAfterAction) {
       $this->assertSession()->assertWaitOnAjaxRequest();
     }
+  }
+
+  /**
+   * Click a button within a dropdown button field.
+   *
+   * @param string $fieldName
+   *   The [name] attribute of the button to be clicked.
+   * @param bool $toggle
+   *   Whether the dropdown button should be expanded before clicking.
+   */
+  protected function clickDropButton($fieldName, $toggle = TRUE) {
+    $page = $this->getSession()->getPage();
+
+    if ($toggle) {
+      $toggleButtonXpath = '//ul[.//*[@name="' . $fieldName . '"]]/li[contains(@class,"dropbutton-toggle")]/button';
+      $toggleButton = $page->find('xpath', $toggleButtonXpath);
+      $toggleButton->click();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+
+    $this->scrollElementInView('[name="' . $fieldName . '"]');
+
+    $page->pressButton($fieldName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -362,6 +413,25 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->getSession()
       ->getPage()
       ->find('xpath', '//input[@name="op"]')
+      ->click();
+  }
+
+  /**
+   * Click article save option based on index of action.
+   *
+   * @param int $actionIndex
+   *   Index for option that should be clicked. (by default 1)
+   */
+  protected function clickArticleSave($actionIndex = 1) {
+    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
+    $page = $this->getSession()->getPage();
+
+    if ($actionIndex !== 1) {
+      $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
+        ->click();
+    }
+
+    $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
       ->click();
   }
 

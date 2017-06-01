@@ -22,8 +22,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     // Media ID used for testing.
     $mediaId = 9;
 
-    $page = $this->getSession()->getPage();
-
     $this->drupalGet("media/$mediaId/edit");
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeFocalPointChange_' . date('Ymd_His') . '.png');
@@ -34,7 +32,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterFocalPointChange_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and keep published');
+    $this->clickArticleSave();
 
     $media = Media::load($mediaId);
     $img = $media->get('field_image')->target_id;
@@ -86,7 +84,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 
-    $page->pressButton('Save and keep published');
+    $this->clickArticleSave();
 
     // Edit media and check are fields correct.
     $this->drupalGet("media/$mediaId/edit");

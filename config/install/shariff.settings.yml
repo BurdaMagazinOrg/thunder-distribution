@@ -1,0 +1,16 @@
+shariff_css: complete
+shariff_theme: grey
+shariff_orientation: horizontal
+shariff_services:
+  twitter: twitter
+  facebook: facebook
+  googleplus: googleplus
+shariff_twitter_via: ''
+shariff_mail_url: 'mailto:'
+shariff_mail_subject: ''
+shariff_mail_body: ''
+shariff_referrer_track: ''
+shariff_backend_url: ''
+shariff_flattr_category: ''
+shariff_flattr_user: ''
+shariff_media_url: ''

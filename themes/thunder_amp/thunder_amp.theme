@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Preprocess html for thunder_amp theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Example of a preprocess hook for a subtheme that could be used to change
+ * variables in templates in order to support custom styling of AMP pages.
+ */
+function thunder_amp_preprocess_html(&$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function thunder_amp_preprocess_video_embed_iframe__youtube(&$variables) {
+  $explodedUrl = explode('/', $variables['url']);
+  $variables['videoid'] = end($explodedUrl);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function thunder_amp_preprocess_media_entity_twitter_tweet(&$variables) {
+  $explodedUrl = explode('/', $variables['path']);
+  $variables['tweetid'] = end($explodedUrl);
+}

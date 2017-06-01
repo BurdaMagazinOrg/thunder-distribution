@@ -52,7 +52,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 20
+          items_per_page: 24
           offset: 0
           id: 0
           total_pages: null
@@ -357,13 +357,13 @@ display:
           is_grouped: true
           group_info:
             label: 'Publishing status'
-            description: ''
+            description: 'Filter by status'
             identifier: status
             optional: true
             widget: select
             multiple: false
             remember: false
-            default_group: All
+            default_group: '1'
             default_group_multiple: {  }
             group_items:
               1:
@@ -431,8 +431,8 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Media name'
-            description: ''
+            label: 'Image name'
+            description: 'Filter by name'
             use_operator: false
             operator: name_op
             identifier: name
@@ -442,6 +442,9 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              editor: '0'
+              seo: '0'
+              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -457,46 +460,6 @@ display:
           entity_type: media
           entity_field: name
           plugin_id: string
-        langcode:
-          id: langcode
-          table: media_field_data
-          field: langcode
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: langcode_op
-            label: Language
-            description: ''
-            use_operator: false
-            operator: langcode_op
-            identifier: langcode
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: media
-          entity_field: langcode
-          plugin_id: language
       sorts:
         created:
           id: created

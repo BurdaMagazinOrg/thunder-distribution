@@ -133,8 +133,8 @@ function thunder_fia_preprocess_paragraph(&$variables) {
  */
 function thunder_fia_get_first_paragraph_image_entity(Node $node) {
   if (isset($node->field_paragraphs[0]) && $paragraph = $node->field_paragraphs[0]->entity) {
-    if ($paragraph->getType() == 'media' && isset($paragraph->field_media->entity) && $paragraph->field_media->entity->bundle() == 'image') {
-      return $paragraph->field_media->entity;
+    if ($paragraph->getType() == 'image' && isset($paragraph->field_image->entity) && $paragraph->field_image->entity->bundle() == 'image') {
+      return $paragraph->field_image->entity;
     }
   }
   return FALSE;

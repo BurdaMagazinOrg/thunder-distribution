@@ -5,6 +5,27 @@
  * Thunder Article install hooks.
  */
 
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+
+/**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_article_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_article'] = [
+    8101 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
 /**
  * Enable thunder_paragraphs.
  */
@@ -21,4 +42,38 @@ function thunder_article_update_8001() {
     ->set('module', $modules)
     ->save();
 
+}
+
+/*** 81xx Thunder Article update patches ***/
+
+/**
+ * Enable shariff module.
+ */
+function thunder_article_update_8101() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  \Drupal::service('module_installer')->install([
+    'config_update',
+    'shariff',
+  ]);
+  $updateLogger->info(t('Shariff module is successfully installed.'));
+
+  $display = EntityViewDisplay::load('node.article.default');
+  if ($display && !$display->getComponent('shariff_field')) {
+    $display->setComponent('shariff_field', [
+      'region' => 'content',
+    ])->save();
+
+    $updateLogger->info(t('Shariff field is added for article.'));
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+  }
+  else {
+    $updateLogger->warning(t('Unable to place shariff field.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
+  }
+
+  return $updateLogger->output();
 }

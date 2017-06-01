@@ -1,0 +1,7 @@
+toolbar-button:
+  css:
+    theme:
+      css/toolbar.css: {}
+  dependencies:
+    - core/jquery.once
+    - core/drupal

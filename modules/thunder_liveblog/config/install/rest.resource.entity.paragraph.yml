@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - hal
+    - paragraphs
+    - serialization
+    - user
+id: entity.paragraph
+plugin_id: 'entity:paragraph'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - hal_json
+      - json
+    supported_auth:
+      - cookie
+  POST:
+    supported_formats:
+      - hal_json
+      - json
+    supported_auth:
+      - cookie
+  DELETE:
+    supported_formats:
+      - hal_json
+      - json
+    supported_auth:
+      - cookie
+  PATCH:
+    supported_formats:
+      - hal_json
+      - json
+    supported_auth:
+      - cookie

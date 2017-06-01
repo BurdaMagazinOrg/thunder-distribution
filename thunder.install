@@ -6,10 +6,31 @@
  */
 
 use Drupal\views\Entity\View;
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder'] = [
+    8006 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
 
 /**
  * Install the thunder installation profile.
@@ -55,6 +76,8 @@ function thunder_install() {
 
   // Disable default media view, cause we have our own.
   View::load('media')->setStatus(FALSE)->save();
+
+  \Drupal::service('thunder_updater')->markAllUpdates();
 
 }
 
@@ -249,9 +272,8 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
-  $updateLogger->cleanLogs();
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = Drupal::service('thunder_updater.logger');
 
   $configs = [
     'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
@@ -277,11 +299,360 @@ function thunder_update_8006() {
     }
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
+  return $updateLogger->output();
+}
 
-    return '';
+/**
+ * Installs the responsive_preview module.
+ */
+function thunder_update_8101() {
+
+  \Drupal::service('module_installer')->install([
+    'responsive_preview',
+  ]);
+}
+
+/**
+ * Installs the access_unpublished module.
+ */
+function thunder_update_8102() {
+
+  \Drupal::service('module_installer')->install([
+    'access_unpublished',
+  ]);
+}
+
+/**
+ * Installs the thunder_updater module.
+ */
+function thunder_update_8103() {
+
+  // We let exception bubble in this case, since it's not possible to continue
+  // with execution of update hooks without "thunder_updater" service.
+  \Drupal::service('module_installer')->install(['thunder_updater']);
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $thunderUpdater->markAllUpdates(FALSE);
+
+  // Now Thunder updater is enabled, we can start marking checkboxes.
+  $thunderUpdater->installModules([
+    'v1_1__responsive_preview' => 'responsive_preview',
+    'v1_1__access_unpublished' => 'access_unpublished',
+  ]);
+
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Installs the metatag_facebook module.
+ */
+function thunder_update_8104() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $thunderUpdater->installModules([
+    'v1_1__metatag_facebook' => 'metatag_facebook',
+  ]);
+
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Installs the config_update module.
+ */
+function thunder_update_8105() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $thunderUpdater->installModules([
+    'v1_1__config_update' => 'config_update',
+  ]);
+
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Installs the diff module.
+ */
+function thunder_update_8106() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $thunderUpdater->installModules([
+    'v1_1__diff' => 'diff',
+  ]);
+
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Installs the thunder_riddle module.
+ *
+ * This replaces the riddle paragraphs by a new one, using media_entity as
+ * a base. After that you are able to select riddles out of the entity browser.
+ */
+function thunder_update_8107() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
+    ->load('paragraphs_riddle_marketplace');
+
+  $successfulUpdate = TRUE;
+  if (!empty($paragraphType)) {
+    if (\Drupal::service('module_installer')->install(['thunder_riddle'])) {
+
+      // Import Riddles.
+      \Drupal::service('media_riddle_marketplace')->createMediaEntities();
+
+      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+      $paragraphs = $entityTypeManager->getStorage('paragraph')
+        ->loadByProperties([
+          'type' => 'paragraphs_riddle_marketplace',
+        ]);
+
+      foreach ($paragraphs as $oldParagraph) {
+
+        $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
+
+        $host = $oldParagraph->getParentEntity();
+        if ($host) {
+
+          foreach ($host->get($fieldName)->getValue() as $delta => $field) {
+            if ($field['target_id'] == $oldParagraph->id()) {
+
+              /* @var \Drupal\media_entity\Entity\Media */
+              $media = $entityTypeManager->getStorage('media')
+                ->loadByProperties([
+                  'bundle' => 'riddle',
+                  'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
+                ]);
+              $media = current($media);
+
+              // Create new Riddle paragraph for media.
+              try {
+                $paragraph = Paragraph::create([
+                  'type' => 'riddle',
+                  'field_riddle' => $media->id(),
+                ]);
+                $paragraph->save();
+              }
+              catch (EntityStorageException $storageException) {
+                $updateLogger->warning(t(
+                  'Could not create paragraph for @riddle in @name.',
+                  [
+                    '@riddle' => $media->label(),
+                    '@name' => $host->label(),
+                  ]
+                ));
+                $successfulUpdate = FALSE;
+
+                // Since paragraph is not created - skip further execution.
+                continue;
+              }
+
+              // Add new paragraph to parent entity.
+              $host->get($fieldName)->set($delta, [
+                'target_id' => $paragraph->id(),
+                'target_revision_id' => $paragraph->getRevisionId(),
+              ]);
+
+              try {
+                $host->save();
+                $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+
+                // After successful saving -> remove old paragraph.
+                try {
+                  $oldParagraph->delete();
+                }
+                catch (EntityStorageException $storageException) {
+                  $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                  $successfulUpdate = FALSE;
+                }
+              }
+              catch (EntityStorageException $storageException) {
+                $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+                $successfulUpdate = FALSE;
+              }
+            }
+          }
+        }
+      }
+
+      if ($successfulUpdate) {
+        try {
+          $fieldConfigs = $entityTypeManager->getStorage('field_config')
+            ->loadByProperties(['field_type' => 'entity_reference_revisions']);
+
+          foreach ($fieldConfigs as $field) {
+            $settings = $field->getSetting('handler_settings');
+
+            unset($settings['target_bundles']['paragraphs_riddle_marketplace']);
+            unset($settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace']);
+
+            $field->setSetting('handler_settings', $settings);
+            $field->save();
+          }
+
+          $paragraphType->delete();
+          $updateLogger->info(t('Old riddle paragraph type is successfully removed.'));
+        }
+        catch (\Exception $e) {
+          $successfulUpdate = FALSE;
+
+          $updateLogger->warning(t('Removing of old riddle paragraph type has failed.'));
+        }
+      }
+    }
+    else {
+      $successfulUpdate = FALSE;
+
+      $updateLogger->warning(t('Riddle module is not available.'));
+    }
   }
 
-  return $updateLogger->outputHtml();
+  if ($successfulUpdate) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_riddle']);
+  }
+  else {
+    $thunderUpdater->markUpdatesFailed(['v1_1__thunder_riddle']);
+  }
+
+  return $updateLogger->output();
+}
+
+/**
+ * Adjust access permissions related to "access_unpublished" module.
+ */
+function thunder_update_8108() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+
+  // Granting permissions only for "anonymous" and "authenticated" user roles.
+  $roles = Role::loadMultiple(['anonymous', 'authenticated']);
+
+  foreach ($roles as $role) {
+    if ($role->hasPermission('access content')) {
+      try {
+        $role->grantPermission('access_unpublished node article');
+        $role->save();
+
+        $updateLogger->info(t('Permission for accessing unpublished node with generated token Url is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      catch (EntityStorageException $storageException) {
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+    }
+    else {
+      $updateLogger->info(t('Skipping @user_role user role, because of non-sufficient permissions.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  // Output logged result of update hook execution.
+  return $updateLogger->output();
+}
+
+/**
+ * Change paragraphs add mode to use the modal.
+ */
+function thunder_update_8109() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  // List of configurations that should be checked for existence.
+  $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
+
+  // New configuration that should be applied.
+  $newConfig['content']['field_paragraphs']['settings']['add_mode'] = 'modal';
+
+  $successfulUpdate = TRUE;
+
+  foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
+    if ($thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
+      $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
+    }
+    else {
+      $successfulUpdate = FALSE;
+
+      $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
+    }
+  }
+
+  if ($successfulUpdate) {
+    $thunderUpdater->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
+  }
+  else {
+    $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
+    $thunderUpdater->markUpdatesFailed(['v1_1__paragraphs_modal']);
+  }
+
+  return $updateLogger->output();
+}
+
+/**
+ * Adjust access permissions related to "responsive_preview" module.
+ */
+function thunder_update_8110() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    if ($role->hasPermission('access content')) {
+      try {
+        $role->grantPermission('access responsive preview');
+        $role->save();
+
+        $updateLogger->info(t('Permission for accessing responsive preview is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+      catch (EntityStorageException $storageException) {
+        $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      }
+    }
+    else {
+      $updateLogger->info(t('Skipping @user_role user role, because of non-sufficient permissions.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  // Output logged result of update hook execution.
+  return $updateLogger->output();
+}
+
+/**
+ * Adjust permissions related to "video_embed_field" module.
+ */
+function thunder_update_8111() {
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    try {
+      $role->grantPermission('never autoplay videos');
+      $role->save();
+
+      $updateLogger->info(t('Permission for never autoplay videos is granted for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+    catch (EntityStorageException $storageException) {
+      $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+
+  }
+
+  // Output logged result of update hook execution.
+  return $updateLogger->output();
 }

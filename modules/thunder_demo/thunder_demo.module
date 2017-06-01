@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Provides hooks for demo module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_tour_tips_alter().
+ *
+ * Tour depends a lot on used theme. Because of that whitelist is provided, to
+ * ensure that tour is loaded only if proper theme is used.
+ */
+function thunder_demo_tour_tips_alter(array &$tour_tips, EntityInterface $entity) {
+  // Whitelist of tours for frontend and backend theme.
+  $tourThemeMapping = [
+    'homepage' => ['thunder_base'],
+    'content-add' => ['thunder_admin'],
+    'content-list' => ['thunder_admin'],
+    'content-paragraphs' => ['thunder_admin'],
+  ];
+
+  // Remove tours that are not whitelisted for provided themes.
+  $activeTheme = \Drupal::theme()->getActiveTheme()->getName();
+  $tourId = $entity->id();
+  if (isset($tourThemeMapping[$tourId]) && !in_array($activeTheme, $tourThemeMapping[$tourId])) {
+    $tour_tips = [];
+  }
+}

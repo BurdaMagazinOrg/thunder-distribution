@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_riddle_marketplace
+id: riddle
+label: Riddle
+description: ''
+type: riddle_marketplace
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_riddle_id
+field_map:
+  status: status
+third_party_settings: {  }

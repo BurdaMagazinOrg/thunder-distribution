@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.liveblog_post.field_embed_media
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.instagram
+    - paragraphs.paragraphs_type.twitter
+  module:
+    - entity_reference_revisions
+    - liveblog
+id: liveblog_post.liveblog_post.field_embed_media
+field_name: field_embed_media
+entity_type: liveblog_post
+bundle: liveblog_post
+label: 'Embed media'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      image: image
+      twitter: twitter
+      instagram: instagram
+    target_bundles_drag_drop:
+      gallery:
+        weight: -17
+        enabled: false
+      image:
+        enabled: true
+        weight: -16
+      twitter:
+        enabled: true
+        weight: -15
+      instagram:
+        enabled: true
+        weight: -14
+      link:
+        weight: -13
+        enabled: false
+      quote:
+        weight: -12
+        enabled: false
+      text:
+        weight: -11
+        enabled: false
+      video:
+        weight: -10
+        enabled: false
+field_type: entity_reference_revisions

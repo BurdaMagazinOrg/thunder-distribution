@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder_1.jpg"
+            "href": "http:\/\/default\/sites\/default\/files\/2016-05\/thunder.jpg"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
@@ -9,7 +9,7 @@
     },
     "fid": [
         {
-            "value": "2"
+            "value": "1"
         }
     ],
     "uuid": [
@@ -24,7 +24,7 @@
     ],
     "uri": [
         {
-            "value": "public:\/\/2016-05\/thunder_1.jpg"
+            "value": "public:\/\/2016-05\/thunder.jpg"
         }
     ],
     "filemime": [

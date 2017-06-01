@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\block\Entity\Block;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -35,6 +36,61 @@ function thunder_install_tasks(&$install_state) {
   ];
 
   return $tasks;
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function thunder_install_tasks_alter(array &$tasks, array $install_state) {
+  $tasks['install_finished']['function'] = 'thunder_post_install_redirect';
+}
+
+/**
+ * Starts the tour after the installation.
+ *
+ * @param array $install_state
+ *   The current install state.
+ *
+ * @return array
+ *   A renderable array with a redirect header.
+ */
+function thunder_post_install_redirect(array &$install_state) {
+  install_finished($install_state);
+
+  // Clear all messages.
+  drupal_get_messages();
+
+  $success_message = t('Congratulations, you installed @drupal!', [
+    '@drupal' => drupal_install_profile_distribution_name(),
+  ]);
+  drupal_set_message($success_message);
+
+  $output = [
+    '#title' => t('Ready to rock'),
+    'info' => [
+      '#markup' => t('Congratulations, you installed Thunder! If you are not redirected in 5 seconds, <a href="@url">click here</a> to proceed to your site.', [
+        '@url' => '/?tour=1',
+      ]),
+    ],
+    '#attached' => [
+      'http_header' => [
+        ['Cache-Control', 'no-cache'],
+      ],
+    ],
+  ];
+
+  // The installer doesn't make it easy (possible?) to return a redirect
+  // response, so set a redirection META tag in the output.
+  $meta_redirect = [
+    '#tag' => 'meta',
+    '#attributes' => [
+      'http-equiv' => 'refresh',
+      'content' => '0;url=/?tour=1',
+    ],
+  ];
+  $output['#attached']['html_head'][] = [$meta_redirect, 'meta_redirect'];
+
+  return $output;
 }
 
 /**
@@ -108,9 +164,11 @@ function thunder_themes_installed($theme_list) {
 
   if (in_array('infinite', $theme_list)) {
 
-    $configs = Drupal::configFactory()->listAll('block.block.infinite_');
+    $configFactory = \Drupal::configFactory();
+
+    $configs = $configFactory->listAll('block.block.infinite_');
     foreach ($configs as $config) {
-      Drupal::configFactory()->getEditable($config)->delete();
+      $configFactory->getEditable($config)->delete();
     }
 
     \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
@@ -154,27 +212,66 @@ function thunder_themes_installed($theme_list) {
     $display->save();
 
     $profilePath = drupal_get_path('profile', 'thunder');
-    \Drupal::configFactory()
-      ->getEditable('infinite.settings')
-      ->set('logo.use_default', 0)
+    $configFactory->getEditable('infinite.settings')
+      ->set('logo.use_default', FALSE)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
+      ->set('favicon.use_default', FALSE)
+      ->set('favicon.path', $profilePath . '/themes/thunder_base/favicon.ico')
       ->save(TRUE);
 
     // Set default pages.
-    \Drupal::configFactory()->getEditable('system.site')
+    $configFactory->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
 
     // Set infinite image styles and gallery view mode.
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.image.default')
+    $configFactory->getEditable('core.entity_view_display.media.image.default')
       ->set('content.field_image.settings.image_style', 'inline_m')
       ->set('content.field_image.settings.responsive_image_style', '')
       ->save(TRUE);
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.gallery.default')
+    $configFactory->getEditable('core.entity_view_display.media.gallery.default')
       ->set('content.field_media_images.settings.view_mode', 'gallery')
       ->save(TRUE);
+  }
+  if (in_array('thunder_amp', $theme_list)) {
+    // Install AMP module.
+    \Drupal::service('module_installer')->install(['amp'], TRUE);
+    \Drupal::service('config.installer')->installOptionalConfig();
+
+    \Drupal::configFactory()
+      ->getEditable('amp.settings')
+      ->set('amp_library_process_full_html', TRUE)
+      ->save(TRUE);
+
+    // Set AMP theme to thunder_amp,
+    // if not set, or is one of the included themes.
+    $ampThemeConfig = \Drupal::configFactory()->getEditable('amp.theme');
+    $ampTheme = $ampThemeConfig->get('amptheme');
+    if (empty($ampTheme) || $ampTheme == 'ampsubtheme_example' || $ampTheme == 'amptheme') {
+      $ampThemeConfig->set('amptheme', 'thunder_amp')
+        ->save(TRUE);
+    }
+
+    // Disable unused blocks.
+    /** @var \Drupal\block\Entity\Block[] $blocks */
+    $blocks = Block::loadMultiple([
+      'thunder_amp_account_menu',
+      'thunder_amp_breadcrumbs',
+      'thunder_amp_footer',
+      'thunder_amp_local_actions',
+      'thunder_amp_local_tasks',
+      'thunder_amp_main_menu',
+      'thunder_amp_messages',
+      'thunder_amp_tools',
+    ]);
+    foreach ($blocks as $block) {
+      $block->disable()->save();
+    }
+
+  }
+  if (in_array('amptheme', $theme_list)) {
+    \Drupal::service('module_installer')->install(['amp'], TRUE);
+    \Drupal::service('config.installer')->installOptionalConfig();
   }
 }
 
@@ -200,15 +297,15 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (in_array('paragraphs_riddle_marketplace', $modules)) {
+  if (in_array('thunder_riddle', $modules)) {
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = entity_load('field_config', 'node.article.field_paragraphs');
 
     $settings = $field->getSetting('handler_settings');
 
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
+    $settings['target_bundles']['riddle'] = 'riddle';
+    $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
 
     $field->setSetting('handler_settings', $settings);
 

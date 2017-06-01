@@ -84,6 +84,10 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Configure modules.
     $this->setUpModules();
 
+    // Click link, we don't get redirected automatically in tests.
+    $this->clickLink('click here');
+    $this->isInstalled = TRUE;
+
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
@@ -148,8 +152,6 @@ class ThunderInstallerTest extends InstallerTestBase {
   protected function setUpModules() {
 
     $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
-    $this->isInstalled = TRUE;
-
   }
 
   /**
@@ -160,6 +162,14 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->assertResponse(200);
     // Confirm that we are logged-in after installation.
     $this->assertText($this->rootUser->getUsername());
+
+    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
+    $query = \Drupal::database()->select('watchdog', 'w')
+      ->condition('severity', 4, '<');
+
+    // Check that there are no warnings in the log after installation.
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);
+
   }
 
 }
