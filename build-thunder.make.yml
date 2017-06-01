@@ -8,4 +8,4 @@ projects:
     download:
       type: git
       branch: master
-      tag: 8.2.0-rc1
+      tag: 8.2.0
