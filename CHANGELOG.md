@@ -1,5 +1,56 @@
 # Change Log
 
+## [8.2.0](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.0) 2017-06-01
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.1.5...8.2.0)
+
+Version 2.0 adds new functionality and improved updating to Thunder. We bumped the major version to 2 because there are
+incompatibilities in the deployment. We removed the dependency on npm and bower for downloading javascript libraries.
+To be able to install Thunder with composer you will have to add
+
+    {
+         "type": "composer",
+         "url": "https://asset-packagist.org"
+    }
+
+to your repositories section in your composer.json and the extra section of the same file should look like this:
+
+    "extra": {
+        "installer-types": ["bower-asset"],
+        "installer-paths": {
+            "docroot/core": ["type:drupal-core"],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset"
+            ],
+            "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+            "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/contrib/{$name}": ["type:drupal-drush"]
+        },
+        "enable-patching": true
+    },
+
+Also remove this line from the post-install-cmd and post-update-cmd sections:
+
+    "Thunder\\composer\\ScriptHandler::deployLibraries"
+
+You can see those changes in the 2.x branch of [thunder project](https://github.com/BurdaMagazinOrg/thunder-project).
+
+The following features have been added:
+
+- Liveblog
+- Responsive Preview
+- Access unpublished
+- Improved Riddle integration
+- Social Buttons
+- Diff integration
+- Google AMP integration
+- Use composer asset-packagist repository instead of npm to download frontend libraries
+- Improved Tests
+- Improved Instagram preview
+- Thunder Updater, provides information on what got updated and what needs manual intervention
+
+
 ## [8.1.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.5) 2017-06-01
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.4...8.x-1.5)
 
