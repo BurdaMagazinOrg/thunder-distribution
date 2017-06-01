@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.1.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.5) 2017-06-01
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.4...8.x-1.5)
+
+- Updates to current module versions
+- Remove patches for media_entity_instagram, entity_reference_revisions, better_normalizers and blazy, these are now merged into the corresponding modules
+- This also means, that those modules are not anymore version locked in the composer file. 
+
 ## [8.1.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.4) 2017-04-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.3...8.x-1.4)
 
