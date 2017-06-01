@@ -1,0 +1,6 @@
+langcode: en
+status: true
+dependencies: {  }
+id: riddle
+label: Riddle
+behavior_plugins: {  }

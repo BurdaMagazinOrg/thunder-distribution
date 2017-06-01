@@ -1,4 +1,0 @@
-services:
-  thunder_media.updater:
-    class: Drupal\thunder_media\Updater
-    arguments: ['@user.shared_tempstore', '@config.factory']

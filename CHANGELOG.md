@@ -123,6 +123,9 @@ Fixes
 - Fix PHP Notice 
 - Better entity browser usability on mobile devices
 
+## [8.1.0-rc3]
+skipped release
+
 ## [8.1.0-rc2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc2) 2016-10-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc1...8.x-1.0-rc2)
 

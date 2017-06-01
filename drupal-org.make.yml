@@ -2,84 +2,109 @@ core: "8.x"
 api: 2
 projects:
   # Missing modules: redirect
+  access_unpublished:
+    type: "module"
+    version: "1"
+
   admin_toolbar:
     type: "module"
-    version: "1.19"
+    version: "1"
 
   adsense:
     type: "module"
+    version: "1"
+
+  amp:
+    type: "module"
     version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
+
+  amptheme:
+    type: "theme"
+    version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
 
   better_normalizers:
     type: "module"
-    version: "1.0-beta3"
+    version: "1"
 
   blazy:
     type: "module"
-    version: "1.0-rc2"
+    version: "1"
 
   breakpoint_js_settings:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
+
+  checklistapi:
+    type: "module"
+    version: "1"
 
   config_update:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   crop:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   ctools:
     type: "module"
-    version: "3.0"
+    version: "3"
 
   default_content:
     type: "module"
-    version: "1.0-alpha6"
+    version: "1"
+
+  diff:
+    type: "module"
+    version: "1.0-rc1"
+    patch:
+      - "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha7"
+    version: "1"
 
   entity:
     type: "module"
-    version: "1.0-alpha4"
+    version: "1"
 
   entity_browser:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   entity_reference_revisions:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   fb_instant_articles:
     type: "module"
     download:
       url: "http://git.drupal.org/project/fb_instant_articles.git"
-      revision: "2a5210fec67a8d7f5c77a4ffffb0b49e5aa62f40"
       branch: "8.x-1.x"
 
   field_group:
     type: "module"
-    version: "1.0-rc6"
+    version: "1"
 
   focal_point:
     type: "module"
-    version: "1.0-beta4"
+    version: "1"
 
   google_analytics:
     type: "module"
-    version: "2.1"
+    version: "2"
 
   inline_entity_form:
     type: "module"
-    version: "1.0-beta1"
+    version: "1"
 
   ivw_integration:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   libraries:
     type: "module"
@@ -89,7 +114,11 @@ projects:
 
   linkit:
     type: "module"
-    version: "4.3"
+    version: "4"
+
+  liveblog:
+    type: "module"
+    version: "1"
 
   media_entity:
     type: "module"
@@ -99,63 +128,83 @@ projects:
 
   media_entity_instagram:
     type: "module"
-    version: "1.4"
+    version: "1"
 
   media_entity_image:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   media_entity_slideshow:
     type: "module"
-    version: "1.2"
+    version: "1"
 
   media_entity_twitter:
     type: "module"
-    version: "1.3"
+    version: "1"
 
   media_expire:
     type: "module"
-    version: "1.0-alpha2"
+    version: "1"
 
   metatag:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   nexx_integration:
     type: "module"
-    version: "1.8"
+    version: "1"
 
   paragraphs:
     type: "module"
     version: "1.1"
+    patch:
+      - "https://www.drupal.org/files/issues/sorting_of_paragraphs-2828110-6.patch"
 
   pathauto:
     type: "module"
-    version: "1.0"
+    version: "1"
+
+  responsive_preview:
+    type: "module"
+    version: "1"
 
   riddle_marketplace:
     type: "module"
-    version: "1.0-alpha6"
+    version: "2"
 
   scheduler:
     type: "module"
-    version: "1.0-rc1"
+    version: "1"
+
+  shariff:
+    type: "module"
+    version: "1"
+
+  simple_gmap:
+    type: "module"
+    version: "1"
 
   simple_sitemap:
     type: "module"
-    version: "2.9"
+    version: "2"
 
   slick:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   slick_media:
     type: "module"
-    version: "1.0"
+    version: "1"
+
+  thunder_admin:
+    type: "theme"
+    download:
+      url: "https://git.drupal.org/project/thunder_admin.git"
+      tag: "8.x-1.0.1"
 
   token:
     type: "module"
-    version: "1.0"
+    version: "1"
 
   harbourmaster:
     type: "module"
@@ -177,13 +226,12 @@ projects:
 
   video_embed_field:
     type: "module"
-    version: "1.5"
+    version: "1"
 
   views_load_more:
     type: "module"
     download:
       url: "https://git.drupal.org/project/views_load_more.git"
-      revision: "178d32195253207cc74097296e25079a23f0b2e5"
       branch: "8.x-1.x"
 
 libraries:
@@ -200,9 +248,23 @@ libraries:
       type: "get"
       url: "https://github.com/dinbror/blazy/archive/1.8.2.zip"
 
+  shariff_lib:
+    type: "library"
+    directory_name: "shariff"
+    download:
+      type: "get"
+      url: "https://github.com/heiseonline/shariff/archive/v1.24.1.zip"
+
   slick_lib:
     type: "library"
     directory_name: "slick"
     download:
       type: "get"
       url: "https://github.com/kenwheeler/slick/archive/1.6.0.zip"
+
+  pusher:
+    type: "library"
+    directory_name: "pusher"
+    download:
+      type: "get"
+      url: "https://github.com/pusher/pusher-http-php/archive/master.zip"

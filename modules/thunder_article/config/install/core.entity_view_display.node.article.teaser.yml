@@ -46,3 +46,4 @@ hidden:
   field_seo_title: true
   field_tags: true
   langcode: true
+  shariff_field: true

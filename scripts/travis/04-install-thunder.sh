@@ -20,6 +20,9 @@ update_thunder() {
 
     # Execute all required updates
     drush updatedb -y
+
+    # Adjust theme logo path because it can be different in case of composer build
+    drush -y php-eval "Drupal::configFactory()->getEditable('thunder_base.settings')->set('logo.path', drupal_get_path('profile', 'thunder') . '/themes/thunder_base/images/Thunder-white_400x90.png')->save(TRUE);"
 }
 
 drush_make_thunder() {
@@ -37,11 +40,11 @@ drush_make_thunder() {
 
 composer_create_thunder() {
     cd ${THUNDER_DIST_DIR}
-    composer create-project "burdamagazinorg/thunder-project:~8.1.0" ${TEST_DIR} --stability dev --no-interaction --no-install
+    composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-
+    composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
     composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" --no-progress
 }
 

@@ -26,3 +26,4 @@ content:
     region: content
 hidden:
   langcode: true
+  shariff_field: true

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.facebook_instant_articles_rss
+    - field.field.paragraph.image.field_image
+    - paragraphs.paragraphs_type.image
+id: paragraph.image.facebook_instant_articles_rss
+targetEntityType: paragraph
+bundle: image
+mode: facebook_instant_articles_rss
+content:
+  field_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: facebook_instant_articles_rss
+      link: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

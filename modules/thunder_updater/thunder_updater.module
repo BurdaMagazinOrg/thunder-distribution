@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * Thunder_updater.module.
+ */
+
+use Drupal\Core\Url;
+use Symfony\Component\Yaml\Yaml;
+use Drupal\thunder_updater\Entity\Update;
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function thunder_updater_checklistapi_checklist_info() {
+
+  $definitions = [];
+  $definitions['thunder_updater'] = [
+    '#title' => t('Thunder update instructions'),
+    '#path' => '/admin/config/development/thunder-update',
+    '#description' => t('Provides steps to keep your Thunder site up to date.'),
+  ];
+
+  $tasks = Yaml::parse(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml');
+
+  foreach ($tasks as $version => $updates) {
+    foreach ($updates as $key => $update) {
+      if (is_array($update)) {
+        $entry = Update::load($key);
+        $status = ($entry && $entry->wasSuccessfulByHook()) ? TRUE : FALSE;
+        if ($status && !empty($update['#description_successful'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_successful'];
+        }
+        elseif (!$status && !empty($update['#description_failed'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_failed'];
+        }
+      }
+    }
+  }
+
+  array_walk_recursive($tasks, function (&$value, $key) {
+    if ($key == '#url') {
+      $value = Url::fromUri($value);
+      if ($value->isExternal()) {
+        $value->setOption('attributes', ['target' => '_blank']);
+      }
+    }
+    elseif (in_array($key, ['#title', '#weight'])) {
+      // @codingStandardsIgnoreStart
+      $value = t($value);
+      // @codingStandardsIgnoreEnd
+    }
+  });
+
+  $definitions['thunder_updater'] += array_reverse($tasks);
+
+  return $definitions;
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function thunder_updater_toolbar() {
+  $user = \Drupal::currentUser();
+
+  /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */
+  $checklist = checklistapi_checklist_load('thunder_updater');
+
+  $items = [];
+  // We are varying our cache by path and by permission.
+  $items['thunder_updater'] = [
+    '#cache' => [
+      'keys' => ['toolbar'],
+      'contexts' => ['user.permissions'],
+    ],
+  ];
+
+  \Drupal::service('renderer')->addCacheableDependency($items['thunder_updater'], $checklist->config);
+
+  if ($checklist->getPercentComplete() != 100 && $user->hasPermission('view thunder_updater checklistapi checklist')) {
+    $items['thunder_updater'] += [
+      '#type' => 'toolbar_item',
+      'tab' => [
+        '#type' => 'link',
+        '#title' => t('Pending Thunder updates'),
+        '#url' => Url::fromRoute($checklist->getRouteName()),
+        '#attributes' => [
+          'class' => ['toolbar-icon', 'toolbar-icon-thunder-updater'],
+          'aria-pressed' => 'false',
+        ],
+      ],
+      '#weight' => 500,
+      '#attached' => [
+        'library' => [
+          'thunder_updater/toolbar-button',
+        ],
+      ],
+    ];
+  }
+  return $items;
+}

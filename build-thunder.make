@@ -4,4 +4,4 @@ includes[] = drupal-org-core.make
 projects[thunder][type] = profile
 projects[thunder][download][type] = git
 projects[thunder][download][branch] = master
-projects[thunder][download][tag] = 8.1.5
+projects[thunder][download][tag] = 8.2.0-rc1

@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Thunder Riddle integration install hooks.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ *
+ * Granting permissions for "editor" and "seo" user roles for proper functioning
+ * of Riddle entity browser.
+ */
+function thunder_riddle_install() {
+  $logger = \Drupal::logger('thunder_riddle');
+
+  /** @var \Drupal\user\RoleInterface[] $roles */
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  foreach ($roles as $role) {
+    $role->grantPermission('access riddle_browser entity browser pages');
+    if ($role->save()) {
+      $logger->info(t('Permissions to access riddle entity browser granted for "@user_role" user role.', ['@user_role' => $role->id()]));
+    }
+    else {
+      $logger->warning(t('Unable to grant access for riddle entity browser for "@user_role" user role.', ['@user_role' => $role->id()]));
+    }
+  }
+}

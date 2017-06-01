@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.amp
+    - field.field.paragraph.video.field_video
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.amp
+targetEntityType: paragraph
+bundle: video
+mode: amp
+content:
+  field_video:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: amp
+      link: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

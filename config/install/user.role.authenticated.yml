@@ -7,10 +7,11 @@ weight: 1
 is_admin: false
 permissions:
   - 'access content'
-  - 'use text format basic_html'
-  - 'view media'
+  - 'access user profiles'
+  - 'access_unpublished node article'
   - 'cancel account'
   - 'change own username'
-  - 'access user profiles'
+  - 'use text format basic_html'
+  - 'view media'
   - 'view published terms in channel'
   - 'view published terms in tags'

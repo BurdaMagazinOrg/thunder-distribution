@@ -17,3 +17,31 @@ function thunder_demo_install() {
     ->save(TRUE);
 
 }
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Handling following steps:
+ * - Remove all tours from configuration.
+ */
+function thunder_demo_uninstall() {
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::configFactory();
+  $logger = \Drupal::logger('thunder_demo');
+
+  $tours = [
+    'tour.tour.content-add',
+    'tour.tour.content-list',
+    'tour.tour.content-paragraphs',
+    'tour.tour.homepage',
+  ];
+
+  foreach ($tours as $tour) {
+    try {
+      $configFactory->getEditable($tour)->delete();
+    }
+    catch (\Exception $e) {
+      $logger->warning(sprintf('Unable to uninstall tour: %s.', $tour));
+    }
+  }
+}

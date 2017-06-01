@@ -1,0 +1,88 @@
+v1.1:
+    '#title': 'Update to Thunder 2'
+    '#description': '<p>We have lots of cool stuff for you in this release</p>'
+    v1_1__responsive_preview:
+        '#title': 'Responsive Theme Preview'
+        '#description': '<p>With this module, you can see what the site will look like on different devices, in upright or landscape orientation.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/responsive_preview' }
+        extension_page: { '#text': 'Enable Responsive Theme Preview', '#url': 'internal:/admin/modules' }
+        configuration_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/user-interface/responsive-preview' }
+    v1_1__access_unpublished:
+        '#title': 'Access Unpublish'
+        '#description': '<p>With this module, you can share unpublished articles with people who don’t have access to your editorial backend by creating a unique and temporary URL.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/access_unpublished' }
+        extension_page: { '#text': 'Enable Access Unpublish', '#url': 'internal:/admin/modules' }
+        configuration_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/content/access_unpublished' }
+    v1_1__shariff:
+        '#title': 'Shariff'
+        '#description': '<p>This module provides highly customizable social buttons.</p>'
+        '#description_successful': '<p><strong>Please note:</strong> We enabled that module for you and placed the social buttons in your article, so the display of your article might have changed. Instead of using a field, it is also possible to add a block with social buttons.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information. After manual installation of the module you can: <ul><li>Place social buttons as a block in <a href="/admin/structure/block">block layout</a></li><li>Add social buttons as a field to your <a href="/admin/structure/types/manage/article/display">article</a></li></ul></p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/shariff' }
+        extension_page: { '#text': 'Enable Shariff', '#url': 'internal:/admin/modules' }
+        configuration_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/services/shariff' }
+        content_type_page: { '#text': 'Configure article display', '#url': 'internal:/admin/structure/types/manage/article/display' }
+        block_page: { '#text': 'Place a Shariff share buttons block', '#url': 'internal:/admin/structure/block' }
+    v1_1__remove_entity_browser_language_filter:
+        '#title': 'Remove language filter from media browsers'
+        '#description': '<p>With this configuration change, we removed the language filter from media browsers. Since media entities do not have relation to language, this filter was useless.</p>'
+        '#description_failed': '<p>We tried to remove the language filter but failed. Please do it on your own: <ol><li>Visit the <a href="/admin/structure/views">views administration page</a>.</li><li>Search for the entity browser view that you want to edit</li><li>Click <strong>Edit</strong> to modify the view.</li><li>On the view editing page, go to <strong>FILTER CRITERIA</strong> and find the link <strong>Media: Translation language (exposed)</strong>. Click on it and a new window opens</li><li>In the pop-up dialog, click <strong>Remove</strong> at the bottom.</li><li>Save the view changes by clicking the <strong>Save</strong> button</li></ol>Repeat the steps 3-6 for all views you need to change.</p>'
+        views_page: { '#text': 'Views administration page', '#url': 'internal:/admin/structure/views' }
+    v1_1__metatag_facebook:
+        '#title': 'Meta tags for Facebook'
+        '#description': '<p>Within the Metatag module, we added a set of meta tags specially for controlling advanced functionality with Facebook.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/metatag' }
+        extension_page: { '#text': 'Enable Metatag module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/search/metatag' }
+    v1_1__config_update:
+        '#title': 'Configuration Update Manager'
+        '#description': '<p>This module provides basic revert and update functionality for other modules. We use this module in the Thunder update hooks, so it should never be disabled.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/config_update' }
+        extension_page: { '#text': 'Enable Configuration Update module', '#url': 'internal:/admin/modules' }
+    v1_1__image_video_paragraph:
+        '#title': 'Installation of image and video paragraph type'
+        '#description': '<p>For making working with paragraphs easier for editors, we divided the media paragraph into two separate paragraphs for images and videos.</p>'
+        '#description_successful': '<p>We installed that in an update hook for you. If you want to stay with the media paragraph, you can change these settings at the article paragraph <a href="/admin/structure/types/manage/article/fields/node.article.field_paragraphs">field settings</a>.</p>'
+        '#description_failed': '<p><strong>There was a problem during the update</strong>, please check the error logs for more information.</p>'
+    v1_1__instagram_edit_preview:
+        '#title': 'Adjusted Instagram preview'
+        '#description': '<p>The Instagram module now provides thumbnails of Instagram cards which are used for the preview.</p>'
+        '#description_failed': '<p><strong>There was a problem during the update</strong>, please check the error logs for more information. To manually update the configuration go to <a href="/admin/structure/media/manage/instagram/display/thumbnail">Configure instagram preview</a> and use the Thumbnail field with image style "Media thumbnail" instead of the URL field.<p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/media_entity_instagram' }
+        configure_page: { '#text': 'Configure instagram preview', '#url': 'internal:/admin/structure/media/manage/instagram/display/thumbnail' }
+    v1_1__diff:
+        '#title': 'Diff'
+        '#description': '<p>This module allows the user to compare two revisions of an article.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/diff' }
+        extension_page: { '#text': 'Enable Diff module', '#url': 'internal:/admin/modules' }
+    v1_1__thunder_riddle:
+        '#title': 'Improved Riddle integration'
+        '#description': '<p>With this improved Riddle integration, you can select riddles from the entity browser. This makes the process user-friendlier.</p>'
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to convert you current riddles into new media_entity based ones, please check the error logs for more informations.<p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/riddle_marketplace' }
+        extension_page: { '#text': 'Enable Thunder Riddle integration module', '#url': 'internal:/admin/modules' }
+    v1_1__paragraphs_modal:
+        '#title': 'In-between placing of paragraphs.'
+        '#description': '<p>We introduced this functionality to the paragraph module so users can easily add paragraphs between two existing ones.</p>'
+        '#description_success': '<p>You can switch to the former paragraph style by configuring your paragraphs’ fields form widget.</p>'
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the new modal mode. Check the form displays where paragraph fields are used and select the modal mode on your own<p>'
+        form_article_page: { '#text': 'Article form display', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+        form_channel_page: { '#text': 'Channel form display', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/form-display' }
+        form_tags_page: { '#text': 'Tags form display', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/form-display' }
+    v1_1__thunder_liveblog:
+        '#title': 'Liveblog'
+        '#description': '<p>With this module, we added a liveblog to Thunder. Since this module is optional, we did not enable it automatically. To do this manually, go to the <a href="/admin/modules">Extend</a> page and enable the <strong>Thunder Liveblog</strong> module.</p><p>You will also need to register a Pusher account at <a href="http://pusher.com" target="_blank">http://pusher.com</a>. Create a new app and note down your keys and cluster</p><p>You can provide them at the <a href="/admin/config/content/liveblog">Liveblog configuration</a> page.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/liveblog' }
+        extension_page: { '#text': 'Enable Thunder Liveblog module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/content/liveblog' }
+    v1_1__thunder_amp:
+        '#title': 'Accelerated Mobile Pages by Google (AMP)'
+        '#description': '<p>This module optimizes your articles for Google AMP. They load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to <a href="/admin/appearance">Appearance</a> and activate the <strong>Thunder AMP theme</strong>. This will install all necessary modules, themes, and configs to use it with Thunder. If you want to make your own AMP theme, please refer to the <a href="https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md" target="_blank">README</a> of the Thunder AMP theme.</p><p><strong>Please note:</strong> If you are not using a composer workflow, you have to download the AMP library manually due to licensing issues. With composer installed, execute the command `composer require lullabot/amp` in the docroot of your installation.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/amp' }
+        extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
+        amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
+        thunder_amp: { '#text': 'Thunder AMP theme README', '#url': 'https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md' }

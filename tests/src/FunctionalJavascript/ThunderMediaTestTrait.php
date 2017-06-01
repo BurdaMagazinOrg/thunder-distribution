@@ -41,20 +41,28 @@ trait ThunderMediaTestTrait {
     }
     $this->assertSession()->assertWaitOnAjaxRequest();
 
+    $element = 'img';
     if ($entityBrowser == 'multiple_image_browser') {
       $this->getSession()->wait(200);
       $this->assertSession()->assertWaitOnAjaxRequest();
 
       $page->pressButton('Use selected');
     }
-    else {
-      $page->pressButton('Select entities');
+    elseif ($entityBrowser == 'image_browser') {
+      $page->pressButton('Select image');
+    }
+    elseif ($entityBrowser == 'riddle_browser') {
+      $page->pressButton('Select riddle');
+    }
+    elseif ($entityBrowser == 'video_browser') {
+      $page->pressButton('Select video');
+      $element = 'iframe';
     }
 
     $this->getSession()->switchToIFrame();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] img');
+    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] ' . $element);
   }
 
   /**

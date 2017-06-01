@@ -47,3 +47,4 @@ hidden:
   field_tags: true
   field_teaser_text: true
   langcode: true
+  shariff_field: true

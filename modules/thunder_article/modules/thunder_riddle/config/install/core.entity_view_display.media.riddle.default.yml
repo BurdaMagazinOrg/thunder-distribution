@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.riddle.field_riddle_id
+    - media_entity.bundle.riddle
+  module:
+    - media_riddle_marketplace
+id: media.riddle.default
+targetEntityType: media
+bundle: riddle
+mode: default
+content:
+  field_riddle_id:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: riddle_embed
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true
