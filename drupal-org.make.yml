@@ -216,13 +216,13 @@ projects:
     type: "module"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677752.git"
-      tag: "8.x-1.0-beta5"
+      tag: "8.x-1.0-beta6"
 
   infinite:
     type: "theme"
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
-      tag: "8.x-1.0-beta6"
+      tag: "8.x-1.0-beta7"
 
   video_embed_field:
     type: "module"

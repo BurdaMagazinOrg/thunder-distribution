@@ -162,9 +162,9 @@ content:
     region: content
   scheduler_settings:
     weight: 11
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
