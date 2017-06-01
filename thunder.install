@@ -666,17 +666,14 @@ function thunder_update_8111() {
 /**
  * Installs new Thunder Admin theme.
  */
-function thunder_update_8108() {
-
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
-  $updateLogger->cleanLogs();
-
-  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
-  $configReverter = \Drupal::service('config_update.config_update');
+function thunder_update_8112() {
 
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
 
   /** @var \Drupal\Component\Serialization\SerializationInterface $serializer */
   $serializer = Drupal::service('serialization.yaml');
@@ -740,7 +737,7 @@ function thunder_update_8108() {
   );
 
   // Execute update of configurations with logging of fails and successes.
-  if (!$thunderUpdater->executeUpdate($updateDefinitions, $updateLogger)) {
+  if (!$thunderUpdater->executeUpdate($updateDefinitions)) {
     $successfulUpdate = FALSE;
   }
 
@@ -753,11 +750,5 @@ function thunder_update_8108() {
   }
 
   // Output logged messages to related chanel of update execution.
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
-
-    return '';
-  }
-
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }

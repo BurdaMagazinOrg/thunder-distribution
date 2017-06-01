@@ -141,7 +141,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function executeUpdate(array $updateDefinitions, UpdateLogger $updateLogger) {
+  public function executeUpdate(array $updateDefinitions) {
     $successfulUpdate = TRUE;
 
     foreach ($updateDefinitions as $configName => $configChange) {
@@ -166,11 +166,11 @@ class Updater implements UpdaterInterface {
       }
 
       if ($this->updateConfig($configName, $newConfig, $expectedConfig, $removeKeys)) {
-        $updateLogger->info($this->t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
+        $this->logger->info($this->t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
       }
       else {
         $successfulUpdate = FALSE;
-        $updateLogger->warning($this->t('Unable to update configuration for @configName.', ['@configName' => $configName]));
+        $this->logger->warning($this->t('Unable to update configuration for @configName.', ['@configName' => $configName]));
       }
     }
 

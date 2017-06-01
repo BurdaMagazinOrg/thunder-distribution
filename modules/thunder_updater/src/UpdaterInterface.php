@@ -48,10 +48,8 @@ interface UpdaterInterface {
    *
    * @param array $updateDefinitions
    *   List of configuration definitions.
-   * @param \Drupal\thunder_updater\UpdateLogger $updateLogger
-   *   Update logger service.
    */
-  public function executeUpdate(array $updateDefinitions, UpdateLogger $updateLogger);
+  public function executeUpdate(array $updateDefinitions);
 
   /**
    * Installs a module, checks updater checkbox and works with logger.
