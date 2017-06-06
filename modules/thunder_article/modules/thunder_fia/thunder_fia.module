@@ -60,9 +60,12 @@ function thunder_fia_preprocess_views_view_row_fia(&$variables) {
 
     // Change author name to "firstname lastname".
     $owner = $node->getOwner();
-    $variables['options']['author'] = [
-      '#markup' => '<a>' . $owner->first_name->value . ' ' . $owner->last_name->value . '</a>',
-    ];
+    if (isset($owner->first_name, $owner->last_name)) {
+      $name = $owner->first_name->value . ' ' . $owner->last_name->value;
+      if ($name = trim($name) && !empty($variables['options']['author'])) {
+        $variables['options']['author'] = ['#markup' => '<a>' . $name . '</a>'];
+      }
+    }
   }
 }
 
