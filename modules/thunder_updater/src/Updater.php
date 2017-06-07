@@ -6,6 +6,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\thunder_updater\Entity\Update;
@@ -40,6 +41,13 @@ class Updater implements UpdaterInterface {
   protected $moduleInstaller;
 
   /**
+   * Module installer service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * The account object.
    *
    * @var \Drupal\Core\Session\AccountInterface
@@ -54,6 +62,13 @@ class Updater implements UpdaterInterface {
   protected $logger;
 
   /**
+   * The Checklist API object.
+   *
+   * @var \Drupal\checklistapi\ChecklistapiChecklist
+   */
+  protected $updaterChecklist;
+
+  /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
    * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
@@ -62,17 +77,27 @@ class Updater implements UpdaterInterface {
    *   Config factory service.
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    *   Module installer service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Module handler service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
    * @param \Drupal\thunder_updater\UpdateLogger $logger
    *   Update logger.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, AccountInterface $account, UpdateLogger $logger) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ModuleHandlerInterface $moduleHandler, AccountInterface $account, UpdateLogger $logger) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
+    $this->moduleHandler = $moduleHandler;
     $this->account = $account;
     $this->logger = $logger;
+
+    if ($this->moduleHandler->moduleExists('checklistapi')) {
+      $this->updaterChecklist = checklistapi_checklist_load('thunder_updater');
+    }
+    else {
+      $this->updaterChecklist = FALSE;
+    }
   }
 
   /**
@@ -155,7 +180,6 @@ class Updater implements UpdaterInterface {
    * {@inheritdoc}
    */
   public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
-
     foreach ($names as $name) {
 
       if ($update = Update::load($name)) {
@@ -180,7 +204,6 @@ class Updater implements UpdaterInterface {
    * {@inheritdoc}
    */
   public function markUpdatesFailed(array $names) {
-
     foreach ($names as $name) {
 
       if ($update = Update::load($name)) {
@@ -200,7 +223,9 @@ class Updater implements UpdaterInterface {
    * {@inheritdoc}
    */
   public function markAllUpdates($status = TRUE) {
-
+    if ($this->updaterChecklist === FALSE) {
+      return;
+    }
     $checklist = checklistapi_checklist_load('thunder_updater');
 
     foreach ($checklist->items as $versionItems) {
@@ -233,7 +258,9 @@ class Updater implements UpdaterInterface {
    *   Array of the bulletpoints.
    */
   protected function checkListPoints(array $names) {
-
+    if ($this->updaterChecklist === FALSE) {
+      return;
+    }
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
@@ -267,7 +294,9 @@ class Updater implements UpdaterInterface {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-
+    if ($this->updaterChecklist === FALSE) {
+      return;
+    }
     /** @var Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
       ->getEditable('checklistapi.progress.thunder_updater');
