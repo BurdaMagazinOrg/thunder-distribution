@@ -1,11 +1,11 @@
 <?php
 
-use Drupal\Core\Extension\MissingDependencyException;
-
 /**
  * @file
  * Thunder Updater install hooks.
  */
+
+use Drupal\Core\Extension\MissingDependencyException;
 
 /**
  * Install the thunder updater.
