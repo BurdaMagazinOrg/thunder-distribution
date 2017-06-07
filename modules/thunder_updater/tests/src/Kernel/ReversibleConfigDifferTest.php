@@ -41,6 +41,9 @@ class ReversibleConfigDifferTest extends KernelTestBase {
   /**
    * Data provider for testing of same() method.
    *
+   * Important part is that 'uuid' and '_core' are stripped only for base
+   * configuration array, not in nested configuration parts.
+   *
    * @return array
    *   Test data with full name + type and name of configuration.
    */
@@ -63,12 +66,15 @@ class ReversibleConfigDifferTest extends KernelTestBase {
             ],
             'custom_key' => 'value',
           ],
+          '1234-5678-90' => [
+            'uuid' => '1234-5678-90',
+          ],
           'empty_array' => [],
           'empty_string' => '',
           'null_value' => NULL,
         ],
         [
-          'uuid' => '09-876504321',
+          'uuid' => '09-8765-4321',
           '_core' => 'core_id_2',
           'id' => 'test.config.id',
           'short_text' => 'en',
@@ -82,6 +88,9 @@ class ReversibleConfigDifferTest extends KernelTestBase {
               'value3',
             ],
             'custom_key' => 'value',
+          ],
+          '1234-5678-90' => [
+            'uuid' => '1234-5678-90',
           ],
           'empty_array' => [],
           'empty_string' => '',
@@ -104,14 +113,17 @@ class ReversibleConfigDifferTest extends KernelTestBase {
               'value1',
               'value3',
             ],
-            'custom_key' => 'value1',
+            'custom_key' => 'value',
+          ],
+          '1234-5678-90' => [
+            'uuid' => '1234-5678-90',
           ],
           'empty_array' => [],
           'empty_string' => '',
           'null_value' => NULL,
         ],
         [
-          'uuid' => '09-876504321',
+          'uuid' => '09-8765-4321',
           '_core' => 'core_id_2',
           'id' => 'test.config.id',
           'short_text' => 'en',
@@ -124,7 +136,10 @@ class ReversibleConfigDifferTest extends KernelTestBase {
               'value1',
               'value3',
             ],
-            'custom_key' => 'value2',
+            'custom_key' => 'value',
+          ],
+          '1234-5678-90' => [
+            'uuid' => '09-8765-4321',
           ],
           'empty_array' => [],
           'empty_string' => '',

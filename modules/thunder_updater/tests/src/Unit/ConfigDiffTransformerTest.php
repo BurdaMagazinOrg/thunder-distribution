@@ -8,7 +8,7 @@ use Drupal\thunder_updater\ConfigDiffTransformer;
 /**
  * Automated tests for the 'thunder_updater.config_diff_transformer' service.
  *
- * @group Thunder_inDev
+ * @group thunder_updater
  */
 class ConfigDiffTransformerTest extends UnitTestCase {
 
