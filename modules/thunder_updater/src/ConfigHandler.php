@@ -3,8 +3,10 @@
 namespace Drupal\thunder_updater;
 
 use Drupal\Component\Serialization\SerializationInterface;
+use Drupal\config_update\ConfigDiffInterface;
 use Drupal\config_update\ConfigListInterface;
 use Drupal\config_update\ConfigRevertInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -35,9 +37,23 @@ class ConfigHandler {
   /**
    * The config differ.
    *
-   * @var ConfigDiffer
+   * @var ReversibleConfigDiffer
    */
   protected $configDiffer;
+
+  /**
+   * Config diff transformer service.
+   *
+   * @var \Drupal\thunder_updater\ConfigDiffTransformer
+   */
+  protected $configDiffTransformer;
+
+  /**
+   * Module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
 
   /**
    * Yaml serializer.
@@ -53,6 +69,8 @@ class ConfigHandler {
    */
   protected $stripConfigParams = ['dependencies'];
 
+  protected $baseUpdatePath = '/config/update';
+
   /**
    * Config handler constructor.
    *
@@ -60,15 +78,21 @@ class ConfigHandler {
    *   Config list service.
    * @param \Drupal\config_update\ConfigRevertInterface $configReverter
    *   Config reverter service.
-   * @param \Drupal\thunder_updater\ConfigDiffer $configDiffer
+   * @param \Drupal\config_update\ConfigDiffInterface $configDiffer
    *   Config differ service.
+   * @param \Drupal\thunder_updater\ConfigDiffTransformer $configDiffTransformer
+   *   Configuration transformer for diffing.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Module handler service.
    * @param \Drupal\Component\Serialization\SerializationInterface $yamlSerializer
    *   Array serializer service.
    */
-  public function __construct(ConfigListInterface $configList, ConfigRevertInterface $configReverter, ConfigDiffer $configDiffer, SerializationInterface $yamlSerializer) {
+  public function __construct(ConfigListInterface $configList, ConfigRevertInterface $configReverter, ConfigDiffInterface $configDiffer, ConfigDiffTransformer $configDiffTransformer, ModuleHandlerInterface $moduleHandler, SerializationInterface $yamlSerializer) {
     $this->configList = $configList;
     $this->configReverter = $configReverter;
     $this->configDiffer = $configDiffer;
+    $this->configDiffTransformer = $configDiffTransformer;
+    $this->moduleHandler = $moduleHandler;
     $this->serializer = $yamlSerializer;
   }
 
@@ -90,13 +114,13 @@ class ConfigHandler {
    *
    * @param string $moduleName
    *   Module name that will be used to generate patch for it.
-   * @param string $rawFilename
-   *   File name where raw patch data will be saved.
+   * @param string $updateName
+   *   Update name for patch.
    *
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
    */
-  public function generateRawData($moduleName, $rawFilename) {
+  public function generatePatchFile($moduleName, $updateName) {
     $updatePatch = [];
     $configurationLists = $this->configList->listConfig('module', $moduleName);
 
@@ -116,7 +140,7 @@ class ConfigHandler {
     }
 
     if (!empty($updatePatch)) {
-      file_put_contents($rawFilename, $this->serializer->encode($updatePatch));
+      file_put_contents($this->getPatchFile($moduleName, $updateName), $this->serializer->encode($updatePatch));
 
       return TRUE;
     }
@@ -191,7 +215,7 @@ class ConfigHandler {
       }
     }
 
-    return $this->configDiffer->formatToConfig($listExpected);
+    return $this->configDiffTransformer->reverseTransform($listExpected);
   }
 
   /**
@@ -224,7 +248,7 @@ class ConfigHandler {
     }
 
     foreach ($listUpdate as $action => $edits) {
-      $listUpdate[$action] = $this->configDiffer->formatToConfig($edits);
+      $listUpdate[$action] = $this->configDiffTransformer->reverseTransform($edits);
     }
 
     return $listUpdate;
@@ -271,7 +295,40 @@ class ConfigHandler {
     foreach ($configList as $configFile) {
       $configNames[] = ConfigName::createByFullName($configFile);
     }
+
     return $configNames;
+  }
+
+  /**
+   * Get full path for update patch file.
+   *
+   * @param string $moduleName
+   *   Module name.
+   * @param string $updateName
+   *   Update name.
+   *
+   * @return string
+   *   Returns full path file name for update patch.
+   */
+  protected function getPatchFile($moduleName, $updateName) {
+    $modulePath = $this->moduleHandler->getModule($moduleName)->getPath();
+
+    return $modulePath . '/' . $this->baseUpdatePath . '/' . $updateName . '.yml';
+  }
+
+  /**
+   * Load update definition from file.
+   *
+   * @param string $moduleName
+   *   Module name.
+   * @param string $updateName
+   *   Update name.
+   *
+   * @return mixed
+   *   Returns update definition.
+   */
+  public function loadUpdate($moduleName, $updateName) {
+    return $this->serializer->decode(file_get_contents($this->getPatchFile($moduleName, $updateName)));
   }
 
 }

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains the code to generate the custom drush commands for module.
+ * Contains the code to generate the custom drush commands for thunder_updater.
  */
 
 /**
@@ -11,16 +11,16 @@
 function thunder_updater_drush_command() {
   $items = [];
 
-  $items['thunder-updater-generate-raw-data'] = [
-    'description' => 'Generate update for module configuration.',
+  $items['thunder-updater-generate-update'] = [
+    'description' => 'Generate update definition for module configuration.',
     'arguments' => [
       'module' => 'Module name',
-      'destination-file' => 'Destination file',
+      'update-name' => 'Update name',
     ],
     'drupal dependencies' => ['thunder_updater'],
     'required-arguments' => 2,
     'examples' => [
-      'drush thunder-updater-generate-raw-data thunder_media raw-data.txt' => 'Generate patch to update configuration from current installed configuration to configuration provided in files.',
+      'drush thunder-updater-generate-update thunder_media thunder_media__update_8201' => 'Generate patch to update configuration from current installed configuration to configuration provided in files.',
     ],
     'core' => ['8+'],
     'outputformat' => [
@@ -32,21 +32,21 @@ function thunder_updater_drush_command() {
 }
 
 /**
- * Handler for "thunder-updater-generate-raw-data" drush command.
+ * Handler for "thunder-updater-generate-update" drush command.
  *
  * @param string $module
  *   Module name.
- * @param string $destinationFilename
- *   Destination file name.
+ * @param string $updateName
+ *   Update name.
  *
  * @return array
  *   Returns messages for output.
  */
-function drush_thunder_updater_generate_raw_data($module, $destinationFilename) {
+function drush_thunder_updater_generate_update($module, $updateName) {
   /** @var \Drupal\thunder_updater\ConfigHandler $configHandler */
   $configHandler = Drupal::service('thunder_updater.config_handler');
 
-  $successful = $configHandler->generateRawData($module, $destinationFilename);
+  $successful = $configHandler->generatePatchFile($module, $updateName);
   $message = ($successful) ? dt('Patch file is successfully generated.') : dt('There are no changes that should be exported.');
 
   return [

@@ -3,6 +3,7 @@
 namespace Drupal\thunder_updater;
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\config_update\ConfigRevertInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
@@ -39,6 +40,20 @@ class Updater implements UpdaterInterface {
   protected $moduleInstaller;
 
   /**
+   * Config reverter service.
+   *
+   * @var \Drupal\config_update\ConfigRevertInterface
+   */
+  protected $configReverter;
+
+  /**
+   * Configuration handler service.
+   *
+   * @var \Drupal\thunder_updater\ConfigHandler
+   */
+  protected $configHandler;
+
+  /**
    * Logger service.
    *
    * @var \Drupal\thunder_updater\UpdateLogger
@@ -61,15 +76,21 @@ class Updater implements UpdaterInterface {
    *   Config factory service.
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    *   Module installer service.
+   * @param \Drupal\config_update\ConfigRevertInterface $configReverter
+   *   Config reverter service.
+   * @param \Drupal\thunder_updater\ConfigHandler $configHandler
+   *   Configuration handler service.
    * @param \Drupal\thunder_updater\UpdateLogger $logger
    *   Update logger.
    * @param \Drupal\thunder_updater\UpdateChecklist $checklist
    *   Update Checklist service.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, UpdateLogger $logger, UpdateChecklist $checklist) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
     $this->moduleInstaller = $moduleInstaller;
+    $this->configReverter = $configReverter;
+    $this->configHandler = $configHandler;
     $this->logger = $logger;
     $this->checklist = $checklist;
   }
@@ -178,6 +199,25 @@ class Updater implements UpdaterInterface {
   }
 
   /**
+   * Execute list of updates.
+   *
+   * @param array $updateList
+   *   List of modules and updates that should be executed.
+   *
+   * @return bool
+   *   Returns if update execution was successful.
+   */
+  public function executeUpdates(array $updateList) {
+    $updateDefinitions = [];
+
+    foreach ($updateList as $updateEntry) {
+      $updateDefinitions = array_merge($updateDefinitions, $this->configHandler->loadUpdate($updateEntry[0], $updateEntry[1]));
+    }
+
+    return $this->executeUpdate($updateDefinitions);
+  }
+
+  /**
    * Get flatten array keys as list of paths.
    *
    * Example:
@@ -273,6 +313,40 @@ class Updater implements UpdaterInterface {
     }
 
     $this->checklist->markUpdatesSuccessful($successful);
+  }
+
+  /**
+   * List of full configuration names to import.
+   *
+   * @param array $configList
+   *   List of configurations.
+   *
+   * @return bool
+   *   Returns if import was successful.
+   */
+  public function importConfigs(array $configList) {
+    $successfulImport = TRUE;
+
+    // Import configurations.
+    foreach ($configList as $fullConfigName) {
+      try {
+        $configName = ConfigName::createByFullName($fullConfigName);
+
+        $this->configReverter->import($configName->getType(), $configName->getName());
+        $this->logger->info($this->t('Configuration @full_name has been successfully imported.', [
+          '@full_name' => $fullConfigName,
+        ]));
+      }
+      catch (\Exception $e) {
+        $successfulImport = FALSE;
+
+        $this->logger->warning($this->t('Unable to import @full_name config.', [
+          '@full_name' => $fullConfigName,
+        ]));
+      }
+    }
+
+    return $successfulImport;
   }
 
 }

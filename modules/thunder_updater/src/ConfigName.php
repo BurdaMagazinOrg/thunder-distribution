@@ -5,19 +5,11 @@ namespace Drupal\thunder_updater;
 /**
  * Configuration name class for easier handling of configuration references.
  *
- * TODO: Unit tests
- * - parse functions (1)
- * - creates
- * - getters.
- *
- * TODO:
- * 1. switch to EntityTypeManager
- *
  * @package Drupal\thunder_updater
  */
 class ConfigName {
 
-  const SYSTEM_SIMPLE_CONFIG = 'system_simple';
+  const SYSTEM_SIMPLE_CONFIG = 'system.simple';
 
   /**
    * Config type.
@@ -36,9 +28,9 @@ class ConfigName {
   /**
    * Entity manager service.
    *
-   * @var \Drupal\Core\Entity\EntityManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityManager;
+  protected $entityTypeManager;
 
   /**
    * Create ConfigName instance from full configuration name.
@@ -91,17 +83,16 @@ class ConfigName {
    */
   protected function parseFullName($fullConfigName) {
     $result = [
-      'type' => '',
+      'type' => static::SYSTEM_SIMPLE_CONFIG,
       'name' => $fullConfigName,
     ];
 
     $prefix = static::SYSTEM_SIMPLE_CONFIG . '.';
     if (strpos($fullConfigName, $prefix)) {
-      $result['type'] = static::SYSTEM_SIMPLE_CONFIG;
       $result['name'] = substr($fullConfigName, strlen($prefix));
     }
     else {
-      foreach ($this->entityManager()->getDefinitions() as $entityType => $definition) {
+      foreach ($this->entityTypeManager()->getDefinitions() as $entityType => $definition) {
         if ($definition->entityClassImplements('Drupal\Core\Config\Entity\ConfigEntityInterface')) {
           $prefix = $definition->getConfigPrefix() . '.';
           if (strpos($fullConfigName, $prefix) === 0) {
@@ -131,7 +122,7 @@ class ConfigName {
       return $name;
     }
 
-    $definition = $this->entityManager()->getDefinition($type);
+    $definition = $this->entityTypeManager()->getDefinition($type);
     $prefix = $definition->getConfigPrefix() . '.';
 
     return $prefix . $name;
@@ -140,15 +131,15 @@ class ConfigName {
   /**
    * Retrieves the entity manager service.
    *
-   * @return \Drupal\Core\Entity\EntityManagerInterface
+   * @return \Drupal\Core\Entity\EntityTypeManagerInterface
    *   The entity manager service.
    */
-  protected function entityManager() {
-    if (!$this->entityManager) {
-      $this->entityManager = \Drupal::service('entity.manager');
+  protected function entityTypeManager() {
+    if (!$this->entityTypeManager) {
+      $this->entityTypeManager = \Drupal::service('entity_type.manager');
     }
 
-    return $this->entityManager;
+    return $this->entityTypeManager;
   }
 
   /**
