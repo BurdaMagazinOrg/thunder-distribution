@@ -194,30 +194,35 @@ Workflow to generate and use CUD and use it is following:
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
 3. Execute update hooks if it's necessary (fe. in case when you have module and/or core updates in your branch)
 4. Now is moment to create CUDs. For that we have provided following drush command:
-```drush thunder-updater-generate-update [module] [update-name]```
-For example to create CUD for your update hook (`thunder_media_update_8099`) in `thunder_media` module, you can execute following command:
-```drush thunder-updater-generate-update thunder_media thunder_media__update_8099```
-That will generate CUD file in `modules\thunder_media\config\update` folder. File is in `yaml` format and human readable.
+
+    ```drush thunder-updater-generate-update [module] [update-name]```
+    
+    For example to create CUD for your update hook (`thunder_media_update_8099`) in `thunder_media` module, you can execute following command:
+
+    ```drush thunder-updater-generate-update thunder_media thunder_media__update_8099```
+
+    That will generate CUD file in `modules\thunder_media\config\update` folder. File is in `yaml` format and human readable.
+
 5. After that you should use CUD file in your update hook. Here is code example:
-```php
-/**
- * Example for update hook with usage of configuration update defintion.
- */
-function thunder_media_update_8099() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+    ```php
+    /**
+     * Example for update hook with usage of configuration update defintion.
+     */
+    function thunder_media_update_8099() {
+      /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+      $thunderUpdater = \Drupal::service('thunder_updater');
+    
+      // Execute configuration update defintions with logging of fails and successes.
+      if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8099']])) {
+        $thunderUpdater->markUpdatesSuccessful(['v8_x_thunder_media_update_8099']);
+      }
+      else {
+        $thunderUpdater->markUpdatesFailed(['v8_x_thunder_media_update_8099']);
+      }
+    
+      // Output logged messages to related chanel of update execution.
+      return $thunderUpdater->logger()->output();
+    }
+    ```
 
-  // Execute configuration update defintions with logging of fails and successes.
-  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8099']])) {
-    $thunderUpdater->markUpdatesSuccessful(['v8_x_thunder_media_update_8099']);
-  }
-  else {
-    $thunderUpdater->markUpdatesFailed(['v8_x_thunder_media_update_8099']);
-  }
-
-  // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
-}
-```
-
-That should be it. And don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
+That's all and don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
