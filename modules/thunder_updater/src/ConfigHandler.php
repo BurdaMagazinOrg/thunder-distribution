@@ -69,6 +69,11 @@ class ConfigHandler {
    */
   protected $stripConfigParams = ['dependencies'];
 
+  /**
+   * Default path for configuration update files.
+   *
+   * @var string
+   */
   protected $baseUpdatePath = '/config/update';
 
   /**
@@ -94,16 +99,6 @@ class ConfigHandler {
     $this->configDiffTransformer = $configDiffTransformer;
     $this->moduleHandler = $moduleHandler;
     $this->serializer = $yamlSerializer;
-  }
-
-  /**
-   * Set serializer.
-   *
-   * @param \Drupal\Component\Serialization\SerializationInterface $serializer
-   *   Serializer that will be used to serialize arrays.
-   */
-  public function setSerializer(SerializationInterface $serializer) {
-    $this->serializer = $serializer;
   }
 
   /**
@@ -140,7 +135,7 @@ class ConfigHandler {
     }
 
     if (!empty($updatePatch)) {
-      file_put_contents($this->getPatchFile($moduleName, $updateName), $this->serializer->encode($updatePatch));
+      file_put_contents($this->getPatchFile($moduleName, $updateName, TRUE), $this->serializer->encode($updatePatch));
 
       return TRUE;
     }
@@ -228,30 +223,61 @@ class ConfigHandler {
    *   Return configuration array that should be applied.
    */
   protected function getUpdateConfig(array $diffs) {
-    $listUpdate = [];
+    $listUpdate = [
+      'add' => [],
+      'change' => [],
+      'delete' => [],
+    ];
 
     foreach ($diffs as $diffOp) {
       if (!empty($diffOp->closing)) {
-        if (!isset($listUpdate[$diffOp->type])) {
-          $listUpdate[$diffOp->type] = [];
+        if ($diffOp->type === 'change') {
+          $removableEdits = $this->getRemovableEdits($diffOp->orig, $diffOp->closing);
+          if (!empty($removableEdits)) {
+            $listUpdate['delete'] = array_merge($listUpdate['delete'], $removableEdits);
+          }
         }
 
         $listUpdate[$diffOp->type] = array_merge($listUpdate[$diffOp->type], $diffOp->closing);
       }
-      elseif ($diffOp->type === 'remove' && !empty($diffOp->orig)) {
-        if (!isset($listUpdate[$diffOp->type])) {
-          $listUpdate[$diffOp->type] = [];
-        }
-
+      elseif ($diffOp->type === 'delete' && !empty($diffOp->orig)) {
         $listUpdate[$diffOp->type] = array_merge($listUpdate[$diffOp->type], $diffOp->orig);
       }
     }
 
+    $listUpdate = array_filter($listUpdate);
     foreach ($listUpdate as $action => $edits) {
       $listUpdate[$action] = $this->configDiffTransformer->reverseTransform($edits);
     }
 
     return $listUpdate;
+  }
+
+  /**
+   * Get edits that should be removed before applying change action.
+   *
+   * @param array $originalEdits
+   *   Original list of edits for compare.
+   * @param array $newEdits
+   *   New list of edits for compare.
+   *
+   * @return array
+   *   Returns list of edits that should be removed.
+   */
+  protected function getRemovableEdits(array $originalEdits, array $newEdits) {
+    $additionalEdits = array_udiff($originalEdits, $newEdits, function ($ymlRow1, $ymlRow2) {
+      $key1 = explode(' : ', $ymlRow1);
+      $key2 = explode(' : ', $ymlRow2);
+
+      // Values from flat array will be marked for removal.
+      if (substr($key1[0], -3) === '::-' && substr($key2[0], -3) === '::-') {
+        return -1;
+      }
+
+      return strcmp($key1[0], $key2[0]);
+    });
+
+    return $additionalEdits;
   }
 
   /**
@@ -306,14 +332,21 @@ class ConfigHandler {
    *   Module name.
    * @param string $updateName
    *   Update name.
+   * @param bool $createDirectory
+   *   Flag if directory should be created.
    *
    * @return string
    *   Returns full path file name for update patch.
    */
-  protected function getPatchFile($moduleName, $updateName) {
-    $modulePath = $this->moduleHandler->getModule($moduleName)->getPath();
+  protected function getPatchFile($moduleName, $updateName, $createDirectory = FALSE) {
+    $updateDir = $this->moduleHandler->getModule($moduleName)->getPath() . $this->baseUpdatePath;
 
-    return $modulePath . '/' . $this->baseUpdatePath . '/' . $updateName . '.yml';
+    // Ensure that directory exists.
+    if (!is_dir($updateDir) && $createDirectory) {
+      mkdir($updateDir, 0755, TRUE);
+    }
+
+    return $updateDir . '/' . $updateName . '.yml';
   }
 
   /**

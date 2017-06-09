@@ -126,7 +126,7 @@ class Updater implements UpdaterInterface {
   /**
    * {@inheritdoc}
    */
-  public function updateConfig($configName, array $configuration, array $expectedConfiguration = [], array $removeKeys = []) {
+  public function updateConfig($configName, array $configuration, array $expectedConfiguration = [], array $deleteKeys = []) {
     $config = $this->configFactory->getEditable($configName);
 
     $configData = $config->get();
@@ -146,9 +146,9 @@ class Updater implements UpdaterInterface {
       return FALSE;
     }
 
-    // Remove configuration keys from config.
-    if (!empty($removeKeys)) {
-      foreach ($removeKeys as $keyPath) {
+    // Delete configuration keys from config.
+    if (!empty($deleteKeys)) {
+      foreach ($deleteKeys as $keyPath) {
         NestedArray::unsetValue($configData, $keyPath);
       }
     }
@@ -169,10 +169,10 @@ class Updater implements UpdaterInterface {
       $expectedConfig = $configChange['expected_config'];
       $updateActions = $configChange['update_actions'];
 
-      // Define configuration keys that should be removed.
-      $removeKeys = [];
-      if (isset($updateActions['remove'])) {
-        $removeKeys = $this->getFlatKeys($updateActions['remove']);
+      // Define configuration keys that should be deleted.
+      $deleteKeys = [];
+      if (isset($updateActions['delete'])) {
+        $deleteKeys = $this->getFlatKeys($updateActions['delete']);
       }
 
       $newConfig = [];
@@ -186,7 +186,7 @@ class Updater implements UpdaterInterface {
         $newConfig = NestedArray::mergeDeep($newConfig, $updateActions['add']);
       }
 
-      if ($this->updateConfig($configName, $newConfig, $expectedConfig, $removeKeys)) {
+      if ($this->updateConfig($configName, $newConfig, $expectedConfig, $deleteKeys)) {
         $this->logger->info($this->t('Configuration @configName has been successfully updated.', ['@configName' => $configName]));
       }
       else {
