@@ -6,6 +6,17 @@
  */
 
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Install the thunder article integration.
+ */
+function thunder_article_install() {
+  // Install Shariff integration as soft dependency.
+  \Drupal::service('module_installer')->install([
+    'shariff',
+  ]);
+}
 
 /**
  * Update hook dependencies.
@@ -50,29 +61,43 @@ function thunder_article_update_8001() {
  * Enable shariff module.
  */
 function thunder_article_update_8101() {
-
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   $updateLogger = $thunderUpdater->logger();
 
-  \Drupal::service('module_installer')->install([
-    'config_update',
-    'shariff',
-  ]);
-  $updateLogger->info(t('Shariff module is successfully installed.'));
+  $modulesInstalledSuccessfully = TRUE;
 
-  $display = EntityViewDisplay::load('node.article.default');
-  if ($display && !$display->getComponent('shariff_field')) {
-    $display->setComponent('shariff_field', [
-      'region' => 'content',
-    ])->save();
-
-    $updateLogger->info(t('Shariff field is added for article.'));
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+  try {
+    \Drupal::service('module_installer')->install([
+      'config_update',
+      'shariff',
+    ]);
   }
-  else {
-    $updateLogger->warning(t('Unable to place shariff field.'));
+  catch (MissingDependencyException $e) {
+    $updateLogger->warning($e->getMessage());
     $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
+    $modulesInstalledSuccessfully = FALSE;
+  }
+
+  if ($modulesInstalledSuccessfully) {
+    $updateLogger->info(t('Shariff module is successfully installed.'));
+
+    $display = EntityViewDisplay::load('node.article.default');
+    if ($display && !$display->getComponent('shariff_field')) {
+      $display->setComponent(
+        'shariff_field',
+        [
+          'region' => 'content',
+        ]
+      )->save();
+
+      $updateLogger->info(t('Shariff field is added for article.'));
+      $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+    }
+    else {
+      $updateLogger->warning(t('Unable to place shariff field.'));
+      $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
+    }
   }
 
   return $updateLogger->output();
