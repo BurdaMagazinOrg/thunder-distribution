@@ -1,6 +1,9 @@
 services:
+  thunder_updater.update_checklist:
+    class: Drupal\thunder_updater\UpdateChecklist
+    arguments: ['@config.factory', '@module_handler', '@current_user']
   thunder_updater:
     class: Drupal\thunder_updater\Updater
-    arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@module_handler', '@current_user', '@thunder_updater.logger']
+    arguments: ['@user.shared_tempstore', '@config.factory', '@module_installer', '@thunder_updater.logger', '@thunder_updater.update_checklist']
   thunder_updater.logger:
     class: Drupal\thunder_updater\UpdateLogger

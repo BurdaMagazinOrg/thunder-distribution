@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_updater;
+namespace Drupal\thunder_updater\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
