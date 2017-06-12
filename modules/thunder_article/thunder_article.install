@@ -75,7 +75,7 @@ function thunder_article_update_8101() {
   }
   catch (MissingDependencyException $e) {
     $updateLogger->warning($e->getMessage());
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+    $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
     $modulesInstalledSuccessfully = FALSE;
   }
 
@@ -92,11 +92,11 @@ function thunder_article_update_8101() {
       )->save();
 
       $updateLogger->info(t('Shariff field is added for article.'));
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+      $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
     }
     else {
       $updateLogger->warning(t('Unable to place shariff field.'));
-      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+      $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
     }
   }
 
