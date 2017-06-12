@@ -85,24 +85,15 @@ class UpdateChecklist {
    *   Indicates the corresponding checkbox should be checked.
    */
   public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
-    foreach ($names as $name) {
-
-      if ($update = Update::load($name)) {
-        $update->setSuccessfulByHook(TRUE)
-          ->save();
-      }
-      else {
-        Update::create([
-          'id' => $name,
-          'successful_by_hook' => TRUE,
-        ])->save();
-      }
+    if ($this->updateChecklist === FALSE) {
+      return;
     }
+
+    $this->setSuccessfulByHook($names, TRUE);
 
     if ($checkListPoints) {
       $this->checkListPoints($names);
     }
-
   }
 
   /**
@@ -112,19 +103,11 @@ class UpdateChecklist {
    *   Array of update ids.
    */
   public function markUpdatesFailed(array $names) {
-    foreach ($names as $name) {
-
-      if ($update = Update::load($name)) {
-        $update->setSuccessfulByHook(FALSE)
-          ->save();
-      }
-      else {
-        Update::create([
-          'id' => $name,
-          'successful_by_hook' => FALSE,
-        ])->save();
-      }
+    if ($this->updateChecklist === FALSE) {
+      return;
     }
+
+    $this->setSuccessfulByHook($names, FALSE);
   }
 
   /**
@@ -138,27 +121,41 @@ class UpdateChecklist {
       return;
     }
 
+    $keys = [];
     foreach ($this->updateChecklist->items as $versionItems) {
       foreach ($versionItems as $key => $item) {
-
-        if (!is_array($item)) {
-          continue;
-        }
-
-        if ($update = Update::load($key)) {
-          $update->setSuccessfulByHook($status)
-            ->save();
-        }
-        else {
-          Update::create([
-            'id' => $key,
-            'successful_by_hook' => $status,
-          ])->save();
+        if (is_array($item)) {
+          $keys[] = $key;
         }
       }
     }
 
+    $this->setSuccessfulByHook($keys, $status);
     $this->checkAllListPoints($status);
+  }
+
+  /**
+   * Set status for update keys.
+   *
+   * @param array $keys
+   *   Keys for update entries.
+   * @param bool $status
+   *   Status that should be set.
+   */
+  protected function setSuccessfulByHook(array $keys, $status = TRUE) {
+    foreach ($keys as $key) {
+      if ($update = Update::load($key)) {
+        $update->setSuccessfulByHook($status)->save();
+      }
+      else {
+        Update::create(
+          [
+            'id' => $key,
+            'successful_by_hook' => $status,
+          ]
+        )->save();
+      }
+    }
   }
 
   /**
@@ -168,9 +165,6 @@ class UpdateChecklist {
    *   Array of the bulletpoints.
    */
   protected function checkListPoints(array $names) {
-    if ($this->updateChecklist === FALSE) {
-      return;
-    }
 
     /** @var \Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -181,13 +175,11 @@ class UpdateChecklist {
 
     foreach ($names as $name) {
       if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
-
         $thunderUpdaterConfig
           ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
             '#completed' => time(),
             '#uid' => $user,
           ]);
-
       }
     }
 
@@ -205,9 +197,6 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-    if ($this->updateChecklist === FALSE) {
-      return;
-    }
 
     /** @var \Drupal\Core\Config\Config $thunderUpdaterConfig */
     $thunderUpdaterConfig = $this->configFactory
@@ -241,7 +230,7 @@ class UpdateChecklist {
               ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName");
           }
         }
-      };
+      }
     }
 
     $thunderUpdaterConfig
