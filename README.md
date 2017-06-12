@@ -44,7 +44,8 @@ Plus some base configuration:
 * A set of commonly used paragraph types
     * Gallery
     * Instagram
-    * Media (Image/Video)
+    * Image
+    * Video
     * Twitter
     * Text
     * Quote
