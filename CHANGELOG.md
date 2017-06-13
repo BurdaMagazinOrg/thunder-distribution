@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.2.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.1) 2017-06-13
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.0...8.2.1)
+
+- Decouple the shariff module, so that it can be disabled and removed. 
+- Fix a notice in Facebook Instant Articles integration
+- Update drupal core and contrib modules.
+
 ## [8.2.0](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.0) 2017-06-01
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.1.5...8.2.0)
 
