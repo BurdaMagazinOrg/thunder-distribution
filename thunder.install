@@ -436,6 +436,9 @@ function thunder_update_8107() {
                   'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
                 ]);
               $media = current($media);
+              if (!$media) {
+                continue;
+              }
 
               // Create new Riddle paragraph for media.
               try {
