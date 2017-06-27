@@ -2,7 +2,7 @@
 
 ## [8.1.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.6) 2017-06-27
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.5...8.x-1.6)
-
+ 
 - Bump drupal core version in drush make file. 
 
 ## [8.1.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.5) 2017-06-01
