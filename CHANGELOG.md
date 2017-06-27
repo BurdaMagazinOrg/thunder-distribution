@@ -1,5 +1,10 @@
 # Change Log
 
+## [8.1.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.6) 2017-06-27
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.5...8.x-1.6)
+
+- Bump drupal core version in drush make file. 
+
 ## [8.1.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.5) 2017-06-01
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.4...8.x-1.5)
 
@@ -122,6 +127,9 @@ Fixes
 - [Make instagram responsive](https://www.drupal.org/node/2807735) 
 - Fix PHP Notice 
 - Better entity browser usability on mobile devices
+
+## [8.1.0-rc3]
+skipped release
 
 ## [8.1.0-rc2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc2) 2016-10-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc1...8.x-1.0-rc2)
