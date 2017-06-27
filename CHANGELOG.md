@@ -1,5 +1,10 @@
 # Change Log
 
+## [8.2.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.2) 2017-06-27
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.1...8.2.2)
+
+- Bump drupal core version in drush make file. 
+
 ## [8.2.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.1) 2017-06-13
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.0...8.2.1)
 
