@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Thunder Updater install hooks.
+ */
+
+use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Install the thunder updater.
+ */
+function thunder_updater_install() {
+  $logger = \Drupal::logger('thunder_updater');
+
+  // Install Checklist API as soft dependency.
+  try {
+    \Drupal::service('module_installer')->install(['checklistapi']);
+  }
+  catch (MissingDependencyException $e) {
+    $logger->warning(
+      'Could not install Checklist API module. You will not see information 
+      about updates in the drupal admin pages.'
+    );
+  }
+}

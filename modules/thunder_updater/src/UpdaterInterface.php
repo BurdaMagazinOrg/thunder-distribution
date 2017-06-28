@@ -42,32 +42,6 @@ interface UpdaterInterface {
   public function updateConfig($configName, array $configuration, array $expectedConfiguration = []);
 
   /**
-   * Marks a list of updates as successful.
-   *
-   * @param array $names
-   *   Array of update ids.
-   * @param bool $checkListPoints
-   *   Indicates the corresponding checkbox should be checked.
-   */
-  public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE);
-
-  /**
-   * Marks a list of updates as failed.
-   *
-   * @param array $names
-   *   Array of update ids.
-   */
-  public function markUpdatesFailed(array $names);
-
-  /**
-   * Marks a list of updates.
-   *
-   * @param bool $status
-   *   Checkboxes enabled or disabled.
-   */
-  public function markAllUpdates($status = TRUE);
-
-  /**
    * Installs a module, checks updater checkbox and works with logger.
    *
    * @param array $modules
@@ -82,5 +56,13 @@ interface UpdaterInterface {
    *   Returns update logger.
    */
   public function logger();
+
+  /**
+   * Returns update checklist service.
+   *
+   * @return \Drupal\thunder_updater\UpdateChecklist
+   *   Update checklist service.
+   */
+  public function checklist();
 
 }
