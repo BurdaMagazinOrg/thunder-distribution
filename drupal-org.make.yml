@@ -66,7 +66,7 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha6"
+    version: "1.0-alpha7"
     patch:
       - "https://www.drupal.org/files/issues/2870708_2.patch"
 
@@ -82,7 +82,7 @@ projects:
     type: "module"
     version: "1.0"
     patch:
-      - "https://www.drupal.org/files/issues/2858438_3.patch"
+      - "https://www.drupal.org/files/issues/2858438_6.patch"
 
   entity_reference_revisions:
     type: "module"
