@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.2.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-06-29
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.2...8.2.3)
+This release adds no new functionality or bug fixes. Similar to release 8.2.1 we require more modules as soft
+dependencies. This time we decoupled the checklistapi module.
+
+- Decoupled checklistapi module.
+- Refactored updater.
+
 ## [8.2.2](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.2) 2017-06-27
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.1...8.2.2)
 
