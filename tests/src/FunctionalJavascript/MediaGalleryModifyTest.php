@@ -28,7 +28,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
-    $this->dragDropElement($dragElement, 200, 0);
+    $this->dragDropElement($dragElement, 210, 0);
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 

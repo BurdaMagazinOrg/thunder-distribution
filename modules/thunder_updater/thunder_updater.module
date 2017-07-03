@@ -61,6 +61,10 @@ function thunder_updater_checklistapi_checklist_info() {
  * Implements hook_toolbar().
  */
 function thunder_updater_toolbar() {
+  if (!\Drupal::service('thunder_updater.update_checklist')->isAvailable()) {
+    return [];
+  }
+
   $user = \Drupal::currentUser();
 
   /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */

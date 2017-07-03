@@ -2,6 +2,5 @@ name: 'Thunder Updater'
 description: 'Provide support for updating Thunder versions.'
 type: module
 core: 8.x
-dependencies:
-  - checklistapi:checklistapi
+
 package: Thunder

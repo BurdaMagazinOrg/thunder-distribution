@@ -496,11 +496,11 @@ function thunder_media_update_8101() {
 
   // If update is successful for all views, then check entry in checklist.
   if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
   }
   else {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
-    $thunderUpdater->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -638,10 +638,10 @@ function thunder_media_update_8102() {
   }
 
   if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
   }
   else {
-    $thunderUpdater->markUpdatesFailed(['v1_1__image_video_paragraph']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__image_video_paragraph']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -688,11 +688,11 @@ function thunder_media_update_8103() {
     $display->removeComponent('field_url')->save();
 
     $updateLogger->info(t('Configuration is successfully changed for instagram thumbnail.'));
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
-    $thunderUpdater->markUpdatesFailed(['v1_1__instagram_edit_preview']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__instagram_edit_preview']);
   }
 
   // Output log result depending on channel used for update execution.

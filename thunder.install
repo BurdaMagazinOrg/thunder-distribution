@@ -77,7 +77,7 @@ function thunder_install() {
   // Disable default media view, cause we have our own.
   View::load('media')->setStatus(FALSE)->save();
 
-  \Drupal::service('thunder_updater')->markAllUpdates();
+  \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
 
 }
 
@@ -334,7 +334,7 @@ function thunder_update_8103() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  $thunderUpdater->markAllUpdates(FALSE);
+  $thunderUpdater->checklist()->markAllUpdates(FALSE);
 
   // Now Thunder updater is enabled, we can start marking checkboxes.
   $thunderUpdater->installModules([
@@ -520,10 +520,10 @@ function thunder_update_8107() {
   }
 
   if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_riddle']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__thunder_riddle']);
   }
   else {
-    $thunderUpdater->markUpdatesFailed(['v1_1__thunder_riddle']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_riddle']);
   }
 
   return $updateLogger->output();
@@ -589,11 +589,11 @@ function thunder_update_8109() {
   }
 
   if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
-    $thunderUpdater->markUpdatesFailed(['v1_1__paragraphs_modal']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__paragraphs_modal']);
   }
 
   return $updateLogger->output();
