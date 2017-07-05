@@ -48,9 +48,7 @@ projects:
 
   content_lock:
     type: "module"
-    version: "1.0-alpha1"
-    patch:
-      - "https://www.drupal.org/files/issues/support_any_entity_type-2852187-7.patch"
+    version: "1"
 
   crop:
     type: "module"
