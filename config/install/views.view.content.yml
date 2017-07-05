@@ -518,7 +518,7 @@ display:
           type: yes-no
           type_custom_true: ''
           type_custom_false: ''
-          not: 0
+          not: false
           plugin_id: content_lock_field
         name:
           id: name
