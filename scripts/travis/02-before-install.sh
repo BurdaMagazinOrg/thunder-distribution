@@ -44,7 +44,8 @@ drush dl drupalorg_drush-7.x
 drush verify-makefile
 
 # install image magick
-yes '' | pecl install imagick
+wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
+yes '' | pecl install -f php-imagick-LATEST.tar.gz
 
 # Install the PECL YAML extension for strict parsing. yes is used to
 # acknowledge all prompts.

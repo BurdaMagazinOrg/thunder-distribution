@@ -36,6 +36,9 @@ export SELENIUM_PATH
 SELENIUM_VERSION="3.3.1"
 export SELENIUM_VERSION
 
+# Get latest version of imagick from api.github.com
+PHP_IMAGICK_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
+
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:
 # git commit -m="Your commit message [TEST_UPDATE=true]"
