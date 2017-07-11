@@ -130,6 +130,8 @@ trait ThunderEntityBrowserTestTrait {
    *   Horizontal offset for element drag in pixels.
    */
   protected function dragDropElement(NodeElement $element, $offsetX, $offsetY) {
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
     $elemXpath = $element->getXpath();
 
     $jsCode = "var fireMouseEvent = function (type, element, x, y) {"

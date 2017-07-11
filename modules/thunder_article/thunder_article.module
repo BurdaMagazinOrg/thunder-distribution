@@ -31,5 +31,7 @@ function thunder_article_form_node_article_form_alter(&$form, FormStateInterface
  */
 function _thunder_article_form_alter_helper(array &$form, FormStateInterface $form_state) {
   // Add CSS file for layout optimization.
+  // @todo: See what of the attached CSS needs to move to the thunder_admin
+  // theme and if there is still a need to attach a library from the module.
   $form['#attached']['library'][] = 'thunder_article/article_form_styling';
 }

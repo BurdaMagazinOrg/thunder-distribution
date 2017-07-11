@@ -3,3 +3,4 @@ status: true
 dependencies: {  }
 id: image
 label: Image
+behavior_plugins: {  }

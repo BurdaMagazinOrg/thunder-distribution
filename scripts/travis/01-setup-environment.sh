@@ -33,7 +33,7 @@ export CHROME_DRIVER_VERSION
 SELENIUM_PATH="$PWD/travis_selenium"
 export SELENIUM_PATH
 
-SELENIUM_VERSION="3.0.1"
+SELENIUM_VERSION="3.3.1"
 export SELENIUM_VERSION
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to

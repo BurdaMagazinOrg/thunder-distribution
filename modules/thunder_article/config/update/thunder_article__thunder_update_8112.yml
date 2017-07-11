@@ -1,0 +1,33 @@
+core.entity_form_display.node.article.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          format_settings:
+            classes: ''
+        group_paragraphs:
+          format_settings:
+            classes: paragraphs-container
+        group_teaser:
+          format_settings:
+            classes: article-teaser
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              classes: content-form__form-section
+          group_paragraphs:
+            format_settings:
+              classes: 'content-form__form-section paragraphs-container'
+              description: ''
+          group_teaser:
+            format_settings:
+              classes: 'content-form__form-section article-teaser'
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              label: Basis

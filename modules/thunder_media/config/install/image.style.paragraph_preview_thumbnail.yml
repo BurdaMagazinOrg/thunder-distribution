@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: paragraph_preview_thumbnail
+label: 'Paragraph Preview Thumbnail'
+effects:
+  701f3d12-4741-47a1-8a88-7a96487c9be1:
+    uuid: 701f3d12-4741-47a1-8a88-7a96487c9be1
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 150
+      height: 90

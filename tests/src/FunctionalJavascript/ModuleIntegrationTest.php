@@ -468,6 +468,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Add post with twitter.
     $this->liveblogSetTitle($page, 'Twitter post');
 
+    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_Add_' . date('Ymd_His') . '.png');
     $this->clickDropButton('field_embed_media_twitter_add_more');
     $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
     $this->setFieldValue($page,
@@ -486,6 +487,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Add post with instagram.
     $this->liveblogSetTitle($page, 'Instagram post');
 
+    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_Add_' . date('Ymd_His') . '.png');
     $this->clickDropButton('field_embed_media_instagram_add_more');
     $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
     $this->setFieldValue($page,

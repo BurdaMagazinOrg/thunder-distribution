@@ -6,7 +6,7 @@ dependencies:
 id: thunder_admin_page_title
 theme: thunder_admin
 region: header
-weight: -30
+weight: -3
 provider: null
 plugin: page_title_block
 settings:
