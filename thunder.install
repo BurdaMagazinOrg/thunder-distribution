@@ -714,10 +714,10 @@ function thunder_update_8112() {
 
   // Set update checklist.
   if ($successfulUpdate) {
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__thunder_admin_ux']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__thunder_admin_ux']);
   }
   else {
-    $thunderUpdater->markUpdatesFailed(['v1_1__thunder_admin_ux']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_admin_ux']);
   }
 
   // Output logged messages to related chanel of update execution.

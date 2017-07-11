@@ -140,10 +140,10 @@ Here is example to import image paragraph configuration:
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   if ($thunderUpdater->importConfigs(['paragraphs.paragraphs_type.image'])) {
-    $thunderUpdater->markUpdatesSuccessful(['v8_x_add_image_paragraph']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_add_image_paragraph']);
   }
   else {
-    $thunderUpdater->markUpdatesFailed(['v8_x_add_image_paragraph']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_add_image_paragraph']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -214,10 +214,10 @@ Workflow to generate and use CUD and use it is following:
     
       // Execute configuration update defintions with logging of fails and successes.
       if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8099']])) {
-        $thunderUpdater->markUpdatesSuccessful(['v8_x_thunder_media_update_8099']);
+        $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_thunder_media_update_8099']);
       }
       else {
-        $thunderUpdater->markUpdatesFailed(['v8_x_thunder_media_update_8099']);
+        $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_thunder_media_update_8099']);
       }
     
       // Output logged messages to related chanel of update execution.
