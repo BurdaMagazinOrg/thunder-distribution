@@ -117,11 +117,11 @@ function thunder_paragraphs_update_8002() {
       ->set('content.field_media.settings.field_widget_edit', FALSE)
       ->set('content.field_media.settings.field_widget_display_settings.form_mode', 'inline');
     $config->save();
-    $this->logger->info(t('Configuration core.entity_form_display.paragraph.media.default has been successfully updated.'));
+    $updateLogger->info(t('Configuration core.entity_form_display.paragraph.media.default has been successfully updated.'));
     $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph']);
   }
   else {
-    $this->logger->warning(t('Unable to update configuration for core.entity_form_display.paragraph.media.default.'));
+    $updateLogger->warning(t('Unable to update configuration for core.entity_form_display.paragraph.media.default.'));
     $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_paragraph']);
   }
 
