@@ -38,6 +38,7 @@ export SELENIUM_VERSION
 
 # Get latest version of imagick from api.github.com
 PHP_IMAGICK_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
+export PHP_IMAGICK_VERSION
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:
