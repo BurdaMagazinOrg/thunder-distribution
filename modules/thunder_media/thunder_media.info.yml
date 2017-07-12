@@ -28,5 +28,7 @@ dependencies:
   - video_embed_field:video_embed_field
   - video_embed_field:video_embed_media
   - drupal:views
+  - field_group:field_group
+  - empty_fields:empty_fields
 package: Thunder
 configure: thunder_media.configuration_form
