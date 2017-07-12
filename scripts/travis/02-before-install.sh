@@ -49,11 +49,8 @@ yes '' | pecl install -f php-imagick-LATEST.tar.gz
 
 # Install the PECL YAML extension for strict parsing. yes is used to
 # acknowledge all prompts.
-if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
-  yes '' | pecl install yaml;
-elif [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then
- yes '' | pecl install yaml-2.0.0;
-fi;
+wget https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
+yes '' | pecl install -f php-yaml-LATEST.tar.gz
 
 # Set MySQL Options
 mysql -e "SET GLOBAL wait_timeout = 5400;"
