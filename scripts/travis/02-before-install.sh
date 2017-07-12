@@ -49,14 +49,15 @@ yes '' | pecl install -f php-imagick-LATEST.tar.gz
 
 # Build and install the YAML extension for strict parsing.
 wget https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
-tar -zxvf php-yaml-LATEST.tar.gz
-cd pecl-file_formats-yaml-$PHP_YAML_VERSION
+tar -C /tmp -zxvf php-yaml-LATEST.tar.gz
+cd /tmp/pecl-file_formats-yaml-$PHP_YAML_VERSION
 phpize
 ./configure
 make
 make install
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
+cd $TRAVIS_BUILD_DIR
 
 # Set MySQL Options
 mysql -e "SET GLOBAL wait_timeout = 5400;"
