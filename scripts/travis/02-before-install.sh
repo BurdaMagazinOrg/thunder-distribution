@@ -47,10 +47,16 @@ drush verify-makefile
 wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
 yes '' | pecl install -f php-imagick-LATEST.tar.gz
 
-# Install the PECL YAML extension for strict parsing. yes is used to
-# acknowledge all prompts.
+# Build and install the YAML extension for strict parsing.
 wget https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
-yes '' | pecl install -f php-yaml-LATEST.tar.gz
+tar -zxvf php-yaml-LATEST.tar.gz
+cd pecl-file_formats-yaml-$PHP_YAML_VERSION
+phpize
+./configure
+make
+make install
+echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+phpenv rehash
 
 # Set MySQL Options
 mysql -e "SET GLOBAL wait_timeout = 5400;"
