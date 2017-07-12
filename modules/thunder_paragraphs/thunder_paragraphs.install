@@ -101,3 +101,18 @@ function thunder_paragraphs_update_8001() {
 
   return $updateLogger->output();
 }
+
+/**
+ * Change media paragraph to use inline_entity_form.
+ */
+function thunder_paragraphs_update_8002() {
+  $config = \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.media.default');
+
+  if ($config->get('content.field_media.settings.field_widget_display') === 'rendered_entity') {
+    $config->set('content.field_media.settings.field_widget_display', 'inline_entity_form')
+      ->set('content.field_media.settings.field_widget_edit', FALSE)
+      ->set('content.field_media.settings.field_widget_display_settings.form_mode', 'inline');
+  }
+
+  $config->save();
+}
