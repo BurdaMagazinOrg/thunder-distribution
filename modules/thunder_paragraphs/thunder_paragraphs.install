@@ -105,7 +105,7 @@ function thunder_paragraphs_update_8001() {
 /**
  * Change media paragraph to use inline_entity_form.
  */
-function thunder_paragraphs_update_8002() {
+function thunder_paragraphs_update_8101() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   $updateLogger = $thunderUpdater->logger();
