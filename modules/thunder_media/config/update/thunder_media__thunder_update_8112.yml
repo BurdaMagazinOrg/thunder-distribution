@@ -36,15 +36,11 @@ core.entity_view_display.media.twitter.default:
 media_entity.bundle.twitter:
   expected_config:
     field_map: {  }
-    type_configuration:
-      generate_thumbnails: false
   update_actions:
     change:
       field_map:
         content: field_content
         user: field_author
-      type_configuration:
-        generate_thumbnails: true
     add:
       third_party_settings:
         crop:
