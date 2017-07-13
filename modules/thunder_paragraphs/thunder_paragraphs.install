@@ -134,11 +134,11 @@ function thunder_paragraphs_update_8101() {
 
     $config->save();
 
-    $updateLogger->info(t('Configuration core.entity_form_display.paragraph.media.default has been successfully updated.'));
+    $updateLogger->info(t('Configuration of media paragraph has been successfully updated.'));
     $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph'], FALSE);
   }
   else {
-    $updateLogger->warning(t('Unable to update configuration for core.entity_form_display.paragraph.media.default.'));
+    $updateLogger->warning(t('Unable to update configuration for media paragraph.'));
     $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_paragraph']);
   }
 
