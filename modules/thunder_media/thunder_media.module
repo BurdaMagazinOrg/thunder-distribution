@@ -92,13 +92,6 @@ function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&
     case 'field_media_images':
       _thunder_media_media_field_widget_form_alter_helper($element, 'image');
       break;
-
-    case 'field_media':
-      // @todo: At the moment the "field_media" can have references to both
-      // video and image media, but that is going to change in future version
-      // of the distribution, so we need an additional switch here
-      _thunder_media_media_field_widget_form_alter_helper($element, 'image-or-video');
-      break;
   }
 }
 
