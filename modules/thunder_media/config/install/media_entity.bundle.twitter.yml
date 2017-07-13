@@ -20,7 +20,7 @@ queue_thumbnail_downloads: false
 new_revision: false
 type_configuration:
   use_twitter_api: false
-  generate_thumbnails: true
+  generate_thumbnails: false
   source_field: field_url
   consumer_key: ''
   consumer_secret: ''
