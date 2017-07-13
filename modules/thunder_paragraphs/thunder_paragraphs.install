@@ -108,17 +108,34 @@ function thunder_paragraphs_update_8001() {
 function thunder_paragraphs_update_8101() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
   $updateLogger = $thunderUpdater->logger();
 
+  /** @var \Drupal\Core\Config\Config $config */
   $config = \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.media.default');
 
-  if ($config->get('content.field_media.settings.field_widget_display') === 'rendered_entity') {
-    $config->set('content.field_media.settings.field_widget_display', 'inline_entity_form')
-      ->set('content.field_media.settings.field_widget_edit', FALSE)
-      ->set('content.field_media.settings.field_widget_display_settings.form_mode', 'inline');
-    $config->save();
-    $updateLogger->info(t('Configuration core.entity_form_display.paragraph.media.default has been successfully updated.'));
+  $previews_widget_display = $config->get('content.field_media.settings.field_widget_display');
+
+  if ($previews_widget_display === NULL) {
+    $updateLogger->info(t('No update for media paragraph needed.'));
     $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph']);
+  }
+  elseif ($previews_widget_display === 'rendered_entity') {
+    $config->set(
+      'content.field_media.settings.field_widget_display',
+      'inline_entity_form'
+    )
+      ->set('content.field_media.settings.field_widget_edit', FALSE)
+      ->set(
+        'content.field_media.settings.field_widget_display_settings.form_mode',
+        'inline'
+      );
+
+    $config->save();
+
+    $updateLogger->info(t('Configuration core.entity_form_display.paragraph.media.default has been successfully updated.'));
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph'], FALSE);
   }
   else {
     $updateLogger->warning(t('Unable to update configuration for core.entity_form_display.paragraph.media.default.'));
