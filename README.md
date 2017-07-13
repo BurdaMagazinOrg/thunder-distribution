@@ -29,6 +29,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Paragraphs
 * Pathauto
 * Scheduler
+* Shariff
 * Simple XML sitemap
 * Slick
 * Slick media
