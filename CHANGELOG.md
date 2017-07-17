@@ -43,7 +43,7 @@ paragraph provided by Thunder.
 
 If you would like to keep the old behaviour, just require "drupal/thunder_admin": "~1.0" in your root composer.json.
 
-### Thanks yous:
+### Thanks you:
 
 Many thanks to all people involved in the Thunder authoring experience task force:
 
