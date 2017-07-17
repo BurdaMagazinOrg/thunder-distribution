@@ -1,0 +1,19 @@
+uuid: cf573628-0cb5-435c-bed8-6d489c0fbf94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_content
+    - media_entity.bundle.instagram
+id: media.instagram.field_content
+field_name: field_content
+entity_type: media
+bundle: instagram
+label: Content
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

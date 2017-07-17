@@ -86,3 +86,11 @@ v1.1:
         extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
         amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
         thunder_amp: { '#text': 'Thunder AMP theme README', '#url': 'https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md' }
+    v1_1__thunder_admin_ux:
+        '#title': 'New Thunder Admin UX'
+        '#description': "<p>Thunder now comes with new improved administration user interface.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> New Thunder Admin UX require plenty new configurations to be adjusted and imported in order to use it properly. We suggest you to take a look at execution of update hook for enabling new administration theme and manually adjust missing configurations.<p>'
+    v1_1__media_paragraph:
+        '#title': 'Updated media paragraph'
+        '#description': "<p>This is the last update of media paragraph to be compatible with thunder admin theme. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We tried to update the now deprecated media paragraph, but failed. If you do not have the media paragraph, everything is fine. If you modified the paragraph yourself it might be possible, that the form display is not correct, please compare with the form display of the image paragraph to get the correct display. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.<p>'

@@ -7,4 +7,4 @@ projects:
     type: profile
     download:
       type: git
-      tag: 8.2.3
+      branch: develop

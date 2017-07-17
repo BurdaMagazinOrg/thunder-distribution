@@ -33,8 +33,20 @@ export CHROME_DRIVER_VERSION
 SELENIUM_PATH="$PWD/travis_selenium"
 export SELENIUM_PATH
 
-SELENIUM_VERSION="3.0.1"
+SELENIUM_VERSION="3.3.1"
 export SELENIUM_VERSION
+
+# Get latest version of imagick from api.github.com
+PHP_IMAGICK_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
+export PHP_IMAGICK_VERSION
+
+# Get latest version of Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
+if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
+  PHP_YAML_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '[ .[].name | select(index("1.")==0) ] | .[0]'`
+elif [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then
+  PHP_YAML_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '.[0].name'`
+fi;
+export PHP_YAML_VERSION
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:

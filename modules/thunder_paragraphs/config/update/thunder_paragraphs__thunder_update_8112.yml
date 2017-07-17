@@ -1,0 +1,102 @@
+core.entity_form_display.paragraph.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          field_widget_display: rendered_entity
+          field_widget_edit: true
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            field_widget_display: inline_entity_form
+            field_widget_display_settings:
+              form_mode: inline
+            field_widget_edit: false
+    remove:
+      content:
+        field_image:
+          settings:
+            field_widget_display_settings:
+              view_mode: thumbnail
+core.entity_form_display.paragraph.video.default:
+  expected_config:
+    content:
+      field_video:
+        settings:
+          field_widget_display: rendered_entity
+          field_widget_edit: true
+  update_actions:
+    change:
+      content:
+        field_video:
+          settings:
+            field_widget_display: inline_entity_form
+            field_widget_display_settings:
+              form_mode: inline
+            field_widget_edit: false
+    remove:
+      content:
+        field_video:
+          settings:
+            field_widget_display_settings:
+              view_mode: thumbnail
+core.entity_view_display.paragraph.gallery.preview:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          image_link: ''
+          image_style: media_thumbnail
+        type: media_thumbnail
+  update_actions:
+    remove:
+      content:
+        field_media:
+          settings:
+            image_link: false
+            image_style: media_thumbnail
+    change:
+      content:
+        field_media:
+          settings:
+            link: false
+            view_mode: paragraph_preview
+          type: entity_reference_entity_view
+core.entity_view_display.paragraph.image.preview:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          view_mode: thumbnail
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            view_mode: paragraph_preview
+core.entity_view_display.paragraph.instagram.preview:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          view_mode: thumbnail
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            view_mode: paragraph_preview
+core.entity_view_display.paragraph.video.preview:
+  expected_config:
+    content:
+      field_video:
+        settings:
+          view_mode: thumbnail
+  update_actions:
+    change:
+      content:
+        field_video:
+          settings:
+            view_mode: paragraph_preview

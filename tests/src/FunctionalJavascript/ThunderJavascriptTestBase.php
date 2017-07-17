@@ -273,15 +273,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $cssSelector = '[data-drupal-selector="' . $drupalSelector . '"]';
-
-    $this->scrollElementInView($cssSelector);
-    $editButton = $page->find('css', $cssSelector);
-    $editButton->click();
-
-    if ($waitAfterAction) {
-      $this->assertSession()->assertWaitOnAjaxRequest();
-    }
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
   }
 
   /**
@@ -295,10 +287,29 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
-
     $this->scrollElementInView($cssSelector);
     $editButton = $page->find('css', $cssSelector);
     $editButton->click();
+
+    if ($waitAfterAction) {
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
+   * Click on Ajax Button based on CSS selector.
+   *
+   * Ajax buttons handler is triggered on "mousedown" event, so it has to be
+   * triggered over JavaScript.
+   *
+   * @param string $cssSelector
+   *   CSS selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
+    $this->scrollElementInView($cssSelector);
+    $this->getSession()->executeScript("jQuery('{$cssSelector}').trigger('mousedown');");
 
     if ($waitAfterAction) {
       $this->assertSession()->assertWaitOnAjaxRequest();
@@ -418,6 +429,9 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
   /**
    * Click article save option based on index of action.
+   *
+   * 1 - Save as unpublished (default).
+   * 2 - Save and publish.
    *
    * @param int $actionIndex
    *   Index for option that should be clicked. (by default 1)

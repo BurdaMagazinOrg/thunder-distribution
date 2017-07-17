@@ -35,11 +35,21 @@ interface UpdaterInterface {
    *   Configuration array to update.
    * @param array $expectedConfiguration
    *   Only if current config is same like old config we are updating.
+   * @param array $deleteKeys
+   *   List of parent keys to remove. @see NestedArray::unsetValue()
    *
    * @return bool
    *   Returns TRUE if update of configuration was successful.
    */
-  public function updateConfig($configName, array $configuration, array $expectedConfiguration = []);
+  public function updateConfig($configName, array $configuration, array $expectedConfiguration = [], array $deleteKeys = []);
+
+  /**
+   * Execute update of configuration from update definitions.
+   *
+   * @param array $updateDefinitions
+   *   List of configuration definitions.
+   */
+  public function executeUpdate(array $updateDefinitions);
 
   /**
    * Installs a module, checks updater checkbox and works with logger.

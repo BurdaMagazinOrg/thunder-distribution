@@ -269,9 +269,90 @@ function thunder_themes_installed($theme_list) {
     }
 
   }
+
+  // Handle installing of Admin Theme.
+  if (in_array('thunder_admin', $theme_list)) {
+    _on_thunder_admin_theme_install();
+  }
+
   if (in_array('amptheme', $theme_list)) {
     \Drupal::service('module_installer')->install(['amp'], TRUE);
     \Drupal::service('config.installer')->installOptionalConfig();
+  }
+}
+
+/**
+ * Adjust related admin theme blocks after installation.
+ */
+function _on_thunder_admin_theme_install() {
+  $logger = \Drupal::logger('thunder_admin');
+
+  /** @var \Drupal\config_update\ConfigListInterface $configList */
+  $configList = \Drupal::service('config_update.config_list');
+
+  /** @var \Drupal\config_update\ConfigReverter $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
+
+  /** @var \Drupal\config_update\ConfigDiffInterface $configDiffer */
+  $configDiffer = \Drupal::service('thunder_updater.config_differ');
+
+  // Optional configuration blocks are ignored by this functionality.
+  list($activeBlocks, $installBlocks) = $configList->listConfig('profile', 'thunder');
+
+  // Filter configuration list only for blocks related to admin theme.
+  $filterCallback = function ($blockName) {
+    return (strpos($blockName, 'block.block.thunder_admin_') === 0);
+  };
+  $activeBlocks = array_filter($activeBlocks, $filterCallback);
+  $installBlocks = array_filter($installBlocks, $filterCallback);
+
+  // Normalize configuration names.
+  $normalizeConfigNames = function ($blockName) {
+    return substr($blockName, strlen('block.block.'));
+  };
+  $activeBlocks = array_map($normalizeConfigNames, $activeBlocks);
+  $installBlocks = array_map($normalizeConfigNames, $installBlocks);
+
+  if (!empty($activeBlocks)) {
+    $activeBlocks = array_flip($activeBlocks);
+  }
+  if (!empty($installBlocks)) {
+    $installBlocks = array_flip($installBlocks);
+  }
+
+  /*
+   * Solving following cases:
+   * | active config | source config | is different | => Action |
+   * |---------------|---------------|--------------|-----------|
+   * |      T        |      F        |      X       | delete    |
+   * |      T        |      T        |      T       | revert    |
+   * |      T        |      F        |      X       | import    |
+   */
+  foreach ($activeBlocks as $blockName => $index) {
+    if (isset($installBlocks[$blockName])) {
+      // If configurations are different, then revert it to configuration
+      // provided in installation configuration file.
+      if (!$configDiffer->same(
+        $configReverter->getFromActive('block', $blockName),
+        $configReverter->getFromExtension('block', $blockName)
+      )) {
+        $logger->info(t('Block configuration "@block_name" reverted.', ['@block_name' => $blockName]));
+        $configReverter->revert('block', $blockName);
+      }
+
+      // Remote block for list, because it should not be imported.
+      unset($installBlocks[$blockName]);
+    }
+    else {
+      $logger->info(t('Block configuration "@block_name" removed.', ['@block_name' => $blockName]));
+      $configReverter->delete('block', $blockName);
+    }
+  }
+
+  // Import missing block configurations.
+  foreach ($installBlocks as $blockName => $index) {
+    $logger->info(t('Block configuration "@block_name" imported.', ['@block_name' => $blockName]));
+    $configReverter->import('block', $blockName);
   }
 }
 

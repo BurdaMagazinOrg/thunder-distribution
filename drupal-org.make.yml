@@ -66,6 +66,12 @@ projects:
 
   dropzonejs:
     type: "module"
+    version: "1.0-alpha7"
+    patch:
+      - "https://www.drupal.org/files/issues/2870708_2.patch"
+
+  empty_fields:
+    type: "module"
     version: "1"
 
   entity:
@@ -74,7 +80,9 @@ projects:
 
   entity_browser:
     type: "module"
-    version: "1"
+    version: "1.0"
+    patch:
+      - "https://www.drupal.org/files/issues/2858438_6.patch"
 
   entity_reference_revisions:
     type: "module"
@@ -88,7 +96,9 @@ projects:
 
   field_group:
     type: "module"
-    version: "1"
+    version: "1.0-rc6"
+    patch:
+      - "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"
 
   focal_point:
     type: "module"
@@ -198,9 +208,7 @@ projects:
 
   thunder_admin:
     type: "theme"
-    download:
-      url: "https://git.drupal.org/project/thunder_admin.git"
-      tag: "8.x-1.0.1"
+    version: "2"
 
   token:
     type: "module"

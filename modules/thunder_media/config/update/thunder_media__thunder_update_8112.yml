@@ -1,0 +1,51 @@
+core.entity_form_display.media.instagram.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_author: true
+        field_content: true
+core.entity_form_display.media.twitter.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_author: true
+        field_content: true
+core.entity_view_display.media.instagram.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_author: true
+        field_content: true
+core.entity_view_display.media.instagram.thumbnail:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_author: true
+        field_content: true
+core.entity_view_display.media.twitter.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_author: true
+        field_content: true
+media_entity.bundle.twitter:
+  expected_config:
+    field_map: {  }
+  update_actions:
+    change:
+      field_map:
+        content: field_content
+        user: field_author
+    add:
+      third_party_settings:
+        crop:
+          image_field: null
+        media_expire:
+          enable_expiring: null
+          expire_field: null
+          fallback_media: null

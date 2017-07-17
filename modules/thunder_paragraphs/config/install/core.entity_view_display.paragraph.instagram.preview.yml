@@ -15,7 +15,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      view_mode: thumbnail
+      view_mode: paragraph_preview
       link: false
     third_party_settings: {  }
     region: content
