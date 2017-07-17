@@ -1,15 +1,15 @@
 # Change Log
 
-## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-17
+## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.4) 2017-07-17
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.3...8.2.4)
 
-With this release we are introducing a new admin theme, while there are man obvious visual changes, we also introduced 
+With this release we are introducing a new admin theme, while there are many obvious visual changes, we also introduced
 some usability improvements.
 
 ### New features:
 
 - The save button is now fix at the bottom of the screen, no more scrolling down long paragraph lists!
-- Paragraphs all have a compact, yet helpful preview mode. The preview also has the same height now for every 
+- All paragraphs have a compact, yet helpful preview mode. The preview also has the same height now for every
   paragraph type, which is easier to read and also easier to handle.
 - We removed lot of form clutter, forms are much cleaner, margins and paddings are harmonized, unneeded borders 
   around field groups are removed.
@@ -43,7 +43,7 @@ paragraph provided by Thunder.
 
 If you would like to keep the old behaviour, just require "drupal/thunder_admin": "~1.0" in your root composer.json.
 
-### Thanks you:
+### Thank you:
 
 Many thanks to all people involved in the Thunder authoring experience task force:
 
@@ -58,7 +58,7 @@ Berta Leinweber
 Miriam Fuchs
 Franziska Fey
 
-Very special thanks to Andreas Krauzberger and Andreas Sahle for beeing the masterminds and designers of all of this!
+Very special thanks to Andreas Krauzberger and Andreas Sahle for being the masterminds and designers of all of this!
 
 ## [8.2.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-03
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.2...8.2.3)
