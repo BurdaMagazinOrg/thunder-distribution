@@ -47,16 +47,8 @@ If you would like to keep the old behaviour, just require "drupal/thunder_admin"
 
 Many thanks to all people involved in the Thunder authoring experience task force:
 
-Jeannette Mayer
-Jessica Simon
-Claudia Herwig
-Andreas Nickel
-Steffen Schlaer
-Nico Davis
-Maria Pecenka
-Berta Leinweber
-Miriam Fuchs
-Franziska Fey
+Jeannette Mayer, Jessica Simon, Claudia Herwig, Andreas Nickel, Steffen Schlaer, Nico Davis, Maria Pecenka, 
+Berta Leinweber, Miriam Fuchs, Franziska Fey
 
 Very special thanks to Andreas Krauzberger and Andreas Sahle for being the masterminds and designers of all of this!
 
