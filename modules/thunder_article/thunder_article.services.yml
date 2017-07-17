@@ -5,6 +5,6 @@ services:
     tags:
       - { name: breadcrumb_builder, priority: 100 }
   thunder_article.twig.filter_extension:
-      class: Drupal\thunder_article\Twig\FilterExtension
-      tags:
-        - { name: twig.extension }
+    class: Drupal\thunder_article\Twig\FilterExtension
+    tags:
+      - { name: twig.extension }

@@ -4,22 +4,19 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.gallery.field_media
-    - image.style.media_thumbnail
     - paragraphs.paragraphs_type.gallery
-  module:
-    - media_entity
 id: paragraph.gallery.preview
 targetEntityType: paragraph
 bundle: gallery
 mode: preview
 content:
   field_media:
-    type: media_thumbnail
+    type: entity_reference_entity_view
     weight: 0
     label: hidden
     settings:
-      image_style: media_thumbnail
-      image_link: ''
+      view_mode: paragraph_preview
+      link: false
     third_party_settings: {  }
     region: content
 hidden:

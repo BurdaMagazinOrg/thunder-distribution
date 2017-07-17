@@ -97,7 +97,6 @@ function thunder_article_update_8101() {
     else {
       $updateLogger->warning(t('Unable to place shariff field.'));
       $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
-
     }
   }
 

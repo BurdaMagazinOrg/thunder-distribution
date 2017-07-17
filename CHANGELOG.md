@@ -1,5 +1,64 @@
 # Change Log
 
+## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-17
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.3...8.2.4)
+
+With this release we are introducing a new admin theme, while there are man obvious visual changes, we also introduced 
+some usability improvements.
+
+### New features:
+
+- The save button is now fix at the bottom of the screen, no more scrolling down long paragraph lists!
+- Paragraphs all have a compact, yet helpful preview mode. The preview also has the same height now for every 
+  paragraph type, which is easier to read and also easier to handle.
+- We removed lot of form clutter, forms are much cleaner, margins and paddings are harmonized, unneeded borders 
+  around field groups are removed.
+- Images and other media can be directly edited in the paragraph now, no mor extra click on that edit button, 
+  no more distracting pop up windows!
+- The help texts are now hidden behind small buttons with question marks – so they don’t disturb the nice view but are 
+  there if you need them  
+- The sidebar handling for mobile devices has been improved. You can now open and close the bar when you use a small 
+  device
+  
+But this is all just the beginning. We will continue to improve the authoring experience step by step in the future.
+
+
+### Some hints:
+
+We try to update your paragraphs as good as possible, but if you have heavily modified your system, some paragraphs 
+will not be looking as we intended. If you want to provide a better look for your custom paragraphs you can do the 
+following:
+
+For custom paragraph types, custom display settings "Preview" should be enabled and adjusted.
+For media bundles we have provided "Paragraph preview" view mode. In order to have proper look for media paragraph, 
+in paragraph "Preview" view mode for media entity field "Rendered entity" formatter should be selected with view mode 
+"Paragraph preview". As an example, you can take a look at default image paragraph provided by Thunder.
+
+For text fields that should be displayed in a preview of the paragraph, we are suggesting to use "Trimmed" the text 
+formatter with max 600 characters. As an example, you can take a look at default text paragraph provided by Thunder.
+
+Additionally the new form display mode "Inline" has been added for media bundles. This form display mode is used for 
+displaying of inline entity form for media entities in paragraphs. As an example, you can take a look at default image paragraph provided by Thunder.
+
+If you would like to keep the old behaviour, just require "drupal/thunder_admin": "~1.0" in your root composer.json.
+
+### Thanks yous:
+
+Many thanks to all people involved in the Thunder authoring experience task force:
+
+Jeannette Mayer
+Jessica Simon
+Claudia Herwig
+Andreas Nickel
+Steffen Schlaer
+Nico Davis
+Maria Pecenka
+Berta Leinweber
+Miriam Fuchs
+Franziska Fey
+
+Special thanks to Andreas Krauzberger and Andreas Sahle for beeing the masterminds and designers of all of this!
+
 ## [8.2.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-03
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.2...8.2.3)
 

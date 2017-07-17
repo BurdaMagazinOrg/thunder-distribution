@@ -276,7 +276,10 @@ function thunder_update_8006() {
   $updateLogger = Drupal::service('thunder_updater.logger');
 
   $configs = [
-    'entity_view_display' => ['paragraph.instagram.preview', 'media.instagram.thumbnail'],
+    'entity_view_display' => [
+      'paragraph.instagram.preview',
+      'media.instagram.thumbnail',
+    ],
   ];
 
   /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
@@ -294,7 +297,10 @@ function thunder_update_8006() {
         $configReverter->import($entity, $id);
       }
       catch (\Exception $e) {
-        $updateLogger->warning(t('Unable to import @entity.@id config.', ['@id' => $id, '@entity' => $entity]));
+        $updateLogger->warning(t('Unable to import @entity.@id config.', [
+          '@id' => $id,
+          '@entity' => $entity,
+        ]));
       }
     }
   }
@@ -654,5 +660,66 @@ function thunder_update_8111() {
   }
 
   // Output logged result of update hook execution.
+  return $updateLogger->output();
+}
+
+/**
+ * Installs new Thunder Admin theme.
+ */
+function thunder_update_8112() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  $successfulUpdate = TRUE;
+
+  // Order is important, because of dependencies.
+  $importConfigs = [
+    'core.entity_form_mode.media.inline',
+    'image.style.paragraph_preview_thumbnail',
+    'core.entity_view_mode.media.paragraph_preview',
+    'field.storage.media.field_author',
+    'field.storage.media.field_content',
+    'field.field.media.twitter.field_author',
+    'field.field.media.twitter.field_content',
+    'field.field.media.instagram.field_author',
+    'field.field.media.instagram.field_content',
+    'core.entity_view_display.media.gallery.paragraph_preview',
+    'core.entity_view_display.media.image.paragraph_preview',
+    'core.entity_view_display.media.twitter.paragraph_preview',
+    'core.entity_view_display.media.instagram.paragraph_preview',
+    'core.entity_view_display.media.video.paragraph_preview',
+    'core.entity_view_display.paragraph.link.preview',
+    'core.entity_view_display.paragraph.twitter.preview',
+    'core.entity_form_display.media.image.inline',
+    'core.entity_form_display.media.video.inline',
+  ];
+
+  if (!$thunderUpdater->importConfigs($importConfigs)) {
+    $successfulUpdate = FALSE;
+  }
+
+  $updateList = [
+    ['thunder_media', 'thunder_media__thunder_update_8112'],
+    ['thunder_paragraphs', 'thunder_paragraphs__thunder_update_8112'],
+    ['thunder_article', 'thunder_article__thunder_update_8112'],
+    ['thunder', 'thunder__thunder_update_8112'],
+  ];
+
+  // Execute update configurations with logging of fails and successes.
+  if (!$thunderUpdater->executeUpdates($updateList)) {
+    $successfulUpdate = FALSE;
+  }
+
+  // Set update checklist.
+  if ($successfulUpdate) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__thunder_admin_ux']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_admin_ux']);
+  }
+
+  // Output logged messages to related chanel of update execution.
   return $updateLogger->output();
 }
