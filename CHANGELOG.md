@@ -1,5 +1,24 @@
 # Change Log
 
+## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-17
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.3...8.2.4)
+
+With this release we are introducing a new admin theme, while there are man obvious visual changes, we also introduced 
+some usability improvements.
+
+- The save button is now fix at the bottom of the screen, no more scrolling down long paragraph lists!
+- Paragraphs all have a compact, yet helpful preview mode. The preview also has the same height now for every 
+  paragraph type, which is easier to read and also easier to handle.
+- We removed lot of form clutter that everybody got used to, forms are much cleaner, margins and paddings are harmonized,
+  unneeded borders around field groups are removed.
+- Images and other media can be directly edited in the paragraph now, no mor extra click on that edit button, 
+  no more distracting pop up windows!
+- The sidebar handling for mobile devices has been improved. You can now open and close the bar when you use a small 
+  device
+  
+But this is all just the beginning. We will continue to improve the authoring experience step by step in the future.
+
+
 ## [8.2.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-03
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.2...8.2.3)
 
