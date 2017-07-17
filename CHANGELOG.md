@@ -59,7 +59,6 @@ Franziska Fey
 
 Special thanks to Andreas Krauzberger and Andreas Sahle for beeing the masterminds and designers of all of this!
 
-
 ## [8.2.3](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.3) 2017-07-03
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.2...8.2.3)
 
