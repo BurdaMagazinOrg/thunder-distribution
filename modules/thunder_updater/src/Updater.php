@@ -71,7 +71,7 @@ class Updater implements UpdaterInterface {
   /**
    * The config helper service.
    *
-   * @var ConfigHelper
+   * @var \Drupal\thunder_updater\ConfigHelper
    */
   protected $configHelper;
 
@@ -92,6 +92,8 @@ class Updater implements UpdaterInterface {
    *   Update logger.
    * @param \Drupal\thunder_updater\UpdateChecklist $checklist
    *   Update Checklist service.
+   * @param \Drupal\thunder_updater\ConfigHelper $configHelper
+   *   Config helper service.
    */
   public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist, ConfigHelper $configHelper) {
     $this->tempStoreFactory = $tempStoreFactory;
