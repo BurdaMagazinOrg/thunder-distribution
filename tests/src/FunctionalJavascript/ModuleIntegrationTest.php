@@ -195,6 +195,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $tokenUrl = $copyToClipboard->getAttribute('data-clipboard-text');
 
     // Log-Out and check that URL with token works, but not URL without it.
+    $loggedInUser = $this->loggedInUser;
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $this->assertSession()->pageTextContains('Article Text 1');
@@ -203,7 +204,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertEquals(1, count($noAccess));
 
     // Log-In and delete token -> check page can't be accessed.
-    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
     $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
     $this->assertSession()->assertWaitOnAjaxRequest();
@@ -216,7 +217,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertEquals(1, count($noAccess));
 
     // Log-In and publish article.
-    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
     $this->clickArticleSave(2);
 
