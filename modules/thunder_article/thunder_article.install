@@ -7,7 +7,6 @@
 
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Extension\MissingDependencyException;
-use Drupal\user\Entity\Role;
 
 /**
  * Install the thunder article integration.
@@ -98,48 +97,6 @@ function thunder_article_update_8101() {
     else {
       $updateLogger->warning(t('Unable to place shariff field.'));
       $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
-    }
-  }
-
-  return $updateLogger->output();
-}
-
-
-/**
- * Enable content_lock module.
- */
-function thunder_article_update_8102() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
-
-  $modulesInstalledSuccessfully = TRUE;
-
-  try {
-    \Drupal::service('module_installer')->install([
-      'content_lock',
-    ]);
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning($e->getMessage());
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
-    $modulesInstalledSuccessfully = FALSE;
-  }
-
-  if ($modulesInstalledSuccessfully) {
-    $updateLogger->info(t('Content lock module is successfully installed.'));
-
-    /** @var \Drupal\user\RoleInterface[] $roles */
-    $roles = Role::loadMultiple(['editor', 'seo']);
-
-    foreach ($roles as $role) {
-      $role->grantPermission('break content lock');
-      if ($role->save()) {
-        $updateLogger->info(t('Permissions to break content lock granted for "@user_role" user role.', ['@user_role' => $role->id()]));
-      }
-      else {
-        $updateLogger->warning(t('Unable to grant break content lock for "@user_role" user role.', ['@user_role' => $role->id()]));
-      }
     }
   }
 
