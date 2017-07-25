@@ -9,6 +9,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Admin Toolbar
 * Better Normalizers
 * Blazy
+* Content lock
 * Crop
 * Ctools
 * Dropzonejs
