@@ -46,6 +46,10 @@ projects:
     type: "module"
     version: "1"
 
+  content_lock:
+    type: "module"
+    version: "1"
+
   crop:
     type: "module"
     version: "1"
