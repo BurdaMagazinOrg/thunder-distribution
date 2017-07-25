@@ -293,7 +293,7 @@ class Updater implements UpdaterInterface {
   public function installModules(array $modules) {
 
     $successful = [];
-
+    $modulesInstalledSuccessfully = TRUE;
     foreach ($modules as $update => $module) {
       try {
         if ($this->moduleInstaller->install([$module])) {
@@ -304,15 +304,18 @@ class Updater implements UpdaterInterface {
         else {
           $this->checklist->markUpdatesFailed([$update]);
           $this->logger->warning($this->t('Unable to enable @module.', ['@module' => $module]));
+          $modulesInstalledSuccessfully = FALSE;
         }
       }
       catch (MissingDependencyException $e) {
         $this->checklist->markUpdatesFailed([$update]);
         $this->logger->warning($this->t('Unable to enable @module because of missing dependencies.', ['@module' => $module]));
+        $modulesInstalledSuccessfully = FALSE;
       }
     }
 
     $this->checklist->markUpdatesSuccessful($successful);
+    return $modulesInstalledSuccessfully;
   }
 
   /**

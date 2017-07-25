@@ -734,20 +734,7 @@ function thunder_update_8113() {
   $thunderUpdater = \Drupal::service('thunder_updater');
   $updateLogger = $thunderUpdater->logger();
 
-  $modulesInstalledSuccessfully = TRUE;
-
-  try {
-    \Drupal::service('module_installer')->install([
-      'content_lock',
-    ]);
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning($e->getMessage());
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__content_lock']);
-    $modulesInstalledSuccessfully = FALSE;
-  }
-
-  if ($modulesInstalledSuccessfully) {
+  if ($thunderUpdater->installModules(['v1_1__content_lock' => 'content_lock'])) {
     $updateLogger->info(t('content_lock module is successfully installed.'));
 
     if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8113']])) {
