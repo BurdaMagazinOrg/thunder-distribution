@@ -12,6 +12,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Crop
 * Ctools
 * Dropzonejs
+* Empty Fields
 * Entity API
 * Entity Browser
 * Field Group
