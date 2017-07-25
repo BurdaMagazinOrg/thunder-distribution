@@ -3,7 +3,7 @@
 ## [8.2.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.5) 2017-07-25
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.4...8.2.5)
 
-Content lock module was added. When someone edits an article, that article is locked for everybody else. This lock can 
+Content lock module was added. When someone edits an article, that article is locked for everybody else. This lock can
 be broken by other editors if needed.
 
 ## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.4) 2017-07-17
