@@ -352,4 +352,38 @@ class Updater implements UpdaterInterface {
     return $successfulImport;
   }
 
+  /**
+   * List of full configuration names to import.
+   *
+   * @param array $configList
+   *   List of configurations.
+   *
+   * @return bool
+   *   Returns if import was successful.
+   */
+  public function importConfigs(array $configList) {
+    $successfulImport = TRUE;
+
+    // Import configurations.
+    foreach ($configList as $fullConfigName) {
+      try {
+        $configName = ConfigName::createByFullName($fullConfigName);
+
+        $this->configReverter->import($configName->getType(), $configName->getName());
+        $this->logger->info($this->t('Configuration @full_name has been successfully imported.', [
+          '@full_name' => $fullConfigName,
+        ]));
+      }
+      catch (\Exception $e) {
+        $successfulImport = FALSE;
+
+        $this->logger->warning($this->t('Unable to import @full_name config.', [
+          '@full_name' => $fullConfigName,
+        ]));
+      }
+    }
+
+    return $successfulImport;
+  }
+
 }
