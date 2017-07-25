@@ -100,3 +100,8 @@ v1.1:
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/content_lock' }
         configure_page: { '#text': 'Configure content lock', '#url': 'internal:/admin/config/content/contentlocksettings' }
+    v1_1__empty_fields:
+        '#title': 'Install empty fields'
+        '#description': "<p>This module is used to show empty fields in the paragraph previews.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/empty_fields' }
