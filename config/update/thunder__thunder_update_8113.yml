@@ -1,0 +1,187 @@
+user.role.editor:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'break content lock'
+user.role.seo:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'break content lock'
+views.view.content:
+  expected_config:
+    display:
+      default:
+        display_options:
+          style:
+            options:
+              info:
+                operations:
+                  default_sort_order: asc
+                  sortable: false
+  update_actions:
+    add:
+      display:
+        default:
+          display_options:
+            fields:
+              is_locked:
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  alter_text: false
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                element_class: ''
+                element_default_classes: true
+                element_label_class: ''
+                element_label_colon: true
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                empty: ''
+                empty_zero: false
+                exclude: false
+                field: is_locked
+                group_type: group
+                hide_alter_empty: true
+                hide_empty: false
+                id: is_locked
+                label: 'Is Locked'
+                not: false
+                plugin_id: content_lock_field
+                relationship: none
+                table: content_lock
+                type: yes-no
+                type_custom_false: ''
+                type_custom_true: ''
+              name:
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  alter_text: false
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                element_class: ''
+                element_default_classes: true
+                element_label_class: ''
+                element_label_colon: true
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                empty: ''
+                empty_zero: false
+                entity_field: name
+                entity_type: user
+                exclude: false
+                field: name
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+                group_type: group
+                hide_alter_empty: true
+                hide_empty: false
+                id: name
+                label: 'Lock owner'
+                multi_type: separator
+                plugin_id: field
+                relationship: uid_1
+                separator: ', '
+                settings:
+                  link_to_entity: true
+                table: users_field_data
+                type: user_name
+            relationships:
+              uid_1:
+                admin_label: 'Lock owner'
+                field: uid
+                group_type: group
+                id: uid_1
+                plugin_id: standard
+                relationship: none
+                required: false
+                table: content_lock
+            style:
+              options:
+                columns:
+                  is_locked: is_locked
+                  name: name
+                info:
+                  is_locked:
+                    align: ''
+                    default_sort_order: asc
+                    empty_column: false
+                    responsive: priority-medium
+                    separator: ''
+                    sortable: true
+                  name:
+                    align: ''
+                    default_sort_order: asc
+                    empty_column: false
+                    responsive: priority-low
+                    separator: ''
+                    sortable: true
+    delete:
+      display:
+        default:
+          display_options:
+            style:
+              options:
+                info:
+                  operations:
+                    default_sort_order: asc
+                    sortable: false

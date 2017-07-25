@@ -195,6 +195,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $tokenUrl = $copyToClipboard->getAttribute('data-clipboard-text');
 
     // Log-Out and check that URL with token works, but not URL without it.
+    $loggedInUser = $this->loggedInUser;
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $this->assertSession()->pageTextContains('Article Text 1');
@@ -203,7 +204,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertEquals(1, count($noAccess));
 
     // Log-In and delete token -> check page can't be accessed.
-    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
     $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
     $this->assertSession()->assertWaitOnAjaxRequest();
@@ -216,7 +217,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertEquals(1, count($noAccess));
 
     // Log-In and publish article.
-    $this->logWithRole(static::$defaultUserRole);
+    $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
     $this->clickArticleSave(2);
 
@@ -671,6 +672,32 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->getSession()->executeScript('AMPValidationSuccess = false; console.info = function(message) { if (message === "AMP validation successful.") { AMPValidationSuccess = true } }; amp.validator.validateUrlAndLog(document.location.href, document);');
     $this->assertJsCondition('AMPValidationSuccess === true', 10000, 'AMP validation successful.');
 
+  }
+
+  /**
+   * Testing the content lock integration.
+   */
+  public function testContentLock() {
+
+    $this->drupalGet('node/6/edit');
+    $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
+
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', '//*[@id="edit-unlock"]')->click();
+
+    $page->find('xpath', '//*[@id="edit-submit"]')->click();
+    $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
+
+    $this->drupalGet('node/6/edit');
+    $loggedInUser = $this->loggedInUser->label();
+
+    $this->drupalLogout();
+
+    // Login with other user.
+    $this->logWithRole(static::$defaultUserRole);
+
+    $this->drupalGet('node/6/edit');
+    $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent other users changes.');
   }
 
 }

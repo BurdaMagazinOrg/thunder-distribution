@@ -9,6 +9,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Admin Toolbar
 * Better Normalizers
 * Blazy
+* Content lock
 * Crop
 * Ctools
 * Dropzonejs
@@ -78,7 +79,7 @@ drush dl thunder
 If you want to install Thunder with composer (recommended) do the following:
 
 ```
-composer create-project 'burdamagazinorg/thunder-project:~8.1.0' MYPROJECT --stability dev  --no-interaction
+composer create-project burdamagazinorg/thunder-project thunder --no-interaction
 ```
 
 For further information follow the [install instructions](https://www.drupal.org/documentation/install). 

@@ -723,3 +723,27 @@ function thunder_update_8112() {
   // Output logged messages to related chanel of update execution.
   return $updateLogger->output();
 }
+
+/**
+ * Enable content_lock module.
+ */
+function thunder_update_8113() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  if ($thunderUpdater->installModules(['v1_1__content_lock' => 'content_lock'])) {
+    $updateLogger->info(t('content_lock module is successfully installed.'));
+
+    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8113']])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__content_lock']);
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__content_lock']);
+    }
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
