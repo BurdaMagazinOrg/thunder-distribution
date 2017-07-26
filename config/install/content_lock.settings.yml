@@ -1,0 +1,4 @@
+verbose: 1
+types:
+  node:
+    article: article

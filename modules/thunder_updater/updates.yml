@@ -94,3 +94,14 @@ v1.1:
         '#title': 'Updated media paragraph'
         '#description': "<p>This is the last update of media paragraph to be compatible with thunder admin theme. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We tried to update the now deprecated media paragraph, but failed. If you do not have the media paragraph, everything is fine. If you modified the paragraph yourself it might be possible, that the form display is not correct, please compare with the form display of the image paragraph to get the correct display. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.<p>'
+    v1_1__content_lock:
+        '#title': 'Install content locking'
+        '#description': "<p>This module provides locking of entity types. We enabled locking for articles by default. Of course, you can enable it for other entity types.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/content_lock' }
+        configure_page: { '#text': 'Configure content lock', '#url': 'internal:/admin/config/content/contentlocksettings' }
+    v1_1__empty_fields:
+        '#title': 'Install empty fields'
+        '#description': "<p>This module is used to show empty fields in the paragraph previews.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/empty_fields' }
