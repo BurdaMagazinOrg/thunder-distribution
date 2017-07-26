@@ -13,7 +13,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  * Implements hook_theme().
  */
 function thunder_fia_theme($existing, $type, $render, $path) {
-  $theme = array();
+  $theme = [];
   $files = scandir(DRUPAL_ROOT . '/' . $path . '/templates');
   foreach ($files as $file) {
     if ($file === '.' || $file === '..') {
@@ -21,7 +21,7 @@ function thunder_fia_theme($existing, $type, $render, $path) {
     }
     $file = str_replace('-', '_', $file);
     $file = basename($file, '.html.twig');
-    $base = array();
+    $base = [];
     preg_match('/([a-z]*)_/', $file, $base);
     $theme[$file] = [
       'path' => $path . '/templates',

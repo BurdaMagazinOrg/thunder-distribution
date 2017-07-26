@@ -12,6 +12,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Crop
 * Ctools
 * Dropzonejs
+* Empty Fields
 * Entity API
 * Entity Browser
 * Field Group
@@ -29,6 +30,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Paragraphs
 * Pathauto
 * Scheduler
+* Shariff
 * Simple XML sitemap
 * Slick
 * Slick media
@@ -44,12 +46,13 @@ Plus some base configuration:
 * A set of commonly used paragraph types
     * Gallery
     * Instagram
-    * Media (Image/Video)
+    * Image
+    * Video
     * Twitter
     * Text
     * Quote
 
-[Here](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/8.x-1.x/modules/thunder_paragraphs/README.md) you can find more information about these paragraphs.
+[Here](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/modules/thunder_paragraphs/README.md) you can find more information about these paragraphs.
  
 ## What can be activated optionally?
 
@@ -76,7 +79,7 @@ drush dl thunder
 If you want to install Thunder with composer (recommended) do the following:
 
 ```
-composer create-project 'burdamagazinorg/thunder-project:~8.1.0' MYPROJECT --stability dev  --no-interaction
+composer create-project burdamagazinorg/thunder-project thunder --no-interaction
 ```
 
 For further information follow the [install instructions](https://www.drupal.org/documentation/install). 

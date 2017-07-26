@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\thunder_updater\UpdateInterface;
 
 /**
  * Defines the Contact entity.
@@ -32,9 +31,9 @@ class Update extends ContentEntityBase implements UpdateInterface {
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
-    $values += array(
+    $values += [
       'user_id' => \Drupal::currentUser()->id(),
-    );
+    ];
   }
 
   /**
@@ -97,11 +96,11 @@ class Update extends ContentEntityBase implements UpdateInterface {
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Update entity.'))
       ->setReadOnly(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '',
         'max_length' => 50,
         'text_processing' => 0,
-      ));
+      ]);
 
     // Standard field, unique outside of the scope of the current project.
     $fields['uuid'] = BaseFieldDefinition::create('uuid')

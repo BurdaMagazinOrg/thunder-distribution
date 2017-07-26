@@ -7,8 +7,8 @@ dependencies:
     - thunder_admin
 id: thunder_admin_breadcrumbs
 theme: thunder_admin
-region: breadcrumb
-weight: 0
+region: header
+weight: -2
 provider: null
 plugin: system_breadcrumb_block
 settings:

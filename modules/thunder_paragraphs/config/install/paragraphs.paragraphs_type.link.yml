@@ -3,3 +3,4 @@ status: true
 dependencies: {  }
 id: link
 label: Link
+behavior_plugins: {  }

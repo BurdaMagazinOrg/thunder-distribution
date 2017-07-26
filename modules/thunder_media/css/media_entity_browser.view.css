@@ -4,6 +4,7 @@
 
 .view-media-entity-browser {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .view-media-entity-browser,
@@ -50,7 +51,15 @@
 }
 
 @media screen and (min-width:50em) { /* 800px */
-  .entity-browser-form .entities-list .item-container,
+  .view-media-entity-browser .views-row {
+    width: 24%;
+  }
+  .entity-browser-form .entities-list .item-container {
+    width: 15em;
+  }
+}
+
+@media screen and (min-width:74em) { /* 1150px */
   .view-media-entity-browser .views-row {
     width: 15em;
   }

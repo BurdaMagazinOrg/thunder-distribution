@@ -12,45 +12,63 @@ use Behat\Mink\Element\DocumentElement;
 trait ThunderParagraphsTestTrait {
 
   /**
-   * Counter used to count number of added Paragraphs.
+   * Get number of paragraphs for defined field on current page.
    *
-   * @var int
+   * @param string $fieldName
+   *   Paragraph field name.
+   *
+   * @return int
+   *   Returns number of paragraphs.
    */
-  protected $paragraphCount;
+  protected function getNumberOfParagraphs($fieldName) {
+    $fieldNamePart = str_replace('_', '-', $fieldName);
+
+    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr");
+
+    return count($paragraphRows);
+  }
 
   /**
    * Add paragraph for field with defined paragraph type.
+   *
+   * This uses paragrpahs modal widget.
    *
    * @param string $fieldName
    *   Field name.
    * @param string $type
    *   Type of the paragraph.
+   * @param int $position
+   *   Position of the paragraph.
+   *
+   * @return int
+   *   Returns index for added paragraph.
    */
-  public function addParagraph($fieldName, $type) {
+  public function addParagraph($fieldName, $type, $position = NULL) {
     $page = $this->getSession()->getPage();
+    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
 
-    $toggleButtonSelector = '#edit-' . str_replace('_', '-', $fieldName) . '-wrapper .dropbutton-toggle button';
-    $toggleButton = $page->find('css', $toggleButtonSelector);
-    $this->scrollElementInView($toggleButtonSelector);
-
-    $toggleButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $addMoreButtonName = "{$fieldName}_{$type}_add_more";
-    $this->scrollElementInView("[name=\"$addMoreButtonName\"]");
-    $page->pressButton($addMoreButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    if (!isset($this->paragraphCount[$fieldName])) {
-      $this->paragraphCount[$fieldName] = 0;
+    $fieldSelector = str_replace('_', '-', $fieldName);
+    if ($position === NULL || $position > $this->getNumberOfParagraphs($fieldName)) {
+      $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
     }
     else {
-      $this->paragraphCount[$fieldName]++;
+      $addButtonSelector = "input[name='${fieldName}_${position}_add_modal']";
     }
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $this->paragraphCount[$fieldName] . '-subform"]');
+    $addButton = $page->find('css', $addButtonSelector);
+    $this->scrollElementInView($addButtonSelector);
 
-    return $this->paragraphCount[$fieldName];
+    $addButton->click();
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    $page->find('xpath', "//ul[@class='paragraphs-add-dialog-list']/li/button[@data-type='$type']")
+      ->click();
+
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
+
+    return $nextParagraphIndex;
   }
 
   /**
@@ -60,9 +78,11 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addImageParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'image');
+  public function addImageParagraph($fieldName, array $media, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
 
@@ -75,9 +95,11 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addVideoParagraph($fieldName, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'video');
+  public function addVideoParagraph($fieldName, array $media, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
 
@@ -92,9 +114,11 @@ trait ThunderParagraphsTestTrait {
    *   Name of the gallery.
    * @param array $media
    *   List of media identifiers.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addGalleryParagraph($fieldName, $name, array $media) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'gallery');
+  public function addGalleryParagraph($fieldName, $name, array $media, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
   }
@@ -108,9 +132,11 @@ trait ThunderParagraphsTestTrait {
    *   Text for paragraph.
    * @param string $type
    *   Type of text paragraph.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addTextParagraph($fieldName, $text, $type = 'text') {
-    $paragraphIndex = $this->addParagraph($fieldName, $type);
+  public function addTextParagraph($fieldName, $text, $type = 'text', $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     $this->fillCkEditor(
       $this->getSession()->getPage(),
@@ -128,9 +154,11 @@ trait ThunderParagraphsTestTrait {
    *   Url to tweet or instagram.
    * @param string $type
    *   Type of paragraph (twitter|instagram).
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addSocialParagraph($fieldName, $socialUrl, $type) {
-    $paragraphIndex = $this->addParagraph($fieldName, $type);
+  public function addSocialParagraph($fieldName, $socialUrl, $type, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
@@ -147,9 +175,11 @@ trait ThunderParagraphsTestTrait {
    *   Text that will be displayed for link.
    * @param string $url
    *   Link url.
+   * @param int $position
+   *   Position of the paragraph.
    */
-  public function addLinkParagraph($fieldName, $urlText, $url) {
-    $paragraphIndex = $this->addParagraph($fieldName, 'link');
+  public function addLinkParagraph($fieldName, $urlText, $url, $position = NULL) {
+    $paragraphIndex = $this->addParagraph($fieldName, 'link', $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();

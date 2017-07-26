@@ -28,7 +28,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
-    $this->dragDropElement($dragElement, 200, 0);
+    $this->dragDropElement($dragElement, 300, 0);
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
@@ -69,7 +69,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->editParagraph($page, 'field_paragraphs', 0);
 
     // Remove 2nd Image.
-    $this->clickButtonDrupalSelector($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button');
+    $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button"]');
 
     $this->clickArticleSave();
 

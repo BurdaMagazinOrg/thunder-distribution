@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\block\Entity\Block;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -22,17 +23,17 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
  */
 function thunder_install_tasks(&$install_state) {
 
-  $tasks = array(
-    'thunder_module_configure_form' => array(
+  $tasks = [
+    'thunder_module_configure_form' => [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
       'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ),
-    'thunder_module_install' => array(
+    ],
+    'thunder_module_install' => [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
-    ),
-  );
+    ],
+  ];
 
   return $tasks;
 }
@@ -59,9 +60,9 @@ function thunder_post_install_redirect(array &$install_state) {
   // Clear all messages.
   drupal_get_messages();
 
-  $success_message = t('Congratulations, you installed @drupal!', array(
+  $success_message = t('Congratulations, you installed @drupal!', [
     '@drupal' => drupal_install_profile_distribution_name(),
-  ));
+  ]);
   drupal_set_message($success_message);
 
   $output = [
@@ -107,12 +108,12 @@ function thunder_module_install(array &$install_state) {
 
   $batch = [];
   if ($modules) {
-    $operations = array();
+    $operations = [];
     foreach ($modules as $module) {
-      $operations[] = array(
+      $operations[] = [
         '_thunder_install_module_batch',
-        array(array($module), $module, $install_state['form_state_values']),
-      );
+        [[$module], $module, $install_state['form_state_values']],
+      ];
     }
 
     $batch = [
@@ -153,7 +154,7 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
   }
 
   $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', array('%module_name' => $module_name));
+  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
 }
 
 /**
@@ -163,9 +164,11 @@ function thunder_themes_installed($theme_list) {
 
   if (in_array('infinite', $theme_list)) {
 
-    $configs = Drupal::configFactory()->listAll('block.block.infinite_');
+    $configFactory = \Drupal::configFactory();
+
+    $configs = $configFactory->listAll('block.block.infinite_');
     foreach ($configs as $config) {
-      Drupal::configFactory()->getEditable($config)->delete();
+      $configFactory->getEditable($config)->delete();
     }
 
     \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
@@ -209,27 +212,147 @@ function thunder_themes_installed($theme_list) {
     $display->save();
 
     $profilePath = drupal_get_path('profile', 'thunder');
-    \Drupal::configFactory()
-      ->getEditable('infinite.settings')
+    $configFactory->getEditable('infinite.settings')
       ->set('logo.use_default', FALSE)
       ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
+      ->set('favicon.use_default', FALSE)
+      ->set('favicon.path', $profilePath . '/themes/thunder_base/favicon.ico')
       ->save(TRUE);
 
     // Set default pages.
-    \Drupal::configFactory()->getEditable('system.site')
+    $configFactory->getEditable('system.site')
       ->set('page.front', '/taxonomy/term/1')
       ->save(TRUE);
 
     // Set infinite image styles and gallery view mode.
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.image.default')
+    $configFactory->getEditable('core.entity_view_display.media.image.default')
       ->set('content.field_image.settings.image_style', 'inline_m')
       ->set('content.field_image.settings.responsive_image_style', '')
       ->save(TRUE);
-    \Drupal::configFactory()
-      ->getEditable('core.entity_view_display.media.gallery.default')
+    $configFactory->getEditable('core.entity_view_display.media.gallery.default')
       ->set('content.field_media_images.settings.view_mode', 'gallery')
       ->save(TRUE);
+  }
+  if (in_array('thunder_amp', $theme_list)) {
+    // Install AMP module.
+    \Drupal::service('module_installer')->install(['amp'], TRUE);
+    \Drupal::service('config.installer')->installOptionalConfig();
+
+    \Drupal::configFactory()
+      ->getEditable('amp.settings')
+      ->set('amp_library_process_full_html', TRUE)
+      ->save(TRUE);
+
+    // Set AMP theme to thunder_amp,
+    // if not set, or is one of the included themes.
+    $ampThemeConfig = \Drupal::configFactory()->getEditable('amp.theme');
+    $ampTheme = $ampThemeConfig->get('amptheme');
+    if (empty($ampTheme) || $ampTheme == 'ampsubtheme_example' || $ampTheme == 'amptheme') {
+      $ampThemeConfig->set('amptheme', 'thunder_amp')
+        ->save(TRUE);
+    }
+
+    // Disable unused blocks.
+    /** @var \Drupal\block\Entity\Block[] $blocks */
+    $blocks = Block::loadMultiple([
+      'thunder_amp_account_menu',
+      'thunder_amp_breadcrumbs',
+      'thunder_amp_footer',
+      'thunder_amp_local_actions',
+      'thunder_amp_local_tasks',
+      'thunder_amp_main_menu',
+      'thunder_amp_messages',
+      'thunder_amp_tools',
+    ]);
+    foreach ($blocks as $block) {
+      $block->disable()->save();
+    }
+
+  }
+
+  // Handle installing of Admin Theme.
+  if (in_array('thunder_admin', $theme_list)) {
+    _on_thunder_admin_theme_install();
+  }
+
+  if (in_array('amptheme', $theme_list)) {
+    \Drupal::service('module_installer')->install(['amp'], TRUE);
+    \Drupal::service('config.installer')->installOptionalConfig();
+  }
+}
+
+/**
+ * Adjust related admin theme blocks after installation.
+ */
+function _on_thunder_admin_theme_install() {
+  $logger = \Drupal::logger('thunder_admin');
+
+  /** @var \Drupal\config_update\ConfigListInterface $configList */
+  $configList = \Drupal::service('config_update.config_list');
+
+  /** @var \Drupal\config_update\ConfigReverter $configReverter */
+  $configReverter = \Drupal::service('config_update.config_update');
+
+  /** @var \Drupal\config_update\ConfigDiffInterface $configDiffer */
+  $configDiffer = \Drupal::service('thunder_updater.config_differ');
+
+  // Optional configuration blocks are ignored by this functionality.
+  list($activeBlocks, $installBlocks) = $configList->listConfig('profile', 'thunder');
+
+  // Filter configuration list only for blocks related to admin theme.
+  $filterCallback = function ($blockName) {
+    return (strpos($blockName, 'block.block.thunder_admin_') === 0);
+  };
+  $activeBlocks = array_filter($activeBlocks, $filterCallback);
+  $installBlocks = array_filter($installBlocks, $filterCallback);
+
+  // Normalize configuration names.
+  $normalizeConfigNames = function ($blockName) {
+    return substr($blockName, strlen('block.block.'));
+  };
+  $activeBlocks = array_map($normalizeConfigNames, $activeBlocks);
+  $installBlocks = array_map($normalizeConfigNames, $installBlocks);
+
+  if (!empty($activeBlocks)) {
+    $activeBlocks = array_flip($activeBlocks);
+  }
+  if (!empty($installBlocks)) {
+    $installBlocks = array_flip($installBlocks);
+  }
+
+  /*
+   * Solving following cases:
+   * | active config | source config | is different | => Action |
+   * |---------------|---------------|--------------|-----------|
+   * |      T        |      F        |      X       | delete    |
+   * |      T        |      T        |      T       | revert    |
+   * |      T        |      F        |      X       | import    |
+   */
+  foreach ($activeBlocks as $blockName => $index) {
+    if (isset($installBlocks[$blockName])) {
+      // If configurations are different, then revert it to configuration
+      // provided in installation configuration file.
+      if (!$configDiffer->same(
+        $configReverter->getFromActive('block', $blockName),
+        $configReverter->getFromExtension('block', $blockName)
+      )) {
+        $logger->info(t('Block configuration "@block_name" reverted.', ['@block_name' => $blockName]));
+        $configReverter->revert('block', $blockName);
+      }
+
+      // Remote block for list, because it should not be imported.
+      unset($installBlocks[$blockName]);
+    }
+    else {
+      $logger->info(t('Block configuration "@block_name" removed.', ['@block_name' => $blockName]));
+      $configReverter->delete('block', $blockName);
+    }
+  }
+
+  // Import missing block configurations.
+  foreach ($installBlocks as $blockName => $index) {
+    $logger->info(t('Block configuration "@block_name" imported.', ['@block_name' => $blockName]));
+    $configReverter->import('block', $blockName);
   }
 }
 
@@ -244,26 +367,26 @@ function thunder_modules_installed($modules) {
     $fieldWidget = 'ivw_integration_widget';
 
     entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
 
     entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', array(
+      ->setComponent('field_ivw', [
         'type' => $fieldWidget,
-      ))->save();
+      ])->save();
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (in_array('paragraphs_riddle_marketplace', $modules)) {
+  if (in_array('thunder_riddle', $modules)) {
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = entity_load('field_config', 'node.article.field_paragraphs');
 
     $settings = $field->getSetting('handler_settings');
 
-    $settings['target_bundles']['paragraphs_riddle_marketplace'] = 'paragraphs_riddle_marketplace';
-    $settings['target_bundles_drag_drop']['paragraphs_riddle_marketplace'] = ['enabled' => TRUE, 'weight' => 10];
+    $settings['target_bundles']['riddle'] = 'riddle';
+    $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
 
     $field->setSetting('handler_settings', $settings);
 

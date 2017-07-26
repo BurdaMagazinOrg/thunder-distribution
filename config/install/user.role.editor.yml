@@ -40,6 +40,7 @@ permissions:
   - 'edit own page content'
   - 'edit terms in channel'
   - 'edit terms in tags'
+  - 'never autoplay videos'
   - 'revert article revisions'
   - 'revert page revisions'
   - 'schedule publishing of nodes'
@@ -54,3 +55,4 @@ permissions:
   - 'view the administration theme'
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
+  - 'break content lock'

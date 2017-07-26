@@ -27,12 +27,12 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->isInstalled = FALSE;
 
     // Define information about the user 1 account.
-    $this->rootUser = new UserSession(array(
+    $this->rootUser = new UserSession([
       'uid' => 1,
       'name' => 'admin',
       'mail' => 'admin@example.com',
       'pass_raw' => $this->randomMachineName(),
-    ));
+    ]);
 
     // If any $settings are defined for this test, copy and prepare an actual
     // settings.php, so as to resemble a regular installation.
@@ -167,8 +167,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     $query = \Drupal::database()->select('watchdog', 'w')
       ->condition('severity', 4, '<');
 
-    // We have one expected warning from the simple_sitemap module.
-    $this->assertEqual($query->countQuery()->execute()->fetchField(), 1);
+    // Check that there are no warnings in the log after installation.
+    $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);
 
   }
 

@@ -65,38 +65,42 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['description'] = array(
+    $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
-    );
+    ];
 
-    $form['install_modules'] = array(
+    $form['install_modules'] = [
       '#type' => 'container',
-    );
+    ];
 
-    foreach ($this->optionalModulesManager->getDefinitions() as $provider) {
+    $providers = $this->optionalModulesManager->getDefinitions();
+
+    static::sortByWeights($providers);
+
+    foreach ($providers as $provider) {
 
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
-      $form['install_modules_' . $provider['id']] = array(
+      $form['install_modules_' . $provider['id']] = [
         '#type' => 'checkbox',
         '#title' => $provider['label'],
         '#description' => isset($provider['description']) ? $provider['description'] : '',
         '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
-      );
+      ];
 
       $form = $instance->buildForm($form, $form_state);
 
     }
     $form['#title'] = $this->t('Install & configure modules');
 
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['save'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['save'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save and continue'),
       '#button_type' => 'primary',
-      '#submit' => array('::submitForm'),
-    );
+      '#submit' => ['::submitForm'],
+    ];
 
     return $form;
   }
@@ -126,6 +130,27 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $form_state->setBuildInfo($buildInfo);
 
+  }
+
+  /**
+   * Returns a sorting function to sort an array by weights.
+   *
+   * If an array element doesn't provide a weight, it will be set to 0.
+   * If two elements have the same weight, they are sorted by label.
+   *
+   * @param array $array
+   *   The array to be sorted.
+   */
+  private static function sortByWeights(array &$array) {
+    uasort($array, function ($a, $b) {
+      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
+      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
+
+      if ($a_weight == $b_weight) {
+        return ($a['label'] > $b['label']) ? 1 : -1;
+      }
+      return ($a_weight > $b_weight) ? 1 : -1;
+    });
   }
 
 }

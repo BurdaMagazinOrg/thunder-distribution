@@ -6,6 +6,36 @@
  */
 
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Install the thunder article integration.
+ */
+function thunder_article_install() {
+  // Install Shariff integration as soft dependency.
+  \Drupal::service('module_installer')->install([
+    'shariff',
+  ]);
+}
+
+/**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_article_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_article'] = [
+    8101 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
 
 /**
  * Enable thunder_paragraphs.
@@ -31,36 +61,44 @@ function thunder_article_update_8001() {
  * Enable shariff module.
  */
 function thunder_article_update_8101() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('logger.thunder_update');
-  $updateLogger->cleanLogs();
+  $modulesInstalledSuccessfully = TRUE;
 
-  /** @var \Drupal\thunder_updater\Updater $updater */
-  $updater = Drupal::service('thunder_updater');
-
-  \Drupal::service('module_installer')->install([
-    'config_update',
-    'shariff',
-  ]);
-
-  $display = EntityViewDisplay::load('node.article.default');
-  if ($display && !$display->getComponent('shariff_field')) {
-    $display->setComponent('shariff_field', [
-      'region' => 'content',
-    ])->save();
-    $updater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+  try {
+    \Drupal::service('module_installer')->install([
+      'config_update',
+      'shariff',
+    ]);
   }
-  else {
-    $updateLogger->warning(t('Unable to place shariff field.'));
-    $updater->markUpdatesFailed(['v1_1__shariff']);
+  catch (MissingDependencyException $e) {
+    $updateLogger->warning($e->getMessage());
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+    $modulesInstalledSuccessfully = FALSE;
   }
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
+  if ($modulesInstalledSuccessfully) {
+    $updateLogger->info(t('Shariff module is successfully installed.'));
 
-    return '';
+    $display = EntityViewDisplay::load('node.article.default');
+    if ($display && !$display->getComponent('shariff_field')) {
+      $display->setComponent(
+        'shariff_field',
+        [
+          'region' => 'content',
+        ]
+      )->save();
+
+      $updateLogger->info(t('Shariff field is added for article.'));
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+    }
+    else {
+      $updateLogger->warning(t('Unable to place shariff field.'));
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+    }
   }
 
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }

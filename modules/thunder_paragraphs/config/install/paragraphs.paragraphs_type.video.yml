@@ -3,3 +3,4 @@ status: true
 dependencies: {  }
 id: video
 label: Video
+behavior_plugins: {  }

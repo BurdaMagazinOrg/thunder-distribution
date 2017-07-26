@@ -43,6 +43,10 @@ mysql:
   encoding: utf8
 
 addons:
+  artifacts:
+    region: eu-west-1
+    paths:
+      - /tmp/thunder-travis-ci
   apt:
     packages:
       - google-chrome-stable
@@ -62,16 +66,3 @@ before_script:
 
 script:
   - bash -x -e ./scripts/travis/06-run-tests.sh
-
-deploy:
-  provider: s3
-  access_key_id: AKIAJULZG77ZX2XFLPOA
-  secret_access_key:
-    secure: AtsY08zKG01jR6ZQLzIrH6MAF52heHB1fdvWLUs+S9eJJ4h31Z4MJqRtlQQn8Ur1JzFWWS4Gmt3biKILDRm7uCBFz3z3b8kuEt4dPDHzBRdhe6TN4QvTyUz6pL5Q6AR8pVMKc0jNNR2tDCMWqjCMpBCHbdS+28iyobdtx8tQn/HP6Udapl2FHByF1TqCtpMQ9ISbpcjf0AC9WUADL1BnyHoqybAvwUpyoO3Iuym6EhOzCJ3aZULt64IamwpWy3fikVwOtzxwQHS7Jp4M7k0QhgGM0hvlEKnKwS7X6CRysBuxH/exY11UdDUgTzPMw5AsnORkFbyKIh2WW2mvJ9aQJuKbSxAmnr4zQKSS9/7MmDM3FEkeQF8DL5SKb/Q0ap3zCgdcbSVfS5UElS4YrKHSGioudfyEpIQUtMOkW1Lz7SDdLCRD5PaubR8BvifbxRvKNLJX2RjVJ2HyPzKNdkn6mviAteNJrh2YwMgLvC5aFRwCHRFgsJwoek43LL4w3M5jZS8Vz4PrjJkBsLwhVzZbeR0S4CpeewttM5hoC19CllygpbRjjJrChfdre1RsfDRYKsty4WpqZD4jZoxU0sNfyNcn0KnCvspRV40bZqzy0uxY3mVPw76OnZUvWBLVi89PvJ56/AXuHhNalkQbgRxyd0SXAjK34EBMLOyLCGBi3NM=
-  bucket: thunder-travis-ci
-  region: eu-central-1
-  local-dir: /tmp/thunder-travis-ci
-  upload-dir: thunder-distribution
-  acl: private
-  on:
-    repo: BurdaMagazinOrg/thunder-distribution

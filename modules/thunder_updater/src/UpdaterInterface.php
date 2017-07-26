@@ -2,8 +2,6 @@
 
 namespace Drupal\thunder_updater;
 
-use Drupal\thunder\ThunderUpdateLogger;
-
 /**
  * Interface for the Update entity.
  */
@@ -37,46 +35,44 @@ interface UpdaterInterface {
    *   Configuration array to update.
    * @param array $expectedConfiguration
    *   Only if current config is same like old config we are updating.
+   * @param array $deleteKeys
+   *   List of parent keys to remove. @see NestedArray::unsetValue()
    *
    * @return bool
    *   Returns TRUE if update of configuration was successful.
    */
-  public function updateConfig($configName, array $configuration, array $expectedConfiguration = []);
+  public function updateConfig($configName, array $configuration, array $expectedConfiguration = [], array $deleteKeys = []);
 
   /**
-   * Marks a list of updates as successful.
+   * Execute update of configuration from update definitions.
    *
-   * @param array $names
-   *   Array of update ids.
-   * @param bool $checkListPoints
-   *   Indicates the corresponding checkbox should be checked.
+   * @param array $updateDefinitions
+   *   List of configuration definitions.
    */
-  public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE);
-
-  /**
-   * Marks a list of updates as failed.
-   *
-   * @param array $names
-   *   Array of update ids.
-   */
-  public function markUpdatesFailed(array $names);
-
-  /**
-   * Marks a list of updates.
-   *
-   * @param bool $status
-   *   Checkboxes enabled or disabled.
-   */
-  public function markAllUpdates($status = TRUE);
+  public function executeUpdate(array $updateDefinitions);
 
   /**
    * Installs a module, checks updater checkbox and works with logger.
    *
    * @param array $modules
    *   Key is name of the checkbox, value name of the module.
-   * @param \Drupal\thunder\ThunderUpdateLogger $updateLogger
-   *   Logger service.
    */
-  public function installModules(array $modules, ThunderUpdateLogger $updateLogger);
+  public function installModules(array $modules);
+
+  /**
+   * Get update logger service.
+   *
+   * @return \Drupal\thunder_updater\UpdateLogger
+   *   Returns update logger.
+   */
+  public function logger();
+
+  /**
+   * Returns update checklist service.
+   *
+   * @return \Drupal\thunder_updater\UpdateChecklist
+   *   Update checklist service.
+   */
+  public function checklist();
 
 }

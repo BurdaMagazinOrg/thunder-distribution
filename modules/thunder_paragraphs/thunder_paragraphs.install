@@ -9,6 +9,25 @@ use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 
 /**
+ * Update hook dependencies.
+ *
+ * 1. Dependency on Thunder Updater module.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_paragraphs_update_dependencies() {
+
+  $installThunderUpdaterHook = ['thunder' => 8103];
+
+  $dependencies['thunder_paragraphs'] = [
+    8001 => $installThunderUpdaterHook,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Change gallery paragraph to use simple inline form widget.
  */
 function thunder_paragraphs_update_8001() {
@@ -41,9 +60,8 @@ function thunder_paragraphs_update_8001() {
     ['content', 'field_media', 'settings', 'match_operator'],
   ];
 
-  /** @var \Drupal\thunder\ThunderUpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('logger.thunder_update');
-  $updateLogger->cleanLogs();
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('thunder_updater.logger');
 
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
   $configFactory = \Drupal::service('config.factory');
@@ -81,11 +99,48 @@ function thunder_paragraphs_update_8001() {
 
   $updateLogger->info('Gallery paragraph is updated.');
 
-  if (function_exists('drush_log') && PHP_SAPI === 'cli') {
-    $updateLogger->outputDrush();
+  return $updateLogger->output();
+}
 
-    return '';
+/**
+ * Change media paragraph to use inline_entity_form.
+ */
+function thunder_paragraphs_update_8101() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
+  $updateLogger = $thunderUpdater->logger();
+
+  /** @var \Drupal\Core\Config\Config $config */
+  $config = \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.media.default');
+
+  $previews_widget_display = $config->get('content.field_media.settings.field_widget_display');
+
+  if ($previews_widget_display === NULL) {
+    $updateLogger->info(t('No update for media paragraph needed.'));
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph']);
+  }
+  elseif ($previews_widget_display === 'rendered_entity') {
+    $config->set(
+      'content.field_media.settings.field_widget_display',
+      'inline_entity_form'
+    )
+      ->set('content.field_media.settings.field_widget_edit', FALSE)
+      ->set(
+        'content.field_media.settings.field_widget_display_settings.form_mode',
+        'inline'
+      );
+
+    $config->save();
+
+    $updateLogger->info(t('Configuration of media paragraph has been successfully updated.'));
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_paragraph'], FALSE);
+  }
+  else {
+    $updateLogger->warning(t('Unable to update configuration for media paragraph.'));
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_paragraph']);
   }
 
-  return $updateLogger->outputHtml();
+  return $updateLogger->output();
 }

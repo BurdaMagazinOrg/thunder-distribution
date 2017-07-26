@@ -34,12 +34,16 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'nexx_integration',
     'ivw_integration',
     'adsense',
+    'thunder_riddle',
 
     // Additional modules.
     // 'thunder_fia',
-    // 'paragraphs_riddle_marketplace',
-    // There is already commit that should be pushed to drupal.org HM sandbox.
+    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    // 'thunder_liveblog',
+    // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
     // 'harbourmaster',
+    // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
+    // 'amp'
     // end of list.
   ];
 
@@ -262,6 +266,60 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
+
+    // Riddle paragraph is added dynamically by thunder profile on
+    // thunder_riddle installation.
+    'field.field.node.article.field_paragraphs' => [
+      'dependencies' => [
+        'config' => TRUE,
+      ],
+      'settings' => [
+        'handler_settings' => [
+          'target_bundles' => [
+            'riddle' => TRUE,
+          ],
+          'target_bundles_drag_drop' => [
+            'riddle' => TRUE,
+          ],
+        ],
+      ],
+    ],
+  ];
+
+  /**
+   * Configuration key path separator.
+   *
+   * @var string
+   */
+  protected static $configPathSeparator = '::';
+
+  /**
+   * Ignore configuration list values. Path to key is separated by '::'.
+   *
+   * Example:
+   * 'field.field.node.article.field_example' => [
+   *   'settings::settings_part1::list_part' => [
+   *      'ignore_entry1',
+   *      'ignore_entry5',
+   *   ]
+   * ]
+   *
+   * TODO: use this functionality for more strict "dependencies" checking.
+   *
+   * @var array
+   */
+  protected static $ignoreConfigListValues = [
+    // Riddle permissions are added dynamically by thunder_riddle installation.
+    'user.role.editor' => [
+      'permissions' => [
+        'access riddle_browser entity browser pages',
+      ],
+    ],
+    'user.role.seo' => [
+      'permissions' => [
+        'access riddle_browser entity browser pages',
+      ],
+    ],
   ];
 
   /**
@@ -275,9 +333,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $ignoreConfigs = [
     // Slick media module. Issue: https://www.drupal.org/node/2852030
     'core.entity_view_mode.media.slick',
-
-    // Paragraphs module. Issue: https://www.drupal.org/node/2852025
-    'core.entity_view_mode.paragraph.preview',
 
     // Focal Point module. Issue: https://www.drupal.org/node/2851587
     'crop.type.focal_point',
@@ -322,10 +377,20 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
 
     $configCleanup = [];
+    $ignoreListRules = [];
 
     // Apply ignore for defined configurations and custom properties.
     if (array_key_exists($configurationName, static::$ignoreConfigKeys)) {
       $configCleanup = static::$ignoreConfigKeys[$configurationName];
+    }
+
+    if (array_key_exists($configurationName, static::$ignoreConfigListValues)) {
+      foreach (static::$ignoreConfigListValues[$configurationName] as $keyPath => $ignoreValues) {
+        $ignoreListRules[] = [
+          'key_path' => explode(static::$configPathSeparator, $keyPath),
+          'ignore_values' => $ignoreValues,
+        ];
+      }
     }
 
     // Ignore configuration dependencies in case of optional configuration.
@@ -338,7 +403,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
 
     // If configuration doesn't require cleanup, just return configurations as
     // they are.
-    if (empty($configCleanup)) {
+    if (empty($configCleanup) && empty($ignoreListRules)) {
       return $configurations;
     }
 
@@ -348,9 +413,49 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         $arrayToOverwrite,
         $configCleanup
       );
+
+      foreach ($ignoreListRules as $ignoreRule) {
+        $list = $this->cleanupConfigList(
+          NestedArray::getValue($configurations[$index], $ignoreRule['key_path']),
+          $ignoreRule['ignore_values']
+        );
+
+        NestedArray::setValue($configurations[$index], $ignoreRule['key_path'], $list);
+      }
     }
 
     return $configurations;
+  }
+
+  /**
+   * Clean up configuration list values.
+   *
+   * @param array $list
+   *   List of values in configuration object.
+   * @param array $ignoreValues
+   *   Array with list of values that should be ignored.
+   *
+   * @return array
+   *   Return cleaned-up list.
+   */
+  protected function cleanupConfigList(array $list, array $ignoreValues) {
+    $cleanList = $list;
+
+    if (!empty($cleanList)) {
+      foreach ($ignoreValues as $ignoreValue) {
+        if (!in_array($ignoreValue, $cleanList)) {
+          $cleanList[] = $ignoreValue;
+        }
+      }
+    }
+    else {
+      $cleanList = $ignoreValues;
+    }
+
+    // Sorting is required to get same order for configuration compare.
+    sort($cleanList);
+
+    return $cleanList;
   }
 
   /**

@@ -6,6 +6,7 @@
  */
 
 use Drupal\file\Entity\File;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_ENTITY_TYPE_create().
@@ -37,6 +38,7 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'image_browser',
     'video_browser',
+    'riddle_browser',
 
     // TODO: Legacy support, remove it with new major version.
     'media_browser',
@@ -72,5 +74,90 @@ function thunder_media_menu_links_discovered_alter(&$links) {
   $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
   if ($view) {
     $links['entity.media.collection']['route_name'] = 'view.thunder_media.media_page_list';
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_ID_form_alter().
+ *
+ * Alter the widget to apply classes and identify widget buttons and their types
+ * for the theme.
+ */
+function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /* @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
+  $items = $context['items'];
+  $field_name = $items->getName();
+  switch ($field_name) {
+    case 'field_teaser_media':
+    case 'field_media_images':
+      _thunder_media_media_field_widget_form_alter_helper($element, 'image');
+      break;
+  }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function thunder_media_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if (isset($entity_form['field_media_images'])) {
+    $entity_form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds classes to theme media:gallery edit form.
+ */
+function thunder_media_form_media_gallery_edit_form_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form['field_media_images'])) {
+    $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds classes to theme media:gallery form.
+ */
+function thunder_media_form_media_gallery_form_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form['field_media_images'])) {
+    $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
+  }
+}
+
+/**
+ * Helper function for form alter hooks to alter the media field widget.
+ *
+ * @param array $widget
+ *   The media form field widget.
+ * @param string $media_type
+ *   The type of media.
+ */
+function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $media_type) {
+  // Process the media field widget.
+  $widget['#attributes']['class'][] = 'media-form__items-widget';
+  if (isset($widget['current']['items'])) {
+    if (count($widget['current']['items']) == 1) {
+      $widget['current']['#attributes']['class'][] = 'entities-list--single-item';
+    }
+    foreach ($widget['current']['items'] as &$media_item) {
+      $media_item['#attributes']['class'][] = 'media-form__item-widget';
+      $media_item['#attributes']['class'][] = 'media-form__item-widget--' . $media_type;
+      if (isset($media_item['remove_button'])) {
+        $media_item['remove_button']['#attributes']['class'][] = 'media-form__item-widget__action';
+        $media_item['remove_button']['#attributes']['class'][] = 'media-form__item-widget__action--remove';
+        // Add our own "button action type" key to be able to use a distinct
+        // template via suggestions in the theme.
+        $media_item['remove_button']['#button_action_type'] = 'media_remove';
+      }
+      if (isset($media_item['edit_button'])) {
+        $media_item['edit_button']['#attributes']['class'][] = 'media-form__item-widget__action';
+        $media_item['edit_button']['#attributes']['class'][] = 'media-form__item-widget__action--edit';
+        // Add our own "button action type" key to be able to use a distinct
+        // template via suggestions in the theme.
+        $media_item['edit_button']['#button_action_type'] = 'media_edit';
+      }
+    }
   }
 }

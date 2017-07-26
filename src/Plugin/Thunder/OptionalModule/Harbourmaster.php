@@ -23,12 +23,12 @@ class Harbourmaster extends AbstractOptionalModule {
 
     $form = parent::buildForm($form, $form_state);
 
-    $form['harbourmaster']['description'] = array(
+    $form['harbourmaster']['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Integrates Harbourmaster providing a single sign-on solution for Drupal. You will need an instance of the harbourmaster running. See <a href=":url" target="_blank">harbourmaster documentation</a> for more details.', [
         ':url' => 'https://valiton.github.io/harbourmaster-docs/index.html',
       ]),
-    );
+    ];
 
     return $form;
   }

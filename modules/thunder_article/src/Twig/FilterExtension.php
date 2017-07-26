@@ -14,10 +14,10 @@ class FilterExtension extends \Twig_Extension {
    *   Declared Twig filters
    */
   public function getFilters() {
-    return array(
-      new \Twig_SimpleFilter('plain_text', array($this, 'plainText')),
-      new \Twig_SimpleFilter('basic_format', array($this, 'basicFormat'), array('is_safe' => array('html'))),
-    );
+    return [
+      new \Twig_SimpleFilter('plain_text', [$this, 'plainText']),
+      new \Twig_SimpleFilter('basic_format', [$this, 'basicFormat'], ['is_safe' => ['html']]),
+    ];
   }
 
   /**

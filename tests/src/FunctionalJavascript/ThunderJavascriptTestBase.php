@@ -19,6 +19,7 @@ use Drupal\thunder\ThunderTestTrait;
 abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
   use ThunderTestTrait;
+  use ThunderImageCompareTestTrait;
 
   /**
    * Modules to enable.
@@ -123,15 +124,15 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $this->drupalGet('user');
-    $this->submitForm(array(
+    $this->submitForm([
       'name' => $account->getUsername(),
       'pass' => $account->passRaw,
-    ), t('Log in'));
+    ], t('Log in'));
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     $account->sessionId = $this->getSession()
       ->getCookie($this->getSessionName());
-    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', array('name' => $account->getUsername())));
+    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', ['name' => $account->getUsername()]));
 
     $this->loggedInUser = $account;
     $this->container->get('current_user')->setAccount($account);
@@ -145,7 +146,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     // idea being if you were properly logged out you should be seeing a login
     // screen.
     $assert_session = $this->assertSession();
-    $this->drupalGet('user/logout', array('query' => array('destination' => 'user')));
+    $this->drupalGet('user/logout', ['query' => ['destination' => 'user']]);
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
 
@@ -167,13 +168,31 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
-
     parent::setUp();
 
     $this->logWithRole(static::$defaultUserRole);
 
     // Set window width/height.
-    $this->getSession()->getDriver()->resizeWindow(1280, 768);
+    $windowSize = $this->getWindowSize();
+    $this->getSession()->getDriver()->resizeWindow($windowSize['width'], $windowSize['height']);
+
+    // Set flag to generate screenshots instead of comparing them.
+    if (!empty($_SERVER['generateMode'])) {
+      $this->setGenerateMode(strtolower($_SERVER['generateMode']) === 'true');
+    }
+  }
+
+  /**
+   * Get base window size.
+   *
+   * @return array
+   *   Return
+   */
+  protected function getWindowSize() {
+    return [
+      'width' => 1280,
+      'height' => 768,
+    ];
   }
 
   /**
@@ -215,13 +234,21 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    * @throws \Exception
    */
   protected function getScreenshotFolder() {
-    if (!is_dir($this->screenshotDirectory)) {
-      if (mkdir($this->screenshotDirectory, 0777, TRUE) === FALSE) {
-        throw new \Exception('Unable to create directory: ' . $this->screenshotDirectory);
+    $dir = $this->screenshotDirectory;
+
+    // Use Travis Job ID for sub folder.
+    $travisId = getenv('TRAVIS_JOB_ID');
+    if (!empty($travisId)) {
+      $dir .= '/' . $travisId;
+    }
+
+    if (!is_dir($dir)) {
+      if (mkdir($dir, 0777, TRUE) === FALSE) {
+        throw new \Exception('Unable to create directory: ' . $dir);
       }
     }
 
-    return realpath($this->screenshotDirectory);
+    return realpath($dir);
   }
 
   /**
@@ -246,15 +273,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $cssSelector = 'input[data-drupal-selector="' . $drupalSelector . '"]';
-
-    $this->scrollElementInView($cssSelector);
-    $editButton = $page->find('css', $cssSelector);
-    $editButton->click();
-
-    if ($waitAfterAction) {
-      $this->assertSession()->assertWaitOnAjaxRequest();
-    }
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
   }
 
   /**
@@ -268,7 +287,6 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
-
     $this->scrollElementInView($cssSelector);
     $editButton = $page->find('css', $cssSelector);
     $editButton->click();
@@ -276,6 +294,50 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     if ($waitAfterAction) {
       $this->assertSession()->assertWaitOnAjaxRequest();
     }
+  }
+
+  /**
+   * Click on Ajax Button based on CSS selector.
+   *
+   * Ajax buttons handler is triggered on "mousedown" event, so it has to be
+   * triggered over JavaScript.
+   *
+   * @param string $cssSelector
+   *   CSS selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
+    $this->scrollElementInView($cssSelector);
+    $this->getSession()->executeScript("jQuery('{$cssSelector}').trigger('mousedown');");
+
+    if ($waitAfterAction) {
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
+   * Click a button within a dropdown button field.
+   *
+   * @param string $fieldName
+   *   The [name] attribute of the button to be clicked.
+   * @param bool $toggle
+   *   Whether the dropdown button should be expanded before clicking.
+   */
+  protected function clickDropButton($fieldName, $toggle = TRUE) {
+    $page = $this->getSession()->getPage();
+
+    if ($toggle) {
+      $toggleButtonXpath = '//ul[.//*[@name="' . $fieldName . '"]]/li[contains(@class,"dropbutton-toggle")]/button';
+      $toggleButton = $page->find('xpath', $toggleButtonXpath);
+      $toggleButton->click();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+
+    $this->scrollElementInView('[name="' . $fieldName . '"]');
+
+    $page->pressButton($fieldName);
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -368,14 +430,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * Click article save option based on index of action.
    *
-   * 1 - Save and continue.
-   * 2 - Save as unpublished (default).
-   * 3 - Save and publish.
+   * 1 - Save as unpublished (default).
+   * 2 - Save and publish.
    *
    * @param int $actionIndex
-   *   Index for option that should be clicked. (by default 2)
+   *   Index for option that should be clicked. (by default 1)
    */
-  protected function clickArticleSave($actionIndex = 2) {
+  protected function clickArticleSave($actionIndex = 1) {
     $this->scrollElementInView('[data-drupal-selector="edit-save"]');
     $page = $this->getSession()->getPage();
 
