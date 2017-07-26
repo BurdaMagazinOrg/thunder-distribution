@@ -449,4 +449,17 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       ->click();
   }
 
+  /**
+   * Checks if pull request is from fork.
+   *
+   * @return bool
+   *   Returns if pull request is from Fork.
+   */
+  protected function isForkPullRequest() {
+    $pullRequestSlag = getenv('TRAVIS_PULL_REQUEST_SLUG');
+    $repoSlag = getenv('TRAVIS_REPO_SLUG');
+
+    return (!empty($pullRequestSlag) && $pullRequestSlag !== $repoSlag);
+  }
+
 }

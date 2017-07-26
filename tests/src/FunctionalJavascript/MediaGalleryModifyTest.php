@@ -24,8 +24,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->editParagraph($page, 'field_paragraphs', 0);
 
-    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
+    // Wait for all images to be displayed properly.
+    $this->getSession()
+      ->wait(10000, "jQuery('[data-drupal-selector=\"edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current\"] .media-form__item-widget--image').filter(function() {return jQuery(this).width() === 182;}).length === 5");
 
+    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
     $this->dragDropElement($dragElement, 300, 0);
@@ -94,6 +97,10 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
     $this->uploadFile($page, realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
+
+    // Wait for all images to be loaded -> with using of "complete" property.
+    $this->getSession()
+      ->wait(10000, "jQuery('#edit-selected img').filter(function(){return jQuery(this).prop('complete');}).length === 5");
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $dragElement = $this->xpath("//*[@id='edit-selected']/div[5]")[0];
