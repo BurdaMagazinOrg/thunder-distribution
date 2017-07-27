@@ -98,9 +98,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->uploadFile($page, realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
 
-    // Wait for all images to be loaded -> with using of "complete" property.
-    $this->waitForImages('#edit-selected img', 5);
-
     // Move new image -> that's 5th image in list, to 3rd position.
     $dragElement = $this->xpath("//*[@id='edit-selected']/div[5]")[0];
     $this->dragDropElement($dragElement, -440, 0);

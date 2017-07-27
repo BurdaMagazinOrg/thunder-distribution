@@ -456,7 +456,6 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Index for option that should be clicked. (by default 1)
    */
   protected function clickArticleSave($actionIndex = 1) {
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
     $page = $this->getSession()->getPage();
 
     if ($actionIndex !== 1) {
