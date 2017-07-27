@@ -224,6 +224,25 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Wait for images to load.
+   *
+   * This functionality is sometimes need, because positions of elements can be
+   * changed in middle of execution and make problems with execution of clicks
+   * or other position depending actions. Image property complete is used.
+   *
+   * @param string $cssSelector
+   *   Css selector, but without single quotes.
+   * @param int $total
+   *   Total number of images that should selected with provided css selector.
+   * @param int $time
+   *   Waiting time, by default 10sec.
+   */
+  public function waitForImages($cssSelector, $total, $time = 10000) {
+    $this->getSession()
+      ->wait($time, "jQuery('{$cssSelector}').filter(function(){return jQuery(this).prop('complete');}).length === {$total}");
+  }
+
+  /**
    * Get directory for saving of screenshots.
    *
    * Directory will be created if it does not already exist.
