@@ -224,6 +224,25 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Wait for images to load.
+   *
+   * This functionality is sometimes need, because positions of elements can be
+   * changed in middle of execution and make problems with execution of clicks
+   * or other position depending actions. Image property complete is used.
+   *
+   * @param string $cssSelector
+   *   Css selector, but without single quotes.
+   * @param int $total
+   *   Total number of images that should selected with provided css selector.
+   * @param int $time
+   *   Waiting time, by default 10sec.
+   */
+  public function waitForImages($cssSelector, $total, $time = 10000) {
+    $this->getSession()
+      ->wait($time, "jQuery('{$cssSelector}').filter(function(){return jQuery(this).prop('complete');}).length === {$total}");
+  }
+
+  /**
    * Get directory for saving of screenshots.
    *
    * Directory will be created if it does not already exist.
@@ -437,7 +456,6 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Index for option that should be clicked. (by default 1)
    */
   protected function clickArticleSave($actionIndex = 1) {
-    $this->scrollElementInView('[data-drupal-selector="edit-save"]');
     $page = $this->getSession()->getPage();
 
     if ($actionIndex !== 1) {
@@ -447,6 +465,19 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
       ->click();
+  }
+
+  /**
+   * Checks if pull request is from fork.
+   *
+   * @return bool
+   *   Returns if pull request is from Fork.
+   */
+  protected function isForkPullRequest() {
+    $pullRequestSlag = getenv('TRAVIS_PULL_REQUEST_SLUG');
+    $repoSlag = getenv('TRAVIS_REPO_SLUG');
+
+    return (!empty($pullRequestSlag) && $pullRequestSlag !== $repoSlag);
   }
 
 }
