@@ -401,6 +401,12 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   public function testLiveblog() {
     $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), TRUE);
     if (empty($pusherCredentials)) {
+      if ($this->isForkPullRequest()) {
+        $this->markTestSkipped("Skip Live Blog test (missing secure environment variables)");
+
+        return;
+      }
+
       $this->fail("pusher credentials not provided.");
       return;
     }
@@ -557,6 +563,12 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $riddleToken = getenv('RIDDLE_TOKEN');
 
     if (empty($riddleToken)) {
+      if ($this->isForkPullRequest()) {
+        $this->markTestSkipped("Skip Riddle test (missing secure environment variables)");
+
+        return;
+      }
+
       $this->fail("Riddle token is not available.");
 
       return;
