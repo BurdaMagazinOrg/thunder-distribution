@@ -24,8 +24,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->editParagraph($page, 'field_paragraphs', 0);
 
-    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
+    // Wait for all images to be displayed properly.
+    $this->getSession()
+      ->wait(10000, "jQuery('[data-drupal-selector=\"edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current\"] .media-form__item-widget--image').filter(function() {return jQuery(this).width() === 182;}).length === 5");
 
+    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
     $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
     $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
     $this->dragDropElement($dragElement, 300, 0);
