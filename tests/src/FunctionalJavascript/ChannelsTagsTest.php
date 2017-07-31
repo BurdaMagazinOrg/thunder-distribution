@@ -43,6 +43,8 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => 'Teaser 1',
     ]);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:17']);
+    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
+
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->clickArticleSave(2);
 
@@ -55,6 +57,8 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => 'Teaser 2',
     ]);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:16']);
+    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
+
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
     $this->clickArticleSave(2);
 
