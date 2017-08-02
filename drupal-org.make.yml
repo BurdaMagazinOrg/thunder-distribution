@@ -172,7 +172,7 @@ projects:
     type: "module"
     version: "1.1"
     patch:
-      - "https://www.drupal.org/files/issues/2899034_4.patch"
+      - "https://www.drupal.org/files/issues/2899034_7.patch"
 
   pathauto:
     type: "module"
