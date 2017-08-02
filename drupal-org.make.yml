@@ -133,6 +133,8 @@ projects:
   liveblog:
     type: "module"
     version: "1"
+    patch:
+      - "https://www.drupal.org/files/issues/liveblog_not_drupal_8_4-2914129-2.patch"
 
   media_entity:
     type: "module"
@@ -179,6 +181,7 @@ projects:
     version: "1.1"
     patch:
       - "https://www.drupal.org/files/issues/2899917_6.patch"
+      - "https://www.drupal.org/files/issues/build_failing_schema-2881459-7.patch"
 
   pathauto:
     type: "module"

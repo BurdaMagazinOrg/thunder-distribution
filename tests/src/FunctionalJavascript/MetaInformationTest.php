@@ -132,7 +132,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
-    $this->clickArticleSave();
+    $this->clickSave();
   }
 
   /**
@@ -257,7 +257,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->expandAllTabs();
     $this->setFieldValues($page, $unPublishFieldValues);
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
@@ -314,7 +314,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/' . $articleId . '/edit');
 
     // Publish article.
-    $this->clickArticleSave(2);
+    $this->setStatus(TRUE);
+    $this->clickSave();
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
@@ -333,7 +334,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'simple_sitemap_priority' => '0.9',
     ]);
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->runCron();
     $this->drupalGet('sitemap.xml');
@@ -376,7 +377,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->scrollElementInView('[name="simple_sitemap_index_content"]');
     $page->find('css', '[name="simple_sitemap_index_content"]')->click();
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->runCron();
     $this->drupalGet('sitemaps/3/sitemap.xml');

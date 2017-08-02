@@ -21,7 +21,7 @@ function thunder_updater_checklistapi_checklist_info() {
     '#description' => t('Provides steps to keep your Thunder site up to date.'),
   ];
 
-  $tasks = Yaml::parse(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml');
+  $tasks = Yaml::parse(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml'));
 
   foreach ($tasks as $version => $updates) {
     foreach ($updates as $key => $update) {

@@ -124,7 +124,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->addImageParagraph('field_paragraphs', ['media:5']);
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->drupalGet('node/7/revisions');
 
@@ -180,7 +180,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Article 1',
     ]);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->clickArticleSave();
+    $this->setStatus(FALSE);
+    $this->clickSave();
 
     // Edit article and generate access unpubplished token.
     $this->drupalGet('node/10/edit');
@@ -207,7 +208,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/10/edit');
     $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Log-Out and check that URL with token doesn't work anymore.
     $this->drupalLogout();
@@ -218,7 +219,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
-    $this->clickArticleSave(2);
+    $this->setStatus(TRUE);
+    $this->clickSave();
 
     // Log-Out and check that URL to article works.
     $this->drupalLogout();
@@ -248,7 +250,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
     ];
     $this->articleFillNew($fieldValues);
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->checkMetaTags($facebookMetaTags);
   }
@@ -470,7 +472,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:25']);
 
     // Save article as unpublished.
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Assert that riddle iframes are correctly generated.
     $this->drupalGet('node/10');

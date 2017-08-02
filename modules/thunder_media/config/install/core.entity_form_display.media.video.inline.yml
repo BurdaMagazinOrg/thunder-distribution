@@ -99,4 +99,5 @@ hidden:
   created: true
   field_caption: true
   langcode: true
+  path: true
   uid: true

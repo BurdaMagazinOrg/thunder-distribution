@@ -51,4 +51,5 @@ hidden:
   field_caption: true
   field_source: true
   langcode: true
+  path: true
   uid: true

@@ -206,7 +206,13 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
-
+    // Remove this when
+    // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
+    'core.entity_form_display.media.nexx_video.default' => [
+      'content' => [
+        'path' => TRUE,
+      ],
+    ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
     'field.field.node.article.field_paragraphs' => [
