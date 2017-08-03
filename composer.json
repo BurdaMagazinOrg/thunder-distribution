@@ -71,7 +71,8 @@
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
             "drupal/dropzonejs": {
-                "Theming compatible JS selectors for auto select": "https://www.drupal.org/files/issues/2870708_2.patch"
+                "Theming compatible JS selectors for auto select": "https://www.drupal.org/files/issues/2870708_2.patch",
+                "Dropzone cropping": "https://www.drupal.org/files/issues/use_dropzonejs_client-2877034-9.patch"
             },
             "drupal/field_group": {
                 "Form mode ignored as field groups always attached to 'default' form mode": "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"
@@ -136,7 +137,8 @@
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
-        "bower-asset/dropzone": "^4.2",
+        "bower-asset/dropzone": "^5.1",
+        "bower-asset/exif-js": "^2.2",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24"
