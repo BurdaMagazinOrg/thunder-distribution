@@ -73,6 +73,7 @@ projects:
     version: "1.0-alpha7"
     patch:
       - "https://www.drupal.org/files/issues/2870708_2.patch"
+      - "https://www.drupal.org/files/issues/use_dropzonejs_client-2877034-9.patch"
 
   empty_fields:
     type: "module"
@@ -251,7 +252,13 @@ libraries:
     type: "library"
     download:
       type: "get"
-      url: "https://github.com/enyo/dropzone/archive/v4.3.0.zip"
+      url: "https://github.com/enyo/dropzone/archive/v5.1.1.zip"
+
+  exif-js:
+    type: "library"
+    download:
+      type: "get"
+      url: "https://github.com/exif-js/exif-js/archive/v2.2.0.zip"
 
   blazy_lib:
     type: "blazy"

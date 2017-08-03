@@ -138,7 +138,7 @@
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
         "bower-asset/dropzone": "^5.1",
-        "bower-asset/exif-js": "^2.2",
+        "bower-asset/exif-js": "^2.2.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24"
