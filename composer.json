@@ -117,6 +117,7 @@
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
+        "drupal/media_entity_pinterest": "^1.0",
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
         "drupal/media_expire": "^1.0",

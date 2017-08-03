@@ -148,6 +148,10 @@ projects:
     type: "module"
     version: "1"
 
+  media_entity_pinterest:
+    type: "module"
+    version: "1"
+
   media_entity_slideshow:
     type: "module"
     version: "1"
