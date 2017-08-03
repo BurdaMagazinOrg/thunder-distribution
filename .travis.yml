@@ -36,6 +36,7 @@ branches:
   only:
     - master
     - develop
+    - test/theme-block-config
 
 mysql:
   database: drupal
