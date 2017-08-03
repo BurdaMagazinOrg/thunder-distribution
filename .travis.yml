@@ -37,6 +37,7 @@ branches:
     - master
     - develop
 
+
 mysql:
   database: drupal
   username: root
