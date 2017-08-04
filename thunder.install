@@ -747,3 +747,57 @@ function thunder_update_8113() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Enable media_entity_pinterest module.
+ */
+function thunder_update_8114() {
+
+  if (\Drupal::moduleHandler()->moduleExists('media_entity_pinterest')) {
+    return;
+  }
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $successfulUpdate = TRUE;
+
+  if ($thunderUpdater->installModules(['v1_1__media_entity_pinterest' => 'media_entity_pinterest'])) {
+
+    // Order is important, because of dependencies.
+    $importConfigs = [
+      'paragraphs.paragraphs_type.pinterest',
+      'media_entity.bundle.pinterest',
+      'field.field.media.pinterest.field_url',
+      'field.field.paragraph.pinterest.field_media',
+      'core.entity_view_display.media.pinterest.default',
+      'core.entity_view_display.media.pinterest.paragraph_preview',
+      'core.entity_view_display.paragraph.pinterest.default',
+      'core.entity_view_display.paragraph.pinterest.preview',
+      'core.entity_form_display.media.pinterest.default',
+      'core.entity_form_display.paragraph.pinterest.default',
+    ];
+
+    if ($thunderUpdater->importConfigs($importConfigs)) {
+      if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8114']])) {
+        $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_entity_pinterest']);
+      }
+      else {
+        $successfulUpdate = FALSE;
+      }
+    }
+    else {
+      $successfulUpdate = FALSE;
+    }
+  }
+  else {
+    $successfulUpdate = FALSE;
+  }
+
+  if (!$successfulUpdate) {
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_entity_pinterest']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

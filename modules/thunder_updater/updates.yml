@@ -105,3 +105,8 @@ v1.1:
         '#description': "<p>This module is used to show empty fields in the paragraph previews.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/empty_fields' }
+    v1_1__media_entity_pinterest:
+        '#title': 'Install pinterest paragraph'
+        '#description': "<p>This update provides pinterest integration. It adds an media entity and a new paragraph type.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/media_entity_pinterest' }
