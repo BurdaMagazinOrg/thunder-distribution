@@ -240,6 +240,10 @@ projects:
     type: "module"
     version: "1"
 
+  views_autocomplete_filters:
+    type: "module"
+    version: "1"
+
   views_load_more:
     type: "module"
     download:

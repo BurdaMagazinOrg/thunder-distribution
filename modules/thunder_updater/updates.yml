@@ -105,3 +105,11 @@ v1.1:
         '#description': "<p>This module is used to show empty fields in the paragraph previews.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/empty_fields' }
+    v1_1__views_autocomplete_filters:
+        '#title': 'Autocompletion for Entity browser views filter'
+        '#description': "<p>Autocompletion for entity browser views improves the usability a lot.</p>"
+        '#description_failed': '<ul><li>Enable the views_autocomplete_filters module</li><li>Go to the image viwe</li><li>Click on the "Media name" filter.</li><li>Check "Use Autocomplete" and Save everything</li><li>Repeat the steps for the video browser view</li></ul>'
+        handbook_page: { '#text': 'Module page', '#url': 'https://www.drupal.org/project/views_autocomplete_filters' }
+        extension_page: { '#text': 'Enable module', '#url': 'internal:/admin/modules' }
+        image_browser_page: { '#text': 'Edit image browser view', '#url': 'internal:/admin/structure/views/view/image_browser' }
+        video_browser_page: { '#text': 'Edit video browser view', '#url': 'internal:/admin/structure/views/view/video_browser' }

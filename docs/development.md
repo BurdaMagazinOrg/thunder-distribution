@@ -49,7 +49,7 @@ phantomjs --webdriver=4444
 ```
 or
 ```bash
-selenium-server -p 4444
+selenium-server -port 4444
 ```
 
 Thunder tests require Mink Selenium2 Driver and that has to be required manually. If you are in your ```docroot``` folder of Thunder installation execute following command:

@@ -747,3 +747,31 @@ function thunder_update_8113() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Installs and configure the views_autocomplete_filters module.
+ */
+function thunder_update_8114() {
+
+  /** @var \Drupal\thunder_updater\UpdaterInterface $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  $updates = [
+    'v1_1__views_autocomplete_filters' => 'views_autocomplete_filters',
+  ];
+
+  if ($thunderUpdater->installModules($updates)) {
+
+    $hash = 'MpLF2dxW81TfwiOqZu8eu2IjlpqUGsObEVy5jajIVdw';
+    if (!$thunderUpdater->revertConfig('views.view.image_browser', $updateLogger, $hash)) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
+    }
+
+    $hash = 'T4BCkJ-e9xYXdW4IAcPjSpdgzDKirI3HHSJ12HQ-J2Q';
+    if (!$thunderUpdater->revertConfig('views.view.video_browser', $updateLogger, $hash)) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__views_autocomplete_filters']);
+    }
+  }
+  return $updateLogger->output();
+}
