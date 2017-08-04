@@ -152,6 +152,32 @@ function thunder_liveblog_install() {
 }
 
 /**
+ * Implements hook_uninstall().
+ */
+function thunder_liveblog_uninstall() {
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::configFactory();
+  $logger = \Drupal::logger('thunder_liveblog');
+
+  $config = [
+    'field.field.liveblog_post.liveblog_post.field_embed_media',
+    'field.field.node.liveblog.field_paragraphs',
+    'field.storage.liveblog_post.field_embed_media',
+    'rest.resource.entity.paragraph',
+  ];
+
+  foreach ($config as $tour) {
+    try {
+      $configFactory->getEditable($tour)->delete();
+    }
+    catch (\Exception $e) {
+      $logger->warning(sprintf('Unable to uninstall config: %s.', $tour));
+    }
+  }
+}
+
+/**
  * Adds image to the list of available paragraphs.
  */
 function thunder_liveblog_update_8101() {
