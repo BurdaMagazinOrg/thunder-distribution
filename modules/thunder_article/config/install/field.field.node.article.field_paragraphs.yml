@@ -8,8 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.instagram
     - paragraphs.paragraphs_type.link
-    - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.pinterest
+    - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.twitter
     - paragraphs.paragraphs_type.video
@@ -37,6 +37,7 @@ settings:
       gallery: gallery
       image: image
       video: video
+      pinterest: pinterest
     target_bundles_drag_drop:
       text:
         enabled: true
