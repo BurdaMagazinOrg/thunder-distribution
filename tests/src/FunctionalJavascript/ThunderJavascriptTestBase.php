@@ -278,7 +278,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   public function scrollElementInView($cssSelector) {
     $this->getSession()
-      ->executeScript('var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); var elementTop = jQuery(\'' . addcslashes($cssSelector, '\'') . '\').offset().top; window.scroll(0, elementTop-(viewPortHeight/2));');
+      ->executeScript('
+        var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var element = jQuery(\'' . addcslashes($cssSelector, '\'') . '\');
+        var scrollTop = element.offset().top - (viewPortHeight/2);
+        var scrollableParent = element.scrollParent();
+        if (scrollableParent.length > 0 && scrollableParent[0] !== document) { scrollableParent[0].scrollTop = scrollTop } else { window.scroll(0, scrollTop); };
+      ');
   }
 
   /**
