@@ -75,6 +75,9 @@
             },
             "drupal/field_group": {
                 "Form mode ignored as field groups always attached to 'default' form mode": "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"
+            },
+            "drupal/media_entity_pinterest": {
+                "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             }
         }
     },
@@ -117,6 +120,7 @@
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
+        "drupal/media_entity_pinterest": "1.0-beta1",
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
         "drupal/media_expire": "^1.0",

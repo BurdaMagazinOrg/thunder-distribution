@@ -335,7 +335,9 @@ class Updater implements UpdaterInterface {
       try {
         $configName = ConfigName::createByFullName($fullConfigName);
 
-        $this->configReverter->import($configName->getType(), $configName->getName());
+        if (!$this->configReverter->import($configName->getType(), $configName->getName())) {
+          throw new \Exception('Config not found');
+        }
         $this->logger->info($this->t('Configuration @full_name has been successfully imported.', [
           '@full_name' => $fullConfigName,
         ]));

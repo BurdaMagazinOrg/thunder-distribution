@@ -148,6 +148,12 @@ projects:
     type: "module"
     version: "1"
 
+  media_entity_pinterest:
+    type: "module"
+    version: "1.0-beta1"
+    patch:
+      - "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+
   media_entity_slideshow:
     type: "module"
     version: "1"
