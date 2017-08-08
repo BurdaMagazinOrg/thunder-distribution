@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.pinterest.field_url
+    - media_entity.bundle.pinterest
+  module:
+    - media_entity_pinterest
+id: media.pinterest.default
+targetEntityType: media
+bundle: pinterest
+mode: default
+content:
+  field_url:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: pinterest_embed
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

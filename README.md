@@ -82,7 +82,7 @@ If you want to install Thunder with composer (recommended) do the following:
 composer create-project burdamagazinorg/thunder-project thunder --no-interaction
 ```
 
-For further information follow the [install instructions](https://www.drupal.org/documentation/install). 
+For further information follow the [install instructions](https://www.drupal.org/docs/8/install). 
 
 ## Configuration
 

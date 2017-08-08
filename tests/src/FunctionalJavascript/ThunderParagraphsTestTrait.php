@@ -146,14 +146,14 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Create Twitter or Instagram Paragraph.
+   * Create Twitter, Instagram or PinterestParagraph.
    *
    * @param string $fieldName
    *   Field name.
    * @param string $socialUrl
-   *   Url to tweet or instagram.
+   *   Url to tweet, instagram or pinterest.
    * @param string $type
-   *   Type of paragraph (twitter|instagram).
+   *   Type of paragraph (twitter|instagram|pinterest).
    * @param int $position
    *   Position of the paragraph.
    */

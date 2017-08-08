@@ -17,6 +17,7 @@ dependencies:
   - media_entity:media_entity
   - media_entity_image:media_entity_image
   - media_entity_instagram:media_entity_instagram
+  - media_entity_pinterest:media_entity_pinterest
   - media_entity_slideshow:media_entity_slideshow
   - media_entity_twitter:media_entity_twitter
   - media_expire:media_expire

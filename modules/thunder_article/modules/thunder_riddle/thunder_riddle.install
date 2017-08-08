@@ -29,3 +29,39 @@ function thunder_riddle_install() {
     }
   }
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function thunder_riddle_uninstall() {
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::configFactory();
+  $logger = \Drupal::logger('thunder_riddle');
+
+  $config = [
+    'core.entity_form_display.media.riddle.default',
+    'core.entity_form_display.paragraph.riddle.default',
+    'core.entity_view_display.media.riddle.default',
+    'core.entity_view_display.media.riddle.thumbnail',
+    'core.entity_view_display.paragraph.riddle.default',
+    'core.entity_view_display.paragraph.riddle.preview',
+    'entity_browser.browser.riddle_browser',
+    'field.field.media.riddle.field_riddle_id',
+    'field.field.paragraph.riddle.field_riddle',
+    'field.storage.media.field_riddle_id',
+    'field.storage.paragraph.field_riddle',
+    'media_entity.bundle.riddle',
+    'paragraphs.paragraphs_type.riddle',
+    'views.view.riddle_browser',
+  ];
+
+  foreach ($config as $tour) {
+    try {
+      $configFactory->getEditable($tour)->delete();
+    }
+    catch (\Exception $e) {
+      $logger->warning(sprintf('Unable to uninstall config: %s.', $tour));
+    }
+  }
+}
