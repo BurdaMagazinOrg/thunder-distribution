@@ -188,6 +188,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/10/edit');
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
+    $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')
       ->click();
     $this->waitUntilVisible('[data-drupal-selector="edit-token-table-1-link"]', 5000);
