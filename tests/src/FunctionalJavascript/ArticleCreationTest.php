@@ -60,6 +60,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Video paragraph at the beginning.
     $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
 
+    // Add Pinterest Paragraph.
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/489766528213367864/', 'pinterest');
+
     $this->scrollElementInView('#edit-actions');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
@@ -105,6 +108,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Video paragraph.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length === 1");
+
+    // Check that one Pinterest widget is on page.
+    $this->assertSession()
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "489766528213367864")]', 2);
   }
 
 }

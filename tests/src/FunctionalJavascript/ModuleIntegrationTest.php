@@ -188,6 +188,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/10/edit');
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
+    $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')
       ->click();
     $this->waitUntilVisible('[data-drupal-selector="edit-token-table-1-link"]', 5000);
@@ -401,6 +402,12 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   public function testLiveblog() {
     $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), TRUE);
     if (empty($pusherCredentials)) {
+      if ($this->isForkPullRequest()) {
+        $this->markTestSkipped("Skip Live Blog test (missing secure environment variables)");
+
+        return;
+      }
+
       $this->fail("pusher credentials not provided.");
       return;
     }
@@ -557,6 +564,12 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $riddleToken = getenv('RIDDLE_TOKEN');
 
     if (empty($riddleToken)) {
+      if ($this->isForkPullRequest()) {
+        $this->markTestSkipped("Skip Riddle test (missing secure environment variables)");
+
+        return;
+      }
+
       $this->fail("Riddle token is not available.");
 
       return;
