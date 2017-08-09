@@ -105,7 +105,8 @@ function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$f
 /**
  * Implements hook_field_widget_WIDGET_ID_form_alter().
  *
- * Add process function to hide 'remove' button of image field widget on inline entity forms.
+ * Add process function to hide 'remove' button of image field widget on inline
+ * entity forms.
  */
 function thunder_media_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $context) {
   if (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form') {
