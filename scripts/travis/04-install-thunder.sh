@@ -44,8 +44,7 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
-    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" --no-progress
+    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "drupal/thunder_admin:dev-2.x" --no-progress
 }
 
 apply_patches() {
