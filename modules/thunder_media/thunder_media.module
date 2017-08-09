@@ -96,9 +96,39 @@ function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'thunder_media/entity_browser_view';
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_ID_form_alter().
+ *
+ * Add process function to hide 'remove' button of image field widget on inline
+ * entity forms.
+ */
+function thunder_media_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form') {
+    $element['#process'][] = 'thunder_media_inline_entity_form_image_widget_process';
+  }
+}
+
+/**
+ * Process function to hide 'Remove' button on image widget forms.
+ */
+function thunder_media_inline_entity_form_image_widget_process($element, FormStateInterface $form_state, $form) {
+  if (isset($element['remove_button'])) {
+    $element['remove_button']['#access'] = FALSE;
+  }
+
+  return $element;
+}
+
+/**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
-function thunder_media_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+function thunder_media_inline_entity_form_entity_form_alter(&$entity_form, FormStateInterface $form_state) {
   if (isset($entity_form['field_media_images'])) {
     $entity_form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
   }

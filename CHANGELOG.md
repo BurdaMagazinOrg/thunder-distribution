@@ -1,5 +1,20 @@
 # Change Log
 
+## [8.2.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.6) 2017-08-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.5...8.2.6)
+
+- [Add pinterest paragraph](https://www.drupal.org/node/2899059)
+- [Add in between paragraph loading notification](https://www.drupal.org/node/2899034)
+- Fixes [Cannot reinstall thunder riddle integration](https://www.drupal.org/node/2899661)
+- Fixes [Config Error on Liveblog reinstall](https://www.drupal.org/node/2879436)
+
+## [8.2.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.5) 2017-07-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.4...8.2.5)
+
+- Addition of the content lock module to prevent concurrent editing of articles.
+- Fix missing installation of empty fields module on updates
+- Fixed installation instructions.
+
 ## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.4) 2017-07-17
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.3...8.2.4)
 
