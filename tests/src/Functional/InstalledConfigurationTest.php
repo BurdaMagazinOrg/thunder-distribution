@@ -181,66 +181,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
     ],
 
-    // Infinite Theme - adjusted by Thunder hooks.
-    'infinite.settings' => [
-      'logo' => TRUE,
-    ],
-
-    // Infinite Theme - adjusted by Shariff module hooks.
-    'core.entity_view_display.node.article.teaser_landscape_l' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_landscape_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_portrait_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_portrait_s' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_square_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_square_s' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.lazyloading' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_full' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_half' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_home_selectable' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-
-    // Infinite Theme - changed by Thunder.
-    'core.entity_view_display.media.gallery.default' => [
-      'content' => [
-        'field_media_images' => [
-          'settings' => [
-            'view_mode' => TRUE,
-          ],
-        ],
-      ],
-    ],
-
-    // Infinite Theme - changed by Thunder in order to use Slick gallery.
-    'core.entity_view_display.media.image.default' => [
-      'content' => [
-        'field_image' => [
-          'settings' => [
-            'image_style' => TRUE,
-            'responsive_image_style' => TRUE,
-          ],
-        ],
-      ],
-    ],
-
     // Diff module. Issue: https://www.drupal.org/node/2854581.
     'core.entity_view_mode.node.diff' => [
       'langcode' => TRUE,
