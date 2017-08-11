@@ -9,7 +9,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @package Drupal\Tests\thunder\Kernel
  *
- * @group ThunderConfig_InDev
+ * @group ThunderConfig
  */
 class ModuleUninstallTest extends ThunderBaseTest {
 
