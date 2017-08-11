@@ -15,27 +15,28 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
   use ThunderFormFieldTestTrait;
+
   /**
-  * dr
-  */
+   * Test saving changes in inline entity form inside gallery paragraph when
+   * paragraph form is collapsed
+   *
+   * Demo Article (node Id: 7) is used for testing.
+   *
+   */
   public function testCollapse() {
 
-    // Test remove inside inline entity form.
+    // Test saving inline entity form when collapsing paragraph form.
     $this->drupalGet("node/7/edit");
-
     $page = $this->getSession()->getPage();
 
-    // Edit gallery paragraph
+    // Edit gallery paragraph.
     $this->clickButtonCssSelector($page,'[data-drupal-selector="edit-field-paragraphs-0-top-links-edit-button"]');
-
     $this->setFieldValue($page, 'field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
-
+    // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-collapse-button"]');
-
     $this->clickArticleSave();
 
     $this->drupalGet("node/7/edit");
-    ////*[@id="edit-field-paragraphs-0"]/div[3]/div/article/div[2]/div/div[2]
     $this->assertSession()->pageTextContains('New gallery name before collapse');
   }
 
