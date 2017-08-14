@@ -19,7 +19,6 @@ projects:
     version: "1.0"
     patch:
       - "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
-      - "https://www.drupal.org/files/issues/2901581_3.patch"
 
   amptheme:
     type: "theme"
@@ -98,8 +97,6 @@ projects:
     download:
       url: "http://git.drupal.org/project/fb_instant_articles.git"
       branch: "8.x-1.x"
-    patch:
-      - "https://www.drupal.org/files/issues/2901583_2.patch"
 
   field_group:
     type: "module"

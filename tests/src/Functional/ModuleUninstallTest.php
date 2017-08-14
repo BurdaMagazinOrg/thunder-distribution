@@ -23,33 +23,26 @@ class ModuleUninstallTest extends ThunderBaseTest {
     ['media_riddle_marketplace'],
     ['riddle_marketplace'],
     ['thunder_riddle', 'media_riddle_marketplace', 'riddle_marketplace'],
-
-    ['thunder_fia'],
-    ['fb_instant_articles'],
-    ['thunder_fia', 'fb_instant_articles'],
-
     ['thunder_liveblog'],
     ['liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],
-
     ['diff'],
     ['content_lock'],
     ['checklistapi'],
-    // ['nexx_integration'], // fields issue.
-    // ['ivw_integration'], // fields issue.
     ['adsense'],
     ['google_analytics'],
-    ['amp'],
-    ['harbourmaster'],
-  ];
+    ['access_unpublished'],
+    ['responsive_preview'],
+    ['shariff'],
 
-  /**
-   * Ignore checking of configuration schemas until it's solved.
-   *
-   * @var array
-   */
-  protected static $configSchemaCheckerExclusions = [
-    'views.view.fb_instant_articles',
+    // ['amp'],
+    // Patch provided: https://www.drupal.org/files/issues/2901581_3.patch.
+    // ['harbourmaster'],
+    // Requires update of project on drupal.org.
+    // ['thunder_fia'],
+    // ['fb_instant_articles'],
+    // ['thunder_fia', 'fb_instant_articles'],
+    // Patch provided: https://www.drupal.org/files/issues/2901583_2.patch.
   ];
 
   /**
@@ -88,10 +81,26 @@ class ModuleUninstallTest extends ThunderBaseTest {
    * Compare active configuration with configuration Yaml files.
    */
   public function testModules() {
+    $uninstallFailures = [];
+
     foreach (static::$moduleLists as $modules) {
-      $this->installModules($modules);
-      $this->uninstallModules($modules);
-      $this->installModules($modules);
+      try {
+        $this->installModules($modules);
+        $this->uninstallModules($modules);
+        $this->installModules($modules);
+      }
+      catch (\Exception $e) {
+        // Store errors, so that all modules can be tested.
+        $uninstallFailures[] = [
+          'modules' => $modules,
+          'error' => $e->getMessage(),
+        ];
+      }
+    }
+
+    if ($uninstallFailures) {
+      // Output all errors for modules tested.
+      throw new \Exception(print_r($uninstallFailures, TRUE));
     }
   }
 

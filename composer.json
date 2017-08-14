@@ -62,8 +62,7 @@
                 "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899034_7.patch"
             },
             "drupal/amp": {
-                "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch",
-                "AMP uninstall hook": "https://www.drupal.org/files/issues/2901581_3.patch"
+                "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
             },
             "drupal/amptheme": {
                 "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
@@ -79,9 +78,6 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
-            },
-            "drupal/fb_instant_articles": {
-                "Facebook IA uninstall hook": "https://www.drupal.org/files/issues/2901583_2.patch"
             }
         }
     },
