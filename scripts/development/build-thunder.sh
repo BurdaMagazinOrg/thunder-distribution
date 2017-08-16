@@ -14,6 +14,6 @@ cd ${DEST_DIR}
 composer config repositories.thunder path ${BASE_DIR}
 composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
 
-composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "behat/mink-selenium2-driver" "burdamagazinorg/thunder-dev-tools:*" "burdamagazinorg/robo:*" --no-progress
+composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "burdamagazinorg/thunder-dev-tools:*" "burdamagazinorg/robo:*" --no-progress
 
 echo "<?php use Thunder\Robo\RoboFileBase; class RoboFile extends RoboFileBase {}" > RoboFile.php
