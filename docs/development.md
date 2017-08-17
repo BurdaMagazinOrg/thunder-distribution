@@ -226,3 +226,79 @@ Workflow to generate and use CUD and use it is following:
     ```
 
 That's all and don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
+
+# Create development environment
+
+This documentation is for developers, that want do develop for the distribution, and not necessarily use it for a 
+project.
+
+## Preparation
+To start developing install the following tools
+
+- git: https://git-scm.com/downloads
+- composer: https://getcomposer.org/download/
+- docker und docker-compose: https://docs.docker.com/engine/installation/
+
+## Installation
+
+We provide two build scripts to install the distribution alongside the repository directory. Both are in the 
+scripts/development folder. One is called build-thunder.sh and creates a new project based on the distribution in the
+thunder directory next to the git repository. You will have to provide a local server stack on your own to use it.
+The other one is called build-thunder-docker.sh and additionally create a docker environment ready to be used locally.
+
+### Docker installation
+
+To install with docker just run:
+
+```
+$ ./scripts/development/build-thunder-docker.sh
+```
+
+After the script has run, you can access your site at http://thunder.localhost, if you are not developping on mac,
+you have to provide an /etc/hosts entry to have this sub domain point to 127.0.0.1.
+
+If you want to simultaneously run multiple installations call the script like this:
+
+```
+$ ./scripts/development/build-thunder-docker.sh ../thunder2 81
+```
+
+This will install the project into the thunder2 directory and it will be accessible at http://thunder.localhost:81
+
+In both cases any change to the distribution repository will be cisible in the installations, since the directory will 
+be linked inside the docker container.
+
+
+### Docker helpers
+
+You can connect to the php docker container to execute drush or composer commands inside the container. To do so, gi 
+to the projects directory (this should contain a docker-compose.yml file) and execute:
+
+``` 
+$ docker-compose exec --user 82 php sh
+```
+
+Now you are inside the container and you can call drush and composer on the installation. To make life a bit easier 
+it is recommended to have the following aliases inside your hosts .profile file:
+
+```
+alias ddrush='docker-compose exec --user 82 php drush -r /var/www/html/docroot'
+alias dcomposer='docker-compose exec --user 82 php composer'
+```
+
+now you do not have to manually enter the docker container to call drush and composer, just gi to the projects root 
+folder and call ddrush instead of drush and dcomposer instead of composer to automatically use the current php
+container.
+
+### Install Thunder in docker container
+
+With the aliases above you can install thunder the following way 
+
+```
+§ ddrush si thunder --account-name=admin --account-pass=admin --db-url=mysql://drupal:drupal@mariadb/drupal -y
+```
+
+### Permissions
+
+To prevent problems with file permission sie [this page](https://docker4drupal.readthedocs.io/en/latest/permissions/) 
+for more informations.  
