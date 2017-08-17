@@ -27,7 +27,7 @@ services:
       #PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
       - THUNDER_DIRECTORY:/var/www/html:cached
-      - DISTRIBUTION_REPOSITORY:DISTRIBUTION_REPOSITORY:cached
+      - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
       #- docker-sync:/var/www/html # Docker-sync for Mac
 
   nginx:
@@ -41,7 +41,7 @@ services:
       NGINX_SERVER_ROOT: /var/www/html/docroot
     volumes:
       - THUNDER_DIRECTORY:/var/www/html:cached
-      - DISTRIBUTION_REPOSITORY:DISTRIBUTION_REPOSITORY:cached
+      - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
       #- docker-sync:/var/www/html # Docker-sync for Mac
     labels:
       - 'traefik.backend=nginx'
