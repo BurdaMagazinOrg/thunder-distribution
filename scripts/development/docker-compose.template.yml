@@ -26,9 +26,10 @@ services:
       #PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting below
       #PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
-      - THUNDER_DIRECTORY:/var/www/html:cached
-      - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      #- docker-sync:/var/www/html # Docker-sync for Mac
+      #- THUNDER_DIRECTORY:/var/www/html:cached
+      #- DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
+      - THUNDER_SYNC_DIRECTORY:/var/www/html
+      - DISTRIBUTION_SYNC_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder
 
   nginx:
     image: wodby/drupal-nginx:8-1.13-2.4.2
@@ -40,9 +41,10 @@ services:
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/docroot
     volumes:
-      - THUNDER_DIRECTORY:/var/www/html:cached
-      - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      #- docker-sync:/var/www/html # Docker-sync for Mac
+      #- THUNDER_DIRECTORY:/var/www/html:cached
+      #- DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
+      - THUNDER_SYNC_DIRECTORY:/var/www/html
+      - DISTRIBUTION_SYNC_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder
     labels:
       - 'traefik.backend=nginx'
       - 'traefik.port=80'
@@ -188,6 +190,7 @@ services:
 
 volumes:
   codebase:
-# Docker-sync for macOS users
-#  docker-sync:
-#    external: true
+  THUNDER_SYNC_DIRECTORY:
+    external: true
+  DISTRIBUTION_SYNC_REPOSITORY:
+    external: true

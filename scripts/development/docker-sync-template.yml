@@ -1,0 +1,12 @@
+version: "2"
+
+syncs:
+  THUNDER_SYNC_DIRECTORY:
+    src: 'THUNDER_DIRECTORY'
+    sync_userid: '82'
+    sync_excludes: ['.gitignore', '.git/', '.idea/']
+
+  DISTRIBUTION_SYNC_REPOSITORY:
+    src: 'DISTRIBUTION_REPOSITORY'
+    sync_userid: '82'
+    sync_excludes: ['.gitignore', '.git/', '.idea/']
