@@ -238,6 +238,8 @@ To start developing install the following tools
 - git: https://git-scm.com/downloads
 - composer: https://getcomposer.org/download/
 - docker und docker-compose: https://docs.docker.com/engine/installation/
+- docker-sync: http://docker-sync.io/
+- install unison: ```brew install unison```
 
 ## Installation
 
@@ -295,7 +297,7 @@ container.
 With the aliases above you can install thunder the following way 
 
 ```
-§ ddrush si thunder --account-name=admin --account-pass=admin --db-url=mysql://drupal:drupal@mariadb/drupal -y
+§ ddrush si thunder --account-name=admin --account-pass=admin --db-url=mysql://thunder:thunder@mariadb/thunder -y
 ```
 
 ### Permissions

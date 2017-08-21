@@ -4,10 +4,10 @@ services:
   mariadb:
     image: wodby/mariadb:10.1-2.3.3
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
+      MYSQL_ROOT_PASSWORD: thunder
+      MYSQL_DATABASE: thunder
+      MYSQL_USER: thunder
+      MYSQL_PASSWORD: thunder
 #    volumes:
 #      - ./database:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
 #      - /path/to/mariadb/data/on/host:/var/lib/mysql # I want to manage volumes manually.
