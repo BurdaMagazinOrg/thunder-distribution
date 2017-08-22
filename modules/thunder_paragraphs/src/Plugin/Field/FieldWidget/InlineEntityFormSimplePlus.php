@@ -33,8 +33,7 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
   public static function defaultSettings() {
     $defaults = parent::defaultSettings();
     $defaults += [
-      'allow_new' => TRUE,
-      'allow_existing' => FALSE,
+      'add_existing' => TRUE,
       'match_operator' => 'CONTAINS',
     ];
 
@@ -49,15 +48,10 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
 
     $labels = $this->getEntityTypeLabels();
     $states_prefix = 'fields[' . $this->fieldDefinition->getName() . '][settings_edit_form][settings]';
-    $element['allow_new'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Allow users to add new @label.', ['@label' => $labels['plural']]),
-      '#default_value' => $this->getSetting('allow_new'),
-    ];
-    $element['allow_existing'] = [
+    $element['add_existing'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Allow users to add existing @label.', ['@label' => $labels['plural']]),
-      '#default_value' => $this->getSetting('allow_existing'),
+      '#default_value' => $this->getSetting('add_existing'),
     ];
     $element['match_operator'] = [
       '#type' => 'select',
@@ -67,7 +61,7 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
       '#description' => $this->t('Select the method used to collect autocomplete suggestions. Note that <em>Contains</em> can cause performance issues on sites with thousands of nodes.'),
       '#states' => [
         'visible' => [
-          ':input[name="' . $states_prefix . '[allow_existing]"]' => ['checked' => TRUE],
+          ':input[name="' . $states_prefix . '[add_existing]"]' => ['checked' => TRUE],
         ],
       ],
     ];
@@ -82,15 +76,8 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
     $summary = parent::settingsSummary();
     $labels = $this->getEntityTypeLabels();
 
-    if ($this->getSetting('allow_new')) {
-      $summary[] = $this->t('New @label can be added.', ['@label' => $labels['plural']]);
-    }
-    else {
-      $summary[] = $this->t('New @label can not be created.', ['@label' => $labels['plural']]);
-    }
-
     $match_operator_options = $this->getMatchOperatorOptions();
-    if ($this->getSetting('allow_existing')) {
+    if ($this->getSetting('add_existing')) {
       $summary[] = $this->t('Existing @label can be referenced and are matched with the %operator operator.', [
         '@label' => $labels['plural'],
         '%operator' => $match_operator_options[$this->getSetting('match_operator')],
@@ -181,11 +168,11 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
       'inline_entity_form'
     ]);
     $bundle = !empty($this->getFieldSetting('handler_settings')['target_bundles']) ? reset($this->getFieldSetting('handler_settings')['target_bundles']) : NULL;
-    if ($entity || $settings['allow_new']) {
+    if (($op == 'add' && !$settings['add_existing']) || $op == 'edit') {
       $element['inline_entity_form'] = $this->getInlineEntityForm($op, $bundle, $langcode, $delta, $parents, $entity);
     }
 
-    if ($op == 'add' && $settings['allow_existing']) {
+    if ($op == 'add' && $settings['add_existing']) {
 
       $element['inline_entity_form'] = [
         '#type' => 'fieldset',
@@ -203,7 +190,13 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
 
       $element['inline_entity_form'] += inline_entity_form_reference_form($element['inline_entity_form'], $form_state);
 
+      // Hide submit only visually, gets triggered by entityBrowserEntityForm behaviour.
+      if (isset($element['inline_entity_form']['entity_browser'])) {
+        $element['inline_entity_form']['actions']['ief_reference_save']['#attributes']['class'][] = 'visually-hidden';
+      }
+
       $element['inline_entity_form']['actions']['ief_reference_cancel']['#access'] = FALSE;
+      unset($element['inline_entity_form']['#title']);
     }
 
     if ($op == 'edit') {
