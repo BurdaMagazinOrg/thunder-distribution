@@ -2,8 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.media.inline
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
+  module:
+    - entity_browser_entity_form
+    - thunder_paragraphs
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
@@ -11,13 +15,19 @@ mode: default
 content:
   field_image:
     weight: 0
-    label: hidden
     settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
+      form_mode: inline
+      label_singular: ''
+      label_plural: ''
+      add_existing: '1'
+      match_operator: CONTAINS
+      override_labels: 0
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: image_browser
+    type: inline_entity_form_simple_plus
     region: content
 hidden:
   created: true
+  status: true
   uid: true
