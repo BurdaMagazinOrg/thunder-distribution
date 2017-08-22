@@ -26,10 +26,10 @@ services:
       #PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting below
       #PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
-      #- THUNDER_DIRECTORY:/var/www/html:cached
+      #- PROJECT_DIRECTORY:/var/www/html:cached
       #- DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      - THUNDER_SYNC_DIRECTORY:/var/www/html
-      - DISTRIBUTION_SYNC_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder
+      - PROJECT_KEY:/var/www/html
+      - DISTRIBUTION_KEY:/var/www/html/docroot/profiles/contrib/thunder
 
   nginx:
     image: wodby/drupal-nginx:8-1.13-2.4.2
@@ -41,14 +41,14 @@ services:
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/docroot
     volumes:
-      #- THUNDER_DIRECTORY:/var/www/html:cached
+      #- PROJECT_DIRECTORY:/var/www/html:cached
       #- DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      - THUNDER_SYNC_DIRECTORY:/var/www/html
-      - DISTRIBUTION_SYNC_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder
+      - PROJECT_KEY:/var/www/html
+      - DISTRIBUTION_KEY:/var/www/html/docroot/profiles/contrib/thunder
     labels:
-      - 'traefik.backend=nginx'
+      - 'traefik.backend=PROJECT_DOCKER_NAME_nginx_1'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:thunder.localhost'
+      - 'traefik.frontend.rule=Host:PROJECT_DOCKER_NAME.localhost'
 
 #  apache:
 #    image: wodby/drupal-apache:2.4-1.0.2
@@ -179,18 +179,18 @@ services:
       - 'traefik.port=9000'
       - 'traefik.frontend.rule=Host:portainer.drupal.docker.localhost'
 
-  traefik:
-    image: traefik
-    command: -c /dev/null --web --docker --logLevel=INFO
-    ports:
-      - 'EXPOSED_HTTP_PORT:80'
-#      - '8080:8080' # Dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+#  traefik:
+#    image: traefik
+#    command: -c /dev/null --web --docker --logLevel=INFO
+#    ports:
+#      - '80:80'
+##      - '8080:8080' # Dashboard
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   codebase:
-  THUNDER_SYNC_DIRECTORY:
+  PROJECT_KEY:
     external: true
-  DISTRIBUTION_SYNC_REPOSITORY:
+  DISTRIBUTION_KEY:
     external: true

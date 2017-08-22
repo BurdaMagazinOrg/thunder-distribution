@@ -1,42 +1,48 @@
 #!/usr/bin/env bash
 
-EXPOSED_HTTP_PORT=80
+PROJECT_NAME="thunder"
 
-RANDOM_NUMBER=$(jot -r 1  100000 999999)
+if [ $1 ] ; then
+  PROJECT_NAME=$1
+fi
+
+PROJECT_NAME=$(echo "${PROJECT_NAME}" | tr '[:upper:]' '[:lower:]')
+
+PROJECT_DOCKER_NAME=${PROJECT_NAME//[![:alnum:]]}
+
+INSTALLATIONS_DIRECTORY="${HOME}/tmp/installations"
+
+if [ $2 ] ; then
+  INSTALLATIONS_DIRECTORY=$2
+fi
+
+PROJECT_DIRECTORY="${INSTALLATIONS_DIRECTORY}/${PROJECT_NAME}"
+
+mkdir -p $PROJECT_DIRECTORY
+
+PROJECT_KEY=${PROJECT_DIRECTORY//\//}
 
 DISTRIBUTION_REPOSITORY=$( cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../.." && pwd )
 
-DISTRIBUTION_REPOSITORY_SYNC_KEY=${RANDOM_NUMBER}${DISTRIBUTION_REPOSITORY//\//-}
+DISTRIBUTION_KEY=${DISTRIBUTION_REPOSITORY//\//}
 
-THUNDER_DIRECTORY=$( cd "${DISTRIBUTION_REPOSITORY}/../thunder" && pwd )
+composer create-project burdamagazinorg/thunder-project:2.x ${PROJECT_DIRECTORY} --stability dev --no-interaction --no-install
 
-if [ $1 ] ; then
-  mkdir -p ${1}
-  THUNDER_DIRECTORY=$( cd ${1} && pwd )
-fi
+sed -e "s|PROJECT_DIRECTORY|${PROJECT_DIRECTORY}|g" -e "s|DISTRIBUTION_REPOSITORY|${DISTRIBUTION_REPOSITORY}|g" -e "s|PROJECT_KEY|${PROJECT_KEY}|g" -e "s|DISTRIBUTION_KEY|${DISTRIBUTION_KEY}|g" -e "s|PROJECT_DOCKER_NAME|${PROJECT_DOCKER_NAME}|g" ${DISTRIBUTION_REPOSITORY}/scripts/development/docker-compose.template.yml > ${PROJECT_DIRECTORY}/docker-compose.yml
+sed -e "s|PROJECT_DIRECTORY|${PROJECT_DIRECTORY}|g" -e "s|DISTRIBUTION_REPOSITORY|${DISTRIBUTION_REPOSITORY}|g" -e "s|PROJECT_KEY|${PROJECT_KEY}|g" -e "s|DISTRIBUTION_KEY|${DISTRIBUTION_KEY}|g" ${DISTRIBUTION_REPOSITORY}/scripts/development/docker-sync-template.yml > ${PROJECT_DIRECTORY}/docker-sync.yml
 
-if [ $2 ] ; then
-  EXPOSED_HTTP_PORT="$2"
-fi
-
-THUNDER_DIRECTORY_SYNC_KEY=${RANDOM_NUMBER}${THUNDER_DIRECTORY//\//-}
-
-DOCKER_EXEC_PHP="docker-compose exec --user 82 php"
-
-composer create-project burdamagazinorg/thunder-project:2.x ${THUNDER_DIRECTORY} --stability dev --no-interaction --no-install
-
-sed -e "s|THUNDER_DIRECTORY|${THUNDER_DIRECTORY}|g" -e "s|DISTRIBUTION_REPOSITORY|${DISTRIBUTION_REPOSITORY}|g" -e "s|THUNDER_SYNC_DIRECTORY|${THUNDER_DIRECTORY_SYNC_KEY}|g" -e "s|DISTRIBUTION_SYNC_REPOSITORY|${DISTRIBUTION_REPOSITORY_SYNC_KEY}|g" -e "s|EXPOSED_HTTP_PORT|${EXPOSED_HTTP_PORT}|g" ${DISTRIBUTION_REPOSITORY}/scripts/development/docker-compose.template.yml > ${THUNDER_DIRECTORY}/docker-compose.yml
-sed -e "s|THUNDER_DIRECTORY|${THUNDER_DIRECTORY}|g" -e "s|DISTRIBUTION_REPOSITORY|${DISTRIBUTION_REPOSITORY}|g" -e "s|THUNDER_SYNC_DIRECTORY|${THUNDER_DIRECTORY_SYNC_KEY}|g" -e "s|DISTRIBUTION_SYNC_REPOSITORY|${DISTRIBUTION_REPOSITORY_SYNC_KEY}|g" -e "s|SYNC_PORT|${SYNC_PORT}|g" ${DISTRIBUTION_REPOSITORY}/scripts/development/docker-sync-template.yml > ${THUNDER_DIRECTORY}/docker-sync.yml
-
-cd ${THUNDER_DIRECTORY}
+cd ${PROJECT_DIRECTORY}
 
 composer config repositories.thunder path ${DISTRIBUTION_REPOSITORY}
 composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "burdamagazinorg/thunder-dev-tools:*" "burdamagazinorg/robo:*" --no-progress
 
+rm docroot/profiles/contrib/thunder
+
 echo "<?php use Thunder\Robo\RoboFileBase; class RoboFile extends RoboFileBase {}" > RoboFile.php
 
-rm docroot/profiles/contrib/thunder
+docker-compose exec php echo -e "<?php\n\nrequire_once DRUPAL_ROOT . '/sites/default/default.settings.php';\n\$settings['hash_salt'] = '$(date | md5)';\n\$databases['default']['default'] = [\n  'database' => 'thunder',\n  'username' => 'thunder',\n  'password' => 'thunder',\n  'prefix' => '',\n  'host' => 'mariadb',\n  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',\n  'driver' => 'mysql'\n];\n" > docroot/sites/default/settings.php
 
 docker-compose down -v
 docker-sync start
-docker-compose up -d
+docker-compose -p ${PROJECT_DOCKER_NAME} up -d
+
