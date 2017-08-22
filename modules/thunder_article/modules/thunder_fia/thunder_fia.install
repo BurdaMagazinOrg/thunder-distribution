@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Thunder Facebook Instant Articles integration install hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function thunder_fia_uninstall() {
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::configFactory();
+  $logger = \Drupal::logger('thunder_fia');
+
+  $configNames = [
+    'core.entity_view_display.media.gallery.facebook_instant_articles_rss',
+    'core.entity_view_display.media.image.facebook_instant_articles_rss',
+    'core.entity_view_display.media.video.facebook_instant_articles_rss',
+    'core.entity_view_display.node.article.fb_instant_articles_rss',
+    'core.entity_view_display.paragraph.gallery.facebook_instant_articles_rss',
+    'core.entity_view_display.paragraph.image.facebook_instant_articles_rss',
+    'core.entity_view_display.paragraph.video.facebook_instant_articles_rss',
+    'core.entity_view_mode.media.facebook_instant_articles_rss',
+    'core.entity_view_mode.paragraph.facebook_instant_articles_rss',
+  ];
+
+  foreach ($configNames as $configName) {
+    try {
+      $configFactory->getEditable($configName)->delete();
+    }
+    catch (\Exception $e) {
+      $logger->warning(sprintf('Unable to uninstall config: %s.', $configName));
+    }
+  }
+}
