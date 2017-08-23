@@ -17,27 +17,56 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
   use ThunderFormFieldTestTrait;
 
   /**
-   * Test saving changes in inline entity form inside gallery paragraph when
-   * paragraph form is collapsed
+   * Test saving changes in inline entity form using the
+   * inline_entity_form_simple widget inside gallery paragraph when the
+   * paragraph form is collapsed.
    *
    * Demo Article (node Id: 7) is used for testing.
    *
    */
-  public function testCollapse() {
+  public function testGalleryCollapse() {
 
     // Test saving inline entity form when collapsing paragraph form.
     $this->drupalGet("node/7/edit");
     $page = $this->getSession()->getPage();
 
     // Edit gallery paragraph.
-    $this->clickButtonCssSelector($page,'[data-drupal-selector="edit-field-paragraphs-0-top-links-edit-button"]');
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-edit-button"]');
     $this->setFieldValue($page, 'field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
     // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-collapse-button"]');
     $this->clickArticleSave();
 
+    // E
     $this->drupalGet("node/7/edit");
-    $this->assertSession()->pageTextContains('New gallery name before collapse');
+    $this->assertSession()
+      ->pageTextContains('New gallery name before collapse');
   }
 
+  /**
+   * Test saving changes in inline entity form using the
+   * inline_entity_form_simple_plus widget inside video paragraph when the
+   * paragraph form is collapsed.
+   *
+   * Demo Article (node Id: 7) is used for testing.
+   *
+   */
+  public function testVideoCollapse() {
+
+    // Test saving inline entity form when collapsing paragraph form.
+    $this->drupalGet("node/7/edit");
+    $page = $this->getSession()->getPage();
+
+    // Edit gallery paragraph.
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-edit-button"]');
+    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][0][inline_entity_form][name][0][value]', 'New video name before collapse');
+    // Collapse parargraph form.
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-collapse-button"]');
+    $this->clickArticleSave();
+
+    // E
+    $this->drupalGet("node/7/edit");
+    $this->assertSession()->pageTextContains('New video name before collapse');
+  }
+  
 }
