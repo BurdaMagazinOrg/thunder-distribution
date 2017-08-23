@@ -91,4 +91,3 @@ services:
       - 'traefik.backend=portainer'
       - 'traefik.port=9000'
       - 'traefik.frontend.rule=Host:portainer.drupal.docker.localhost'
-
