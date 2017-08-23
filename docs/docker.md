@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
     command: -c /dev/null --web --docker --logLevel=DEBUG
     networks:
-      - thunder1
+      - thunder
       - thunder2
     ports:
       - '80:80'
@@ -52,9 +52,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
-  thunder1:
+  thunder:
     external:
-      name: thunder1_default
+      name: thunder_default
   thunder2:
     external:
       name: thunder2_default      
@@ -67,8 +67,15 @@ $ docker-compose down -v
 $ docker-compose up 
 ```
 
-You can now access the installation by calling thunder2.localhost in your browser.
+You can now access the installation by calling thunder2.localhost in your browser. If you choose to create a new 
+installation with a name that contains any non alphanumeric characters, you have to remove those characters from the
+network name, so the following will use the same thunder2 network name as the previous example:
+ 
+```
+$ ./scripts/development/build-thunder-docker.sh thunder-2
+```
 
+Make sure to have a unique network name for each installation. 
 
 ### Docker helpers
 
