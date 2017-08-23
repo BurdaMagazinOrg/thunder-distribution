@@ -119,7 +119,8 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
 
     // Get state from storage.
     $widget_state = $form_state->get(['inline_entity_form', $this->getIefId()]);
-    if (!$widget_state){
+
+    if (!$widget_state) {
       $widget_state = [
         'instance' => $this->fieldDefinition,
         'form' => NULL,
@@ -133,16 +134,17 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
     $wrapper = 'inline-entity-form-' . $this->getIefId();
 
     $element = [
-        '#type' => $this->getSetting('collapsible') ? 'details' : 'fieldset',
-        '#prefix' => '<div id="' . $wrapper . '">',
-        '#suffix' => '</div>',
-        '#ief_id' => $this->getIefId(),
-        '#ief_root' => TRUE,
-        '#field_title' => $this->fieldDefinition->getLabel(),
-        '#after_build' => [
-          [get_class($this), 'removeTranslatabilityClue'],
-        ],
-      ] + $element;
+      '#type' => $this->getSetting('collapsible') ? 'details' : 'fieldset',
+      '#prefix' => '<div id="' . $wrapper . '">',
+      '#suffix' => '</div>',
+      '#ief_id' => $this->getIefId(),
+      '#ief_root' => TRUE,
+      '#field_title' => $this->fieldDefinition->getLabel(),
+      '#after_build' => [
+        [get_class($this), 'removeTranslatabilityClue'],
+      ],
+    ] + $element;
+
     if ($element['#type'] == 'details') {
       $element['#open'] = !$this->getSetting('collapsed');
     }
@@ -165,7 +167,7 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
     $parents = array_merge($element['#field_parents'], [
       $items->getName(),
       $delta,
-      'inline_entity_form'
+      'inline_entity_form',
     ]);
     $bundle = !empty($this->getFieldSetting('handler_settings')['target_bundles']) ? reset($this->getFieldSetting('handler_settings')['target_bundles']) : NULL;
     if (($op == 'add' && !$settings['add_existing']) || $op == 'edit') {
@@ -190,7 +192,8 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
 
       $element['inline_entity_form'] += inline_entity_form_reference_form($element['inline_entity_form'], $form_state);
 
-      // Hide submit only visually, gets triggered by entityBrowserEntityForm behaviour.
+      // Hide submit only visually, gets triggered by entityBrowserEntityForm
+      // behaviour.
       if (isset($element['inline_entity_form']['entity_browser'])) {
         $element['inline_entity_form']['actions']['ief_reference_save']['#attributes']['class'][] = 'visually-hidden';
       }

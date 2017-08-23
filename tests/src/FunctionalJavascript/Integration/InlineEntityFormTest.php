@@ -17,12 +17,13 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
   use ThunderFormFieldTestTrait;
 
   /**
+   * Test saving collapsed gallery paragraph.
+   *
    * Test saving changes in inline entity form using the
    * inline_entity_form_simple widget inside gallery paragraph when the
    * paragraph form is collapsed.
    *
    * Demo Article (node Id: 7) is used for testing.
-   *
    */
   public function testGalleryCollapse() {
 
@@ -37,19 +38,20 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-collapse-button"]');
     $this->clickArticleSave();
 
-    // E
+    // Re-open edit form, value has changed.
     $this->drupalGet("node/7/edit");
     $this->assertSession()
       ->pageTextContains('New gallery name before collapse');
   }
 
   /**
+   * Test saving collapsed video paragraph.
+   *
    * Test saving changes in inline entity form using the
    * inline_entity_form_simple_plus widget inside video paragraph when the
    * paragraph form is collapsed.
    *
    * Demo Article (node Id: 7) is used for testing.
-   *
    */
   public function testVideoCollapse() {
 
@@ -64,9 +66,9 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-collapse-button"]');
     $this->clickArticleSave();
 
-    // E
+    // Re-open edit form, value has changed.
     $this->drupalGet("node/7/edit");
     $this->assertSession()->pageTextContains('New video name before collapse');
   }
-  
+
 }
