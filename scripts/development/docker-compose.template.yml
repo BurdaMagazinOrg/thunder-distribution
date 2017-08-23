@@ -28,8 +28,6 @@ services:
     volumes:
       - PROJECT_DIRECTORY:/var/www/html:cached
       - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      #- PROJECT_KEY:/var/www/html
-      #- DISTRIBUTION_KEY:/var/www/html/docroot/profiles/contrib/thunder
 
   nginx:
     image: wodby/drupal-nginx:8-1.13-2.4.2
@@ -43,8 +41,7 @@ services:
     volumes:
       - PROJECT_DIRECTORY:/var/www/html:cached
       - DISTRIBUTION_REPOSITORY:/var/www/html/docroot/profiles/contrib/thunder:cached
-      #- PROJECT_KEY:/var/www/html
-      #- DISTRIBUTION_KEY:/var/www/html/docroot/profiles/contrib/thunder
+
     labels:
       - 'traefik.backend=PROJECT_DOCKER_NAME_nginx_1'
       - 'traefik.port=80'
@@ -95,17 +92,3 @@ services:
       - 'traefik.port=9000'
       - 'traefik.frontend.rule=Host:portainer.drupal.docker.localhost'
 
-#  traefik:
-#    image: traefik
-#    command: -c /dev/null --web --docker --logLevel=INFO
-#    ports:
-#      - '80:80'
-##      - '8080:8080' # Dashboard
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-
-#volumes:
-#  PROJECT_KEY:
-#    external: true
-#  DISTRIBUTION_KEY:
-#    external: true
