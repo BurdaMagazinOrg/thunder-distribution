@@ -226,4 +226,3 @@ Workflow to generate and use CUD and use it is following:
     ```
 
 That's all and don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
-
