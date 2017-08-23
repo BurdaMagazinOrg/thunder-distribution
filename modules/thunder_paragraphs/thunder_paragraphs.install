@@ -144,3 +144,23 @@ function thunder_paragraphs_update_8101() {
 
   return $updateLogger->output();
 }
+
+/**
+ * Use new inline_entity_form_simple_plus for paragraph type image and video.
+ */
+function thunder_paragraphs_update_8201() {
+  /* @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of fails and
+  // successes.
+  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_paragraphs__thunder_update_8201']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_thunder_paragraphs_update_8201']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_thunder_paragraphs_update_8201']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

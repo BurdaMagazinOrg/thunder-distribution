@@ -68,7 +68,8 @@
                 "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
             },
             "drupal/entity_browser": {
-                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch",
+                "Enable entity_browser for inline_entity_form_simple_plus widget": "https://www.drupal.org/files/issues/2903835-enable-eb-on-simple-plus-widget.patch"
             },
             "drupal/dropzonejs": {
                 "Theming compatible JS selectors for auto select": "https://www.drupal.org/files/issues/2870708_2.patch"
@@ -78,6 +79,9 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+            },
+            "drupal/inline_entity_form": {
+                "Changes are lost when collapsing a paragraphs subform including an inline_entity_form": "https://www.drupal.org/files/issues/2901158-and-2830829-combined_0.patch"
             }
         }
     },
@@ -112,7 +116,7 @@
         "drupal/field_group": "1.0-rc6",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "^1.0",
+        "drupal/inline_entity_form": "1.0-beta1",
         "drupal/ivw_integration": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",

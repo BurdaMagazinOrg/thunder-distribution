@@ -114,7 +114,9 @@ projects:
 
   inline_entity_form:
     type: "module"
-    version: "1"
+    version: "1.0-beta1"
+    patch:
+      - "https://www.drupal.org/files/issues/2901158-and-2830829-combined_0.patch"
 
   ivw_integration:
     type: "module"

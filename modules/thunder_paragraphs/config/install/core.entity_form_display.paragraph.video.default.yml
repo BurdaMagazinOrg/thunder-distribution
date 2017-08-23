@@ -2,11 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.video_browser
+    - core.entity_form_mode.media.inline
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   module:
-    - entity_browser
+    - entity_browser_entity_form
+    - thunder_paragraphs
 id: paragraph.video.default
 targetEntityType: paragraph
 bundle: video
@@ -15,17 +16,17 @@ content:
   field_video:
     weight: 0
     settings:
-      entity_browser: video_browser
-      field_widget_display: inline_entity_form
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        form_mode: inline
-      field_widget_edit: false
-    third_party_settings: {  }
+      form_mode: inline
+      label_singular: ''
+      label_plural: ''
+      add_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: video_browser
     region: content
-    type: entity_browser_entity_reference
+    type: inline_entity_form_simple_plus
 hidden:
   created: true
   status: true

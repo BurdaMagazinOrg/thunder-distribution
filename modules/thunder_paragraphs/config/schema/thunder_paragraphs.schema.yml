@@ -1,0 +1,22 @@
+field.widget.settings.inline_entity_form_simple_plus:
+  type: mapping
+  label: 'Inline entity reference display format settings'
+  mapping:
+    form_mode:
+      type: string
+      label: "Form mode"
+    override_labels:
+      type: boolean
+      label: "Override labels"
+    label_singular:
+      type: string
+      label: "Label (singular)"
+    label_plural:
+      type: string
+      label: "Label (plural)"
+    add_existing:
+      type: boolean
+      label: "Add existing"
+    match_operator:
+      type: string
+      label: "Match operator"

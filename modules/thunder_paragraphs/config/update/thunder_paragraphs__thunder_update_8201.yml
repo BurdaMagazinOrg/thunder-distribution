@@ -1,0 +1,77 @@
+core.entity_form_display.paragraph.video.default:
+  expected_config:
+    content:
+      field_video:
+        settings:
+          entity_browser: video_browser
+          field_widget_display: inline_entity_form
+          field_widget_display_settings:
+            form_mode: inline
+          field_widget_edit: false
+          field_widget_remove: true
+          open: true
+          selection_mode: selection_append
+        third_party_settings: {  }
+        type: entity_browser_entity_reference
+  update_actions:
+    change:
+      content:
+        field_video:
+          settings:
+            add_existing: '1'
+            form_mode: inline
+            label_plural: ''
+            label_singular: ''
+            match_operator: CONTAINS
+            override_labels: 0
+          third_party_settings:
+            entity_browser_entity_form:
+              entity_browser_id: video_browser
+          type: inline_entity_form_simple_plus
+    delete:
+      content:
+        field_video:
+          settings:
+            entity_browser: video_browser
+            field_widget_display: inline_entity_form
+            field_widget_display_settings:
+              form_mode: inline
+            field_widget_edit: false
+            field_widget_remove: true
+            open: true
+            selection_mode: selection_append
+core.entity_view_display.paragraph.image.default:
+  expected_config:
+    content:
+      field_image:
+        label: hidden
+        settings:
+          link: false
+          view_mode: default
+        third_party_settings: {  }
+        type: entity_reference_entity_view
+  update_actions:
+    add:
+      hidden:
+        status: true
+    change:
+      content:
+        field_image:
+          settings:
+            add_existing: '1'
+            form_mode: inline
+            label_plural: ''
+            label_singular: ''
+            match_operator: CONTAINS
+            override_labels: 0
+          third_party_settings:
+            entity_browser_entity_form:
+              entity_browser_id: image_browser
+          type: inline_entity_form_simple_plus
+    delete:
+      content:
+        field_image:
+          label: hidden
+          settings:
+            link: false
+            view_mode: default
