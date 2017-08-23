@@ -187,7 +187,7 @@ class InlineEntityFormSimplePlus extends InlineEntityFormBase {
         // Pass the current entity type.
         '#entity_type' => $target_type,
         // Pass the widget specific labels.
-        '#ief_labels' => $this->getEntityTypeLabels(),
+        '#ief_labels' => $labels,
       ];
 
       $element['inline_entity_form'] += inline_entity_form_reference_form($element['inline_entity_form'], $form_state);
