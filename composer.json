@@ -59,7 +59,7 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/paragraphs": {
-                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899034_7.patch"
+                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch"
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
