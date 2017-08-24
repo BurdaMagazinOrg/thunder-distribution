@@ -25,6 +25,7 @@ function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(
   if (isset($element['subform'])) {
     foreach (Element::children($element['subform']) as $index) {
       if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])
+        || isset($element['subform'][$index]['widget']['#ief_id'])
         || isset($element['subform'][$index]['widget']['#attach_ief_submit'])) {
         _thunder_paragraph_attach_ief_submit($element);
       }
