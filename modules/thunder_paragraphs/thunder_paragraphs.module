@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains paragraphs related hook implementations and functions.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function thunder_paragraphs_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /* @var $context['widget'] EntityReferenceBrowserWidget */
+  if (isset($context['widget']) && ($context['widget']->getSetting('field_widget_display') == 'inline_entity_form')) {
+    $element['#attach_ief_submit'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if (isset($element['subform'])) {
+    foreach (Element::children($element['subform']) as $index) {
+      if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])
+        || isset($element['subform'][$index]['widget']['#attach_ief_submit'])) {
+        _thunder_paragraph_attach_ief_submit($element);
+      }
+    }
+  }
+}
+
+/**
+ * Helper for attaching ief submit trigger and functions.
+ */
+function _thunder_paragraph_attach_ief_submit(&$element) {
+  if ($button = &$element['top']['links']['collapse_button']) {
+    $button['#submit'] = array_merge([['Drupal\inline_entity_form\ElementSubmit', 'trigger']], $button['#submit']);
+    $button['#value'] = t('Collapse and save');
+    $button['#ief_submit_trigger'] = TRUE;
+    $button['#ief_submit_trigger_all'] = TRUE;
+    $button['#paragraphs_show_warning'] = FALSE;
+  }
+}
