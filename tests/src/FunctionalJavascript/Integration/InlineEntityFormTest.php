@@ -62,7 +62,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     // Edit gallery paragraph.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-edit-button"]');
-    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][0][inline_entity_form][name][0][value]', 'New video name before collapse');
+    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][current][items][0][display][name][0][value]', 'New video name before collapse');
 
     // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-collapse-button"]');
