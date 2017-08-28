@@ -110,3 +110,9 @@ v1.1:
         '#description': "<p>This update provides pinterest integration. It adds an media entity and a new paragraph type.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/media_entity_pinterest' }
+    thunder_taxonomy_update_8201:
+        '#title': 'Enable pinterest paragraph type on taxonomy terms'
+        '#description': "<p>This update enables pinterest paragraph type on taxonomy terms.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        configure_page_channel: { '#text': 'Configure paragraphs field in channel taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/fields/taxonomy_term.tags.field_paragraphs' }
+        configure_page_tags: { '#text': 'Configure paragraphs field in tags taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/fields/taxonomy_term.tags.field_paragraphs' }
