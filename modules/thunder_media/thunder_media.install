@@ -752,7 +752,8 @@ function thunder_media_update_8201() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  // Execute configuration update defintions with logging of fails and successes.
+  // Execute configuration update defintions with logging of fails and
+  // successes.
   if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8201']])) {
     $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_thunder_media_update_8201']);
   }
