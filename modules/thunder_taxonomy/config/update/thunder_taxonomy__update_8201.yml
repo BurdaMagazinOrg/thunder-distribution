@@ -1,0 +1,56 @@
+field.field.taxonomy_term.channel.field_paragraphs:
+  expected_config:
+    settings:
+      handler_settings:
+        target_bundles_drag_drop:
+          media:
+            enabled: false
+            weight: 11
+  update_actions:
+    add:
+      settings:
+        handler_settings:
+          target_bundles:
+            pinterest: pinterest
+    change:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            pinterest:
+              enabled: true
+              weight: 14
+    delete:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            media:
+              enabled: false
+              weight: 11
+field.field.taxonomy_term.tags.field_paragraphs:
+  expected_config:
+    settings:
+      handler_settings:
+        target_bundles_drag_drop:
+          media:
+            enabled: false
+            weight: 11
+  update_actions:
+    add:
+      settings:
+        handler_settings:
+          target_bundles:
+            pinterest: pinterest
+    change:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            pinterest:
+              enabled: true
+              weight: 14
+    delete:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            media:
+              enabled: false
+              weight: 11

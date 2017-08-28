@@ -51,3 +51,23 @@ function thunder_taxonomy_update_8001() {
   }
 
 }
+
+/**
+ * Enable pinterest paragraph type on taxonomy terms.
+ */
+function thunder_taxonomy_update_8201() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update defintions with logging of fails and
+  // successes.
+  if ($thunderUpdater->executeUpdates([['thunder_taxonomy', 'thunder_taxonomy__update_8201']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_thunder_taxonomy_update_8201']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_thunder_taxonomy_update_8201']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
