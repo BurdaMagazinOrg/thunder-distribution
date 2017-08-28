@@ -9,6 +9,22 @@ use Drupal\user\Entity\Role;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
+ * Update hook dependencies.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_taxonomy_update_dependencies() {
+
+  $dependencies['thunder_taxonomy'] = [
+    // Dependency on pinterest media type.
+    8201 => ['thunder' => '8114'],
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Implements hook_install().
  */
 function thunder_taxonomy_install() {
