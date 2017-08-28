@@ -110,3 +110,10 @@ v1.1:
         '#description': "<p>This update provides pinterest integration. It adds an media entity and a new paragraph type.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/media_entity_pinterest' }
+    thunder_media_update_8201:
+        '#title': 'Update url field labels in media entities'
+        '#description': "<p>This update changes the labels of url field for instagram, twitter and pinterest entities.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
+        configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
+        configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
