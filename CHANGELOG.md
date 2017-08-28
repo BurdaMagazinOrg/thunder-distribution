@@ -1,5 +1,24 @@
 # Change Log
 
+## [8.2.7](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.7) 2017-08-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.6...8.2.7)
+
+This release notably fixes a data loss bug, where changes in an inline entity form where not submitted when collapsing 
+the paragraph containing the inline entity form. The fix saves remote entities on collapsing a paragraph, this means,
+that changes on a referenced entity are saved before the referencing article is changed!
+
+This might be unexpected behaviour, but we renamed the collapse button to "Collapse and save" to reflect this change.
+
+All changes and fixes in this release:
+
+- Fix [Library not loaded in entity_browser form](https://www.drupal.org/node/2900431)
+- Change [Remove the 'Remove' button of image widgets](https://www.drupal.org/node/2900663)
+- Change [Mark Infinite theme and module as hidden](https://www.drupal.org/node/2901282)
+- Add [Test modules if they are reinstallable](https://www.drupal.org/node/2899669)
+- Fix [Paragraphs add in between buttons styling is not good](https://www.drupal.org/node/2899917)
+- Fix [Saving of collapsed paragraphs with referenced fields doesn't work](https://www.drupal.org/node/2900626)
+
+
 ## [8.2.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.6) 2017-08-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.5...8.2.6)
 
