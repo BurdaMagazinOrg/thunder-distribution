@@ -10,7 +10,7 @@ id: media.twitter.field_url
 field_name: field_url
 entity_type: media
 bundle: twitter
-label: Url
+label: 'Twitter url'
 description: ''
 required: true
 translatable: false
