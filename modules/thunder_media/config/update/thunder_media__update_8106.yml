@@ -1,0 +1,20 @@
+field.field.media.instagram.field_url:
+  expected_config:
+    label: Url
+  update_actions:
+    change:
+      label: 'Instagram url'
+field.field.media.pinterest.field_url:
+  expected_config:
+    label: Url
+    required: false
+  update_actions:
+    change:
+      label: 'Pinterest url'
+      required: true
+field.field.media.twitter.field_url:
+  expected_config:
+    label: Url
+  update_actions:
+    change:
+      label: 'Twitter url'

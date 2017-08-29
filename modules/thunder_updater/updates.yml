@@ -122,6 +122,13 @@ v2.6:
 v2.8:
     '#title': 'Update to Thunder 2.8'
     '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_media_update_8106:
+        '#title': 'Update url field labels in media entities'
+        '#description': "<p>This update changes the labels of url field for instagram, twitter and pinterest entities.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
+        configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
+        configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
     thunder_taxonomy_update_8002:
         '#title': 'Enable pinterest paragraph type on taxonomy terms'
         '#description': "<p>This update enables pinterest paragraph type on taxonomy terms.</p>"
