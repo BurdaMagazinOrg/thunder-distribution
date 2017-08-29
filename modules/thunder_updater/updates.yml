@@ -122,7 +122,7 @@ v2.6:
 v2.8:
     '#title': 'Update to Thunder 2.8'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_taxonomy_update_8201:
+    thunder_taxonomy_update_8002:
         '#title': 'Enable pinterest paragraph type on taxonomy terms'
         '#description': "<p>This update enables pinterest paragraph type on taxonomy terms.</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the pinterest paragraphs type. Please check the field settings and update the available paragraph types below.<p>'
