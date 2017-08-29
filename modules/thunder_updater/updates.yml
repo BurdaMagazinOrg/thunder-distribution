@@ -129,3 +129,9 @@ v2.8:
         configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
         configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
         configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
+    thunder_taxonomy_update_8002:
+        '#title': 'Enable pinterest paragraph type on taxonomy terms'
+        '#description': "<p>This update enables pinterest paragraph type on taxonomy terms.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the pinterest paragraphs type. Please check the field settings and update the available paragraph types below.<p>'
+        configure_page_channel: { '#text': 'Configure paragraphs field in channel taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/fields/taxonomy_term.tags.field_paragraphs' }
+        configure_page_tags: { '#text': 'Configure paragraphs field in tags taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/fields/taxonomy_term.tags.field_paragraphs' }
