@@ -10,9 +10,9 @@ id: media.pinterest.field_url
 field_name: field_url
 entity_type: media
 bundle: pinterest
-label: Url
+label: 'Pinterest url'
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
