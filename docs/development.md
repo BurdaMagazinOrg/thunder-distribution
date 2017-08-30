@@ -192,7 +192,7 @@ Workflow to generate and use CUD and use it is following:
 
 1. Make clean install of previous version of Thunder (version for which one you want to install - fe. if you are merging changes to `develop` branch, then you should install Thunder for that branch)
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
-3. Execute update hooks if it's necessary (fe. in case when you have module and/or core updates in your branch)
+3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
 4. Now is moment to create CUDs. For that we have provided following drush command:
 
     ```drush thunder-updater-generate-update [module] [update-name]```
