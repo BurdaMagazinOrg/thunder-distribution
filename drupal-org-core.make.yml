@@ -5,3 +5,7 @@ projects:
   drupal:
     type: core
     version: 8.4.0
+    patch:
+      - "https://www.drupal.org/files/issues/2912298-13.patch"
+      - "https://www.drupal.org/files/issues/2883813-27.patch"
+      - "https://www.drupal.org/files/issues/2877383-5.patch"

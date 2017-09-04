@@ -7,7 +7,7 @@ dependencies:
     - field.field.media.instagram.field_content
     - field.field.media.instagram.field_url
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.instagram
+    - media.type.instagram
   module:
     - empty_fields
     - image

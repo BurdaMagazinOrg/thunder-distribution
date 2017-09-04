@@ -5,9 +5,9 @@ dependencies:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.gallery.field_media_images
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.gallery
+    - media.type.gallery
   module:
-    - media_entity
+    - media
 id: media.gallery.paragraph_preview
 targetEntityType: media
 bundle: gallery

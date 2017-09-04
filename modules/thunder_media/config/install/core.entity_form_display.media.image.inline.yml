@@ -10,7 +10,7 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
     - image.style.medium
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - datetime
     - field_group
@@ -149,4 +149,5 @@ hidden:
   field_tags: true
   langcode: true
   path: true
+  status: true
   uid: true

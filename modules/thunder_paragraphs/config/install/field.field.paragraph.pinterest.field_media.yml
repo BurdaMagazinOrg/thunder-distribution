@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media
-    - media_entity.bundle.pinterest
+    - media.type.pinterest
     - paragraphs.paragraphs_type.pinterest
 id: paragraph.pinterest.field_media
 field_name: field_media

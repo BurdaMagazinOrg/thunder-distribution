@@ -14,8 +14,7 @@ dependencies:
   - focal_point:focal_point
   - drupal:image
   - drupal:link
-  - media_entity:media_entity
-  - media_entity_image:media_entity_image
+  - drupal:media (>= 8.4)
   - media_entity_instagram:media_entity_instagram
   - media_entity_pinterest:media_entity_pinterest
   - media_entity_slideshow:media_entity_slideshow

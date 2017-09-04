@@ -10,7 +10,7 @@ dependencies:
   - drupal:field
   - inline_entity_form:inline_entity_form
   - drupal:link
-  - media_entity:media_entity
+  - drupal:media (>= 8.4)
   - paragraphs:paragraphs
   - drupal:text
   - thunder:thunder_media

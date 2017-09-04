@@ -31,12 +31,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $modules = [
     'thunder_demo',
     'google_analytics',
-    'nexx_integration',
     'ivw_integration',
     'adsense',
     'thunder_riddle',
 
     // Additional modules.
+    // 'nexx_integration',
     // 'thunder_fia',
     // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
     // 'thunder_liveblog',

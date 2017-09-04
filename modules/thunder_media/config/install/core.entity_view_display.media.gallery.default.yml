@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.gallery.field_media_images
-    - media_entity.bundle.gallery
+    - media.type.gallery
   module:
     - slick_media
 id: media.gallery.default

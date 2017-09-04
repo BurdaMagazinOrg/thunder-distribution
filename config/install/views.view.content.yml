@@ -7,7 +7,7 @@ dependencies:
     - image.style.thumbnail
   module:
     - content_lock
-    - media_entity
+    - media
     - node
     - user
 id: content

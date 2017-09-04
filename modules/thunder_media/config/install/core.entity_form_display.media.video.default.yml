@@ -7,7 +7,7 @@ dependencies:
     - field.field.media.video.field_description
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
-    - media_entity.bundle.video
+    - media.type.video
   module:
     - text
     - video_embed_field
@@ -17,7 +17,7 @@ bundle: video
 mode: default
 content:
   field_copyright:
-    weight: 3
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -26,7 +26,7 @@ content:
     region: content
   field_description:
     type: text_textarea
-    weight: 4
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -46,6 +46,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   created: true
   field_caption: true

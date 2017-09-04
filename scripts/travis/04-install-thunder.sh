@@ -19,6 +19,7 @@ update_thunder() {
     cd ${TEST_DIR}/docroot
 
     # Execute all required updates
+    drush cr
     drush updatedb -y
 
     # Adjust theme logo path because it can be different in case of composer build

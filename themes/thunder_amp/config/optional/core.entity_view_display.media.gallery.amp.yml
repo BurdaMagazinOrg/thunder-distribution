@@ -4,7 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.amp
     - field.field.media.gallery.field_media_images
-    - media_entity.bundle.gallery
+    - media.type.gallery
 id: media.gallery.amp
 targetEntityType: media
 bundle: gallery

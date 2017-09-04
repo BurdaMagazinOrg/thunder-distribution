@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.pinterest.field_url
-    - media_entity.bundle.pinterest
+    - media.type.pinterest
   module:
     - media_entity_pinterest
 id: media.pinterest.default

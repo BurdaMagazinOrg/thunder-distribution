@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_author
-    - media_entity.bundle.instagram
+    - media.type.instagram
 id: media.instagram.field_author
 field_name: field_author
 entity_type: media

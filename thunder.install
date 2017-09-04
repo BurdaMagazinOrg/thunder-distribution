@@ -74,9 +74,6 @@ function thunder_install() {
     ->set('register', 'visitors_admin_approval')
     ->save(TRUE);
 
-  // Disable default media view, cause we have our own.
-  View::load('media')->setStatus(FALSE)->save();
-
   \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
 
 }
@@ -435,7 +432,7 @@ function thunder_update_8107() {
           foreach ($host->get($fieldName)->getValue() as $delta => $field) {
             if ($field['target_id'] == $oldParagraph->id()) {
 
-              /* @var \Drupal\media_entity\Entity\Media */
+              /* @var \Drupal\media\Entity\Media */
               $media = $entityTypeManager->getStorage('media')
                 ->loadByProperties([
                   'bundle' => 'riddle',

@@ -10,7 +10,7 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
     - image.style.media_image_tablet
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - amp
 id: media.image.amp

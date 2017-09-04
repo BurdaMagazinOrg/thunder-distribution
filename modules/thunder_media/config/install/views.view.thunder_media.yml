@@ -7,7 +7,7 @@ dependencies:
   module:
     - datetime
     - image
-    - media_entity
+    - media
     - user
 id: thunder_media
 label: Media

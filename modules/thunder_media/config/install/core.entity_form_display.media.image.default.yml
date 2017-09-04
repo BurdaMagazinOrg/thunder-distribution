@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
     - image.style.medium
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - datetime
     - focal_point
@@ -67,6 +67,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   created: true
   field_tags: true

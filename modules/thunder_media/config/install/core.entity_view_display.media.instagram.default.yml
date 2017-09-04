@@ -5,7 +5,7 @@ dependencies:
     - field.field.media.instagram.field_author
     - field.field.media.instagram.field_content
     - field.field.media.instagram.field_url
-    - media_entity.bundle.instagram
+    - media.type.instagram
   module:
     - media_entity_instagram
 id: media.instagram.default

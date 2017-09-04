@@ -4,7 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Update;
 
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
@@ -63,8 +63,8 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Filter only instagram media type.
-    $this->setFieldValue($page, 'provider', 'instagram');
-    $page->find('xpath', '//*[@id="edit-submit-thunder-media"]')->click();
+    $this->setFieldValue($page, 'source', 'instagram');
+    $page->find('xpath', '//*[@id="edit-submit-media"]')->click();
 
     // Adjust position for list, before making screenshot.
     $this->scrollElementInView('#edit-submit');
@@ -105,7 +105,7 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
         'name' => 'Test Image Id ' . $i,
         'field_image' => $file,
         'bundle' => 'image',
-        'status' => Media::PUBLISHED,
+        'status' => TRUE,
       ]);
       $mediaImage->save();
 
@@ -113,7 +113,7 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
         'name' => 'Test Video Id ' . $i,
         'field_media_video_embed_field' => $videoUrl,
         'bundle' => 'video',
-        'status' => Media::PUBLISHED,
+        'status' => TRUE,
       ]);
       $mediaVideo->save();
     }

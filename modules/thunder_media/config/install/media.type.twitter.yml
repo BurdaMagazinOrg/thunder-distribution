@@ -15,10 +15,10 @@ third_party_settings:
 id: twitter
 label: Twitter
 description: ''
-type: twitter
+source: twitter
 queue_thumbnail_downloads: false
 new_revision: false
-type_configuration:
+source_configuration:
   use_twitter_api: false
   generate_thumbnails: false
   source_field: field_url
