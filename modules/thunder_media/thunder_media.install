@@ -765,3 +765,13 @@ function thunder_media_update_8106() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Introduce enable_filefield_remove_button config item.
+ */
+function thunder_media_update_8107() {
+  $config = Drupal::configFactory()->getEditable('thunder_media.settings');
+  if ($config->get('enable_filefield_remove_button') === NULL) {
+    $config->set('enable_filefield_remove_button', FALSE)->save();
+  }
+}
