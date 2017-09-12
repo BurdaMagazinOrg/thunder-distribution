@@ -109,8 +109,12 @@ function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$f
  * entity forms.
  */
 function thunder_media_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $context) {
-  if (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form') {
-    $element['#process'][] = 'thunder_media_inline_entity_form_image_widget_process';
+  $config = \Drupal::config('thunder_media.settings');
+
+  if (!$config->get('enable_filefield_remove_button')) {
+    if (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form') {
+      $element['#process'][] = 'thunder_media_inline_entity_form_image_widget_process';
+    }
   }
 }
 
