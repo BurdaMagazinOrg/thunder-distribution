@@ -79,10 +79,7 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
-            },
-            "drupal/liveblog": {
-                "Align config export simple gmap schema update": "https://www.drupal.org/files/issues/2908325-config-export-simple-gmap-schema-update.patch"
-             }
+            }
         }
     },
     "require": {
