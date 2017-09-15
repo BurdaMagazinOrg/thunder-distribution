@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.article.field_channel
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
+    - field.field.node.article.field_seo_keyword
     - field.field.node.article.field_seo_title
     - field.field.node.article.field_tags
     - field.field.node.article.field_teaser_media
@@ -18,6 +19,7 @@ dependencies:
     - paragraphs
     - path
     - scheduler
+    - yoast_seo_preview
 third_party_settings:
   field_group:
     group_teaser:
@@ -52,6 +54,7 @@ third_party_settings:
         - field_channel
         - title
         - field_seo_title
+        - field_seo_keyword
         - field_tags
       parent_name: ''
       weight: 3
@@ -98,6 +101,12 @@ content:
       default_paragraph_type: _none
     third_party_settings: {  }
     region: content
+  field_seo_keyword:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: yoast_seo_preview_widget
+    region: content
   field_seo_title:
     type: string_textfield
     weight: 4
@@ -108,7 +117,7 @@ content:
     region: content
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -164,9 +173,9 @@ content:
     region: content
   scheduler_settings:
     weight: 11
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   sticky:
     type: boolean_checkbox
     settings:
