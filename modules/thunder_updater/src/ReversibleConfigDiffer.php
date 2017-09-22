@@ -84,7 +84,7 @@ class ReversibleConfigDiffer extends ConfigDiffer {
   /**
    * {@inheritdoc}
    */
-  protected function format($config, $prefix = '') {
+  protected function format(array $config, $prefix = '') {
     return $this->configDiffTransformer->transform($config, $prefix);
   }
 
