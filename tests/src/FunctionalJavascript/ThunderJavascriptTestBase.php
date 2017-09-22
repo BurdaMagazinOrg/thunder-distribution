@@ -283,7 +283,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
         var element = jQuery(\'' . addcslashes($cssSelector, '\'') . '\');
         var scrollTop = element.offset().top - (viewPortHeight/2);
         var scrollableParent = jQuery.isFunction(element.scrollParent) ? element.scrollParent() : [];
-        if (scrollableParent.length > 0 && scrollableParent[0] !== document) { scrollableParent[0].scrollTop = scrollTop } else { window.scroll(0, scrollTop); };
+        if (scrollableParent.length > 0 && scrollableParent[0] !== document && scrollableParent[0] !== document.body) { scrollableParent[0].scrollTop = scrollTop } else { window.scroll(0, scrollTop); };
       ');
   }
 
