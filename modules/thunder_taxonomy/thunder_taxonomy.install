@@ -9,6 +9,22 @@ use Drupal\user\Entity\Role;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
+ * Update hook dependencies.
+ *
+ * @return mixed
+ *   Returns list of update hook dependencies.
+ */
+function thunder_taxonomy_update_dependencies() {
+
+  $dependencies['thunder_taxonomy'] = [
+    // Dependency on pinterest media type.
+    8002 => ['thunder' => '8114'],
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Implements hook_install().
  */
 function thunder_taxonomy_install() {
@@ -50,4 +66,24 @@ function thunder_taxonomy_update_8001() {
     }
   }
 
+}
+
+/**
+ * Enable pinterest paragraph type on taxonomy terms.
+ */
+function thunder_taxonomy_update_8002() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update defintions with logging of fails and
+  // successes.
+  if ($thunderUpdater->executeUpdates([['thunder_taxonomy', 'thunder_taxonomy__update_8002']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_taxonomy_update_8002']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_taxonomy_update_8002']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
 }

@@ -20,7 +20,7 @@ function thunder_updater_drush_command() {
     'drupal dependencies' => ['thunder_updater'],
     'required-arguments' => 2,
     'examples' => [
-      'drush thunder-updater-generate-update thunder_media thunder_media__update_8201' => 'Generate patch to update configuration from current installed configuration to configuration provided in files.',
+      'drush thunder-updater-generate-update thunder_media thunder_media__update_8099' => 'Generate patch to update configuration from current installed configuration to configuration provided in files.',
     ],
     'core' => ['8+'],
     'outputformat' => [
