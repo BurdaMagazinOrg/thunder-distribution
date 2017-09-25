@@ -1,5 +1,21 @@
 # Change Log
 
+## [8.2.8](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.8) 2017-09-25
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.7...8.2.8)
+
+With this release we have improved support for the Seven theme, fixed few issues related to updates of modules and testing tools.
+Additionally, we have improved Checklist for updates and Paragraphs integration.
+
+All changes and fixes in this release:
+
+- Add [Thunder does not support seven theme correctly](https://www.drupal.org/node/2901160)
+- Change [Break up checkboxes into releases.](https://www.drupal.org/node/2905081)
+- Change [Hard to differentiate Instagram and Twitter paragraph after adding](https://www.drupal.org/node/2899620)
+- Fix [Pinterest paragraph is not enabled for Taxonomy term pages](https://www.drupal.org/node/2902034)
+- Fix [Typo fix @ thunder_updater](https://www.drupal.org/node/2910627)
+- Fix [Fix responsive_preview integration tests](https://www.drupal.org/node/2910773)
+- Fix [Update entity browser to version 8.x-1.3](https://www.drupal.org/node/2910831)
+
 ## [8.2.7](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.7) 2017-08-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.6...8.2.7)
 
@@ -17,7 +33,6 @@ All changes and fixes in this release:
 - Add [Test modules if they are reinstallable](https://www.drupal.org/node/2899669)
 - Fix [Paragraphs add in between buttons styling is not good](https://www.drupal.org/node/2899917)
 - Fix [Saving of collapsed paragraphs with referenced fields doesn't work](https://www.drupal.org/node/2900626)
-
 
 ## [8.2.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.6) 2017-08-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.5...8.2.6)
