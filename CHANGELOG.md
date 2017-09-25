@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.8](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.8) 2017-09-22
+## [8.2.8](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.8) 2017-09-25
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.7...8.2.8)
 
 With this release we have improved support for the Seven theme, fixed few issues related to updates of modules and testing tools.
