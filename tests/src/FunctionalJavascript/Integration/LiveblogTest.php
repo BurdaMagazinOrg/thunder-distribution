@@ -141,7 +141,11 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_' . date('Ymd_His') . '.png');
 
     $this->waitUntilVisible('article[data-postid="3"]', 10000);
-    $this->waitUntilVisible('[data-tweet-id="778001033142284288"].twitter-tweet-rendered', 20000);
+    $this->waitUntilVisible('[data-tweet-id="778001033142284288"].twitter-tweet-rendered', 10000);
+
+    // We can't check inside Twitter widget is it loaded or not, that's why
+    // plain wait is used.
+    $this->getSession()->wait(5000);
 
     // Add post with instagram.
     $this->liveblogSetTitle($page, 'Instagram post');
