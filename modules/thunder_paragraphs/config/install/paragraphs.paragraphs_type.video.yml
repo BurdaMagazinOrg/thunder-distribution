@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: video
 label: Video
-icon_uuid: null
-description: ''
+icon_uuid: 07398a17-87c3-4919-981e-4ec8da2b0f52
+description: null
 behavior_plugins: {  }

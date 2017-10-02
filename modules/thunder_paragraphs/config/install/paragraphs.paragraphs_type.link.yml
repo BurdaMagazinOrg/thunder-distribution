@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: link
 label: Link
-icon_uuid: null
-description: ''
+icon_uuid: 028e519c-14f4-4643-81ad-653686c7daa4
+description: null
 behavior_plugins: {  }

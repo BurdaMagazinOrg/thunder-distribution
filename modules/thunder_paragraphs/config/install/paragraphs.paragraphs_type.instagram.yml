@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: instagram
 label: Instagram
-icon_uuid: null
-description: ''
+icon_uuid: 863c7557-6618-4185-be70-6425f240ddaa
+description: null
 behavior_plugins: {  }

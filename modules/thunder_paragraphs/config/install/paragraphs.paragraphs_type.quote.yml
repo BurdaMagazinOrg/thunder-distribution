@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: quote
 label: Quote
-icon_uuid: null
-description: ''
+icon_uuid: 9bf24a91-6acf-4330-b457-63f40d7baa7a
+description: null
 behavior_plugins: {  }

@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: pinterest
 label: Pinterest
-icon_uuid: null
-description: ''
+icon_uuid: 1f9438c2-bb6f-4e5d-8147-c5df6f1876b5
+description: null
 behavior_plugins: {  }
