@@ -176,9 +176,9 @@ projects:
 
   paragraphs:
     type: "module"
-    version: "1.1"
+    version: "1.2"
     patch:
-      - "https://www.drupal.org/files/issues/2899917_6.patch"
+      - "https://www.drupal.org/files/issues/2877927_29.patch"
 
   pathauto:
     type: "module"

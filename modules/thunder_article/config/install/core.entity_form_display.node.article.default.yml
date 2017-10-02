@@ -87,12 +87,14 @@ content:
     type: metatag_firehose
     region: content
   field_paragraphs:
-    type: entity_reference_paragraphs
+    type: paragraphs
     weight: 7
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: preview
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
