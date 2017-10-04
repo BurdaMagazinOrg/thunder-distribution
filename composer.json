@@ -78,6 +78,9 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+            },
+            "drupal/liveblog": {
+                "Switch to new version of Pusher library": "https://www.drupal.org/files/issues/2913774_3.patch"
             }
         }
     },
@@ -116,7 +119,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
-        "drupal/liveblog": "^1.0",
+        "drupal/liveblog": "1.2-alpha11",
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
