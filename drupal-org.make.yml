@@ -285,4 +285,4 @@ libraries:
     directory_name: "pusher"
     download:
       type: "get"
-      url: "https://github.com/pusher/pusher-http-php/archive/master.zip"
+      url: "https://github.com/pusher/pusher-http-php/archive/2.6.4.zip"
