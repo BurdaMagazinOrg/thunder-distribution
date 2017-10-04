@@ -143,4 +143,4 @@ libraries[slick_lib][download][url] = https://github.com/kenwheeler/slick/archiv
 libraries[pusher][type] = library
 libraries[pusher][directory_name] = pusher
 libraries[pusher][download][type] = get
-libraries[pusher][download][url] = https://github.com/pusher/pusher-http-php/archive/2.6.4.zip
+libraries[pusher][download][url] = https://github.com/pusher/pusher-http-php/archive/master.zip
