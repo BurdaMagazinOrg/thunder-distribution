@@ -49,9 +49,11 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "drupal/thunder_admin:dev-2.x" "drush/drush:^9.0.0" --no-progress
 
-    composer global remove drush/drush
+    # Use only global drush.
+    composer remove drush/drush --no-update
+
+    composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "drupal/thunder_admin:dev-2.x" --no-progress
 }
 
 apply_patches() {

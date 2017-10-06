@@ -5,7 +5,7 @@
 # see: https://github.com/drush-ops/drush#install---composer
 export THUNDER_DIST_DIR=`echo $(pwd)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
-export PATH="$HOME/.composer/vendor/bin:${TEST_DIR}/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export TEST_INSTALLER="false"
 
 # For daily cron runs, current version from Drupal will be installed

@@ -43,6 +43,9 @@ drush dl drupalorg_drush-7.x
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
 drush verify-makefile
 
+# update version of global drush
+composer global require drush/drush:^9
+
 # install image magick
 wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
 yes '' | pecl install -f php-imagick-LATEST.tar.gz
