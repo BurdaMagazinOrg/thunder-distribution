@@ -46,7 +46,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->setStatus(TRUE);
+    $this->setPublishedStatus(TRUE);
     $this->clickSave();
 
     // Create 2. Article.
@@ -61,7 +61,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
-    $this->setStatus(TRUE);
+    $this->setPublishedStatus(TRUE);
     $this->clickSave();
 
     // Check is everything created properly for Article 1.

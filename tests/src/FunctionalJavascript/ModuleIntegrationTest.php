@@ -180,7 +180,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Article 1',
     ]);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->setStatus(FALSE);
+    $this->setPublishedStatus(FALSE);
     $this->clickSave();
 
     // Edit article and generate access unpubplished token.
@@ -219,7 +219,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
-    $this->setStatus(TRUE);
+    $this->setPublishedStatus(TRUE);
     $this->clickSave();
 
     // Log-Out and check that URL to article works.

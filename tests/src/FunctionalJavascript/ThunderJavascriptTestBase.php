@@ -465,13 +465,13 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * Set entity status.
    *
-   * TRUE - Unpublished.
-   * FALSE - Save.
+   * TRUE - Published.
+   * FALSE - Unpublished.
    *
    * @param bool $status
    *   Entity published or not.
    */
-  protected function setStatus($status = TRUE) {
+  protected function setPublishedStatus($status = TRUE) {
 
     $page = $this->getSession()->getPage();
 
