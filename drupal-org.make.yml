@@ -132,7 +132,7 @@ projects:
 
   liveblog:
     type: "module"
-    version: "1.2-alpha12 "
+    version: "1.2-alpha12"
     patch:
       - "https://www.drupal.org/files/issues/liveblog_not_drupal_8_4-2914129-2.patch"
 
