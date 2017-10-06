@@ -32,7 +32,7 @@ function thunder_updater_checklistapi_checklist_info() {
  *   Return the items for the thunder_updater list.
  */
 function thunder_updater_checklistapi_checklist_items() {
-  $tasks = Yaml::parse(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml');
+  $tasks = Yaml::parse(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml'));
 
   foreach ($tasks as $version => $updates) {
     foreach ($updates as $key => $update) {
