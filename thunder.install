@@ -801,3 +801,21 @@ function thunder_update_8114() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Update to Drupal 8.4.
+ */
+function thunder_update_8115() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8115']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8115']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8115']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
