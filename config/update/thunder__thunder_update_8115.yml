@@ -1,0 +1,56 @@
+core.base_field_override.node.article.status:
+  expected_config:
+    description: 'A boolean indicating whether the node is published.'
+    label: 'Publishing status'
+  update_actions:
+    change:
+      description: ''
+      label: Published
+core.entity_form_display.media.gallery.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.image.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.image.inline:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.instagram.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.pinterest.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.twitter.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.video.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true
+core.entity_form_display.media.video.inline:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true

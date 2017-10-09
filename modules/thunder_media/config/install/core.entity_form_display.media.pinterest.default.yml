@@ -22,5 +22,6 @@ content:
 hidden:
   created: true
   langcode: true
+  path: true
   name: true
   uid: true
