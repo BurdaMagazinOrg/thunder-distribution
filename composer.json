@@ -59,7 +59,8 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/paragraphs": {
-                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch"
+                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch",
+                "Schema errors": "https://www.drupal.org/files/issues/build_failing_schema-2881459-7.patch"
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
@@ -78,6 +79,9 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+            },
+            "drupal/liveblog": {
+                "Liveblog not Drupal 8.4 compatible": "https://www.drupal.org/files/issues/liveblog_not_drupal_8_4-2914129-2.patch"
             }
         }
     },
@@ -96,7 +100,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.3.0",
+        "drupal/core": "^8.4.0-stable",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^1.0",
@@ -116,7 +120,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
-        "drupal/liveblog": "^1.0",
+        "drupal/liveblog": "1.2-alpha12 ",
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",

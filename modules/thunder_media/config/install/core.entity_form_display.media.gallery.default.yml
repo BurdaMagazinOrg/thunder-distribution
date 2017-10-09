@@ -37,4 +37,5 @@ content:
 hidden:
   created: true
   langcode: true
+  path: true
   uid: true

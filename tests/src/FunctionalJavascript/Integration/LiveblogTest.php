@@ -98,7 +98,8 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     // 1 saves it as published in this case.
-    $this->clickArticleSave(1);
+    $this->setPublishedStatus(TRUE);
+    $this->clickSave();
 
     // Add first post.
     $page = $this->getSession()->getPage();

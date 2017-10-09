@@ -146,4 +146,5 @@ hidden:
   created: true
   field_tags: true
   langcode: true
+  path: true
   uid: true
