@@ -27,5 +27,5 @@ dependencies:
   - thunder:thunder_taxonomy
   - drupal:user
   - drupal:views
-  - yoast_seo_preview
+  - yoast_seo_preview:yoast_seo_preview
 package: Thunder
