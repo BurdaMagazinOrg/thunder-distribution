@@ -92,6 +92,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'tour.tour.language',
     'tour.tour.language-add',
     'tour.tour.language-edit',
+
+    // Focal point schema issue.
+    'image.style.entity_browser_thumbnail',
+    'image.style.gallery',
+    'image.style.facebook',
+    'image.style.media_image',
+    'image.style.media_image_mobile',
+    'image.style.media_image_tablet',
+    'image.style.media_thumbnail',
+    'image.style.teaser',
+    'image.style.twitter',
   ];
 
   /**

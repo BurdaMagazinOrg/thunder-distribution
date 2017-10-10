@@ -12,7 +12,7 @@ dependencies:
     - media_entity.bundle.image
   module:
     - datetime
-    - image
+    - focal_point
     - text
 id: media.image.default
 targetEntityType: media
@@ -44,10 +44,12 @@ content:
   field_image:
     weight: 1
     settings:
+      offsets: '50,50'
       progress_indicator: throbber
       preview_image_style: medium
+      preview_link: true
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
     region: content
   field_source:
     type: string_textfield
