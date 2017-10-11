@@ -1,0 +1,6 @@
+core.entity_form_display.media.riddle.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        path: true

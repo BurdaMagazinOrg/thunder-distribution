@@ -37,7 +37,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-collapse-button"]');
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Re-open edit form, value has changed.
     $this->drupalGet("node/7/edit");
@@ -66,7 +66,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-collapse-button"]');
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Re-open edit form, value has changed.
     $this->drupalGet("node/7/edit");

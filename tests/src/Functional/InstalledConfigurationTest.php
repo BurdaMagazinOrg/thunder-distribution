@@ -92,6 +92,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'tour.tour.language',
     'tour.tour.language-add',
     'tour.tour.language-edit',
+
+    // Focal point schema issue.
+    'image.style.entity_browser_thumbnail',
+    'image.style.gallery',
+    'image.style.facebook',
+    'image.style.media_image',
+    'image.style.media_image_mobile',
+    'image.style.media_image_tablet',
+    'image.style.media_thumbnail',
+    'image.style.teaser',
+    'image.style.twitter',
   ];
 
   /**
@@ -206,7 +217,13 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
-
+    // Remove this when
+    // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
+    'core.entity_form_display.media.nexx_video.default' => [
+      'content' => [
+        'path' => TRUE,
+      ],
+    ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
     'field.field.node.article.field_paragraphs' => [

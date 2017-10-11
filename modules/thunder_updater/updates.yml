@@ -135,3 +135,17 @@ v2.8:
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the pinterest paragraphs type. Please check the field settings and update the available paragraph types below.<p>'
         configure_page_channel: { '#text': 'Configure paragraphs field in channel taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/fields/taxonomy_term.tags.field_paragraphs' }
         configure_page_tags: { '#text': 'Configure paragraphs field in tags taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/fields/taxonomy_term.tags.field_paragraphs' }
+v2.9:
+    '#title': 'Update to Thunder 2.9'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8115:
+        '#title': 'Move "URL alias" out of the media forms.'
+        '#description': "<p>Drupal 8.4 introduces 'URL alias' for all media forms. This updates moves them in the hidden region.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, move "URL alias" field form the media form if you want.</p>'
+        configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
+        configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
+        configure_page_gallery: { '#text': 'Configure gallery form display', '#url': 'internal:/admin/structure/media/manage/gallery/form-display' }
+        configure_page_image: { '#text': 'Configure image form display', '#url': 'internal:/admin/structure/media/manage/image/form-display' }
+        configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
+        configure_page_video: { '#text': 'Configure video form display', '#url': 'internal:/admin/structure/media/manage/video/form-display' }
+        configure_page_riddle: { '#text': 'Configure riddle form display', '#url': 'internal:/admin/structure/media/manage/riddle/form-display' }
