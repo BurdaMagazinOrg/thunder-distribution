@@ -7,8 +7,8 @@ id: node.article.status
 field_name: status
 entity_type: node
 bundle: article
-label: 'Publishing status'
-description: 'A boolean indicating whether the node is published.'
+label: Published
+description: ''
 required: false
 translatable: true
 default_value:

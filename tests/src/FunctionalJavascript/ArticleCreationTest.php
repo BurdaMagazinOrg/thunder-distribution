@@ -63,11 +63,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/99360735500167749/', 'pinterest');
 
-    $this->scrollElementInView('#edit-actions');
-
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 

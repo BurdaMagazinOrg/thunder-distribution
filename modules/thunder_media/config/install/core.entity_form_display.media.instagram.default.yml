@@ -26,5 +26,6 @@ hidden:
   field_author: true
   field_content: true
   langcode: true
+  path: true
   name: true
   uid: true

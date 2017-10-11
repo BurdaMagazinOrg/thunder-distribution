@@ -32,7 +32,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterFocalPointChange_' . date('Ymd_His') . '.png');
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $media = Media::load($mediaId);
     $img = $media->get('field_image')->target_id;
@@ -84,7 +84,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Edit media and check are fields correct.
     $this->drupalGet("media/$mediaId/edit");
@@ -115,6 +115,29 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
+  }
+
+  /**
+   * Click article save option based on index of action.
+   *
+   * 1 - Save as unpublished (default).
+   * 2 - Save and publish.
+   *
+   * Media entity still using the old collased "Save and publish" button.
+   *
+   * @param int $actionIndex
+   *   Index for option that should be clicked. (by default 1)
+   *
+   * @TODO: Remove this when switching to core media.
+   */
+  protected function clickSave($actionIndex = 1) {
+    $page = $this->getSession()->getPage();
+    if ($actionIndex !== 1) {
+      $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
+        ->click();
+    }
+    $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
+      ->click();
   }
 
 }
