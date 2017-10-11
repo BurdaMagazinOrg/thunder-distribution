@@ -6,7 +6,8 @@
 This release mostly fixes problems that occurred with the Drupal 8.4 update. Additionally several tests had to be
 updated because of new contrib module versions.
 
-Updating to Drupal 8.4 requires Drush 8.1.12 or newer. Additional information can be found in [Drupal 8.4.0 Changelog](https://www.drupal.org/project/drupal/releases/8.4.0).
+Updating to Drupal 8.4 requires Drush 8.1.12 or newer, we recommend to use Drush 8.1.15 or newer. Additional information 
+can be found in [Drupal 8.4.0 Changelog](https://www.drupal.org/project/drupal/releases/8.4.0).
 
 All changes and fixes in this release:
 
