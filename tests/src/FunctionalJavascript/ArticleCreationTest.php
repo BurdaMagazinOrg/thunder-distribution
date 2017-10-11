@@ -61,13 +61,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
 
     // Add Pinterest Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/489766528213367864/', 'pinterest');
-
-    $this->scrollElementInView('#edit-actions');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/99360735500167749/', 'pinterest');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
@@ -111,7 +109,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Pinterest widget is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "489766528213367864")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "99360735500167749")]', 2);
   }
 
 }
