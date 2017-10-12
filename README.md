@@ -18,6 +18,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 * Field Group
 * Focal Point
 * Inline Entity Form
+* Inline Form Errors
 * Libraries API
 * Linkit - Enriched linking experience
 * Metatag
