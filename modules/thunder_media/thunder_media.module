@@ -108,7 +108,7 @@ function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$f
  * Add process function to hide 'remove' button of image field widget on inline
  * entity forms.
  */
-function thunder_media_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $context) {
+function thunder_media_field_widget_image_focal_point_form_alter(&$element, FormStateInterface $form_state, $context) {
   $config = \Drupal::config('thunder_media.settings');
 
   if (!$config->get('enable_filefield_remove_button')) {
