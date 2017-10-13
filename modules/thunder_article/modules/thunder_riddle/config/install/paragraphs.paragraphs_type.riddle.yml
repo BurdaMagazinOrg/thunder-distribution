@@ -3,4 +3,6 @@ status: true
 dependencies: {  }
 id: riddle
 label: Riddle
+icon_uuid: 5b4ec8f7-f542-47c4-99a7-e826add30be9
+description: null
 behavior_plugins: {  }

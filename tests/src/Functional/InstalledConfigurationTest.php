@@ -224,6 +224,10 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'path' => TRUE,
       ],
     ],
+    'paragraphs.paragraphs_type.nexx_video' => [
+      'icon_uuid' => TRUE,
+      'description' => TRUE,
+    ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
     'field.field.node.article.field_paragraphs' => [
