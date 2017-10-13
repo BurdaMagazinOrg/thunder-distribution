@@ -60,7 +60,9 @@ projects:
 
   default_content:
     type: "module"
-    version: "1"
+    version: "1.0-alpha6"
+    patch:
+      - "https://www.drupal.org/files/issues/2698425-80.patch"
 
   diff:
     type: "module"
