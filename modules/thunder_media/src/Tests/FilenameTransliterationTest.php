@@ -14,6 +14,13 @@ use Drupal\thunder\ThunderBaseTest;
 class FilenameTransliterationTest extends ThunderBaseTest {
 
   /**
+   * Modules to enable.
+   *
+   * @var array
+   */
+  public static $modules = ['file_test', 'file'];
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp() {
