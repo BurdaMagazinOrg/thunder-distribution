@@ -1,0 +1,70 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - field.storage.paragraph.field_text
+    - field.storage.node.field_seo_title
+    - field.storage.node.field_teaser_text
+    - search_api.server.database
+  module:
+    - paragraphs
+    - search_api
+    - node
+id: node
+name: Node
+description: ''
+read_only: false
+field_settings:
+  field_text:
+    label: 'Paragraphs » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_text'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_text
+      module:
+        - paragraphs
+  field_seo_title:
+    label: 'SEO Title'
+    datasource_id: 'entity:node'
+    property_path: field_seo_title
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_seo_title
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 3
+  field_teaser_text:
+    label: 'Teaser Text'
+    datasource_id: 'entity:node'
+    property_path: field_teaser_text
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_teaser_text
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  rendered_item: {  }
+tracker_settings:
+  default: {  }
+options:
+  index_directly: true
+  cron_limit: 50
+server: database
