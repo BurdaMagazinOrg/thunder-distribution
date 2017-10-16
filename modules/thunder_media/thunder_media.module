@@ -112,8 +112,20 @@ function thunder_media_field_widget_image_focal_point_form_alter(&$element, Form
   $config = \Drupal::config('thunder_media.settings');
 
   if (!$config->get('enable_filefield_remove_button')) {
-    if (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form') {
-      $element['#process'][] = 'thunder_media_inline_entity_form_image_widget_process';
+    $bundle = NULL;
+    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+    if (($form_display = $form_state->getStorage()['form_display']) && $form_display->getTargetEntityTypeId() == 'media') {
+      $bundle = $form_display->getTargetBundle();
+    }
+    elseif (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form' && $context['form']['#entity_type'] == 'media') {
+      $bundle = $context['form']['#bundle'];
+    }
+    if ($bundle) {
+      /** @var \Drupal\media_entity\MediaBundleInterface $bundle */
+      $bundle = \Drupal::entityTypeManager()->getStorage('media_bundle')->load($bundle);
+      if ($bundle->getTypeConfiguration()['source_field'] == $element['#field_name']) {
+        $element['#process'][] = 'thunder_media_inline_entity_form_image_widget_process';
+      }
     }
   }
 }
