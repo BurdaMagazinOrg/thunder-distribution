@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Contains hook integrations.
+ */
+
+/**
+ * Implements hook_views_data().
+ */
+function thunder_search_views_data() {
+  $data['views']['facet_block'] = [
+    'title' => t('Facet block'),
+    'help' => t('.'),
+    'area' => [
+      'id' => 'facet_block',
+    ],
+  ];
+  return $data;
+}

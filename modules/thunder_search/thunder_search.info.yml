@@ -1,0 +1,9 @@
+name: 'Thunder Search'
+description: 'Provides better search integration for Thunder.'
+type: module
+core: 8.x
+dependencies:
+  - facets:facets
+  - search_api:search_api_db
+  - views_bulk_operations:views_bulk_operations
+package: Thunder

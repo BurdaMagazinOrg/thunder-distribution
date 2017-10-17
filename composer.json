@@ -76,6 +76,10 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+            },
+            "drupal/search_api": {
+                "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch",
+                "Facets not shown on view of overridden system route": "https://www.drupal.org/files/issues/2916754-2.patch"
             }
         }
     },

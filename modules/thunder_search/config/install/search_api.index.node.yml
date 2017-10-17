@@ -1,55 +1,86 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.storage.node.field_paragraphs
-    - field.storage.paragraph.field_text
-    - field.storage.node.field_seo_title
-    - field.storage.node.field_teaser_text
-    - search_api.server.database
   module:
-    - paragraphs
+    - user
     - search_api
     - node
+  config:
+    - search_api.server.database
 id: node
 name: Node
 description: ''
 read_only: false
 field_settings:
-  field_text:
-    label: 'Paragraphs » Paragraph » Text'
-    datasource_id: 'entity:node'
-    property_path: 'field_paragraphs:entity:field_text'
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
     type: text
-    dependencies:
-      config:
-        - field.storage.node.field_paragraphs
-        - field.storage.paragraph.field_text
-      module:
-        - paragraphs
-  field_seo_title:
-    label: 'SEO Title'
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          article: default
+          page: default
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  label:
+    label: Label
+    property_path: aggregated_field
+    type: text
+    boost: !!float 8
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/title'
+  status:
+    label: status
     datasource_id: 'entity:node'
-    property_path: field_seo_title
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+  name:
+    label: 'Authored by » User » Name'
+    datasource_id: 'entity:node'
+    property_path: 'uid:entity:name'
     type: string
     dependencies:
-      config:
-        - field.storage.node.field_seo_title
-  title:
-    label: Title
+      module:
+        - user
+  changed:
+    label: Changed
     datasource_id: 'entity:node'
-    property_path: title
-    type: text
-    boost: !!float 3
-  field_teaser_text:
-    label: 'Teaser Text'
+    property_path: changed
+    type: date
+  type:
+    label: 'Content type'
     datasource_id: 'entity:node'
-    property_path: field_teaser_text
-    type: text
-    boost: !!float 2
-    dependencies:
-      config:
-        - field.storage.node.field_teaser_text
+    property_path: type
+    type: string
+  sticky:
+    label: 'Sticky at top of lists'
+    datasource_id: 'entity:node'
+    property_path: sticky
+    type: boolean
+  promote:
+    label: 'Promoted to front page'
+    datasource_id: 'entity:node'
+    property_path: promote
+    type: boolean
 datasource_settings:
   'entity:node':
     bundles:
@@ -61,7 +92,105 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  html_filter:
+    all_fields: true
+    fields:
+      - rendered_item
+      - label
+      - name
+      - type
+    title: true
+    alt: true
+    tags:
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      b: 2
+      em: 1
+      u: 1
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignorecase:
+    all_fields: true
+    fields:
+      - rendered_item
+      - label
+      - name
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
   rendered_item: {  }
+  stopwords:
+    all_fields: true
+    fields:
+      - rendered_item
+      - label
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  tokenizer:
+    all_fields: true
+    fields:
+      - rendered_item
+      - label
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '3'
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+  transliteration:
+    all_fields: true
+    fields:
+      - rendered_item
+      - label
+      - name
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
 tracker_settings:
   default: {  }
 options:
