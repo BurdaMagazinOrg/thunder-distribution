@@ -453,24 +453,38 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
-   * Click article save option based on index of action.
-   *
-   * 1 - Save as unpublished (default).
-   * 2 - Save and publish.
-   *
-   * @param int $actionIndex
-   *   Index for option that should be clicked. (by default 1)
+   * Click article save.
    */
-  protected function clickArticleSave($actionIndex = 1) {
+  protected function clickSave() {
     $page = $this->getSession()->getPage();
 
-    if ($actionIndex !== 1) {
-      $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
-        ->click();
-    }
-
-    $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
+    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]')
       ->click();
+  }
+
+  /**
+   * Set entity status.
+   *
+   * TRUE - Published.
+   * FALSE - Unpublished.
+   *
+   * @param bool $status
+   *   Entity published or not.
+   */
+  protected function setPublishedStatus($status = TRUE) {
+
+    $page = $this->getSession()->getPage();
+
+    $this->scrollElementInView('#edit-status-value');
+
+    if ($status) {
+      $page->find('xpath', '//*[@id="edit-status-value"]')
+        ->check();
+    }
+    else {
+      $page->find('xpath', '//*[@id="edit-status-value"]')
+        ->uncheck();
+    }
   }
 
   /**

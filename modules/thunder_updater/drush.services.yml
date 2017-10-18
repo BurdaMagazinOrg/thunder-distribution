@@ -1,0 +1,5 @@
+services:
+  thunder_updater.commands:
+    class: \Drupal\thunder_updater\Commands\ThunderUpdaterCommands
+    tags:
+      - { name: drush.command }

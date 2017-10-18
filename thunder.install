@@ -801,3 +801,44 @@ function thunder_update_8114() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Update to Drupal 8.4.
+ */
+function thunder_update_8115() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $successful = TRUE;
+  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8115']])) {
+    $successful = FALSE;
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('thunder_riddle')) {
+    if (!$thunderUpdater->executeUpdates([['thunder_riddle', 'thunder__thunder_update_8115']])) {
+      $successful = FALSE;
+    }
+  }
+
+  if ($successful) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8115']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8115']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable inline_form_errors module.
+ */
+function thunder_update_8116() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->installModules(['thunder__thunder_update_8116' => 'inline_form_errors']);
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

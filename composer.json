@@ -63,7 +63,8 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/paragraphs": {
-                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch"
+                "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch",
+                "Schema errors": "https://www.drupal.org/files/issues/build_failing_schema-2881459-7.patch"
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
@@ -100,7 +101,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.3.0",
+        "drupal/core": "^8.4.0-stable",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^1.0",
@@ -124,7 +125,7 @@
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
-        "drupal/media_entity_pinterest": "1.0-beta1",
+        "drupal/media_entity_pinterest": "1.0-beta2",
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
         "drupal/media_expire": "^1.0",
