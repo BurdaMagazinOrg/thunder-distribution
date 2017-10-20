@@ -107,6 +107,13 @@ body {
   .field--name-field-media-images {
     margin-top: 1.5em;
     border-top: 1px solid #e6e4df;
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      margin: 5px;
+      flex-basis: 20%;
+    }
   }
 
   .field-multiple-table {
@@ -134,13 +141,22 @@ body {
   height: 40px;
 }
 
-#edit-field-paragraphs > strong[data-drupal-selector="edit-field-paragraphs-title"] {
-  font-size: 0;
-  line-height: 0;
-
+#edit-field-top-paragraphs {
   & > * {
     font-size: 12px;
     line-height: 1;
+  }
+}
+
+#edit-field-paragraphs {
+  & > * {
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  & > strong[data-drupal-selector="edit-field-paragraphs-title"] {
+    font-size: 0;
+    line-height: 0;
   }
 }
 
@@ -149,10 +165,6 @@ body {
 }
 
 #field-paragraphs-values, #field-top-paragraphs-values {
-  & > thead {
-    display: none;
-  }
-
   .draggable {
     &:first-child {
       border-top: 1px solid #e6e4df;
@@ -169,8 +181,4 @@ body {
   .paragraphs-subform {
     padding-bottom: 1em;
   }
-}
-
-.paragraphs-container thead {
-  display: none;
 }
