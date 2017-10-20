@@ -218,7 +218,9 @@ projects:
 
   thunder_admin:
     type: "theme"
-    version: "2"
+    download:
+      url: "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
+      branch: "feature/2908887-experimental-paragraphs-widget"
 
   token:
     type: "module"
