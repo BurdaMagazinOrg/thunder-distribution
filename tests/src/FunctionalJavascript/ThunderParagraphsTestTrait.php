@@ -49,25 +49,25 @@ trait ThunderParagraphsTestTrait {
 
     $fieldSelector = str_replace('_', '-', $fieldName);
     if ($position === NULL || $position > $this->getNumberOfParagraphs($fieldName)) {
-      $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper div.paragraphs-bottom-add-button > input";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input";
     }
 
-    $addButton = $page->find('css', $addButtonSelector);
-    $this->scrollElementInView($addButtonSelector);
+    $addButton = $page->find('css', $addButtonCssSelector);
+    $this->scrollElementInView($addButtonCssSelector);
 
     $addButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->find('xpath', "//ul[@class='paragraphs-add-dialog-list']/li/button[@data-type='$type']")
+    $page->find('xpath', "//input[@name='{$fieldName}_{$type}_add_more']")
       ->click();
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
+    $this->waitUntilVisible('div[data-drupal-selector="edit-' . $fieldSelector . '-' . $nextParagraphIndex . '-subform"]');
 
     return $nextParagraphIndex;
   }
