@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - thunder_admin
-id: thunder_admin_primary_local_tasks
-theme: thunder_admin
+    - seven
+id: seven_primary_local_tasks
+theme: seven
 region: header
-weight: -1
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:

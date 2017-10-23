@@ -23,7 +23,7 @@ trait ThunderParagraphsTestTrait {
   protected function getNumberOfParagraphs($fieldName) {
     $fieldNamePart = str_replace('_', '-', $fieldName);
 
-    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr");
+    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]");
 
     return count($paragraphRows);
   }
@@ -52,7 +52,8 @@ trait ThunderParagraphsTestTrait {
       $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
     }
     else {
-      $addButtonSelector = "input[name='${fieldName}_${position}_add_modal']";
+      $addButtonPosition = $position * 2 + 1;
+      $addButtonSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input";
     }
 
     $addButton = $page->find('css', $addButtonSelector);
@@ -146,14 +147,14 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Create Twitter or Instagram Paragraph.
+   * Create Twitter, Instagram or PinterestParagraph.
    *
    * @param string $fieldName
    *   Field name.
    * @param string $socialUrl
-   *   Url to tweet or instagram.
+   *   Url to tweet, instagram or pinterest.
    * @param string $type
-   *   Type of paragraph (twitter|instagram).
+   *   Type of paragraph (twitter|instagram|pinterest).
    * @param int $position
    *   Position of the paragraph.
    */

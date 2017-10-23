@@ -1,0 +1,24 @@
+field.field.taxonomy_term.channel.field_paragraphs:
+  expected_config: {  }
+  update_actions:
+    add:
+      settings:
+        handler_settings:
+          target_bundles:
+            pinterest: pinterest
+          target_bundles_drag_drop:
+            pinterest:
+              enabled: true
+              weight: 14
+field.field.taxonomy_term.tags.field_paragraphs:
+  expected_config: {  }
+  update_actions:
+    add:
+      settings:
+        handler_settings:
+          target_bundles:
+            pinterest: pinterest
+          target_bundles_drag_drop:
+            pinterest:
+              enabled: true
+              weight: 14

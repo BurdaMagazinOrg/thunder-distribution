@@ -83,6 +83,11 @@ We support some test execution options. They can be provided in commit message i
 - TEST_INSTALLER - allowed values: (true), this option will execute additional tests, that tests installation of Thunder with default language (English) and German. These tests require significant more time to be executed.
 - SAUCE_LABS_ENABLED - allowed values: (true), this option will execute tests on [Sauce Labs](https://saucelabs.com), where screenshots and videos of test executions are available for additional investigation of possible problems. This option significantly increases execution time of tests.
 
+Example to execute update test path:
+```
+git commit -m "[TEST_UPDATE=true] Trigger update test path"
+```
+
 ----------
 
 ## Updating Thunder
@@ -192,7 +197,7 @@ Workflow to generate and use CUD and use it is following:
 
 1. Make clean install of previous version of Thunder (version for which one you want to install - fe. if you are merging changes to `develop` branch, then you should install Thunder for that branch)
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
-3. Execute update hooks if it's necessary (fe. in case when you have module and/or core updates in your branch)
+3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
 4. Now is moment to create CUDs. For that we have provided following drush command:
 
     ```drush thunder-updater-generate-update [module] [update-name]```

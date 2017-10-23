@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.pinterest.field_url
+    - image.style.paragraph_preview_thumbnail
+    - media_entity.bundle.pinterest
+  module:
+    - empty_fields
+    - image
+id: media.pinterest.paragraph_preview
+targetEntityType: media
+bundle: pinterest
+mode: paragraph_preview
+content:
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: paragraph_preview_thumbnail
+      image_link: ''
+    third_party_settings:
+      empty_fields:
+        handler: ''
+hidden:
+  created: true
+  field_url: true
+  langcode: true
+  name: true
+  uid: true

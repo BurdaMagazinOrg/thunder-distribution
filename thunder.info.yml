@@ -19,6 +19,7 @@ dependencies:
   - editor
   - entity_reference
   - image
+  - inline_form_errors
   - menu_ui
   - language
   - node

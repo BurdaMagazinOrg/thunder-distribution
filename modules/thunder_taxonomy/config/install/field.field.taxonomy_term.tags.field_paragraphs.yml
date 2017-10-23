@@ -7,6 +7,7 @@ dependencies:
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.instagram
     - paragraphs.paragraphs_type.link
+    - paragraphs.paragraphs_type.pinterest
     - paragraphs.paragraphs_type.quote
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.twitter
@@ -34,6 +35,7 @@ settings:
       image: image
       quote: quote
       text: text
+      pinterest: pinterest
       twitter: twitter
       video: video
     target_bundles_drag_drop:
@@ -49,15 +51,15 @@ settings:
       image:
         enabled: true
         weight: 11
-      media:
-        weight: 11
-        enabled: false
       quote:
         enabled: true
         weight: 12
       text:
         enabled: true
         weight: 13
+      pinterest:
+        enabled: true
+        weight: 14
       twitter:
         enabled: true
         weight: 14

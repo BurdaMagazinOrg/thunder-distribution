@@ -92,6 +92,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'tour.tour.language',
     'tour.tour.language-add',
     'tour.tour.language-edit',
+
+    // Focal point schema issue.
+    'image.style.entity_browser_thumbnail',
+    'image.style.gallery',
+    'image.style.facebook',
+    'image.style.media_image',
+    'image.style.media_image_mobile',
+    'image.style.media_image_tablet',
+    'image.style.media_thumbnail',
+    'image.style.teaser',
+    'image.style.twitter',
   ];
 
   /**
@@ -181,66 +192,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
     ],
 
-    // Infinite Theme - adjusted by Thunder hooks.
-    'infinite.settings' => [
-      'logo' => TRUE,
-    ],
-
-    // Infinite Theme - adjusted by Shariff module hooks.
-    'core.entity_view_display.node.article.teaser_landscape_l' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_landscape_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_portrait_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_portrait_s' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_square_m' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.teaser_square_s' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.lazyloading' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_full' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_half' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-    'core.entity_view_display.node.article.presenter_home_selectable' => [
-      'hidden' => ['shariff_field' => TRUE],
-    ],
-
-    // Infinite Theme - changed by Thunder.
-    'core.entity_view_display.media.gallery.default' => [
-      'content' => [
-        'field_media_images' => [
-          'settings' => [
-            'view_mode' => TRUE,
-          ],
-        ],
-      ],
-    ],
-
-    // Infinite Theme - changed by Thunder in order to use Slick gallery.
-    'core.entity_view_display.media.image.default' => [
-      'content' => [
-        'field_image' => [
-          'settings' => [
-            'image_style' => TRUE,
-            'responsive_image_style' => TRUE,
-          ],
-        ],
-      ],
-    ],
-
     // Diff module. Issue: https://www.drupal.org/node/2854581.
     'core.entity_view_mode.node.diff' => [
       'langcode' => TRUE,
@@ -266,7 +217,13 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'module' => TRUE,
       ],
     ],
-
+    // Remove this when
+    // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
+    'core.entity_form_display.media.nexx_video.default' => [
+      'content' => [
+        'path' => TRUE,
+      ],
+    ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
     'field.field.node.article.field_paragraphs' => [

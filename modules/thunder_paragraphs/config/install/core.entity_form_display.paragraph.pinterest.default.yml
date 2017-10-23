@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.pinterest.field_media
+    - paragraphs.paragraphs_type.pinterest
+  module:
+    - inline_entity_form
+id: paragraph.pinterest.default
+targetEntityType: paragraph
+bundle: pinterest
+mode: default
+content:
+  field_media:
+    weight: 0
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      override_labels: false
+    third_party_settings: {  }
+    type: inline_entity_form_simple
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

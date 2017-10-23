@@ -42,7 +42,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
@@ -74,7 +74,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Remove 2nd Image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button"]');
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     $this->clickButtonCssSelector($page, '#slick-media-13-media-images-default-1 button.slick-next');
 
@@ -104,7 +104,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->submitEntityBrowser($page);
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Check that, there are 5 images in gallery.
     $numberOfImages = $this->getSession()
@@ -131,7 +131,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
     $this->submitEntityBrowser($page);
 
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()

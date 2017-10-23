@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - thunder_admin
-id: thunder_admin_page_title
-theme: thunder_admin
+    - seven
+id: seven_page_title
+theme: seven
 region: header
-weight: -3
+weight: -30
 provider: null
 plugin: page_title_block
 settings:

@@ -32,7 +32,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->setFieldValue($page, 'name[0][value]', 'New Section');
     $this->addImageParagraph('field_paragraphs', ['media:5']);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
-    $this->clickArticleSave();
+    $this->clickSave();
 
     // Create 1. Article.
     $this->articleFillNew([
@@ -46,7 +46,8 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->clickArticleSave(2);
+    $this->setPublishedStatus(TRUE);
+    $this->clickSave();
 
     // Create 2. Article.
     $this->articleFillNew([
@@ -60,7 +61,8 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
-    $this->clickArticleSave(2);
+    $this->setPublishedStatus(TRUE);
+    $this->clickSave();
 
     // Check is everything created properly for Article 1.
     $this->drupalGet('article-1');

@@ -1,6 +1,6 @@
-v1.1:
+v2.0:
     '#title': 'Update to Thunder 2'
-    '#description': '<p>We have lots of cool stuff for you in this release</p>'
+    '#description': '<h3>These are the new features for this release:</h3>'
     v1_1__responsive_preview:
         '#title': 'Responsive Theme Preview'
         '#description': '<p>With this module, you can see what the site will look like on different devices, in upright or landscape orientation.</p>'
@@ -86,6 +86,9 @@ v1.1:
         extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
         amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
         thunder_amp: { '#text': 'Thunder AMP theme README', '#url': 'https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md' }
+v2.4:
+    '#title': 'Update to Thunder 2.4'
+    '#description': '<h3>These are the new features for this release:</h3>'
     v1_1__thunder_admin_ux:
         '#title': 'New Thunder Admin UX'
         '#description': "<p>Thunder now comes with new improved administration user interface.</p>"
@@ -94,6 +97,9 @@ v1.1:
         '#title': 'Updated media paragraph'
         '#description': "<p>This is the last update of media paragraph to be compatible with thunder admin theme. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.</p>"
         '#description_failed': '<p><strong>There was a problem during the update.</strong> We tried to update the now deprecated media paragraph, but failed. If you do not have the media paragraph, everything is fine. If you modified the paragraph yourself it might be possible, that the form display is not correct, please compare with the form display of the image paragraph to get the correct display. <strong>The media paragraph is now considered deprecated and will not get any updates in the future</strong>.<p>'
+v2.5:
+    '#title': 'Update to Thunder 2.5'
+    '#description': '<h3>These are the new features for this release:</h3>'
     v1_1__content_lock:
         '#title': 'Install content locking'
         '#description': "<p>This module provides locking of entity types. We enabled locking for articles by default. Of course, you can enable it for other entity types.</p>"
@@ -105,3 +111,49 @@ v1.1:
         '#description': "<p>This module is used to show empty fields in the paragraph previews.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/empty_fields' }
+v2.6:
+    '#title': 'Update to Thunder 2.6'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    v1_1__media_entity_pinterest:
+        '#title': 'Install pinterest paragraph'
+        '#description': "<p>This update provides pinterest integration. It adds an media entity and a new paragraph type.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/media_entity_pinterest' }
+v2.8:
+    '#title': 'Update to Thunder 2.8'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_media_update_8106:
+        '#title': 'Update url field labels in media entities'
+        '#description': "<p>This update changes the labels of url field for instagram, twitter and pinterest entities.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check the error logs for more information.</p>'
+        configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
+        configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
+        configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
+    thunder_taxonomy_update_8002:
+        '#title': 'Enable pinterest paragraph type on taxonomy terms'
+        '#description': "<p>This update enables pinterest paragraph type on taxonomy terms.</p>"
+        '#description_failed': '<p><strong>There was a problem during the update.</strong> We were not able to activate the pinterest paragraphs type. Please check the field settings and update the available paragraph types below.<p>'
+        configure_page_channel: { '#text': 'Configure paragraphs field in channel taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/channel/overview/fields/taxonomy_term.tags.field_paragraphs' }
+        configure_page_tags: { '#text': 'Configure paragraphs field in tags taxonomy', '#url': 'internal:/admin/structure/taxonomy/manage/tags/overview/fields/taxonomy_term.tags.field_paragraphs' }
+v2.9:
+    '#title': 'Update to Thunder 2.9'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8115:
+        '#title': 'Move "URL alias" out of the media forms.'
+        '#description': "<p>Drupal 8.4 introduces 'URL alias' for all media forms. This updates moves them in the hidden region.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, move "URL alias" field form the media form if you want.</p>'
+        configure_page_instagram: { '#text': 'Configure instagram form display', '#url': 'internal:/admin/structure/media/manage/instagram/form-display' }
+        configure_page_twitter: { '#text': 'Configure twitter form display', '#url': 'internal:/admin/structure/media/manage/twitter/form-display' }
+        configure_page_gallery: { '#text': 'Configure gallery form display', '#url': 'internal:/admin/structure/media/manage/gallery/form-display' }
+        configure_page_image: { '#text': 'Configure image form display', '#url': 'internal:/admin/structure/media/manage/image/form-display' }
+        configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
+        configure_page_video: { '#text': 'Configure video form display', '#url': 'internal:/admin/structure/media/manage/video/form-display' }
+        configure_page_riddle: { '#text': 'Configure riddle form display', '#url': 'internal:/admin/structure/media/manage/riddle/form-display' }
+v2.10:
+    '#title': 'Update to Thunder 2.10'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8116:
+        '#title': 'Enable "Inline Form Errors" module.'
+        '#description': "<p>Places error messages adjacent to form inputs, for improved usability and accessibility.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Inline form errors', '#url': 'internal:/admin/modules' }

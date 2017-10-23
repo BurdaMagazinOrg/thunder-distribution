@@ -4,11 +4,11 @@ dependencies:
   module:
     - system
   theme:
-    - thunder_admin
-id: thunder_admin_breadcrumbs
-theme: thunder_admin
-region: header
-weight: -2
+    - seven
+id: seven_breadcrumbs
+theme: seven
+region: breadcrumb
+weight: 0
 provider: null
 plugin: system_breadcrumb_block
 settings:

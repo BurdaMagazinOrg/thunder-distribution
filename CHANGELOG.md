@@ -1,5 +1,72 @@
 # Change Log
 
+## [8.2.9](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.9) 2017-10-11
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.8...8.2.9)
+
+This release mostly fixes problems that occurred with the Drupal 8.4 update. Additionally several tests had to be
+updated because of new contrib module versions.
+
+Updating to Drupal 8.4 requires Drush 8.1.12 or newer, we recommend to use Drush 8.1.15 or newer. Additional information 
+can be found in [Drupal 8.4.0 Changelog](https://www.drupal.org/project/drupal/releases/8.4.0).
+
+All changes and fixes in this release:
+
+- Fix [Update Thunder to Drupal 8.4](https://www.drupal.org/node/2899242)
+- Fix [Enabling content translation module results in RuntimeException](https://www.drupal.org/node/2904413)
+- Fix [Live blog tests flip flop](https://www.drupal.org/node/2908456)
+- Fix [Cron failing because of simple_sitemap](https://www.drupal.org/node/2913792)
+- Fix [Failing tests for Device Preview integration](https://www.drupal.org/node/2915158)
+- Change [Update media_entity_pinterest to 1.0-beta2](https://www.drupal.org/node/2915378)
+
+## [8.2.8](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.8) 2017-09-25
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.7...8.2.8)
+
+With this release we have improved support for the Seven theme, fixed few issues related to updates of modules and testing tools.
+Additionally, we have improved Checklist for updates and Paragraphs integration.
+
+All changes and fixes in this release:
+
+- Add [Thunder does not support seven theme correctly](https://www.drupal.org/node/2901160)
+- Change [Break up checkboxes into releases.](https://www.drupal.org/node/2905081)
+- Change [Hard to differentiate Instagram and Twitter paragraph after adding](https://www.drupal.org/node/2899620)
+- Fix [Pinterest paragraph is not enabled for Taxonomy term pages](https://www.drupal.org/node/2902034)
+- Fix [Typo fix @ thunder_updater](https://www.drupal.org/node/2910627)
+- Fix [Fix responsive_preview integration tests](https://www.drupal.org/node/2910773)
+- Fix [Update entity browser to version 8.x-1.3](https://www.drupal.org/node/2910831)
+
+## [8.2.7](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.7) 2017-08-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.6...8.2.7)
+
+This release notably fixes a data loss bug, where changes in an inline entity form where not submitted when collapsing 
+the paragraph containing the inline entity form. The fix saves remote entities on collapsing a paragraph, this means,
+that changes on a referenced entity are saved before the referencing article is changed!
+
+This might be unexpected behaviour, but we renamed the collapse button to "Collapse and save" to reflect this change.
+
+All changes and fixes in this release:
+
+- Fix [Library not loaded in entity_browser form](https://www.drupal.org/node/2900431)
+- Change [Remove the 'Remove' button of image widgets](https://www.drupal.org/node/2900663)
+- Change [Mark Infinite theme and module as hidden](https://www.drupal.org/node/2901282)
+- Add [Test modules if they are reinstallable](https://www.drupal.org/node/2899669)
+- Fix [Paragraphs add in between buttons styling is not good](https://www.drupal.org/node/2899917)
+- Fix [Saving of collapsed paragraphs with referenced fields doesn't work](https://www.drupal.org/node/2900626)
+
+## [8.2.6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.6) 2017-08-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.5...8.2.6)
+
+- [Add pinterest paragraph](https://www.drupal.org/node/2899059)
+- [Add in between paragraph loading notification](https://www.drupal.org/node/2899034)
+- Fixes [Cannot reinstall thunder riddle integration](https://www.drupal.org/node/2899661)
+- Fixes [Config Error on Liveblog reinstall](https://www.drupal.org/node/2879436)
+
+## [8.2.5](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.5) 2017-07-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.4...8.2.5)
+
+- Addition of the content lock module to prevent concurrent editing of articles.
+- Fix missing installation of empty fields module on updates
+- Fixed installation instructions.
+
 ## [8.2.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.4) 2017-07-17
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.3...8.2.4)
 

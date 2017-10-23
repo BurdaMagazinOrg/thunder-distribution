@@ -1,0 +1,6 @@
+langcode: en
+status: true
+dependencies: {  }
+id: pinterest
+label: Pinterest
+behavior_plugins: {  }
