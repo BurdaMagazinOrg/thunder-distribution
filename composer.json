@@ -73,7 +73,7 @@
             },
             "drupal/dropzonejs": {
                 "Theming compatible JS selectors for auto select": "https://www.drupal.org/files/issues/2870708_2.patch",
-                "Dropzone cropping": "https://www.drupal.org/files/issues/2877034-11.patch"
+                "Dropzone cropping": "https://www.drupal.org/files/issues/2877034-12.patch"
             },
             "drupal/field_group": {
                 "Form mode ignored as field groups always attached to 'default' form mode": "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"

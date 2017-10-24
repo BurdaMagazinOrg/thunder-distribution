@@ -40,10 +40,10 @@ widgets:
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
       clientside_resize: false
-      resize_width: 0
       resize_height: 0
-      resize_quality: 1.0
       resize_method: contain
+      resize_quality: !!float 1
+      resize_width: 0
       thumbnail_method: contain
       submit_text: 'Select entities'
     uuid: 3c3b56e6-f111-4477-b9f8-c789b68d6f15
