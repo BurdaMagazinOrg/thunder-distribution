@@ -34,6 +34,12 @@ widgets:
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
+      clientside_resize: 0
+      resize_width: ''
+      resize_height: ''
+      resize_quality: '1'
+      resize_method: contain
+      thumbnail_method: contain
       submit_text: 'Import images'
       auto_select: true
     uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
