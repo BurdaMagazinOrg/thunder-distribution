@@ -73,7 +73,7 @@ projects:
     version: "1.0-alpha7"
     patch:
       - "https://www.drupal.org/files/issues/2870708_2.patch"
-      - "https://www.drupal.org/files/issues/use_dropzonejs_client-2877034-9.patch"
+      - "https://www.drupal.org/files/issues/2877034-11.patch"
 
   empty_fields:
     type: "module"

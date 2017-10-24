@@ -39,10 +39,10 @@ widgets:
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
       extensions: 'png gif jpg jpeg'
-      clientside_resize: 0
-      resize_width: ''
-      resize_height: ''
-      resize_quality: '1'
+      clientside_resize: false
+      resize_width: 0
+      resize_height: 0
+      resize_quality: 1.0
       resize_method: contain
       thumbnail_method: contain
       submit_text: 'Select entities'
