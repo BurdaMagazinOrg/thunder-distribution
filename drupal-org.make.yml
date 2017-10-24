@@ -70,10 +70,7 @@ projects:
 
   dropzonejs:
     type: "module"
-    version: "1.0-alpha7"
-    patch:
-      - "https://www.drupal.org/files/issues/2870708_2.patch"
-      - "https://www.drupal.org/files/issues/2877034-12.patch"
+    version: "1"
 
   empty_fields:
     type: "module"
