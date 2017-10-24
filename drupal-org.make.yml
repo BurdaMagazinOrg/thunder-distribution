@@ -265,7 +265,7 @@ libraries:
     type: "library"
     download:
       type: "get"
-      url: "https://github.com/exif-js/exif-js/archive/v2.2.0.zip"
+      url: "https://github.com/exif-js/exif-js/archive/v2.3.0.zip"
 
   blazy_lib:
     type: "blazy"
