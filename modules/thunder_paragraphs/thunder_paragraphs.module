@@ -5,6 +5,7 @@
  * Contains paragraphs related hook implementations and functions.
  */
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 
@@ -20,28 +21,63 @@ function thunder_paragraphs_field_widget_entity_browser_entity_reference_form_al
 
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * Used for Classic Paragraphs widget.
  */
 function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  _thunder_paragraph_attach_ief_submit(
+    $element,
+    [
+      'top',
+      'links',
+      'collapse_button',
+    ]
+  );
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * Used for Experimental Paragraphs widget.
+ */
+function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  _thunder_paragraph_attach_ief_submit(
+    $element,
+    [
+      'top',
+      'actions',
+      'actions',
+      'collapse_button',
+    ]
+  );
+}
+
+/**
+ * Helper for attaching IEF submit trigger and functions.
+ *
+ * @param array $element
+ *   Element render array for paragraph.
+ * @param array $button_parents
+ *   Array with parents for paragraph collapse button.
+ */
+function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents) {
   if (isset($element['subform'])) {
     foreach (Element::children($element['subform']) as $index) {
       if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])
         || isset($element['subform'][$index]['widget']['#ief_id'])
         || isset($element['subform'][$index]['widget']['#attach_ief_submit'])) {
-        _thunder_paragraph_attach_ief_submit($element);
+
+        $button = NestedArray::getValue($element, $button_parents);
+        if ($button) {
+          $button['#submit'] = array_merge([['Drupal\inline_entity_form\ElementSubmit', 'trigger']], $button['#submit']);
+          $button['#value'] = t('Collapse and save');
+          $button['#ief_submit_trigger'] = TRUE;
+          $button['#ief_submit_trigger_all'] = TRUE;
+          $button['#paragraphs_show_warning'] = FALSE;
+
+          NestedArray::setValue($element, $button_parents, $button);
+        }
       }
     }
-  }
-}
-
-/**
- * Helper for attaching ief submit trigger and functions.
- */
-function _thunder_paragraph_attach_ief_submit(&$element) {
-  if ($button = &$element['top']['links']['collapse_button']) {
-    $button['#submit'] = array_merge([['Drupal\inline_entity_form\ElementSubmit', 'trigger']], $button['#submit']);
-    $button['#value'] = t('Collapse and save');
-    $button['#ief_submit_trigger'] = TRUE;
-    $button['#ief_submit_trigger_all'] = TRUE;
-    $button['#paragraphs_show_warning'] = FALSE;
   }
 }
