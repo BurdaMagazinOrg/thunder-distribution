@@ -41,6 +41,13 @@ class ConfigurationForm extends ConfigFormBase {
       '#default_value' => $config->get('enable_filename_transliteration'),
     ];
 
+    $form['enable_filefield_remove_button'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable file field remove button'),
+      '#description' => $this->t('Enable this checkbox to enable remove buttons for file fields on inline entity forms.'),
+      '#default_value' => $config->get('enable_filefield_remove_button'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -52,6 +59,7 @@ class ConfigurationForm extends ConfigFormBase {
 
     $this->config('thunder_media.settings')
       ->set('enable_filename_transliteration', $form_state->getValue('enable_filename_transliteration'))
+      ->set('enable_filefield_remove_button', $form_state->getValue('enable_filefield_remove_button'))
       ->save();
   }
 
