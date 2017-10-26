@@ -115,32 +115,29 @@ class ConfigHandler {
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
    */
-  public function generatePatchFile($moduleName, $updateName) {
+  public function generatePatchFile(array $moduleNames = []) {
     $updatePatch = [];
-    $configurationLists = $this->configList->listConfig('module', $moduleName);
 
-    // Get required and optional configuration names.
-    $moduleConfigNames = array_merge($configurationLists[1], $configurationLists[2]);
+    foreach ($moduleNames as $moduleName) {
+      $configurationLists = $this->configList->listConfig('module', $moduleName);
 
-    $configNames = $this->getConfigNames(array_intersect($moduleConfigNames, $configurationLists[0]));
-    foreach ($configNames as $configName) {
-      $configDiff = $this->getConfigDiff($configName);
-      $configDiff = $this->filterDiff($configDiff);
-      if (!empty($configDiff)) {
-        $updatePatch[$configName->getFullName()] = [
-          'expected_config' => $this->getExpectedConfig($configDiff),
-          'update_actions' => $this->getUpdateConfig($configDiff),
-        ];
+      // Get required and optional configuration names.
+      $moduleConfigNames = array_merge($configurationLists[1], $configurationLists[2]);
+
+      $configNames = $this->getConfigNames(array_intersect($moduleConfigNames, $configurationLists[0]));
+      foreach ($configNames as $configName) {
+        $configDiff = $this->getConfigDiff($configName);
+        $configDiff = $this->filterDiff($configDiff);
+        if (!empty($configDiff)) {
+          $updatePatch[$configName->getFullName()] = [
+            'expected_config' => $this->getExpectedConfig($configDiff),
+            'update_actions' => $this->getUpdateConfig($configDiff),
+          ];
+        }
       }
     }
 
-    if (!empty($updatePatch)) {
-      file_put_contents($this->getPatchFile($moduleName, $updateName, TRUE), $this->serializer->encode($updatePatch));
-
-      return TRUE;
-    }
-
-    return FALSE;
+    return $updatePatch ? $this->serializer->encode($updatePatch) : FALSE;
   }
 
   /**

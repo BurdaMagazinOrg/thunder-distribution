@@ -1,0 +1,114 @@
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        type: entity_reference_paragraphs
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+          type: paragraphs
+paragraphs.paragraphs_type.gallery:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: bcfb8506-f3e1-45f1-a69b-9bbd7576ad19
+paragraphs.paragraphs_type.image:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 95c4547f-b83c-4aed-8ac7-ac2b0d64c1a3
+paragraphs.paragraphs_type.instagram:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 863c7557-6618-4185-be70-6425f240ddaa
+paragraphs.paragraphs_type.link:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 028e519c-14f4-4643-81ad-653686c7daa4
+paragraphs.paragraphs_type.pinterest:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 1f9438c2-bb6f-4e5d-8147-c5df6f1876b5
+paragraphs.paragraphs_type.quote:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 9bf24a91-6acf-4330-b457-63f40d7baa7a
+paragraphs.paragraphs_type.text:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: f0c91281-b957-48eb-a28c-1f0cf32d5292
+paragraphs.paragraphs_type.twitter:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 9af9c8ce-a96e-4083-9e9e-38db3eb1de43
+paragraphs.paragraphs_type.video:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: null
+      icon_uuid: 07398a17-87c3-4919-981e-4ec8da2b0f52
+core.entity_form_display.taxonomy_term.channel.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        type: entity_reference_paragraphs
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+          type: paragraphs
+core.entity_form_display.taxonomy_term.tags.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        type: entity_reference_paragraphs
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+          type: paragraphs
