@@ -5,7 +5,7 @@
  * Contains the code to generate the custom drush commands for thunder_updater.
  */
 
-use \Drupal\Core\Extension\Extension;
+use Drupal\Core\Extension\Extension;
 
 /**
  * Implements hook_drush_command().

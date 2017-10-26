@@ -107,10 +107,8 @@ class ConfigHandler {
    * It compares Base vs. Active configuration and creates patch with defined
    * name in patch folder.
    *
-   * @param string $moduleName
+   * @param string[] $moduleNames
    *   Module name that will be used to generate patch for it.
-   * @param string $updateName
-   *   Update name for patch.
    *
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
