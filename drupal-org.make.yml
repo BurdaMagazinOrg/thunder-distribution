@@ -143,8 +143,6 @@ projects:
     download:
       url: "http://git.drupal.org/project/media_entity.git"
       branch: "8.x-2.x"
-    patch:
-      - "https://www.drupal.org/files/issues/2880334-42.patch"
 
   media_entity_slideshow:
     type: "module"

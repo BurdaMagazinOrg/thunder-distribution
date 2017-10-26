@@ -71,7 +71,6 @@ projects[media_entity_pinterest][version] = 2
 projects[media_entity][type] = module
 projects[media_entity][download][url] = http://git.drupal.org/project/media_entity.git
 projects[media_entity][download][branch] = 8.x-2.x
-projects[media_entity][patch][] = https://www.drupal.org/files/issues/2880334-42.patch
 projects[media_entity_slideshow][type] = module
 projects[media_entity_slideshow][version] = 2
 projects[media_entity_twitter][type] = module
