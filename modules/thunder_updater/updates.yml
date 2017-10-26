@@ -160,5 +160,4 @@ v2.10:
     thunder__thunder_update_8117:
         '#title': 'Change to paragraphs experimental widget.'
         '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"
-        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
-        extension_page: { '#text': 'Enable Inline form errors', '#url': 'internal:/admin/modules' }
+        '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraph type icons we installed successfully and that all you paragraphs widget use the experimental widget.</p>'
