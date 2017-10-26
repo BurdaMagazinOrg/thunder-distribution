@@ -196,19 +196,6 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
-   * LogIn with defined role assigned to user.
-   *
-   * @param string $role
-   *   Role name that will be assigned to user.
-   */
-  protected function logWithRole($role) {
-    $editor = $this->drupalCreateUser();
-    $editor->addRole($role);
-    $editor->save();
-    $this->drupalLogin($editor);
-  }
-
-  /**
    * Waits and asserts that a given element is visible.
    *
    * @param string $selector
