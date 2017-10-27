@@ -3,7 +3,6 @@ description: 'Provide content related configs and code for thunder.'
 type: module
 core: 8.x
 dependencies:
-  - content_lock:content_lock
   - config_update:config_update
   - entity_browser:entity_browser
   - entity_reference_revisions:entity_reference_revisions
