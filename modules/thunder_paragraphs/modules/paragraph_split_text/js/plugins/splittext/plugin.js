@@ -144,7 +144,8 @@
           }
           // Editor id is changed after submit
           $(document).ajaxComplete(function (e, xhr, settings) {
-            if (settings.extraData._triggering_element_name === triggeringElementName) {
+            var eventElement = settings.extraData._triggering_element_name;
+            if (eventElement === triggeringElementName) {
               // Paragraph is added above original
               // Get new paragraph delta
               var newDelta = $('.paragraph-item').length - 1;
@@ -159,8 +160,22 @@
               var newEditorId = newEditor.attr('id');
 
               // Set content to editors
-              CKEDITOR.instances[newEditorId].setData(oldContent);
-              CKEDITOR.instances[originalEditorId].setData(newContent.getHtml());
+              if (newEditorId !== undefined) {
+                CKEDITOR.instances[newEditorId].setData(oldContent, {
+                  callback: function () {
+                    this.updateElement();
+                    this.element.data('editor-value-is-changed', true);
+                  }
+                });
+              }
+              if (originalEditorId !== undefined) {
+                CKEDITOR.instances[originalEditorId].setData(newContent.getHtml(), {
+                  callback: function () {
+                    this.updateElement();
+                    this.element.data('editor-value-is-changed', true);
+                  }
+                });
+              }
             }
           });
         }
