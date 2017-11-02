@@ -18,3 +18,44 @@ function thunder_search_views_data() {
   ];
   return $data;
 }
+
+/**
+ * Implements hook_toolbar().
+ */
+function thunder_search_toolbar() {
+  $items = [];
+  $items['search'] = [
+    '#cache' => [
+      'contexts' => [
+        'user.permissions',
+      ],
+    ],
+  ];
+
+  $items['search'] += array(
+    '#type' => 'toolbar_item',
+    'tab' => array(
+      'input' => [
+        '#type' => 'textfield',
+        '#size' => 20,
+        '#attributes' => array(
+          'class' => array('thunder-search-box'),
+          'placeholder' => t('Search'),
+        ),
+      ],
+      'tab1' => array(
+        '#type' => 'submit',
+        '#value' => 'Search',
+      ),
+    ),
+    '#wrapper_attributes' => array(
+      'id' => 'toolbar-tab-search',
+    ),
+    '#attached' => array(
+      'library' => array(
+        'thunder_search/search_box',
+      ),
+    ),
+  );
+  return $items;
+}
