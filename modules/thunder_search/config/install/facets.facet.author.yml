@@ -11,17 +11,14 @@ name: Author
 url_alias: author
 weight: 0
 min_count: 1
-show_only_one_result: false
+show_only_one_result: true
 field_identifier: uid
 facet_source_id: 'search_api:views_page__content_search__page_1'
 widget:
-  type: checkbox
+  type: dropdown
   config:
     show_numbers: false
-    soft_limit: 0
-    soft_limit_settings:
-      show_less_label: 'Show less'
-      show_more_label: 'Show more'
+    default_option_label: Choose
 query_operator: or
 use_hierarchy: false
 expand_hierarchy: false

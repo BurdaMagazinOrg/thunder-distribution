@@ -90,6 +90,12 @@ projects:
     type: "module"
     version: "1"
 
+  facets:
+    type: "module"
+    download:
+      url: "http://git.drupal.org/project/facets.git"
+      branch: "8.x-1.x"
+
   fb_instant_articles:
     type: "module"
     download:
@@ -191,6 +197,13 @@ projects:
     type: "module"
     version: "2"
 
+  search_api:
+    type: "module"
+    version: "1.5"
+    patch:
+      - "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch"
+      - "https://www.drupal.org/files/issues/2916754-2.patch"
+
   scheduler:
     type: "module"
     version: "1"
@@ -240,6 +253,10 @@ projects:
     download:
       url: "http://git.drupal.org/sandbox/gos77/2677750.git"
       tag: "8.x-1.0-beta7"
+
+  views_bulk_operations:
+    type: "module"
+    version: "1"
 
   video_embed_field:
     type: "module"
