@@ -155,7 +155,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       'Paragraphs > Text',
       ['1' => ''],
       [],
-      ['1' => '<p>' . $newParagraphText . '</p>', '2' => ''],
+      ['1' => '<p>' . $newParagraphText . '</p>'],
       []
     );
 
