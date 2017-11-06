@@ -14,5 +14,4 @@ dependencies:
   - paragraphs:paragraphs
   - drupal:text
   - thunder:thunder_media
-  - thunder_paragraphs:paragraph_split_text
 package: Thunder

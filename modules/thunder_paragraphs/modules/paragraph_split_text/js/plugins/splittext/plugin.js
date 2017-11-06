@@ -160,7 +160,7 @@
               var newEditorId = newEditor.attr('id');
 
               // Set content to editors
-              if (newEditorId !== undefined) {
+              if (typeof newEditorId !== 'undefined') {
                 CKEDITOR.instances[newEditorId].setData(oldContent, {
                   callback: function () {
                     this.updateElement();
@@ -168,7 +168,7 @@
                   }
                 });
               }
-              if (originalEditorId !== undefined) {
+              if (typeof originalEditorId !== 'undefined') {
                 CKEDITOR.instances[originalEditorId].setData(newContent.getHtml(), {
                   callback: function () {
                     this.updateElement();

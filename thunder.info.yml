@@ -42,6 +42,7 @@ dependencies:
   - libraries
   - simple_sitemap
   - responsive_preview
+  - paragraph_split_text
 # thunder
   - thunder_article
   - thunder_media
