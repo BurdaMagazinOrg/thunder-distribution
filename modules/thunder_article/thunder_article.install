@@ -9,16 +9,6 @@ use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Extension\MissingDependencyException;
 
 /**
- * Install the thunder article integration.
- */
-function thunder_article_install() {
-  // Install Shariff integration as soft dependency.
-  \Drupal::service('module_installer')->install([
-    'shariff',
-  ]);
-}
-
-/**
  * Update hook dependencies.
  *
  * 1. Dependency on Thunder Updater module.

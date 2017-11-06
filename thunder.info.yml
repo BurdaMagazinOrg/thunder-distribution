@@ -38,8 +38,10 @@ dependencies:
 # contrib
   - access_unpublished
   - admin_toolbar_tools
+  - content_lock
   - diff
   - libraries
+  - shariff
   - simple_sitemap
   - responsive_preview
 # thunder
