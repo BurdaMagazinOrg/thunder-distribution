@@ -3,6 +3,5 @@ description: 'Provide content related configs and code for thunder.'
 type: module
 core: 8.x
 dependencies:
-  - drupal:node
   - thunder:thunder_updater
 package: Thunder
