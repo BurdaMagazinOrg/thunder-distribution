@@ -35,7 +35,7 @@ display:
         type: tag
         options: {  }
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false
@@ -200,8 +200,8 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          batch: 1
-          batch_size: '10'
+          batch: true
+          batch_size: 10
           form_step: true
           action_title: Action
           selected_actions:

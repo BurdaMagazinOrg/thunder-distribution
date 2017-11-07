@@ -9,7 +9,6 @@ description: ''
 backend: search_api_db
 backend_config:
   database: 'default:default'
-  database_text: ''
   min_chars: 3
   partial_matches: false
   autocomplete:

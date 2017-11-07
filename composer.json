@@ -79,7 +79,14 @@
             },
             "drupal/search_api": {
                 "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch",
-                "Facets not shown on view of overridden system route": "https://www.drupal.org/files/issues/2916754-2.patch"
+                "Facets not shown on view of overridden system route": "https://www.drupal.org/files/issues/2916754-2.patch",
+                "Don't export database_text in config files": "https://www.drupal.org/files/issues/don_t_export-2921582-2.patch"
+            },
+            "drupal/views_bulk_operations": {
+                "'Undefined index: entity type' when using vbo with search api based view": "https://www.drupal.org/files/issues/undefined_index_-2921563-2.patch"
+            },
+            "drupal/facets": {
+                "Add schema for all processors and test that it works": "https://www.drupal.org/files/issues/2919439-3.patch"
             }
         }
     },
@@ -142,7 +149,7 @@
         "drupal/thunder_admin": ">=1",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
-        "drupal/views_bulk_operations": "^1.0",
+        "drupal/views_bulk_operations": "1.0-beta2",
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
         "bower-asset/dropzone": "^5.1",
