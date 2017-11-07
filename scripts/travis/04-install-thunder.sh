@@ -84,6 +84,6 @@ else
     install_thunder ${TEST_DIR}/docroot
 fi
 
-create_testing_dump
-
 apply_patches
+
+create_testing_dump
