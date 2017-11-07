@@ -24,7 +24,7 @@ class FacetBlock extends AreaPluginBase {
       ->loadMultiple();
 
     $facetManager = \Drupal::service('facets.manager');
-    $build = NULL;
+    $build = ['#type' => 'container', '#attributes' => ['class' => 'form--inline']];
     foreach ($facets as $id => $facet) {
       // No need to build the facet if it does not need to be visible.
       if ($facet->getOnlyVisibleWhenFacetSourceIsVisible() && !$facet->getFacetSource()->isRenderedInCurrentRequest()) {
@@ -36,9 +36,16 @@ class FacetBlock extends AreaPluginBase {
       if ($config['view_id'] == $this->view->id() && $config['view_display'] == $this->view->current_display) {
         $built_facet = $facetManager->build($facet);
         if ($built_facet) {
-          $build[$id] = ['#type' => 'container'];
-          $build[$id]['label'] = ['#markup' => $facet->label()];
-          $build[$id]['element'] = $built_facet;
+          $build[$id] = [
+            '#type' => 'container',
+            '#attributes' => ['class' => 'form-item'],
+            'label' => [
+              '#type' => 'label',
+              '#title' => $facet->label(),
+              '#title_display' => 'above',
+            ],
+            'element' => $built_facet,
+          ];
         }
       }
     }
