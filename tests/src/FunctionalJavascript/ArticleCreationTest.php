@@ -47,6 +47,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Add Quote Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
+    sleep(20);
+
+    #$this->getSession()->getDriver()->getWebDriverSession()->frame(array('class' => $name))
 
     // Add Twitter Paragraph between Text and Quote.
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
