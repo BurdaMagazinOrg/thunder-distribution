@@ -37,7 +37,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
-    $this->addTextParagraph(static::$paragraphsField, 'Awesome text');
+    $this->addTextParagraph(static::$paragraphsField, 'Awesome text<br/>With a new line');
 
     // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
@@ -47,9 +47,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Add Quote Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
-    sleep(60);
-
-    $this->getSession()->getDriver()->getWebDriverSession()->frame(array('class' =>'cke_wysiwyg_frame cke_reset'));
 
     // Add Twitter Paragraph between Text and Quote.
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
@@ -66,6 +63,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/99360735500167749/', 'pinterest');
 
+    sleep(60);
+    $this->scrollElementInView('#cke_1039_contents > iframe');
+    $this->getSession()->executeScript("jQuery('.cke_button__splittextafter').click();");
+
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
     $this->clickSave();
@@ -74,7 +75,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
-    #cke_256_contents > iframe
+
     // Check Image paragraph.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//img', 1);
