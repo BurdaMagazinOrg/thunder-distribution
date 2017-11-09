@@ -47,9 +47,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Add Quote Paragraph.
     $this->addTextParagraph(static::$paragraphsField, 'Awesome quote', 'quote');
-    sleep(20);
+    sleep(60);
 
-    #$this->getSession()->getDriver()->getWebDriverSession()->frame(array('class' => $name))
+    $this->getSession()->getDriver()->getWebDriverSession()->frame(array('class' =>'cke_wysiwyg_frame cke_reset'));
 
     // Add Twitter Paragraph between Text and Quote.
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
@@ -74,7 +74,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
-
+    #cke_256_contents > iframe
     // Check Image paragraph.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//img', 1);
