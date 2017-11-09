@@ -38,14 +38,27 @@ dependencies:
 # contrib
   - access_unpublished
   - admin_toolbar_tools
+  - content_lock
   - diff
+  - entity_browser
+  - field_group
   - libraries
+  - linkit
+  - media_entity
+  - metatag
+  - metatag_open_graph
+  - metatag_facebook
+  - metatag_twitter_cards
+  - paragraphs
+  - pathauto
+  - scheduler
   - simple_sitemap
   - responsive_preview
   - yoast_seo_preview
 # thunder
   - thunder_article
   - thunder_media
+  - thunder_paragraphs
   - thunder_taxonomy
   - thunder_updater
 themes:
