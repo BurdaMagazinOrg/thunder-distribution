@@ -39,6 +39,7 @@ dependencies:
   - access_unpublished
   - admin_toolbar_tools
   - content_lock
+  - ctools
   - diff
   - entity_browser
   - field_group
