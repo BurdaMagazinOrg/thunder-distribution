@@ -37,7 +37,8 @@ Enable the simpletest module. Over administration UI or by drush.
 drush -y en simpletest
 ```
 
-To successfully run drupal tests, a Browser with WebDriver is required. Use selenium chrome docker image:
+To successfully run drupal tests, a Browser with WebDriver is required. Use selenium chrome docker image.
+
 On Mac you have to alias localhost:
 ```bash
 sudo ifconfig lo0 alias 172.16.123.1`
