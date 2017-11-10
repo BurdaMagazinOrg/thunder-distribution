@@ -312,6 +312,8 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
+
+  \Drupal::service('config.installer')->installOptionalConfig();
 }
 
 /**
