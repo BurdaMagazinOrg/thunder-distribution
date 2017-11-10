@@ -34,33 +34,41 @@ In order to execute tests, following steps have to be executed.
 Enable the simpletest module. Over administration UI or by drush.
 
 ```bash
-drush en simpletest
+drush -y en simpletest
 ```
 
-To successfully run drupal tests, a Browser with WebDriver is required. You can use one of following:
-- [PhantomJS](http://phantomjs.org)
-- [Selenium Server Standalone](http://www.seleniumhq.org/download) (* Selenium requires Chrome Browser and [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver))
-
-Chrome Driver have to be installed in executable path (fe. /usr/local/bin/chromedriver).
-
-It's sufficient to run one of mentioned browsers:
+To successfully run drupal tests, a Browser with WebDriver is required. Use selenium chrome docker image:
+On Mac you have to alias localhost:
 ```bash
-phantomjs --webdriver=4444
-```
-or
+sudo ifconfig lo0 alias 172.16.123.1`
+``` 
 ```bash
-selenium-server -p 4444
+docker run -d -P -p 4444:4444 --add-host="thunder.dev:172.16.123.1" selenium/standalone-chrome
 ```
 
 Thunder tests require Mink Selenium2 Driver and that has to be required manually. If you are in your ```docroot``` folder of Thunder installation execute following command:
 ```bash
-composer require "behat/mink-selenium2-driver"
+composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver"
 ```
 
 After that drupal tests can be executed (if you are in ```docroot``` folder of Thunder installation and composer requirements are installed):
 ```bash
 cd core
-php scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
+php scripts/06-run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
+```
+
+To speed things up run tests using a database dump: 
+```bash
+DEVDESKTOP_DRUPAL_SETTINGS_DIR="/Users/d439426/.acquia/DevDesktop/DrupalSettings" \
+php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
+
+thunderDumpFile=thunder.sql.gz php core/scripts/run-tests.sh --php '/usr/local/bin/php' \
+--verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:33067/thunder Thunder
+```
+and run them individually:
+```bash
+thunderDumpFile=thunder.sql.gz php core/scripts/run-tests.sh --php '/usr/local/bin/php' \
+--verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
 ```
 
 This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
