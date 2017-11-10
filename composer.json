@@ -84,9 +84,6 @@
             },
             "drupal/views_bulk_operations": {
                 "'Undefined index: entity type' when using vbo with search api based view": "https://www.drupal.org/files/issues/undefined_index_-2921563-2.patch"
-            },
-            "drupal/facets": {
-                "Add schema for all processors and test that it works": "https://www.drupal.org/files/issues/2919439-3.patch"
             }
         }
     },

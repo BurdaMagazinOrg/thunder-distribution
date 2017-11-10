@@ -32,7 +32,7 @@ display:
         options:
           perm: 'access content overview'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: search_api_query
@@ -944,7 +944,8 @@ display:
         weight: -10
       display_extenders: {  }
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       defaults:
         cache: false
       exposed_block: true

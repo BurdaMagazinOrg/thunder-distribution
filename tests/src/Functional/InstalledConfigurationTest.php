@@ -92,6 +92,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'tour.tour.language',
     'tour.tour.language-add',
     'tour.tour.language-edit',
+    'tour.tour.search-api-index',
+    'tour.tour.search-api-index-fields',
+    'tour.tour.search-api-index-form',
+    'tour.tour.search-api-index-processors',
+    'tour.tour.search-api-server',
+    'tour.tour.search-api-server-form',
 
     // Focal point schema issue.
     'image.style.entity_browser_thumbnail',
@@ -163,6 +169,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'config' => TRUE,
       ],
       'status' => TRUE,
+    ],
+    'views.view.content' => [
+      'dependencies' => [
+        'config' => TRUE,
+      ],
+      'status' => FALSE,
     ],
 
     // Changed on installation.
