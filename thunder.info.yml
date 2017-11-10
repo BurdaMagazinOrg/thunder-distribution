@@ -38,13 +38,23 @@ dependencies:
 # contrib
   - access_unpublished
   - admin_toolbar_tools
+  - blazy
   - content_lock
+  - ctools
   - diff
-  - entity_browser
+  - dropzonejs_eb_widget
+  - empty_fields
+  - entity_browser_entity_form
   - field_group
+  - focal_point
   - libraries
   - linkit
-  - media_entity
+  - media_entity_image
+  - media_entity_instagram
+  - media_entity_pinterest
+  - media_entity_slideshow
+  - media_entity_twitter
+  - media_expire
   - metatag
   - metatag_open_graph
   - metatag_facebook
@@ -53,7 +63,9 @@ dependencies:
   - pathauto
   - scheduler
   - simple_sitemap
+  - slick_media
   - responsive_preview
+  - video_embed_media
   - yoast_seo_preview
 # thunder
   - thunder_article
