@@ -50,7 +50,6 @@ dependencies:
   - libraries
   - linkit
   - media_entity_actions
-  - media_entity_image
   - media_entity_instagram
   - media_entity_pinterest
   - media_entity_slideshow
