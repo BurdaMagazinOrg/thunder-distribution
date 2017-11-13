@@ -37,7 +37,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
-    $this->addTextParagraph(static::$paragraphsField, 'Awesome text<br/>With a new line');
+    $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
+
+    // Split text paragraph.
+    $this->getSession()->executeScript("jQuery('#cke_108').click();");
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
@@ -62,10 +66,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/99360735500167749/', 'pinterest');
-
-    sleep(60);
-    $this->scrollElementInView('#cke_1039_contents > iframe');
-    $this->getSession()->executeScript("jQuery('.cke_button__splittextafter').click();");
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
@@ -113,7 +113,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Pinterest widget is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "99360735500167749")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][10]//span[contains(@data-pin-id, "99360735500167749")]', 2);
   }
 
 }
