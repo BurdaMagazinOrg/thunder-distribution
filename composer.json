@@ -76,8 +76,7 @@
             },
             "drupal/core": {
                 "Make media name available on manage display": "https://www.drupal.org/files/issues/2912298-13.patch",
-                "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch",
-                "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-5.patch"
+                "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch"
             }
         }
     },
@@ -118,6 +117,7 @@
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
         "drupal/media_entity": "dev-2.x",
+        "drupal/media_entity_actions": "^1.0",
         "drupal/media_entity_instagram": "^2.0",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0",
