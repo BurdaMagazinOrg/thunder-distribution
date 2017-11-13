@@ -51,12 +51,12 @@ addons:
     packages:
       - google-chrome-stable
 
+services:
+  - docker
+
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
-  - docker pull selenium/standalone-chrome
-  - docker run -d -p 4444:4444 selenium/standalone-chrome
-  - docker ps -a
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
