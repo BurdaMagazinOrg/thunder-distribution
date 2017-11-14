@@ -1,8 +1,10 @@
 <div class="indicator-wrap">
-    <span class="indicator bad"></span>
-    <span class="indicator ok"></span>
-    <span class="indicator good"></span>
-    <span class="indicator ok"></span>
-    <span class="indicator bad"></span>
+    {% for indicator in indicators %}
+        <span
+                class="indicator {{ indicator['class'] }}"
+                data-pos="{{ indicator['pos'] }}"
+                style="width: {{ indicator['width'] }}%"
+        ></span>
+    {% endfor %}
     <div class="cursor"></div>
 </div>

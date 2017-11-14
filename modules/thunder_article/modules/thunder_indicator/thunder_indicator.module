@@ -15,7 +15,9 @@ use Drupal\Core\Field\WidgetInterface;
 function thunder_indicator_theme($existing, $type, $theme, $path) {
   return [
     'thunder_indicator' => [
-      'variables' => [],
+      'variables' => [
+        'indicators' => [],
+      ],
     ],
   ];
 }
@@ -135,10 +137,70 @@ function thunder_indicator_field_widget_form_alter(&$element, FormStateInterface
       $element['value']['#attributes']['data-optimin'] = $indicator_opt['optimin'];
       $element['value']['#attributes']['data-optimax'] = $indicator_opt['optimax'];
       $element['value']['#attributes']['data-tolerance'] = $indicator_opt['tolerance'];
+      $element['value']['#attributes']['data-total'] = $indicator_opt['optimin'] + $indicator_opt['optimax'];
 
       $element['thunder_indicator'] = [
         '#theme' => 'thunder_indicator',
+        '#indicators' => _thunder_indicator_get_width_and_pos(
+          $indicator_opt['optimin'],
+          $indicator_opt['optimax'],
+          $indicator_opt['tolerance']
+        ),
       ];
     }
   }
+}
+
+/**
+ * Gets the widths and positions for the indicator template.
+ *
+ * @param int $optimin
+ *   The optimum minimum.
+ * @param int $optimax
+ *   The optimum maximum.
+ * @param int $tolerance
+ *   The tolerance.
+ *
+ * @return array
+ *   The widths and positions of the indicators.
+ */
+function _thunder_indicator_get_width_and_pos($optimin, $optimax, $tolerance) {
+  $indicators = [];
+
+  $min = $optimin - $tolerance;
+  $max = $optimax + $tolerance;
+
+  $total = $max + $min;
+
+  $width = ($min / $total) * 100;
+  $indicators[0]['width'] = $width;
+  $indicators[0]['pos'] = 0;
+  $indicators[0]['class'] = 'bad';
+  // Adding +1 to make max inclusive.
+  $indicators[4]['width'] = $width;
+  $indicators[4]['pos'] = $max + 1;
+  $indicators[4]['class'] = 'bad';
+  $last = $width;
+
+  $width = ($optimin / $total) * 100;
+  $indicators[1]['width'] = $width - $last;
+  $indicators[1]['pos'] = $min;
+  $indicators[1]['class'] = 'ok';
+  $last = $width;
+
+  $width = ($optimax / $total) * 100;
+  $indicators[2]['width'] = $width - $last;
+  $indicators[2]['pos'] = $optimin;
+  $indicators[2]['class'] = 'good';
+  $last = $width;
+
+  $width = ($max / $total) * 100;
+  // Adding +1 to make optimax inclusive.
+  $indicators[3]['width'] = $width - $last;
+  $indicators[3]['pos'] = $optimax + 1;
+  $indicators[3]['class'] = 'ok';
+
+  ksort($indicators);
+
+  return $indicators;
 }
