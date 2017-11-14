@@ -1,0 +1,7 @@
+name: 'Thunder Length Indicator'
+description: 'Adds an optional length indicator to fields'
+type: module
+core: 8.x
+dependencies:
+  - drupal:field
+package: Thunder

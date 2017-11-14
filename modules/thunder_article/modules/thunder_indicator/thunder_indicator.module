@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @file
+ * Thunder Indicator module hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\WidgetInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function thunder_indicator_theme($existing, $type, $theme, $path) {
+  return [
+    'thunder_indicator' => [
+      'variables' => [],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function thunder_indicator_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+  $element = [];
+
+  if ($plugin->getPluginId() == 'string_textfield') {
+    $element['indicator'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Length indicator'),
+      '#default_value' => $plugin->getThirdPartySetting('thunder_indicator', 'indicator'),
+    ];
+
+    $element['indicator_opt'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Length indicator settings'),
+      '#states' => [
+        'visible' => [
+          ':input[name="fields[' . $field_definition->getName() . '][settings_edit_form][third_party_settings][thunder_indicator][indicator]"]' => [
+            'checked' => TRUE,
+          ],
+        ],
+      ],
+    ];
+
+    $indicator_opt = $plugin->getThirdPartySetting('thunder_indicator', 'indicator_opt');
+
+    $element['indicator_opt']['optimin'] = [
+      '#type' => 'number',
+      '#title' => t('Optimum minimum'),
+      '#default_value' => isset($indicator_opt['optimin']) ? $indicator_opt['optimin'] : 10,
+      '#required' => TRUE,
+      '#min' => 1,
+    ];
+
+    $element['indicator_opt']['optimax'] = [
+      '#type' => 'number',
+      '#title' => t('Optimum maximum'),
+      '#default_value' => isset($indicator_opt['optimax']) ? $indicator_opt['optimax'] : 15,
+      '#required' => TRUE,
+      '#min' => 5,
+      '#element_validate' => ['_thunder_indicator_settings_optimax'],
+    ];
+
+    $element['indicator_opt']['tolerance'] = [
+      '#type' => 'number',
+      '#title' => t('Tolerance'),
+      '#default_value' => isset($indicator_opt['tolerance']) ? $indicator_opt['tolerance'] : 5,
+      '#required' => TRUE,
+      '#min' => 0,
+      '#element_validate' => ['_thunder_indicator_settings_tolerance'],
+    ];
+
+  }
+  return $element;
+}
+
+/**
+ * Validate optimax value.
+ *
+ * @param array $element
+ *   Form element to be validated.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The state of the form.
+ */
+function _thunder_indicator_settings_optimax(array $element, FormStateInterface &$form_state) {
+  $parents = array_slice($element['#parents'], 0, -1);
+  $indicator_opt = $form_state->getValue($parents);
+
+  if ($indicator_opt['optimax'] <= $indicator_opt['optimin']) {
+    $form_state->setError($element, t('Optimum maximum has to be greater than the optimum minimum'));
+  }
+}
+
+/**
+ * Validate tolerance value.
+ *
+ * @param array $element
+ *   Form element to be validated.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The state of the form.
+ */
+function _thunder_indicator_settings_tolerance(array $element, FormStateInterface &$form_state) {
+  $parents = array_slice($element['#parents'], 0, -1);
+  $indicator_opt = $form_state->getValue($parents);
+
+  if ($indicator_opt['tolerance'] >= $indicator_opt['optimin']) {
+    $form_state->setError($element, t('Tolerance has to be smaller than the optimum minimum'));
+  }
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function thunder_indicator_field_widget_settings_summary_alter(&$summary, $context) {
+  if ($context['widget']->getPluginId() == 'string_textfield') {
+    $inidcator = $context['widget']->getThirdPartySetting('thunder_indicator', 'indicator');
+    $indicator_string = $inidcator ? 'On' : 'Off';
+    $summary[] = 'Length indicator: ' . $indicator_string;
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function thunder_indicator_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if ($context['widget']->getPluginId() == 'string_textfield') {
+    if ($context['widget']->getThirdPartySetting('thunder_indicator', 'indicator')) {
+      $element['#attached']['library'][] = 'thunder_indicator/length_indicator';
+      $element['value']['#attributes']['class'][] = 'length-indicator-enabled';
+
+      $indicator_opt = $context['widget']->getThirdPartySetting('thunder_indicator', 'indicator_opt');
+      $element['value']['#attributes']['data-optimin'] = $indicator_opt['optimin'];
+      $element['value']['#attributes']['data-optimax'] = $indicator_opt['optimax'];
+      $element['value']['#attributes']['data-tolerance'] = $indicator_opt['tolerance'];
+
+      $element['thunder_indicator'] = [
+        '#theme' => 'thunder_indicator',
+      ];
+    }
+  }
+}

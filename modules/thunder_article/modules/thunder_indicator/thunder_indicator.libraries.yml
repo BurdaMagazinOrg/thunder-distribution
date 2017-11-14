@@ -1,0 +1,9 @@
+length_indicator:
+  css:
+    theme:
+      css/length-indicator.css: {}
+  js:
+    js/length-indicator.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
