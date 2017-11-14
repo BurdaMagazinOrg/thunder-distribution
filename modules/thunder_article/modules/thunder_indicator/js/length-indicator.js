@@ -11,8 +11,7 @@
           var total = $el.data('total');
 
           new Indicator($el, $el.closest('.form-wrapper'), total);
-        }
-      );
+        });
     }
   };
 
