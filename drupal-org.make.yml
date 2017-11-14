@@ -130,6 +130,10 @@ projects:
     type: "module"
     version: "1"
 
+  media_entity_actions:
+    type: "module"
+    version: "1"
+
   media_entity_instagram:
     type: "module"
     version: "2"
