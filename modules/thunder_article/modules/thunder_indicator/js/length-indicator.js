@@ -1,19 +1,20 @@
 (function (Drupal, $) {
+  'use strict';
 
   Drupal.behaviors.length_indicator = {
-    attach: function(context, settings) {
+    attach: function (context, settings) {
       $(context)
         .find('.length-indicator-enabled')
         .once('length-indicator')
-        .each(function(index, element) {
+        .each(function (index, element) {
           var $el = $(element);
           var optimin = $el.data('optimin');
           var optimax = $el.data('optimax');
           var tolerance = $el.data('tolerance');
 
-          new Indicator($el, $el.closest('.form-wrapper'), optimin, optimax, tolerance)
+          new Indicator($el, $el.closest('.form-wrapper'), optimin, optimax, tolerance);
         }
-      )
+      );
     }
   };
 
@@ -24,7 +25,7 @@
       min: optimin - tolerance,
       optimin: optimin,
       optimax: optimax,
-      max: optimax + tolerance,
+      max: optimax + tolerance
     };
 
     this.allIndicators = $context.find('.indicator');
@@ -33,13 +34,13 @@
     this.scaleIndicators();
 
     var self = this;
-    this.$el.on('input', function(e) {
+    this.$el.on('input', function (e) {
       self.setCursorAndActiveIndicator();
     });
     this.setCursorAndActiveIndicator();
   }
 
-  Indicator.prototype.scaleIndicators = function() {
+  Indicator.prototype.scaleIndicators = function () {
     var total = this.settings.max + this.settings.min;
 
     var width = (this.settings.min / total) * 100;
@@ -61,7 +62,7 @@
     this.allIndicators.eq(3).css('width', (width - last) + '%').data('pos', this.settings.optimax + 1);
   };
 
-  Indicator.prototype.setCursorAndActiveIndicator = function() {
+  Indicator.prototype.setCursorAndActiveIndicator = function () {
     var length = this.$el.val().length;
     var max = this.settings.max + this.settings.min;
     var position = (length / max) * 100;
@@ -84,4 +85,4 @@
     coloredIndicator.addClass('active');
   };
 
-}) (Drupal, jQuery);
+})(Drupal, jQuery);
