@@ -6,4 +6,4 @@ thunder_media.settings:
       label: 'Default transliteration'
     enable_filefield_remove_button:
       type: boolean
-      label: 'Default transliteration'
+      label: 'Enable remove button'
