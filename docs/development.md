@@ -41,7 +41,7 @@ To successfully run drupal tests, a Browser with WebDriver is required. Use sele
 
 On Mac you have to alias localhost:
 ```bash
-sudo ifconfig lo0 alias 172.16.123.1`
+sudo ifconfig lo0 alias 172.16.123.1
 ``` 
 ```bash
 docker run -d -P -p 4444:4444 --add-host="thunder.dev:172.16.123.1" selenium/standalone-chrome
