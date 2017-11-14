@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains update hooks for Thunder Search module.
+ */
+
 use Drupal\views\Entity\View;
 
 /**
