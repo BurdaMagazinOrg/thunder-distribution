@@ -830,3 +830,15 @@ function thunder_update_8115() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Enable inline_form_errors module.
+ */
+function thunder_update_8116() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->installModules(['thunder__thunder_update_8116' => 'inline_form_errors']);
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

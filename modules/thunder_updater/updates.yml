@@ -149,3 +149,11 @@ v2.9:
         configure_page_pinterest: { '#text': 'Configure pinterest form display', '#url': 'internal:/admin/structure/media/manage/pinterest/form-display' }
         configure_page_video: { '#text': 'Configure video form display', '#url': 'internal:/admin/structure/media/manage/video/form-display' }
         configure_page_riddle: { '#text': 'Configure riddle form display', '#url': 'internal:/admin/structure/media/manage/riddle/form-display' }
+v2.10:
+    '#title': 'Update to Thunder 2.10'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8116:
+        '#title': 'Enable "Inline Form Errors" module.'
+        '#description': "<p>Places error messages adjacent to form inputs, for improved usability and accessibility.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Inline form errors', '#url': 'internal:/admin/modules' }
