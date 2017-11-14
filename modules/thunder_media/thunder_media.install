@@ -13,6 +13,27 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
+ * Install the thunder media integration.
+ */
+function thunder_media_install() {
+  // Disable default media view, cause we have our own.
+  View::load('media')->setStatus(FALSE)->save();
+
+  if ($thunder_media_view = View::load('thunder_media')) {
+    $thunder_media_view->setStatus(TRUE)->save();
+  }
+}
+
+/**
+ * Uninstall the thunder media integration.
+ */
+function thunder_media_uninstall() {
+  // Enable default media view.
+  View::load('media')->setStatus(TRUE)->save();
+  View::load('thunder_media')->setStatus(FALSE)->save();
+}
+
+/**
  * Update hook dependencies.
  *
  * 1. Dependency on Thunder Updater module.
