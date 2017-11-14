@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.node
+    - search_api.index.content
     - views.view.content_search
   module:
     - search_api
@@ -45,6 +45,11 @@ processor_configs:
       sort: -10
     settings:
       sort: ASC
+  hide_1_result_facet:
+    processor_id: hide_1_result_facet
+    weights:
+      build: -10
+    settings: {  }
   translate_entity:
     processor_id: translate_entity
     weights:

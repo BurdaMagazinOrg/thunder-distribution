@@ -11,7 +11,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  *   description = @Translation("Installs demo content to show how Thunder works."),
  *   type = "module",
  *   standardlyEnabled = 1,
- *   weight = -1
+ *   weight = -2
  * )
  */
 class ThunderDemo extends AbstractOptionalModule {}

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.node
+    - search_api.index.content
     - views.view.content_search
   module:
     - search_api

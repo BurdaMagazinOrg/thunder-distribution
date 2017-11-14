@@ -1,0 +1,10 @@
+<?php
+
+use Drupal\views\Entity\View;
+
+/**
+ * Implements hook_install().
+ */
+function thunder_search_install() {
+  View::load('content')->setStatus(FALSE)->save();
+}

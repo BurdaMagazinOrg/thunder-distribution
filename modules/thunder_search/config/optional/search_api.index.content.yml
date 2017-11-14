@@ -5,10 +5,12 @@ dependencies:
     - user
     - search_api
     - node
+    - media_entity
+    - taxonomy
   config:
     - search_api.server.database
-id: node
-name: Node
+id: content
+name: Content
 description: ''
 read_only: false
 field_settings:
@@ -23,6 +25,16 @@ field_settings:
         'entity:node':
           article: default
           page: default
+        'entity:media':
+          gallery: default
+          image: default
+          instagram: default
+          pinterest: default
+          twitter: default
+          video: default
+        'entity:taxonomy_term':
+          channel: default
+          tags: default
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -39,6 +51,8 @@ field_settings:
       type: union
       fields:
         - 'entity:node/title'
+        - 'entity:media/name'
+        - 'entity:taxonomy_term/name'
   status:
     label: status
     datasource_id: 'entity:node'
@@ -83,6 +97,20 @@ field_settings:
     type: boolean
 datasource_settings:
   'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:media':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:taxonomy_term':
     bundles:
       default: true
       selected: {  }
