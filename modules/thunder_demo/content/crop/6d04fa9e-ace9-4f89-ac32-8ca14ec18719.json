@@ -44,20 +44,17 @@
     ],
     "uri": [
         {
-            "value": "public:\/\/2016-05\/26893182561_1281c142bb_k.jpg",
-            "lang": "en"
+            "value": "public:\/\/2016-05\/26893182561_1281c142bb_k.jpg"
         }
     ],
     "x": [
         {
-            "value": 901,
-            "lang": "en"
+            "value": 901
         }
     ],
     "y": [
         {
-            "value": 365,
-            "lang": "en"
+            "value": 365
         }
     ],
     "revision_timestamp": [
@@ -87,14 +84,12 @@
     },
     "default_langcode": [
         {
-            "value": true,
-            "lang": "en"
+            "value": true
         }
     ],
     "revision_translation_affected": [
         {
-            "value": true,
-            "lang": "en"
+            "value": true
         }
     ]
 }

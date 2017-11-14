@@ -163,6 +163,10 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Confirm that we are logged-in after installation.
     $this->assertText($this->rootUser->getUsername());
 
+    // Ensure demo content is installed.
+    $this->assertText('Burda Launches Worldwide Coalition Of Industry Partners And Releases Open-Source Online CMS Platform');
+    $this->assertText('Come to DrupalCon New Orleans');
+
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
       ->condition('severity', 4, '<');

@@ -13,6 +13,32 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
+ * Install the thunder media integration.
+ */
+function thunder_media_install() {
+  // Disable default media view, because we have our own.
+  if ($media_view = View::load('media')) {
+    $media_view->setStatus(FALSE)->save();
+  }
+  if ($thunder_media_view = View::load('thunder_media')) {
+    $thunder_media_view->setStatus(TRUE)->save();
+  }
+}
+
+/**
+ * Uninstall the thunder media integration.
+ */
+function thunder_media_uninstall() {
+  // Enable default media view.
+  if ($thunder_media_view = View::load('thunder_media')) {
+    $thunder_media_view->setStatus(FALSE)->save();
+  }
+  if ($media_view = View::load('media')) {
+    $media_view->setStatus(TRUE)->save();
+  }
+}
+
+/**
  * Update hook dependencies.
  *
  * 1. Dependency on Thunder Updater module.
@@ -764,4 +790,14 @@ function thunder_media_update_8106() {
 
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Introduce enable_filefield_remove_button config item.
+ */
+function thunder_media_update_8107() {
+  $config = Drupal::configFactory()->getEditable('thunder_media.settings');
+  if ($config->get('enable_filefield_remove_button') === NULL) {
+    $config->set('enable_filefield_remove_button', FALSE)->save();
+  }
 }

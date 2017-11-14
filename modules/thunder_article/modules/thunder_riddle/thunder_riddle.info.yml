@@ -3,7 +3,7 @@ description: 'Provide an integration with riddle marketplace.'
 type: module
 core: 8.x
 dependencies:
-  - views:views
+  - drupal:views
   - paragraphs:paragraphs
   - entity_browser:entity_browser
   - riddle_marketplace:media_riddle_marketplace
