@@ -1,3 +1,4 @@
+uuid: b7dd447a-f51c-4276-9037-b2bb391d7e52
 langcode: en
 status: true
 dependencies:
@@ -6,9 +7,9 @@ dependencies:
     - views.view.content_search
   module:
     - search_api
-id: content_type
-name: 'Content type'
-url_alias: content_type
+id: type
+name: Type
+url_alias: type
 weight: 0
 min_count: 1
 show_only_one_result: true
@@ -49,11 +50,6 @@ processor_configs:
     processor_id: hide_1_result_facet
     weights:
       build: -10
-    settings: {  }
-  translate_entity:
-    processor_id: translate_entity
-    weights:
-      build: 5
     settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler

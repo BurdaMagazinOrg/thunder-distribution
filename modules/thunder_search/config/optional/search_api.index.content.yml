@@ -8,6 +8,7 @@ dependencies:
     - media_entity
     - taxonomy
   config:
+    - field.storage.node.field_channel
     - search_api.server.database
 id: content
 name: Content
@@ -53,6 +54,36 @@ field_settings:
         - 'entity:node/title'
         - 'entity:media/name'
         - 'entity:taxonomy_term/name'
+  type:
+    label: Type
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/type'
+        - 'entity:media/bundle'
+        - 'entity:taxonomy_term/vid'
+  changed:
+    label: Changed
+    property_path: aggregated_field
+    type: date
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/changed'
+        - 'entity:media/changed'
+        - 'entity:taxonomy_term/changed'
+  published:
+    label: Published
+    property_path: aggregated_field
+    type: boolean
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/status'
+        - 'entity:media/status'
+        - 'entity:taxonomy_term/status'
   status:
     label: status
     datasource_id: 'entity:node'
@@ -75,16 +106,6 @@ field_settings:
     dependencies:
       module:
         - user
-  changed:
-    label: Changed
-    datasource_id: 'entity:node'
-    property_path: changed
-    type: date
-  type:
-    label: 'Content type'
-    datasource_id: 'entity:node'
-    property_path: type
-    type: string
   sticky:
     label: 'Sticky at top of lists'
     datasource_id: 'entity:node'
@@ -95,6 +116,14 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: promote
     type: boolean
+  field_channel:
+    label: Channel
+    datasource_id: 'entity:node'
+    property_path: field_channel
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_channel
 datasource_settings:
   'entity:node':
     bundles:
@@ -128,8 +157,8 @@ processor_settings:
     fields:
       - rendered_item
       - label
-      - name
       - type
+      - name
     title: true
     alt: true
     tags:
@@ -148,8 +177,8 @@ processor_settings:
     fields:
       - rendered_item
       - label
-      - name
       - type
+      - name
     weights:
       preprocess_index: -20
       preprocess_query: -20
@@ -214,8 +243,8 @@ processor_settings:
     fields:
       - rendered_item
       - label
-      - name
       - type
+      - name
     weights:
       preprocess_index: -20
       preprocess_query: -20

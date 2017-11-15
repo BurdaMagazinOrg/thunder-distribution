@@ -2,17 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_teaser_media
+    - field.storage.media.field_expires
     - image.style.thumbnail
     - search_api.index.content
   module:
-    - media_entity
+    - datetime
+    - image
     - search_api
     - thunder_search
     - user
     - views_bulk_operations
-id: content_search
-label: Content
+id: media_search
+label: Media
 module: views
 description: ''
 tag: ''
@@ -82,13 +83,12 @@ display:
           description: ''
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
-            field_teaser_media: field_teaser_media
+            thumbnail: thumbnail
             label: label
             type: type
-            field_channel: field_channel
             status: status
-            publish_on: publish_on
-            changed_1: changed_1
+            field_expires: field_expires
+            changed: changed
             search_api_operations: search_api_operations
           info:
             views_bulk_operations_bulk_form:
@@ -96,7 +96,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_teaser_media:
+            thumbnail:
               align: ''
               separator: ''
               empty_column: false
@@ -115,24 +115,17 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_channel:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             status:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            publish_on:
+            field_expires:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            changed_1:
-              sortable: true
-              default_sort_order: desc
+            changed:
               align: ''
               separator: ''
               empty_column: false
@@ -142,7 +135,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          default: changed_1
+          default: '-1'
           empty_table: false
       row:
         type: fields
@@ -237,14 +230,14 @@ display:
             views_bulk_operations_delete_entity:
               label_override: ''
           plugin_id: views_bulk_operations_bulk_form
-        field_teaser_media:
-          id: field_teaser_media
-          table: search_api_datasource_content_entity_node
-          field: field_teaser_media
+        thumbnail:
+          id: thumbnail
+          table: search_api_datasource_content_entity_media
+          field: thumbnail
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Thumbnail
           exclude: false
           alter:
             alter_text: false
@@ -277,7 +270,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -286,11 +279,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: media_thumbnail
+          type: image
           settings:
             image_style: thumbnail
             image_link: ''
-          group_column: target_id
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -301,31 +294,12 @@ display:
           separator: ', '
           field_api_classes: false
           field_rendering: true
-          fallback_handler: search_api_entity
+          fallback_handler: search_api
           fallback_options:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-            display_methods:
-              gallery:
-                display_method: label
-                view_mode: default
-              image:
-                display_method: label
-                view_mode: default
-              instagram:
-                display_method: label
-                view_mode: default
-              pinterest:
-                display_method: label
-                view_mode: default
-              twitter:
-                display_method: label
-                view_mode: default
-              video:
-                display_method: label
-                view_mode: default
-          entity_type: node
+          entity_type: media
           plugin_id: search_api_field
         label:
           id: label
@@ -431,14 +405,14 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        published:
-          id: published
-          table: search_api_index_content
-          field: published
+        status:
+          id: status
+          table: search_api_datasource_content_entity_media
+          field: status
           relationship: none
           group_type: group
           admin_label: ''
-          label: Published
+          label: Status
           exclude: false
           alter:
             alter_text: false
@@ -479,18 +453,42 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: false
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: custom
+            format_custom_true: Published
+            format_custom_false: Unpublished
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
           multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api
-        publish_on:
-          id: publish_on
-          table: search_api_datasource_content_entity_node
-          field: publish_on
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_boolean
+          fallback_options:
+            type: yes-no
+            type_custom_true: ''
+            type_custom_false: ''
+            not: false
+            link_to_item: false
+            multi_type: separator
+            multi_separator: ', '
+          entity_type: media
+          plugin_id: search_api_field
+        field_expires:
+          id: field_expires
+          table: search_api_datasource_content_entity_media
+          field: field_expires
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Publish on'
+          label: Expires
           exclude: false
           alter:
             alter_text: false
@@ -523,7 +521,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -532,11 +530,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp
+          type: datetime_default
           settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
+            timezone_override: ''
+            format_type: short
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -553,11 +550,11 @@ display:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
+          entity_type: media
           plugin_id: search_api_field
-        changed_1:
-          id: changed_1
-          table: search_api_index_content
+        changed:
+          id: changed
+          table: search_api_datasource_content_entity_media
           field: changed
           relationship: none
           group_type: group
@@ -565,7 +562,7 @@ display:
           label: Updated
           exclude: false
           alter:
-            alter_text: true
+            alter_text: false
             text: ''
             make_link: false
             path: ''
@@ -595,7 +592,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -603,9 +600,6 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: 0
-          multi_type: separator
-          multi_separator: ', '
           click_sort_column: value
           type: timestamp
           settings:
@@ -619,6 +613,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
+          multi_type: separator
           separator: ', '
           field_api_classes: false
           field_rendering: true
@@ -630,6 +625,7 @@ display:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
+          entity_type: media
           plugin_id: search_api_field
         search_api_operations:
           id: search_api_operations
@@ -772,7 +768,7 @@ display:
           admin_label: ''
           operator: or
           value:
-            'entity:node': 'entity:node'
+            'entity:media': 'entity:media'
           group: 1
           exposed: false
           expose:
@@ -855,10 +851,10 @@ display:
         - url.query_args
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_teaser_media'
+        - 'config:field.storage.media.field_expires'
   page_1:
     display_options:
-      path: admin/content
+      path: admin/content/media
       menu:
         type: tab
         title: Content
@@ -876,6 +872,7 @@ display:
       display_extenders: {  }
       cache:
         type: none
+        options: {  }
       defaults:
         cache: false
       exposed_block: true
@@ -892,4 +889,4 @@ display:
         - url.query_args
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_teaser_media'
+        - 'config:field.storage.media.field_expires'
