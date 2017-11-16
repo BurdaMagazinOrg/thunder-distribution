@@ -1,5 +1,15 @@
 # Change Log
 
+## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
+
+This is the release, where we removed lots of dependencies. Additionally we added inline form errors and the 
+possibility to configure if the remove button for files is shown in the medie entity form or not.
+
+- Add [Integrate inline form errors](https://www.drupal.org/node/2915435)
+- Change [Revert "Removing the 'Remove' button of image widgets"](https://www.drupal.org/node/2907100)
+- Change [[META] Decouple modules from Thunder](https://www.drupal.org/node/2919194)
+
 ## [8.2.9](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.9) 2017-10-11
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.8...8.2.9)
 
