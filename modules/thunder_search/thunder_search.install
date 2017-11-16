@@ -11,5 +11,10 @@ use Drupal\views\Entity\View;
  * Implements hook_install().
  */
 function thunder_search_install() {
-  View::load('content')->setStatus(FALSE)->save();
+  if ($view = View::load('content')) {
+    $view->setStatus(FALSE)->save();
+  }
+  if ($view = View::load('thunder_media')) {
+    $view->setStatus(FALSE)->save();
+  }
 }

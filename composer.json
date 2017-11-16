@@ -80,8 +80,7 @@
             },
             "drupal/search_api": {
                 "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch",
-                "Facets not shown on view of overridden system route": "https://www.drupal.org/files/issues/2916754-2.patch",
-                "Don't export database_text in config files": "https://www.drupal.org/files/issues/don_t_export-2921582-2.patch"
+                "Facets not shown on view of overridden system route": "https://www.drupal.org/files/issues/2916754-2.patch"
             },
             "drupal/views_bulk_operations": {
                 "'Undefined index: entity type' when using vbo with search api based view": "https://www.drupal.org/files/issues/undefined_index_-2921563-2.patch"
