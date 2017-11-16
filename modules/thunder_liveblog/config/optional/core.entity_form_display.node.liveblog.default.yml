@@ -78,9 +78,7 @@ content:
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: closed
-      closed_mode: preview
-      autocollapse: none
+      edit_mode: preview
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
