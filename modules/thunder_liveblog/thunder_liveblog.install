@@ -212,3 +212,21 @@ function thunder_liveblog_update_8101() {
   // Output logged result of update hook execution.
   return $updateLogger->output();
 }
+
+/**
+ * Provide nicer liveblog form display.
+ */
+function thunder_liveblog_update_8102() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+  if (!$thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8102']])) {
+    $updateLogger->info(t('New form display successfully installed.".'));
+  }
+  else {
+    $updateLogger->warning(t('There was an error during the update of the liveblog form display.'));
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
