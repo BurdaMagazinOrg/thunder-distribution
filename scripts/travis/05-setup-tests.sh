@@ -25,5 +25,5 @@ if [[ ${SAUCE_LABS_ENABLED} == "true" ]]; then
 fi
 
 docker pull selenium/standalone-chrome
-docker run -d -p 4444:4444 --net=host selenium/standalone-chrome
+docker run -d -p 4444:4444 -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome
 docker ps -a
