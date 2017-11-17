@@ -1,0 +1,172 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.liveblog.field_highlights
+    - field.field.node.liveblog.field_paragraphs
+    - field.field.node.liveblog.field_posts_load_limit
+    - field.field.node.liveblog.field_posts_number_initial
+    - field.field.node.liveblog.field_status
+    - node.type.liveblog
+  module:
+    - field_group
+    - liveblog
+    - paragraphs
+    - path
+    - scheduler
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - title
+        - field_status
+        - field_highlights
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
+    group_paragraphs:
+      children:
+        - field_paragraphs
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: 'content-form__form-section paragraphs-container'
+        description: ''
+        required_fields: true
+      label: Paragraphs
+    group_advanced:
+      children:
+        - field_posts_number_initial
+        - field_posts_load_limit
+      parent_name: ''
+      weight: 5
+      format_type: details
+      format_settings:
+        label: Advanced
+        required_fields: true
+        id: ''
+        classes: content-form__form-section
+        open: false
+      label: Advanced
+id: node.liveblog.default
+targetEntityType: node
+bundle: liveblog
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_highlights:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: liveblog_taxonomy_tree
+    region: content
+  field_paragraphs:
+    weight: 10
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: preview
+      add_mode: modal
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
+  field_posts_load_limit:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_posts_number_initial:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_status:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  langcode:
+    type: language_select
+    weight: 0
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    third_party_settings: {  }
+    region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 11
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 7
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
