@@ -3,6 +3,9 @@
 namespace Drupal\thunder;
 
 use Drupal\Component\Utility\Crypt;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\Database\Database;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -89,12 +92,54 @@ trait ThunderTestTrait {
   protected function tearDown() {
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
+      ->fields('w')
       ->condition('severity', 4, '<');
 
     // Check that there are no warnings in the log after installation.
-    $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);
+    // $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);.
+    if ($query->countQuery()->execute()->fetchField()) {
+      // Output all errors for modules tested.
+      $errors = [];
+      foreach ($query->execute()->fetchAll() as $row) {
+        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($this->formatMessage($row))), 256, TRUE, TRUE);
+      }
+      throw new \Exception(print_r(array_unique($errors), TRUE));
+    }
 
     parent::tearDown();
+  }
+
+  /**
+   * Formats a database log entry.
+   *
+   * @param object $row
+   *   Database row object.
+   *
+   * @return bool|\Drupal\Core\StringTranslation\TranslatableMarkup|string
+   *   String of the database row.
+   */
+  protected function formatMessage($row) {
+    // Check for required properties.
+    if (isset($row->message, $row->variables)) {
+      $variables = @unserialize($row->variables);
+      // Messages without variables or user specified text.
+      if ($variables === NULL) {
+        $message = Xss::filterAdmin($row->message);
+      }
+      elseif (!is_array($variables)) {
+        $message = t('Log data is corrupted and cannot be unserialized: @message', ['@message' => Xss::filterAdmin($row->message)]);
+      }
+      // Message to translate with injected variables.
+      else {
+        // @codingStandardsIgnoreStart
+        $message = t(Xss::filterAdmin($row->message), $variables);
+        // @codingStandardsIgnoreEnd
+      }
+    }
+    else {
+      $message = FALSE;
+    }
+    return $message;
   }
 
 }
