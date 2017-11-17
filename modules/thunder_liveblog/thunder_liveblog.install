@@ -6,6 +6,7 @@
  */
 
 use Drupal\field\Entity\FieldConfig;
+use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
@@ -13,118 +14,49 @@ use Drupal\field\Entity\FieldConfig;
  * Configures form and view display of the field_embed_media.
  */
 function thunder_liveblog_install() {
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('core.entity_form_display.liveblog_post.liveblog_post.default');
-  if ($config) {
-    if ($content = $config->get('content')) {
-      $content['field_embed_media'] = [
-        'type' => 'entity_reference_paragraphs',
-        'weight' => 0,
-        'settings' => [
-          'title' => 'Paragraph',
-          'title_plural' => 'Paragraphs',
-          'edit_mode' => 'open',
-          'add_mode' => 'dropdown',
-          'form_display_mode' => 'default',
-        ],
-        'third_party_settings' => [],
-        'region' => 'content',
-      ];
+  $display = entity_get_form_display('liveblog_post', 'liveblog_post', 'default');
+  $display->setComponent('field_embed_media', [
+    'type' => 'entity_reference_paragraphs',
+    'weight' => 0,
+    'settings' => [
+      'title' => 'Paragraph',
+      'title_plural' => 'Paragraphs',
+      'edit_mode' => 'open',
+      'add_mode' => 'dropdown',
+      'form_display_mode' => 'default',
+    ],
+    'third_party_settings' => [],
+    'region' => 'content',
+  ])->save();
 
-      $config->set('content', $content)->save();
-    }
+  $display = entity_get_display('liveblog_post', 'liveblog_post', 'default');
+  $display->setComponent('field_embed_media', [
+    'type' => 'entity_reference_revisions_entity_view',
+    'label' => 'hidden',
+    'weight' => 3,
+    'settings' => [
+      'view_mode' => 'default',
+      'link' => '',
+    ],
+    'third_party_settings' => [],
+    'region' => 'content',
+  ])->save();
 
-    if ($dependencies = $config->get('dependencies')) {
-      $dependencies['config'][] = 'field.field.liveblog_post.liveblog_post.field_embed_media';
-
-      $config->set('dependencies', $dependencies)->save();
-    }
-  }
-
-  $config = $config_factory->getEditable('core.entity_view_display.liveblog_post.liveblog_post.default');
-  if ($config) {
-    if ($content = $config->get('content')) {
-      $content['field_embed_media'] = [
-        'type' => 'entity_reference_revisions_entity_view',
-        'label' => 'hidden',
-        'weight' => 3,
-        'settings' => [
-          'view_mode' => 'default',
-          'link' => '',
-        ],
-        'third_party_settings' => [],
-        'region' => 'content',
-      ];
-
-      $config->set('content', $content)->save();
-    }
-
-    if ($dependencies = $config->get('dependencies')) {
-      $dependencies['config'][] = 'field.field.liveblog_post.liveblog_post.field_embed_media';
-
-      $config->set('dependencies', $dependencies)->save();
-    }
-  }
+  FieldConfig::load('node.liveblog.body')->delete();
 
   // Add paragraphs to Liveblog content-type.
-  $config = $config_factory->getEditable('core.entity_view_display.node.liveblog.default');
-  if ($config) {
-    if ($content = $config->get('content')) {
-      unset($content['body']);
-      $content['field_paragraphs'] = [
-        'weight' => 1,
-        'label' => 'hidden',
-        'settings' => [
-          'view_mode' => 'default',
-          'link' => '',
-        ],
-        'third_party_settings' => [],
-        'type' => 'entity_reference_revisions_entity_view',
-        'region' => 'content',
-      ];
-
-      $config->set('content', $content)->save();
-    }
-
-    if ($dependencies = $config->get('dependencies')) {
-      unset($dependencies['config']['field.field.node.liveblog.body']);
-      $dependencies['config'][] = 'field.field.node.liveblog.field_paragraphs';
-
-      $config->set('dependencies', $dependencies)->save();
-    }
-  }
-  $config = $config_factory->getEditable('core.entity_form_display.node.liveblog.default');
-  if ($config) {
-    if ($content = $config->get('content')) {
-      unset($content['body']);
-      $content['field_paragraphs'] = [
-        'weight' => 9,
-        'settings' => [
-          'title' => 'Paragraph',
-          'title_plural' => 'Paragraphs',
-          'edit_mode' => 'open',
-          'add_mode' => 'dropdown',
-          'form_display_mode' => 'default',
-          'default_paragraph_type' => '',
-        ],
-        'third_party_settings' => [],
-        'type' => 'entity_reference_paragraphs',
-        'region' => 'content',
-      ];
-
-      $config->set('content', $content)->save();
-    }
-
-    if ($dependencies = $config->get('dependencies')) {
-      unset($dependencies['config']['field.field.node.liveblog.body']);
-      unset($dependencies['module']['text']);
-      $dependencies['config'][] = 'field.field.node.liveblog.field_paragraphs';
-      $dependencies['module'][] = 'entity_reference_revisions';
-
-      $config->set('dependencies', $dependencies)->save();
-    }
-  }
-  $config_factory->getEditable('field.field.node.liveblog.body')->delete();
+  $display = entity_get_display('node', 'liveblog', 'default');
+  $display->setComponent('field_paragraphs', [
+    'weight' => 1,
+    'label' => 'hidden',
+    'settings' => [
+      'view_mode' => 'default',
+      'link' => '',
+    ],
+    'third_party_settings' => [],
+    'type' => 'entity_reference_revisions_entity_view',
+    'region' => 'content',
+  ])->save();
 
   // Add permissions to thunder users.
   $liveblog_permissions = [
@@ -140,39 +72,32 @@ function thunder_liveblog_install() {
     'revert liveblog revisions',
     'view liveblog revisions',
   ];
-  foreach (['user.role.editor', 'user.role.seo'] as $role) {
-    $config = $config_factory->getEditable($role);
-    if ($config) {
-      $permissions = $config->get('permissions');
-      $permissions = array_merge($permissions, $liveblog_permissions);
-      $config->set('permissions', $permissions)->save(TRUE);
+  foreach (['editor', 'seo'] as $role) {
+    $role = Role::load($role);
+    foreach ($liveblog_permissions as $permission) {
+      $role->grantPermission($permission);
     }
+    $role->save();
   }
-
 }
 
 /**
  * Implements hook_uninstall().
  */
 function thunder_liveblog_uninstall() {
-
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = \Drupal::configFactory();
   $logger = \Drupal::logger('thunder_liveblog');
 
-  $config = [
-    'field.field.liveblog_post.liveblog_post.field_embed_media',
-    'field.field.node.liveblog.field_paragraphs',
-    'field.storage.liveblog_post.field_embed_media',
-    'rest.resource.entity.paragraph',
+  $fields = [
+    'liveblog_post.liveblog_post.field_embed_media',
+    'node.liveblog.field_paragraphs',
   ];
 
-  foreach ($config as $tour) {
+  foreach ($fields as $field) {
     try {
-      $configFactory->getEditable($tour)->delete();
+      FieldConfig::load($field)->delete();
     }
     catch (\Exception $e) {
-      $logger->warning(sprintf('Unable to uninstall config: %s.', $tour));
+      $logger->warning(sprintf('Unable to uninstall config: %s.', $field));
     }
   }
 }
