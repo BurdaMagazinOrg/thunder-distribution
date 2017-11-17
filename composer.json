@@ -16,8 +16,12 @@
             "email": "mladen.todorovic@burda.com"
         },
         {
+            "name": "Volker Killesreiter",
+            "email": "volker.killesreiter@burda.com"
+        },
+        {
             "name": "Timo Welde",
-            "email": "welde@galaniproject.de"
+            "email": "welde@galaniprojects.de"
         }
     ],
     "minimum-stability": "dev",
@@ -68,9 +72,6 @@
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
-            "drupal/field_group": {
-                "Form mode ignored as field groups always attached to 'default' form mode": "https://www.drupal.org/files/issues/field_group-form-mode-ignored-2842354-2.patch"
-            },
             "drupal/slick_media": {
                 "Slick Media Port to the proposed Media core module API": "https://www.drupal.org/files/issues/slick_media_port_to_the-2905335-2.patch"
             },
@@ -108,7 +109,7 @@
         "drupal/entity_browser": "^2.0",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
-        "drupal/field_group": "1.0-rc6",
+        "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
         "drupal/inline_entity_form": "^1.0",
