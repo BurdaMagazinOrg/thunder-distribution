@@ -97,7 +97,6 @@ function thunder_liveblog_uninstall() {
     'liveblog_post.liveblog_post.field_embed_media',
     'node.liveblog.field_paragraphs',
   ];
-
   foreach ($fields as $field) {
     try {
       if ($field = FieldConfig::load($field)) {
