@@ -153,7 +153,7 @@ function thunder_liveblog_update_8102() {
   $thunderUpdater = \Drupal::service('thunder_updater');
   $updateLogger = $thunderUpdater->logger();
   if ($thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8102']])) {
-    $updateLogger->info(t('New form display successfully installed.".'));
+    $updateLogger->info(t('New form display successfully installed.'));
   }
   else {
     $updateLogger->warning(t('There was an error during the update of the liveblog form display.'));
