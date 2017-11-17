@@ -14,49 +14,54 @@ use Drupal\user\Entity\Role;
  * Configures form and view display of the field_embed_media.
  */
 function thunder_liveblog_install() {
-  $display = entity_get_form_display('liveblog_post', 'liveblog_post', 'default');
-  $display->setComponent('field_embed_media', [
-    'type' => 'entity_reference_paragraphs',
-    'weight' => 0,
-    'settings' => [
-      'title' => 'Paragraph',
-      'title_plural' => 'Paragraphs',
-      'edit_mode' => 'open',
-      'add_mode' => 'dropdown',
-      'form_display_mode' => 'default',
-    ],
-    'third_party_settings' => [],
-    'region' => 'content',
-  ])->save();
+  if ($display = entity_get_form_display('liveblog_post', 'liveblog_post', 'default')) {
+    $display->setComponent('field_embed_media', [
+      'type' => 'entity_reference_paragraphs',
+      'weight' => 0,
+      'settings' => [
+        'title' => 'Paragraph',
+        'title_plural' => 'Paragraphs',
+        'edit_mode' => 'open',
+        'add_mode' => 'dropdown',
+        'form_display_mode' => 'default',
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+    ])->save();
+  }
 
-  $display = entity_get_display('liveblog_post', 'liveblog_post', 'default');
-  $display->setComponent('field_embed_media', [
-    'type' => 'entity_reference_revisions_entity_view',
-    'label' => 'hidden',
-    'weight' => 3,
-    'settings' => [
-      'view_mode' => 'default',
-      'link' => '',
-    ],
-    'third_party_settings' => [],
-    'region' => 'content',
-  ])->save();
+  if ($display = entity_get_display('liveblog_post', 'liveblog_post', 'default')) {
+    $display->setComponent('field_embed_media', [
+      'type' => 'entity_reference_revisions_entity_view',
+      'label' => 'hidden',
+      'weight' => 3,
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'third_party_settings' => [],
+      'region' => 'content',
+    ])->save();
+  }
 
-  FieldConfig::load('node.liveblog.body')->delete();
+  if ($field = FieldConfig::load('node.liveblog.body')) {
+    $field->delete();
+  }
 
   // Add paragraphs to Liveblog content-type.
-  $display = entity_get_display('node', 'liveblog', 'default');
-  $display->setComponent('field_paragraphs', [
-    'weight' => 1,
-    'label' => 'hidden',
-    'settings' => [
-      'view_mode' => 'default',
-      'link' => '',
-    ],
-    'third_party_settings' => [],
-    'type' => 'entity_reference_revisions_entity_view',
-    'region' => 'content',
-  ])->save();
+  if ($display = entity_get_display('node', 'liveblog', 'default')) {
+    $display->setComponent('field_paragraphs', [
+      'weight' => 1,
+      'label' => 'hidden',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'third_party_settings' => [],
+      'type' => 'entity_reference_revisions_entity_view',
+      'region' => 'content',
+    ])->save();
+  }
 
   // Add permissions to thunder users.
   $liveblog_permissions = [
@@ -73,11 +78,12 @@ function thunder_liveblog_install() {
     'view liveblog revisions',
   ];
   foreach (['editor', 'seo'] as $role) {
-    $role = Role::load($role);
-    foreach ($liveblog_permissions as $permission) {
-      $role->grantPermission($permission);
+    if ($role = Role::load($role)) {
+      foreach ($liveblog_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $role->save();
     }
-    $role->save();
   }
 }
 
@@ -94,7 +100,9 @@ function thunder_liveblog_uninstall() {
 
   foreach ($fields as $field) {
     try {
-      FieldConfig::load($field)->delete();
+      if ($field = FieldConfig::load($field)) {
+        $field->delete();
+      }
     }
     catch (\Exception $e) {
       $logger->warning(sprintf('Unable to uninstall config: %s.', $field));
