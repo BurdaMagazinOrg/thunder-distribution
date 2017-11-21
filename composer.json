@@ -113,7 +113,7 @@
         "drupal/google_analytics": "^2.0",
         "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^1.0",
-        "drupal/length_indicator": "^1.0"
+        "drupal/length_indicator": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
