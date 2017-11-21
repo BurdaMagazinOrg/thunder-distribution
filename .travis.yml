@@ -46,9 +46,6 @@ addons:
     region: eu-west-1
     paths:
       - /tmp/thunder-travis-ci
-  apt:
-    packages:
-      - google-chrome-stable
 
 services:
   - docker
