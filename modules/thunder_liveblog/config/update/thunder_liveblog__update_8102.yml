@@ -1,0 +1,124 @@
+core.entity_form_display.node.liveblog.default:
+  expected_config:
+    content:
+      created:
+        weight: 3
+      field_highlights:
+        weight: 11
+      field_paragraphs:
+        settings:
+          add_mode: dropdown
+          default_paragraph_type: ''
+          edit_mode: open
+        type: entity_reference_paragraphs
+        weight: 9
+      field_posts_load_limit:
+        weight: 27
+      field_posts_number_initial:
+        weight: 26
+      field_status:
+        weight: 10
+      langcode:
+        settings: {  }
+        weight: 1
+      path:
+        weight: 6
+      promote:
+        weight: 4
+      publish_on:
+        weight: 7
+      status:
+        weight: 120
+      sticky:
+        weight: 5
+      title:
+        weight: 0
+      uid:
+        weight: 2
+      unpublish_on:
+        weight: 8
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_advanced:
+            children:
+              - field_posts_number_initial
+              - field_posts_load_limit
+            format_settings:
+              classes: content-form__form-section
+              id: ''
+              label: Advanced
+              open: false
+              required_fields: true
+            format_type: details
+            label: Advanced
+            parent_name: ''
+            weight: 5
+          group_basis:
+            children:
+              - title
+              - field_status
+              - field_highlights
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 3
+          group_paragraphs:
+            children:
+              - field_paragraphs
+            format_settings:
+              classes: 'content-form__form-section paragraphs-container'
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Paragraphs
+            parent_name: ''
+            weight: 4
+    change:
+      content:
+        created:
+          weight: 2
+        field_highlights:
+          weight: 3
+        field_paragraphs:
+          settings:
+            add_mode: modal
+            autocollapse: none
+            closed_mode: preview
+            default_paragraph_type: _none
+            edit_mode: closed
+          type: paragraphs
+          weight: 10
+        field_posts_load_limit:
+          weight: 5
+        field_posts_number_initial:
+          weight: 4
+        field_status:
+          weight: 2
+        langcode:
+          settings:
+            include_locked: true
+          weight: 0
+        path:
+          weight: 8
+        promote:
+          weight: 6
+        publish_on:
+          weight: 9
+        status:
+          weight: 11
+        sticky:
+          weight: 7
+        title:
+          weight: 1
+        uid:
+          weight: 1
+        unpublish_on:
+          weight: 10
