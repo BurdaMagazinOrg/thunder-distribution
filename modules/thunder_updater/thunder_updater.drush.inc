@@ -17,7 +17,7 @@ function thunder_updater_drush_command() {
     'description' => 'Generate update definition for module configuration.',
     'arguments' => [
       'filename' => 'Filename of generated update',
-      'module' => 'List of modules, leave empty for all',
+      'modules' => 'List of modules, leave empty for all',
     ],
     'options' => [
       'filter' => 'Regex to filter the module list',
@@ -25,7 +25,8 @@ function thunder_updater_drush_command() {
     'drupal dependencies' => ['thunder_updater'],
     'required-arguments' => 1,
     'examples' => [
-      'drush thunder-updater-generate-update mypatchfile.yml --filter=/thunder/' => 'Generate patch to update configuration from current installed configuration to configuration provided in files.',
+      'drush thunder-updater-generate-update mypatchfile.yml --filter=/thunder/' => 'Uses all modules containing thunder in their name to generate the update file.',
+      'drush thunder-updater-generate-update mypatchfile.yml thunder_article' => 'Generates the update file out of the thunder_article module.',
     ],
     'core' => ['8+'],
     'outputformat' => [
@@ -50,7 +51,7 @@ function thunder_updater_drush_command() {
 function drush_thunder_updater_generate_update($patchFilePath, $moduleList = '') {
 
   /** @var \Drupal\thunder_updater\ConfigHandler $configHandler */
-  $configHandler = Drupal::service('thunder_updater.config_handler');
+  $configHandler = \Drupal::service('thunder_updater.config_handler');
 
   if ($moduleList) {
     $modules = explode(',', $moduleList);
@@ -68,8 +69,11 @@ function drush_thunder_updater_generate_update($patchFilePath, $moduleList = '')
   }
 
   $patchFile = $configHandler->generatePatchFile($modules);
-  file_put_contents($patchFilePath, $patchFile, FILE_CREATE_DIRECTORY);
-  $message = (!empty($patchFile)) ? dt('Patch file is successfully generated.') : dt('There are no changes that should be exported.');
+  $message = dt('There are no changes that should be exported.');
+  if (!empty($patchFile)) {
+    file_put_contents($patchFilePath, $patchFile);
+    $message = dt('Patch file is successfully generated.');
+  }
 
   return [
     $message,
