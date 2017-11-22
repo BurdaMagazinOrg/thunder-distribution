@@ -47,9 +47,6 @@ addons:
     paths:
       - /tmp/thunder-travis-ci
 
-services:
-  - docker
-
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
