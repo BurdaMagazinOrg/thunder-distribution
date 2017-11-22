@@ -5,7 +5,9 @@ namespace Drupal\Tests\thunder\Functional\Integration;
 use Drupal\thunder\ThunderBaseTest;
 
 /**
- * Class AdminToolbarTest.
+ * Tests integration with the admin toolbar.
+ *
+ * @group Thunder
  */
 class AdminToolbarTest extends ThunderBaseTest {
 
