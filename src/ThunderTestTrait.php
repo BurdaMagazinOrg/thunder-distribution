@@ -93,7 +93,7 @@ trait ThunderTestTrait {
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
       ->fields('w')
-      ->condition('severity', 4, '<');
+      ->condition('severity', 5, '<');
 
     // Check that there are no warnings in the log after installation.
     // $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);.
