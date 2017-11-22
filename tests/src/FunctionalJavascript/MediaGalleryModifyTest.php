@@ -96,7 +96,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->uploadFile($page, realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
+    $this->uploadFile($page, '/tests/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $dragElement = $this->xpath("//*[@id='edit-selected']/div[5]")[0];
