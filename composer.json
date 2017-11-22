@@ -73,7 +73,8 @@
                 "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
             },
             "drupal/entity_browser": {
-                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch",
+                "PHP Warning, non numeric value": "https://www.drupal.org/files/issues/entity_browser-fix_warning_none_numeric_-value-2851512-12.patch"
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
