@@ -74,9 +74,6 @@ function thunder_install() {
     ->set('register', 'visitors_admin_approval')
     ->save(TRUE);
 
-  // Disable default media view, cause we have our own.
-  View::load('media')->setStatus(FALSE)->save();
-
   \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
 
 }
@@ -838,6 +835,45 @@ function thunder_update_8116() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->installModules(['thunder__thunder_update_8116' => 'inline_form_errors']);
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable paragraphs split text.
+ */
+function thunder_update_8117() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8118' => 'paragraph_split_text'])) {
+    $config = \Drupal::configFactory()->getEditable('editor.editor.basic_html');
+    $items = $config->get('settings.toolbar.rows.0');
+    if ($items) {
+      foreach ($items as &$item) {
+        if (!empty($item['name'] && $item['name'] === 'Tools')) {
+          $item['items'][] = 'SplitTextAfter';
+          $item['items'][] = 'SplitTextBefore';
+
+        }
+      }
+      $config->set('settings.toolbar.rows.0', $items)->save();
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8118']);
+    }
+  }
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable admin_toolbar_links_access_filter module.
+ */
+function thunder_update_8118() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->installModules(['thunder__thunder_update_8117' => 'admin_toolbar_links_access_filter']);
 
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
