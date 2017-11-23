@@ -1,6 +1,6 @@
-# Thunder
+# Thunder [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=I%20just%20tried%20ThunderCMS.%20The%20CMS%20for%20professional%20publishing!&url=https://www.thunder.org&via=ThunderCoreTeam&hashtags=drupal8,publishing,ThunderCMS)
 
-[![Build Status](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution.svg?branch=8.x-1.x)](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution)
+[![Build Status](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution.svg?branch=develop)](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution)
 
 Thunder is a Drupal 8 distribution for professional publishers. It consists of the current Drupal 8 functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
 
