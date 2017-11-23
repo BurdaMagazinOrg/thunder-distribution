@@ -2,12 +2,41 @@
 
 namespace Drupal\thunder_updater\Commands;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\thunder_updater\ConfigHandler;
 use Drush\Commands\DrushCommands;
 
 /**
  * Thunder updater drush commands.
  */
 class ThunderUpdaterCommands extends DrushCommands {
+
+  /**
+   * Config handler service.
+   *
+   * @var \Drupal\thunder_updater\ConfigHandler
+   */
+  protected $configHandler;
+
+  /**
+   * Module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * ThunderUpdaterCommands constructor.
+   *
+   * @param \Drupal\thunder_updater\ConfigHandler $configHandler
+   *   Config handler service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Module handler service.
+   */
+  public function __construct(ConfigHandler $configHandler, ModuleHandlerInterface $moduleHandler) {
+    $this->moduleHandler = $moduleHandler;
+    $this->configHandler = $configHandler;
+  }
 
   /**
    * Generate update definition for module configuration.
@@ -30,14 +59,11 @@ class ThunderUpdaterCommands extends DrushCommands {
    * @aliases thunder-updater-generate-update
    */
   public function updaterGenerateUpdate($patchFilePath, $moduleList = '') {
-    /** @var \Drupal\thunder_updater\ConfigHandler $configHandler */
-    $configHandler = \Drupal::service('thunder_updater.config_handler');
-
     if ($moduleList) {
       $modules = explode(',', $moduleList);
     }
     else {
-      $modules = array_filter(\Drupal::moduleHandler()->getModuleList(), function (Extension $extension) {
+      $modules = array_filter($this->moduleHandler->getModuleList(), function (Extension $extension) {
         return ($extension->getType() == 'module');
       });
       $modules = array_keys($modules);
@@ -48,13 +74,12 @@ class ThunderUpdaterCommands extends DrushCommands {
       });
     }
 
-    $patchFile = $configHandler->generatePatchFile($modules);
+    $patchFile = $this->configHandler->generatePatchFile($modules);
     $message = dt('There are no changes that should be exported.');
     if (!empty($patchFile)) {
       file_put_contents($patchFilePath, $patchFile);
       $message = dt('Patch file is successfully generated.');
     }
-
     return [
       $message,
     ];
