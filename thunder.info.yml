@@ -60,6 +60,7 @@ dependencies:
   - metatag_facebook
   - metatag_twitter_cards
   - paragraphs
+  - paragraph_split_text
   - pathauto
   - scheduler
   - simple_sitemap
