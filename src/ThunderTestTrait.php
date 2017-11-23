@@ -92,11 +92,14 @@ trait ThunderTestTrait {
   protected function tearDown() {
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
-      ->fields('w')
-      ->condition('severity', 5, '<')
-      ->orConditionGroup()
+      ->fields('w');
+    $andGroup = $query->andConditionGroup()
       ->condition('severity', 6, '<')
       ->condition('type', 'php');
+    $group = $query->orConditionGroup()
+      ->condition('severity', 5, '<')
+      ->condition($andGroup);
+    $query = $query->condition($group);
 
     // Check that there are no warnings in the log after installation.
     // $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);.
