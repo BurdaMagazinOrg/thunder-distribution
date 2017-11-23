@@ -70,7 +70,6 @@ projects[media_entity_instagram][version] = 2
 projects[media_entity_pinterest][type] = module
 projects[media_entity_pinterest][version] = 2
 projects[media_entity][type] = module
-projects[media_entity][download][url] = http://git.drupal.org/project/media_entity.git
 projects[media_entity][download][branch] = 8.x-2.x
 projects[media_entity_slideshow][type] = module
 projects[media_entity_slideshow][version] = 2
