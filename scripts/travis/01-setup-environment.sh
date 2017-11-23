@@ -21,21 +21,6 @@ export TEST_UPDATE;
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
-# Setup Selenium parameters
-export DISPLAY=:99.0
-export DBUS_SESSION_BUS_ADDRESS=/dev/null
-
-# Get latest ChromeDriver version
-CHROME_DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-export CHROME_DRIVER_VERSION
-
-# Selenium related environment variables
-SELENIUM_PATH="$PWD/travis_selenium"
-export SELENIUM_PATH
-
-SELENIUM_VERSION="3.3.1"
-export SELENIUM_VERSION
-
 # Get latest version of imagick from api.github.com
 PHP_IMAGICK_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
 export PHP_IMAGICK_VERSION

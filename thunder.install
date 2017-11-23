@@ -879,3 +879,40 @@ function thunder_update_8117() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Change to paragraphs experimental widget.
+ */
+function thunder_update_8119() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $successful = TRUE;
+
+  if (!$thunderUpdater->installModules(['thunder__thunder_update_8117' => 'default_content']) || !$thunderUpdater->installModules(['thunder__thunder_update_8117' => 'better_normalizers'])) {
+    $successful = FALSE;
+  }
+
+  if ($successful) {
+    /** @var \Drupal\default_content\Importer $contentImporter */
+    $contentImporter = \Drupal::service('default_content.importer');
+    $contentImporter->importContent('thunder_paragraphs');
+    if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8117']])) {
+      $successful = FALSE;
+    }
+
+    if (\Drupal::moduleHandler()->moduleExists('thunder_liveblog')) {
+      if (!$thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder__thunder_update_8117']])) {
+        $successful = FALSE;
+      }
+    }
+  }
+  if ($successful) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8117']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8117']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

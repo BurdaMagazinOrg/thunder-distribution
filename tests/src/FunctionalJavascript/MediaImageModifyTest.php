@@ -67,7 +67,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->drupalGet("media/$mediaId/edit");
 
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page->fillField('name[0][value]', "Media {$mediaId}");
     $page->fillField('field_image[0][alt]', "Media {$mediaId} Alt Text");
