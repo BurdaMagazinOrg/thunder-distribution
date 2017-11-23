@@ -24,7 +24,6 @@ if [[ ${SAUCE_LABS_ENABLED} == "true" ]]; then
     travis_start_sauce_connect
 fi
 
-# Run Selenium2 Server
-bash -e /etc/init.d/xvfb start
-sleep 3
-java -jar -Dwebdriver.chrome.driver="${SELENIUM_PATH}/chromedriver-$CHROME_DRIVER_VERSION" "${SELENIUM_PATH}/selenium-server-standalone-$SELENIUM_VERSION.jar" > /dev/null 2>&1 &
+docker pull selenium/standalone-chrome
+docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome
+docker ps -a

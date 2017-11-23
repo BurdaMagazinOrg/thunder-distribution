@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * This module holds functions for split paragraph.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\paragraphs\Plugin\Field\FieldWidget\InlineParagraphsWidget;
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function paragraph_split_text_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if ($context['widget'] instanceof InlineParagraphsWidget) {
+    $element['#attributes']['data-paragraph-type'] = Html::getClass($element['top']['paragraph_type_title']['info']['#markup']);
+    $element['#attributes']['class'][] = 'paragraph-item';
+  }
+}
