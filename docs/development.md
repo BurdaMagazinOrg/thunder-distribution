@@ -45,12 +45,12 @@ sudo ifconfig lo0 alias 172.16.123.1
 ``` 
 ```bash
 docker run -d -P -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
- -v /dev/shm:/dev/shm --add-host="thunder.dev:172.16.123.1" selenium/standalone-chrome
+ -v /dev/shm:/dev/shm --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome
 ```
 To debug a browser you can use following commands:
 ```bash
 docker run -d -P -p 5900:5900 -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
- -v /dev/shm:/dev/shm --add-host="thunder.dev:172.16.123.1" selenium/standalone-chrome-debug
+ -v /dev/shm:/dev/shm --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome-debug
 ```
 and connect with you vnc client (on mac you can use finder: go to -> connect to server [⌘K]). The password is: `secret`
 
@@ -70,12 +70,12 @@ DEVDESKTOP_DRUPAL_SETTINGS_DIR="/Users/d439426/.acquia/DevDesktop/DrupalSettings
 php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
 
 thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' \
---verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:33067/thunder Thunder
+--verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder Thunder
 ```
 and run them individually:
 ```bash
 thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' \
---verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
+--verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
 ```
 
 This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
