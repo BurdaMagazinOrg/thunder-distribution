@@ -1,0 +1,20 @@
+core.entity_form_display.node.liveblog.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        type: entity_reference_paragraphs
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+          type: paragraphs
