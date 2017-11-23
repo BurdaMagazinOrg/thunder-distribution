@@ -94,10 +94,10 @@ trait ThunderTestTrait {
     $query = \Drupal::database()->select('watchdog', 'w')
       ->fields('w');
     $andGroup = $query->andConditionGroup()
-      ->condition('severity', 6, '<')
+      ->condition('severity', 5, '<')
       ->condition('type', 'php');
     $group = $query->orConditionGroup()
-      ->condition('severity', 5, '<')
+      ->condition('severity', 4, '<')
       ->condition($andGroup);
     $query = $query->condition($group);
 
