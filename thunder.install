@@ -841,21 +841,9 @@ function thunder_update_8116() {
 }
 
 /**
- * Enable admin_toolbar_links_access_filter module.
- */
-function thunder_update_8117() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder__thunder_update_8117' => 'admin_toolbar_links_access_filter']);
-
-  // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
-}
-
-/**
  * Enable paragraphs split text.
  */
-function thunder_update_8118() {
+function thunder_update_8117() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   if ($thunderUpdater->installModules(['thunder__thunder_update_8118' => 'paragraph_split_text'])) {
@@ -875,6 +863,18 @@ function thunder_update_8118() {
       $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8118']);
     }
   }
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable admin_toolbar_links_access_filter module.
+ */
+function thunder_update_8118() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->installModules(['thunder__thunder_update_8117' => 'admin_toolbar_links_access_filter']);
+
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }

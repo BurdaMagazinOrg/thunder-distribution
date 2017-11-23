@@ -161,12 +161,12 @@ v2.11:
     '#title': 'Update to Thunder 2.11'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8117:
-        '#title': 'Enable "Admin Toolbar Links Access Filter" module.'
-        '#description': "<p>The Admin Toolbar Links Access Filter module Provides a workaround for the common problem that users with 'Use the administration pages and help' permission see menu links they don't have access permission for.</p>"
-        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
-        extension_page: { '#text': 'Enable Admin Toolbar Links Access Filter', '#url': 'internal:/admin/modules' }
-    thunder__thunder_update_8118:
         '#title': 'Enable "Paragraphs split text" module.'
         '#description': "<p>'Paragraphs split text' enables the editor to split one text paragraph in two separate text paragraphs.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Paragraphs split text', '#url': 'internal:/admin/modules' }
+    thunder__thunder_update_8118:
+        '#title': 'Enable "Admin Toolbar Links Access Filter" module.'
+        '#description': "<p>The Admin Toolbar Links Access Filter module Provides a workaround for the common problem that users with 'Use the administration pages and help' permission see menu links they don't have access permission for.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Admin Toolbar Links Access Filter', '#url': 'internal:/admin/modules' }
