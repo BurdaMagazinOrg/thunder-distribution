@@ -61,8 +61,9 @@ function thunder_media_page_attachments(array &$page) {
  * Implements hook_menu_local_actions_alter().
  */
 function thunder_media_menu_local_actions_alter(&$local_actions) {
+  /** @var \Drupal\views\ViewEntityInterface $view */
   $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
-  if ($view) {
+  if ($view && $view->status()) {
     $local_actions['media.add']['appears_on'][] = 'view.thunder_media.media_page_list';
   }
 }
@@ -71,8 +72,9 @@ function thunder_media_menu_local_actions_alter(&$local_actions) {
  * Implements hook_menu_links_discovered_alter().
  */
 function thunder_media_menu_links_discovered_alter(&$links) {
+  /** @var \Drupal\views\ViewEntityInterface $view */
   $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
-  if ($view) {
+  if ($view && $view->status()) {
     $links['entity.media.collection']['route_name'] = 'view.thunder_media.media_page_list';
   }
 }
