@@ -80,7 +80,10 @@
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             },
             "drupal/liveblog": {
-                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389.patch"
+                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389-7_0.patch"
+            },
+            "drupal/core": {
+                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2925913-4.patch"
             }
         }
     },
@@ -99,7 +102,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.4.0-stable",
+        "drupal/core": "8.4.2",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^1.0",
@@ -119,7 +122,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
-        "drupal/liveblog": "^1.0",
+        "drupal/liveblog": "1.2-alpha13",
         "drupal/media_entity": "1.6",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
