@@ -38,5 +38,8 @@ If you found an issue with Thunder, please open a [ticket](https://www.drupal.or
 
 If you want to help, to make Thunder even better, open an issue on [drupal.org](https://www.drupal.org/project/issues/thunder?categories=All) or just create a pull request.
 
+## Documentation
+For more information please take a look at [https://burdamagazinorg.github.io/thunder-documentation/](https://burdamagazinorg.github.io/thunder-documentation/).
+
 ## Development
 For Development information please take a look at [docs/development.md](docs/development.md).
