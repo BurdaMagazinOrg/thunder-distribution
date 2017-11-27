@@ -209,12 +209,13 @@ Before Drupal\thunder_updater\Updater::updateConfig() updates existing configura
 
 With Thunder Updater module, we have provided Drupal Console command that will generate update configuration changes (it's called configuration update definition or CUD). Configuration update definition (CUD) will be stored in `config/update` directory of the module and it can be easily executed with Thunder Updater.
 
-It's sufficient to execute `drupal generate:thunder:update` and follow instructions.
-There are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function).
-Then also information for checklist entry, like title, success message and failure message.
+Workflow to generate Thunder configuration update is following:
+1. Make clean install of the previous version of Thunder (version for which one you want to create configuration update). For example, if you are merging changes to `develop` branch, then you should install Thunder for that branch
+2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
+3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
+4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:thunder:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
+5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code. 
 
-Command will generate CUD file and save it in `config/update` folder of module, it will add entry in `update.yml` file for checklist and it will create update hook function in `<module_name>.install` file.
-
-Additional information about command are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
+Additional information about command options are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
 
 When an update for Thunder is created don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
