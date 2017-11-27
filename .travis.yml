@@ -22,12 +22,10 @@ dist: trusty
 # Here is related issue: https://github.com/travis-ci/travis-ci/issues/7150
 sudo: required
 
-# match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
   only:
     - master
     - develop
-    - test/thunder-project
 
 mysql:
   database: drupal
