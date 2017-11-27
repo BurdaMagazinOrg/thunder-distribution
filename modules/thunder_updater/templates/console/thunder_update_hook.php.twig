@@ -18,7 +18,7 @@ function {{ update_hook_name }}() {
     $thunderUpdater->checklist()->markUpdatesFailed(['{{ update_hook_name }}']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 {% endblock %}

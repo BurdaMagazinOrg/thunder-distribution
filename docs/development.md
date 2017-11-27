@@ -166,7 +166,7 @@ Here is example to import image paragraph configuration:
     $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_add_image_paragraph']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 ```
 It imports configurations, that's in a module or profile config directory. 

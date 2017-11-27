@@ -788,7 +788,7 @@ function thunder_media_update_8106() {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8106']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -817,6 +817,6 @@ function thunder_media_update_8108() {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8108']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
