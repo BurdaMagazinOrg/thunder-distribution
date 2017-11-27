@@ -80,7 +80,7 @@
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             },
             "drupal/liveblog": {
-                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389-7_0.patch"
+                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389-15.patch"
             },
             "drupal/core": {
                 "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2925913-4.patch"
