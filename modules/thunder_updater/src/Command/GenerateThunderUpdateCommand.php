@@ -276,16 +276,6 @@ class GenerateThunderUpdateCommand extends Command {
   }
 
   /**
-   * Get update gook generator.
-   *
-   * @return \Drupal\thunder_updater\Generator\ThunderUpdateGenerator
-   *   Update hook generator for Thunder update.
-   */
-  protected function createGenerator() {
-    return new ThunderUpdateGenerator();
-  }
-
-  /**
    * Get last update number.
    *
    * @param string $module
@@ -295,20 +285,9 @@ class GenerateThunderUpdateCommand extends Command {
    *   Returns next update hook number.
    */
   protected function getLastUpdate($module) {
-    $this->site->loadLegacyFile('/core/includes/update.inc');
     $this->site->loadLegacyFile('/core/includes/schema.inc');
 
-    $updates = update_get_update_list();
-
-    if (empty($updates[$module]['pending'])) {
-      $last_update_number = drupal_get_schema_versions($module);
-      $last_update_number = $last_update_number[0];
-    }
-    else {
-      $last_update_number = reset(array_keys($updates[$module]['pending'], max($updates[$module]['pending'])));
-    }
-
-    return $last_update_number;
+    return drupal_get_installed_schema_version($module);
   }
 
 }
