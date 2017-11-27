@@ -170,3 +170,8 @@ v2.11:
         '#description': "<p>The Admin Toolbar Links Access Filter module Provides a workaround for the common problem that users with 'Use the administration pages and help' permission see menu links they don't have access permission for.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Admin Toolbar Links Access Filter', '#url': 'internal:/admin/modules' }
+    thunder_media_update_8108:
+        '#title': 'Use blazy for lazy loading.'
+        '#description': '<p>Slick has been configured to use blazy for lazy loading of images in galleries.</p>'
+        '#description_failed': '<p><strong>Slick could not be configured to use blazy for lazy loading of images in galleries!</strong><p>'
+        extension_page: { '#text': 'Configure your optionsets to use blazy for lazy loading', '#url': 'internal:/' }

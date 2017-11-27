@@ -1,0 +1,10 @@
+slick.optionset.thunder_gallery:
+  expected_config:
+    options:
+      settings:
+        lazyLoad: ''
+  update_actions:
+    change:
+      options:
+        settings:
+          lazyLoad: blazy
