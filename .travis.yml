@@ -6,18 +6,11 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 
-php:
-  - 7.1
-
-env:
-  - INSTALL_METHOD=drush_make
-  - INSTALL_METHOD=composer
-
 matrix:
-  exclude:
-  - php: 5.6
-    env: INSTALL_METHOD=composer
+  include:
   - php: 7.1
+    env: INSTALL_METHOD=composer
+  - php: 5.6
     env: INSTALL_METHOD=drush_make
 
 # Use newer distribution on Travis CI (Ubuntu 14.04 - Trusty)
