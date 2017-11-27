@@ -66,7 +66,7 @@ php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http:
 
 To speed things up run tests using a database dump: 
 ```bash
-DEVDESKTOP_DRUPAL_SETTINGS_DIR="/Users/d439426/.acquia/DevDesktop/DrupalSettings" \
+DEVDESKTOP_DRUPAL_SETTINGS_DIR="${HOME}/.acquia/DevDesktop/DrupalSettings" \
 php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
 
 thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' \
