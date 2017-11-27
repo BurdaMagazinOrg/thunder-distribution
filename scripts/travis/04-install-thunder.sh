@@ -45,7 +45,7 @@ drush_make_thunder() {
 
 composer_create_thunder() {
     cd ${THUNDER_DIST_DIR}
-    composer create-project burdamagazinorg/thunder-project:div-feature/update-project ${TEST_DIR} --stability dev --no-interaction --no-install
+    composer create-project burdamagazinorg/thunder-project:dev-feature/update-project ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
