@@ -83,7 +83,7 @@
                 "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389-15.patch"
             },
             "drupal/core": {
-                "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2925913-4.patch"
+                "EntityReferenceItem logs critical errors in onDependencyRemoval()": "https://www.drupal.org/files/issues/2925913-4.patch"
             }
         }
     },
