@@ -1,4 +1,6 @@
-### Thunder is a Drupal 8 based distribution. 
+### Contributing to Thunder 
+
+Thunder is a Drupal 8 based distribution. 
 
 We are working on GitHub and drupal.org. Issues will be managed on drupal.org. That gives us the possibility to better interact with related issues. Code improvements will be managed over GitHub's PR system.
 
