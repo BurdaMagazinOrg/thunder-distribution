@@ -66,7 +66,7 @@ php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http:
 
 To speed things up run tests using a database dump: 
 ```bash
-DEVDESKTOP_DRUPAL_SETTINGS_DIR="/Users/d439426/.acquia/DevDesktop/DrupalSettings" \
+DEVDESKTOP_DRUPAL_SETTINGS_DIR="${HOME}/.acquia/DevDesktop/DrupalSettings" \
 php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
 
 thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' \
@@ -207,42 +207,15 @@ Before Drupal\thunder_updater\Updater::updateConfig() updates existing configura
 
 #### Updating existing configuration (with using of generated configuration changes)
 
-With Thunder Updater module, we have provided `drush` command that will generate update configuration changes (it's called configuration update definition or CUD). Configuration update definition (CUD) will be stored in `config\update` directory of module and it can be easily execute with Thunder Updater.
-Workflow to generate and use CUD and use it is following:
+With Thunder Updater module, we have provided Drupal Console command that will generate update configuration changes (it's called configuration update definition or CUD). Configuration update definition (CUD) will be stored in `config/update` directory of the module and it can be easily executed with Thunder Updater.
 
-1. Make clean install of previous version of Thunder (version for which one you want to install - fe. if you are merging changes to `develop` branch, then you should install Thunder for that branch)
+Workflow to generate Thunder configuration update is following:
+1. Make clean install of the previous version of Thunder (version for which one you want to create configuration update). For example, if you are merging changes to `develop` branch, then you should install Thunder for that branch
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
 3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
-4. Now is moment to create CUDs. For that we have provided following drush command:
+4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:thunder:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
+5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code. 
 
-    ```drush thunder-updater-generate-update [module] [update-name]```
-    
-    For example to create CUD for your update hook (`thunder_media_update_8099`) in `thunder_media` module, you can execute following command:
+Additional information about command options are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
 
-    ```drush thunder-updater-generate-update thunder_media thunder_media__update_8099```
-
-    That will generate CUD file in `modules\thunder_media\config\update` folder. File is in `yaml` format and human readable.
-
-5. After that you should use CUD file in your update hook. Here is code example:
-    ```php
-    /**
-     * Example for update hook with usage of configuration update defintion.
-     */
-    function thunder_media_update_8099() {
-      /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-      $thunderUpdater = \Drupal::service('thunder_updater');
-    
-      // Execute configuration update defintions with logging of fails and successes.
-      if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8099']])) {
-        $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_thunder_media_update_8099']);
-      }
-      else {
-        $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_thunder_media_update_8099']);
-      }
-    
-      // Output logged messages to related chanel of update execution.
-      return $thunderUpdater->logger()->output();
-    }
-    ```
-
-That's all and don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
+When an update for Thunder is created don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.
