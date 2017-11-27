@@ -29,6 +29,10 @@
     "license": "GPL-2.0+",
     "repositories": [
         {
+            "type": "git",
+            "url":  "https://git.drupal.org/sandbox/volkerk/2908463.git"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -143,7 +147,8 @@
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24"
+        "bower-asset/shariff": "^1.24",
+        "drupal/yoast_seo_preview": "8.x-1.x-dev as 1.0"
     },
     "replace": {
         "heiseonline/shariff": "*",

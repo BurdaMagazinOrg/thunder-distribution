@@ -50,6 +50,10 @@ composer_create_thunder() {
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "drupal/thunder_admin:dev-2.x" --no-progress
+
+    # add yoast_seo_preview sandbox
+    composer config repositories.yoast_seo_preview git https://git.drupal.org/sandbox/volkerk/2908463.git
+    composer require "drupal/yoast_seo_preview" "dev-8.x-1.x as 1.0"
 }
 
 apply_patches() {

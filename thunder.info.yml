@@ -68,6 +68,7 @@ dependencies:
   - slick_media
   - responsive_preview
   - video_embed_media
+  - yoast_seo_preview
 # thunder
   - thunder_article
   - thunder_media
