@@ -1,0 +1,36 @@
+description: 'Generate Thunder configuration update.'
+help: 'The <info>"%s"</info> command helps you generate Thunder configuration update.'
+welcome: 'Welcome to the Thunder update generator'
+options:
+  module: 'The module name where the update will be stored'
+  update-n: 'Update hook number'
+  description: 'Description for update'
+  success-message: 'Success message for checklist'
+  failure-message: 'Failure message for checklist'
+  include-modules: 'List of modules which configurations should be included in the update (empty for all)'
+  filter-modules: 'Regex filter for modules that should be included in update'
+questions:
+  module: 'Enter the module name where the update will be stored'
+  update-n: 'Please provide the number for update hook to be implemented'
+  description: 'Please enter a description text for update function and checklist entry'
+  success-message: 'Please enter a message that will be displayed in checklist entry when the update is successful'
+  failure-message: 'Please enter a message that will be displayed in checklist entry when the update has failed'
+  include-modules: 'Please provide a comma-separated list of modules which configurations should be included in update (empty for all)'
+  filter-modules: 'Please enter regex filter for modules that should be included in the update'
+defaults:
+  description: 'Update configuration.'
+  success-message: 'Configuration is successfully updated.'
+  failure-message: 'Update of configuration has failed.'
+messages:
+  success: 'Update is successfully generated.'
+  no-update: 'There are no changes that should be exported for the update.'
+  wrong-update-n: 'The update number "%s" is invalid'
+examples:
+  - description: 'Generate a Thunder update configuration and update hook with update N in module'
+    execution: |
+      drupal generate:thunder:update  \
+          --module="thunder_updater"  \
+          --update-n="8001"  \
+          --description="Update configuration."  \
+          --success-message="Configuration is successfully updated."  \
+          --failure-message="Update of configuration has failed."

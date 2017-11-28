@@ -1,0 +1,11 @@
+services:
+  thunder_updater.generate_thunder_update:
+    class: Drupal\thunder_updater\Command\GenerateThunderUpdateCommand
+    arguments: ['@console.extension_manager', '@thunder_updater.thunder_update_generator', '@console.site']
+    tags:
+      - { name: drupal.command }
+  thunder_updater.thunder_update_generator:
+    class: Drupal\thunder_updater\Generator\ThunderUpdateGenerator
+    arguments: ['@console.extension_manager', '@thunder_updater.config_handler', '@module_handler']
+    tags:
+      - { name: drupal.generator }
