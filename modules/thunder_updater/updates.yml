@@ -157,3 +157,22 @@ v2.10:
         '#description': "<p>Places error messages adjacent to form inputs, for improved usability and accessibility.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Inline form errors', '#url': 'internal:/admin/modules' }
+v2.11:
+    '#title': 'Update to Thunder 2.11'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8117:
+        '#title': 'Enable "Paragraphs split text" module.'
+        '#description': "<p>'Paragraphs split text' enables the editor to split one text paragraph in two separate text paragraphs.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Paragraphs split text', '#url': 'internal:/admin/modules' }
+    thunder__thunder_update_8118:
+        '#title': 'Enable "Admin Toolbar Links Access Filter" module.'
+        '#description': "<p>The Admin Toolbar Links Access Filter module Provides a workaround for the common problem that users with 'Use the administration pages and help' permission see menu links they don't have access permission for.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Admin Toolbar Links Access Filter', '#url': 'internal:/admin/modules' }
+    thunder_media_update_8108:
+        '#title': 'Use blazy for lazy loading.'
+        '#description': '<p>Slick has been configured to use blazy for lazy loading of images in galleries.</p>'
+        '#description_failed': '<p><strong>Slick could not be configured to use blazy for lazy loading of images in galleries.</strong> Enable the Slick UI module and configure your option sets to use blazy for lazy loading<p>'
+        extension_page: { '#text': 'Enable the Slick UI module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure your option sets', '#url': 'internal:/admin/config/media/slick' }
