@@ -4,8 +4,8 @@
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.10...8.2.11)
 
 We added a new feature to split paragraphs into two. This was contributed by Telekurier Online Medien GmbH.
-Additionally we fixed th lazy loading of galleries, that were below the visible area and improved the liveblog
-integration. PHP notices have been removed and links, that are not available for a role are not displayed anymore.
+Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
+integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
 
 - Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
 - Fix [Add liveblog page is not aligned with article design](https://www.drupal.org/node/2924063)
