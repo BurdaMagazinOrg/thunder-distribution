@@ -173,6 +173,6 @@ v2.11:
     thunder_media_update_8108:
         '#title': 'Use blazy for lazy loading.'
         '#description': '<p>Slick has been configured to use blazy for lazy loading of images in galleries.</p>'
-        '#description_failed': '<p><strong>Slick could not be configured to use blazy for lazy loading of images in galleries.</strong>Enable the Slick UI module and configure your option sets to use blazy for lazy loading<p>'
+        '#description_failed': '<p><strong>Slick could not be configured to use blazy for lazy loading of images in galleries.</strong> Enable the Slick UI module and configure your option sets to use blazy for lazy loading<p>'
         extension_page: { '#text': 'Enable the Slick UI module', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Configure your option sets', '#url': 'internal:/admin/config/media/slick' }
