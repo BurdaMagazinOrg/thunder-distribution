@@ -1,5 +1,20 @@
 # Change Log
 
+## [8.2.11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.11) 2017-11-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.10...8.2.11)
+
+We added a new feature to split paragraphs into two. This was contributed by Telekurier Online Medien GmbH.
+Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
+integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
+
+- Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
+- Fix [Add liveblog page is not aligned with article design](https://www.drupal.org/node/2924063)
+- Add [Integrate paragraphs split modul](https://www.drupal.org/node/2915666)
+- Change [Use selenium chrome docker image for tests](https://www.drupal.org/node/2924324)
+- Fix [Configuration menu - many useless menu items for SEO role](https://www.drupal.org/node/2828407)
+- Change [Make update generation more generic for thunder_updater](https://www.drupal.org/node/2924323)
+- Fix [Gallery images below the visible area do not get loaded](https://www.drupal.org/node/2926501)
+
 ## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
 

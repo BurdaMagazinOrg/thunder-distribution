@@ -40,7 +40,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
 
     // Split text paragraph.
-    $this->getSession()->executeScript("jQuery('#cke_108').click();");
+    $this->getSession()->executeScript("jQuery('.cke_button_off[title=\"Split Text Before\"]')[0].click();");
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Add Gallery Paragraph between Image and Text.
