@@ -84,6 +84,6 @@ function thunder_taxonomy_update_8002() {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder_taxonomy_update_8002']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
