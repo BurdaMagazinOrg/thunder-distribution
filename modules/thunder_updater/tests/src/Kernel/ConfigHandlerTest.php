@@ -96,11 +96,7 @@ class ConfigHandlerTest extends KernelTestBase {
     $config->setData($configData)->save(TRUE);
 
     // Generate patch after configuration change.
-    $configHandler->generatePatchFile('node', 'thunder_updater__node_test');
-
-    // Validate generated file data.
-    $moduleHandler = \Drupal::service('module_handler');
-    $data = file_get_contents($moduleHandler->getModule('node')->getPath() . '/config/update/thunder_updater__node_test.yml');
+    $data = $configHandler->generatePatchFile(['node']);
 
     $this->assertEquals($this->getUpdateDefinition(), $data);
   }

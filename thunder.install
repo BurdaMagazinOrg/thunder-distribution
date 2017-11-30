@@ -717,7 +717,7 @@ function thunder_update_8112() {
     $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_admin_ux']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $updateLogger->output();
 }
 
@@ -741,7 +741,7 @@ function thunder_update_8113() {
     }
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -795,7 +795,7 @@ function thunder_update_8114() {
     $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_entity_pinterest']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -824,7 +824,7 @@ function thunder_update_8115() {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8115']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -836,7 +836,7 @@ function thunder_update_8116() {
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->installModules(['thunder__thunder_update_8116' => 'inline_form_errors']);
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -863,7 +863,7 @@ function thunder_update_8117() {
       $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8118']);
     }
   }
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -875,6 +875,6 @@ function thunder_update_8118() {
   $thunderUpdater = \Drupal::service('thunder_updater');
   $thunderUpdater->installModules(['thunder__thunder_update_8117' => 'admin_toolbar_links_access_filter']);
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
