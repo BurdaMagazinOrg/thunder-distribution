@@ -381,12 +381,44 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   Text that will be filled into CKEditor.
    */
   public function fillCkEditor(DocumentElement $page, $ckEditorCssSelector, $text) {
-    $ckEditor = $page->find('css', $ckEditorCssSelector);
-    $ckEditorId = $ckEditor->getAttribute('id');
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
 
     $this->getSession()
       ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].insertHtml(\"$text\");");
+  }
+
+  /**
+   * Select CKEditor element.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   * @param int $childIndex
+   *   The child index under the node.
+   */
+  public function selectCkEditorElement($ckEditorCssSelector, $childIndex) {
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
+
+    $this->getSession()
+      ->getDriver()
+      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex));");
+  }
+
+  /**
+   * Assert that CKEditor instance contains correct data.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   * @param string $expectedData
+   *   The expected data.
+   */
+  public function assertCkEditorData($ckEditorCssSelector, $expectedData) {
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
+    $ckEditordata = $this->getSession()
+      ->getDriver()
+      ->evaluateScript("return CKEDITOR.instances[\"$ckEditorId\"].getData();");
+
+    static::assertTrue($ckEditordata == $expectedData, 'CKEditor data found');
   }
 
   /**
@@ -485,6 +517,24 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $repoSlag = getenv('TRAVIS_REPO_SLUG');
 
     return (!empty($pullRequestSlag) && $pullRequestSlag !== $repoSlag);
+  }
+
+  /**
+   * Get CKEditor id from css selector.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   *
+   * @return string
+   *   CKEditor ID.
+   */
+  protected function getCkEditorId($ckEditorCssSelector) {
+    $ckEditor = $this->getSession()->getPage()->find(
+      'css',
+      $ckEditorCssSelector
+    );
+    $ckEditorId = $ckEditor->getAttribute('id');
+    return $ckEditorId;
   }
 
 }
