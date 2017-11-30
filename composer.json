@@ -79,6 +79,9 @@
                 "Make media name available on manage display": "https://www.drupal.org/files/issues/2912298-13.patch",
                 "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch",
                 "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-39.patch"
+            },
+            "drupal/media_entity": {
+                "Action support check shouldn't fail if 2877383 is applied": "https://www.drupal.org/files/issues/2927490.patch"
             }
         }
     },
