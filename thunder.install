@@ -5,6 +5,7 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
@@ -29,7 +30,24 @@ function thunder_update_dependencies() {
     8006 => $installThunderUpdaterHook,
   ];
 
-  return $dependencies;
+  // Ensure that all thunder updates come after all the other update hooks.
+  $list = [];
+  $return = [];
+  $updates = update_get_update_list();
+  $module_data = system_rebuild_module_data();
+  $thunder_path_regex = '@^' . $module_data['thunder']->getPath() . '@';
+  foreach ($updates as $module => $info) {
+    // Only include modules in the thunder profile.
+    if (preg_match($thunder_path_regex, $module_data[$module]->getPath())) {
+      $return[$module] = [];
+    }
+    $pending = array_keys($info['pending']);
+    $list[$module] = array_pop($pending);
+  }
+  foreach ($return as $module => &$info) {
+    $info[$updates[$module]['start']] = $list;
+  }
+  return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
 }
 
 /**
