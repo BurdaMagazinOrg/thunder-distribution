@@ -30,6 +30,9 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
    * {@inheritdoc}
    */
   protected function setDatabaseDumpFiles() {
+    // This database was created from the Thunder release available from
+    // https://www.drupal.org/project/thunder/releases/8.x-2.0 and an
+    // interactive install and choosing to enable all the optional modules.
     $this->databaseDumpFiles = [
       __DIR__ . '/../../fixtures/update/thunder.2-0.php.gz',
     ];
@@ -39,7 +42,11 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
    * Tests Thunder updates from 2.0 to current.
    */
   public function testUpdate() {
+    // Calling the method below performs assertions that all updates have been
+    // run successfully, configuration schema is correct and that the entity
+    // schemas are correct.
     $this->runUpdates();
+    // @todo figure out any other tests to run.
   }
 
   /**
