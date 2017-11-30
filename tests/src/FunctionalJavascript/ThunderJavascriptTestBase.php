@@ -362,8 +362,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $driver = $this->getSession()->getDriver();
     if ($driver instanceof Selenium2Driver) {
       $actualTitle = $driver->getWebDriverSession()->title();
-
-      static::assertTrue($expectedTitle === $actualTitle, 'Title found');
+      static::assertEquals($expectedTitle, $actualTitle, 'Title found');
     }
     else {
       $this->assertSession()->titleEquals($expectedTitle);
@@ -409,16 +408,16 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *
    * @param string $ckEditorCssSelector
    *   CSS selector for CKEditor.
-   * @param string $expectedData
-   *   The expected data.
+   * @param string $expectedContent
+   *   The expected content.
    */
-  public function assertCkEditorData($ckEditorCssSelector, $expectedData) {
+  public function assertCkEditorContent($ckEditorCssSelector, $expectedContent) {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-    $ckEditordata = $this->getSession()
+    $ckEditorContent = $this->getSession()
       ->getDriver()
       ->evaluateScript("return CKEDITOR.instances[\"$ckEditorId\"].getData();");
 
-    static::assertTrue($ckEditordata == $expectedData, 'CKEditor data found');
+    static::assertEquals($expectedContent, $ckEditorContent);
   }
 
   /**
@@ -533,8 +532,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       'css',
       $ckEditorCssSelector
     );
-    $ckEditorId = $ckEditor->getAttribute('id');
-    return $ckEditorId;
+    return $ckEditor->getAttribute('id');
   }
 
 }
