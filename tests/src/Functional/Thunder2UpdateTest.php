@@ -14,6 +14,7 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
 
   /**
    * An array of config to skip schema checking on.
+   *
    * @var array
    */
   protected $configSchemaCheckSkip = [
@@ -40,7 +41,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   public function testUpdate() {
     $this->runUpdates();
   }
-
 
   /**
    * {@inheritdoc}
