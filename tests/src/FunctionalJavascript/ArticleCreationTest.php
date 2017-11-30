@@ -13,7 +13,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderArticleTestTrait;
 
   /**
-   * Filed name for paragraphs in article content.
+   * Field name for paragraphs in article content.
    *
    * @var string
    */
