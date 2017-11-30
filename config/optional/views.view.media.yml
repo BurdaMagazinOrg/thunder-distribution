@@ -8,8 +8,9 @@ dependencies:
     - datetime
     - image
     - media
+    - system
     - user
-id: thunder_media
+id: media
 label: Media
 module: views
 description: ''
@@ -42,7 +43,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filter
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -82,17 +83,44 @@ display:
           summary: ''
           description: ''
           columns:
-            media_bulk_form: media_bulk_form
-            thumbnail__target_id: thumbnail__target_id
             name: name
             bundle: bundle
+            changed: changed
             uid: uid
             status: status
-            field_expires: field_expires
-            changed: changed
-            operations: operations
+            thumbnail__target_id: thumbnail__target_id
           info:
-            media_bulk_form:
+            name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            bundle:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -104,57 +132,8 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-medium
-            bundle:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-medium
-            uid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            status:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-medium
-            field_expires:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            changed:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            operations:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
           default: changed
-          empty_table: false
+          empty_table: true
       row:
         type: fields
       fields:
@@ -165,7 +144,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Media operations bulk form'
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -206,7 +185,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          action_title: 'With selection'
+          action_title: Action
           include_exclude: exclude
           selected_actions: {  }
           entity_type: media
@@ -331,7 +310,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Provider
+          label: Source
           exclude: false
           alter:
             alter_text: false
@@ -375,7 +354,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -704,93 +683,6 @@ display:
           entity_type: media
           plugin_id: entity_operations
       filters:
-        status:
-          id: status
-          table: media_field_data
-          field: status
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: true
-          expose:
-            operator_id: ''
-            label: 'True'
-            description: null
-            use_operator: false
-            operator: status_op
-            identifier: status
-            required: true
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: true
-          group_info:
-            label: 'Publishing status'
-            description: ''
-            identifier: status
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: Published
-                operator: '='
-                value: '1'
-              2:
-                title: Unpublished
-                operator: '='
-                value: '0'
-          plugin_id: boolean
-          entity_type: media
-          entity_field: status
-        bundle:
-          id: bundle
-          table: media_field_data
-          field: bundle
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: bundle_op
-            label: Provider
-            description: ''
-            use_operator: false
-            operator: bundle_op
-            identifier: provider
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: media
-          entity_field: bundle
-          plugin_id: bundle
         name:
           id: name
           table: media_field_data
@@ -831,6 +723,93 @@ display:
           entity_type: media
           entity_field: name
           plugin_id: string
+        bundle:
+          id: bundle
+          table: media_field_data
+          field: bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: bundle_op
+            label: Source
+            description: ''
+            use_operator: false
+            operator: bundle_op
+            identifier: source
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: media
+          entity_field: bundle
+          plugin_id: bundle
+        status:
+          id: status
+          table: media_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'True'
+            description: null
+            use_operator: false
+            operator: status_op
+            identifier: status
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: true
+          group_info:
+            label: 'Published status'
+            description: ''
+            identifier: status
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Published
+                operator: '='
+                value: '1'
+              2:
+                title: Unpublished
+                operator: '='
+                value: '0'
+          plugin_id: boolean
+          entity_type: media
+          entity_field: status
         langcode:
           id: langcode
           table: media_field_data
@@ -906,10 +885,6 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
     cache_metadata:
       max-age: 0
       contexts:

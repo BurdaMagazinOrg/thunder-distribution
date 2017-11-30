@@ -64,7 +64,7 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
 
     // Filter only instagram media type.
     $this->setFieldValue($page, 'source', 'instagram');
-    $page->find('xpath', '//*[@id="edit-submit-media"]')->click();
+    $page->find('xpath', '//*[@id="edit-submit"]')->click();
 
     // Adjust position for list, before making screenshot.
     $this->scrollElementInView('#edit-submit');

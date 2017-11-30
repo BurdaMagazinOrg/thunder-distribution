@@ -75,7 +75,6 @@ function thunder_install() {
     ->save(TRUE);
 
   \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
-
 }
 
 /**
