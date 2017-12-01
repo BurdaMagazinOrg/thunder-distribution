@@ -9,7 +9,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 /**
  * Tests the paragraph split module integration.
  *
- * @group Thunder
+ * @group _Thunder
  */
 class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
@@ -34,9 +34,37 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   protected static $selectorTemplate = "textarea[name='%s[%d][subform][field_text][0][value]']";
 
   /**
-   * Test split of single paragraph after a selection.
+   * Test if a deleted paragraph leads to data loss.
    */
-  public function testSingleParagraphSplitAfter() {
+  public function testParagraphSplitDataLoss() {
+    $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
+    $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
+
+    $this->articleFillNew([]);
+    $this->addTextParagraph(static::$paragraphsField, '');
+
+    $page = $this->getSession()->getPage();
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_remove"]');
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_confirm_remove"]');
+
+    $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
+
+    // Textfield selector template.
+    $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 0);
+
+    // Split text paragraph.
+    $this->clickParagraphSplitButton('after');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Split after reverts the paragraph counting order.
+    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 1), $firstParagraphContent . PHP_EOL);
+    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), $secondParagraphContent . PHP_EOL);
+  }
+
+  /**
+   * Test split of paragraph after a selection.
+   */
+  public function testParagraphSplitAfter() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -49,7 +77,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 0);
 
     // Split text paragraph.
-    $this->getSession()->executeScript("jQuery('.cke_button__splittextafter')[0].click();");
+    $this->clickParagraphSplitButton('after');
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Split after reverts the paragraph counting order.
@@ -59,9 +87,9 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test split of single paragraph before a selection.
+   * Test split of paragraph before a selection.
    */
-  public function testSingleParagraphSplitBefore() {
+  public function testParagraphSplitBefore() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -74,6 +102,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 1);
 
     // Split text paragraph.
+    $this->clickParagraphSplitButton('before');
     $this->getSession()->executeScript("jQuery('.cke_button__splittextbefore')[0].click();");
     $this->assertSession()->assertWaitOnAjaxRequest();
 
@@ -82,4 +111,13 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
   }
 
+  /**
+   * Click on split button.
+   *
+   * @param string $type
+   *   The button type to click. Can be 'before' or 'after'.
+   */
+  protected function clickParagraphSplitButton($type) {
+    $this->getSession()->executeScript("jQuery('.cke_button__splittext{$type}')[0].click();");
+  }
 }
