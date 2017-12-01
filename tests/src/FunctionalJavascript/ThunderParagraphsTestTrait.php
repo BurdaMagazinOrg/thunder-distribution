@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Element\DocumentElement;
+use Drupal\Component\Utility\Html;
 
 /**
  * Trait for handling of Paragraph related test actions.
@@ -44,11 +45,12 @@ trait ThunderParagraphsTestTrait {
    *   Returns index for added paragraph.
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-    $page = $this->getSession()->getPage();
-    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
 
-    $fieldSelector = str_replace('_', '-', $fieldName);
-    if ($position === NULL || $position > $this->getNumberOfParagraphs($fieldName)) {
+    $page = $this->getSession()->getPage();
+    $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
+
+    $fieldSelector = HTML::cleanCssIdentifier($fieldName);
+    if ($position === NULL || $position > $numberOfParagraphs) {
       $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
     }
     else {
@@ -67,9 +69,18 @@ trait ThunderParagraphsTestTrait {
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-' . $nextParagraphIndex . '-subform"]');
+    $selector = "#edit-{$fieldSelector}-wrapper table.field-multiple-table--paragraphs tr.draggable";
+    $condition = "jQuery('$selector').length > " . $numberOfParagraphs;
 
-    return $nextParagraphIndex;
+    $this->assertJsCondition($condition, 1000, '');
+
+    $newParagraphPosition = $position + 1;
+    $paragraphRow = $this->xpath("//*[@id=\"edit-{$fieldSelector}-wrapper\"]//table[starts-with(@id, \"{$fieldSelector}-values\")]/tbody/tr[contains(@class, \"draggable\")][{$newParagraphPosition}]//textarea")[0];
+
+    $newParagraphId = $paragraphRow->getAttribute('id');
+    preg_match("/edit-{$fieldSelector}-(\d+)-/", $newParagraphId, $matches);
+
+    return $matches[1];
   }
 
   /**
