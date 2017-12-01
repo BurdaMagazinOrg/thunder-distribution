@@ -532,6 +532,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       'css',
       $ckEditorCssSelector
     );
+
     return $ckEditor->getAttribute('id');
   }
 
