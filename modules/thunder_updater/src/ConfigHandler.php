@@ -107,40 +107,35 @@ class ConfigHandler {
    * It compares Base vs. Active configuration and creates patch with defined
    * name in patch folder.
    *
-   * @param string $moduleName
+   * @param string[] $moduleNames
    *   Module name that will be used to generate patch for it.
-   * @param string $updateName
-   *   Update name for patch.
    *
    * @return string|bool
    *   Rendering generated patch file name or FALSE if patch is empty.
    */
-  public function generatePatchFile($moduleName, $updateName) {
+  public function generatePatchFile(array $moduleNames = []) {
     $updatePatch = [];
-    $configurationLists = $this->configList->listConfig('module', $moduleName);
 
-    // Get required and optional configuration names.
-    $moduleConfigNames = array_merge($configurationLists[1], $configurationLists[2]);
+    foreach ($moduleNames as $moduleName) {
+      $configurationLists = $this->configList->listConfig('module', $moduleName);
 
-    $configNames = $this->getConfigNames(array_intersect($moduleConfigNames, $configurationLists[0]));
-    foreach ($configNames as $configName) {
-      $configDiff = $this->getConfigDiff($configName);
-      $configDiff = $this->filterDiff($configDiff);
-      if (!empty($configDiff)) {
-        $updatePatch[$configName->getFullName()] = [
-          'expected_config' => $this->getExpectedConfig($configDiff),
-          'update_actions' => $this->getUpdateConfig($configDiff),
-        ];
+      // Get required and optional configuration names.
+      $moduleConfigNames = array_merge($configurationLists[1], $configurationLists[2]);
+
+      $configNames = $this->getConfigNames(array_intersect($moduleConfigNames, $configurationLists[0]));
+      foreach ($configNames as $configName) {
+        $configDiff = $this->getConfigDiff($configName);
+        $configDiff = $this->filterDiff($configDiff);
+        if (!empty($configDiff)) {
+          $updatePatch[$configName->getFullName()] = [
+            'expected_config' => $this->getExpectedConfig($configDiff),
+            'update_actions' => $this->getUpdateConfig($configDiff),
+          ];
+        }
       }
     }
 
-    if (!empty($updatePatch)) {
-      file_put_contents($this->getPatchFile($moduleName, $updateName, TRUE), $this->serializer->encode($updatePatch));
-
-      return TRUE;
-    }
-
-    return FALSE;
+    return $updatePatch ? $this->serializer->encode($updatePatch) : FALSE;
   }
 
   /**
@@ -338,7 +333,7 @@ class ConfigHandler {
    * @return string
    *   Returns full path file name for update patch.
    */
-  protected function getPatchFile($moduleName, $updateName, $createDirectory = FALSE) {
+  public function getPatchFile($moduleName, $updateName, $createDirectory = FALSE) {
     $updateDir = $this->moduleHandler->getModule($moduleName)->getPath() . $this->baseUpdatePath;
 
     // Ensure that directory exists.
