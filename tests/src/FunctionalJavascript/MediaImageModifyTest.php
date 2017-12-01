@@ -56,7 +56,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test Image modifications (edit fields and change image).
+   * Test Image modifications (edit fields).
    */
   public function testImageEdit() {
     // Media ID used for testing.
@@ -66,10 +66,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet("media/$mediaId/edit");
 
-    $this->clickButtonDrupalSelector($page, 'edit-field-image-0-remove-button');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-    $page->findField('files[field_image_0]')
-      ->attachFile(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $page->fillField('name[0][value]', "Media {$mediaId}");
@@ -107,14 +103,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
       ->fieldValueEquals('field_source[0][value]', "Media {$mediaId} Source");
     $this->assertSession()
       ->fieldValueEquals('field_description[0][value]', "<p>Media {$mediaId} Description</p>");
-
-    // Check that new image is used in article gallery.
-    $this->drupalGet('/node/7');
-
-    // Check that, 2nd image is file: reference.jpg.
-    $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-13-media-images-default-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("reference.jpg")');
-    $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "reference.jpg".');
   }
 
   /**

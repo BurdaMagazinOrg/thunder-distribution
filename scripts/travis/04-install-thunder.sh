@@ -49,10 +49,6 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-
-    # Use only global drush.
-    composer remove drush/drush --no-update
-
     composer require "burdamagazinorg/thunder:*" "phpunit/phpunit:~4.8" "drupal/thunder_admin:dev-2.x" --no-progress
 }
 

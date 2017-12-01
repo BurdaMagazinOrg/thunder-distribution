@@ -1,0 +1,95 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/crop\/focal_point"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/crop\/focal_point\/revision_uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "cid": [
+        {
+            "value": 1
+        }
+    ],
+    "uuid": [
+        {
+            "value": "6d04fa9e-ace9-4f89-ac32-8ca14ec18719"
+        }
+    ],
+    "vid": [
+        {
+            "value": 1
+        }
+    ],
+    "type": [
+        {
+            "target_id": "focal_point"
+        }
+    ],
+    "entity_id": [
+        {
+            "value": 9
+        }
+    ],
+    "entity_type": [
+        {
+            "value": "file"
+        }
+    ],
+    "uri": [
+        {
+            "value": "public:\/\/2016-05\/26893182561_1281c142bb_k.jpg"
+        }
+    ],
+    "x": [
+        {
+            "value": 901
+        }
+    ],
+    "y": [
+        {
+            "value": 365
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2017-10-10T16:23:05+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/crop\/focal_point\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "693ed5d2-ca8e-4d7f-bc27-25be45f766c1"
+                    }
+                ]
+            }
+        ]
+    },
+    "default_langcode": [
+        {
+            "value": true
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true
+        }
+    ]
+}

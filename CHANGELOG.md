@@ -1,5 +1,33 @@
 # Change Log
 
+## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
+
+This is the release, where we removed lots of dependencies. Additionally we added inline form errors and the 
+possibility to configure if the remove button for files is shown in the medie entity form or not.
+
+- Add [Integrate inline form errors](https://www.drupal.org/node/2915435)
+- Change [Revert "Removing the 'Remove' button of image widgets"](https://www.drupal.org/node/2907100)
+- Change [[META] Decouple modules from Thunder](https://www.drupal.org/node/2919194)
+
+## [8.2.9](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.9) 2017-10-11
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.8...8.2.9)
+
+This release mostly fixes problems that occurred with the Drupal 8.4 update. Additionally several tests had to be
+updated because of new contrib module versions.
+
+Updating to Drupal 8.4 requires Drush 8.1.12 or newer, we recommend to use Drush 8.1.15 or newer. Additional information 
+can be found in [Drupal 8.4.0 Changelog](https://www.drupal.org/project/drupal/releases/8.4.0).
+
+All changes and fixes in this release:
+
+- Fix [Update Thunder to Drupal 8.4](https://www.drupal.org/node/2899242)
+- Fix [Enabling content translation module results in RuntimeException](https://www.drupal.org/node/2904413)
+- Fix [Live blog tests flip flop](https://www.drupal.org/node/2908456)
+- Fix [Cron failing because of simple_sitemap](https://www.drupal.org/node/2913792)
+- Fix [Failing tests for Device Preview integration](https://www.drupal.org/node/2915158)
+- Change [Update media_entity_pinterest to 1.0-beta2](https://www.drupal.org/node/2915378)
+
 ## [8.2.8](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.8) 2017-09-25
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.7...8.2.8)
 
