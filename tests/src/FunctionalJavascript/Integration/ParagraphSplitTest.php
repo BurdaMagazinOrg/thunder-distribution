@@ -26,8 +26,8 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Selector template for CKEditor instances.
    *
-   * To use it, you have to provide a string containing the paragraps field
-   * name and the number of the paragraph.
+   * To use it, you have to provide a string containing the paragraphs field
+   * name and the delta of the paragraph.
    *
    * @var string
    */
@@ -36,35 +36,39 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test if a deleted paragraph leads to data loss.
    */
-  public function testParagraphSplitDataLoss() {
+  public function _testParagraphSplitDataLoss() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
     $this->articleFillNew([]);
+
+    // Create first paragraph.
     $this->addTextParagraph(static::$paragraphsField, '');
 
+    // Remove the paragraph.
     $page = $this->getSession()->getPage();
     $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_remove"]');
     $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_confirm_remove"]');
 
+    // Create second paragraph.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
 
-    // Textfield selector template.
-    $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 0);
+    // Select second element in editor.
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(1), 1);
 
     // Split text paragraph.
-    $this->clickParagraphSplitButton('after');
+    $this->clickParagraphSplitButton('before');
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    // Split after reverts the paragraph counting order.
-    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 1), $firstParagraphContent . PHP_EOL);
-    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), $secondParagraphContent . PHP_EOL);
+    // Test if all texts are in the correct paragraph.
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
   }
 
   /**
    * Test split of paragraph after a selection.
    */
-  public function testParagraphSplitAfter() {
+  public function _testParagraphSplitAfter() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -73,17 +77,18 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
 
-    // Textfield selector template.
-    $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 0);
+    // Select first element in editor.
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 0);
 
-    // Split text paragraph.
+    // Split text paragraph after the current selection.
     $this->clickParagraphSplitButton('after');
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    // Split after reverts the paragraph counting order.
-    $this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 1), $firstParagraphContent . PHP_EOL);
-    $this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), $secondParagraphContent . PHP_EOL);
-
+    // Test if all texts are in the correct paragraph.
+    // When splitting after the current position, the new paragraph will
+    // be in front of the old, that is why the paragraph delta is reversed.
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $secondParagraphContent . PHP_EOL);
   }
 
   /**
@@ -98,17 +103,16 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
 
-    // Textfield selector template.
-    $this->selectCkEditorElement(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), 1);
+    // Select second element in editor.
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 1);
 
-    // Split text paragraph.
+    // Split text paragraph before the current selection.
     $this->clickParagraphSplitButton('before');
-    $this->getSession()->executeScript("jQuery('.cke_button__splittextbefore')[0].click();");
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), $firstParagraphContent . PHP_EOL);
-    $this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 1), $secondParagraphContent . PHP_EOL);
-
+    // Test if all texts are in the correct paragraph.
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $secondParagraphContent . PHP_EOL);
   }
 
   /**
@@ -120,4 +124,18 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   protected function clickParagraphSplitButton($type) {
     $this->getSession()->executeScript("jQuery('.cke_button__splittext{$type}')[0].click();");
   }
+
+  /**
+   * Create css selector for paragraph with the given delta.
+   *
+   * @param int $paragraphDelta
+   *   The delta of the paragraph.
+   *
+   * @return string
+   *   Css selector for the paragraph.
+   */
+  protected function getCkEditorCssSelector($paragraphDelta) {
+    return sprintf(static::$selectorTemplate, static::$paragraphsField, $paragraphDelta);
+  }
+
 }

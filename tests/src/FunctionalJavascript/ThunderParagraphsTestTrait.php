@@ -22,11 +22,28 @@ trait ThunderParagraphsTestTrait {
    *   Returns number of paragraphs.
    */
   protected function getNumberOfParagraphs($fieldName) {
-    $fieldNamePart = str_replace('_', '-', $fieldName);
+    $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
 
     $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]");
 
     return count($paragraphRows);
+  }
+
+  /**
+   * Get all paragraphs for the given field.
+   *
+   * @param string $fieldName
+   *   Paragraph field name.
+   * @param int $position
+   *   The position of the paragraph item in the array.
+   *
+   * @return Behat\Mink\Element\NodeElement
+   *   The paragraph node element.
+   */
+  protected function getParagraphItem($fieldName, $position) {
+    $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
+
+    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")][{$position}]//div[contains(@class, \"paragraph-item\")]")[0];
   }
 
   /**
@@ -45,12 +62,12 @@ trait ThunderParagraphsTestTrait {
    *   Returns index for added paragraph.
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-
     $page = $this->getSession()->getPage();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
+      $position = $numberOfParagraphs;
       $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
     }
     else {
@@ -69,16 +86,13 @@ trait ThunderParagraphsTestTrait {
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $selector = "#edit-{$fieldSelector}-wrapper table.field-multiple-table--paragraphs tr.draggable";
-    $condition = "jQuery('$selector').length > " . $numberOfParagraphs;
+    // Test if we have one more paragraph now.
+    static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
 
-    $this->assertJsCondition($condition, 1000, '');
-
-    $newParagraphPosition = $position + 1;
-    $paragraphRow = $this->xpath("//*[@id=\"edit-{$fieldSelector}-wrapper\"]//table[starts-with(@id, \"{$fieldSelector}-values\")]/tbody/tr[contains(@class, \"draggable\")][{$newParagraphPosition}]//textarea")[0];
-
-    $newParagraphId = $paragraphRow->getAttribute('id');
-    preg_match("/edit-{$fieldSelector}-(\d+)-/", $newParagraphId, $matches);
+    // Retrieve new paragraps delta from id attribute of the item.
+    $paragraphItem = $this->getParagraphItem($fieldName, ($position + 1));
+    $itemId = $paragraphItem->getAttribute('id');
+    preg_match("/^edit-{$fieldSelector}-(\d+)--/", $itemId, $matches);
 
     return $matches[1];
   }
