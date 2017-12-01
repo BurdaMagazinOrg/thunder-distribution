@@ -333,7 +333,7 @@ class ConfigHandler {
    * @return string
    *   Returns full path file name for update patch.
    */
-  protected function getPatchFile($moduleName, $updateName, $createDirectory = FALSE) {
+  public function getPatchFile($moduleName, $updateName, $createDirectory = FALSE) {
     $updateDir = $this->moduleHandler->getModule($moduleName)->getPath() . $this->baseUpdatePath;
 
     // Ensure that directory exists.
