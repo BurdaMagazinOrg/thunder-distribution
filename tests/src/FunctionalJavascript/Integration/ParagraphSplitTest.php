@@ -9,7 +9,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 /**
  * Tests the paragraph split module integration.
  *
- * @group _Thunder
+ * @group Thunder
  */
 class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
@@ -36,7 +36,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test if a deleted paragraph leads to data loss.
    */
-  public function _testParagraphSplitDataLoss() {
+  public function testParagraphSplitDataLoss() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -68,7 +68,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test split of paragraph after a selection.
    */
-  public function _testParagraphSplitAfter() {
+  public function testParagraphSplitAfter() {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
