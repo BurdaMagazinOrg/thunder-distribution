@@ -96,7 +96,6 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('node/add/liveblog');
     $this->assertSession()->assertWaitOnAjaxRequest();
-
     $this->expandAllTabs(1);
     $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     // 1 saves it as published in this case.
