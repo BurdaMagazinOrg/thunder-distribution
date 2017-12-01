@@ -9,7 +9,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 /**
  * Tests the paragraph split module integration.
  *
- * @group _Thunder
+ * @group Thunder
  */
 class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
