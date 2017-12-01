@@ -57,8 +57,12 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Split after reverts the paragraph counting order.
-    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 1), $firstParagraphContent . PHP_EOL);
-    #$this->assertCkEditorContent(sprintf(static::$selectorTemplate, static::$paragraphsField, 0), $secondParagraphContent . PHP_EOL);
+    /*
+    $this->assertCkEditorContent(sprintf(static::$selectorTemplate,
+    static::$paragraphsField, 1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent(sprintf(static::$selectorTemplate,
+    static::$paragraphsField, 0), $secondParagraphContent . PHP_EOL);
+     */
   }
 
   /**
@@ -120,4 +124,5 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   protected function clickParagraphSplitButton($type) {
     $this->getSession()->executeScript("jQuery('.cke_button__splittext{$type}')[0].click();");
   }
+
 }
