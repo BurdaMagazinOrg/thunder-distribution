@@ -94,7 +94,7 @@ trait ThunderParagraphsTestTrait {
     $itemId = $paragraphItem->getAttribute('id');
     preg_match("/^edit-{$fieldSelector}-(\d+)--/", $itemId, $matches);
 
-    if (empty($matches[1])) {
+    if (!isset($matches[1])) {
       throw new \Exception('No new paragraph is found');
     }
     return $matches[1];
