@@ -1,0 +1,9 @@
+name: 'Paragraph split text'
+description: 'Paragraph split text.'
+package: Paragraphs
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:ckeditor
+  - paragraphs:paragraphs

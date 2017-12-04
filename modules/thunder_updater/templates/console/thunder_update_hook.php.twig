@@ -1,0 +1,24 @@
+{% block file_methods %}
+{% if not file_exists %}
+{% include 'module/php_tag.php.twig' %}
+{% endif %}
+
+/**
+ * {{ description }}
+ */
+function {{ update_hook_name }}() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['{{ module }}', '{{ update_hook_name }}']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['{{ update_hook_name }}']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['{{ update_hook_name }}']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+{% endblock %}

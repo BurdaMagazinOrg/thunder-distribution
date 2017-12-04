@@ -5,21 +5,12 @@ cache:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
   - "vendor"
-  - "travis_selenium"
-
-php:
-  - 7.1
-  - 5.6
-
-env:
-  - INSTALL_METHOD=drush_make
-  - INSTALL_METHOD=composer
 
 matrix:
-  exclude:
-  - php: 5.6
-    env: INSTALL_METHOD=composer
+  include:
   - php: 7.1
+    env: INSTALL_METHOD=composer
+  - php: 5.6
     env: INSTALL_METHOD=drush_make
 
 # Use newer distribution on Travis CI (Ubuntu 14.04 - Trusty)
@@ -31,7 +22,6 @@ dist: trusty
 # Here is related issue: https://github.com/travis-ci/travis-ci/issues/7150
 sudo: required
 
-# match drupal style dev branches and release tags (8.x-1.x or 8.x-1.0)
 branches:
   only:
     - master
@@ -47,9 +37,6 @@ addons:
     region: eu-west-1
     paths:
       - /tmp/thunder-travis-ci
-  apt:
-    packages:
-      - google-chrome-stable
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
