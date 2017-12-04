@@ -788,7 +788,7 @@ function thunder_media_update_8106() {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8106']);
   }
 
-  // Output logged messages to related chanel of update execution.
+  // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
 
@@ -800,4 +800,23 @@ function thunder_media_update_8107() {
   if ($config->get('enable_filefield_remove_button') === NULL) {
     $config->set('enable_filefield_remove_button', FALSE)->save();
   }
+}
+
+/**
+ * Use blazy for lazy loading.
+ */
+function thunder_media_update_8108() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media_update_8108']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_media_update_8108']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8108']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
 }
