@@ -34,38 +34,6 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   protected static $selectorTemplate = "textarea[name='%s[%d][subform][field_text][0][value]']";
 
   /**
-   * Test if a deleted paragraph leads to data loss.
-   */
-  public function testParagraphSplitDataLoss() {
-    $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
-    $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
-
-    $this->articleFillNew([]);
-
-    // Create first paragraph.
-    $this->addTextParagraph(static::$paragraphsField, '');
-
-    // Remove the paragraph.
-    $page = $this->getSession()->getPage();
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_remove"]');
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_confirm_remove"]');
-
-    // Create second paragraph.
-    $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
-
-    // Select second element in editor.
-    $this->selectCkEditorElement($this->getCkEditorCssSelector(1), 1);
-
-    // Split text paragraph.
-    $this->clickParagraphSplitButton('before');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    // Test if all texts are in the correct paragraph.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
-  }
-
-  /**
    * Test split of paragraph after a selection.
    */
   public function testParagraphSplitAfter() {
@@ -113,6 +81,38 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     // Test if all texts are in the correct paragraph.
     $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL);
     $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $secondParagraphContent . PHP_EOL);
+  }
+
+  /**
+   * Test if a deleted paragraph leads to data loss.
+   */
+  public function testParagraphSplitDataLoss() {
+    $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
+    $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
+
+    $this->articleFillNew([]);
+
+    // Create first paragraph.
+    $this->addTextParagraph(static::$paragraphsField, '');
+
+    // Remove the paragraph.
+    $page = $this->getSession()->getPage();
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_remove"]');
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_confirm_remove"]');
+
+    // Create second paragraph.
+    $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
+
+    // Select second element in editor.
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(1), 1);
+
+    // Split text paragraph.
+    $this->clickParagraphSplitButton('before');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Test if all texts are in the correct paragraph.
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
   }
 
   /**

@@ -22,34 +22,30 @@ trait ThunderParagraphsTestTrait {
    *   Returns number of paragraphs.
    */
   protected function getNumberOfParagraphs($fieldName) {
-    $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
-
-    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]");
+    $paragraphRows = $this->getParagraphItems($fieldName);
 
     return count($paragraphRows);
   }
 
   /**
-   * Get a single paragrph item.
+   * Get paragraph items.
    *
    * @param string $fieldName
    *   Paragraph field name.
-   * @param int $position
-   *   The position of the paragraph item in the array.
    *
    * @return Behat\Mink\Element\NodeElement
    *   The paragraph node element.
    */
-  protected function getParagraphItem($fieldName, $position) {
+  protected function getParagraphItems($fieldName) {
     $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
 
-    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")][{$position}]//div[contains(@class, \"paragraph-item\")]")[0];
+    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[contains(@class, \"paragraph-item\")]");
   }
 
   /**
    * Add paragraph for field with defined paragraph type.
    *
-   * This uses paragrpahs modal widget.
+   * This uses paragraphs modal widget.
    *
    * @param string $fieldName
    *   Field name.
@@ -60,6 +56,8 @@ trait ThunderParagraphsTestTrait {
    *
    * @return int
    *   Returns index for added paragraph.
+   *
+   * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
     $page = $this->getSession()->getPage();
@@ -90,7 +88,7 @@ trait ThunderParagraphsTestTrait {
     static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
 
     // Retrieve new paragraphs delta from id attribute of the item.
-    $paragraphItem = $this->getParagraphItem($fieldName, ($position + 1));
+    $paragraphItem = $this->getParagraphItems($fieldName)[$position];
     $itemId = $paragraphItem->getAttribute('id');
     preg_match("/^edit-{$fieldSelector}-(\d+)--/", $itemId, $matches);
 
