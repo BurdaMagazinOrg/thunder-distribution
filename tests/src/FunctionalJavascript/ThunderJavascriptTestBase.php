@@ -362,6 +362,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $driver = $this->getSession()->getDriver();
     if ($driver instanceof Selenium2Driver) {
       $actualTitle = $driver->getWebDriverSession()->title();
+
       static::assertEquals($expectedTitle, $actualTitle, 'Title found');
     }
     else {

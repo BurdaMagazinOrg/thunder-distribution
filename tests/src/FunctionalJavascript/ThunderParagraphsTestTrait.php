@@ -30,7 +30,7 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Get all paragraphs for the given field.
+   * Get a single paragrph item.
    *
    * @param string $fieldName
    *   Paragraph field name.
@@ -89,11 +89,14 @@ trait ThunderParagraphsTestTrait {
     // Test if we have one more paragraph now.
     static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
 
-    // Retrieve new paragraps delta from id attribute of the item.
+    // Retrieve new paragraphs delta from id attribute of the item.
     $paragraphItem = $this->getParagraphItem($fieldName, ($position + 1));
     $itemId = $paragraphItem->getAttribute('id');
     preg_match("/^edit-{$fieldSelector}-(\d+)--/", $itemId, $matches);
 
+    if (empty($matches[1])) {
+      throw new \Exception('No new paragraph is found');
+    }
     return $matches[1];
   }
 
