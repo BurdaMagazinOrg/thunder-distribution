@@ -5,6 +5,7 @@
  * Thunder Article install hooks.
  */
 
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Extension\MissingDependencyException;
 
@@ -97,6 +98,58 @@ function thunder_article_update_8101() {
     else {
       $updateLogger->warning(t('Unable to place shariff field.'));
       $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+    }
+  }
+
+  return $updateLogger->output();
+}
+
+/**
+ * Enable length_indicator module.
+ */
+function thunder_article_update_8103() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  $modulesInstalledSuccessfully = TRUE;
+
+  try {
+    \Drupal::service('module_installer')->install([
+      'config_update',
+      'length_indicator',
+    ]);
+  }
+  catch (MissingDependencyException $e) {
+    $updateLogger->warning($e->getMessage());
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article_update_8102']);
+    $modulesInstalledSuccessfully = FALSE;
+  }
+
+  if ($modulesInstalledSuccessfully) {
+    $updateLogger->info(t('Length Indicator module is successfully installed.'));
+
+    $formDisplay = EntityFormDisplay::load('node.article.default');
+    $seoField = $formDisplay->getComponent('field_seo_title');
+    if ($formDisplay && $seoField) {
+      $seoField['third_party_settings'] = [
+        'length_indicator' => [
+          'indicator' => TRUE,
+          'indicator_opt' => [
+            'optimin' => 15,
+            'optimax' => 50,
+            'tolerance' => 10,
+          ],
+        ],
+      ];
+      $formDisplay->setComponent('field_seo_title', $seoField)->save();
+
+      $updateLogger->info(t('Length indicator added to SEO field.'));
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_article_update_8102'], FALSE);
+    }
+    else {
+      $updateLogger->warning(t('Unable to add length indicator to SEO field.'));
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article_update_8102']);
     }
   }
 
