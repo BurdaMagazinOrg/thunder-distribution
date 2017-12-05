@@ -5,7 +5,6 @@ namespace Drupal\thunder;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Unicode;
-use Drupal\Component\Utility\Xss;
 use Drupal\Core\Database\Database;
 use Drupal\dblog\Controller\DbLogController;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,14 +92,16 @@ trait ThunderTestTrait {
   protected function tearDown() {
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
-      ->fields('w');
+      ->fields('w', ['message', 'variables']);
     $andGroup = $query->andConditionGroup()
       ->condition('severity', 5, '<')
       ->condition('type', 'php');
     $group = $query->orConditionGroup()
       ->condition('severity', 4, '<')
       ->condition($andGroup);
-    $query = $query->condition($group);
+    $query->condition($group);
+    $query->groupBy('w.message');
+    $query->groupBy('w.variables');
 
     $controller = DbLogController::create($this->container);
 
@@ -112,7 +113,7 @@ trait ThunderTestTrait {
       foreach ($query->execute()->fetchAll() as $row) {
         $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($controller->formatMessage($row))), 256, TRUE, TRUE);
       }
-      throw new \Exception(print_r(array_unique($errors), TRUE));
+      throw new \Exception(print_r($errors, TRUE));
     }
 
     parent::tearDown();
