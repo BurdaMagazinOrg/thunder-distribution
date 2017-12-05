@@ -64,26 +64,6 @@ field_settings:
         - 'entity:node/type'
         - 'entity:media/bundle'
         - 'entity:taxonomy_term/vid'
-  changed:
-    label: Changed
-    property_path: aggregated_field
-    type: date
-    configuration:
-      type: union
-      fields:
-        - 'entity:node/changed'
-        - 'entity:media/changed'
-        - 'entity:taxonomy_term/changed'
-  published:
-    label: Published
-    property_path: aggregated_field
-    type: boolean
-    configuration:
-      type: union
-      fields:
-        - 'entity:node/status'
-        - 'entity:media/status'
-        - 'entity:taxonomy_term/status'
   status:
     label: status
     datasource_id: 'entity:node'
@@ -124,6 +104,31 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_channel
+  node_changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+  media_changed:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+  media_status:
+    label: 'Publishing status'
+    datasource_id: 'entity:media'
+    property_path: status
+    type: boolean
+  term_changed:
+    label: Changed
+    datasource_id: 'entity:taxonomy_term'
+    property_path: changed
+    type: date
+  term_status:
+    label: Published
+    datasource_id: 'entity:taxonomy_term'
+    property_path: status
+    type: boolean
 datasource_settings:
   'entity:node':
     bundles:

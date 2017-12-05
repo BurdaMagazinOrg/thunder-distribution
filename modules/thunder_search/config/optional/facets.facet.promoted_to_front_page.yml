@@ -7,7 +7,7 @@ dependencies:
   module:
     - search_api
 id: promoted_to_front_page
-name: 'Promoted to front page'
+name: Promoted
 url_alias: promoted_to_front_page
 weight: 0
 min_count: 1

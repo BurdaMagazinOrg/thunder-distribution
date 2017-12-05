@@ -7,7 +7,7 @@ dependencies:
   module:
     - search_api
 id: sticky_at_top_of_lists
-name: 'Sticky at top of lists'
+name: Sticky
 url_alias: sticky_at_top_of_lists
 weight: 0
 min_count: 1

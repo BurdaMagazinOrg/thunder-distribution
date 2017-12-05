@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_channel
     - field.storage.node.field_teaser_media
     - image.style.thumbnail
     - search_api.index.content
@@ -88,7 +89,7 @@ display:
             field_channel: field_channel
             status: status
             publish_on: publish_on
-            changed_1: changed_1
+            node_changed: node_changed
             search_api_operations: search_api_operations
           info:
             views_bulk_operations_bulk_form:
@@ -100,7 +101,7 @@ display:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-low
             label:
               sortable: true
               default_sort_order: asc
@@ -114,35 +115,39 @@ display:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-medium
             field_channel:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-low
             status:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-medium
             publish_on:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
-            changed_1:
+              responsive: priority-low
+            node_changed:
               sortable: true
               default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-low
             search_api_operations:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          default: changed_1
+          default: node_changed
           empty_table: false
       row:
         type: fields
@@ -431,14 +436,14 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        published:
-          id: published
+        field_channel:
+          id: field_channel
           table: search_api_index_content
-          field: published
+          field: field_channel
           relationship: none
           group_type: group
           admin_label: ''
-          label: Published
+          label: Channel
           exclude: false
           alter:
             alter_text: false
@@ -479,10 +484,109 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
           multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              channel:
+                display_method: label
+                view_mode: default
+              tags:
+                display_method: label
+                view_mode: default
+          plugin_id: search_api_field
+        status:
+          id: status
+          table: search_api_index_content
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Status
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: custom
+            format_custom_true: Published
+            format_custom_false: Unpublished
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_boolean
+          fallback_options:
+            type: yes-no
+            type_custom_true: ''
+            type_custom_false: ''
+            not: false
+            link_to_item: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
         publish_on:
           id: publish_on
           table: search_api_datasource_content_entity_node
@@ -555,17 +659,17 @@ display:
             multi_separator: ', '
           entity_type: node
           plugin_id: search_api_field
-        changed_1:
-          id: changed_1
+        node_changed:
+          id: node_changed
           table: search_api_index_content
-          field: changed
+          field: node_changed
           relationship: none
           group_type: group
           admin_label: ''
-          label: Updated
+          label: 'Changed '
           exclude: false
           alter:
-            alter_text: true
+            alter_text: false
             text: ''
             make_link: false
             path: ''
@@ -595,7 +699,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -603,9 +707,6 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: 0
-          multi_type: separator
-          multi_separator: ', '
           click_sort_column: value
           type: timestamp
           settings:
@@ -619,6 +720,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
+          multi_type: separator
           separator: ', '
           field_api_classes: false
           field_rendering: true
@@ -638,7 +740,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Operations
           exclude: false
           alter:
             alter_text: false
@@ -855,6 +957,7 @@ display:
         - url.query_args
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_channel'
         - 'config:field.storage.node.field_teaser_media'
   page_1:
     display_options:
@@ -892,4 +995,5 @@ display:
         - url.query_args
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_channel'
         - 'config:field.storage.node.field_teaser_media'
