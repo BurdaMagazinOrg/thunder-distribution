@@ -140,7 +140,13 @@ content:
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      length_indicator:
+        indicator: true
+        indicator_opt:
+          optimin: 57
+          optimax: 139
+          tolerance: 17
     type: string_textarea
     region: content
   langcode:

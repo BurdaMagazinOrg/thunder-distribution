@@ -3,6 +3,8 @@ core.entity_form_display.node.article.default:
     content:
       field_seo_title:
         third_party_settings: {  }
+      field_teaser_text:
+        third_party_settings: {  }
   update_actions:
     change:
       content:
@@ -14,3 +16,11 @@ core.entity_form_display.node.article.default:
                 optimax: 50
                 optimin: 15
                 tolerance: 10
+        field_teaser_text:
+          third_party_settings:
+            length_indicator:
+              indicator: true
+              indicator_opt:
+                optimax: 139
+                optimin: 57
+                tolerance: 17

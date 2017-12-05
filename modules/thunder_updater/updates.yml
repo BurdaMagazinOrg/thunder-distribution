@@ -179,7 +179,7 @@ v2.11:
     thunder_article_update_8102:
         '#title': 'Enable "Length Indicator" module'
         '#description': '<p>The "Length Indicator" module provides a visual feedback for editors, to decide if they have written too less, enough, or too much.</p>'
-        '#description_successful': '<p>It was activated for the SEO Title in the article.</p>'
-        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p><p>Afterwards visit the form display configuration of the article to activate it, e.g. for the field "SEO Title".</p>'
+        '#description_successful': '<p>It was activated for the fields "SEO Title" and "Teaser Text" in the article.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p><p>Afterwards visit the form display configuration of the article to activate it, e.g. for the field "SEO Title", or "Teaser Text".</p>'
         extension_page: { '#text': 'Enable the Length Indicator module', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Configure the form display of the article', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
