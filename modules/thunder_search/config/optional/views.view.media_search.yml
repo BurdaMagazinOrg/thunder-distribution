@@ -86,9 +86,9 @@ display:
             thumbnail: thumbnail
             label: label
             type: type
-            status: status
+            media_status: media_status
             field_expires: field_expires
-            changed: changed
+            media_changed: media_changed
             search_api_operations: search_api_operations
           info:
             views_bulk_operations_bulk_form:
@@ -107,35 +107,39 @@ display:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-medium
             type:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
-            status:
+              responsive: priority-medium
+            media_status:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-medium
             field_expires:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
-            changed:
+              responsive: priority-low
+            media_changed:
+              sortable: true
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-low
             search_api_operations:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          default: '-1'
+          default: media_changed
           empty_table: false
       row:
         type: fields
@@ -405,10 +409,10 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        status:
-          id: status
-          table: search_api_datasource_content_entity_media
-          field: status
+        media_status:
+          id: media_status
+          table: search_api_index_content
+          field: media_status
           relationship: none
           group_type: group
           admin_label: ''
@@ -479,7 +483,6 @@ display:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: media
           plugin_id: search_api_field
         field_expires:
           id: field_expires
@@ -552,10 +555,10 @@ display:
             multi_separator: ', '
           entity_type: media
           plugin_id: search_api_field
-        changed:
-          id: changed
-          table: search_api_datasource_content_entity_media
-          field: changed
+        media_changed:
+          id: media_changed
+          table: search_api_index_content
+          field: media_changed
           relationship: none
           group_type: group
           admin_label: ''
@@ -625,7 +628,6 @@ display:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: media
           plugin_id: search_api_field
         search_api_operations:
           id: search_api_operations
@@ -634,7 +636,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Operations
           exclude: false
           alter:
             alter_text: false
@@ -811,7 +813,7 @@ display:
           expose:
             label: ''
           plugin_id: search_api
-      title: Content
+      title: Media
       header:
         result:
           id: result
@@ -857,7 +859,7 @@ display:
       path: admin/content/media
       menu:
         type: tab
-        title: Content
+        title: Media
         description: ''
         expanded: false
         parent: ''
@@ -872,7 +874,6 @@ display:
       display_extenders: {  }
       cache:
         type: none
-        options: {  }
       defaults:
         cache: false
       exposed_block: true

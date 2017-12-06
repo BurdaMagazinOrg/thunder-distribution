@@ -119,6 +119,14 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: status
     type: boolean
+  media_author:
+    label: 'Publisher ID » User » Name'
+    datasource_id: 'entity:media'
+    property_path: 'uid:entity:name'
+    type: string
+    dependencies:
+      module:
+        - user
   term_changed:
     label: Changed
     datasource_id: 'entity:taxonomy_term'
@@ -164,6 +172,7 @@ processor_settings:
       - label
       - type
       - name
+      - media_author
     title: true
     alt: true
     tags:
@@ -184,6 +193,7 @@ processor_settings:
       - label
       - type
       - name
+      - media_author
     weights:
       preprocess_index: -20
       preprocess_query: -20
@@ -249,13 +259,3 @@ processor_settings:
       - rendered_item
       - label
       - type
-      - name
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
-tracker_settings:
-  default: {  }
-options:
-  index_directly: true
-  cron_limit: 50
-server: database
