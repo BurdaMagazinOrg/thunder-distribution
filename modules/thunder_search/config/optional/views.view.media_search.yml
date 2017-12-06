@@ -195,43 +195,32 @@ display:
           batch: true
           batch_size: 10
           form_step: true
+          buttons: false
           action_title: Action
           selected_actions:
-            media_delete_action: 0
-            media_publish_action: 0
-            media_save_action: 0
-            media_unpublish_action: 0
-            node_assign_owner_action: node_assign_owner_action
-            node_unpromote_action: node_unpromote_action
-            node_promote_action: node_promote_action
-            node_publish_action: node_publish_action
-            node_save_action: node_save_action
-            node_make_sticky_action: node_make_sticky_action
-            node_unpublish_by_keyword_action: node_unpublish_by_keyword_action
-            node_unpublish_action: node_unpublish_action
-            node_make_unsticky_action: node_make_unsticky_action
-            views_bulk_operations_delete_entity: views_bulk_operations_delete_entity
+            media_delete_action: media_delete_action
+            media_publish_action: media_publish_action
+            media_save_action: media_save_action
+            media_unpublish_action: media_unpublish_action
+            node_assign_owner_action: 0
+            node_unpromote_action: 0
+            node_promote_action: 0
+            node_publish_action: 0
+            node_save_action: 0
+            node_make_sticky_action: 0
+            node_unpublish_by_keyword_action: 0
+            node_unpublish_action: 0
+            node_make_unsticky_action: 0
+            views_bulk_operations_delete_entity: 0
             pathauto_update_alias: 0
           preconfiguration:
-            node_assign_owner_action:
+            media_delete_action:
               label_override: ''
-            node_unpromote_action:
+            media_publish_action:
               label_override: ''
-            node_promote_action:
+            media_save_action:
               label_override: ''
-            node_publish_action:
-              label_override: ''
-            node_save_action:
-              label_override: ''
-            node_make_sticky_action:
-              label_override: ''
-            node_unpublish_by_keyword_action:
-              label_override: ''
-            node_unpublish_action:
-              label_override: ''
-            node_make_unsticky_action:
-              label_override: ''
-            views_bulk_operations_delete_entity:
+            media_unpublish_action:
               label_override: ''
           plugin_id: views_bulk_operations_bulk_form
         thumbnail:
