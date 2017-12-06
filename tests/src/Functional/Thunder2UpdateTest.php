@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\FunctionalTests\Update\UpdatePathTestBase;
+use Drupal\Tests\thunder\Traits\ThunderAwsTestFixtureTrait;
 
 /**
  * Tests Thunder updates from 2.0 to current.
@@ -11,6 +12,7 @@ use Drupal\FunctionalTests\Update\UpdatePathTestBase;
  * @group Thunder
  */
 class Thunder2UpdateTest extends UpdatePathTestBase {
+  use ThunderAwsTestFixtureTrait;
 
   /**
    * An array of config to skip schema checking on.
@@ -34,7 +36,7 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     // https://www.drupal.org/project/thunder/releases/8.x-2.0 and an
     // interactive install and choosing to enable all the optional modules.
     $this->databaseDumpFiles = [
-      __DIR__ . '/../../fixtures/update/thunder.2-0.php.gz',
+      $this->getTestFixture("thunder.2-0.php.gz"),
     ];
   }
 
