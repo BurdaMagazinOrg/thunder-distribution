@@ -80,9 +80,6 @@
             },
             "drupal/liveblog": {
                 "Views error on liveblog module uninstall": "https://www.drupal.org/files/issues/2923389-15.patch"
-            },
-            "drupal/core": {
-                "EntityReferenceItem logs critical errors in onDependencyRemoval()": "https://www.drupal.org/files/issues/2925913-4.patch"
             }
         }
     },
@@ -101,7 +98,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "8.4.2",
+        "drupal/core": "^8.4.0-stable",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^1.0",
