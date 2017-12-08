@@ -33,6 +33,11 @@ else
 fi;
 export PHP_YAML_VERSION
 
+# Set a default install method if none set.
+if [[ ${INSTALL_METHOD} == "" ]]; then
+  export INSTALL_METHOD=composer
+fi;
+
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:
 # git commit -m="Your commit message [TEST_UPDATE=true]"
