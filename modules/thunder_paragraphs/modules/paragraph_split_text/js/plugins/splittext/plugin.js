@@ -26,7 +26,7 @@
       // Check if selection mode is modal.
       if ($editorObject.closest('table').parent().find('.paragraph-type-add-modal').length > 0) {
         // Check if editor is inside paragraph
-        if ($editorObject.parents('.paragraph-item').length > 0){
+        if ($editorObject.parents('.paragraph-item').length > 0) {
           editor.addCommand('splitTextBefore', {
             exec: function (editor) {
               split(editor, 'before');
@@ -51,7 +51,7 @@
             command: 'splitTextAfter'
           });
 
-          if (editor.addMenuItems){
+          if (editor.addMenuItems) {
             editor.addMenuGroup('splittext');
             editor.addMenuItems({
               splittextbefore: {
@@ -71,7 +71,7 @@
             });
           }
 
-          if (editor.contextMenu){
+          if (editor.contextMenu) {
             editor.contextMenu.addListener(function (element, selection) {
               var menuItems = {};
               menuItems = {
