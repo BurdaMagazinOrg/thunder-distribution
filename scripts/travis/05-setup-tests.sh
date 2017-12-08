@@ -14,7 +14,7 @@ fi
 drush cr
 
 # Run the webserver
-drush runserver --default-server=builtin 8080 &>/dev/null &
+php -S localhost:8888 .ht.router.php &>/dev/null &
 
 # Run Sauce Labs connector manually if Sauce Labs is enabled
 if [[ ${SAUCE_LABS_ENABLED} == "true" ]]; then
