@@ -77,10 +77,6 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
-            },
-            "drupal/core": {
-                "Add a startup configuration for the built-in PHP server that supports clean URLs": "https://www.drupal.org/files/issues/1543858-2-109.patch",
-                ".ht.router.php does not support update.php": "https://www.drupal.org/files/issues/2929198-3.patch"
             }
         }
     },

@@ -14,6 +14,8 @@ fi
 drush cr
 
 # Run the webserver
+curl http://cgit.drupalcode.org/drupal/plain/.ht.router.php?h=8.5.x --output .ht.router.php
+curl https://www.drupal.org/files/issues/2929198-3.patch | patch -p1
 php -S localhost:8080 .ht.router.php &>/dev/null &
 
 # Run Sauce Labs connector manually if Sauce Labs is enabled
