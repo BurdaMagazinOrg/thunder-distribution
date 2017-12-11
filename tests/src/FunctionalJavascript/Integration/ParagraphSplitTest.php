@@ -116,6 +116,33 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   }
 
   /**
+   * Test if a adding paragraph after split leads to data loss.
+   */
+  /*
+  public function testAddParagraphAfterSplitDataLoss() {
+    $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
+    $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
+    $thirdParagraphContent = '<p>Content that will be placed into the first paragraph after split.</p>';
+
+    $this->articleFillNew([]);
+
+    // Create first paragraph.
+    $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
+
+    // Select second element in editor.
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(1), 0);
+
+    // Split text paragraph.
+    $this->clickParagraphSplitButton('before');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    // Test if all texts are in the correct paragraph.
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
+  }
+  */
+
+  /**
    * Click on split button.
    *
    * @param string $type

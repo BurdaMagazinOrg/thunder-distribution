@@ -87,6 +87,25 @@ trait ThunderParagraphsTestTrait {
     // Test if we have one more paragraph now.
     static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
 
+    return $this->getParagraphDelta($fieldName, $position);
+  }
+
+  /**
+   * Get dalta of paragraph item for a given filed on a specific position.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param int $position
+   *   The Position of the paragraph item.
+   *
+   * @return int
+   *   The delta of the paragraph
+   *
+   * @throws \Exception
+   */
+  public function getParagraphDelta($fieldName, $position) {
+    $fieldSelector = HTML::cleanCssIdentifier($fieldName);
+
     // Retrieve new paragraphs delta from id attribute of the item.
     $paragraphItem = $this->getParagraphItems($fieldName)[$position];
     $itemId = $paragraphItem->getAttribute('id');
@@ -95,6 +114,7 @@ trait ThunderParagraphsTestTrait {
     if (!isset($matches[1])) {
       throw new \Exception('No new paragraph is found');
     }
+
     return $matches[1];
   }
 
