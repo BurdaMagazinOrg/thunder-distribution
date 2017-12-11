@@ -34,12 +34,10 @@ class LiveblogTest extends ThunderJavascriptTestBase {
   /**
    * Set the body of a liveblog post.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $body
    *   The body.
    */
-  protected function liveblogSetBody(DocumentElement $page, $body) {
+  protected function liveblogSetBody($body) {
     $this->fillCkEditor(
       "textarea[name='body[0][value]']",
       $body
