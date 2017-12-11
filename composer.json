@@ -77,6 +77,9 @@
             },
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
+            },
+            "drupal/admin_toolbar": {
+                "admin_toolbar_tools is not creating links on Appearance, Extend and People when installed": "https://www.drupal.org/files/issues/2926844-22.patch"
             }
         }
     },
@@ -90,7 +93,7 @@
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
-        "drupal/admin_toolbar": "^1.0",
+        "drupal/admin_toolbar": "1.2.1",
         "drupal/better_normalizers": "^1.0",
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
