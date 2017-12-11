@@ -187,7 +187,6 @@ trait ThunderParagraphsTestTrait {
 
     if (!empty($text)) {
       $this->fillCkEditor(
-        $this->getSession()->getPage(),
         "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']",
         $text
       );

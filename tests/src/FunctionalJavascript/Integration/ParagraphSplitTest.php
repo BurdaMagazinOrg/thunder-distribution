@@ -9,7 +9,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 /**
  * Tests the paragraph split module integration.
  *
- * @group __Thunder
+ * @group Thunder
  */
 class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
@@ -129,19 +129,24 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
 
     // Select second element in editor.
-    $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 0);
+    $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 1);
 
     // Split text paragraph.
     $this->clickParagraphSplitButton('before');
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $paragraphIndex = $this->getParagraphDelta(static::$paragraphsField, 0);
+    $paragraphDelta = $this->getParagraphDelta(static::$paragraphsField, 0);
+    $ckEditorCssSelector = "textarea[name='" . static::$paragraphsField . "[{$paragraphDelta}][subform][field_text][0][value]']";
 
     $this->fillCkEditor(
-      $this->getSession()->getPage(),
-      "textarea[name='" . static::$paragraphsField . "[{$paragraphIndex}][subform][field_text][0][value]']",
+      $ckEditorCssSelector,
       $thirdParagraphContent
     );
+
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
+    $this->getSession()
+      ->getDriver()
+      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$thirdParagraphContent\");");
 
     $this->addTextParagraph(static::$paragraphsField, '', 'text', 1);
 

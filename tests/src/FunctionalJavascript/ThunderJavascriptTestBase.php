@@ -373,14 +373,12 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * Fill CKEditor field.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $ckEditorCssSelector
    *   CSS selector for CKEditor.
    * @param string $text
    *   Text that will be filled into CKEditor.
    */
-  public function fillCkEditor(DocumentElement $page, $ckEditorCssSelector, $text) {
+  public function fillCkEditor($ckEditorCssSelector, $text) {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
 
     $this->getSession()
