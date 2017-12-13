@@ -26,7 +26,7 @@
       // Check if selection mode is modal.
       if ($editorObject.closest('table').parent().find('.paragraph-type-add-modal').length > 0) {
         // Check if editor is inside paragraph
-        if ($editorObject.parents('.paragraph-item').length > 0){
+        if ($editorObject.parents('.paragraph-item').length > 0) {
           editor.addCommand('splitTextBefore', {
             exec: function (editor) {
               split(editor, 'before');
@@ -51,7 +51,7 @@
             command: 'splitTextAfter'
           });
 
-          if (editor.addMenuItems){
+          if (editor.addMenuItems) {
             editor.addMenuGroup('splittext');
             editor.addMenuItems({
               splittextbefore: {
@@ -71,7 +71,7 @@
             });
           }
 
-          if (editor.contextMenu){
+          if (editor.contextMenu) {
             editor.contextMenu.addListener(function (element, selection) {
               var menuItems = {};
               menuItems = {
@@ -146,6 +146,8 @@
           if (editorObject.closest('table').parent().find('.paragraph-type-add-modal').length > 0) {
             var $buttonWrapper = editorObject.closest('table').parent().find('.paragraphs-add-dialog-template').parent();
             window.triggeringElementName = $('.js-hide input[name$="_add_more"]', $buttonWrapper).attr('name');
+            // Enable splitting
+            window.split_trigger = true;
             Drupal.modalAddParagraphs.setValues($buttonWrapper, {
               add_more_select: getParagraphType(editorObject),
               add_more_delta: delta
@@ -154,9 +156,19 @@
 
           // Editor id is changed after submit
           $(document).once('ajax-paragraph').ajaxComplete(function (e, xhr, settings) {
-            var eventElement = settings.extraData._triggering_element_name;
-            if (eventElement === window.triggeringElementName) {
+            var split_trigger = false;
+            if (typeof window.split_trigger !== 'undefined') {
+              split_trigger = window.split_trigger;
+            }
 
+            var eventElement = null;
+            if (settings.extraData._triggering_element_name) {
+              eventElement = settings.extraData._triggering_element_name;
+            }
+            if (eventElement === window.triggeringElementName && split_trigger === true) {
+              // Content
+              var originalEditorContent = window.newContent.getHtml();
+              var newEditorContent = window.oldContent;
               var originalEditorSelector = window.originalEditorSelector;
 
               // Get original editor id
@@ -166,10 +178,6 @@
               // Get new editor id
               var newEditor = $('td .ajax-new-content textarea');
               var newEditorId = newEditor.attr('id');
-
-              // Content
-              var originalEditorContent = window.newContent.getHtml();
-              var newEditorContent = window.oldContent;
 
               // Set content to editors
               if (typeof originalEditorId !== 'undefined') {
@@ -191,6 +199,7 @@
                 });
               }
             }
+            window.split_trigger = false;
           });
         }
       }
