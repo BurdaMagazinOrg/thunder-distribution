@@ -152,8 +152,8 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
     // Test if all texts are in the correct paragraph.
     $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $thirdParagraphContent . PHP_EOL);
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), '' . PHP_EOL);
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(2), '');
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $secondParagraphContent . PHP_EOL);
   }
 
   /**
