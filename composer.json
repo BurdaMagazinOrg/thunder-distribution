@@ -76,7 +76,6 @@
                 "Slick Media Port to the proposed Media core module API": "https://www.drupal.org/files/issues/slick_media_port_to_the-2905335-2.patch"
             },
             "drupal/core": {
-                "Make media name available on manage display": "https://www.drupal.org/files/issues/2912298-13.patch",
                 "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch",
                 "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-39.patch"
             },
