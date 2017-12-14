@@ -16,8 +16,6 @@ matrix:
 # Use newer distribution on Travis CI (Ubuntu 14.04 - Trusty)
 dist: trusty
 
-group: deprecated-2017Q4
-
 # Currently there is problem with chrome browser on Travis CI docker environment,
 # but when we enable "sudo" requirement, non-docker environment is used and problem
 # does not appear there.
