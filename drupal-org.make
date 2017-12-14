@@ -35,7 +35,6 @@ projects[diff][version] = 1.0-rc1
 projects[diff][patch][] = https://www.drupal.org/files/issues/back_button_for-2853193-4.patch
 projects[dropzonejs][type] = module
 projects[dropzonejs][version] = 2
-projects[dropzonejs][patch][] = https://www.drupal.org/files/issues/2915745-14.patch
 projects[empty_fields][type] = module
 projects[empty_fields][version] = 1
 projects[entity][type] = module

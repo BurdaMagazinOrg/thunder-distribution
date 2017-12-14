@@ -81,9 +81,6 @@
             },
             "drupal/media_entity": {
                 "Action support check shouldn't fail if 2877383 is applied": "https://www.drupal.org/files/issues/2927490-5.patch"
-            },
-            "drupal/dropzonejs": {
-                "Make sure dropzonejs_eb_widget_update_8201 runs after media_entity update": "https://www.drupal.org/files/issues/2915745-14.patch"
             }
         }
     },
