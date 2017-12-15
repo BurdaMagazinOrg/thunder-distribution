@@ -14,9 +14,6 @@ use Drupal\user\Entity\Role;
  * Configures form and view display of the field_embed_media.
  */
 function thunder_liveblog_install() {
-  var_dump('thunder_liveblog_install');
-
-
   // Add permissions to thunder users.
   $liveblog_permissions = [
     'add liveblog_post entity',
