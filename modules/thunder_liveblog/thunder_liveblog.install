@@ -14,6 +14,8 @@ use Drupal\user\Entity\Role;
  * Configures form and view display of the field_embed_media.
  */
 function thunder_liveblog_install() {
+  var_dump('thunder_liveblog_install');
+
 
   // Add permissions to thunder users.
   $liveblog_permissions = [
@@ -40,24 +42,23 @@ function thunder_liveblog_install() {
 }
 
 /**
- * Implements hook_uninstall().
+ * Delete liveblog provided config, we have our own.
  */
-function thunder_liveblog_uninstall() {
-  $logger = \Drupal::logger('thunder_liveblog');
-
-  $fields = [
-    'liveblog_post.liveblog_post.field_embed_media',
-    'node.liveblog.field_paragraphs',
-  ];
-  foreach ($fields as $field) {
-    try {
-      if ($field = FieldConfig::load($field)) {
-        $field->delete();
-        field_purge_field($field);
-      }
+function thunder_liveblog_module_preinstall($module) {
+  if ('thunder_liveblog' == $module) {
+    if ($field = FieldConfig::load('node.liveblog.body')) {
+      $field->delete();
+      field_purge_batch(10);
     }
-    catch (\Exception $e) {
-      $logger->warning(sprintf('Unable to uninstall config: %s.', $field));
+    $configs = [
+      'core.entity_form_display.node.liveblog.default',
+      'core.entity_form_display.liveblog_post.liveblog_post.default',
+      'core.entity_view_display.liveblog_post.liveblog_post.default',
+      'core.entity_view_display.node.liveblog.default',
+    ];
+    $configFactory = \Drupal::configFactory();
+    foreach ($configs as $config) {
+      $configFactory->getEditable($config)->delete();
     }
   }
 }
