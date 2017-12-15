@@ -37,6 +37,8 @@ dependencies:
   - views_ui
 # contrib
   - access_unpublished
+  - admin_toolbar_tools
+  - admin_toolbar_links_access_filter
   - blazy
   - content_lock
   - ctools
