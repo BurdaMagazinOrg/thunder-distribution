@@ -12,6 +12,5 @@ function thunder_liveblog_modules_installed($modules) {
   // Remove liveblog form display. We provide our own.
   if (in_array('liveblog', $modules)) {
     \Drupal::configFactory()->getEditable('core.entity_form_display.node.liveblog.default')->delete();
-    \Drupal::service('config.installer')->installOptionalConfig();
   }
 }
