@@ -2,7 +2,7 @@ services:
   plugin.manager.thunder.optional_modules:
     class: Drupal\thunder\OptionalModulesManager
     parent: default_plugin_manager
-  config_import_subscriber:
+  config_save_subscriber:
     class: Drupal\thunder\EventSubscriber\ConfigSaveSubscriber
     tags:
       - { name: event_subscriber }
