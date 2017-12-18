@@ -52,3 +52,4 @@ hidden:
   field_posts_number_initial: true
   langcode: true
   shariff_field: true
+  body: true
