@@ -6,7 +6,7 @@ dependencies:
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   enforced:
-    module:
+    theme:
       - thunder_amp
 id: paragraph.video.amp
 targetEntityType: paragraph

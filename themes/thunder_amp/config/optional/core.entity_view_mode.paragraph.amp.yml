@@ -4,7 +4,7 @@ dependencies:
   module:
     - paragraphs
   enforced:
-    module:
+    theme:
       - thunder_amp
 id: paragraph.amp
 label: AMP

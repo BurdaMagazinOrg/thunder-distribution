@@ -4,7 +4,7 @@ dependencies:
   module:
     - media_entity
   enforced:
-    module:
+    theme:
       - thunder_amp
 id: media.amp
 label: AMP

@@ -6,7 +6,7 @@ dependencies:
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
   enforced:
-    module:
+    theme:
       - thunder_amp
 id: paragraph.gallery.amp
 targetEntityType: paragraph

@@ -16,6 +16,7 @@ dependencies:
   enforced:
     module:
       - amp
+    theme:
       - thunder_amp
 id: media.image.amp
 targetEntityType: media
