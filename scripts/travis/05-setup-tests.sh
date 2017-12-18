@@ -24,6 +24,5 @@ if [[ ${SAUCE_LABS_ENABLED} == "true" ]]; then
     travis_start_sauce_connect
 fi
 
-docker pull selenium/standalone-chrome
-docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome
+docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome:3.8.1-aluminum
 docker ps -a
