@@ -308,6 +308,16 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
+
+  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
+  foreach ($configs as $config) {
+    $dependencies = $config->get('dependencies.module');
+    if (!empty($dependencies)) {
+      if (array_intersect($modules, $dependencies)) {
+        \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
+      }
+    }
+  }
 }
 
 /**
