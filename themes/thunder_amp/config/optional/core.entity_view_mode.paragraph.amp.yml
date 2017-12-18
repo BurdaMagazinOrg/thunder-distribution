@@ -3,6 +3,9 @@ status: true
 dependencies:
   module:
     - paragraphs
+  enforced:
+    module:
+      - thunder_amp
 id: paragraph.amp
 label: AMP
 targetEntityType: paragraph

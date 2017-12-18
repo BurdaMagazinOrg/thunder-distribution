@@ -5,6 +5,9 @@ dependencies:
     - core.entity_view_mode.paragraph.amp
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
+  enforced:
+    module:
+      - thunder_amp
 id: paragraph.video.amp
 targetEntityType: paragraph
 bundle: video

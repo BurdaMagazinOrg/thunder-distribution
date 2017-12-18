@@ -3,6 +3,9 @@ status: true
 dependencies:
   module:
     - media_entity
+  enforced:
+    module:
+      - thunder_amp
 id: media.amp
 label: AMP
 targetEntityType: media

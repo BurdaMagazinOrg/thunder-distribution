@@ -5,6 +5,9 @@ dependencies:
     - core.entity_view_mode.paragraph.amp
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
+  enforced:
+    module:
+      - thunder_amp
 id: paragraph.gallery.amp
 targetEntityType: paragraph
 bundle: gallery

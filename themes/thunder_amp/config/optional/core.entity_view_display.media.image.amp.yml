@@ -13,6 +13,10 @@ dependencies:
     - media_entity.bundle.image
   module:
     - amp
+  enforced:
+    module:
+      - amp
+      - thunder_amp
 id: media.image.amp
 targetEntityType: media
 bundle: image
