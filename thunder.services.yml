@@ -3,7 +3,7 @@ services:
     class: Drupal\thunder\OptionalModulesManager
     parent: default_plugin_manager
   config_import_subscriber:
-    class: Drupal\thunder\EventSubscriber\ConfigImportSubscriber
+    class: Drupal\thunder\EventSubscriber\ConfigSaveSubscriber
     tags:
       - { name: event_subscriber }
     arguments: ['@config.installer']

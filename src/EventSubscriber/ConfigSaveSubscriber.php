@@ -10,12 +10,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * Installs optional config on config save.
  */
-class ConfigImportSubscriber implements EventSubscriberInterface {
+class ConfigSaveSubscriber implements EventSubscriberInterface {
 
   protected $configInstaller;
 
   /**
-   * ConfigImportSubscriber constructor.
+   * ConfigSaveSubscriber constructor.
    *
    * @param \Drupal\Core\Config\ConfigInstallerInterface $config_installer
    *   Config installer service.
