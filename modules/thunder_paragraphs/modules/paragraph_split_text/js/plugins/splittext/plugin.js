@@ -3,9 +3,11 @@
  * Split Text CKEditor plugin.
  *
  * Split text on cursor position to new paragraph.
+ *
+ * @author Jakub Hnilička ahoj@jakubhnilicka.cz
  */
 
-(function ($, Drupal, drupalSettings, CKEDITOR) {
+(function ($, Drupal, drupalSettings, CKEDITOR, window) {
 
   'use strict';
 
@@ -20,58 +22,65 @@
       $editorObject.closest('table').parent().find('.paragraph-item').each(function (index) {
         $(this).attr('data-paragraph-delta', index);
       });
-      // Check if editor is inside paragraph
-      if ($editorObject.parents('.paragraph-item').length > 0) {
-        editor.addCommand('splitTextBefore', {
-          exec: function (editor) {
-            split(editor, 'before');
-          }
-        });
 
-        editor.addCommand('splitTextAfter', {
-          exec: function (editor) {
-            split(editor, 'after');
-          }
-        });
-
-        editor.ui.addButton('SplitTextBefore', {
-          label: 'Split Text Before',
-          icon: this.path + 'icons/splittext-before.png',
-          command: 'splitTextBefore'
-        });
-
-        editor.ui.addButton('SplitTextAfter', {
-          label: 'Split Text After',
-          icon: this.path + 'icons/splittext-after.png',
-          command: 'splitTextAfter'
-        });
-
-        if (editor.addMenuItems) {
-          editor.addMenuGroup('splittext');
-          editor.addMenuItems({
-            splittextbefore: {
-              label: Drupal.t('Split Before'),
-              command: 'splitTextBefore',
-              icon: this.path + 'icons/splittext-before.png',
-              group: 'splittext',
-              order: 1
-            }, splittextafter: {
-              label: Drupal.t('Split After'),
-              command: 'splitTextAfter',
-              icon: this.path + 'icons/splittext-after.png',
-              group: 'splittext',
-              order: 2
+      // Check if selection mode is modal.
+      if ($editorObject.closest('table').parent().find('.paragraph-type-add-modal').length > 0) {
+        // Check if editor is inside paragraph
+        if ($editorObject.parents('.paragraph-item').length > 0) {
+          editor.addCommand('splitTextBefore', {
+            exec: function (editor) {
+              split(editor, 'before');
             }
           });
-        }
 
-        if (editor.contextMenu) {
-          editor.contextMenu.addListener(function (element, selection) {
-            return {
-              splittextbefore: CKEDITOR.TRISTATE_OFF,
-              splittextafter: CKEDITOR.TRISTATE_OFF
-            };
+          editor.addCommand('splitTextAfter', {
+            exec: function (editor) {
+              split(editor, 'after');
+            }
           });
+
+          editor.ui.addButton('SplitTextBefore', {
+            label: 'Split Text Before',
+            icon: this.path + 'icons/splittext-before.png',
+            command: 'splitTextBefore'
+          });
+
+          editor.ui.addButton('SplitTextAfter', {
+            label: 'Split Text After',
+            icon: this.path + 'icons/splittext-after.png',
+            command: 'splitTextAfter'
+          });
+
+          if (editor.addMenuItems) {
+            editor.addMenuGroup('splittext');
+            editor.addMenuItems({
+              splittextbefore: {
+                label: Drupal.t('Split Before'),
+                command: 'splitTextBefore',
+                icon: this.path + 'icons/splittext-before.png',
+                group: 'splittext',
+                order: 1
+              },
+              splittextafter: {
+                label: Drupal.t('Split After'),
+                command: 'splitTextAfter',
+                icon: this.path + 'icons/splittext-after.png',
+                group: 'splittext',
+                order: 2
+              }
+            });
+          }
+
+          if (editor.contextMenu) {
+            editor.contextMenu.addListener(function (element, selection) {
+              var menuItems = {};
+              menuItems = {
+                splittextbefore: CKEDITOR.TRISTATE_OFF,
+                splittextafter: CKEDITOR.TRISTATE_OFF
+              };
+              return menuItems;
+            });
+          }
         }
       }
 
@@ -95,12 +104,15 @@
       }
 
       function split(editor, direction) {
+        window.direction = direction;
         // Get editor object
         var editorObject = getEditorObject(editor);
         // Get editor body tag element
         var body = editor.document.getBody();
+        // Get Selection
+        var selection = editor.getSelection();
         // Get selected element
-        var selectedElement = editor.getSelection().getStartElement();
+        var selectedElement = selection.getStartElement();
         // Select first element under body tag html -> body -> element
         var rootElement = getRootElement(selectedElement);
         // Get next element of selected element
@@ -113,7 +125,7 @@
           var range = editor.createRange(editor.document);
           // Set start of range to next element
           range.setStartBefore(fromElement);
-          // Get delta of paragraph
+          // Get Delta
           var delta = getParagraphDelta(editorObject);
           // Set end of range to last element
           if (direction === 'after') {
@@ -121,65 +133,76 @@
           }
           else {
             range.setEndBefore(toElement);
-            delta = delta + 1;
+            delta++;
           }
           // Copy cutted content tovariable and delete it
-          var newContent = range.extractContents();
+          window.newContent = range.extractContents();
           // Get content of editor
-          var oldContent = editor.getData();
+          window.oldContent = editor.getData();
           // Get editor drupal selector
-          var originalEditorSelector = editorObject.data('drupal-selector');
+          window.originalEditorSelector = editorObject.data('drupal-selector');
 
-          // Trigger add button
-          var $buttonWrapper;
-          var triggeringElementName;
           // Modal add mode
           if (editorObject.closest('table').parent().find('.paragraph-type-add-modal').length > 0) {
-            $buttonWrapper = editorObject.closest('table').parent().find('.paragraphs-add-dialog-template').parent();
-            triggeringElementName = $('.js-hide input[name$="_add_more"]', $buttonWrapper).attr('name');
+            var $buttonWrapper = editorObject.closest('table').parent().find('.paragraphs-add-dialog-template').parent();
+            window.triggeringElementName = $('.js-hide input[name$="_add_more"]', $buttonWrapper).attr('name');
+            // Enable splitting
+            window.split_trigger = true;
             Drupal.modalAddParagraphs.setValues($buttonWrapper, {
               add_more_select: getParagraphType(editorObject),
               add_more_delta: delta
             });
           }
+
           // Editor id is changed after submit
-          $(document).ajaxComplete(function (e, xhr, settings) {
-            var eventElement = settings.extraData._triggering_element_name;
-            if (eventElement === triggeringElementName) {
-              // Paragraph is added above original
-              // Get new paragraph delta
-              var newDelta = $('.paragraph-item').length - 1;
+          $(document).once('ajax-paragraph').ajaxComplete(function (e, xhr, settings) {
+            var split_trigger = false;
+            if (typeof window.split_trigger !== 'undefined') {
+              split_trigger = window.split_trigger;
+            }
+
+            var eventElement = null;
+            if (settings.extraData._triggering_element_name) {
+              eventElement = settings.extraData._triggering_element_name;
+            }
+            if (eventElement === window.triggeringElementName && split_trigger === true) {
+              // Content
+              var originalEditorContent = window.newContent.getHtml();
+              var newEditorContent = window.oldContent;
+              var originalEditorSelector = window.originalEditorSelector;
 
               // Get original editor id
               var originalEditor = $('[data-drupal-selector="' + originalEditorSelector + '"]');
               var originalEditorId = originalEditor.attr('id');
 
               // Get new editor id
-              var newEditorSelector = originalEditorSelector.replace(/[0-9]-subform/g, newDelta + '-subform');
-              var newEditor = $('[data-drupal-selector="' + newEditorSelector + '"]');
+              var newEditor = $('td .ajax-new-content textarea');
               var newEditorId = newEditor.attr('id');
 
               // Set content to editors
-              if (typeof newEditorId !== 'undefined') {
-                CKEDITOR.instances[newEditorId].setData(oldContent, {
+              if (typeof originalEditorId !== 'undefined') {
+                CKEDITOR.instances[originalEditorId].setData(originalEditorContent, {
                   callback: function () {
+                    // Mark textarea as changed
                     this.updateElement();
                     this.element.data('editor-value-is-changed', true);
                   }
                 });
               }
-              if (typeof originalEditorId !== 'undefined') {
-                CKEDITOR.instances[originalEditorId].setData(newContent.getHtml(), {
+              if (typeof newEditorId !== 'undefined') {
+                CKEDITOR.instances[newEditorId].setData(newEditorContent, {
                   callback: function () {
+                    // Mark textarea as changed
                     this.updateElement();
                     this.element.data('editor-value-is-changed', true);
                   }
                 });
               }
             }
+            window.split_trigger = false;
           });
         }
       }
     }
   });
-})(jQuery, Drupal, drupalSettings, CKEDITOR);
+})(jQuery, Drupal, drupalSettings, CKEDITOR, this);
