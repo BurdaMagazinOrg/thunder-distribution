@@ -14,6 +14,9 @@ dependencies:
   module:
     - entity_reference_revisions
     - user
+  enforced:
+    theme:
+      - thunder_amp
 id: node.article.amp
 targetEntityType: node
 bundle: article
