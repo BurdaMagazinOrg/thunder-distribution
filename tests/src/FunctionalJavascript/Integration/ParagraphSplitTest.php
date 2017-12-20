@@ -34,32 +34,6 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   protected static $selectorTemplate = "textarea[name='%s[%d][subform][field_text][0][value]']";
 
   /**
-   * Test split of paragraph after a selection.
-   */
-  public function testParagraphSplitAfter() {
-    $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
-    $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
-
-    $this->articleFillNew([]);
-
-    // Add text paragraph with two elements.
-    $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
-
-    // Select first element in editor.
-    $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 0);
-
-    // Split text paragraph after the current selection.
-    $this->clickParagraphSplitButton('after');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    // Test if all texts are in the correct paragraph.
-    // When splitting after the current position, the new paragraph will
-    // be in front of the old, that is why the paragraph delta is reversed.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $secondParagraphContent . PHP_EOL);
-  }
-
-  /**
    * Test split of paragraph before a selection.
    */
   public function testParagraphSplitBefore() {

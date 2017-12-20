@@ -39,7 +39,6 @@ settings:
           name: Tools
           items:
             - Source
-            - SplitTextAfter
             - SplitTextBefore
   plugins:
     stylescombo:
