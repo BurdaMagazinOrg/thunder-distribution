@@ -5,6 +5,9 @@ dependencies:
     - entity_reference_revisions
     - liveblog
     - paragraphs
+  enforced:
+    module:
+      - thunder_liveblog
 id: liveblog_post.field_embed_media
 field_name: field_embed_media
 entity_type: liveblog_post

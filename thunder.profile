@@ -147,7 +147,6 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
 
     $instance = $optionalModulesManager->createInstance($module_name);
     $instance->submitForm($form_values);
-    \Drupal::service('config.installer')->installOptionalConfig();
   }
   catch (\Exception $e) {
 
@@ -172,7 +171,6 @@ function thunder_themes_installed($theme_list) {
     }
 
     \Drupal::service('module_installer')->install(['infinite_article'], TRUE);
-    \Drupal::service('config.installer')->installOptionalConfig();
 
     // Ensure that footer block is pre-filled with lazy loading block.
     $entityTypeManager = \Drupal::service('entity_type.manager');
@@ -236,7 +234,6 @@ function thunder_themes_installed($theme_list) {
   if (in_array('thunder_amp', $theme_list)) {
     // Install AMP module.
     \Drupal::service('module_installer')->install(['amp'], TRUE);
-    \Drupal::service('config.installer')->installOptionalConfig();
 
     \Drupal::configFactory()
       ->getEditable('amp.settings')
@@ -272,7 +269,6 @@ function thunder_themes_installed($theme_list) {
 
   if (in_array('amptheme', $theme_list)) {
     \Drupal::service('module_installer')->install(['amp'], TRUE);
-    \Drupal::service('config.installer')->installOptionalConfig();
   }
 }
 
@@ -313,7 +309,16 @@ function thunder_modules_installed($modules) {
     $field->save();
   }
 
-  \Drupal::service('config.installer')->installOptionalConfig();
+  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
+  foreach ($configs as $config) {
+    $dependencies = $config->get('dependencies.module');
+    $enforced_dependencies = $config->get('dependencies.enforced.module');
+    $dependencies = $dependencies ?: [];
+    $enforced_dependencies = $enforced_dependencies ?: [];
+    if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
+      \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
+    }
+  }
 }
 
 /**
