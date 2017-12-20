@@ -6,7 +6,7 @@
 We added a new feature to split paragraphs into two. This was contributed by Telekurier Online Medien GmbH.
 Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
 integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
-Test coverage has been improved to also check for errors on installation and unneccesarry optional config installs
+Test coverage has been improved to also check for errors on installation and unnecessary optional config installs
 have been removed 
 
 - Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
@@ -19,11 +19,11 @@ have been removed
 - Add [Integrate paragraphs split modul](https://www.drupal.org/node/2915666)
 - Add [Evaluate drupal database log on automated tests](https://www.drupal.org/node/2923637)
 
-## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-12-11
+## [8.2.11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.11) 2017-12-11
 
-This release does not contain any changes. It was necessary to update the tar ball on drupal.org, that contained a 
+This release does not contain any changes. It was necessary to update the tar ball on drupal.org that contained a 
 version of config_update with a security flaw.
-This does not concern peaple installing and updating thunder with composer, drush or manually. It is only relevant
+This does not concern people installing and updating thunder with composer, drush or manually. It is only relevant
 for people downloading the tar ball from drupal.org. 
 
 ## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
