@@ -1,5 +1,31 @@
 # Change Log
 
+## [8.2.12](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.12) 2017-12-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.11...8.2.12)
+
+We added a new feature to split paragraphs into two. This was contributed by Telekurier Online Medien GmbH.
+Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
+integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
+Test coverage has been improved to also check for errors on installation and unnecessary optional config installs
+have been removed 
+
+- Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
+- Fix [Add liveblog page is not aligned with article design](https://www.drupal.org/node/2924063)
+- Fix [Thunder installs all optional config after a module install](https://www.drupal.org/node/2931007)
+- Fix [Gallery images below the visible area do not get loaded](https://www.drupal.org/node/2926501)
+- Fix [Configuration menu - many useless menu items for SEO role](https://www.drupal.org/node/2828407)
+- Change [Use selenium chrome docker image for tests](https://www.drupal.org/node/2924324)
+- Change [Make update generation more generic for thunder_updater](https://www.drupal.org/node/2924323)
+- Add [Integrate paragraphs split modul](https://www.drupal.org/node/2915666)
+- Add [Evaluate drupal database log on automated tests](https://www.drupal.org/node/2923637)
+
+## [8.2.11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.11) 2017-12-11
+
+This release does not contain any changes. It was necessary to update the tar ball on drupal.org that contained a 
+version of config_update with a security flaw.
+This does not concern people installing and updating thunder with composer, drush or manually. It is only relevant
+for people downloading the tar ball from drupal.org. 
+
 ## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
 
