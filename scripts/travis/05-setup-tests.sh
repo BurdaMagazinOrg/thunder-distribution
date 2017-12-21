@@ -13,9 +13,10 @@ fi
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 
+# Remove once Thunder is using 8.5.x and
+# https://www.drupal.org/project/drupal/issues/2929198 has been committed
+cp ${TEST_DIR}/docroot/profiles/contrib/thunder/travis/.ht.router.php ./
 # Run the webserver
-curl http://cgit.drupalcode.org/drupal/plain/.ht.router.php?h=8.5.x --output .ht.router.php
-curl https://www.drupal.org/files/issues/2929198-10.patch | patch -p1
 php -S localhost:8080 .ht.router.php &>/dev/null &
 
 # Run Sauce Labs connector manually if Sauce Labs is enabled
