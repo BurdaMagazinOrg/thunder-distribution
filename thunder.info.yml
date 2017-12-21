@@ -48,6 +48,7 @@ dependencies:
   - entity_browser_entity_form
   - field_group
   - focal_point
+  - length_indicator
   - libraries
   - linkit
   - media_entity_image
