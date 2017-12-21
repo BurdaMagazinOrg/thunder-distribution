@@ -80,6 +80,9 @@
             },
             "drupal/core": {
                 "Recursive rebuild caused by installing admin_toolbar_tools module": "https://www.drupal.org/files/issues/2930715-2-4.patch"
+            },
+            "drupal/redirect": {
+                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248.patch"
             }
         }
     },
@@ -131,7 +134,7 @@
         "drupal/paragraphs": "1.1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/redirect": "^1.0",
+        "drupal/redirect": "1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
