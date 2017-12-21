@@ -12,7 +12,7 @@ use Drupal\thunder\ThunderBaseTest;
 class RedirectTest extends ThunderBaseTest {
 
   /**
-   * Tests empty menu groups are gone with admin_toolbar_links_access_filter.
+   * Tests redirect from old URL to new one.
    */
   public function testRedirectFromOldToNewUrl() {
 
