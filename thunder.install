@@ -5,6 +5,7 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
@@ -17,6 +18,8 @@ use Drupal\paragraphs\Entity\Paragraph;
  * Update hook dependencies.
  *
  * 1. Dependency on Thunder Updater module.
+ * 2. Ensure that Thunder updates come last so entity schema updates and more
+ *    fundamental updates occur first.
  *
  * @return mixed
  *   Returns list of update hook dependencies.
@@ -29,7 +32,41 @@ function thunder_update_dependencies() {
     8006 => $installThunderUpdaterHook,
   ];
 
-  return $dependencies;
+  // Ensure that all thunder hook_update_N functions are called after all other
+  // update hooks.
+  $list = [];
+  $return = [];
+  $updates = update_get_update_list();
+
+  // List of thunder modules with hook_update_N() functions.
+  $thunder_module_list = [
+    'thunder',
+    'thunder_article',
+    'thunder_liveblog',
+    'thunder_media',
+    'thunder_paragraphs',
+    'thunder_taxonomy',
+  ];
+
+  foreach ($updates as $module => $info) {
+    if (in_array($module, $thunder_module_list, TRUE)) {
+      // Build a list of thunder modules with updates to run.
+      $return[$module] = [];
+    }
+    else {
+      // Build the list of all the update hooks for thunder updates to depend
+      // on.
+      $pending = array_keys($info['pending']);
+      $list[$module] = array_pop($pending);
+    }
+  }
+
+  // Add the dependencies to the thunder modules with updates to run.
+  foreach ($return as $module => &$info) {
+    $info[$updates[$module]['start']] = $list;
+  }
+
+  return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
 }
 
 /**
