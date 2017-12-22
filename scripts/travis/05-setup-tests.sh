@@ -13,9 +13,10 @@ fi
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 
-# Run the webserver
-curl https://raw.githubusercontent.com/drupal/drupal/8.5.x/.ht.router.php --output .ht.router.php
+# Get the 8.5.x version of .ht.router.php from commit b912d77 and patch it.
+curl https://raw.githubusercontent.com/drupal/drupal/b912d77400abf3327a78b7d513d53ea3b7166daa/.ht.router.php --output .ht.router.php
 curl https://www.drupal.org/files/issues/2929198-10.patch | patch -p1
+# Run the webserver
 php -S localhost:8080 .ht.router.php &>/dev/null &
 
 # Run Sauce Labs connector manually if Sauce Labs is enabled
