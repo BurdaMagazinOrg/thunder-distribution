@@ -14,4 +14,4 @@ So, if you can track down an issue to a specific module, please open the ticket 
 
 If you want to open a PR for the Thunder distribution, please make sure you created an corresponding issue on d.o. before. All created pull requests should contain a d.o. issue number in it's title.
 
-Please also note the pull request template to create better qualitity pull requests.
+Please also note the pull request template to create better quality pull requests.

@@ -102,3 +102,25 @@ function thunder_article_update_8101() {
 
   return $updateLogger->output();
 }
+
+/**
+ * Enable length_indicator module.
+ */
+function thunder_article_update_8102() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if (
+    $thunderUpdater->installModules(['thunder_article_update_8102' => 'length_indicator']) &&
+    $thunderUpdater->executeUpdates([['thunder_article', 'thunder_article_update_8102']])
+  ) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_article_update_8102']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article_update_8102']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
