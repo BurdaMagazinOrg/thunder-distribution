@@ -883,13 +883,12 @@ function thunder_update_8116() {
 function thunder_update_8117() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8118' => 'paragraph_split_text'])) {
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8117' => 'paragraph_split_text'])) {
     $config = \Drupal::configFactory()->getEditable('editor.editor.basic_html');
     $items = $config->get('settings.toolbar.rows.0');
     if ($items) {
       foreach ($items as &$item) {
         if (!empty($item['name'] && $item['name'] === 'Tools')) {
-          $item['items'][] = 'SplitTextAfter';
           $item['items'][] = 'SplitTextBefore';
 
         }
@@ -897,7 +896,7 @@ function thunder_update_8117() {
       $config->set('settings.toolbar.rows.0', $items)->save();
     }
     else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8118']);
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8117']);
     }
   }
   // Output logged messages to related channel of update execution.
@@ -910,7 +909,7 @@ function thunder_update_8117() {
 function thunder_update_8118() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder__thunder_update_8117' => 'admin_toolbar_links_access_filter']);
+  $thunderUpdater->installModules(['thunder__thunder_update_8118' => 'admin_toolbar_links_access_filter']);
 
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
