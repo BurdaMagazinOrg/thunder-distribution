@@ -110,11 +110,7 @@
         "drupal/dropzonejs": "^2.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
-<<<<<<< HEAD
         "drupal/entity_browser": "^2.0",
-=======
-        "drupal/entity_browser": "1.4",
->>>>>>> develop
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
         "drupal/field_group": "^1.0",
