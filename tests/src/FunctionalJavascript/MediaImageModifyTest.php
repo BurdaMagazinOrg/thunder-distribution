@@ -76,7 +76,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $page->fillField('field_copyright[0][value]', "Media {$mediaId} Copyright");
     $page->fillField('field_source[0][value]', "Media {$mediaId} Source");
 
-    $this->fillCkEditor($page, '#edit-field-description-0-value', "Media {$mediaId} Description");
+    $this->fillCkEditor('#edit-field-description-0-value', "Media {$mediaId} Description");
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 

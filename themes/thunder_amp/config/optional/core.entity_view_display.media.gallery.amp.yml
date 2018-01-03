@@ -5,6 +5,9 @@ dependencies:
     - core.entity_view_mode.media.amp
     - field.field.media.gallery.field_media_images
     - media.type.gallery
+  enforced:
+    theme:
+      - thunder_amp
 id: media.gallery.amp
 targetEntityType: media
 bundle: gallery

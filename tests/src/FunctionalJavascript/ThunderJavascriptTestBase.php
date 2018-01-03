@@ -363,7 +363,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     if ($driver instanceof Selenium2Driver) {
       $actualTitle = $driver->getWebDriverSession()->title();
 
-      static::assertTrue($expectedTitle === $actualTitle, 'Title found');
+      static::assertEquals($expectedTitle, $actualTitle, 'Title found');
     }
     else {
       $this->assertSession()->titleEquals($expectedTitle);
@@ -373,20 +373,50 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   /**
    * Fill CKEditor field.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $ckEditorCssSelector
    *   CSS selector for CKEditor.
    * @param string $text
    *   Text that will be filled into CKEditor.
    */
-  public function fillCkEditor(DocumentElement $page, $ckEditorCssSelector, $text) {
-    $ckEditor = $page->find('css', $ckEditorCssSelector);
-    $ckEditorId = $ckEditor->getAttribute('id');
+  public function fillCkEditor($ckEditorCssSelector, $text) {
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
 
     $this->getSession()
       ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$text\");");
+      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].insertHtml(\"$text\");");
+  }
+
+  /**
+   * Select CKEditor element.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   * @param int $childIndex
+   *   The child index under the node.
+   */
+  public function selectCkEditorElement($ckEditorCssSelector, $childIndex) {
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
+
+    $this->getSession()
+      ->getDriver()
+      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex));");
+  }
+
+  /**
+   * Assert that CKEditor instance contains correct data.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   * @param string $expectedContent
+   *   The expected content.
+   */
+  public function assertCkEditorContent($ckEditorCssSelector, $expectedContent) {
+    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
+    $ckEditorContent = $this->getSession()
+      ->getDriver()
+      ->evaluateScript("return CKEDITOR.instances[\"$ckEditorId\"].getData();");
+
+    static::assertEquals($expectedContent, $ckEditorContent);
   }
 
   /**
@@ -485,6 +515,24 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
     $repoSlag = getenv('TRAVIS_REPO_SLUG');
 
     return (!empty($pullRequestSlag) && $pullRequestSlag !== $repoSlag);
+  }
+
+  /**
+   * Get CKEditor id from css selector.
+   *
+   * @param string $ckEditorCssSelector
+   *   CSS selector for CKEditor.
+   *
+   * @return string
+   *   CKEditor ID.
+   */
+  protected function getCkEditorId($ckEditorCssSelector) {
+    $ckEditor = $this->getSession()->getPage()->find(
+      'css',
+      $ckEditorCssSelector
+    );
+
+    return $ckEditor->getAttribute('id');
   }
 
 }

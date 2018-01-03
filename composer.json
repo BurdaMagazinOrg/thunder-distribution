@@ -77,7 +77,8 @@
             },
             "drupal/core": {
                 "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch",
-                "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-39.patch"
+                "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-39.patch",
+                "Recursive rebuild caused by installing admin_toolbar_tools module": "https://www.drupal.org/files/issues/2930715-2-4.patch"
             },
             "drupal/media_entity": {
                 "Action support check shouldn't fail if 2877383 is applied": "https://www.drupal.org/files/issues/2927490-5.patch"
@@ -99,7 +100,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.4.0-stable",
+        "drupal/core": "8.4.3",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^2.0",
@@ -109,7 +110,11 @@
         "drupal/dropzonejs": "^2.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
+<<<<<<< HEAD
         "drupal/entity_browser": "^2.0",
+=======
+        "drupal/entity_browser": "1.4",
+>>>>>>> develop
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
         "drupal/field_group": "^1.0",
@@ -117,6 +122,7 @@
         "drupal/google_analytics": "^2.0",
         "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^1.0",
+        "drupal/length_indicator": "^1.0",
         "drupal/libraries": "dev-3.x",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",

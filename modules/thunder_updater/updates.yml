@@ -157,8 +157,8 @@ v2.10:
         '#description': "<p>Places error messages adjacent to form inputs, for improved usability and accessibility.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Inline form errors', '#url': 'internal:/admin/modules' }
-v2.11:
-    '#title': 'Update to Thunder 2.11'
+v2.12:
+    '#title': 'Update to Thunder 2.12'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8117:
         '#title': 'Enable "Paragraphs split text" module.'
@@ -176,3 +176,13 @@ v2.11:
         '#description_failed': '<p><strong>Slick could not be configured to use blazy for lazy loading of images in galleries.</strong> Enable the Slick UI module and configure your option sets to use blazy for lazy loading<p>'
         extension_page: { '#text': 'Enable the Slick UI module', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Configure your option sets', '#url': 'internal:/admin/config/media/slick' }
+v2.13:
+    '#title': 'Update to Thunder 2.13'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_article_update_8102:
+        '#title': 'Enable "Length Indicator" module'
+        '#description': '<p>The "Length Indicator" module provides a visual feedback for editors, to decide if they have written too less, enough, or too much.</p>'
+        '#description_successful': '<p>It was activated for the field "SEO Title" in the article.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p><p>Afterwards visit the form display configuration of the article to activate it, e.g. for the field "SEO Title".</p>'
+        extension_page: { '#text': 'Enable the Length Indicator module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure the form display of the article', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
