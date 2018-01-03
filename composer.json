@@ -26,7 +26,7 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "repositories": [
         {
             "type": "composer",
@@ -72,25 +72,16 @@
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
-            "drupal/slick_media": {
-                "Slick Media Port to the proposed Media core module API": "https://www.drupal.org/files/issues/slick_media_port_to_the-2905335-2.patch"
-            },
-            "drupal/core": {
-                "Move File/Image media type into Standard once Media is stable": "https://www.drupal.org/files/issues/2883813-27.patch",
-                "Add action support to Media module": "https://www.drupal.org/files/issues/2877383-39.patch",
-                "Recursive rebuild caused by installing admin_toolbar_tools module": "https://www.drupal.org/files/issues/2930715-2-4.patch"
-            },
-            "drupal/media_entity": {
-                "Action support check shouldn't fail if 2877383 is applied": "https://www.drupal.org/files/issues/2927490-5.patch"
+            "drupal/redirect": {
+                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
             }
         }
     },
     "require": {
-        "burdamagazinorg/infinite_module": "dev-feature/media-in-core",
-        "burdamagazinorg/infinite_theme": "^1.0",
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
         "drupal/amp": "1.0",
+        "pc-magas/amp": "^1.0",
         "drupal/amptheme": "1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
@@ -100,7 +91,8 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "8.4.3",
+        "drupal/core": "8.6.x-dev",
+        "drupal/config_selector": "^1.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^2.0",
@@ -119,39 +111,40 @@
         "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0",
-        "drupal/libraries": "dev-3.x",
+        "drupal/libraries": "^3.0",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
-        "drupal/media_entity": "^2.0",
         "drupal/media_entity_instagram": "^2.0",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0",
         "drupal/media_entity_twitter": "^2.0",
         "drupal/media_expire": "^2.0",
-        "burdamagazinorg/nexx_integration": "dev-feature/move-to-core-media",
         "drupal/metatag": "^1.0",
         "drupal/paragraphs": "1.1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/riddle_marketplace": "^3.0",
+        "drupal/redirect": "1.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
-        "drupal/slick_media": "^1.0",
+        "drupal/slick_media": "^2.0",
         "drupal/thunder_admin": ">=1",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^2.0",
-        "drupal/views_load_more": "dev-1.x",
-        "valiton/harbourmaster": "~8.1",
         "bower-asset/dropzone": "^5.1",
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24"
     },
+    "suggest": {
+        "drupal/riddle_marketplace": "Riddle marketplace integration",
+        "drupal/nexx_integration": "NEXX Video CMS integration",
+        "valiton/harbourmaster": "Harbourmaster Single Sign On"
+    },
     "replace": {
-        "heiseonline/shariff": "*",
+        "lullabot/amp": "*",
         "bower-asset/jquery": "*",
         "bower-asset/jqueryui": "*",
         "bower-asset/backbone": "*",

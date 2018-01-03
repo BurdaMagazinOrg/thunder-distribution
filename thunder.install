@@ -913,3 +913,19 @@ function thunder_update_8118() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Enable redirect module.
+ */
+function thunder_update_8119() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8119' => 'redirect'])) {
+    if ($role = Role::load('seo')) {
+      $role->grantPermission('administer redirects');
+      $role->save();
+    }
+  }
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}

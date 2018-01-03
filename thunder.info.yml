@@ -40,6 +40,7 @@ dependencies:
   - admin_toolbar_tools
   - admin_toolbar_links_access_filter
   - blazy
+  - config_selector
   - content_lock
   - ctools
   - diff
@@ -63,6 +64,7 @@ dependencies:
   - paragraphs
   - paragraph_split_text
   - pathauto
+  - redirect
   - scheduler
   - simple_sitemap
   - slick_media

@@ -1,0 +1,6 @@
+thunder_article.settings:
+  type: config_object
+  mapping:
+    move_scheduler_local_task:
+      type: boolean
+      label: 'Move scheduler to local task of content list'

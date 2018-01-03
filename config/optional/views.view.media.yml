@@ -185,9 +185,6 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          action_title: Action
-          include_exclude: exclude
-          selected_actions: {  }
           entity_type: media
           plugin_id: media_bulk_form
         thumbnail__target_id:

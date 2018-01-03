@@ -1,5 +1,47 @@
 # Change Log
 
+## [8.2.16](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.16) 2018-03-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.15...8.2.16)
+
+This is a release to reflect the availablity of a new highly critical Drupal release. Everyone using Thunder or Drupal
+should update as soon as possible. This release does not contain any code changes. The only difference is the updated
+drush make files that lead to a new tar-ball on drupal.org which will contain the security patch for drupal.
+For more information about the Drupal release see: https://www.drupal.org/psa-2018-001
+
+## [8.2.15](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.15) 2018-03-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.14...8.2.15)
+
+Drupal 8.5.0 release fixes and test fixes. Also starting with this release we will have hard dependencies on the 
+config selector module, which is required for delivering configuration depending on activated modules.
+Special note on Drupal 8.5.0 and the Google AMP integration: The lullabot AMP library is currently not compatible with 
+the drupal 8.5 dependencies, for this reason we provide the pc-magas/amp library instead. 
+Since we do not ship core patches anymore, we do not lock Drupal core anymore. 
+
+- Fix [Config Selector and Thunder Updater are required by Thunder](https://www.drupal.org/project/thunder/issues/2947051)
+- Do [Enable config checks for more modules](https://www.drupal.org/project/thunder/issues/2948617)
+- Do [Prepare thunder for Drupal 8.5](https://www.drupal.org/project/thunder/issues/2948955)
+
+
+## [8.2.14](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.14) 2018-02-22
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.13...8.2.14)
+
+Security update for Drupal core: https://www.drupal.org/SA-CORE-2018-001, additionally several tests have been fixed.
+No features were added in this release.
+
+## [8.2.13](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.13) 2018-01-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.12...8.2.13)
+
+Thunder now contains a configurable length indicator for text fields. You can attach a length indicator to any text
+field, it will show an indication, if the text length is within a given range. We implemented it for the SEO text field.  
+Additionally we added the redirect module, to automatically add redirects when URLs of articles have changed. As usual 
+several test improvements have been made.
+
+- Add [[UX] Field length indicator without setting a hard limit](https://www.drupal.org/project/thunder/issues/2931731)
+- Add [Update testing using UpdatePathTestBase](https://www.drupal.org/node/2927525)
+- Fix [Previous article paths get not redirected to the current url](https://www.drupal.org/project/thunder/issues/2925486)
+- Fix [Daily tests are failing with Drush 9](https://www.drupal.org/project/thunder/issues/2936777)
+- Do [Update core and contrib](https://www.drupal.org/node/2934289)
+
 ## [8.2.12](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.12) 2017-12-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.11...8.2.12)
 

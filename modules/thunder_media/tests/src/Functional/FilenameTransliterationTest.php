@@ -51,7 +51,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
     ];
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->responseContains(t('You WIN!'));
+    $this->assertSession()->responseContains('You WIN!');
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
