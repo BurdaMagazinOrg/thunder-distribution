@@ -57,7 +57,7 @@
         },
         "patches": {
             "drupal/media_entity": {
-                "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
+                "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2934289-2813685-21.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
