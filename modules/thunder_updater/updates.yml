@@ -186,3 +186,8 @@ v2.13:
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p><p>Afterwards visit the form display configuration of the article to activate it, e.g. for the field "SEO Title".</p>'
         extension_page: { '#text': 'Enable the Length Indicator module', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Configure the form display of the article', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+    thunder__thunder_update_8119:
+        '#title': 'Enable "Redirect" module.'
+        '#description': "<p>Allows users to redirect from old URLs to new URLs.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable Redirect', '#url': 'internal:/admin/modules' }

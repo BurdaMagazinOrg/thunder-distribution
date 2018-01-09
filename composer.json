@@ -80,6 +80,9 @@
             },
             "drupal/core": {
                 "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch"
+            },
+            "drupal/redirect": {
+                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248.patch"
             }
         }
     },
@@ -132,6 +135,7 @@
         "drupal/paragraphs": "1.1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
+        "drupal/redirect": "1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
