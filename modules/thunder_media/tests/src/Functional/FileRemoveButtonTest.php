@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_media\Tests;
+namespace Drupal\Tests\thunder_media\Functional;
 
 use Drupal\thunder\ThunderBaseTest;
 
