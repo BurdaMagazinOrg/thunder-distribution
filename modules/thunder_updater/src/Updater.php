@@ -7,6 +7,7 @@ use Drupal\config_update\ConfigRevertInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
@@ -31,6 +32,13 @@ class Updater implements UpdaterInterface {
    * @var \Drupal\user\SharedTempStoreFactory
    */
   protected $tempStoreFactory;
+
+  /**
+   * Module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
 
   /**
    * Module installer service.
@@ -74,6 +82,8 @@ class Updater implements UpdaterInterface {
    *   A temporary key-value store service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Module handler service.
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    *   Module installer service.
    * @param \Drupal\config_update\ConfigRevertInterface $configReverter
@@ -85,9 +95,10 @@ class Updater implements UpdaterInterface {
    * @param \Drupal\thunder_updater\UpdateChecklist $checklist
    *   Update Checklist service.
    */
-  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist) {
+  public function __construct(SharedTempStoreFactory $tempStoreFactory, ConfigFactoryInterface $configFactory, ModuleHandlerInterface $moduleHandler, ModuleInstallerInterface $moduleInstaller, ConfigRevertInterface $configReverter, ConfigHandler $configHandler, UpdateLogger $logger, UpdateChecklist $checklist) {
     $this->tempStoreFactory = $tempStoreFactory;
     $this->configFactory = $configFactory;
+    $this->moduleHandler = $moduleHandler;
     $this->moduleInstaller = $moduleInstaller;
     $this->configReverter = $configReverter;
     $this->configHandler = $configHandler;
@@ -209,6 +220,9 @@ class Updater implements UpdaterInterface {
    */
   public function executeUpdates(array $updateList) {
     $updateDefinitions = [];
+    $modulesEnabled = $this->moduleHandler->getModuleList();
+    // Only run updates from enabled modules.
+    $updateList = array_intersect_key($updateList, $modulesEnabled);
 
     foreach ($updateList as $updateEntry) {
       $updateDefinitions = array_merge($updateDefinitions, $this->configHandler->loadUpdate($updateEntry[0], $updateEntry[1]));
