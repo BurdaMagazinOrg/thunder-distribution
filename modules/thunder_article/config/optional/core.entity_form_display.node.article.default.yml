@@ -104,7 +104,13 @@ content:
     settings:
       size: 65
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      length_indicator:
+        indicator: true
+        indicator_opt:
+          optimin: 15
+          optimax: 50
+          tolerance: 10
     region: content
   field_tags:
     type: entity_reference_autocomplete_tags
@@ -204,4 +210,9 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }

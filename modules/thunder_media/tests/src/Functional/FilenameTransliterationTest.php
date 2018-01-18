@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_media\Tests;
+namespace Drupal\Tests\thunder_media\Functional;
 
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
@@ -51,7 +51,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
     ];
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->responseContains(t('You WIN!'));
+    $this->assertSession()->responseContains('You WIN!');
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
