@@ -459,70 +459,99 @@ function thunder_update_8107() {
           'type' => 'paragraphs_riddle_marketplace',
         ]);
 
+      /** @var \Drupal\paragraphs\ParagraphInterface $oldParagraph */
       foreach ($paragraphs as $oldParagraph) {
-
         $fieldName = $oldParagraph->get('parent_field_name')->get(0)->getString();
 
+        /** @var Drupal\Core\Entity\ContentEntityInterface $host */
         $host = $oldParagraph->getParentEntity();
-        if ($host) {
+        if (!$host) {
+          continue;
+        }
 
-          foreach ($host->get($fieldName)->getValue() as $delta => $field) {
-            if ($field['target_id'] == $oldParagraph->id()) {
+        foreach ($host->get($fieldName)->getValue() as $delta => $field) {
+          if ($field['target_id'] != $oldParagraph->id()) {
+            continue;
+          }
 
-              /* @var \Drupal\media_entity\Entity\Media */
-              $media = $entityTypeManager->getStorage('media')
-                ->loadByProperties([
-                  'bundle' => 'riddle',
-                  'field_riddle_id' => pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'],
-                ]);
-              $media = current($media);
+          // Extract riddle ID from link field.
+          $riddle_id = pathinfo(parse_url($oldParagraph->get('field_link')->uri)['path'])['filename'];
 
-              // Create new Riddle paragraph for media.
-              try {
-                $paragraph = Paragraph::create([
-                  'type' => 'riddle',
-                  'field_riddle' => $media->id(),
-                ]);
-                $paragraph->save();
-              }
-              catch (EntityStorageException $storageException) {
-                $updateLogger->warning(t(
-                  'Could not create paragraph for @riddle in @name.',
-                  [
-                    '@riddle' => $media->label(),
-                    '@name' => $host->label(),
-                  ]
-                ));
-                $successfulUpdate = FALSE;
-
-                // Since paragraph is not created - skip further execution.
-                continue;
-              }
-
-              // Add new paragraph to parent entity.
-              $host->get($fieldName)->set($delta, [
-                'target_id' => $paragraph->id(),
-                'target_revision_id' => $paragraph->getRevisionId(),
+          /* @var \Drupal\media_entity\Entity\Media */
+          $media = $entityTypeManager->getStorage('media')
+            ->loadByProperties([
+              'bundle' => 'riddle',
+              'field_riddle_id' => $riddle_id,
+            ]);
+          if (($media = current($media)) === FALSE) {
+            // There is no media with this riddle ID.
+            try {
+              // Create new media entity with riddle ID.
+              $media = Media::create([
+                'type' => 'riddle',
+                'field_riddle_id' => $riddle_id,
               ]);
-
-              try {
-                $host->save();
-                $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-
-                // After successful saving -> remove old paragraph.
-                try {
-                  $oldParagraph->delete();
-                }
-                catch (EntityStorageException $storageException) {
-                  $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-                  $successfulUpdate = FALSE;
-                }
-              }
-              catch (EntityStorageException $storageException) {
-                $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
-                $successfulUpdate = FALSE;
-              }
+              $media->save();
             }
+            catch (EntityStorageException $storageException) {
+              $updateLogger->warning(t(
+                'Could not create riddle media for @riddle in @name.',
+                [
+                  '@riddle' => $riddle_id,
+                  '@name' => $host->label(),
+                ]
+              ));
+              $successfulUpdate = FALSE;
+
+              // Since paragraph is not created - skip further execution.
+              continue;
+            }
+          }
+
+          // Create new Riddle paragraph for media.
+          try {
+            $paragraph = Paragraph::create([
+              'type' => 'riddle',
+              'field_riddle' => $media->id(),
+            ]);
+            $paragraph->save();
+          }
+          catch (EntityStorageException $storageException) {
+            $updateLogger->warning(t(
+              'Could not create paragraph for @riddle in @name.',
+              [
+                '@riddle' => $media->label(),
+                '@name' => $host->label(),
+              ]
+            ));
+            $successfulUpdate = FALSE;
+
+            // Since paragraph is not created - skip further execution.
+            continue;
+          }
+
+          // Add new paragraph to parent entity.
+          $host->get($fieldName)->set($delta, [
+            'target_id' => $paragraph->id(),
+            'target_revision_id' => $paragraph->getRevisionId(),
+          ]);
+
+          try {
+            $host->save();
+            $updateLogger->info(t('Converted @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+
+            // After successful saving -> remove old paragraph.
+            try {
+              $oldParagraph->delete();
+            }
+            catch (EntityStorageException $storageException) {
+              $updateLogger->warning(t('Could not delete @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+              $successfulUpdate = FALSE;
+            }
+          }
+          catch (EntityStorageException $storageException) {
+            $updateLogger->warning(t('Could not convert @riddle in @name.', ['@riddle' => $media->label(), '@name' => $host->label()]));
+            $successfulUpdate = FALSE;
           }
         }
       }
