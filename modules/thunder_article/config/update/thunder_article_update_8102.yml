@@ -1,0 +1,16 @@
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_seo_title:
+        third_party_settings: {  }
+  update_actions:
+    change:
+      content:
+        field_seo_title:
+          third_party_settings:
+            length_indicator:
+              indicator: true
+              indicator_opt:
+                optimax: 50
+                optimin: 15
+                tolerance: 10
