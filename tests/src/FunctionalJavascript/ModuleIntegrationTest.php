@@ -247,7 +247,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Check channel page.
     $this->drupalGet('news');
 
-    $topChannelCssSelector = 'a[href$="burda-launches-worldwide-coalition-industry-partners-and-releases-open-source-online-cms-platform"]';
+    $topChannelCssSelector = 'a[href$="burda-launches-open-source-cms-thunder"]';
     $midChannelCssSelector = 'a[href$="duis-autem-vel-eum-iriure"]';
 
     $windowSize['height'] = 950;

@@ -45,12 +45,12 @@ sudo ifconfig lo0 alias 172.16.123.1
 ``` 
 ```bash
 docker run -d -P -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
- -v /dev/shm:/dev/shm --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome
+ --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome
 ```
 To debug a browser you can use following commands:
 ```bash
 docker run -d -P -p 6000:5900 -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
- -v /dev/shm:/dev/shm --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome-debug
+ --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome-debug
 ```
 and connect with you vnc client (on mac you can use finder: go to -> connect to server [⌘K]). Address: `vnc://localhost:6000`, the password is: `secret`
 
