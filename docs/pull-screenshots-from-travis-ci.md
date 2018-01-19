@@ -41,7 +41,7 @@ Then edit the script for running of tests:
 $ vi scripts/travis/06-run-tests.sh
 ```
 
-Prepend the line that executes tests with `generateMode=true`, that flag is used to create screenshot files during the test execution. The line in the script should look like this: ```generateMode=true thunderDumpFile=thunder.php.gz php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 Thunder,thunder_updater```
+Prepend the line that executes tests with `generateMode=true`, that flag is used to create screenshots during the test execution. The line in the script should look like this: ```generateMode=true thunderDumpFile=thunder.php.gz php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 Thunder,thunder_updater```
 
 (optional) The Speed-Up solution is to add additional filtering. In that way it's possible to run only the tests that should be updated, then the generation of the screenshots will be execute faster.
 For example: ```generateMode=true thunderDumpFile=thunder.php.gz php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\FunctionalJavascript\Update\ThunderMediaTest"```
