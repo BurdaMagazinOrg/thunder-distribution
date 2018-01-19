@@ -5,7 +5,7 @@
 # see: https://github.com/drush-ops/drush#install---composer
 export THUNDER_DIST_DIR=`echo $(pwd)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="$TEST_DIR/bin:$HOME/.composer/vendor/bin:$PATH"
 export TEST_INSTALLER="false"
 
 # For daily cron runs, current version from Drupal will be installed
@@ -28,10 +28,15 @@ export PHP_IMAGICK_VERSION
 # Get latest version of Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
 if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
   PHP_YAML_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '[ .[].name | select(index("1.")==0) ] | .[0]'`
-elif [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then
+else
   PHP_YAML_VERSION=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '.[0].name'`
 fi;
 export PHP_YAML_VERSION
+
+# Set a default install method if none set.
+if [[ ${INSTALL_METHOD} == "" ]]; then
+  export INSTALL_METHOD=composer
+fi;
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:

@@ -1,5 +1,45 @@
 # Change Log
 
+## [8.2.13](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.13) 2018-01-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.12...8.2.13)
+
+Thunder now contains a configurable length indicator for text fields. You can attach a length indicator to any text
+field, it will show an indication, if the text length is within a given range. We implemented it for the SEO text field.  
+Additionally we added the redirect module, to automatically add redirects when URLs of articles have changed. As usual 
+several test improvements have been made.
+
+- Add [[UX] Field length indicator without setting a hard limit](https://www.drupal.org/project/thunder/issues/2931731)
+- Add [Update testing using UpdatePathTestBase](https://www.drupal.org/node/2927525)
+- Fix [Previous article paths get not redirected to the current url](https://www.drupal.org/project/thunder/issues/2925486)
+- Fix [Daily tests are failing with Drush 9](https://www.drupal.org/project/thunder/issues/2936777)
+- Do [Update core and contrib](https://www.drupal.org/node/2934289)
+
+## [8.2.12](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.12) 2017-12-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.11...8.2.12)
+
+We added a new feature to split paragraphs into two. This was contributed by Telekurier Online Medien GmbH.
+Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
+integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
+Test coverage has been improved to also check for errors on installation and unnecessary optional config installs
+have been removed 
+
+- Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
+- Fix [Add liveblog page is not aligned with article design](https://www.drupal.org/node/2924063)
+- Fix [Thunder installs all optional config after a module install](https://www.drupal.org/node/2931007)
+- Fix [Gallery images below the visible area do not get loaded](https://www.drupal.org/node/2926501)
+- Fix [Configuration menu - many useless menu items for SEO role](https://www.drupal.org/node/2828407)
+- Change [Use selenium chrome docker image for tests](https://www.drupal.org/node/2924324)
+- Change [Make update generation more generic for thunder_updater](https://www.drupal.org/node/2924323)
+- Add [Integrate paragraphs split modul](https://www.drupal.org/node/2915666)
+- Add [Evaluate drupal database log on automated tests](https://www.drupal.org/node/2923637)
+
+## [8.2.11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.11) 2017-12-11
+
+This release does not contain any changes. It was necessary to update the tar ball on drupal.org that contained a 
+version of config_update with a security flaw.
+This does not concern people installing and updating thunder with composer, drush or manually. It is only relevant
+for people downloading the tar ball from drupal.org. 
+
 ## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
 

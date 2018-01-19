@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.liveblog_post.liveblog_post.field_embed_media
+  module:
+    - entity_reference_revisions
+    - link
+    - liveblog
+    - simple_gmap
+    - text
+    - user
+id: liveblog_post.liveblog_post.default
+targetEntityType: liveblog_post
+bundle: liveblog_post
+mode: default
+content:
+  body:
+    type: text_default
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  created:
+    label: hidden
+    type: timestamp
+    weight: 3
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    region: content
+  field_embed_media:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    weight: 3
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  location:
+    type: simple_gmap
+    weight: 8
+    label: hidden
+    settings:
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      zoom_level: 14
+      information_bubble: true
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+    third_party_settings: {  }
+    region: content
+  source:
+    label: inline
+    type: link
+    weight: 7
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    region: content
+  title:
+    label: hidden
+    type: string
+    weight: 1
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    region: content
+  uid:
+    label: hidden
+    type: author
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  changed: true
+  highlight: true
+  liveblog: true
