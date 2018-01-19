@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Element\DocumentElement;
+use Drupal\Component\Utility\Html;
 
 /**
  * Trait for handling of Paragraph related test actions.
@@ -21,17 +22,30 @@ trait ThunderParagraphsTestTrait {
    *   Returns number of paragraphs.
    */
   protected function getNumberOfParagraphs($fieldName) {
-    $fieldNamePart = str_replace('_', '-', $fieldName);
-
-    $paragraphRows = $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]");
+    $paragraphRows = $this->getParagraphItems($fieldName);
 
     return count($paragraphRows);
   }
 
   /**
+   * Get paragraph items.
+   *
+   * @param string $fieldName
+   *   Paragraph field name.
+   *
+   * @return Behat\Mink\Element\NodeElement
+   *   The paragraph node element.
+   */
+  protected function getParagraphItems($fieldName) {
+    $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
+
+    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[contains(@class, \"paragraph-item\")]");
+  }
+
+  /**
    * Add paragraph for field with defined paragraph type.
    *
-   * This uses paragrpahs modal widget.
+   * This uses paragraphs modal widget.
    *
    * @param string $fieldName
    *   Field name.
@@ -42,13 +56,16 @@ trait ThunderParagraphsTestTrait {
    *
    * @return int
    *   Returns index for added paragraph.
+   *
+   * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
     $page = $this->getSession()->getPage();
-    $nextParagraphIndex = $this->getNumberOfParagraphs($fieldName);
+    $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
-    $fieldSelector = str_replace('_', '-', $fieldName);
-    if ($position === NULL || $position > $this->getNumberOfParagraphs($fieldName)) {
+    $fieldSelector = HTML::cleanCssIdentifier($fieldName);
+    if ($position === NULL || $position > $numberOfParagraphs) {
+      $position = $numberOfParagraphs;
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper div.paragraphs-bottom-add-button > input";
     }
     else {
@@ -67,9 +84,38 @@ trait ThunderParagraphsTestTrait {
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . $fieldSelector . '-' . $nextParagraphIndex . '-subform"]');
+    // Test if we have one more paragraph now.
+    static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
 
-    return $nextParagraphIndex;
+    return $this->getParagraphDelta($fieldName, $position);
+  }
+
+  /**
+   * Get dalta of paragraph item for a given filed on a specific position.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param int $position
+   *   The Position of the paragraph item.
+   *
+   * @return int
+   *   The delta of the paragraph
+   *
+   * @throws \Exception
+   */
+  public function getParagraphDelta($fieldName, $position) {
+    $fieldSelector = HTML::cleanCssIdentifier($fieldName);
+
+    // Retrieve new paragraphs delta from id attribute of the item.
+    $paragraphItem = $this->getParagraphItems($fieldName)[$position];
+    $itemId = $paragraphItem->getAttribute('id');
+    preg_match("/^edit-{$fieldSelector}-(\d+)--/", $itemId, $matches);
+
+    if (!isset($matches[1])) {
+      throw new \Exception('No new paragraph is found');
+    }
+
+    return $matches[1];
   }
 
   /**
@@ -139,11 +185,12 @@ trait ThunderParagraphsTestTrait {
   public function addTextParagraph($fieldName, $text, $type = 'text', $position = NULL) {
     $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
-    $this->fillCkEditor(
-      $this->getSession()->getPage(),
-      "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']",
-      $text
-    );
+    if (!empty($text)) {
+      $this->fillCkEditor(
+        "textarea[name='{$fieldName}[{$paragraphIndex}][subform][field_text][0][value]']",
+        $text
+      );
+    }
   }
 
   /**

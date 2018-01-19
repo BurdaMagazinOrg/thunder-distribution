@@ -34,14 +34,11 @@ class LiveblogTest extends ThunderJavascriptTestBase {
   /**
    * Set the body of a liveblog post.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $body
    *   The body.
    */
-  protected function liveblogSetBody(DocumentElement $page, $body) {
+  protected function liveblogSetBody($body) {
     $this->fillCkEditor(
-      $page,
       "textarea[name='body[0][value]']",
       $body
     );
@@ -106,7 +103,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->liveblogSetTitle($page, 'Normal post');
-    $this->liveblogSetBody($page, "This is a normal text");
+    $this->liveblogSetBody("This is a normal text");
     $this->clickButtonDrupalSelector($page, "edit-submit");
 
     $this->waitUntilVisible('article[data-postid="1"]', 10000);
@@ -118,7 +115,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->selectMedia("field_embed_media_0_subform_field_image", 'image_browser', ['media:1']);
 
-    $this->liveblogSetBody($page, 'Very nice image post you have here!');
+    $this->liveblogSetBody('Very nice image post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_ImagePost_' . date('Ymd_His') . '.png');
@@ -137,7 +134,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
       'https://twitter.com/tweetsauce/status/778001033142284288'
     );
 
-    $this->liveblogSetBody($page, 'Very nice twitter post you have here!');
+    $this->liveblogSetBody('Very nice twitter post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_' . date('Ymd_His') . '.png');
@@ -160,7 +157,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
       'https://www.instagram.com/p/BNU5k6jhds9/'
     );
 
-    $this->liveblogSetBody($page, 'Very nice instagram post you have here!');
+    $this->liveblogSetBody('Very nice instagram post you have here!');
 
     $this->clickButtonDrupalSelector($page, "edit-submit");
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_' . date('Ymd_His') . '.png');

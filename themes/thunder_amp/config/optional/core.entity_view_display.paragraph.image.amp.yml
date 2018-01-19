@@ -5,6 +5,9 @@ dependencies:
     - core.entity_view_mode.paragraph.amp
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
+  enforced:
+    theme:
+      - thunder_amp
 id: paragraph.image.amp
 targetEntityType: paragraph
 bundle: image

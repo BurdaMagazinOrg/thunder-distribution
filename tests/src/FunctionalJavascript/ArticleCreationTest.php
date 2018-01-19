@@ -13,7 +13,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderArticleTestTrait;
 
   /**
-   * Filed name for paragraphs in article content.
+   * Field name for paragraphs in article content.
    *
    * @var string
    */
@@ -23,8 +23,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Test Creation of Article.
    */
   public function testCreateArticle() {
-    $this->drupalGet('node/add/article');
-
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test article',
@@ -39,10 +37,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
 
-    // Split text paragraph.
-    $this->getSession()->executeScript("jQuery('#cke_108').click();");
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
     // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
       'media:1',
@@ -56,7 +50,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BK3VVUtAuJ3/', 'instagram');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BbywAZBBqlI/', 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
@@ -92,11 +86,15 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Instagram widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BK3VVUtAuJ3') !== -1);}).length === 1");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length");
+    $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
 
     // Check that one Twitter widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+      ->wait(5000, "jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
+    $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
     $this->assertSession()->linkExists('Link to Thunder');
@@ -110,10 +108,12 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Video paragraph.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length");
+    $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
     // Check that one Pinterest widget is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][10]//span[contains(@data-pin-id, "99360735500167749")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "99360735500167749")]', 2);
   }
 
 }

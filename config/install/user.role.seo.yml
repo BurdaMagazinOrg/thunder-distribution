@@ -59,3 +59,4 @@ permissions:
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
   - 'break content lock'
+  - 'administer redirects'
