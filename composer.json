@@ -79,10 +79,15 @@
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             },
             "drupal/core": {
-                "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch"
+                "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch",
+                "Broken/missing handler for Moderation state field": "https://www.drupal.org/files/issues/2859381-31.patch",
+                "Provide useful Views filters for Content Moderation State fields": "https://www.drupal.org/files/issues/2862041-257.patch"
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248.patch"
+            },
+            "drupal/scheduler": {
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/scheduler-content-moderation-integration-2798689-28.diff"
             }
         }
     },
@@ -137,7 +142,7 @@
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "1.0",
         "drupal/riddle_marketplace": "^2.0",
-        "drupal/scheduler": "^1.0",
+        "drupal/scheduler": "1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
