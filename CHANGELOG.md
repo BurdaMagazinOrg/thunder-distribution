@@ -1,5 +1,19 @@
 # Change Log
 
+## [8.2.13](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.13) 2018-01-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.12...8.2.13)
+
+Thunder now contains a configurable length indicator for text fields. You can attach a length indicator to any text
+field, it will show an indication, if the text length is within a given range. We implemented it for the SEO text field.  
+Additionally we added the redirect module, to automatically add redirects when URLs of articles have changed. As usual 
+several test improvements have been made.
+
+- Add [[UX] Field length indicator without setting a hard limit](https://www.drupal.org/project/thunder/issues/2931731)
+- Add [Update testing using UpdatePathTestBase](https://www.drupal.org/node/2927525)
+- Fix [Previous article paths get not redirected to the current url](https://www.drupal.org/project/thunder/issues/2925486)
+- Fix [Daily tests are failing with Drush 9](https://www.drupal.org/project/thunder/issues/2936777)
+- Do [Update core and contrib](https://www.drupal.org/node/2934289)
+
 ## [8.2.12](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.12) 2017-12-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.11...8.2.12)
 
