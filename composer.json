@@ -79,6 +79,7 @@
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             },
             "drupal/core": {
+                "Diff can infinitely loop since #2885309": "https://www.drupal.org/files/issues/2936941-9.patch",
                 "Regression: LinkWidget no longer supports base fields with optional title": "https://www.drupal.org/files/issues/2937889-link-fix-pass.patch"
             },
             "drupal/redirect": {
