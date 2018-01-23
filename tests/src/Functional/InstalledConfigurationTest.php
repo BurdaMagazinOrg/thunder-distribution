@@ -241,11 +241,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         ],
       ],
     ],
-    'views.view.redirect' => [
-      'dependencies' => [
-        'module' => TRUE,
-      ],
-    ],
   ];
 
   /**
