@@ -42,7 +42,7 @@ To successfully run drupal tests, a Browser with WebDriver is required. Use sele
 On Mac you have to alias localhost:
 ```bash
 sudo ifconfig lo0 alias 172.16.123.1
-``` 
+```
 ```bash
 docker run -d -P -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
  --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome
@@ -64,7 +64,7 @@ After that drupal tests can be executed (if you are in ```docroot``` folder of T
 php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
 ```
 
-To speed things up run tests using a database dump: 
+To speed things up run tests using a database dump:
 ```bash
 DEVDESKTOP_DRUPAL_SETTINGS_DIR="${HOME}/.acquia/DevDesktop/DrupalSettings" \
 php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
@@ -90,11 +90,11 @@ Documentation how to check your code for coding style issues can be found [here]
 
 ## Thunder Travis CI
 
-All Thunder pull requests are execute on [Travis CI](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP versions 5.6 (with drush make install) and 7.1 (with composer install). All code will be checked against coding style.
+All Thunder pull requests are execute on [Travis CI](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP versions 5.6 (with drush make install) and 7.2 (with composer install). All code will be checked against coding style.
 
 We support some test execution options. They can be provided in commit message in square brackets []. Here is list of options supported:
 - TEST_UPDATE - allowed values: (true), this option will execute custom test path, where update (including execution of update hooks) from latest released version will be tested. This option should be used in case of pull request with update hooks or module update.
-- INSTALL_METHOD - allowed values: (drush_make, composer), this options overwrites default install method and it allows to test PHP 5.6 and 7.1 with same install method.
+- INSTALL_METHOD - allowed values: (drush_make, composer), this options overwrites default install method and it allows to test PHP 5.6 and 7.2 with same install method.
 - TEST_INSTALLER - allowed values: (true), this option will execute additional tests, that tests installation of Thunder with default language (English) and German. These tests require significant more time to be executed.
 - SAUCE_LABS_ENABLED - allowed values: (true), this option will execute tests on [Sauce Labs](https://saucelabs.com), where screenshots and videos of test executions are available for additional investigation of possible problems. This option significantly increases execution time of tests.
 
@@ -169,11 +169,11 @@ Here is example to import image paragraph configuration:
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 ```
-It imports configurations, that's in a module or profile config directory. 
+It imports configurations, that's in a module or profile config directory.
 
 #### Updating existing configuration (with manually defined configuration changes)
 
-Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state. 
+Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state.
 
 ```php
   // List of configurations that should be checked for existence.
@@ -214,7 +214,7 @@ Workflow to generate Thunder configuration update is following:
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
 3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
 4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:thunder:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
-5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code. 
+5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code.
 
 Additional information about command options are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
 

@@ -78,9 +78,6 @@
             "drupal/media_entity_pinterest": {
                 "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
             },
-            "drupal/core": {
-                "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch"
-            },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248.patch"
             }
@@ -101,7 +98,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "8.4.4",
+        "drupal/core": "^8.5.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
         "drupal/crop": "^1.0",
