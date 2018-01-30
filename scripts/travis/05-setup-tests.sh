@@ -14,8 +14,7 @@ fi
 drush cr
 
 # Get the 8.5.x version of .ht.router.php from commit b912d77 and patch it.
-curl https://raw.githubusercontent.com/drupal/drupal/b912d77400abf3327a78b7d513d53ea3b7166daa/.ht.router.php --output .ht.router.php
-curl https://www.drupal.org/files/issues/2929198-10.patch | patch -p1
+curl https://raw.githubusercontent.com/drupal/drupal/0b2d458da9f84aeb31f72a8aef7b0f174249e2ad/.ht.router.php --output .ht.router.php
 # Run the webserver
 php -S localhost:8080 .ht.router.php &>/dev/null &
 
