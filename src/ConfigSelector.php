@@ -94,10 +94,6 @@ class ConfigSelector {
    */
   public function selectConfigOnUninstall() {
     $features = $this->state->get('thunder.feature_uninstall_list', []);
-    if (empty($features)) {
-      // Nothing to do. No features have been affected.
-      return;
-    }
     foreach ($features as $config_entity_id => $feature) {
       $entity_type_id = $this->configManager->getEntityTypeIdByName($config_entity_id);
       if (!$entity_type_id) {
