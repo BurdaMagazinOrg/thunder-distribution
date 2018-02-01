@@ -105,6 +105,8 @@ class ConfigSelector {
         // config.
         continue;
       }
+
+      // Get all the possible configuration for the feature.
       $entity_storage = $this->entityTypeManager->getStorage($entity_type_id);
       $matching_config = $entity_storage
         ->getQuery()
@@ -114,32 +116,28 @@ class ConfigSelector {
       $configs = $entity_storage->loadMultiple($matching_config);
       $this->sortConfigEntities($configs);
 
-      // The last member of the array might be enabled, if none of the others
-      // already are.
-      $highest_priority_config = array_pop($configs);
-      $enable_config = TRUE;
+      // If any of the configuration is enabled there is nothing to do here.
       foreach ($configs as $config) {
         if ($config->status()) {
-          $enable_config = FALSE;
+          continue 2;
         }
       }
-      if ($enable_config) {
-        $highest_priority_config->setStatus(TRUE)->save();
-        $variables = [
-          ':active_config_href' => $highest_priority_config->toUrl('edit-form')->toString(),
-          '@active_config_label' => $highest_priority_config->label(),
-        ];
 
-        $this->logger->notice(
-          'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled.',
-          $variables
-        );
-        $this->drupalSetMessage($this->t(
-          'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled to replace removed functionality.',
-          $variables
-        ));
-      }
-
+      // No configuration is enabled. Enable the highest priority one.
+      $highest_priority_config = array_pop($configs);
+      $highest_priority_config->setStatus(TRUE)->save();
+      $variables = [
+        ':active_config_href' => $highest_priority_config->toUrl('edit-form')->toString(),
+        '@active_config_label' => $highest_priority_config->label(),
+      ];
+      $this->logger->notice(
+        'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled.',
+        $variables
+      );
+      $this->drupalSetMessage($this->t(
+        'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled to replace removed functionality.',
+        $variables
+      ));
     }
   }
 
