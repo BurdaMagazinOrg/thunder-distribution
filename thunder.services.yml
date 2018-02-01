@@ -1,4 +1,10 @@
 services:
+  thunder.config_selector:
+    class: Drupal\thunder\ConfigSelector
+    arguments: ['@config.factory', '@config.manager', '@entity_type.manager', '@logger.channel.thunder', '@state']
   plugin.manager.thunder.optional_modules:
     class: Drupal\thunder\OptionalModulesManager
     parent: default_plugin_manager
+  logger.channel.thunder:
+    parent: logger.channel_base
+    arguments: ['thunder']

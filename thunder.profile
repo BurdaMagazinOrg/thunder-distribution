@@ -273,6 +273,13 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
+ * Implements hook_module_preinstall().
+ */
+function thunder_module_preinstall($module) {
+  \Drupal::service('thunder.config_selector')->setCurrentConfigList();
+}
+
+/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
@@ -319,6 +326,8 @@ function thunder_modules_installed($modules) {
       \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
     }
   }
+
+  \Drupal::service('thunder.config_selector')->selectConfig();
 }
 
 /**
