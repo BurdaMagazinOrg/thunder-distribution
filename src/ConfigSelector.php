@@ -101,7 +101,7 @@ class ConfigSelector {
     foreach ($features as $config_entity_id => $feature) {
       $entity_type_id = $this->configManager->getEntityTypeIdByName($config_entity_id);
       if (!$entity_type_id) {
-        // The entity type no longer exists there will no be any replacement
+        // The entity type no longer exists there will not be any replacement
         // config.
         continue;
       }
@@ -112,16 +112,8 @@ class ConfigSelector {
         ->execute();
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs */
       $configs = $entity_storage->loadMultiple($matching_config);
+      $this->sortConfigEntities($configs);
 
-      // Predictably sort the array by priority then config name.
-      uksort($configs, function ($a, $b) use ($configs) {
-        $a_priority = $configs[$a]->getThirdPartySetting('thunder', 'config_select')['priority'];
-        $b_priority = $configs[$b]->getThirdPartySetting('thunder', 'config_select')['priority'];
-        if ($a_priority === $b_priority) {
-          return strcmp($a, $b);
-        }
-        return $a_priority < $b_priority ? -1 : 1;
-      });
       // The last member of the array might be enabled, if none of the others
       // already are.
       $highest_priority_config = array_pop($configs);
@@ -191,15 +183,8 @@ class ConfigSelector {
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs */
       $configs = $entity_storage->loadMultiple($matching_config);
       $configs[$config_entity->id()] = $config_entity;
-      // Predictably sort the array by priority then config name.
-      uksort($configs, function ($a, $b) use ($configs) {
-        $a_priority = $configs[$a]->getThirdPartySetting('thunder', 'config_select')['priority'];
-        $b_priority = $configs[$b]->getThirdPartySetting('thunder', 'config_select')['priority'];
-        if ($a_priority === $b_priority) {
-          return strcmp($a, $b);
-        }
-        return $a_priority < $b_priority ? -1 : 1;
-      });
+      $configs = $this->sortConfigEntities($configs);
+
       // The last member of the array stay enabled.
       $active_config = array_pop($configs);
       foreach ($configs as $config) {
@@ -226,6 +211,26 @@ class ConfigSelector {
 
   protected function drupalSetMessage($message = NULL, $type = 'status', $repeat = FALSE) {
     drupal_set_message($message, $type, $repeat);
+  }
+
+  /**
+   * Sorts an array of configuration entities by priority then config name.
+   *
+   * @param \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs
+   *   Array of configuration entities to sort.
+   *
+   * @return \Drupal\Core\Config\Entity\ConfigEntityInterface[]
+   */
+  protected function sortConfigEntities(array $configs) {
+    uksort($configs, function ($a, $b) use ($configs) {
+      $a_priority = $configs[$a]->getThirdPartySetting('thunder', 'config_select')['priority'];
+      $b_priority = $configs[$b]->getThirdPartySetting('thunder', 'config_select')['priority'];
+      if ($a_priority === $b_priority) {
+        return strcmp($a, $b);
+      }
+      return $a_priority < $b_priority ? -1 : 1;
+    });
+    return $configs;
   }
 
 }
