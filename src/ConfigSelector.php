@@ -47,11 +47,108 @@ class ConfigSelector {
   }
 
   /**
+   * Stores a list of active configuration prior to module installation.
+   *
+   * The list makes it simple to work out what configuration is new and if we
+   * have to enable or disable any configuration.
+   *
    * @return $this
    */
   public function setCurrentConfigList() {
     $this->state->set('thunder.current_config_list', $this->configFactory->listAll());
     return $this;
+  }
+
+  /**
+   * Determines if Thunder features might be removed as part of an uninstall.
+   *
+   * Stores a list of affected features keyed by full configuration object name.
+   *
+   * @param string $module
+   *   The module neing uninstalled
+   *
+   * @return $this
+   */
+  public function setUninstallConfigList($module) {
+    // Get a list of config entities that will be deleted.
+    $config_entities = $this->configManager->findConfigEntityDependentsAsEntities('module', [$module]);
+    $features = [];
+    $default_third_party_settings = ['feature' => FALSE, 'priority' => 0];
+    foreach ($config_entities as $config_entity) {
+      if (!$config_entity->status()) {
+        // We are only interested in enabled configuration entities, ie.
+        // functionality a user might lose.
+        continue;
+      }
+      $thunder_settings = $config_entity->getThirdPartySetting('thunder', 'config_select', $default_third_party_settings);
+      if ($thunder_settings['feature'] !== FALSE) {
+        $features[$config_entity->getConfigDependencyName()] = $thunder_settings['feature'];
+      }
+    }
+    $this->state->set('thunder.feature_uninstall_list', $features);
+    return $this;
+  }
+
+  /**
+   *
+   */
+  public function selectConfigOnUninstall() {
+    $features = $this->state->get('thunder.feature_uninstall_list', []);
+    if (empty($features)) {
+      // Nothing to do. No features have been affected.
+      return;
+    }
+    foreach ($features as $config_entity_id => $feature) {
+      $entity_type_id = $this->configManager->getEntityTypeIdByName($config_entity_id);
+      if (!$entity_type_id) {
+        // The entity type no longer exists there will no be any replacement
+        // config.
+        continue;
+      }
+      $entity_storage = $this->entityTypeManager->getStorage($entity_type_id);
+      $matching_config = $entity_storage
+        ->getQuery()
+        ->condition('third_party_settings.thunder.config_select.feature', $feature)
+        ->execute();
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs */
+      $configs = $entity_storage->loadMultiple($matching_config);
+
+      // Predictably sort the array by priority then config name.
+      uksort($configs, function ($a, $b) use ($configs) {
+        $a_priority = $configs[$a]->getThirdPartySetting('thunder', 'config_select')['priority'];
+        $b_priority = $configs[$b]->getThirdPartySetting('thunder', 'config_select')['priority'];
+        if ($a_priority === $b_priority) {
+          return strcmp($a, $b);
+        }
+        return $a_priority < $b_priority ? -1 : 1;
+      });
+      // The last member of the array might be enabled, if none of the others
+      // already are.
+      $highest_priority_config = array_pop($configs);
+      $enable_config = TRUE;
+      foreach ($configs as $config) {
+        if ($config->status()) {
+          $enable_config = FALSE;
+        }
+      }
+      if ($enable_config) {
+        $highest_priority_config->setStatus(TRUE)->save();
+        $variables = [
+          ':active_config_href' => $highest_priority_config->toUrl('edit-form')->toString(),
+          '@active_config_label' => $highest_priority_config->label(),
+        ];
+
+        $this->logger->notice(
+          'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled.',
+          $variables
+        );
+        $this->drupalSetMessage($this->t(
+          'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled to replace removed functionality.',
+          $variables
+        ));
+      }
+
+    }
   }
 
   public function selectConfig() {

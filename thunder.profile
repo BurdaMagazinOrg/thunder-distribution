@@ -331,6 +331,20 @@ function thunder_modules_installed($modules) {
 }
 
 /**
+ * Implements hook_module_preuninstall().
+ */
+function thunder_module_preuninstall($module) {
+  \Drupal::service('thunder.config_selector')->setUninstallConfigList($module);
+}
+
+/**
+ * Implements hook_modules_uninstalled().
+ */
+function thunder_modules_uninstalled($modules) {
+  \Drupal::service('thunder.config_selector')->selectConfigOnUninstall();
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function thunder_page_attachments(array &$attachments) {

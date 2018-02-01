@@ -1,18 +1,18 @@
 langcode: en
-status: true
+status: false
 dependencies:
   enforced:
     module:
-      - thunder_config_test_one
+      - thunder_config_test_four
   module:
     - thunder
 third_party_settings:
   thunder:
     config_select:
       feature: feature_a
-      priority: 0
-id: feature_a_one
-label: 'Feature A version 1'
+      priority: 1000
+id: feature_a_four
+label: 'Feature A version 4'
 weight: 0
 style: null
 size: null
