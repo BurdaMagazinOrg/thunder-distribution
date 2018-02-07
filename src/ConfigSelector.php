@@ -9,6 +9,19 @@ use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
+/**
+ * Uses the Thunder feature name and priority to select which configuration
+ * should be enabled after a module install or uninstall. The Thunder feature
+ * name and priority are stored in a configuration entity's third party
+ * settings. For example:
+ * @code
+ * third_party_settings:
+ *   thunder:
+ *     config_select:
+ *       feature: thunder_feature_name
+ *       priority: 1000
+ * @endcode
+ */
 class ConfigSelector {
   use StringTranslationTrait;
 
@@ -37,7 +50,15 @@ class ConfigSelector {
    */
   protected $state;
 
-
+  /**
+   * ConfigSelector constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Logger\LoggerChannelInterface $logger
+   * @param \Drupal\Core\State\StateInterface $state
+   */
   public function __construct(ConfigFactoryInterface $config_factory, ConfigManagerInterface $config_manager, EntityTypeManagerInterface $entity_type_manager, LoggerChannelInterface $logger, StateInterface $state) {
     $this->configFactory = $config_factory;
     $this->configManager = $config_manager;
@@ -53,6 +74,8 @@ class ConfigSelector {
    * have to enable or disable any configuration.
    *
    * @return $this
+   *
+   * @see thunder_module_preinstall()
    */
   public function setCurrentConfigList() {
     $this->state->set('thunder.current_config_list', $this->configFactory->listAll());
@@ -65,9 +88,11 @@ class ConfigSelector {
    * Stores a list of affected features keyed by full configuration object name.
    *
    * @param string $module
-   *   The module neing uninstalled
+   *   The module being uninstalled
    *
    * @return $this
+   *
+   * @see thunder_module_preuninstall()
    */
   public function setUninstallConfigList($module) {
     // Get a list of config entities that will be deleted.
@@ -90,7 +115,11 @@ class ConfigSelector {
   }
 
   /**
+   * Selects configuration to enable after uninstalling a module.
    *
+   * @return $this
+   *
+   * @see thunder_modules_uninstalled()
    */
   public function selectConfigOnUninstall() {
     $features = $this->state->get('thunder.feature_uninstall_list', []);
@@ -135,8 +164,16 @@ class ConfigSelector {
         $variables
       ));
     }
+    return $this;
   }
 
+  /**
+   * Selects configuration to enable and disable after installing a module.
+   *
+   * @return $this
+   *
+   * @see thunder_modules_installed()
+   */
   public function selectConfig() {
     $default_third_party_settings = ['feature' => FALSE, 'priority' => 0];
     $new_configuration_list = array_diff(
@@ -191,11 +228,11 @@ class ConfigSelector {
         ];
 
         $this->logger->info(
-          'Configuration <a href=":disabled_config_href">@disabled_config_label</a> has been disabled in favor of <a href=":active_config_href">@active_config_label</a>',
+          'Configuration <a href=":disabled_config_href">@disabled_config_label</a> has been disabled in favor of <a href=":active_config_href">@active_config_label</a>.',
           $variables
         );
         $this->drupalSetMessage($this->t(
-          'Configuration <a href=":disabled_config_href">@disabled_config_label</a> has been disabled in favor of <a href=":active_config_href">@active_config_label</a>',
+          'Configuration <a href=":disabled_config_href">@disabled_config_label</a> has been disabled in favor of <a href=":active_config_href">@active_config_label</a>.',
           $variables
         ));
       }
@@ -203,6 +240,21 @@ class ConfigSelector {
     return $this;
   }
 
+  /**
+   * Wraps drupal_set_message().
+   *
+   * @param string|\Drupal\Component\Render\MarkupInterface $message
+   *   (optional) The translated message to be displayed to the user. For
+   *   consistency with other messages, it should begin with a capital letter
+   *   and end with a period.
+   * @param string $type
+   *   (optional) The message's type. Defaults to 'status'.
+   * @param bool $repeat
+   *   (optional) If this is FALSE and the message is already set, then the
+   *   message won't be repeated. Defaults to FALSE.
+   *
+   * @see drupal_set_message()
+   */
   protected function drupalSetMessage($message = NULL, $type = 'status', $repeat = FALSE) {
     drupal_set_message($message, $type, $repeat);
   }

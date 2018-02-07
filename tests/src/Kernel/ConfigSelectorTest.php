@@ -88,9 +88,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertArrayNotHasKey('feature_a_three', $configs);
     $this->assertLogMessages([
       '<em class="placeholder">thunder_config_test_two</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.',
     ]);
-    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.']);
     $this->clearLogger();
 
     // Install another module that will cause
@@ -105,9 +105,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_three']->status());
     $this->assertLogMessages([
       '<em class="placeholder">thunder_config_test_three</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.',
     ]);
-    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.']);
     $this->clearLogger();
 
     // Uninstall a module causing config_test.dynamic.feature_a_two to be
@@ -137,9 +137,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_three']->status());
     $this->assertLogMessages([
       '<em class="placeholder">thunder_config_test_two</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.',
     ]);
-    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.']);
     $this->clearLogger();
 
     // Manually disable config_test.dynamic.feature_a_two and enable
@@ -172,9 +172,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_three']->status());
     $this->assertLogMessages([
       '<em class="placeholder">thunder_config_test_two</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.',
     ]);
-    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>.']);
     $this->clearLogger();
 
     // Uninstalling the module that config_test.dynamic.feature_a_three depends
@@ -250,9 +250,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $configs['feature_a_four']->setStatus(FALSE)->save();
     $this->assertLogMessages([
       '<em class="placeholder">thunder_config_test_one</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>.',
     ]);
-    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>']);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>.']);
     $this->clearLogger();
 
     // Because both config_test.dynamic.feature_a_one and
