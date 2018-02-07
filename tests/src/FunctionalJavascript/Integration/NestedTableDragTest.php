@@ -32,12 +32,12 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, '<p>Some random text paragraph.</p>');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 11', 'https://example.com/11');
-    // Add two link paragraphs with two link fields each
+    // Add two link paragraphs with two link fields each.
     $this->addLinkField(static::$paragraphsField, "1", 'Example 12', 'https://example.com/12');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 21', 'https://example.com/21');
     $this->addLinkField(static::$paragraphsField, "2", 'Example 22', 'https://example.com/22');
 
-    /** @var \Behat\Mink\Element\DocumentElement $page */
+    /* @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     // Enable sorting on second link paragraph.
@@ -62,22 +62,26 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->assertFalse($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
   }
 
-
   /**
    * Adding link field instance.
    *
    * @param string $fieldName
+   *   Field name.
    * @param int $fieldIndex
+   *   Field index.
    * @param string $urlText
+   *   Url text.
    * @param string $url
+   *   Url.
    * @param int $position
+   *   Position.
    */
-  function addLinkField($fieldName, $fieldIndex,  $urlText, $url, $position = NULL) {
+  protected function addLinkField($fieldName, $fieldIndex, $urlText, $url, $position = NULL) {
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $addButtonName =  $fieldName ."_". $fieldIndex ."_subform_field_link_add_more";
+    $addButtonName = $fieldName . "_" . $fieldIndex . "_subform_field_link_add_more";
     $this->scrollElementInView("[name=\"{$addButtonName}\"]");
     $page->pressButton($addButtonName);
     $this->assertSession()->assertWaitOnAjaxRequest();
@@ -85,4 +89,5 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $page->fillField("{$fieldName}[{$fieldIndex}][subform][field_link][1][title]", $urlText);
     $page->fillField("{$fieldName}[{$fieldIndex}][subform][field_link][1][uri]", $url);
   }
+
 }
