@@ -2,8 +2,11 @@
 
 namespace Drupal\Tests\thunder\Kernel;
 
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Extension\ExtensionDiscovery;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\thunder\ThunderTestLogger;
+use Psr\Log\LogLevel;
 
 /**
  * @group ThunderConfig
@@ -47,6 +50,15 @@ class ConfigSelectorTest extends KernelTestBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function register(ContainerBuilder $container) {
+    parent::register($container);
+    ThunderTestLogger::register($container);
+  }
+
+
+  /**
    * Tests \Drupal\thunder\ConfigSelector().
    */
   public function testConfigSelector() {
@@ -61,6 +73,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertTrue($configs['feature_a_one']->status());
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertArrayNotHasKey('feature_a_three', $configs);
+    $this->assertLogMessages(['<em class="placeholder">thunder_config_test_one</em> module installed.']);
+    $this->assertMessages([]);
+    $this->clearLogger();
 
     // Install another module that will cause config_test.dynamic.feature_a_two
     // to be installed. This configuration has a higher priority than
@@ -71,6 +86,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertTrue($configs['feature_a_two']->status());
     $this->assertArrayNotHasKey('feature_a_three', $configs);
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module installed.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->clearLogger();
 
     // Install another module that will cause
     // config_test.dynamic.feature_a_three to be installed. This configuration
@@ -82,6 +103,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertTrue($configs['feature_a_two']->status());
     $this->assertFalse($configs['feature_a_three']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_three</em> module installed.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->clearLogger();
 
     // Uninstall a module causing config_test.dynamic.feature_a_two to be
     // removed. Since config_test.dynamic.feature_a_three has the next highest
@@ -91,6 +118,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertTrue($configs['feature_a_three']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module uninstalled.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been enabled.',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been enabled.']);
+    $this->clearLogger();
 
     // Install the module that will cause config_test.dynamic.feature_a_two to
     // be installed again. This configuration has a higher priority than
@@ -102,6 +135,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertTrue($configs['feature_a_two']->status());
     $this->assertFalse($configs['feature_a_three']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module installed.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_three">Feature A version 3</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->clearLogger();
 
     // Manually disable config_test.dynamic.feature_a_two and enable
     // config_test.dynamic.feature_a_one.
@@ -115,6 +154,11 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertTrue($configs['feature_a_one']->status());
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertFalse($configs['feature_a_three']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module uninstalled.',
+    ]);
+    $this->assertMessages([]);
+    $this->clearLogger();
 
     // Install the module that will cause config_test.dynamic.feature_a_two to
     // be installed again. This configuration has a higher priority than
@@ -126,6 +170,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertTrue($configs['feature_a_two']->status());
     $this->assertFalse($configs['feature_a_three']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module installed.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a>']);
+    $this->clearLogger();
 
     // Uninstalling the module that config_test.dynamic.feature_a_three depends
     // on does not change which config is enabled.
@@ -134,6 +184,11 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertFalse($configs['feature_a_one']->status());
     $this->assertTrue($configs['feature_a_two']->status());
     $this->assertArrayNotHasKey('feature_a_three', $configs);
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_three</em> module uninstalled.',
+    ]);
+    $this->assertMessages([]);
+    $this->clearLogger();
 
     // Uninstalling the module that config_test.dynamic.feature_a_two depends
     // on means that as the last remaining config,
@@ -143,6 +198,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertTrue($configs['feature_a_one']->status());
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertArrayNotHasKey('feature_a_three', $configs);
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_two</em> module uninstalled.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been enabled.',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been enabled.']);
+    $this->clearLogger();
 
     // Install the module that will cause config_test.dynamic.feature_a_four to
     // be created. This configuration has a higher priority than
@@ -155,6 +216,11 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertArrayNotHasKey('feature_a_three', $configs);
     $this->assertFalse($configs['feature_a_four']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_four</em> module installed.',
+    ]);
+    $this->assertMessages([]);
+    $this->clearLogger();
 
     // Uninstalling the module that will cause config_test.dynamic.feature_a_one
     // to be removed. This will cause config_test.dynamic.feature_a_four to be
@@ -165,6 +231,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertArrayNotHasKey('feature_a_three', $configs);
     $this->assertTrue($configs['feature_a_four']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_one</em> module uninstalled.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a> has been enabled.',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a> has been enabled.']);
+    $this->clearLogger();
 
     // Installing the module that will cause config_test.dynamic.feature_a_one
     // to be create. This will cause config_test.dynamic.feature_a_four to still
@@ -176,6 +248,12 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertArrayNotHasKey('feature_a_three', $configs);
     $this->assertTrue($configs['feature_a_four']->status());
     $configs['feature_a_four']->setStatus(FALSE)->save();
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_one</em> module installed.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>',
+    ]);
+    $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_four">Feature A version 4</a>']);
+    $this->clearLogger();
 
     // Because both config_test.dynamic.feature_a_one and
     // config_test.dynamic.feature_a_four are disabled, uninstalling a module
@@ -186,6 +264,30 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertArrayNotHasKey('feature_a_two', $configs);
     $this->assertArrayNotHasKey('feature_a_three', $configs);
     $this->assertFalse($configs['feature_a_four']->status());
+    $this->assertLogMessages([
+      '<em class="placeholder">thunder_config_test_one</em> module uninstalled.',
+    ]);
+    $this->assertMessages([]);
+    $this->clearLogger();
+  }
+
+  protected function assertLogMessages($messages = [], $level = LogLevel::INFO) {
+    if ($messages != $this->container->get('thunder.test_logger')->getLogs($level)) {
+      var_dump($this->container->get('thunder.test_logger')->getLogs($level));
+    }
+    $this->assertEquals($messages, $this->container->get('thunder.test_logger')->getLogs($level));
+  }
+
+  protected function assertMessages($messages = [], $type = 'status') {
+    $actual_messages = drupal_get_messages($type);
+    if (!empty($actual_messages)) {
+      $actual_messages = array_map('strval', $actual_messages[$type]);
+    }
+    $this->assertEquals($messages, $actual_messages);
+  }
+
+  protected function clearLogger() {
+    $this->container->get('thunder.test_logger')->clear();
   }
 
 }

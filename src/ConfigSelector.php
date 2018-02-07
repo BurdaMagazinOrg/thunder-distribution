@@ -126,12 +126,12 @@ class ConfigSelector {
         ':active_config_href' => $highest_priority_config->toUrl('edit-form')->toString(),
         '@active_config_label' => $highest_priority_config->label(),
       ];
-      $this->logger->notice(
+      $this->logger->info(
         'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled.',
         $variables
       );
       $this->drupalSetMessage($this->t(
-        'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled to replace removed functionality.',
+        'Configuration <a href=":active_config_href">@active_config_label</a> has been enabled.',
         $variables
       ));
     }
@@ -190,7 +190,7 @@ class ConfigSelector {
           '@active_config_label' => $active_config->label(),
         ];
 
-        $this->logger->notice(
+        $this->logger->info(
           'Configuration <a href=":disabled_config_href">@disabled_config_label</a> has been disabled in favor of <a href=":active_config_href">@active_config_label</a>',
           $variables
         );
