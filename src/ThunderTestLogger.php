@@ -15,6 +15,9 @@ class ThunderTestLogger implements DebugLoggerInterface, LoggerInterface {
 
   protected static $logs;
 
+  /**
+   * ThunderTestLogger constructor.
+   */
   public function __construct() {
     if (empty(static::$logs)) {
       $this->clear();
@@ -24,30 +27,30 @@ class ThunderTestLogger implements DebugLoggerInterface, LoggerInterface {
   /**
    * {@inheritdoc}
    */
-  public function getLogs($level = false) {
-    return false === $level ? static::$logs : static::$logs[$level];
+  public function getLogs($level = FALSE) {
+    return FALSE === $level ? static::$logs : static::$logs[$level];
   }
 
   /**
    * {@inheritdoc}
    */
   public function clear() {
-    static::$logs = array(
-      'emergency' => array(),
-      'alert' => array(),
-      'critical' => array(),
-      'error' => array(),
-      'warning' => array(),
-      'notice' => array(),
-      'info' => array(),
-      'debug' => array(),
-    );
+    static::$logs = [
+      'emergency' => [],
+      'alert' => [],
+      'critical' => [],
+      'error' => [],
+      'warning' => [],
+      'notice' => [],
+      'info' => [],
+      'debug' => [],
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = array()) {
+  public function log($level, $message, array $context = []) {
     // Convert levels...
     static $map = [
       RfcLogLevel::DEBUG => 'debug',
@@ -67,63 +70,63 @@ class ThunderTestLogger implements DebugLoggerInterface, LoggerInterface {
   /**
    * {@inheritdoc}
    */
-  public function emergency($message, array $context = array()) {
+  public function emergency($message, array $context = []) {
     $this->log('emergency', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function alert($message, array $context = array()) {
+  public function alert($message, array $context = []) {
     $this->log('alert', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function critical($message, array $context = array()) {
+  public function critical($message, array $context = []) {
     $this->log('critical', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function error($message, array $context = array()) {
+  public function error($message, array $context = []) {
     $this->log('error', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function warning($message, array $context = array()) {
+  public function warning($message, array $context = []) {
     $this->log('warning', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function notice($message, array $context = array()) {
+  public function notice($message, array $context = []) {
     $this->log('notice', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function info($message, array $context = array()) {
+  public function info($message, array $context = []) {
     $this->log('info', $message, $context);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function debug($message, array $context = array()) {
+  public function debug($message, array $context = []) {
     $this->log('debug', $message, $context);
   }
 
   /**
    * Registers the test logger to the container.
    *
-   * @param ContainerBuilder $container
+   * @param \Drupal\Core\DependencyInjection\ContainerBuilder $container
    *   The ContainerBuilder to register the test logger to.
    */
   public static function register(ContainerBuilder $container) {

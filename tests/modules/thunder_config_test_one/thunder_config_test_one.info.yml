@@ -2,6 +2,5 @@ name: 'Thunder Config Test one'
 core: 8.x
 type: module
 package: Testing
-version: VERSION
 dependencies:
   - config_test

@@ -9,7 +9,11 @@ use Drupal\thunder\ThunderTestLogger;
 use Psr\Log\LogLevel;
 
 /**
+ * Tests the ConfigSelector.
+ *
  * @group ThunderConfig
+ *
+ * @see \Drupal\thunder\ConfigSelector
  */
 class ConfigSelectorTest extends KernelTestBase {
 
@@ -56,7 +60,6 @@ class ConfigSelectorTest extends KernelTestBase {
     parent::register($container);
     ThunderTestLogger::register($container);
   }
-
 
   /**
    * Tests \Drupal\thunder\ConfigSelector().
@@ -271,14 +274,30 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->clearLogger();
   }
 
-  protected function assertLogMessages($messages = [], $level = LogLevel::INFO) {
-    if ($messages != $this->container->get('thunder.test_logger')->getLogs($level)) {
-      var_dump($this->container->get('thunder.test_logger')->getLogs($level));
-    }
+  /**
+   * Asserts the logger has messages.
+   *
+   * @param string[] $messages
+   *   (optional) The messages we expect the logger to have. Defaults to an
+   *   empty array.
+   * @param string $level
+   *   (optional) The log level of the expected messages. Defaults to
+   *   \Psr\Log\LogLevel::INFO.
+   */
+  protected function assertLogMessages(array $messages = [], $level = LogLevel::INFO) {
     $this->assertEquals($messages, $this->container->get('thunder.test_logger')->getLogs($level));
   }
 
-  protected function assertMessages($messages = [], $type = 'status') {
+  /**
+   * Asserts the Drupal message service has messages.
+   *
+   * @param array $messages
+   *   (optional) The messages we expect the Drupal message service to have.
+   *   Defaults to an empty array.
+   * @param string $type
+   *   (optional) The type of the expected messages. Defaults to 'status'.
+   */
+  protected function assertMessages(array $messages = [], $type = 'status') {
     $actual_messages = drupal_get_messages($type);
     if (!empty($actual_messages)) {
       $actual_messages = array_map('strval', $actual_messages[$type]);
@@ -286,6 +305,9 @@ class ConfigSelectorTest extends KernelTestBase {
     $this->assertEquals($messages, $actual_messages);
   }
 
+  /**
+   * Clears the test logger of messages.
+   */
   protected function clearLogger() {
     $this->container->get('thunder.test_logger')->clear();
   }

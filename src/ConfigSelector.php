@@ -10,6 +10,8 @@ use Drupal\Core\State\StateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
+ * Selects configuration to enable after a module install or uninstall.
+ *
  * Uses the Thunder feature name and priority to select which configuration
  * should be enabled after a module install or uninstall. The Thunder feature
  * name and priority are stored in a configuration entity's third party
@@ -26,26 +28,36 @@ class ConfigSelector {
   use StringTranslationTrait;
 
   /**
+   * The config factory.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
+   * The config manager.
+   *
    * @var \Drupal\Core\Config\ConfigManagerInterface
    */
   protected $configManager;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * The logger.
+   *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
   protected $logger;
 
   /**
+   * The state service.
+   *
    * @var \Drupal\Core\State\StateInterface
    */
   protected $state;
@@ -54,10 +66,15 @@ class ConfigSelector {
    * ConfigSelector constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
    * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
+   *   The config manager.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\Core\Logger\LoggerChannelInterface $logger
+   *   The logger.
    * @param \Drupal\Core\State\StateInterface $state
+   *   The state service.
    */
   public function __construct(ConfigFactoryInterface $config_factory, ConfigManagerInterface $config_manager, EntityTypeManagerInterface $entity_type_manager, LoggerChannelInterface $logger, StateInterface $state) {
     $this->configFactory = $config_factory;
@@ -88,7 +105,7 @@ class ConfigSelector {
    * Stores a list of affected features keyed by full configuration object name.
    *
    * @param string $module
-   *   The module being uninstalled
+   *   The module being uninstalled.
    *
    * @return $this
    *
@@ -266,6 +283,7 @@ class ConfigSelector {
    *   Array of configuration entities to sort.
    *
    * @return \Drupal\Core\Config\Entity\ConfigEntityInterface[]
+   *   The sorted array of configuration entities.
    */
   protected function sortConfigEntities(array $configs) {
     uksort($configs, function ($a, $b) use ($configs) {
