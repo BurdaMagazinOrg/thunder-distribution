@@ -33,9 +33,9 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, '<p>Some random text paragraph.</p>');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 11', 'https://example.com/11');
     // Add two link paragraphs with two link fields each.
-    $this->addLinkField(static::$paragraphsField, "1", 'Example 12', 'https://example.com/12');
+    $this->addLinkField(static::$paragraphsField, 1, 'field_link', 1, 'Example 12', 'https://example.com/12');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 21', 'https://example.com/21');
-    $this->addLinkField(static::$paragraphsField, "2", 'Example 22', 'https://example.com/22');
+    $this->addLinkField(static::$paragraphsField, 2, 'field_link', 1, 'Example 22', 'https://example.com/22');
 
     /* @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
@@ -46,6 +46,8 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->assertTrue($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
     $this->assertTrue($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
     $this->assertFalse($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
+    // Check for sort targets outside active table.
+    $this->assertFalse($page->find('xpath', '//*[@class="tabledrag-sort-target" and not(ancestor::*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"])]'));
 
     // Select and move link field.
     $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[4]/td[1]/input')->click();
@@ -53,18 +55,22 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     // Check content of field url on certain position.
     $this->assertTrue($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[2]/td[2]/div/div[1]/div[1]/input')->getValue() === 'https://example.com/22');
 
-    $page->find
     // Disable sorting on second link paragraph.
     $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->click();
     // Check that all sort buttons are enabled again.
     $this->assertFalse($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
     $this->assertFalse($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
     $this->assertFalse($page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'));
+
   }
 
   /**
    * Adding link field instance.
    *
+   * @param string $paragraphName
+   *   Paragraph field name.
+   * @param int $paragraphIndex
+   *   Paragraph field index.
    * @param string $fieldName
    *   Field name.
    * @param int $fieldIndex
@@ -76,18 +82,17 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
    * @param int $position
    *   Position.
    */
-  protected function addLinkField($fieldName, $fieldIndex, $urlText, $url, $position = NULL) {
-
+  protected function addLinkField($paragraphName, $paragraphIndex, $fieldName, $fieldIndex, $urlText, $url, $position = NULL) {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $addButtonName = $fieldName . "_" . $fieldIndex . "_subform_field_link_add_more";
+    $addButtonName = $paragraphName . "_" . $paragraphIndex . "_subform_" . $fieldName . "_add_more";
     $this->scrollElementInView("[name=\"{$addButtonName}\"]");
     $page->pressButton($addButtonName);
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->fillField("{$fieldName}[{$fieldIndex}][subform][field_link][1][title]", $urlText);
-    $page->fillField("{$fieldName}[{$fieldIndex}][subform][field_link][1][uri]", $url);
+    $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][title]", $urlText);
+    $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][uri]", $url);
   }
 
 }
