@@ -101,10 +101,9 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     // Enable sorting on second link paragraph.
     $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->click();
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[4]/td[1]/input')->isChecked(),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[2]/td[1]/input')->isChecked(),
       'Checkbox is still checked after sort completed.'
     );
-
   }
 
   /**
