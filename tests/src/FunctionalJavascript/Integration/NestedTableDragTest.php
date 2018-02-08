@@ -24,7 +24,14 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
   protected static $paragraphsField = 'field_paragraphs';
 
   /**
-   * Test split of paragraph before a selection.
+   * Field name for link field in paragraph content.
+   *
+   * @var string
+   */
+  protected static $linkField = 'field_link';
+
+  /**
+   * Test tabledrag sorting in nested table.
    */
   public function testNestedTableSorting() {
     $this->articleFillNew([]);
@@ -33,9 +40,9 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, '<p>Some random text paragraph.</p>');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 11', 'https://example.com/11');
     // Add two link paragraphs with two link fields each.
-    $this->addLinkField(static::$paragraphsField, 1, 'field_link', 1, 'Example 12', 'https://example.com/12');
+    $this->addLinkField(static::$paragraphsField, 1, static::$linkField, 1, 'Example 12', 'https://example.com/12');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 21', 'https://example.com/21');
-    $this->addLinkField(static::$paragraphsField, 2, 'field_link', 1, 'Example 22', 'https://example.com/22');
+    $this->addLinkField(static::$paragraphsField, 2, static::$linkField, 1, 'Example 22', 'https://example.com/22');
 
     /* @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
