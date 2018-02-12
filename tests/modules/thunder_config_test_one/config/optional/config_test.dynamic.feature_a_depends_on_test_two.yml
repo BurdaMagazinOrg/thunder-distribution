@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - thunder_config_test_depends_on_test_two
+  module:
+    - thunder
+third_party_settings:
+  thunder:
+    config_select:
+      feature: feature_a
+      priority: 103
+id: feature_a_depends_on_test_two
+label: 'Feature A indirect depending on Test Two'
+weight: 0
+style: null
+size: null
+size_value: null
+protected_property: Default

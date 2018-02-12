@@ -1,0 +1,6 @@
+name: 'Thunder Config that depends on Test two'
+core: 8.x
+type: module
+package: Testing
+dependencies:
+  - drupal:thunder_config_test_two
