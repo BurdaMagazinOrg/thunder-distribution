@@ -64,7 +64,7 @@ class ConfigSelectorTest extends KernelTestBase {
   /**
    * Tests \Drupal\thunder\ConfigSelector().
    */
-  public function testConfigSelector() {
+  public function _testConfigSelector() {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
     $module_installer = $this->container->get('module_installer');
 
@@ -279,7 +279,7 @@ class ConfigSelectorTest extends KernelTestBase {
    *
    * Checks indirect module uninstall dependencies.
    */
-  public function testConfigSelectorIndirectDependency() {
+  public function _testConfigSelectorIndirectDependency() {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
     $module_installer = $this->container->get('module_installer');
 
@@ -328,6 +328,34 @@ class ConfigSelectorTest extends KernelTestBase {
     ]);
     $this->assertMessages(['Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been enabled.']);
     $this->clearLogger();
+  }
+
+  /**
+   * Tests \Drupal\thunder\ConfigSelector().
+   *
+   * Tests installing a module that provides multiple features with multiple
+   * versions.
+   */
+  public function testConfigSelectorMultipleFeatures() {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+    $module_installer = $this->container->get('module_installer');
+
+    $module_installer->install(['thunder_config_test_provides_multiple']);
+    /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs */
+    $configs = \Drupal::entityTypeManager()->getStorage('config_test')->loadMultiple();
+
+    $this->assertTrue($configs['feature_a_two']->status());
+    // Lower priority than feature_a_two.
+    $this->assertFalse($configs['feature_a_one']->status());
+    // Lower priority than feature_a_two.
+    $this->assertFalse($configs['feature_a_three']->status());
+    // Higher priority but it is disabled in default configuration.
+    $this->assertFalse($configs['feature_a_four']->status());
+
+    $this->assertTrue($configs['feature_b_two']->status());
+    $this->assertFalse($configs['feature_b_one']->status());
+
+    $this->assertTrue($configs['feature_c_one']->status());
   }
 
   /**

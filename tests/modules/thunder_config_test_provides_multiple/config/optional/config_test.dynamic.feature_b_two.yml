@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - thunder
+third_party_settings:
+  thunder:
+    config_select:
+      feature: feature_b
+      priority: 3
+id: feature_b_two
+label: 'Feature B version 2'
+weight: 0
+style: null
+size: null
+size_value: null
+protected_property: Default

@@ -1,0 +1,6 @@
+name: 'Thunder Config that provides multiple configurations for the same feature'
+core: 8.x
+type: module
+package: Testing
+dependencies:
+  - drupal:config_test

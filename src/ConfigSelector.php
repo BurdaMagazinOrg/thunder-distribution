@@ -201,6 +201,9 @@ class ConfigSelector {
       $this->configFactory->listAll(),
       $this->state->get('thunder.current_config_list', [])
     );
+    // Build a list of thunder feature names of the configuration that's been
+    // imported.
+    $thunder_features = [];
     foreach ($new_configuration_list as $config_name) {
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $config_entity */
       $config_entity = $this->configManager->loadConfigEntityByName($config_name);
@@ -213,31 +216,30 @@ class ConfigSelector {
         continue;
       }
       $thunder_settings = $config_entity->getThirdPartySetting('thunder', 'config_select', $default_third_party_settings);
-      if ($thunder_settings['feature'] === FALSE) {
-        // Configuration without a thunder config_select third party settings is
-        // ignored.
-        continue;
+      if ($thunder_settings['feature'] !== FALSE) {
+        $thunder_features[] = $thunder_settings['feature'];
       }
+    }
+    // It is possible that the module or profile installed has multiple
+    // configurations for the same feature.
+    $thunder_features = array_unique($thunder_features);
 
+    // Process each thunder feature and choose the configuration with the
+    // highest priority.
+    foreach ($thunder_features as $thunder_feature) {
       $entity_storage = $this->entityTypeManager->getStorage($config_entity->getEntityTypeId());
       $matching_config = $entity_storage
         ->getQuery()
-        ->condition('third_party_settings.thunder.config_select.feature', $thunder_settings['feature'])
-        ->condition('id', $config_entity->id(), '<>')
+        ->condition('third_party_settings.thunder.config_select.feature', $thunder_feature)
         ->condition('status', FALSE, '<>')
         ->execute();
 
-      if (empty($matching_config)) {
-        // No matches. Ignore.
-        continue;
-      }
-
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface[] $configs */
       $configs = $entity_storage->loadMultiple($matching_config);
-      $configs[$config_entity->id()] = $config_entity;
       $configs = $this->sortConfigEntities($configs);
 
-      // The last member of the array stay enabled.
+      // The last member of the array has the highest priority and should remain
+      // enabled.
       $active_config = array_pop($configs);
       foreach ($configs as $config) {
         $config->setStatus(FALSE)->save();
