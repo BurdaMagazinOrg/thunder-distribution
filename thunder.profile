@@ -273,6 +273,13 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
+ * Implements hook_module_preinstall().
+ */
+function thunder_module_preinstall($module) {
+  \Drupal::service('thunder.config_selector')->setCurrentConfigList($module);
+}
+
+/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
@@ -309,16 +316,43 @@ function thunder_modules_installed($modules) {
     $field->save();
   }
 
-  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
-  foreach ($configs as $config) {
-    $dependencies = $config->get('dependencies.module');
-    $enforced_dependencies = $config->get('dependencies.enforced.module');
-    $dependencies = $dependencies ?: [];
-    $enforced_dependencies = $enforced_dependencies ?: [];
-    if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
-      \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
+  if (in_array('thunder', $modules, TRUE)) {
+    // Duplicate what occurs in install_install_profile() so that
+    // \Drupal\thunder\ConfigSelector::selectConfig() works from a full list of
+    // configuration that will be installed by the install_install_profile()
+    // step. This means that the later call will do nothing.
+    \Drupal::service('config.installer')->installOptionalConfig();
+  }
+  else {
+    $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()
+      ->listAll());
+    foreach ($configs as $config) {
+      $dependencies = $config->get('dependencies.module');
+      $enforced_dependencies = $config->get('dependencies.enforced.module');
+      $dependencies = $dependencies ?: [];
+      $enforced_dependencies = $enforced_dependencies ?: [];
+      if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
+        \Drupal::service('config.installer')
+          ->installOptionalConfig(NULL, ['config' => $config->getName()]);
+      }
     }
   }
+
+  \Drupal::service('thunder.config_selector')->selectConfig();
+}
+
+/**
+ * Implements hook_module_preuninstall().
+ */
+function thunder_module_preuninstall($module) {
+  \Drupal::service('thunder.config_selector')->setUninstallConfigList($module);
+}
+
+/**
+ * Implements hook_modules_uninstalled().
+ */
+function thunder_modules_uninstalled($modules) {
+  \Drupal::service('thunder.config_selector')->selectConfigOnUninstall();
 }
 
 /**

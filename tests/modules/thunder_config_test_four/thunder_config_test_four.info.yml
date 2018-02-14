@@ -1,0 +1,6 @@
+name: 'Thunder Config Test four'
+core: 8.x
+type: module
+package: Testing
+dependencies:
+  - drupal:config_test

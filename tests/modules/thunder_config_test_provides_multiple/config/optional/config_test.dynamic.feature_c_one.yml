@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - thunder
+third_party_settings:
+  thunder:
+    config_select:
+      feature: feature_c
+      priority: 0
+id: feature_c_one
+label: 'Feature C version 1'
+weight: 0
+style: null
+size: null
+size_value: null
+protected_property: Default

@@ -1,0 +1,20 @@
+thunder_third_party:
+  type: mapping
+  label: 'Schema for Thunder profile additions to configuration entities'
+  mapping:
+    config_select:
+      type: mapping
+      label: 'Information for Thunder to select which configuration to enable'
+      mapping:
+        feature:
+          type: string
+          label: 'The Thunder feature name'
+        priority:
+          type: integer
+          label: 'The Thunder feature priority'
+
+block.block.*.third_party.thunder:
+  type: thunder_third_party
+
+views.view.*.third_party.thunder:
+  type: thunder_third_party

@@ -1,0 +1,2 @@
+config_test.dynamic.*.third_party.thunder:
+  type: thunder_third_party
