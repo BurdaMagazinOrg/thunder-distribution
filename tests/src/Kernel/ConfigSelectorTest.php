@@ -64,7 +64,7 @@ class ConfigSelectorTest extends KernelTestBase {
   /**
    * Tests \Drupal\thunder\ConfigSelector().
    */
-  public function _testConfigSelector() {
+  public function testConfigSelector() {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
     $module_installer = $this->container->get('module_installer');
 
@@ -279,7 +279,7 @@ class ConfigSelectorTest extends KernelTestBase {
    *
    * Checks indirect module uninstall dependencies.
    */
-  public function _testConfigSelectorIndirectDependency() {
+  public function testConfigSelectorIndirectDependency() {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
     $module_installer = $this->container->get('module_installer');
 
