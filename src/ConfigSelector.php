@@ -90,12 +90,24 @@ class ConfigSelector {
    * The list makes it simple to work out what configuration is new and if we
    * have to enable or disable any configuration.
    *
+   * @param string $module
+   *   The module being installed.
+   *
    * @return $this
    *
    * @see thunder_module_preinstall()
    */
-  public function setCurrentConfigList() {
-    $this->state->set('thunder.current_config_list', $this->configFactory->listAll());
+  public function setCurrentConfigList($module) {
+    if ($module === 'thunder') {
+      // If the Thunder install profile is being installed we need to process
+      // all existing configuration in
+      // \Drupal\thunder\ConfigSelector::selectConfig().
+      $list = [];
+    }
+    else {
+      $list = $this->configFactory->listAll();
+    }
+    $this->state->set('thunder.current_config_list', $list);
     return $this;
   }
 
