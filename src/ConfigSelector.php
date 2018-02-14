@@ -112,9 +112,11 @@ class ConfigSelector {
    * @see thunder_module_preuninstall()
    */
   public function setUninstallConfigList($module) {
-    // Get a list of config entities that will be deleted.
+    // Get a list of config entities that might be deleted.
     $config_entities = $this->configManager->findConfigEntityDependentsAsEntities('module', [$module]);
-    $features = [];
+    // We need to keep adding to the list since more than one module might be
+    // uninstalled at a time.
+    $features = $this->state->get('thunder.feature_uninstall_list', []);;
     $default_third_party_settings = ['feature' => FALSE, 'priority' => 0];
     foreach ($config_entities as $config_entity) {
       if (!$config_entity->status()) {
@@ -181,6 +183,8 @@ class ConfigSelector {
         $variables
       ));
     }
+    // Reset the list.
+    $this->state->set('thunder.feature_uninstall_list', []);
     return $this;
   }
 

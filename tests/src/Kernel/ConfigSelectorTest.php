@@ -303,12 +303,12 @@ class ConfigSelectorTest extends KernelTestBase {
       '<em class="placeholder">thunder_config_test_two</em> module installed.',
       '<em class="placeholder">thunder_config_test_depends_on_test_two</em> module installed.',
       '<em class="placeholder">thunder_config_test_one</em> module installed.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on 2</a>.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on 2</a>.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on Test Two</a>.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on Test Two</a>.',
     ]);
     $this->assertMessages([
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on 2</a>.',
-      'Configuration <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on 2</a>.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_one">Feature A version 1</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on Test Two</a>.',
+      'Configuration <a href="/admin/structure/config_test/manage/feature_a_two">Feature A version 2</a> has been disabled in favor of <a href="/admin/structure/config_test/manage/feature_a_depends_on_test_two">Feature A indirect depending on Test Two</a>.',
     ]);
     $this->clearLogger();
 
