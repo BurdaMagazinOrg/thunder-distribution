@@ -2,3 +2,49 @@ verbose: 1
 types:
   node:
     article: article
+  access_token: {  }
+  crop: {  }
+  file: {  }
+  media: {  }
+  redirect: {  }
+  taxonomy_term: {  }
+  thunder_updater_update: {  }
+  user: {  }
+  menu_link_content: {  }
+  paragraph: {  }
+types_translation_lock: {  }
+types_js_lock: {  }
+form_op_lock:
+  access_token:
+    mode: null
+    values: {  }
+  crop:
+    mode: 0
+    values: {  }
+  file:
+    mode: null
+    values: {  }
+  media:
+    mode: 0
+    values: {  }
+  node:
+    mode: 0
+    values: {  }
+  redirect:
+    mode: 0
+    values: {  }
+  taxonomy_term:
+    mode: 0
+    values: {  }
+  thunder_updater_update:
+    mode: null
+    values: {  }
+  user:
+    mode: 0
+    values: {  }
+  menu_link_content:
+    mode: 0
+    values: {  }
+  paragraph:
+    mode: 0
+    values: {  }
