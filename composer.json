@@ -29,10 +29,6 @@
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
-            "type": "git",
-            "url":  "https://git.drupal.org/sandbox/volkerk/2908463.git"
-        },
-        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -147,13 +143,13 @@
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
+        "drupal/yoast_seo": "^2.0",
         "valiton/harbourmaster": "~8.1",
         "bower-asset/dropzone": "^5.1",
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24",
-        "drupal/yoast_seo_preview": "8.x-1.x-dev as 1.0"
+        "bower-asset/shariff": "^1.24"
     },
     "replace": {
         "bower-asset/jquery": "*",
