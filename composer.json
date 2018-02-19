@@ -75,9 +75,6 @@
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
-            "drupal/media_entity_pinterest": {
-                "Media name always 'h'": "https://www.drupal.org/files/issues/media_name_always_h-2837977-8.patch"
-            },
             "drupal/core": {
                 "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch"
             },
@@ -120,13 +117,13 @@
         "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0",
-        "drupal/libraries": "dev-3.x",
+        "drupal/libraries": "^3.0",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
         "drupal/media_entity": "1.7",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
-        "drupal/media_entity_pinterest": "1.0-beta2",
+        "drupal/media_entity_pinterest": "^1.0",
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
         "drupal/media_expire": "^1.0",
@@ -154,7 +151,6 @@
         "bower-asset/shariff": "^1.24"
     },
     "replace": {
-        "heiseonline/shariff": "*",
         "bower-asset/jquery": "*",
         "bower-asset/jqueryui": "*",
         "bower-asset/backbone": "*",
