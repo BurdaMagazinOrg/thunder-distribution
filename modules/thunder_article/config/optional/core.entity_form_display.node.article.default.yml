@@ -19,7 +19,7 @@ dependencies:
     - paragraphs
     - path
     - scheduler
-    - yoast_seo_preview
+    - yoast_seo
 third_party_settings:
   field_group:
     group_teaser:
@@ -105,7 +105,7 @@ content:
     weight: 5
     settings: {  }
     third_party_settings: {  }
-    type: yoast_seo_preview_widget
+    type: yoast_seo_widget
     region: content
   field_seo_title:
     type: string_textfield

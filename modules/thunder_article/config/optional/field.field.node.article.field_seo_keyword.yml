@@ -5,7 +5,7 @@ dependencies:
     - field.storage.node.field_seo_keyword
     - node.type.article
   module:
-    - yoast_seo_preview
+    - yoast_seo
 id: node.article.field_seo_keyword
 field_name: field_seo_keyword
 entity_type: node
@@ -17,4 +17,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: yoast_seo_preview
+field_type: yoast_seo
