@@ -519,7 +519,7 @@ display:
           type_custom_true: ''
           type_custom_false: ''
           not: false
-          plugin_id: content_lock_field
+          plugin_id: boolean
         name:
           id: name
           table: users_field_data
