@@ -35,3 +35,12 @@ function _thunder_article_form_alter_helper(array &$form, FormStateInterface $fo
   // theme and if there is still a need to attach a library from the module.
   $form['#attached']['library'][] = 'thunder_article/article_form_styling';
 }
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
+  if ($route_name == 'system.admin_content' && !empty($data['tabs'][0]['views_view:view.scheduler_scheduled_content.overview'])) {
+    unset($data['tabs'][0]['views_view:view.scheduler_scheduled_content.overview']);
+  }
+}

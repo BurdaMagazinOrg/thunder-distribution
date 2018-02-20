@@ -1,0 +1,4 @@
+thunder_article.content_view:
+  deriver: 'Drupal\thunder_article\Plugin\Derivative\DynamicLocalTasks'
+  weight: 100
+
