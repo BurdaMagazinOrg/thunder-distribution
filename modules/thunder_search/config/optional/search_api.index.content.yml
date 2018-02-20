@@ -259,3 +259,12 @@ processor_settings:
       - rendered_item
       - label
       - type
+      - name
+      - media_author
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: database

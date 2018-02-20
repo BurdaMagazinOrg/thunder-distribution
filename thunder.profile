@@ -140,6 +140,7 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
     $definition = $optionalModulesManager->getDefinition($module_name);
     if ($definition['type'] == 'module') {
       \Drupal::service('module_installer')->install($module, TRUE);
+      \Drupal::service('config.installer')->installOptionalConfig();
     }
     elseif ($definition['type'] == 'theme') {
       \Drupal::service('theme_installer')->install($module, TRUE);
