@@ -16,7 +16,7 @@ dependencies:
 third_party_settings:
   config_selector:
     feature: thunder_content_view
-    priority: 10
+    priority: 1
 id: content_content_lock
 label: Content
 module: node
