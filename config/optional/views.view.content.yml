@@ -10,6 +10,7 @@ dependencies:
     - media_entity
     - node
     - user
+    - config_selector
 id: content
 label: Content
 module: node
@@ -18,6 +19,10 @@ tag: default
 base_table: node_field_data
 base_field: nid
 core: 8.x
+third_party_settings:
+  config_selector:
+    feature: thunder_content_view
+    priority: 0
 display:
   default:
     display_options:

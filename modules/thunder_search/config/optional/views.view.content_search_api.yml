@@ -12,7 +12,8 @@ dependencies:
     - thunder_search
     - user
     - views_bulk_operations
-id: content_search
+    - config_selector
+id: content_search_api
 label: Content
 module: views
 description: ''
@@ -20,6 +21,10 @@ tag: ''
 base_table: search_api_index_content
 base_field: search_api_id
 core: 8.x
+third_party_settings:
+  config_selector:
+    feature: thunder_content_view
+    priority: 1
 display:
   default:
     display_plugin: default
@@ -586,78 +591,6 @@ display:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
-        publish_on:
-          id: publish_on
-          table: search_api_datasource_content_entity_node
-          field: publish_on
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Publish on'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            multi_type: separator
-            multi_separator: ', '
-          entity_type: node
           plugin_id: search_api_field
         node_changed:
           id: node_changed

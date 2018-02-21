@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-id: search_api__views_page__content_search__page_1
-name: 'search_api:views_page__content_search__page_1'
+id: search_api__views_page__content_search_api__page_1
+name: 'search_api:views_page__content_search_api__page_1'
 filter_key: ''
 url_processor: query_string
 breadcrumb:
