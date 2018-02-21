@@ -24,9 +24,9 @@ function thunder_search_views_data() {
  */
 function thunder_search_menu_local_actions_alter(&$local_actions) {
   /** @var \Drupal\views\ViewEntityInterface $view */
-  $view = \Drupal::entityTypeManager()->getStorage('view')->load('media_search');
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('media_search_api');
   if ($view && $view->status()) {
-    $local_actions['media.add']['appears_on'][] = 'view.media_search.page_1';
+    $local_actions['media.add']['appears_on'][] = 'view.media_search_api.page_1';
   }
 }
 
@@ -35,8 +35,8 @@ function thunder_search_menu_local_actions_alter(&$local_actions) {
  */
 function thunder_search_menu_links_discovered_alter(&$links) {
   /** @var \Drupal\views\ViewEntityInterface $view */
-  $view = \Drupal::entityTypeManager()->getStorage('view')->load('media_search');
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('media_search_api');
   if ($view && $view->status()) {
-    $links['entity.media.collection']['route_name'] = 'view.media_search.page_1';
+    $links['entity.media.collection']['route_name'] = 'view.media_search_api.page_1';
   }
 }

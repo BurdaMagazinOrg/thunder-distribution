@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - search_api.index.content
-    - views.view.media_search
+    - views.view.media_search_api
   module:
     - search_api
 id: media_type
@@ -13,7 +13,7 @@ weight: 0
 min_count: 1
 show_only_one_result: true
 field_identifier: type
-facet_source_id: 'search_api:views_page__media_search__page_1'
+facet_source_id: 'search_api:views_page__media_search_api__page_1'
 widget:
   type: dropdown
   config:

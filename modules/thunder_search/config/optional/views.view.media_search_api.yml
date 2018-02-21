@@ -12,7 +12,8 @@ dependencies:
     - thunder_search
     - user
     - views_bulk_operations
-id: media_search
+    - config_selector
+id: media_search_api
 label: Media
 module: views
 description: ''
@@ -20,6 +21,10 @@ tag: ''
 base_table: search_api_index_content
 base_field: search_api_id
 core: 8.x
+third_party_settings:
+  config_selector:
+    feature: thunder_media_view
+    priority: 1
 display:
   default:
     display_plugin: default
