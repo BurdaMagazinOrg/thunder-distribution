@@ -1,5 +1,0 @@
-search_box:
-  version: VERSION
-  css:
-    theme:
-      css/search_box.css: {}
