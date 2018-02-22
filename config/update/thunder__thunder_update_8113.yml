@@ -74,7 +74,7 @@ views.view.content:
                 id: is_locked
                 label: 'Is Locked'
                 not: false
-                plugin_id: content_lock_field
+                plugin_id: boolean
                 relationship: none
                 table: content_lock
                 type: yes-no

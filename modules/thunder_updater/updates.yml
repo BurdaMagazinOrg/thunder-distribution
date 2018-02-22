@@ -191,3 +191,12 @@ v2.13:
         '#description': "<p>Allows users to redirect from old URLs to new URLs.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Redirect', '#url': 'internal:/admin/modules' }
+v2.14:
+    '#title': 'Update to Thunder 2.14'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_post_update_install_config_selector:
+        '#title': 'Enable "Configuration Selector" module'
+        '#description': '<p>The "Configuration Selector" module is a developer focused module that allows Thunder to provide multiple versions of the same configuration.</p>'
+        '#description_successful': '<p>The installation was successful.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Enable the Configuration Selector module', '#url': 'internal:/admin/modules' }
