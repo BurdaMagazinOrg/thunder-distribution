@@ -6,7 +6,7 @@
  */
 
 /**
- * Install the Configuration Selector module.
+ * Install the Configuration Selector module if necessary.
  */
 function thunder_post_update_ensure_config_selector_installed() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
