@@ -8,10 +8,12 @@
 /**
  * Install the Configuration Selector module.
  */
-function thunder_post_update_install_config_selector() {
+function thunder_post_update_ensure_config_selector_installed() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder_post_update_install_config_selector' => 'config_selector']);
+  if (!\Drupal::moduleHandler()->moduleExists('config_selector')) {
+    $thunderUpdater->installModules(['thunder_post_update_install_config_selector' => 'config_selector']);
+  }
 
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
