@@ -48,6 +48,8 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     // run successfully, configuration schema is correct and that the entity
     // schemas are correct.
     $this->runUpdates();
+    $this->rebuildContainer();
+    $this->assertTrue($this->container->get('module_handler')->moduleExists('config_selector'));
     // @todo figure out any other tests to run.
   }
 
