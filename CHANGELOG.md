@@ -1,5 +1,11 @@
 # Change Log
 
+## [8.2.14](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.14) 2018-02-22
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.13...8.2.14)
+
+Security update for Drupal core: https://www.drupal.org/SA-CORE-2018-001, additionally several tests have been fixed.
+No features were added in this release.
+
 ## [8.2.13](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.13) 2018-01-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.12...8.2.13)
 
