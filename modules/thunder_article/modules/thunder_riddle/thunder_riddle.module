@@ -9,10 +9,13 @@
  * Implements hook_menu_local_actions_alter().
  */
 function thunder_riddle_menu_local_actions_alter(&$local_actions) {
+  /** @var \Drupal\config_selector\ActiveEntity $config_selector */
+  $config_selector = \Drupal::service('config_selector.active');
   /** @var \Drupal\views\ViewEntityInterface $view */
-  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  $view = $config_selector->get('view', 'thunder_media_view');
   if ($view && $view->status()) {
-    $local_actions['riddle_marketplace.import']['appears_on'][] = 'view.thunder_media.media_page_list';
+    $view->getExecutable()->initDisplay();
+    $local_actions['riddle_marketplace.import']['appears_on'][] = $view->getExecutable()->getUrl()->getRouteName();
   }
 }
 
