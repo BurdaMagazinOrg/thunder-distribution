@@ -172,18 +172,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
       'status' => TRUE,
     ],
-    'views.view.thunder_media' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => TRUE,
-    ],
-    'views.view.content' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => FALSE,
-    ],
 
     // Changed on installation.
     'views.view.glossary' => [

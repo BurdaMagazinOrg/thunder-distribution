@@ -1,5 +1,5 @@
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.field_channel
