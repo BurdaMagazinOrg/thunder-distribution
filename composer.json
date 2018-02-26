@@ -140,7 +140,7 @@
         "drupal/redirect": "1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
-        "drupal/search_api": "1.6",
+        "drupal/search_api": "1.7",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
