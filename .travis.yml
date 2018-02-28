@@ -42,6 +42,7 @@ addons:
 # indicates the execution order
 before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - source ./scripts/travis/01-setup-environment.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
   - bash -x -e ./scripts/travis/03-test-source-code.sh
