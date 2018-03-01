@@ -80,6 +80,9 @@
             },
             "drupal/core": {
                 "Views should be dependent on providers of table data via hook_views_data": "https://www.drupal.org/files/issues/2942986-21.patch"
+            },
+            "drupal/focal_point": {
+                "Missing schema for focal_point_scale_and_crop effect": "https://www.drupal.org/files/issues/2915497_3.patch"
             }
         }
     },
