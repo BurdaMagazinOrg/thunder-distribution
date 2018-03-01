@@ -173,12 +173,29 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'dependencies' => [
         'config' => TRUE,
       ],
+      'display' => [
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'attachment_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
+    ],
+    'views.view.watchdog' => [
+      'display' => [
+        'page' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
+    ],
+    'views.view.locked_content' => [
+      'display' => [
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
     ],
 
-    // Changed on installation.
-    'views.view.content_recent' => [
+    'views.view.files' => [
       'display' => [
-        'block_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'page_2' => ['cache_metadata' => ['max-age' => TRUE]],
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],

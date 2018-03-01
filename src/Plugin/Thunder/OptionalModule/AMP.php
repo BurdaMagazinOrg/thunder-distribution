@@ -28,7 +28,7 @@ class AMP extends AbstractOptionalModule {
         '#type' => 'item',
         '#description' => $this->t("ATTENTION: Due to licensing issues,
         you have to download the needed library manually, before activating this module.
-        With composer installed execute the command `composer require lullabot/amp`
+        With composer installed execute the command `composer require pc-magas/amp`
         in the docroot of your installation."),
       ];
     }
