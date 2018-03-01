@@ -51,9 +51,11 @@ function thunder_post_update_add_content_lock_view() {
       $display = $content_view->getDisplay($display_name);
       $options = ['fields', 'filters', 'sorts', 'relationships'];
       foreach ($options as $option) {
-        foreach ($display['display_options'][$option] as $key => $values) {
-          if ($values['table'] == 'content_lock') {
-            $view_contains_content_lock = TRUE;
+        if (!empty($display['display_options'][$option]) && is_array($display['display_options'][$option])) {
+          foreach ($display['display_options'][$option] as $key => $values) {
+            if ($values['table'] == 'content_lock') {
+              $view_contains_content_lock = TRUE;
+            }
           }
         }
       }
@@ -89,7 +91,7 @@ function thunder_post_update_add_content_lock_view() {
         foreach ($options as $option) {
           if (!empty($display['display_options'][$option]) && is_array($display['display_options'][$option])) {
             foreach ($display['display_options'][$option] as $key => $values) {
-              if ($values['table'] == 'content_lock' || in_array($values['relationship'], $deleted_relationships)) {
+              if ($values['table'] == 'content_lock' || (!empty($values['relationship']) && in_array($values['relationship'], $deleted_relationships))) {
                 unset($display['display_options'][$option][$key]);
               }
             }
