@@ -37,22 +37,9 @@ function thunder_post_update_add_content_lock_view() {
   $content_view->setThirdPartySetting('config_selector', 'feature', 'thunder_content_view');
   $content_view->setThirdPartySetting('config_selector', 'priority', 0);
 
-  $view_contains_content_lock = FALSE;
-  foreach (array_keys($content_view->get('display')) as $display_name) {
-    $display = $content_view->getDisplay($display_name);
-    $options = ['fields', 'filters', 'sorts', 'relationships'];
-    foreach ($options as $option) {
-      if (!empty($display['display_options'][$option]) && is_array($display['display_options'][$option])) {
-        foreach ($display['display_options'][$option] as $key => $values) {
-          if ($values['table'] == 'content_lock') {
-            $view_contains_content_lock = TRUE;
-          }
-        }
-      }
-    }
-  }
+  $content_view->calculateDependencies();
 
-  if ($view_contains_content_lock) {
+  if (in_array('content_lock', $content_view->getDependencies()['module'])) {
     // Duplicate content into content_content_lock view and add third party
     // settings.
     $content_lock_view = $content_view->createDuplicate();
@@ -89,6 +76,8 @@ function thunder_post_update_add_content_lock_view() {
         }
       }
     }
+    // Let's disable the 'content' view because 'content_content_lock' will now
+    // be the enabled one.
     $content_view->disable();
   }
   else {
