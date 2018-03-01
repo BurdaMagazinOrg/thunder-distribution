@@ -10,9 +10,7 @@ dependencies:
     - node
     - user
     - config_selector
-  enforced:
-    module:
-      - content_lock
+    - content_lock
 third_party_settings:
   config_selector:
     feature: thunder_content_view

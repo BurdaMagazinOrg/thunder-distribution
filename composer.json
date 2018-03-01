@@ -77,6 +77,9 @@
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
+            },
+            "drupal/core": {
+                "Views should be dependent on providers of table data via hook_views_data": "https://www.drupal.org/files/issues/2942986-21.patch"
             }
         }
     },
