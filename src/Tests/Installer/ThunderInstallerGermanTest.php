@@ -28,7 +28,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * Continues installation when an expected warning is found.
    *
-   * @param string[] $expected_warnings
+   * @param string $expected_warnings
    *   A list of warning summaries to expect on the requirements screen (e.g.
    *   'PHP', 'PHP OPcode caching', etc.). If only the expected warnings
    *   are found, the test will click the "continue anyway" link to go to the
