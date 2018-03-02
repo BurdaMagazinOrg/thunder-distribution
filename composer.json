@@ -79,7 +79,7 @@
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/scheduler-content-moderation-integration-2798689-28.diff"
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/scheduler-content-moderation-integration-2798689-32.patch"
             }
         }
     },
