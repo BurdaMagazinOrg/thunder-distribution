@@ -31,7 +31,7 @@ Thunder distribution comes with a set of drupal tests. They can be used to valid
 #### How to run the tests
 In order to execute tests, following steps have to be executed.
 
-Enable the simpletest module. Over administration UI or by drush.
+Enable the Simpletest module. Over administration UI or by drush.
 
 ```bash
 drush -y en simpletest
@@ -42,7 +42,7 @@ To successfully run drupal tests, a Browser with WebDriver is required. Use sele
 On Mac you have to alias localhost:
 ```bash
 sudo ifconfig lo0 alias 172.16.123.1
-``` 
+```
 ```bash
 docker run -d -P -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests \
  --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome
@@ -64,7 +64,7 @@ After that drupal tests can be executed (if you are in ```docroot``` folder of T
 php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
 ```
 
-To speed things up run tests using a database dump: 
+To speed things up run tests using a database dump:
 ```bash
 DEVDESKTOP_DRUPAL_SETTINGS_DIR="${HOME}/.acquia/DevDesktop/DrupalSettings" \
 php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
@@ -169,11 +169,11 @@ Here is example to import image paragraph configuration:
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 ```
-It imports configurations, that's in a module or profile config directory. 
+It imports configurations, that's in a module or profile config directory.
 
 #### Updating existing configuration (with manually defined configuration changes)
 
-Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state. 
+Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state.
 
 ```php
   // List of configurations that should be checked for existence.
@@ -214,7 +214,7 @@ Workflow to generate Thunder configuration update is following:
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
 3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
 4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:thunder:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
-5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code. 
+5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code.
 
 Additional information about command options are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
 

@@ -75,6 +75,9 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Select profile.
     $this->setUpProfile();
 
+    // Address the requirements problem screen, if any.
+    $this->setUpRequirementsProblem();
+
     // Configure settings.
     $this->setUpSettings();
 
