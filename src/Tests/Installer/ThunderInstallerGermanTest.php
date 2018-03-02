@@ -13,6 +13,8 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
 
   protected $translations = [
     'Save and continue' => 'Speichern und fortfahren',
+    'Errors found' => 'Fehler gefunden',
+    'continue anyway' => 'fahre weiter fort',
   ];
 
   /**
@@ -37,7 +39,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    */
   protected function continueOnExpectedWarnings($expected_warnings = []) {
     // Don't try to continue if there are errors.
-    if (strpos($this->getTextContent(), 'Errors found') !== FALSE) {
+    if (strpos($this->getTextContent(), $this->translations['Errors found']) !== FALSE) {
       return;
     }
     // Allow only details elements that are directly after the warning header
@@ -62,7 +64,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
       $warnings[] = trim((string) $warning);
     }
     $this->assertEqual($expected_warnings, $warnings);
-    $this->clickLink('fahre weiter fort');
+    $this->clickLink($this->translations['continue anyway']);
   }
 
 }
