@@ -1,5 +1,5 @@
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - field.storage.node.field_channel
@@ -9,11 +9,6 @@ dependencies:
     - media_entity
     - node
     - user
-    - config_selector
-third_party_settings:
-  config_selector:
-    feature: thunder_content_view
-    priority: 0
 id: content
 label: Content
 module: node
