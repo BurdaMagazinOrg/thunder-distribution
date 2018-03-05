@@ -53,7 +53,6 @@ projects[field_group][type] = module
 projects[field_group][version] = 1
 projects[focal_point][type] = module
 projects[focal_point][version] = 1
-projects[focal_point][patch][] = https://www.drupal.org/files/issues/2915497_3.patch
 projects[google_analytics][type] = module
 projects[google_analytics][version] = 2
 projects[inline_entity_form][type] = module
