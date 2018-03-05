@@ -44,7 +44,6 @@ function thunder_post_update_add_content_lock_view() {
     // settings.
     $content_lock_view = $content_view->createDuplicate();
     $content_lock_view->set('id', 'content_content_lock');
-    $content_lock_view->setThirdPartySetting('config_selector', 'feature', 'thunder_content_view');
     $content_lock_view->setThirdPartySetting('config_selector', 'priority', 1);
     $content_lock_view->save();
 
