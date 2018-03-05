@@ -75,14 +75,11 @@
             "drupal/entity_browser": {
                 "Integrate editorial search with Search API module": "https://www.drupal.org/files/issues/2899254-combined.patch"
             },
-            "drupal/core": {
-                "Setting a revision ID on a new entity sets the newRevision flag to false": "https://www.drupal.org/files/issues/revision-id-unset-2934517-2.patch"
-            },
             "drupal/search_api": {
                 "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch"
             },
             "drupal/redirect": {
-                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248.patch"
+                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
             }
         }
     },
@@ -92,6 +89,7 @@
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
         "drupal/amp": "1.0",
+        "pc-magas/amp": "^1.0",
         "drupal/amptheme": "1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
@@ -101,7 +99,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "8.4.5",
+        "drupal/core": "^8.5.0",
         "drupal/config_selector": "^1.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
@@ -158,6 +156,7 @@
         "bower-asset/shariff": "^1.24"
     },
     "replace": {
+        "lullabot/amp": "*",
         "bower-asset/jquery": "*",
         "bower-asset/jqueryui": "*",
         "bower-asset/backbone": "*",
