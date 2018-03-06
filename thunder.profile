@@ -344,7 +344,13 @@ function thunder_modules_uninstall($modules) {
   /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
   $route_provider = \Drupal::service('router.route_provider');
   $found_routes = $route_provider->getRoutesByPattern('admin/content');
-  if (!$found_routes->count()) {
+  $view_found = FALSE;
+  foreach ($found_routes->getIterator() as $route) {
+    if (!empty($route->getDefault('view_id'))) {
+      $view_found = TRUE;
+    }
+  }
+  if (!$view_found) {
     $config_service = \Drupal::service('config_update.config_update');
     $config_service->import('view', 'content');
   }
