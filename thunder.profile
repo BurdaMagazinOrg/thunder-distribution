@@ -341,18 +341,20 @@ function thunder_modules_uninstall($modules) {
   // Import the content view if it was deleted during module uninstalling.
   // This could happen if content_lock was uninstalled and the content view
   // contained content_lock fields at that time.
-  /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
-  $route_provider = \Drupal::service('router.route_provider');
-  $found_routes = $route_provider->getRoutesByPattern('admin/content');
-  $view_found = FALSE;
-  foreach ($found_routes->getIterator() as $route) {
-    if (!empty($route->getDefault('view_id'))) {
-      $view_found = TRUE;
+  if (in_array('content_lock', $modules)) {
+    /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
+    $route_provider = \Drupal::service('router.route_provider');
+    $found_routes = $route_provider->getRoutesByPattern('admin/content');
+    $view_found = FALSE;
+    foreach ($found_routes->getIterator() as $route) {
+      if (!empty($route->getDefault('view_id'))) {
+        $view_found = TRUE;
+      }
     }
-  }
-  if (!$view_found) {
-    $config_service = \Drupal::service('config_update.config_update');
-    $config_service->import('view', 'content');
+    if (!$view_found) {
+      $config_service = \Drupal::service('config_update.config_update');
+      $config_service->import('view', 'content');
+    }
   }
 }
 
