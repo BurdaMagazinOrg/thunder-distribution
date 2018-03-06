@@ -40,7 +40,9 @@ function _thunder_article_form_alter_helper(array &$form, FormStateInterface $fo
  * Implements hook_menu_local_tasks_alter().
  */
 function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
-  if (!empty($data['tabs'][0]['views_view:view.scheduler_scheduled_content.overview'])) {
-    unset($data['tabs'][0]['views_view:view.scheduler_scheduled_content.overview']);
+  foreach ($data['tabs'] as $key => $tab) {
+    if (!empty($tab['views_view:view.scheduler_scheduled_content.overview'])) {
+      unset($data['tabs'][$key]['views_view:view.scheduler_scheduled_content.overview']);
+    }
   }
 }
