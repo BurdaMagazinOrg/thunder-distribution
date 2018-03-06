@@ -337,7 +337,7 @@ function thunder_modules_installed($modules) {
 /**
  * Implements hook_modules_uninstalled().
  */
-function thunder_modules_uninstall($modules) {
+function thunder_modules_uninstalled($modules) {
   // Import the content view if it was deleted during module uninstalling.
   // This could happen if content_lock was uninstalled and the content view
   // contained content_lock fields at that time.
