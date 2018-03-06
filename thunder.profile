@@ -349,6 +349,7 @@ function thunder_modules_uninstalled($modules) {
     foreach ($found_routes->getIterator() as $route) {
       if (!empty($route->getDefault('view_id'))) {
         $view_found = TRUE;
+        break;
       }
     }
     if (!$view_found) {
