@@ -5,8 +5,21 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+
+/**
+ * Implements hook_system_info_alter().
+ */
+function thunder_system_info_alter(array &$info, Extension $file, $type) {
+  // Thunder can not work properly without these modules. So they are enforced
+  // to be enabled.
+  $required_modules = ['config_selector'];
+  if ($type == 'module' && in_array($file->getName(), $required_modules)) {
+    $info['required'] = TRUE;
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
