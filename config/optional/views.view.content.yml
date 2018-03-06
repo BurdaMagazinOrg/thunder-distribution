@@ -721,7 +721,7 @@ display:
               administrator: '0'
           is_grouped: true
           group_info:
-            label: 'Promoted to front page'
+            label: Promoted
             description: ''
             identifier: promote
             optional: true
@@ -771,7 +771,7 @@ display:
               administrator: '0'
           is_grouped: true
           group_info:
-            label: 'Sticky at top of lists'
+            label: Sticky
             description: ''
             identifier: sticky
             optional: true
