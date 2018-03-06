@@ -50,15 +50,6 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
-    $this->derivatives = [];
-
-    $this->derivatives["thunder_article.overview"] = [
-      'route_name' => "system.admin_content",
-      'title' => $this->t('Overview'),
-      'parent_id' => "system.admin_content",
-      'weight' => 1,
-    ] + $base_plugin_definition;
-
     if ($this->moduleHandler->moduleExists('content_lock')) {
       $this->derivatives["thunder_article.content_lock"] = [
         'route_name' => "view.locked_content.page_1",
