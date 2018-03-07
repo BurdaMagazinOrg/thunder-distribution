@@ -25,21 +25,24 @@ class ContentListTest extends ThunderBaseTest {
     $this->logWithRole('administrator');
     $this->drupalGet('admin/content');
 
+    $primaryMenuBlockSelector = '#block-thunder-admin-primary-local-tasks > nav > nav > ul';
+    $secondaryMenuBlockSelector = '#block-thunder-admin-secondary-local-tasks > nav > nav > ul';
+
     $assert_session = $this->assertSession();
-    $assert_session->elementTextContains('css', '#block-thunder-admin-secondary-local-tasks > nav > nav > ul', 'Overview');
-    $assert_session->elementTextContains('css', '#block-thunder-admin-secondary-local-tasks > nav > nav > ul', 'Scheduled content');
+    $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Overview');
+    $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
 
     $this->drupalPostForm('admin/config/thunder_article/configuration', ['move_scheduler_local_task' => 0], 'Save configuration');
 
     $this->drupalGet('admin/content');
 
     try {
-      $assert_session->elementTextNotContains('css', '#block-thunder-admin-secondary-local-tasks > nav > nav > ul', 'Scheduled content');
+      $assert_session->elementTextNotContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
     }
     catch (ElementNotFoundException $exception) {
     }
 
-    $assert_session->elementTextContains('css', '#block-thunder-admin-primary-local-tasks > nav > nav > ul', 'Scheduled');
+    $assert_session->elementTextContains('css', $primaryMenuBlockSelector, 'Scheduled');
   }
 
 }
