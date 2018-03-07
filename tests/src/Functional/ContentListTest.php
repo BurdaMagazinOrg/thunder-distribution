@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Drupal\thunder\ThunderBaseTest;
 
 /**
@@ -33,18 +32,15 @@ class ContentListTest extends ThunderBaseTest {
     $assert_session = $this->assertSession();
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Overview');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
+    $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Locked content');
 
     $this->drupalPostForm('admin/config/thunder_article/configuration', ['move_scheduler_local_task' => 0], 'Save configuration');
 
     $this->drupalGet('admin/content');
 
-    try {
-      $assert_session->elementTextNotContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
-    }
-    catch (ElementNotFoundException $exception) {
-    }
-
+    $assert_session->elementTextNotContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
     $assert_session->elementTextContains('css', $primaryMenuBlockSelector, 'Scheduled');
+    $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Locked content');
   }
 
 }
