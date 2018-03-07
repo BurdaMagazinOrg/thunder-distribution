@@ -7,6 +7,8 @@ use Drupal\thunder\ThunderBaseTest;
 
 /**
  * Test the Thunder content list view.
+ *
+ * @group Thunder
  */
 class ContentListTest extends ThunderBaseTest {
 
