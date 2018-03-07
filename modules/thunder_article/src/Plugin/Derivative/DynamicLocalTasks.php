@@ -3,6 +3,7 @@
 namespace Drupal\thunder_article\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
 use Drupal\Core\Routing\RouteProviderInterface;
@@ -32,6 +33,13 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
   protected $routeProvider;
 
   /**
+   * The config factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * Creates an DynamicLocalTasks object.
    *
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
@@ -39,12 +47,15 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler service.
    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
-   *   The route provider service..
+   *   The route provider service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory service.
    */
-  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, RouteProviderInterface $route_provider) {
+  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, RouteProviderInterface $route_provider, ConfigFactoryInterface $config_factory) {
     $this->stringTranslation = $string_translation;
     $this->moduleHandler = $module_handler;
     $this->routeProvider = $route_provider;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -54,7 +65,8 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
     return new static(
       $container->get('string_translation'),
       $container->get('module_handler'),
-      $container->get('router.route_provider')
+      $container->get('router.route_provider'),
+      $container->get('config.factory')
     );
   }
 
@@ -71,7 +83,7 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
       ] + $base_plugin_definition;
     }
 
-    if ($this->moduleHandler->moduleExists('scheduler') && $this->routeProvider->getRoutesByNames(['view.scheduler_scheduled_content.overview'])) {
+    if ($this->configFactory->get('thunder_article.settings')->get('move_scheduler_local_task') && $this->moduleHandler->moduleExists('scheduler') && $this->routeProvider->getRoutesByNames(['view.scheduler_scheduled_content.overview'])) {
       $this->derivatives["thunder_article.scheduler"] = [
         'route_name' => "view.scheduler_scheduled_content.overview",
         'title' => $this->t('Scheduled content'),
