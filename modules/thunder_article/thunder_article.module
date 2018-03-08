@@ -47,7 +47,7 @@ function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
       if (in_array($task, $tabs, TRUE)) {
         $config = \Drupal::service('config.factory')->get('thunder_article.settings');
         $link_ref = &$data['tabs'][$key][$task];
-        $link_ref['#access'] = (($task === 'views_view:view.scheduler_scheduled_content.overview') xor $config->get('move_scheduler_local_task'));
+        $link_ref['#access'] = ($task === 'views_view:view.scheduler_scheduled_content.overview' xor $config->get('move_scheduler_local_task'));
         $link_ref['#cache']['tags'] = Cache::mergeTags(isset($link_ref['#cache']['tags']) ? $link_ref['#cache']['tags'] : [], $config->getCacheTags());
       }
     }
