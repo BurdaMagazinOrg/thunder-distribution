@@ -48,8 +48,8 @@ composer_create_thunder() {
     composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
-    composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
+    composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-fix/2950861-MediaGalleryModifyTest-fails-in-thunder-distribution" --no-progress
 }
 
