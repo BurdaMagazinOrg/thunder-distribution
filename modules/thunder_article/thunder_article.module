@@ -43,8 +43,9 @@ function _thunder_article_form_alter_helper(array &$form, FormStateInterface $fo
 function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
   foreach ($data['tabs'] as $key => $tab) {
     foreach ($tab as $task => $link) {
-      $tabs = ['views_view:view.scheduler_scheduled_content.overview', 'thunder_article.content_view:thunder_article.scheduler'];
-      if (in_array($task, $tabs, TRUE)) {
+      if (in_array($task, ['views_view:view.scheduler_scheduled_content.overview', 'thunder_article.content_view:thunder_article.scheduler'], TRUE)) {
+        // Access configuration inside the loop so that we don't do unnecessary
+        // queries.
         $config = \Drupal::service('config.factory')->get('thunder_article.settings');
         $link_ref = &$data['tabs'][$key][$task];
         $link_ref['#access'] = ($task === 'views_view:view.scheduler_scheduled_content.overview' xor $config->get('move_scheduler_local_task'));
