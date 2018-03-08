@@ -17,7 +17,6 @@ function thunder_workflow_install() {
     if ($role->hasPermission('edit any article content')) {
       $role->grantPermission('use editorial transition archive');
       $role->grantPermission('use editorial transition create_new_draft');
-      $role->grantPermission('use editorial transition needs_review');
       $role->grantPermission('use editorial transition publish');
       $role->grantPermission('use editorial transition archived_published');
       $role->grantPermission('use editorial transition archived_draft');
