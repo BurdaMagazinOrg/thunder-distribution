@@ -38,7 +38,7 @@ drush_make_thunder() {
 
     # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
     rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-    git clone --depth 1 --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --branch fix/2950861-MediaGalleryModifyTest-fails-in-thunder-distribution https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
 }
@@ -49,7 +49,8 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+    composer config repositories.thunder_admin git https://github.com/BurdaMagazinOrg/theme-thunder-admin.git
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-fix/2950861-MediaGalleryModifyTest-fails-in-thunder-distribution" --no-progress
 }
 
 apply_patches() {
