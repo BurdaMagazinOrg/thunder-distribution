@@ -1,5 +1,19 @@
 # Change Log
 
+## [8.2.15](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.15) 2018-03-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.14...8.2.15)
+
+Drupal 8.5.0 release fixes and test fixes. Also starting with this release we will have hard dependencies on the 
+config selector module, which is required for delivering configuration depending on activated modules.
+Special note on Drupal 8.5.0 and the Google AMP integration: The lullabot AMP library is currently not compatible with 
+the drupal 8.5 dependencies, for this reason we provide the pc-magas/amp library instead. 
+Since we do not ship core patches anymore, we do not lock Drupal core anymore. 
+
+- Fix [Config Selector and Thunder Updater are required by Thunder](https://www.drupal.org/project/thunder/issues/2947051)
+- Do [Enable config checks for more modules](https://www.drupal.org/project/thunder/issues/2948617)
+- Do [Prepare thunder for Drupal 8.5](https://www.drupal.org/project/thunder/issues/2948955)
+
+
 ## [8.2.14](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.14) 2018-02-22
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.13...8.2.14)
 
