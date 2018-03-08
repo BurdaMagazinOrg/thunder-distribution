@@ -30,8 +30,6 @@ function thunder_article_post_update_move_scheduler_to_content_list() {
     }
   }
 
-
-
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
