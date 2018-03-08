@@ -5,6 +5,7 @@
  * Thunder Article module hooks.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -40,12 +41,19 @@ function _thunder_article_form_alter_helper(array &$form, FormStateInterface $fo
  * Implements hook_menu_local_tasks_alter().
  */
 function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
-  $config_factory = \Drupal::service('config.factory');
-  if ($config_factory->get('thunder_article.settings')->get('move_scheduler_local_task')) {
-    foreach ($data['tabs'] as $key => $tab) {
-      if (!empty($tab['views_view:view.scheduler_scheduled_content.overview'])) {
-        unset($data['tabs'][$key]['views_view:view.scheduler_scheduled_content.overview']);
+  foreach ($data['tabs'] as $key => $tab) {
+    foreach ($tab as $task => $link) {
+      if ($task === 'views_view:view.scheduler_scheduled_content.overview') {
+        $config = \Drupal::service('config.factory')->get('thunder_article.settings');
+        $link_ref = &$data['tabs'][$key][$task];
+        $link_ref['#access'] = !$config->get('move_scheduler_local_task');
+        $link_ref['#cache']['tags'] = Cache::mergeTags(isset($link_ref['#cache']['tags']) ? $link_ref['#cache']['tags'] : [], $config->getCacheTags());
+      }
+      if ($task === 'thunder_article.content_view:thunder_article.scheduler') {
+        $config = \Drupal::service('config.factory')->get('thunder_article.settings');
+        $link_ref = &$data['tabs'][$key][$task];
+        $link_ref['#access'] = $config->get('move_scheduler_local_task');
+        $link_ref['#cache']['tags'] = Cache::mergeTags(isset($link_ref['#cache']['tags']) ? $link_ref['#cache']['tags'] : [], $config->getCacheTags());
       }
     }
   }
