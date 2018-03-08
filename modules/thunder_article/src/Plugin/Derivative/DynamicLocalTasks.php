@@ -91,6 +91,7 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
         'title' => $this->t('Scheduled content'),
         'parent_id' => "system.admin_content",
         'weight' => 3,
+        'cache_tags' => $this->configFactory->get('thunder_article.settings')->getCacheTags(),
       ] + $base_plugin_definition;
     }
 
