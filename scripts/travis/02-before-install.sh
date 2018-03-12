@@ -24,10 +24,6 @@ drush dl drupalorg_drush-7.x
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
 drush verify-makefile
 
-# install image magick
-wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
-yes '' | pecl install -f php-imagick-LATEST.tar.gz
-
 # Build and install the YAML extension for strict parsing.
 wget https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
 tar -C /tmp -zxvf php-yaml-LATEST.tar.gz
