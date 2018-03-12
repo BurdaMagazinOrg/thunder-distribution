@@ -21,21 +21,16 @@ export TEST_UPDATE;
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
+# Set version of imagick
+export PHP_IMAGICK_VERSION="3.4.3"
 
-# Get latest version of imagick from api.github.com
-PHP_IMAGICK_VERSION_DEFAULT="3.4.3"
-PHP_IMAGICK_VERSION_FROM_API=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
-export PHP_IMAGICK_VERSION=${PHP_IMAGICK_VERSION_FROM_API:-$PHP_IMAGICK_VERSION_DEFAULT}
-
-# Get latest version of Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
+# Set version for Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
 if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
-  PHP_YAML_VERSION_DEFAULT="1.3.1"
-  PHP_YAML_VERSION_FROM_API=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '[ .[].name | select(index("1.")==0) ] | .[0]'`
+  PHP_YAML_VERSION="1.3.1"
 else
-  PHP_YAML_VERSION_DEFAULT="2.0.2"
-  PHP_YAML_VERSION_FROM_API=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '.[0].name'`
+  PHP_YAML_VERSION="2.0.2"
 fi;
-export PHP_YAML_VERSION=${PHP_YAML_VERSION_FROM_API:-$PHP_YAML_VERSION_DEFAULT}
+export PHP_YAML_VERSION
 
 # Set a default install method if none set.
 if [[ ${INSTALL_METHOD} == "" ]]; then
