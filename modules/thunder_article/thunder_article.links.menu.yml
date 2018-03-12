@@ -1,0 +1,6 @@
+thunder_article.configuration_form:
+  title: 'Thunder Article Configuration'
+  route_name: thunder_article.configuration_form
+  description: 'Thunder Article configuration'
+  parent: system.admin_config_content
+  weight: 99
