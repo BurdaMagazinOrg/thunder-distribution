@@ -23,8 +23,9 @@ export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
 
 # Get latest version of imagick from api.github.com
+PHP_IMAGICK_VERSION_DEFAULT="3.4.3"
 PHP_IMAGICK_VERSION_FROM_API=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/mkoppanen/imagick/tags | jq -r '.[0].name'`
-export PHP_IMAGICK_VERSION=${PHP_IMAGICK_VERSION_FROM_API:-3.4.3}
+export PHP_IMAGICK_VERSION=${PHP_IMAGICK_VERSION_FROM_API:-$PHP_IMAGICK_VERSION_DEFAULT}
 
 # Get latest version of Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
 if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
