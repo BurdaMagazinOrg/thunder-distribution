@@ -66,7 +66,7 @@ dependencies:
   - paragraph_split_text
   - pathauto
   - redirect
-  - scheduler
+  - scheduler_content_moderation_integration
   - simple_sitemap
   - slick_media
   - responsive_preview

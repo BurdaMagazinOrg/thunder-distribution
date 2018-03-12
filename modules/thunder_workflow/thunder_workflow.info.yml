@@ -1,7 +1,0 @@
-name: 'Thunder Workflow'
-description: 'Integrates a real content workflow into Thunder.'
-type: module
-core: 8.x
-package: Thunder
-dependencies:
-  - scheduler:scheduler_content_moderation_integration
