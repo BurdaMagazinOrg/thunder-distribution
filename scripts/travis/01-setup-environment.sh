@@ -35,7 +35,7 @@ else
   PHP_YAML_VERSION_DEFAULT="2.0.2"
   #PHP_YAML_VERSION_FROM_API=`curl -L -s -H 'Accept: application/json' https://api.github.com/repos/php/pecl-file_formats-yaml/tags | jq -r '.[0].name'`
 fi;
-export PHP_YAML_VERSION=${PHP_YAML_VERSION_FROM_API:-PHP_YAML_VERSION_DEFAULT}
+export PHP_YAML_VERSION=${PHP_YAML_VERSION_FROM_API:-$PHP_YAML_VERSION_DEFAULT}
 
 # Set a default install method if none set.
 if [[ ${INSTALL_METHOD} == "" ]]; then
