@@ -31,7 +31,7 @@ yes '' | pecl install -f php-imagick-LATEST.tar.gz
 # Build and install the YAML extension for strict parsing.
 wget https://github.com/php/pecl-file_formats-yaml/archive/${PHP_YAML_VERSION:-$PHP_YAML_VERSION_DEFAULT}.tar.gz -O php-yaml-LATEST.tar.gz
 tar -C /tmp -zxvf php-yaml-LATEST.tar.gz
-cd /tmp/pecl-file_formats-yaml-$PHP_YAML_VERSION
+cd /tmp/pecl-file_formats-yaml-${PHP_YAML_VERSION:-$PHP_YAML_VERSION_DEFAULT}
 phpize
 ./configure
 make
