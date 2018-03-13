@@ -934,12 +934,12 @@ function thunder_update_8119() {
 /**
  * Change to paragraphs experimental widget.
  */
-function thunder_update_8119() {
+function thunder_update_8120() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   $successful = TRUE;
 
-  if (!$thunderUpdater->installModules(['thunder__thunder_update_8119' => 'default_content']) || !$thunderUpdater->installModules(['thunder__thunder_update_8119' => 'better_normalizers'])) {
+  if (!$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'default_content']) || !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'better_normalizers'])) {
     $successful = FALSE;
   }
 
@@ -947,21 +947,21 @@ function thunder_update_8119() {
     /** @var \Drupal\default_content\Importer $contentImporter */
     $contentImporter = \Drupal::service('default_content.importer');
     $contentImporter->importContent('thunder_paragraphs');
-    if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8119']])) {
+    if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8120']])) {
       $successful = FALSE;
     }
 
     if (\Drupal::moduleHandler()->moduleExists('thunder_liveblog')) {
-      if (!$thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder__thunder_update_8119']])) {
+      if (!$thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder__thunder_update_8120']])) {
         $successful = FALSE;
       }
     }
   }
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8119']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8120']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8119']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8120']);
   }
 
   // Output logged messages to related chanel of update execution.

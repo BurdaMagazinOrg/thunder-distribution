@@ -212,7 +212,7 @@ v2.16:
 v2.17:
     '#title': 'Update to Thunder 2.17'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder__thunder_update_8119:
+    thunder__thunder_update_8120:
         '#title': 'Change to paragraphs experimental widget.'
         '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraph type icons we installed successfully and that all you paragraphs widget use the experimental widget.</p>'
