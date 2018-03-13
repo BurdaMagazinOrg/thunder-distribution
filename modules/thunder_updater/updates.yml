@@ -81,7 +81,7 @@ v2.0:
         configure_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/content/liveblog' }
     v1_1__thunder_amp:
         '#title': 'Accelerated Mobile Pages by Google (AMP)'
-        '#description': '<p>This module optimizes your articles for Google AMP. They load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to <a href="/admin/appearance">Appearance</a> and activate the <strong>Thunder AMP theme</strong>. This will install all necessary modules, themes, and configs to use it with Thunder. If you want to make your own AMP theme, please refer to the <a href="https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md" target="_blank">README</a> of the Thunder AMP theme.</p><p><strong>Please note:</strong> If you are not using a composer workflow, you have to download the AMP library manually due to licensing issues. With composer installed, execute the command `composer require lullabot/amp` in the docroot of your installation.</p>'
+        '#description': '<p>This module optimizes your articles for Google AMP. They load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to <a href="/admin/appearance">Appearance</a> and activate the <strong>Thunder AMP theme</strong>. This will install all necessary modules, themes, and configs to use it with Thunder. If you want to make your own AMP theme, please refer to the <a href="https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md" target="_blank">README</a> of the Thunder AMP theme.</p><p><strong>Please note:</strong> If you are not using a composer workflow, you have to download the AMP library manually due to licensing issues. With composer installed, execute the command `composer require pc-magas/amp` in the docroot of your installation.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/amp' }
         extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
         amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
@@ -192,6 +192,26 @@ v2.13:
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable Redirect', '#url': 'internal:/admin/modules' }
 v2.14:
+    '#title': 'Update to Thunder 2.14'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_post_update_install_config_selector:
+        '#title': 'Enable "Configuration Selector" module'
+        '#description': '<p>The "Configuration Selector" module is a developer focused module that allows Thunder to provide multiple versions of the same configuration.</p>'
+        '#description_successful': '<p>The installation was successful.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Enable the Configuration Selector module', '#url': 'internal:/admin/modules' }
+v2.16:
+    '#title': 'Update to Thunder 2.16'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_article_move_scheduler_to_content_list:
+        '#title': 'Update locked content view and move scheduler tab to local tasks'
+        '#description': '<p>From now on we will not add functionality for content lists to the existing content list but will create a separate content list for each use-case.</p><p>We have replaced the current locked content view with a new one. The old one can still be reached under views.view.locked_content_old.</p><p>The scheduler tab has also been moved to the local tasks of the content list. This change can be undone under the menu item "Thunder article configuration".</p>'
+        '#description_successful': '<p>The installation was successful.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong><p>'
+        thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+v2.17:
+    '#title': 'Update to Thunder 2.17'
+    '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8119:
         '#title': 'Change to paragraphs experimental widget.'
         '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"

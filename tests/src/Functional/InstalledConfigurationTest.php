@@ -35,13 +35,15 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'ivw_integration',
     'adsense',
     'thunder_riddle',
+    'harbourmaster',
+    'simple_gmap',
 
     // Additional modules.
     // 'thunder_fia',
-    // Simple_gmap module. Issue: https://www.drupal.org/node/2859165
+    // We are messing around with configuration in
+    // thunder_liveblog_module_preinstall, so it's not possible to check the
+    // thunder_liveblog config in a proper way.
     // 'thunder_liveblog',
-    // https://github.com/valiton/harbourmaster-sso-drupal8-plugin/issues/1
-    // 'harbourmaster',
     // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
     // 'amp'
     // end of list.
@@ -87,6 +89,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_view_mode.paragraph.token',
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
+    'core.entity_view_mode.thunder_updater_update.token',
 
     // Core Tour/Language.
     'tour.tour.language',
@@ -170,12 +173,29 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'dependencies' => [
         'config' => TRUE,
       ],
+      'display' => [
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'attachment_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
+    ],
+    'views.view.watchdog' => [
+      'display' => [
+        'page' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
+    ],
+    'views.view.locked_content' => [
+      'display' => [
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE]],
+      ],
     ],
 
-    // Changed on installation.
-    'views.view.content_recent' => [
+    'views.view.files' => [
       'display' => [
-        'block_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
+        'page_2' => ['cache_metadata' => ['max-age' => TRUE]],
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
@@ -291,22 +311,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
    *
    * @var array
    */
-  protected static $ignoreConfigs = [
-    // Slick media module. Issue: https://www.drupal.org/node/2852030
-    'core.entity_view_mode.media.slick',
-
-    // Focal Point module. Issue: https://www.drupal.org/node/2851587
-    'crop.type.focal_point',
-
-    // Metatag module. Issue: https://www.drupal.org/node/2851582.
-    'metatag.metatag_defaults.403',
-    'metatag.metatag_defaults.404',
-    'metatag.metatag_defaults.front',
-    'metatag.metatag_defaults.global',
-    'metatag.metatag_defaults.node',
-    'metatag.metatag_defaults.taxonomy_term',
-    'metatag.metatag_defaults.user',
-  ];
+  protected static $ignoreConfigs = [];
 
   /**
    * Set default theme for test.

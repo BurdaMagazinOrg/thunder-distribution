@@ -1,0 +1,9 @@
+thunder_article.content_view:
+  deriver: 'Drupal\thunder_article\Plugin\Derivative\DynamicLocalTasks'
+  weight: 100
+
+# We need an 'Overview' task also when content_moderation is not enabled
+content_moderation.content:
+  title: 'Overview'
+  route_name: system.admin_content
+  parent_id: system.admin_content
