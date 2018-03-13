@@ -5,6 +5,8 @@
  * Post update functions for Thunder.
  */
 
+use Drupal\views\Entity\View;
+
 /**
  * Install the Configuration Selector module if necessary.
  */
@@ -32,6 +34,8 @@ function thunder_post_update_add_config_selector_to_content_media() {
 
   // Execute configuration update definitions with logging of success.
   if ($thunderUpdater->executeUpdates([['thunder', 'thunder_add_config_selector_to_content_media']])) {
+    View::load('content')->save();
+    View::load('thunder_media')->save();
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_add_config_selector_to_content_media']);
   }
   else {
