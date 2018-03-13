@@ -167,11 +167,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'register' => TRUE,
     ],
 
-    // Media view status is changed by Thunder Install hook.
+    // View status is changed by Thunder Install hook.
     'views.view.media' => [
       'dependencies' => [
         'config' => TRUE,
       ],
+      'status' => TRUE,
+    ],
+    'views.view.thunder_media' => [
+      'status' => TRUE,
+    ],
+    'views.view.content' => [
       'status' => TRUE,
     ],
 
