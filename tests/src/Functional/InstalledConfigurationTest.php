@@ -199,7 +199,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
-
+    'views.view.moderated_content' => [
+      'display' => [
+        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+      ],
+    ],
     // Diff Module: changed on installation of module when additional library
     // exists on system: mkalkbrenner/php-htmldiff-advanced.
     'diff.settings' => [
@@ -242,6 +247,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
       ],
     ],
     // Riddle paragraph is added dynamically by thunder profile on

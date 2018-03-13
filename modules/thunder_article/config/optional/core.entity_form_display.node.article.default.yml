@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.article.field_teaser_text
     - node.type.article
   module:
+    - content_moderation
     - entity_browser
     - field_group
     - metatag
@@ -149,6 +150,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
     weight: 8
@@ -168,6 +175,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  publish_state:
+    type: options_select
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   scheduler_settings:
     weight: 11
     region: content
@@ -210,6 +223,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  unpublish_state:
+    type: options_select
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   url_redirects:
     weight: 50
     region: content
