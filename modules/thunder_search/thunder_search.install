@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Contains hook integrations.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function thunder_search_install() {
+  search_api_cron();
+}
