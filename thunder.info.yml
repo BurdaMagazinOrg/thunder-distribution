@@ -63,6 +63,7 @@ dependencies:
   - metatag_facebook
   - metatag_twitter_cards
   - paragraphs
+  - paragraphs_features
   - paragraph_split_text
   - pathauto
   - redirect

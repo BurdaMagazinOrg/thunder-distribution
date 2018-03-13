@@ -939,14 +939,26 @@ function thunder_update_8120() {
   $thunderUpdater = \Drupal::service('thunder_updater');
   $successful = TRUE;
 
-  if (!$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'default_content']) || !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'better_normalizers'])) {
+  if (
+    !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'default_content'])
+    || !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'better_normalizers'])
+    || !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'paragraphs_features'])
+  ) {
     $successful = FALSE;
   }
 
   if ($successful) {
     /** @var \Drupal\default_content\Importer $contentImporter */
     $contentImporter = \Drupal::service('default_content.importer');
-    $contentImporter->importContent('thunder_paragraphs');
+    try {
+      $contentImporter->importContent('thunder_paragraphs');
+    }
+    catch (Exception $e) {
+      $successful = FALSE;
+    }
+  }
+
+  if ($successful) {
     if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8120']])) {
       $successful = FALSE;
     }
@@ -957,6 +969,7 @@ function thunder_update_8120() {
       }
     }
   }
+
   if ($successful) {
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8120']);
   }
