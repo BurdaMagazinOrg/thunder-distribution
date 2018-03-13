@@ -29,6 +29,7 @@ type_settings:
     archive:
       label: Archive
       from:
+        - draft
         - published
       to: archived
       weight: 2

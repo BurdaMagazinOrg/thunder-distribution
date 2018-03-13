@@ -80,6 +80,9 @@
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/scheduler-content-moderation-integration-2798689-32.patch"
+            },
+            "drupal/core": {
+                "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch"
             }
         }
     },
