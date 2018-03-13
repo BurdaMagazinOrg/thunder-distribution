@@ -1,0 +1,9 @@
+thunder_article.configuration_form:
+  path: '/admin/config/thunder_article/configuration'
+  defaults:
+    _form: '\Drupal\thunder_article\Form\ConfigurationForm'
+    _title: 'Thunder Article Configuration'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE
