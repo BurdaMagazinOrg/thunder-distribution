@@ -34,6 +34,9 @@ class ModuleUninstallTest extends ThunderBaseTest {
     ['access_unpublished'],
     ['responsive_preview'],
     ['shariff'],
+    ['length_indicator'],
+    ['redirect'],
+    ['simple_sitemap'],
 
     // ['amp'],
     // Patch provided: https://www.drupal.org/files/issues/2901581_3.patch.
