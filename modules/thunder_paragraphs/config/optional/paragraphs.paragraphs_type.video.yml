@@ -1,8 +1,10 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  content:
+    - 'file:file:07398a17-87c3-4919-981e-4ec8da2b0f52'
 id: video
 label: Video
 icon_uuid: 07398a17-87c3-4919-981e-4ec8da2b0f52
-description: null
+description: ''
 behavior_plugins: {  }

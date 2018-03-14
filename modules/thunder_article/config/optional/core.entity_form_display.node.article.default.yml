@@ -105,6 +105,7 @@ content:
     third_party_settings:
       paragraphs_features:
         add_in_between: true
+        split_text: true
     region: content
   field_seo_title:
     type: string_textfield

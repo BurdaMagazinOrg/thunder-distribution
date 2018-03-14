@@ -1,8 +1,10 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  content:
+    - 'file:file:863c7557-6618-4185-be70-6425f240ddaa'
 id: instagram
 label: Instagram
 icon_uuid: 863c7557-6618-4185-be70-6425f240ddaa
-description: null
+description: ''
 behavior_plugins: {  }

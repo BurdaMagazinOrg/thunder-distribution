@@ -1,8 +1,10 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  content:
+    - 'file:file:f0c91281-b957-48eb-a28c-1f0cf32d5292'
 id: text
 label: Text
 icon_uuid: f0c91281-b957-48eb-a28c-1f0cf32d5292
-description: null
+description: ''
 behavior_plugins: {  }
