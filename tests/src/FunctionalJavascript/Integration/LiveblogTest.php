@@ -96,7 +96,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->expandAllTabs(1);
     $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     // 1 saves it as published in this case.
-    $this->setModerationState('published');
+    $this->setPublishedStatus(TRUE);
     $this->clickSave();
 
     // Add first post.
