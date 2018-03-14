@@ -116,18 +116,19 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     ],
 
     // Changed on installation.
+    'system.file' => [
+      'path' => [
+        'temporary' => TRUE,
+      ],
+    ],
+
+    // Changed on installation.
     'update.settings' => [
       'notification' => [
         'emails' => TRUE,
       ],
     ],
 
-    // Changed on installation.
-    'system.file' => [
-      'path' => [
-        'temporary' => TRUE,
-      ],
-    ],
     // Changed on Testing.
     'system.logging' => [
       'error_level' => TRUE,
