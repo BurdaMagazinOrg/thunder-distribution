@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - config_selector
+id: thunder_content_view
+label: 'Content view'
+description: 'The main view for editing content'

@@ -36,6 +36,10 @@ function thunder_post_update_add_config_selector_to_content_media() {
   if ($thunderUpdater->executeUpdates([['thunder', 'thunder_add_config_selector_to_content_media']])) {
     View::load('content')->save();
     View::load('thunder_media')->save();
+    /** @var \Drupal\config_update\ConfigReverter $configReverter */
+    $configReverter = \Drupal::service('config_update.config_update');
+    $configReverter->import('config_selector_feature', 'thunder_content_view');
+    $configReverter->import('config_selector_feature', 'thunder_media_view');
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_add_config_selector_to_content_media']);
   }
   else {

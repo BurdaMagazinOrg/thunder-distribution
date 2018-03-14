@@ -80,6 +80,9 @@
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
+            },
+            "drupal/config_selector": {
+                "Add a user interface so that users can administer features": "https://www.drupal.org/files/issues/2948788-2.patch"
             }
         }
     },

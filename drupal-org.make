@@ -22,6 +22,7 @@ projects[checklistapi][type] = module
 projects[checklistapi][version] = 1
 projects[config_selector][type] = module
 projects[config_selector][version] = 1
+projects[config_selector][patch][] = https://www.drupal.org/files/issues/2948788-2.patch
 projects[config_update][type] = module
 projects[config_update][version] = 1
 projects[content_lock][type] = module
