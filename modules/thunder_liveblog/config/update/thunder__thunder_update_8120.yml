@@ -4,7 +4,7 @@ core.entity_form_display.node.liveblog.default:
       field_paragraphs:
         settings:
           edit_mode: preview
-        type: entity_reference_paragraphs
+        third_party_settings: {  }
   update_actions:
     add:
       content:
@@ -12,9 +12,18 @@ core.entity_form_display.node.liveblog.default:
           settings:
             autocollapse: none
             closed_mode: preview
+        url_redirects:
+          settings: {  }
+          third_party_settings: {  }
     change:
       content:
         field_paragraphs:
           settings:
             edit_mode: closed
-          type: paragraphs
+            features:
+              collapse_edit_all: '0'
+              duplicate: '0'
+          third_party_settings:
+            paragraphs_features:
+              add_in_between: true
+              split_text: true
