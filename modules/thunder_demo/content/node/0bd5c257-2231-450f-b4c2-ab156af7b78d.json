@@ -260,6 +260,11 @@
             "value": "1"
         }
     ],
+    "moderation_state": [
+      {
+        "value": "published"
+      }
+    ],
     "revision_timestamp": [
         {
             "value": "1462976658"

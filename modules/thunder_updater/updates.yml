@@ -209,3 +209,9 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+    thunder_enable_content_moderation:
+        '#title': 'Install content moderation module and scheduler integration with it.'
+        '#description': '<p>Thunder now enables the content moderation module by default. The content moderation module gives you the ability to define workflows for content editing.</p><p>To disable the Thunder provided workflow follow the link.</p>'
+        '#description_successful': '<p>The installation was successful.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong><p>'
+        thunder_article_config: { '#text': 'Edit/disable editorial workflow', '#url': 'internal:/admin/config/workflow/workflows/manage/editorial' }

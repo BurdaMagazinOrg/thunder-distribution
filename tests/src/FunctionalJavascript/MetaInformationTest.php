@@ -226,6 +226,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'publish_on[0][value][time]' => date('H:i:s', $startTimestamp),
       'unpublish_on[0][value][date]' => date('Y-m-d', $endTimestamp),
       'unpublish_on[0][value][time]' => date('H:i:s', $endTimestamp),
+      'publish_state' => 'published',
+      'unpublish_state' => 'archived',
     ];
 
     $this->createArticleWithFields($fieldValues);
@@ -252,6 +254,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $unPublishFieldValues = [
       'unpublish_on[0][value][date]' => date('Y-m-d', $unPublishTimestamp),
       'unpublish_on[0][value][time]' => date('H:i:s', $unPublishTimestamp),
+      'unpublish_state' => 'archived',
     ];
 
     $this->expandAllTabs();
@@ -314,7 +317,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/' . $articleId . '/edit');
 
     // Publish article.
-    $this->setPublishedStatus(TRUE);
+    $this->setModerationState('published');
     $this->clickSave();
 
     $this->runCron();

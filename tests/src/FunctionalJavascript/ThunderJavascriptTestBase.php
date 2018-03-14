@@ -505,6 +505,21 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
   }
 
   /**
+   * Set moderation state.
+   *
+   * @param string $state
+   *   State id.
+   */
+  protected function setModerationState($state) {
+
+    $page = $this->getSession()->getPage();
+
+    $this->scrollElementInView('#edit-moderation-state-0-state');
+    $page->find('xpath', '//*[@id="edit-moderation-state-0-state"]')
+      ->selectOption($state);
+  }
+
+  /**
    * Checks if pull request is from fork.
    *
    * @return bool
