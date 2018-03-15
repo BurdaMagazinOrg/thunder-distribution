@@ -7,24 +7,24 @@ dependencies:
     - image.style.thumbnail
     - search_api.index.content
   module:
+    - config_selector
     - media_entity
     - search_api
     - thunder_search
     - user
     - views_bulk_operations
-    - config_selector
-id: content_search_api
-label: Content
-module: views
-description: ''
-tag: ''
-base_table: search_api_index_content
-base_field: search_api_id
-core: 8.x
 third_party_settings:
   config_selector:
     feature: thunder_content_view
     priority: 1
+id: content_search_api
+label: 'Content - Search API'
+module: views
+description: 'Find and manage content with an advanced search technology.'
+tag: ''
+base_table: search_api_index_content
+base_field: search_api_id
+core: 8.x
 display:
   default:
     display_plugin: default
@@ -93,7 +93,6 @@ display:
             type: type
             field_channel: field_channel
             status: status
-            publish_on: publish_on
             node_changed: node_changed
             search_api_operations: search_api_operations
           info:
@@ -122,7 +121,7 @@ display:
               empty_column: false
               responsive: priority-medium
             field_channel:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -135,11 +134,6 @@ display:
               separator: ''
               empty_column: false
               responsive: priority-medium
-            publish_on:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
             node_changed:
               sortable: true
               default_sort_order: desc
