@@ -78,26 +78,26 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
         array_splice($last_item['items'], $split_text_index, 1);
         $config->set('settings.toolbar.rows.0', $items)->save();
 
-        $thunderUpdater->logger()->info('Split before option is successfully removed.');
+        $thunderUpdater->logger()->info('Split before option is successfully removed from Basic HTML Editor.');
       }
       else {
-        $thunderUpdater->logger()->info('Update did not found split before option.');
+        $thunderUpdater->logger()->info('Update did not found split before option from Basic HTML Editor.');
       }
     }
     else {
-      $thunderUpdater->logger()->info('Update did not found split before option.');
+      $thunderUpdater->logger()->info('Update did not found split before option from Basic HTML Editor.');
     }
 
-    // Uninstall paragraphs_split_text module.
-    if ($moduleHandler->moduleExists('paragraphs_split_text')) {
+    // Uninstall paragraph_split_text module.
+    if ($moduleHandler->moduleExists('paragraph_split_text')) {
       /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
       $moduleInstaller = \Drupal::service('module_installer');
 
-      if ($moduleInstaller->uninstall(['paragraphs_split_text'])) {
-        $thunderUpdater->logger()->info('Module "paragraphs_split_text" is successfully removed.');
+      if ($moduleInstaller->uninstall(['paragraph_split_text'])) {
+        $thunderUpdater->logger()->info('Module "paragraph_split_text" is successfully removed.');
       }
       else {
-        $thunderUpdater->logger()->warning('Module "paragraphs_split_text" is not removed.');
+        $thunderUpdater->logger()->warning('Module "paragraph_split_text" is not removed.');
         $successful = FALSE;
       }
     }

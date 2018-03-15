@@ -31,6 +31,17 @@ core.entity_form_display.node.article.default:
         langcode:
           settings:
             include_locked: true
+core.entity_form_display.node.page.default:
+  expected_config:
+    content:
+      langcode:
+        settings: {  }
+  update_actions:
+    change:
+      content:
+        langcode:
+          settings:
+            include_locked: true
 paragraphs.paragraphs_type.gallery:
   expected_config: {  }
   update_actions:
