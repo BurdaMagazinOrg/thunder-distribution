@@ -47,10 +47,12 @@ composer_create_thunder() {
     cd ${THUNDER_DIST_DIR}
     composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
+    git clone --depth 1 --single-branch --branch "feature/2908887-experimental-paragraphs-widget" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/../thunder_admin
+
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer config repositories.thunder_admin git "https://github.com/BurdaMagazinOrg/theme-thunder-admin.git"
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-feature/2908887-experimental-paragraphs-widget" --no-progress
+    composer config repositories.thunder_admin path ${TEST_DIR}/../thunder_admin
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:*" --no-progress
 }
 
 apply_patches() {
