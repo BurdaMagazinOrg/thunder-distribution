@@ -112,7 +112,7 @@
         "drupal/diff": "1.0-rc1",
         "drupal/dropzonejs": "^1.0",
         "drupal/empty_fields": "^1.0",
-        "drupal/entity": "1.0-beta1",
+        "drupal/entity": "^1.0",
         "drupal/entity_browser": "1.4",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
