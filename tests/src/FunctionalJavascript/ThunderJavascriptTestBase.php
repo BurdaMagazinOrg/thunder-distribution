@@ -86,7 +86,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected function getDriverArgs() {
     $desiredCapabilities = NULL;
-    $webDriverUrl = 'http://127.0.0.1:4444/wd/hub';
+    $webDriverUrl = $this->getWebDriverUrl();
 
     // Get Sauce Labs variables from environment, if Sauce Labs build is set.
     if (!empty(getenv('SAUCE_LABS_ENABLED'))) {
@@ -110,6 +110,20 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $desiredCapabilities,
       $webDriverUrl,
     ];
+  }
+
+  /**
+   * Get WebDriver URL, that can be set by environment variable.
+   *
+   * @return string
+   *   Returns full URL to WebDriver interface.
+   */
+  protected function getWebDriverUrl() {
+    if (!empty(getenv('THUNDER_WEBDRIVER_HOST'))) {
+      return $webDriverUrl = 'http://' . getenv('THUNDER_WEBDRIVER_HOST') . '/wd/hub';
+    }
+
+    return 'http://127.0.0.1:4444/wd/hub';
   }
 
   /**
