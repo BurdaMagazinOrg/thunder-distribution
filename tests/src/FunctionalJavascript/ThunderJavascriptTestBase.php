@@ -120,7 +120,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected function getWebDriverUrl() {
     if (!empty(getenv('THUNDER_WEBDRIVER_HOST'))) {
-      return $webDriverUrl = 'http://' . getenv('THUNDER_WEBDRIVER_HOST') . '/wd/hub';
+      return 'http://' . getenv('THUNDER_WEBDRIVER_HOST') . '/wd/hub';
     }
 
     return 'http://127.0.0.1:4444/wd/hub';
