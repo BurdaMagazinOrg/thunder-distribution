@@ -49,11 +49,11 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 1);
 
     // Split text paragraph before the current selection.
-    $this->clickParagraphSplitButton('before');
+    $this->clickParagraphSplitButton();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL . PHP_EOL . '<p>&nbsp;</p>' . PHP_EOL);
     $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $secondParagraphContent . PHP_EOL);
   }
 
@@ -70,9 +70,9 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, '');
 
     // Remove the paragraph.
-    $page = $this->getSession()->getPage();
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_remove"]');
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_confirm_remove"]');
+    $driver = $this->getSession()->getDriver();
+    $driver->executeScript("jQuery('[name=\"field_paragraphs_0_remove\"]').trigger('mousedown')");
+    $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Create second paragraph.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
@@ -81,11 +81,11 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->selectCkEditorElement($this->getCkEditorCssSelector(1), 1);
 
     // Split text paragraph.
-    $this->clickParagraphSplitButton('before');
+    $this->clickParagraphSplitButton();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL . PHP_EOL . '<p>&nbsp;</p>' . PHP_EOL);
     $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
   }
 
@@ -106,7 +106,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->selectCkEditorElement($this->getCkEditorCssSelector(0), 1);
 
     // Split text paragraph.
-    $this->clickParagraphSplitButton('before');
+    $this->clickParagraphSplitButton();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $paragraphDelta = $this->getParagraphDelta(static::$paragraphsField, 0);
@@ -132,12 +132,9 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
   /**
    * Click on split button.
-   *
-   * @param string $type
-   *   The button type to click. Can be 'before' or 'after'.
    */
-  protected function clickParagraphSplitButton($type) {
-    $this->getSession()->executeScript("jQuery('.cke_button__splittext{$type}')[0].click();");
+  protected function clickParagraphSplitButton() {
+    $this->getSession()->executeScript("jQuery('.cke_button__splittext')[0].click();");
   }
 
   /**
