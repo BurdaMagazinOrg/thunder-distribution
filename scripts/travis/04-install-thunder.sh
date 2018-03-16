@@ -50,8 +50,8 @@ composer_create_thunder() {
     git clone --depth 1 --single-branch --branch "feature/2908887-experimental-paragraphs-widget" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/../thunder_admin
 
     cd ${TEST_DIR}
-    composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer config repositories.thunder_admin path ${TEST_DIR}/../thunder_admin
+    composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:*" --no-progress
 }
 
