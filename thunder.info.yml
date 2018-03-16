@@ -64,7 +64,6 @@ dependencies:
   - metatag_twitter_cards
   - paragraphs
   - paragraphs_features
-  - paragraph_split_text
   - pathauto
   - redirect
   - scheduler
