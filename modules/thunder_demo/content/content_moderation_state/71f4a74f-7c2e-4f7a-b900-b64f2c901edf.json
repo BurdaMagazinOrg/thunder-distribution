@@ -1,0 +1,74 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/content_moderation_state\/content_moderation_state"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/content_moderation_state\/content_moderation_state\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "id": [
+        {
+            "value": 4
+        }
+    ],
+    "uuid": [
+        {
+            "value": "71f4a74f-7c2e-4f7a-b900-b64f2c901edf"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": 4
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/content_moderation_state\/content_moderation_state\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6b596467-9714-488c-b359-83c31cf7de4b"
+                    }
+                ]
+            }
+        ]
+    },
+    "workflow": [
+        {
+            "target_id": "editorial"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published"
+        }
+    ],
+    "content_entity_type_id": [
+        {
+            "value": "node"
+        }
+    ],
+    "content_entity_id": [
+        {
+            "value": 8
+        }
+    ],
+    "content_entity_revision_id": [
+        {
+            "value": 8
+        }
+    ]
+}
