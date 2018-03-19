@@ -90,22 +90,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.thunder_updater_update.token',
-
-    // Core Tour/Language.
-    'tour.tour.language',
-    'tour.tour.language-add',
-    'tour.tour.language-edit',
-
-    // Focal point schema issue.
-    'image.style.entity_browser_thumbnail',
-    'image.style.gallery',
-    'image.style.facebook',
-    'image.style.media_image',
-    'image.style.media_image_mobile',
-    'image.style.media_image_tablet',
-    'image.style.media_thumbnail',
-    'image.style.teaser',
-    'image.style.twitter',
   ];
 
   /**
@@ -185,13 +169,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
-    'views.view.locked_content' => [
-      'display' => [
-        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
-        'default' => ['cache_metadata' => ['max-age' => TRUE]],
-      ],
-    ],
-
     'views.view.files' => [
       'display' => [
         'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
