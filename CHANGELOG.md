@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.2.16](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.16) 2018-03-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.15...8.2.16)
+
+This is a release to reflect the availablity of a new highly critical Drupal release. Everyone using Thunder or Drupal
+should update as soon as possible. This release does not contain any code changes. The only difference is the updated
+drush make files that lead to a new tar-ball on drupal.org which will contain the security patch for drupal.
+For more information about the Drupal release see: https://www.drupal.org/psa-2018-001
+
 ## [8.2.15](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.15) 2018-03-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.14...8.2.15)
 
