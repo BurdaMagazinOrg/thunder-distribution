@@ -41,6 +41,22 @@ function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(
  * Used for Experimental Paragraphs widget.
  */
 function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  // Based on logic in ParagraphsWidget::formMultipleElements - execution of
+  // alter hook for existing paragraphs will be executed first and only with
+  // list of editable paragraphs. Since all editable paragraphs are processed
+  // before new paragraphs, we can simply disable "Collapse and save" for any
+  // following paragraph.
+  $processing_new_paragraphs = FALSE;
+
+  /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $item */
+  foreach ($context['items'] as $item) {
+    if ($item->isEmpty()) {
+      $processing_new_paragraphs = TRUE;
+
+      break;
+    }
+  }
+
   _thunder_paragraph_attach_ief_submit(
     $element,
     [
@@ -48,7 +64,8 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
       'actions',
       'actions',
       'collapse_button',
-    ]
+    ],
+    !$processing_new_paragraphs
   );
 }
 
@@ -59,8 +76,10 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
  *   Element render array for paragraph.
  * @param array $button_parents
  *   Array with parents for paragraph collapse button.
+ * @param bool $is_displayed
+ *   Flag if "Collapse and save" button should be visible.
  */
-function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents) {
+function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents, $is_displayed = TRUE) {
   if (isset($element['subform'])) {
     foreach (Element::children($element['subform']) as $index) {
       if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])
@@ -74,6 +93,7 @@ function _thunder_paragraph_attach_ief_submit(array &$element, array $button_par
           $button['#ief_submit_trigger'] = TRUE;
           $button['#ief_submit_trigger_all'] = TRUE;
           $button['#paragraphs_show_warning'] = FALSE;
+          $button['#access'] = $is_displayed;
 
           NestedArray::setValue($element, $button_parents, $button);
         }
