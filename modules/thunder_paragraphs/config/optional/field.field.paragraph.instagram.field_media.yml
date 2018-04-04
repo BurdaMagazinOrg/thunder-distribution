@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media
-    - media_entity.bundle.instagram
+    - media.type.instagram
     - paragraphs.paragraphs_type.instagram
 id: paragraph.instagram.field_media
 field_name: field_media

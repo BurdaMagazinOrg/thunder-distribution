@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - link
-    - media_entity
+    - media
 id: media.field_url
 field_name: field_url
 entity_type: media

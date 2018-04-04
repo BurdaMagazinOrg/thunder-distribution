@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_author
-    - media_entity.bundle.twitter
+    - media.type.twitter
 id: media.twitter.field_author
 field_name: field_author
 entity_type: media

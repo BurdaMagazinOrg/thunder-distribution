@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.video
+    - media.type.video
   module:
     - image
 id: media.video.paragraph_preview

@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_tags
-    - media_entity.bundle.image
+    - media.type.image
 id: media.image.field_tags
 field_name: field_tags
 entity_type: media

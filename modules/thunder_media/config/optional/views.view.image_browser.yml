@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - image.style.entity_browser_thumbnail
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - entity_browser
     - image
-    - media_entity
+    - media
     - user
 id: image_browser
 label: 'Image Browser'

@@ -6,5 +6,5 @@ dependencies:
   - drupal:views
   - paragraphs:paragraphs
   - entity_browser:entity_browser
-  - riddle_marketplace:media_riddle_marketplace
+  - riddle_marketplace:media_riddle_marketplace (>=8.x-3.x)
 package: Thunder

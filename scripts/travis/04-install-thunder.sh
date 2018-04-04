@@ -19,6 +19,7 @@ update_thunder() {
     cd ${TEST_DIR}/docroot
 
     # Execute all required updates
+    drush cr
     drush updatedb -y
 
     # Adjust theme logo path because it can be different in case of composer build
@@ -49,7 +50,8 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
+
 }
 
 apply_patches() {

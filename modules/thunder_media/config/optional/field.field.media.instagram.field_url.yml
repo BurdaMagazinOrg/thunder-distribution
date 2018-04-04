@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_url
-    - media_entity.bundle.instagram
+    - media.type.instagram
   module:
     - link
 id: media.instagram.field_url

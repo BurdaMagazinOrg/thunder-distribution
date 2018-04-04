@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media
-    - media_entity.bundle.gallery
+    - media.type.gallery
     - paragraphs.paragraphs_type.gallery
 id: paragraph.gallery.field_media
 field_name: field_media
