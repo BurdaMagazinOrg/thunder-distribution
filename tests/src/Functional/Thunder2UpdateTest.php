@@ -9,7 +9,12 @@ use Drupal\Tests\thunder\Traits\ThunderAwsTestFixtureTrait;
 /**
  * Tests Thunder updates from 2.0 to current.
  *
- * @group Thunder
+ * This will be disabled for the Thunder 3.0 branch as long as there are no
+ * releases with update path.
+ *
+ * TODO: rewrite for Thunder 3.0
+ *
+ * @group Disabled_Thunder
  */
 class Thunder2UpdateTest extends UpdatePathTestBase {
   use ThunderAwsTestFixtureTrait;

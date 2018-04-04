@@ -52,7 +52,6 @@ dependencies:
   - length_indicator
   - libraries
   - linkit
-  - media_entity_image
   - media_entity_instagram
   - media_entity_pinterest
   - media_entity_slideshow

@@ -7,7 +7,7 @@ dependencies:
     - field.field.media.twitter.field_content
     - field.field.media.twitter.field_url
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.twitter
+    - media.type.twitter
   module:
     - image
 id: media.twitter.paragraph_preview

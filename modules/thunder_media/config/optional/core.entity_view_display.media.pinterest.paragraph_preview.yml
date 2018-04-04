@@ -5,7 +5,7 @@ dependencies:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.pinterest.field_url
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.pinterest
+    - media.type.pinterest
   module:
     - empty_fields
     - image

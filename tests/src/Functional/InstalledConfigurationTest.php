@@ -31,7 +31,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
   protected static $modules = [
     'thunder_demo',
     'google_analytics',
-    'nexx_integration',
     'ivw_integration',
     'adsense',
     'thunder_riddle',
@@ -39,6 +38,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'simple_gmap',
 
     // Additional modules.
+    // 'nexx_integration',
     // 'thunder_fia',
     // We are messing around with configuration in
     // thunder_liveblog_module_preinstall, so it's not possible to check the

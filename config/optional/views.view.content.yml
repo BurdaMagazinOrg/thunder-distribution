@@ -6,7 +6,7 @@ dependencies:
     - field.storage.node.field_teaser_media
     - image.style.thumbnail
   module:
-    - media_entity
+    - media
     - node
     - user
 id: content

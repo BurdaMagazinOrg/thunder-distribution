@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_riddle
-    - media_entity.bundle.riddle
+    - media.type.riddle
     - paragraphs.paragraphs_type.riddle
 id: paragraph.riddle.field_riddle
 field_name: field_riddle

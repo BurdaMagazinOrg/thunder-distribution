@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - datetime
-    - media_entity
+    - media
 id: media.field_expires
 field_name: field_expires
 entity_type: media

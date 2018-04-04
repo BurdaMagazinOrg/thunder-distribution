@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_riddle_id
-    - media_entity.bundle.riddle
+    - media.type.riddle
 id: media.riddle.field_riddle_id
 field_name: field_riddle_id
 entity_type: media

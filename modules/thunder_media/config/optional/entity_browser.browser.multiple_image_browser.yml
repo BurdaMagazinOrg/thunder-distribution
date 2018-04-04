@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media_entity.bundle.image
+    - media.type.image
     - views.view.image_browser
   module:
     - dropzonejs_eb_widget
-    - media_entity
+    - media
     - views
 name: multiple_image_browser
 label: 'Multiple Image Browser'
@@ -29,7 +29,7 @@ widget_selector_configuration: {  }
 widgets:
   89532aea-140d-4b9e-96f4-2aa489c095cb:
     settings:
-      media_entity_bundle: image
+      media_type: image
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M

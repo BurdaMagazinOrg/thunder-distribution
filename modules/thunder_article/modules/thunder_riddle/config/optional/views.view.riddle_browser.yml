@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - image.style.entity_browser_thumbnail
-    - media_entity.bundle.riddle
+    - media.type.riddle
   module:
     - entity_browser
     - image
-    - media_entity
+    - media
     - user
 id: riddle_browser
 label: 'Riddle Browser'

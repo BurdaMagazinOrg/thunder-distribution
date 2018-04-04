@@ -26,7 +26,7 @@ function thunder_amp_preprocess_video_embed_iframe__youtube(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function thunder_amp_preprocess_media_entity_twitter_tweet(&$variables) {
+function thunder_amp_preprocess_media_twitter_tweet(&$variables) {
   $explodedUrl = explode('/', $variables['path']);
   $variables['tweetid'] = end($explodedUrl);
 }

@@ -15,7 +15,7 @@ use Drupal\block\Entity\Block;
 function thunder_system_info_alter(array &$info, Extension $file, $type) {
   // Thunder can not work properly without these modules. So they are enforced
   // to be enabled.
-  $required_modules = ['config_selector', 'views', 'media_entity', 'node'];
+  $required_modules = ['config_selector', 'views', 'media', 'node'];
   if ($type == 'module' && in_array($file->getName(), $required_modules)) {
     $info['required'] = TRUE;
   }

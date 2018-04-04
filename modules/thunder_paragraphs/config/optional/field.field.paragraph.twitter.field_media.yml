@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media
-    - media_entity.bundle.twitter
+    - media.type.twitter
     - paragraphs.paragraphs_type.twitter
 id: paragraph.twitter.field_media
 field_name: field_media
