@@ -942,6 +942,9 @@ function thunder_update_8120() {
     // that the config_selector is always enabled.
     // thunder_post_update_install_config_selector was the former name and is
     // still the key for the checklist.
+    // After 2.16 this function was moved from
+    // thunder_post_update_ensure_config_selector_installed into a hook_update_N
+    // function, because we realized that module installs should happen here.
     $thunderUpdater->installModules(['thunder_post_update_install_config_selector' => 'config_selector']);
   }
 
