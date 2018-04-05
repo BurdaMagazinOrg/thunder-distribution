@@ -31,4 +31,3 @@ function thunder_post_update_add_config_selector_to_content_media() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
-
