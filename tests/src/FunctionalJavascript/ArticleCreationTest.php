@@ -59,7 +59,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
 
     // Add Pinterest Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/99360735500167749/', 'pinterest');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/283515739025915901/', 'pinterest');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
