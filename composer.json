@@ -66,17 +66,8 @@
                 "create a NEW paragraph 'in place' between existing ones": "https://www.drupal.org/files/issues/2899917_6.patch",
                 "Schema errors": "https://www.drupal.org/files/issues/build_failing_schema-2881459-7.patch"
             },
-            "drupal/amp": {
-                "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
-            },
-            "drupal/amptheme": {
-                "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
-            },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
-            },
-            "drupal/redirect": {
-                "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
             }
         }
     },
@@ -85,9 +76,9 @@
         "burdamagazinorg/infinite_theme": "^1.0",
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
-        "drupal/amp": "1.0",
+        "drupal/amp": "~1.0",
         "pc-magas/amp": "^1.0",
-        "drupal/amptheme": "1.0",
+        "drupal/amptheme": "~1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
@@ -131,7 +122,7 @@
         "drupal/paragraphs": "1.1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/redirect": "1.0",
+        "drupal/redirect": "~1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
