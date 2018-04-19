@@ -1,5 +1,14 @@
 # Change Log
 
+## [8.2.17](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.17) 2018-04-19
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.16...8.2.17)
+
+Maintenance release with module and drupal core update. Some smaller test fixes and update refactoring.
+
+- Do [Update core and modules](https://www.drupal.org/project/thunder/issues/2961993)
+- Fix [Tests fail due to deleted pinterest pin](https://www.drupal.org/project/thunder/issues/2961787)
+- Fix [Move thunder_post_update_ensure_config_selector_installed into hook_update_N](https://www.drupal.org/project/thunder/issues/2958735)
+
 ## [8.2.16](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.16) 2018-03-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.15...8.2.16)
 
