@@ -66,9 +66,6 @@
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
             },
-            "drupal/amptheme": {
-                "Don't use network for loading logo information": "https://www.drupal.org/files/issues/amptheme-do_not_use_the_network_for_loading_logo_information-2753089-7.patch"
-            },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
@@ -80,9 +77,9 @@
     "require": {
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
-        "drupal/amp": "1.0",
+        "drupal/amp": "1.1",
         "pc-magas/amp": "^1.0",
-        "drupal/amptheme": "1.0",
+        "drupal/amptheme": "~1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
@@ -123,7 +120,7 @@
         "drupal/paragraphs": "1.1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/redirect": "1.0",
+        "drupal/redirect": "1.1",
         "drupal/scheduler": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
