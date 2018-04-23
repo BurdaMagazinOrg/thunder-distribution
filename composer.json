@@ -86,7 +86,6 @@
         "drupal/admin_toolbar": "^1.0",
         "drupal/better_normalizers": "^1.0",
         "drupal/blazy": "^1.0",
-        "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
         "drupal/core": "8.6.x-dev",
         "drupal/config_selector": "^1.0",
