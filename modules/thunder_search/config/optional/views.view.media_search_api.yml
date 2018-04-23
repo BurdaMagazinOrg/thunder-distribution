@@ -14,9 +14,9 @@ dependencies:
     - views_bulk_operations
     - config_selector
 id: media_search_api
-label: Media
+label: 'Media - Search API'
 module: views
-description: ''
+description: 'Find and manage media with an advanced search technology.'
 tag: ''
 base_table: search_api_index_content
 base_field: search_api_id
