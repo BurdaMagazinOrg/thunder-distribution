@@ -23,7 +23,7 @@ For more information about the Drupal release see: https://www.drupal.org/psa-20
 Drupal 8.5.0 release fixes and test fixes. Also starting with this release we will have hard dependencies on the
 config selector module, which is required for delivering configuration depending on activated modules.
 Special note on Drupal 8.5.0 and the Google AMP integration: The lullabot AMP library is currently not compatible with
-the drupal 8.5 dependencies, for this reason we provide the lullabot/amp library instead.
+the drupal 8.5 dependencies, for this reason we provide the pc-magas/amp library instead.
 Since we do not ship core patches anymore, we do not lock Drupal core anymore.
 
 - Fix [Config Selector and Thunder Updater are required by Thunder](https://www.drupal.org/project/thunder/issues/2947051)
