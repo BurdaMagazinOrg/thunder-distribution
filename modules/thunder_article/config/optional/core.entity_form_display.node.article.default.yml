@@ -18,6 +18,7 @@ dependencies:
     - paragraphs
     - path
     - scheduler
+    - select2boxes
 third_party_settings:
   field_group:
     group_teaser:
@@ -75,7 +76,7 @@ content:
     third_party_settings: {  }
     region: content
   field_channel:
-    type: options_select
+    type: select2boxes_autocomplete_single
     weight: 2
     settings: {  }
     third_party_settings: {  }
@@ -113,13 +114,13 @@ content:
           tolerance: 10
     region: content
   field_tags:
-    type: entity_reference_autocomplete_tags
+    type: select2boxes_autocomplete_multi
     weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+    settings: {  }
+    third_party_settings:
+      select2boxes:
+        preload_count: null
+        enable_preload: false
     region: content
   field_teaser_media:
     weight: 4

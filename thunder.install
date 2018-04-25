@@ -951,3 +951,15 @@ function thunder_update_8120() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Enable select2boxes module.
+ */
+function thunder_update_8121() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $thunderUpdater->installModules(['thunder__thunder_update_8118' => 'select2boxes']);
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
