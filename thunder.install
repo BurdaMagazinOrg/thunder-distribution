@@ -958,7 +958,18 @@ function thunder_update_8120() {
 function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder__thunder_update_8118' => 'select2boxes']);
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2boxes'])) {
+    /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+    $thunderUpdater = \Drupal::service('thunder_updater');
+
+    // Execute configuration update definitions with logging of success.
+    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8121']])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+    }
+  }
 
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
