@@ -78,7 +78,6 @@
         "composer/installers": "^1.0",
         "cweagans/composer-patches": "~1.0",
         "drupal/amp": "1.1",
-        "pc-magas/amp": "^1.0",
         "drupal/amptheme": "~1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0",
@@ -86,7 +85,6 @@
         "drupal/admin_toolbar": "^1.0",
         "drupal/better_normalizers": "^1.0",
         "drupal/blazy": "^1.0",
-        "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
         "drupal/core": "8.6.x-dev",
         "drupal/config_selector": "^1.0",
@@ -141,7 +139,6 @@
         "valiton/harbourmaster": "Harbourmaster Single Sign On"
     },
     "replace": {
-        "lullabot/amp": "*",
         "bower-asset/jquery": "*",
         "bower-asset/jqueryui": "*",
         "bower-asset/backbone": "*",
