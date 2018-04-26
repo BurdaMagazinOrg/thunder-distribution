@@ -71,9 +71,6 @@
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
-            },
-            "drupal/core": {
-                "Make it possible to specify a destination after the installation for distributions": "https://www.drupal.org/files/issues/2018-04-20/2776605-18.patch"
             }
         }
     },
