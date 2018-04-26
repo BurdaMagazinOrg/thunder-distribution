@@ -1,5 +1,11 @@
 # Change Log
 
+## [8.2.18](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.18) 2018-04-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.17...8.2.18)
+
+Updating drupal-org-core.make to use Drupal core 8.5.3 which is a security release.
+See: https://www.drupal.org/sa-core-2018-004
+
 ## [8.2.17](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.17) 2018-04-19
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.16...8.2.17)
 
