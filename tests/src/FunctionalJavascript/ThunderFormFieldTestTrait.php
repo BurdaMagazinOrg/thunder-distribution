@@ -75,7 +75,12 @@ trait ThunderFormFieldTestTrait {
     }
     elseif ($fieldTag === 'select') {
       // Handling of dropdown list.
-      $page->selectFieldOption($fieldName, $value);
+      foreach ($value as $item) {
+        $this->getSession()
+          ->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append('<option value=\"{$item}\">{$item}</option>');");
+        $page->selectFieldOption($fieldName, $item);
+      }
+
 
       return;
     }
