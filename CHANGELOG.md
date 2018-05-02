@@ -1,13 +1,36 @@
 # Change Log
 
+## [8.2.18](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.18) 2018-04-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.17...8.2.18)
+
+Updating drupal-org-core.make to use Drupal core 8.5.3 which is a security release.
+See: https://www.drupal.org/sa-core-2018-004
+
+## [8.2.17](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.17) 2018-04-19
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.16...8.2.17)
+
+Maintenance release with module and drupal core update. Some smaller test fixes and update refactoring.
+
+- Do [Update core and modules](https://www.drupal.org/project/thunder/issues/2961993)
+- Fix [Tests fail due to deleted pinterest pin](https://www.drupal.org/project/thunder/issues/2961787)
+- Fix [Move thunder_post_update_ensure_config_selector_installed into hook_update_N](https://www.drupal.org/project/thunder/issues/2958735)
+
+## [8.2.16](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.16) 2018-03-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.15...8.2.16)
+
+This is a release to reflect the availablity of a new highly critical Drupal release. Everyone using Thunder or Drupal
+should update as soon as possible. This release does not contain any code changes. The only difference is the updated
+drush make files that lead to a new tar-ball on drupal.org which will contain the security patch for drupal.
+For more information about the Drupal release see: https://www.drupal.org/psa-2018-001
+
 ## [8.2.15](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.15) 2018-03-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.14...8.2.15)
 
-Drupal 8.5.0 release fixes and test fixes. Also starting with this release we will have hard dependencies on the 
+Drupal 8.5.0 release fixes and test fixes. Also starting with this release we will have hard dependencies on the
 config selector module, which is required for delivering configuration depending on activated modules.
-Special note on Drupal 8.5.0 and the Google AMP integration: The lullabot AMP library is currently not compatible with 
-the drupal 8.5 dependencies, for this reason we provide the pc-magas/amp library instead. 
-Since we do not ship core patches anymore, we do not lock Drupal core anymore. 
+Special note on Drupal 8.5.0 and the Google AMP integration: The lullabot AMP library is currently not compatible with
+the drupal 8.5 dependencies, for this reason we provide the pc-magas/amp library instead.
+Since we do not ship core patches anymore, we do not lock Drupal core anymore.
 
 - Fix [Config Selector and Thunder Updater are required by Thunder](https://www.drupal.org/project/thunder/issues/2947051)
 - Do [Enable config checks for more modules](https://www.drupal.org/project/thunder/issues/2948617)
@@ -24,8 +47,8 @@ No features were added in this release.
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.12...8.2.13)
 
 Thunder now contains a configurable length indicator for text fields. You can attach a length indicator to any text
-field, it will show an indication, if the text length is within a given range. We implemented it for the SEO text field.  
-Additionally we added the redirect module, to automatically add redirects when URLs of articles have changed. As usual 
+field, it will show an indication, if the text length is within a given range. We implemented it for the SEO text field.
+Additionally we added the redirect module, to automatically add redirects when URLs of articles have changed. As usual
 several test improvements have been made.
 
 - Add [[UX] Field length indicator without setting a hard limit](https://www.drupal.org/project/thunder/issues/2931731)
@@ -41,7 +64,7 @@ We added a new feature to split paragraphs into two. This was contributed by Tel
 Additionally, we fixed the lazy loading of galleries that were below the visible area and improved the liveblog
 integration. PHP notices have been removed and links that are not available for a role are not displayed anymore.
 Test coverage has been improved to also check for errors on installation and unnecessary optional config installs
-have been removed 
+have been removed
 
 - Fix [PHP Notice while adding image](https://www.drupal.org/node/2923350)
 - Fix [Add liveblog page is not aligned with article design](https://www.drupal.org/node/2924063)
@@ -55,15 +78,15 @@ have been removed
 
 ## [8.2.11](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.11) 2017-12-11
 
-This release does not contain any changes. It was necessary to update the tar ball on drupal.org that contained a 
+This release does not contain any changes. It was necessary to update the tar ball on drupal.org that contained a
 version of config_update with a security flaw.
 This does not concern people installing and updating thunder with composer, drush or manually. It is only relevant
-for people downloading the tar ball from drupal.org. 
+for people downloading the tar ball from drupal.org.
 
 ## [8.2.10](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.10) 2017-11-15
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.9...8.2.10)
 
-This is the release, where we removed lots of dependencies. Additionally we added inline form errors and the 
+This is the release, where we removed lots of dependencies. Additionally we added inline form errors and the
 possibility to configure if the remove button for files is shown in the medie entity form or not.
 
 - Add [Integrate inline form errors](https://www.drupal.org/node/2915435)
@@ -76,7 +99,7 @@ possibility to configure if the remove button for files is shown in the medie en
 This release mostly fixes problems that occurred with the Drupal 8.4 update. Additionally several tests had to be
 updated because of new contrib module versions.
 
-Updating to Drupal 8.4 requires Drush 8.1.12 or newer, we recommend to use Drush 8.1.15 or newer. Additional information 
+Updating to Drupal 8.4 requires Drush 8.1.12 or newer, we recommend to use Drush 8.1.15 or newer. Additional information
 can be found in [Drupal 8.4.0 Changelog](https://www.drupal.org/project/drupal/releases/8.4.0).
 
 All changes and fixes in this release:
@@ -107,7 +130,7 @@ All changes and fixes in this release:
 ## [8.2.7](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.7) 2017-08-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.6...8.2.7)
 
-This release notably fixes a data loss bug, where changes in an inline entity form where not submitted when collapsing 
+This release notably fixes a data loss bug, where changes in an inline entity form where not submitted when collapsing
 the paragraph containing the inline entity form. The fix saves remote entities on collapsing a paragraph, this means,
 that changes on a referenced entity are saved before the referencing article is changed!
 
@@ -148,34 +171,34 @@ some usability improvements.
 - The save button is now fix at the bottom of the screen, no more scrolling down long paragraph lists!
 - All paragraphs have a compact, yet helpful preview mode. The preview also has the same height now for every
   paragraph type, which is easier to read and also easier to handle.
-- We removed lot of form clutter, forms are much cleaner, margins and paddings are harmonized, unneeded borders 
+- We removed lot of form clutter, forms are much cleaner, margins and paddings are harmonized, unneeded borders
   around field groups are removed.
-- Images and other media can be directly edited in the paragraph now, no mor extra click on that edit button, 
+- Images and other media can be directly edited in the paragraph now, no mor extra click on that edit button,
   no more distracting pop up windows!
-- The help texts are now hidden behind small buttons with question marks – so they don’t disturb the nice view but are 
-  there if you need them  
-- The sidebar handling for mobile devices has been improved. You can now open and close the bar when you use a small 
+- The help texts are now hidden behind small buttons with question marks – so they don’t disturb the nice view but are
+  there if you need them
+- The sidebar handling for mobile devices has been improved. You can now open and close the bar when you use a small
   device
-  
+
 But this is all just the beginning. We will continue to improve the authoring experience step by step in the future.
 
 
 ### Some hints:
 
-We try to update your paragraphs as good as possible, but if you have heavily modified your system, some paragraphs 
-will not be looking as we intended. If you want to provide a better look for your custom paragraphs you can do the 
+We try to update your paragraphs as good as possible, but if you have heavily modified your system, some paragraphs
+will not be looking as we intended. If you want to provide a better look for your custom paragraphs you can do the
 following:
 
 For custom paragraph types, custom display settings "Preview" should be enabled and adjusted.
-For media bundles we have provided "Paragraph preview" view mode. In order to have proper look for media paragraph, 
-in paragraph "Preview" view mode for media entity field "Rendered entity" formatter should be selected with view mode 
+For media bundles we have provided "Paragraph preview" view mode. In order to have proper look for media paragraph,
+in paragraph "Preview" view mode for media entity field "Rendered entity" formatter should be selected with view mode
 "Paragraph preview". As an example, you can take a look at default image paragraph provided by Thunder.
 
-For text fields that should be displayed in a preview of the paragraph, we are suggesting to use "Trimmed" the text 
+For text fields that should be displayed in a preview of the paragraph, we are suggesting to use "Trimmed" the text
 formatter with max 600 characters. As an example, you can take a look at default text paragraph provided by Thunder.
 
-Additionally the new form display mode "Inline" has been added for media bundles. This form display mode is used for 
-displaying of inline entity form for media entities in paragraphs. As an example, you can take a look at default image 
+Additionally the new form display mode "Inline" has been added for media bundles. This form display mode is used for
+displaying of inline entity form for media entities in paragraphs. As an example, you can take a look at default image
 paragraph provided by Thunder.
 
 If you would like to keep the old behaviour, just require "drupal/thunder_admin": "~1.0" in your root composer.json.
@@ -184,7 +207,7 @@ If you would like to keep the old behaviour, just require "drupal/thunder_admin"
 
 Many thanks to all people involved in the Thunder authoring experience task force:
 
-Jeannette Mayer, Jessica Simon, Claudia Herwig, Andreas Nickel, Steffen Schlaer, Nico Davis, Maria Pecenka, 
+Jeannette Mayer, Jessica Simon, Claudia Herwig, Andreas Nickel, Steffen Schlaer, Nico Davis, Maria Pecenka,
 Berta Leinweber, Miriam Fuchs, Franziska Fey
 
 Very special thanks to Andreas Krauzberger and Andreas Sahle for being the masterminds and designers of all of this!
@@ -202,12 +225,12 @@ dependencies. This time we decoupled the checklistapi module.
 
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.1...8.2.2)
 
-- Bump drupal core version in drush make file. 
+- Bump drupal core version in drush make file.
 
 ## [8.2.1](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.1) 2017-06-13
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.0...8.2.1)
 
-- Decouple the shariff module, so that it can be disabled and removed. 
+- Decouple the shariff module, so that it can be disabled and removed.
 - Fix a notice in Facebook Instant Articles integration
 - Update drupal core and contrib modules.
 
@@ -267,7 +290,7 @@ The following features have been added:
 
 - Updates to current module versions
 - Remove patches for media_entity_instagram, entity_reference_revisions, better_normalizers and blazy, these are now merged into the corresponding modules
-- This also means, that those modules are not anymore version locked in the composer file. 
+- This also means, that those modules are not anymore version locked in the composer file.
 
 ## [8.1.4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.4) 2017-04-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.3...8.x-1.4)
@@ -311,9 +334,9 @@ See also:
 ## [8.1.0-rc6](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc6) 2017-01-25
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc5...8.x-1.0-rc6)
 
-This release candidate mainly improves the updater service and updates most contrib modules to the newest versions. 
+This release candidate mainly improves the updater service and updates most contrib modules to the newest versions.
 An exception to the updates are the blazy and slick modules, which do not work properly after update.
-Additionally we now use the pecl yaml extension when validating our yml files, since it is more strict then the previously 
+Additionally we now use the pecl yaml extension when validating our yml files, since it is more strict then the previously
 used Symfony component.
 lat but not least, we introduced fixed creation dates for the demo articles to prevent having articles with exactly the same creation dates.
 
@@ -348,7 +371,7 @@ widgets:
 ```
 
 As you can see, those configurations would be incomplete. If your Files look similar to the other entity_browser.browser.* config files, everything is fine.
-  
+
 
 ## [8.1.0-rc4](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.1.0-rc4) 2016-12-01
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.x-1.0-rc2...8.x-1.0-rc4)
@@ -357,15 +380,15 @@ Test improvements
 - Added tests for SEO functionality (Metatag, Sitemap)
 - Code style tests and fixes
 - Update tests to work with current module markup
- 
+
 Config changes
 - Activated revisions for article and basic page
 - Media URLs are required for twitter and instagram entities
-- UX: better responsiveness on content list 
+- UX: better responsiveness on content list
 - Improve image style for media thumbnails
 - UX: Add author filter to content overview
 - UX: Add sorting to entity browser views
-- Enable auto select on multiple_image_browser 
+- Enable auto select on multiple_image_browser
 - Reorganize node and term edit pages
 - Auto open media browser
 - reduce allowed allowed upload extensions in image browser
@@ -376,13 +399,13 @@ Config changes
 Fixes
 - Fix entity browser preselection after error
 - Add missing svg files for entity browser
-- UX dropzone: [Checkmark indicator for upload screen](https://www.drupal.org/node/2696915) 
-- UX dropzone: [Implement maxFiles](https://www.drupal.org/node/2633346) 
-- UX dropzone: [Improved MultiStep selection display](https://www.drupal.org/node/2823670) 
+- UX dropzone: [Checkmark indicator for upload screen](https://www.drupal.org/node/2696915)
+- UX dropzone: [Implement maxFiles](https://www.drupal.org/node/2633346)
+- UX dropzone: [Improved MultiStep selection display](https://www.drupal.org/node/2823670)
 - Fix term access for unpublished terms
-- UX media browser: [Open entity browser with one click from Entity Browser IEF widget](https://www.drupal.org/node/2778305) 
-- [Make instagram responsive](https://www.drupal.org/node/2807735) 
-- Fix PHP Notice 
+- UX media browser: [Open entity browser with one click from Entity Browser IEF widget](https://www.drupal.org/node/2778305)
+- [Make instagram responsive](https://www.drupal.org/node/2807735)
+- Fix PHP Notice
 - Better entity browser usability on mobile devices
 
 ## [8.1.0-rc3]
@@ -453,7 +476,7 @@ skipped release
 - Infinite module and theme are not installed by default
 - Gallery is handled by slick
 - Changed composer repository from https://packagist.drupal-composer.org to https://packages.drupal.org/8
-  be warned, that if you require the distribution that you change this in your composer file as well 
+  be warned, that if you require the distribution that you change this in your composer file as well
   see [https://www.drupal.org/node/2718229](https://www.drupal.org/node/2718229)
 - Installation of front end modules is handled by bower
 - Improve test coverage
