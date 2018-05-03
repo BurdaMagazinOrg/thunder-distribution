@@ -15,8 +15,23 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
   $moduleHandler = \Drupal::moduleHandler();
 
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  // Few modules are required only for importing paragraphs type icons and they
+  // can be uninstalled afterwards.
+  $uninstall_after_content_import = [];
+  if ($moduleHandler->moduleExists('default_content')) {
+    $uninstall_after_content_import[] = 'default_content';
+  }
+  if ($moduleHandler->moduleExists('better_normalizers')) {
+    $uninstall_after_content_import[] = 'better_normalizers';
+  }
+
+  // Update is successful only when all steps are successful.
   $successful = TRUE;
 
+  // There are few new modules required for experimental paragraphs widget.
   if (
     !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'default_content'])
     || !$thunderUpdater->installModules(['thunder__thunder_update_8120' => 'better_normalizers'])
@@ -25,6 +40,11 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
     $successful = FALSE;
   }
 
+  // Import settings for paragraphs features module, to enable drop-down to a
+  // single button functionality.
+  $successful = $successful && $thunderUpdater->importConfigs(['paragraphs_features.settings']);
+
+  // Import icons for paragraphs types.
   if ($successful) {
     /** @var \Drupal\default_content\Importer $contentImporter */
     $contentImporter = \Drupal::service('default_content.importer');
@@ -36,11 +56,33 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
     }
   }
 
+  // Modules for default content are not needed anymore.
+  if ($successful && !empty($uninstall_after_content_import)) {
+    try {
+      if ($moduleInstaller->uninstall($uninstall_after_content_import)) {
+        $thunderUpdater->logger()->info('Following modules are uninstalled, because they ware required only for update hook execution: "' . implode('", "', $uninstall_after_content_import) . '"');
+      }
+      else {
+        $thunderUpdater->logger()->warning('Unable to clean up following module(s): "' . implode('", "', $uninstall_after_content_import) . '"');
+
+        $successful = FALSE;
+      }
+    }
+    catch (Exception $e) {
+      $thunderUpdater->logger()->warning('Unable to clean up following module(s): "' . implode('", "', $uninstall_after_content_import) . '"');
+
+      $successful = FALSE;
+    }
+  }
+
+  // Execute configuration update definition for switching to experimental
+  // paragraphs widget.
   if ($successful) {
     if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8120']])) {
       $successful = FALSE;
     }
 
+    // Live blog specific configuration has to be adjusted too.
     if ($moduleHandler->moduleExists('thunder_liveblog')) {
       if (!$thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder__thunder_update_8120']])) {
         $successful = FALSE;
@@ -48,6 +90,7 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
     }
   }
 
+  // Switch to split text feature provided by paragraphs features.
   if ($successful) {
     /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
     $configFactory = \Drupal::configFactory();
@@ -85,6 +128,7 @@ function thunder_post_update_switch_to_paragraphs_experimental_widget() {
     }
   }
 
+  // Update should be marked as successful only if all steps are successful.
   if ($successful) {
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8120']);
   }
