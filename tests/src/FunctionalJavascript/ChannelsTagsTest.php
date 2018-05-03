@@ -54,7 +54,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_channel' => 3,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
-      'field_tags[target_id]' => 'New Section, Tag2',
+      'field_tags[]' => ['New Section', 'Tag2'],
       'field_teaser_text[0][value]' => 'Teaser 2',
     ]);
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:16']);

@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * Trait for manipulation of form fields.
@@ -75,12 +76,21 @@ trait ThunderFormFieldTestTrait {
     }
     elseif ($fieldTag === 'select') {
       // Handling of dropdown list.
-      foreach ($value as $item) {
-        $this->getSession()
-          ->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append('<option value=\"{$item}\">{$item}</option>');");
-        $page->selectFieldOption($fieldName, $item);
-      }
+      if (is_array($value)) {
+        foreach ($value as $item) {
 
+          try {
+            $page->selectFieldOption($fieldName, $item, TRUE);
+          }
+          catch (ElementNotFoundException $e) {
+            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option(\"{$item}\", \"{$item}\", false, false)).trigger('change')");
+          }
+        }
+        $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val([" . trim(json_encode(array_values($value)), '[]') . "]).trigger('change')");
+      }
+      else {
+        $page->selectFieldOption($fieldName, $value);
+      }
 
       return;
     }
