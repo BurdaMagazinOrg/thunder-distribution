@@ -213,7 +213,7 @@ v2.19:
     '#title': 'Update to Thunder 2.19'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8121:
-        '#title': 'Enable "Select2Boxes" module.'
+        '#title': 'Enable "select2_widget" module.'
         '#description': "<p>Provide Select2 field widgets for forms and views filters.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
-        extension_page: { '#text': 'Enable "Select2Boxes" module', '#url': 'internal:/admin/modules' }
+        extension_page: { '#text': 'Enable "select2_widget" module', '#url': 'internal:/admin/modules' }

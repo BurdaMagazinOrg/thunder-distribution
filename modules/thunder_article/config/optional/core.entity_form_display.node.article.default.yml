@@ -18,7 +18,7 @@ dependencies:
     - paragraphs
     - path
     - scheduler
-    - select2boxes
+    - select2_widget
 third_party_settings:
   field_group:
     group_teaser:
@@ -76,7 +76,7 @@ content:
     third_party_settings: {  }
     region: content
   field_channel:
-    type: select2boxes_autocomplete_single
+    type: select2_autocomplete_widget
     weight: 2
     settings: {  }
     third_party_settings: {  }
@@ -114,7 +114,7 @@ content:
           tolerance: 10
     region: content
   field_tags:
-    type: select2boxes_autocomplete_multi
+    type: select2_autocomplete_widget
     weight: 5
     settings: {  }
     third_party_settings:

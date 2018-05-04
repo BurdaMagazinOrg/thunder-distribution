@@ -953,12 +953,12 @@ function thunder_update_8120() {
 }
 
 /**
- * Enable select2boxes module.
+ * Enable select2_widget module.
  */
 function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2boxes'])) {
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2_widget'])) {
     /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
     $thunderUpdater = \Drupal::service('thunder_updater');
 

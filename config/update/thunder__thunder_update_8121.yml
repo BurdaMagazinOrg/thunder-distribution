@@ -14,14 +14,14 @@ core.entity_form_display.node.article.default:
     change:
       content:
         field_channel:
-          type: select2boxes_autocomplete_single
+          type: select2_autocomplete_widget
         field_tags:
           settings: {  }
           third_party_settings:
             select2boxes:
               enable_preload: false
               preload_count: null
-          type: select2boxes_autocomplete_multi
+          type: select2_autocomplete_widget
     delete:
       content:
         field_tags:

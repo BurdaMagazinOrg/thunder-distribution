@@ -67,7 +67,7 @@ dependencies:
   - pathauto
   - redirect
   - scheduler
-  - select2boxes
+  - select2_widget
   - simple_sitemap
   - slick_media
   - responsive_preview
