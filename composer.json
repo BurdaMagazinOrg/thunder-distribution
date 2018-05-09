@@ -76,7 +76,7 @@
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
             },
             "drupal/select2_widget": {
-                "Doesn't work for taxonomy terms": "https://www.drupal.org/files/issues/2018-05-08/2943659-3.patch"
+                "Doesn't work for taxonomy terms": "https://www.drupal.org/files/issues/2018-05-08/2943659-4.patch"
             }
         }
     },
