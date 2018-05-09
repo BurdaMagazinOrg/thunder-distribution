@@ -102,6 +102,7 @@ projects[scheduler][type] = module
 projects[scheduler][version] = 1
 projects[select2_widget][type] = module
 projects[select2_widget][version] = 1
+projects[select2_widget][patch][] = https://www.drupal.org/files/issues/2018-05-09/2943659-4.patch
 projects[shariff][type] = module
 projects[shariff][version] = 1
 projects[simple_gmap][type] = module
