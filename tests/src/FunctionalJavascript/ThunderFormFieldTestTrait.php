@@ -119,7 +119,7 @@ trait ThunderFormFieldTestTrait {
    * @param array $fieldValues
    *   Field values as associative array with field names as keys.
    */
-  public function  setFieldValues(DocumentElement $page, array $fieldValues) {
+  public function setFieldValues(DocumentElement $page, array $fieldValues) {
     foreach ($fieldValues as $fieldName => $value) {
       $this->setFieldValue($page, $fieldName, $value);
     }
