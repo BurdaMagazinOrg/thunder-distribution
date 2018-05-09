@@ -89,7 +89,14 @@ trait ThunderFormFieldTestTrait {
         $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val([" . trim(json_encode(array_values($value)), '[]') . "]).trigger('change')");
       }
       else {
-        $page->selectFieldOption($fieldName, $value);
+        try {
+          $page->selectFieldOption($fieldName, $value, TRUE);
+        }
+        catch (ElementNotFoundException $e) {
+          $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option(\"{$value}\", \"{$value}\", false, false)).trigger('change')");
+        }
+
+        $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val([" . trim(json_encode([$value]), '[]') . "]).trigger('change')");
       }
 
       return;
@@ -109,7 +116,7 @@ trait ThunderFormFieldTestTrait {
    * @param array $fieldValues
    *   Field values as associative array with field names as keys.
    */
-  public function setFieldValues(DocumentElement $page, array $fieldValues) {
+  public function  setFieldValues(DocumentElement $page, array $fieldValues) {
     foreach ($fieldValues as $fieldName => $value) {
       $this->setFieldValue($page, $fieldName, $value);
     }

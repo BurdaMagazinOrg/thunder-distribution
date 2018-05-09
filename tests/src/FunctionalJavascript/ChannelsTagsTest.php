@@ -48,6 +48,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->setPublishedStatus(TRUE);
     $this->clickSave();
+    sleep(19);
 
     // Create 2. Article.
     $this->articleFillNew([

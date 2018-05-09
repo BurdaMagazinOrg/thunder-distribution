@@ -117,10 +117,7 @@ content:
     type: select2_autocomplete_widget
     weight: 5
     settings: {  }
-    third_party_settings:
-      select2boxes:
-        preload_count: null
-        enable_preload: false
+    third_party_settings: {  }
     region: content
   field_teaser_media:
     weight: 4

@@ -16,11 +16,6 @@ core.entity_form_display.node.article.default:
         field_channel:
           type: select2_autocomplete_widget
         field_tags:
-          settings: {  }
-          third_party_settings:
-            select2boxes:
-              enable_preload: false
-              preload_count: null
           type: select2_autocomplete_widget
     delete:
       content:
