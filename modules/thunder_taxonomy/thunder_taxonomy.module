@@ -9,18 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
- * Implements hook_entity_type_alter().
- */
-function thunder_taxonomy_entity_type_alter(array &$entity_types) {
-  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
-  if (!empty($entity_types['taxonomy_term'])) {
-    $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
-    $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
-  }
-
-}
-
-/**
  * Implements hook_entity_base_field_info_alter().
  */
 function thunder_taxonomy_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
@@ -35,6 +23,18 @@ function thunder_taxonomy_entity_base_field_info_alter(&$fields, EntityTypeInter
       ])
       ->setDisplayConfigurable('form', TRUE);
   }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function thunder_taxonomy_entity_type_alter(array &$entity_types) {
+  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  if (!empty($entity_types['taxonomy_term'])) {
+    $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
+    $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
+  }
+
 }
 
 /**
