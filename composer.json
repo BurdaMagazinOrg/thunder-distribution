@@ -71,6 +71,9 @@
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
+            },
+            "drupal/core": {
+                "Convert taxonomy terms to be revisionable and publishable": "https://www.drupal.org/files/issues/2018-05-14/2880149-139.patch"
             }
         }
     },
