@@ -71,6 +71,9 @@
             },
             "drupal/redirect": {
                 "Provided config does not match the config after an export": "https://www.drupal.org/files/issues/2932248-3.patch"
+            },
+            "drupal/core": {
+                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-05-14/2492171-93.patch"
             }
         }
     },

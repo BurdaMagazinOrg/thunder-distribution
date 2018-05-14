@@ -5,30 +5,7 @@
  * Contains media related functions.
  */
 
-use Drupal\file\Entity\File;
 use Drupal\Core\Form\FormStateInterface;
-
-/**
- * Implements hook_ENTITY_TYPE_create().
- */
-function thunder_media_file_create(File $entity) {
-
-  $config = \Drupal::config('thunder_media.settings');
-
-  if ($config->get('enable_filename_transliteration')) {
-
-    $pathinfo = pathinfo($entity->getFilename());
-
-    /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
-    $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
-
-    // Check for needed pathinfo array keys.
-    if (!empty($pathinfo['filename']) && !empty($pathinfo['extension'])) {
-      $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
-      $entity->setFilename($cleanFilename);
-    }
-  }
-}
 
 /**
  * Implements hook_preprocess_views_view().
