@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Implements hook_entity_type_alter().
@@ -17,6 +18,23 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
     $entity_types['taxonomy_term']->setFormClass('default', 'Drupal\thunder_taxonomy\ThunderTermForm');
   }
 
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function thunder_taxonomy_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() == 'taxonomy_term') {
+    $fields['status']
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+        'weight' => 120,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+  }
 }
 
 /**
