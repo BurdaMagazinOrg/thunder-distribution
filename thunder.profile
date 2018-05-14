@@ -300,10 +300,13 @@ function thunder_modules_installed($modules) {
         'type' => $fieldWidget,
       ])->save();
 
-    entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    // Attach field_ivw only if channel vocabulary is present in the distribution.
+    if (Vocabulary::load('channel')) {
+      entity_get_form_display('taxonomy_term', 'channel', 'default')
+        ->setComponent('field_ivw', [
+          'type' => $fieldWidget,
+        ])->save();
+    }
   }
 
   // Enable riddle paragraph in field_paragraphs.
