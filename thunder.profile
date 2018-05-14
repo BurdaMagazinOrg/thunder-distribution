@@ -8,6 +8,7 @@
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Implements hook_system_info_alter().
