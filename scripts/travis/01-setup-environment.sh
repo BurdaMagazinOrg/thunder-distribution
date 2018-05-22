@@ -10,16 +10,16 @@ export TEST_INSTALLER="false"
 
 # For daily cron runs, current version from Drupal will be installed
 # and after that update will be executed and tested
+if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
+    TEST_UPDATE="true"
+else
+    TEST_UPDATE=""
+fi
+
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
-#if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
-#    TEST_UPDATE="true"
-#else
-#    TEST_UPDATE=""
-#fi
-#
-#export TEST_UPDATE;
-export TEST_UPDATE="";
+TEST_UPDATE=""
+export TEST_UPDATE;
 
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
