@@ -31,7 +31,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     'core.entity_view_display.paragraph.gallery.preview',
     'nexx_integration.settings',
     'views.view.fb_instant_articles',
-    'image.style.slick_media',
   ];
 
   /**
