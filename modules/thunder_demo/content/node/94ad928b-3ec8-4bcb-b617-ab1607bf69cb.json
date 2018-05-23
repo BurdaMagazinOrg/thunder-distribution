@@ -203,11 +203,6 @@
             "value": "0"
         }
     ],
-    "moderation_state": [
-      {
-        "value": "published"
-      }
-    ],
     "revision_timestamp": [
         {
             "value": "1463125920"
