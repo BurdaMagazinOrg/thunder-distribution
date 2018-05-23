@@ -292,6 +292,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $waitMidGallery = "jQuery('#block-thunder-base-content div.field__items > div.field__item:nth-child(3) div.slick-active img.b-loaded').css('opacity') === '1'";
 
     $this->drupalGet('node/8/edit');
+    $this->setModerationState('published');
 
     $windowSize['height'] = 950;
     $this->setWindowSize($windowSize);
