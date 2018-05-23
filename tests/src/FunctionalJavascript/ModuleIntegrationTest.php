@@ -128,6 +128,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('node/7/revisions');
 
+    $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
+    $firstRightRadio->click();
     $lastLeftRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
     $lastLeftRadio->click();
 

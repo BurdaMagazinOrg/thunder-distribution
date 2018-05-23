@@ -23,9 +23,13 @@ class RedirectTest extends ThunderBaseTest {
     $this->drupalGet('burda-launches-open-source-cms-thunder');
     $this->assertSession()->statusCodeEquals(200);
 
+    $page = $this->getSession()->getPage();
+
     $this->drupalGet('node/6/edit');
-    $this->getSession()->getPage()->fillField('SEO Title', 'Burda Launches Worldwide Coalition');
-    $this->getSession()->getPage()->pressButton('Save');
+    $page->fillField('SEO Title', 'Burda Launches Worldwide Coalition');
+    $page->find('xpath', '//*[@id="edit-moderation-state-0-state"]')
+      ->selectOption('published');
+    $page->pressButton('Save');
 
     $this->drupalGet('burda-launches-open-source-cms-thunder');
     $this->assertSession()->statusCodeEquals(200);
