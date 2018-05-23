@@ -11,7 +11,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @package Drupal\Tests\thunder\Kernel
  *
- * @group ThunderConfig
+ * @group ThunderConfigBla
  */
 class InstalledConfigurationTest extends ThunderBaseTest {
 
@@ -243,8 +243,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // To the slick module. As soon as 8.6.0 is released we should provide that
     // patch to get rid of this ignored key.
     'image.style.slick_media' => [
-      '4b434ce0-90cc-44c3-9423-35d7cccc7d93' => [
-        'effects' => [
+      'effects' => [
+        '4b434ce0-90cc-44c3-9423-35d7cccc7d93' => [
           'data' => [
             'anchor' => TRUE,
           ],
