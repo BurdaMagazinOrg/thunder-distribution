@@ -8,6 +8,7 @@
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
@@ -296,10 +297,13 @@ function thunder_modules_installed($modules) {
 
     $fieldWidget = 'ivw_integration_widget';
 
-    entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    if (Node::load('article')) {
+      entity_get_form_display('node', 'article', 'default')
+        ->setComponent(
+          'field_ivw', [
+            'type' => $fieldWidget,
+          ])->save();
+    }
 
     // Attach field only if channel vocabulary is present in the distribution.
     if (Vocabulary::load('channel')) {
