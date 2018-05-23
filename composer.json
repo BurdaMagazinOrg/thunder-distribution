@@ -80,9 +80,6 @@
             },
             "drupal/core": {
                 "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch"
-            },
-            "drupal/access_unpublished": {
-                "Access unpublished not working together with content moderation": "https://www.drupal.org/files/issues/2018-03-14/2861940-9.patch"
             }
         }
     },
@@ -94,7 +91,7 @@
         "drupal/amp": "1.1",
         "drupal/amptheme": "~1.0",
         "oomphinc/composer-installers-extender": "^1.1",
-        "drupal/access_unpublished": "dev-1.x",
+        "drupal/access_unpublished": "^1.0",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
         "drupal/better_normalizers": "^1.0",
