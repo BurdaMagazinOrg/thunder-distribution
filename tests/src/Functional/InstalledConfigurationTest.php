@@ -90,9 +90,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.thunder_updater_update.token',
-
-    // Not updated image styles.
-    'image.style.slick_media',
   ];
 
   /**
@@ -238,6 +235,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
           'target_bundles_drag_drop' => [
             'riddle' => TRUE,
           ],
+        ],
+      ],
+    ],
+    // Drupal 8.6.x adss the anchor key to the crop schema.
+    // As long as there is no release of Drupal 8.6.x we cannot provide a patch
+    // To the slick module. As soon as 8.6.0 is released we should provide that
+    // patch to get rid of this ignored key.
+    'image.style.slick_media' => [
+      'effects' => [
+        'data' => [
+          'anchor' => TRUE,
         ],
       ],
     ],
