@@ -90,9 +90,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.thunder_updater_update.token',
-
-    // Not updated image styles.
-    'image.style.slick_media',
   ];
 
   /**
