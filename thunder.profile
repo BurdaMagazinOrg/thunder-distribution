@@ -8,8 +8,7 @@
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
-use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Vocabulary;
+
 
 /**
  * Implements hook_system_info_alter().
@@ -299,18 +298,25 @@ function thunder_modules_installed($modules) {
 
     // Attach field if channel vocabulary and article node type is
     // present in the distribution.
-    if (Node::load('article')) {
+    try {
       entity_get_form_display('node', 'article', 'default')
         ->setComponent(
           'field_ivw', [
             'type' => $fieldWidget,
           ])->save();
     }
-    if (Vocabulary::load('channel')) {
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
+    }
+
+    try {
       entity_get_form_display('taxonomy_term', 'channel', 'default')
         ->setComponent('field_ivw', [
           'type' => $fieldWidget,
         ])->save();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
     }
   }
 
