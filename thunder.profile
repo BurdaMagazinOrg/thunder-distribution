@@ -297,6 +297,8 @@ function thunder_modules_installed($modules) {
 
     $fieldWidget = 'ivw_integration_widget';
 
+    // Attach field if channel vocabulary and article node type is
+    // present in the distribution.
     if (Node::load('article')) {
       entity_get_form_display('node', 'article', 'default')
         ->setComponent(
@@ -304,8 +306,6 @@ function thunder_modules_installed($modules) {
             'type' => $fieldWidget,
           ])->save();
     }
-
-    // Attach field only if channel vocabulary is present in the distribution.
     if (Vocabulary::load('channel')) {
       entity_get_form_display('taxonomy_term', 'channel', 'default')
         ->setComponent('field_ivw', [
