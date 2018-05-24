@@ -959,11 +959,9 @@ function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
+  $thunderUpdater->installModules(['thunder_enable_content_moderation' => 'content_moderation']);
   if (\Drupal::service('module_handler')->moduleExists('scheduler')) {
     $thunderUpdater->installModules(['thunder_enable_content_moderation' => 'scheduler_content_moderation_integration']);
-  }
-  else {
-    $thunderUpdater->installModules(['thunder_enable_content_moderation' => 'content_moderation']);
   }
 
   // Output logged messages to related channel of update execution.
