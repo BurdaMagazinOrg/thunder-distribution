@@ -951,3 +951,20 @@ function thunder_update_8120() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Install JSON-LD support.
+ */
+function thunder_update_8121() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if (!\Drupal::moduleHandler()->moduleExists('amp')) {
+    $thunderUpdater->installModules(['thunder_update_8121' => 'schema_article']);
+    if (!$thunderUpdater->executeUpdates([['thunder_article', 'thunder__thunder_update_8121']])) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+    }
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}

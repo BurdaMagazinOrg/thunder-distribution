@@ -209,3 +209,12 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+v2.19:
+    '#title': 'Update to Thunder 2.19'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8121:
+        '#title': 'Foo'
+        '#description': '<p>From now on we will not add functionality for content lists to the existing content list but will create a separate content list for each use-case.</p><p>We have replaced the current locked content view with a new one. The old one can still be reached under views.view.locked_content_old.</p><p>The scheduler tab has also been moved to the local tasks of the content list. This change can be undone under the menu item "Thunder article configuration".</p>'
+        '#description_successful': '<p>The installation was successful.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong><p>'
+        thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
