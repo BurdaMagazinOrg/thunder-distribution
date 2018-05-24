@@ -958,10 +958,10 @@ function thunder_update_8120() {
 function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  if (!\Drupal::moduleHandler()->moduleExists('amp')) {
-    $thunderUpdater->installModules(['thunder_update_8121' => 'schema_article']);
-    if (!$thunderUpdater->executeUpdates([['thunder_article', 'thunder__thunder_update_8121']])) {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+
+  if ($thunderUpdater->installModules(['thunder_article__thunder_update_8121' => 'schema_article'])) {
+    if (!$thunderUpdater->executeUpdates([['thunder_article', 'thunder_article__thunder_update_8121']])) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article__thunder_update_8121']);
     }
   }
 
