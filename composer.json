@@ -79,8 +79,7 @@
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-05-07/scheduler-content-moderation-integration-2798689-63.patch"
             },
             "drupal/core": {
-                "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch",
-                "UpdatePathTestBase fails to pick up new modules": "https://www.drupal.org/files/issues/2018-05-24/2975081-8.5.3-2.patch"
+                "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch"
             }
         }
     },
