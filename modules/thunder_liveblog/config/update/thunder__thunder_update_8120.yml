@@ -27,3 +27,4 @@ core.entity_form_display.node.liveblog.default:
             paragraphs_features:
               add_in_between: true
               split_text: true
+              delete_confirmation: true

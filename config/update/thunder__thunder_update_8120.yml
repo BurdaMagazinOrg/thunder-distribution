@@ -27,6 +27,7 @@ core.entity_form_display.node.article.default:
             paragraphs_features:
               add_in_between: true
               split_text: true
+              delete_confirmation: true
           type: paragraphs
         langcode:
           settings:
@@ -125,6 +126,7 @@ core.entity_form_display.taxonomy_term.channel.default:
             paragraphs_features:
               add_in_between: true
               split_text: true
+              delete_confirmation: true
           type: paragraphs
         langcode:
           settings:
@@ -158,6 +160,7 @@ core.entity_form_display.taxonomy_term.tags.default:
             paragraphs_features:
               add_in_between: true
               split_text: true
+              delete_confirmation: true
           type: paragraphs
         langcode:
           settings:

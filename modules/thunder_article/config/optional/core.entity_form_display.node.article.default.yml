@@ -106,6 +106,7 @@ content:
       paragraphs_features:
         add_in_between: true
         split_text: true
+        delete_confirmation: true
     region: content
   field_seo_title:
     type: string_textfield

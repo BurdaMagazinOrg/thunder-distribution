@@ -92,6 +92,7 @@ content:
       paragraphs_features:
         add_in_between: true
         split_text: true
+        delete_confirmation: true
     type: paragraphs
     region: content
   field_posts_load_limit:
