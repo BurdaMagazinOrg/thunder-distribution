@@ -10,8 +10,8 @@ label: Editorial
 type: content_moderation
 type_settings:
   states:
-    archived:
-      label: Archived
+    unpublished:
+      label: Unpublished
       weight: 5
       published: false
       default_revision: true
@@ -26,23 +26,23 @@ type_settings:
       default_revision: true
       weight: 0
   transitions:
-    archive:
-      label: Archive
+    unpublish:
+      label: Unpublish
       from:
         - draft
         - published
-      to: archived
+      to: unpublished
       weight: 2
-    archived_draft:
+    unpublished_draft:
       label: 'Restore to Draft'
       from:
-        - archived
+        - unpublished
       to: draft
       weight: 3
-    archived_published:
+    unpublished_published:
       label: Restore
       from:
-        - archived
+        - unpublished
       to: published
       weight: 4
     create_new_draft:
