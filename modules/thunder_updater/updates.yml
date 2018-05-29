@@ -209,10 +209,10 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
-v2.17:
-    '#title': 'Update to Thunder 2.17'
+v2.19:
+    '#title': 'Update to Thunder 2.19'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder__thunder_update_8120:
+    thunder__thunder_update_8121:
         '#title': 'Change to paragraphs experimental widget.'
         '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraph type icons we installed successfully and that all you paragraphs widget use the experimental widget.</p>'
