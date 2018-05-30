@@ -70,6 +70,21 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
 }
 
 /**
+ * Implements hook_modules_installed().
+ */
+function thunder_paragraphs_modules_installed($modules) {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+  foreach ($modules as $module) {
+    if ($module === 'default_content') {
+      \Drupal::service('default_content.importer')->importContent('thunder_paragraphs');
+      break;
+    }
+  }
+}
+
+/**
  * Helper for attaching IEF submit trigger and functions.
  *
  * @param array $element
