@@ -121,7 +121,7 @@
         "drupal/nexx_integration": "^1.0||^2.0",
         "drupal/metatag": "^1.0",
         "drupal/paragraphs": "^1.0",
-        "drupal/paragraphs_features": "dev-1.x",
+        "drupal/paragraphs_features": "^1.0",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "1.1",
