@@ -115,3 +115,17 @@ function thunder_liveblog_update_8102() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Switch to new experimental paragraphs widget and paragraphs features.
+ */
+function thunder_liveblog_update_8103() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Update should be marked as successful only if all steps are successful.
+  $thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8103']]);
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

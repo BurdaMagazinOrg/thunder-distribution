@@ -213,6 +213,23 @@ v2.19:
     '#title': 'Update to Thunder 2.19'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8121:
+        '#title': 'Enable "Paragraphs features" module.'
+        '#description': "<p>All new features for experimental widget are provided in the paragraphs features module and it should be enabled.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraphs features module is successfully installed.</p>'
+        extension_page: { '#text': 'Enable the paragraphs features module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure the paragraphs features module', '#url': 'internal:/admin/config/content/paragraphs_features' }
+    thunder__thunder_update_8122:
+        '#title': 'Import paragraphs icons for paragraphs types.'
+        '#description': "<p>For better user experience, new paragraphs experimental widget displays also icons next to the label of paragraph type.</p>"
+        '#description_failed': '<p><strong>Importing failed</strong>, please check that the paragraph type icons are imported successfully.</p>'
+        extension_page: { '#text': 'Paragraph types with icons', '#url': 'internal:/admin/structure/paragraphs_type' }
+    thunder__thunder_update_8123:
         '#title': 'Change to paragraphs experimental widget.'
         '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"
-        '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraph type icons we installed successfully and that all you paragraphs widget use the experimental widget.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, please check that all your paragraphs widgets are using the experimental widget.</p>'
+    thunder__thunder_update_8124:
+        '#title': 'Removing the old paragraph split text solution.'
+        '#description': "<p>Since we have switched to the experimental paragraphs widget and split text feature is provided with paragraphs features module, we are removing old split text functionality and module.</p>"
+        '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text pluging for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
+        configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
+        extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
