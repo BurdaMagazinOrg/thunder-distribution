@@ -996,11 +996,11 @@ function thunder_update_8122() {
   // Few modules are required only for importing paragraphs type icons and they
   // can be uninstalled afterwards.
   $uninstall_after_content_import = [];
-  if ($moduleHandler->moduleExists('default_content')) {
+  if (!$moduleHandler->moduleExists('default_content')) {
     $uninstall_after_content_import[] = 'default_content';
   }
 
-  if ($moduleHandler->moduleExists('better_normalizers')) {
+  if (!$moduleHandler->moduleExists('better_normalizers')) {
     $uninstall_after_content_import[] = 'better_normalizers';
   }
 
