@@ -3,7 +3,7 @@ status: true
 dependencies: {  }
 id: seo
 label: Seo
-weight: 3
+weight: -6
 is_admin: false
 permissions:
   - 'access administration pages'
@@ -21,7 +21,9 @@ permissions:
   - 'administer menu'
   - 'administer meta tags'
   - 'administer nodes'
+  - 'administer redirects'
   - 'administer taxonomy'
+  - 'break content lock'
   - 'create article content'
   - 'create media'
   - 'create page content'
@@ -49,21 +51,19 @@ permissions:
   - 'schedule publishing of nodes'
   - 'update any media'
   - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition unpublish'
+  - 'use editorial transition unpublished_draft'
+  - 'use editorial transition unpublished_published'
   - 'use text format full_html'
   - 'view all revisions'
+  - 'view any unpublished content'
   - 'view article revisions'
+  - 'view latest version'
   - 'view own unpublished content'
   - 'view page revisions'
   - 'view scheduled content'
   - 'view the administration theme'
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
-  - 'break content lock'
-  - 'administer redirects'
-  - 'use editorial transition unpublish'
-  - 'use editorial transition create_new_draft'
-  - 'use editorial transition publish'
-  - 'use editorial transition unpublished_published'
-  - 'use editorial transition unpublished_draft'
-  - 'view any unpublished content'
-  - 'view latest version'

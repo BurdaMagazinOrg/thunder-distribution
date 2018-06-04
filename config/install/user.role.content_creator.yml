@@ -1,12 +1,12 @@
+uuid: 38a16e90-5433-4428-8a1c-0c7e3803a92e
 langcode: en
 status: true
 dependencies: {  }
-id: editor
-label: Editor
-weight: -7
-is_admin: false
+id: content_creator
+label: 'Content creator'
+weight: -8
+is_admin: null
 permissions:
-  - 'access content'
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
@@ -48,8 +48,6 @@ permissions:
   - 'update any media'
   - 'update media'
   - 'use editorial transition create_new_draft'
-  - 'use editorial transition publish'
-  - 'use editorial transition unpublish'
   - 'use editorial transition unpublished_draft'
   - 'use editorial transition unpublished_published'
   - 'use text format full_html'
@@ -57,7 +55,6 @@ permissions:
   - 'view any unpublished content'
   - 'view article revisions'
   - 'view latest version'
-  - 'view own unpublished content'
   - 'view page revisions'
   - 'view scheduled content'
   - 'view the administration theme'
