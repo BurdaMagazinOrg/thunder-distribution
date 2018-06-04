@@ -413,7 +413,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     $this->getSession()
       ->getDriver()
-      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex));");
+      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex)); var ranges = selection.getRanges(); ranges[0].setEndBefore(ranges[0].getBoundaryNodes().endNode); selection.selectRanges(ranges);");
   }
 
   /**
