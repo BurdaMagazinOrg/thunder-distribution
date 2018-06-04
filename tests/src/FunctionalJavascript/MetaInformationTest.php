@@ -254,7 +254,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $unPublishFieldValues = [
       'unpublish_on[0][value][date]' => date('Y-m-d', $unPublishTimestamp),
       'unpublish_on[0][value][time]' => date('H:i:s', $unPublishTimestamp),
-      'unpublish_state' => 'archived',
+      'unpublish_state' => 'unpublished',
     ];
 
     $this->expandAllTabs();
