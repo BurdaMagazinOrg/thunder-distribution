@@ -71,6 +71,8 @@ dependencies:
   - slick_media
   - responsive_preview
   - video_embed_media
+  - better_normalizers
+  - default_content
 # thunder
   - thunder_article
   - thunder_media
