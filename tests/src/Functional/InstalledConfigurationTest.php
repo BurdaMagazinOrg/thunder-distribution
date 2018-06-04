@@ -71,9 +71,11 @@ class InstalledConfigurationTest extends ThunderBaseTest {
 
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
+    'system.action.user_add_role_action.content_creator',
     'system.action.user_add_role_action.editor',
     'system.action.user_add_role_action.seo',
     'system.action.user_remove_role_action.administrator',
+    'system.action.user_remove_role_action.content_creator',
     'system.action.user_remove_role_action.editor',
     'system.action.user_remove_role_action.seo',
     'system.action.user_add_role_action.harbourmaster',
