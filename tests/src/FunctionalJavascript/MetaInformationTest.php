@@ -77,6 +77,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     'basic description' => '[random]',
     'advanced robots' => 'follow',
     'advanced referrer' => 'no-referrer',
+    'schema_article schema_article_description' => 'I do my own description.',
   ];
 
   /**

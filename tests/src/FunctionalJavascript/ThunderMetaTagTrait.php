@@ -59,7 +59,7 @@ trait ThunderMetaTagTrait {
    *   Meta tag value.
    */
   protected function checkMetaTag($name, $value) {
-    if (strpos($name, 'schema_article') !== FALSE) {
+    if (strpos($name, 'schema_article') === 0) {
       $jsonLd = Json::decode($this->getSession()->getPage()->find('xpath', '//head/script[(@type="application/ld+json")]')->getHtml());
       $key = substr($name, strlen('schema_article_'));
       $this->assertSame($jsonLd['@graph'][0][$key], $value);
