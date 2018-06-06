@@ -26,3 +26,12 @@ tags:
   twitter_cards_image_height: '[node:field_teaser_media:entity:field_image:twitter:height]'
   twitter_cards_image_width: '[node:field_teaser_media:entity:field_image:twitter:width]'
   twitter_cards_type: summary_large_image
+  schema_article_about: '[node:field_channel]'
+  schema_article_date_modified: '[node:changed:html_datetime]'
+  schema_article_date_published: '[node:created:html_datetime]'
+  schema_article_description: '[node:field_teaser_text]'
+  schema_article_headline: '[node:field_seo_title]'
+  schema_article_image: 'a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:53:"[node:field_teaser_media:entity:field_image:facebook]";}'
+  schema_article_name: '[node:title]'
+  schema_article_publisher: 'a:3:{s:5:"@type";s:12:"Organization";s:4:"name";s:11:"[site:name]";s:3:"url";s:10:"[site:url]";}'
+  schema_article_type: NewsArticle

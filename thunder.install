@@ -953,15 +953,32 @@ function thunder_update_8120() {
 }
 
 /**
- * Installing paragraphs features module with corresponding settings for it.
+ * Install JSON-LD support.
  */
 function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
+  if ($thunderUpdater->installModules(['thunder_article__thunder_update_8121' => 'schema_article'])) {
+    if (!$thunderUpdater->executeUpdates([['thunder_article', 'thunder_article__thunder_update_8121']])) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article__thunder_update_8121']);
+    }
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Installing paragraphs features module with corresponding settings for it.
+ */
+function thunder_update_8122() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
   // Import settings for paragraphs features module, to enable drop-down to a
   // single button functionality.
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'paragraphs_features'])) {
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8122' => 'paragraphs_features'])) {
     $successful = $thunderUpdater->importConfigs(['paragraphs_features.settings']);
   }
   else {
@@ -970,10 +987,10 @@ function thunder_update_8121() {
 
   // Update should be marked as successful only if all steps are successful.
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -983,7 +1000,7 @@ function thunder_update_8121() {
 /**
  * Importing paragraphs icons for paragraphs types.
  */
-function thunder_update_8122() {
+function thunder_update_8123() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -1005,7 +1022,7 @@ function thunder_update_8122() {
   }
 
   // There are few new modules required for experimental paragraphs widget.
-  $modulesInstalled = $thunderUpdater->installModules(['thunder__thunder_update_8122' => 'better_normalizers']) && $thunderUpdater->installModules(['thunder__thunder_update_8122' => 'default_content']);
+  $modulesInstalled = $thunderUpdater->installModules(['thunder__thunder_update_8123' => 'better_normalizers']) && $thunderUpdater->installModules(['thunder__thunder_update_8123' => 'default_content']);
 
   // Update is successful only when all steps are successful.
   $successfulImport = TRUE;
@@ -1045,10 +1062,10 @@ function thunder_update_8122() {
 
   // Update should be marked as successful only if all steps are successful.
   if ($successfulImport && $modulesInstalled && $successfulUninstall) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -1058,18 +1075,18 @@ function thunder_update_8122() {
 /**
  * Switch to paragraphs experimental widget.
  */
-function thunder_update_8123() {
+function thunder_update_8124() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   // Execute configuration update definition for switching to new experimental
   // paragraphs widget.
-  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8123']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8124']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8124']);
   }
   else {
     $thunderUpdater->logger()->warning('Unable to apply configuration changes for experimental paragraphs widget. Follow instructions provided in the update list.');
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8124']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -1079,7 +1096,7 @@ function thunder_update_8123() {
 /**
  * Remove the old paragraph split text solution.
  */
-function thunder_update_8124() {
+function thunder_update_8125() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -1136,10 +1153,10 @@ function thunder_update_8124() {
 
   // Update should be marked as successful only if all steps are successful.
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8124']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8124']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
   }
 
   // Output logged messages to related chanel of update execution.
