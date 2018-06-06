@@ -8,6 +8,20 @@
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\paragraphs\Plugin\Field\FieldWidget\ParagraphsWidget;
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+  if ($plugin instanceof ParagraphsWidget) {
+    // Add library for hard-wiring and disabling options.
+    $element['#attached']['library'][] = 'thunder_paragraphs/fieldwidget_settings';
+    return $element;
+  }
+}
 
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
