@@ -81,7 +81,7 @@ v2.0:
         configure_page: { '#text': 'Configure module', '#url': 'internal:/admin/config/content/liveblog' }
     v1_1__thunder_amp:
         '#title': 'Accelerated Mobile Pages by Google (AMP)'
-        '#description': '<p>This module optimizes your articles for Google AMP. They load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to <a href="/admin/appearance">Appearance</a> and activate the <strong>Thunder AMP theme</strong>. This will install all necessary modules, themes, and configs to use it with Thunder. If you want to make your own AMP theme, please refer to the <a href="https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md" target="_blank">README</a> of the Thunder AMP theme.</p><p><strong>Please note:</strong> If you are not using a composer workflow, you have to download the AMP library manually due to licensing issues. With composer installed, execute the command `composer require pc-magas/amp` in the docroot of your installation.</p>'
+        '#description': '<p>This module optimizes your articles for Google AMP. They load very fast on mobile devices and can be viewed directly on Google.</p><p>To use it, go to <a href="/admin/appearance">Appearance</a> and activate the <strong>Thunder AMP theme</strong>. This will install all necessary modules, themes, and configs to use it with Thunder. If you want to make your own AMP theme, please refer to the <a href="https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/themes/thunder_amp/README.md" target="_blank">README</a> of the Thunder AMP theme.</p><p><strong>Please note:</strong> If you are not using a composer workflow, you have to download the AMP library manually due to licensing issues. With composer installed, execute the command `composer require lullabot/amp` in the docroot of your installation.</p>'
         handbook_page: { '#text': 'Module information', '#url': 'https://www.drupal.org/project/amp' }
         extension_page: { '#text': 'Enable theme', '#url': 'internal:/admin/appearance' }
         amp_library: { '#text': 'AMP library', '#url': 'https://github.com/Lullabot/amp-library' }
@@ -209,3 +209,13 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+v2.19:
+    '#title': 'Update to Thunder 2.19'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_article__thunder_update_8121:
+        '#title': 'Enable JSON-LD support'
+        '#description': '<p>JSON-LD is an implementation format for structuring data analogous to Microdata and RDFa. Typically, in terms of SEO, JSON-LD is implemented leveraging the Schema.org vocabulary, a joint effort by Google, Bing, Yahoo!, and Yandex in 2011 to create a unified structured data vocabulary for the web.</p>'
+        '#description_successful': '<p>The installation was successful. Now you can configure the metatags.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Enable the "Schema.org Article" module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure metatags', '#url': 'internal:/admin/config/search/metatag' }
