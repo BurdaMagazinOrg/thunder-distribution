@@ -1,0 +1,14 @@
+image.style.twitter:
+  expected_config:
+    effects:
+      6995bd89-7c15-49fa-8644-b745acc46a5c:
+        data:
+          height: 150
+          width: 280
+  update_actions:
+    change:
+      effects:
+        6995bd89-7c15-49fa-8644-b745acc46a5c:
+          data:
+            height: 512
+            width: 1024
