@@ -541,6 +541,10 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   CKEditor ID.
    */
   protected function getCkEditorId($ckEditorCssSelector) {
+    // Since CKEditor requires some time to initialize, we are going to wait for
+    // CKEditor instance to be ready before we continue and return ID.
+    $this->getSession()->wait(10000, "(waitForCk = CKEDITOR.instances[jQuery(\"{$ckEditorCssSelector}\").attr('id')]) && waitForCk.instanceReady");
+
     $ckEditor = $this->getSession()->getPage()->find(
       'css',
       $ckEditorCssSelector
