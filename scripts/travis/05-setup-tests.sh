@@ -6,15 +6,11 @@ cd ${TEST_DIR}/docroot
 # require development packages needed for testing
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" --no-progress --working-dir ${TEST_DIR}/docroot
-elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    composer require "behat/mink-selenium2-driver" --no-progress --working-dir ${TEST_DIR}
 fi
 
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 
-# Get the 8.5.x version of .ht.router.php from commit 0b2d458.
-curl https://raw.githubusercontent.com/drupal/drupal/0b2d458da9f84aeb31f72a8aef7b0f174249e2ad/.ht.router.php --output .ht.router.php
 # Run the webserver
 php -S localhost:8080 .ht.router.php &>/dev/null &
 

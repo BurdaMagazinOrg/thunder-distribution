@@ -734,15 +734,8 @@ function thunder_update_8112() {
     $successfulUpdate = FALSE;
   }
 
-  $updateList = [
-    ['thunder_media', 'thunder_media__thunder_update_8112'],
-    ['thunder_paragraphs', 'thunder_paragraphs__thunder_update_8112'],
-    ['thunder_article', 'thunder_article__thunder_update_8112'],
-    ['thunder', 'thunder__thunder_update_8112'],
-  ];
-
   // Execute update configurations with logging of fails and successes.
-  if (!$thunderUpdater->executeUpdates($updateList)) {
+  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8112']])) {
     $successfulUpdate = FALSE;
   }
 
@@ -927,6 +920,44 @@ function thunder_update_8119() {
       $role->save();
     }
   }
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Install the Configuration Selector module if necessary.
+ */
+function thunder_update_8120() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if (!\Drupal::moduleHandler()->moduleExists('config_selector')) {
+    // This function was renamed after Thunder 2.14, because we want to ensure
+    // that the config_selector is always enabled.
+    // thunder_post_update_install_config_selector was the former name and is
+    // still the key for the checklist.
+    // After 2.16 this function was moved from
+    // thunder_post_update_ensure_config_selector_installed into a hook_update_N
+    // function, because we realized that module installs should happen here.
+    $thunderUpdater->installModules(['thunder_post_update_install_config_selector' => 'config_selector']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Install JSON-LD support.
+ */
+function thunder_update_8121() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  if ($thunderUpdater->installModules(['thunder_article__thunder_update_8121' => 'schema_article'])) {
+    if (!$thunderUpdater->executeUpdates([['thunder_article', 'thunder_article__thunder_update_8121']])) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article__thunder_update_8121']);
+    }
+  }
+
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }

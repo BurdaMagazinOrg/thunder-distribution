@@ -15,7 +15,7 @@ use Drupal\block\Entity\Block;
 function thunder_system_info_alter(array &$info, Extension $file, $type) {
   // Thunder can not work properly without these modules. So they are enforced
   // to be enabled.
-  $required_modules = ['config_selector'];
+  $required_modules = ['config_selector', 'views', 'media_entity', 'node'];
   if ($type == 'module' && in_array($file->getName(), $required_modules)) {
     $info['required'] = TRUE;
   }
@@ -295,15 +295,28 @@ function thunder_modules_installed($modules) {
 
     $fieldWidget = 'ivw_integration_widget';
 
-    entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    // Attach field if channel vocabulary and article node type is
+    // present in the distribution.
+    try {
+      entity_get_form_display('node', 'article', 'default')
+        ->setComponent(
+          'field_ivw', [
+            'type' => $fieldWidget,
+          ])->save();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
+    }
 
-    entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    try {
+      entity_get_form_display('taxonomy_term', 'channel', 'default')
+        ->setComponent('field_ivw', [
+          'type' => $fieldWidget,
+        ])->save();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
+    }
   }
 
   // Enable riddle paragraph in field_paragraphs.
@@ -330,6 +343,31 @@ function thunder_modules_installed($modules) {
     $enforced_dependencies = $enforced_dependencies ?: [];
     if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
       \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
+    }
+  }
+}
+
+/**
+ * Implements hook_modules_uninstalled().
+ */
+function thunder_modules_uninstalled($modules) {
+  // Import the content view if it was deleted during module uninstalling.
+  // This could happen if content_lock was uninstalled and the content view
+  // contained content_lock fields at that time.
+  if (in_array('content_lock', $modules, TRUE)) {
+    /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
+    $route_provider = \Drupal::service('router.route_provider');
+    $found_routes = $route_provider->getRoutesByPattern('admin/content');
+    $view_found = FALSE;
+    foreach ($found_routes->getIterator() as $route) {
+      if (!empty($route->getDefault('view_id'))) {
+        $view_found = TRUE;
+        break;
+      }
+    }
+    if (!$view_found) {
+      $config_service = \Drupal::service('config_update.config_update');
+      $config_service->import('view', 'content');
     }
   }
 }
