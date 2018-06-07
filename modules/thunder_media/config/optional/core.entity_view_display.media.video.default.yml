@@ -9,8 +9,8 @@ dependencies:
     - field.field.media.video.field_source
     - media.type.video
   module:
+    - media
     - text
-    - video_embed_field
 id: media.video.default
 targetEntityType: media
 bundle: video
@@ -35,12 +35,10 @@ content:
     weight: 0
     label: hidden
     settings:
-      autoplay: true
-      responsive: true
-      width: 854
-      height: 480
+      max_width: 854
+      max_height: 480
     third_party_settings: {  }
-    type: video_embed_field_video
+    type: oembed
     region: content
 hidden:
   created: true

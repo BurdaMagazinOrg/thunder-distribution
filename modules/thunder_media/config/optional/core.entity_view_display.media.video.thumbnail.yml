@@ -10,21 +10,19 @@ dependencies:
     - field.field.media.video.field_source
     - media.type.video
   module:
-    - video_embed_field
+    - media
 id: media.video.thumbnail
 targetEntityType: media
 bundle: video
 mode: thumbnail
 content:
   field_media_video_embed_field:
-    type: video_embed_field_video
+    type: oembed
     weight: 0
     label: hidden
     settings:
-      width: 241
-      height: 138
-      autoplay: false
-      responsive: false
+      max_width: 241
+      max_height: 138
     third_party_settings: {  }
     region: content
 hidden:

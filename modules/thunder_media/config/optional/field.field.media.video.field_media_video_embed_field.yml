@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.storage.media.field_media_video_embed_field
     - media.type.video
-  module:
-    - video_embed_field
 id: media.video.field_media_video_embed_field
 field_name: field_media_video_embed_field
 entity_type: media
@@ -16,9 +14,5 @@ required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings:
-  allowed_providers:
-    vimeo: vimeo
-    youtube: youtube
-    youtube_playlist: youtube_playlist
-field_type: video_embed_field
+settings: {  }
+field_type: string
