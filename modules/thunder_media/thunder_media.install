@@ -820,3 +820,22 @@ function thunder_media_update_8108() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Update twitter image style dimensions.
+ */
+function thunder_media_update_8109() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media_update_8109']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_media_update_8109']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8109']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
