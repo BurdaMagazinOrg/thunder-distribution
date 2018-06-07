@@ -222,4 +222,5 @@ v2.19:
     thunder_media_update_8109:
         '#title': 'Update twitter image style dimensions'
         '#description': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+        '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
+        image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
