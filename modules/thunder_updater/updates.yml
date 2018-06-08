@@ -219,6 +219,11 @@ v2.19:
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
         extension_page: { '#text': 'Enable the "Schema.org Article" module', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Configure metatags', '#url': 'internal:/admin/config/search/metatag' }
+    thunder_media_update_8109:
+        '#title': 'Update twitter image style dimensions'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
+        image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
     thunder__thunder_update_8122:
         '#title': 'Enable "Paragraphs features" module.'
         '#description': "<p>All new features for experimental widget are provided in the paragraphs features module and it should be enabled.</p>"

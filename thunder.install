@@ -734,15 +734,8 @@ function thunder_update_8112() {
     $successfulUpdate = FALSE;
   }
 
-  $updateList = [
-    ['thunder_media', 'thunder_media__thunder_update_8112'],
-    ['thunder_paragraphs', 'thunder_paragraphs__thunder_update_8112'],
-    ['thunder_article', 'thunder_article__thunder_update_8112'],
-    ['thunder', 'thunder__thunder_update_8112'],
-  ];
-
   // Execute update configurations with logging of fails and successes.
-  if (!$thunderUpdater->executeUpdates($updateList)) {
+  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8112']])) {
     $successfulUpdate = FALSE;
   }
 
