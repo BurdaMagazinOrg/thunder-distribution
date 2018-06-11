@@ -209,18 +209,3 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
-v2.19:
-    '#title': 'Update to Thunder 2.19'
-    '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_article__thunder_update_8121:
-        '#title': 'Enable JSON-LD support'
-        '#description': '<p>JSON-LD is an implementation format for structuring data analogous to Microdata and RDFa. Typically, in terms of SEO, JSON-LD is implemented leveraging the Schema.org vocabulary, a joint effort by Google, Bing, Yahoo!, and Yandex in 2011 to create a unified structured data vocabulary for the web.</p>'
-        '#description_successful': '<p>The installation was successful. Now you can configure the metatags.</p>'
-        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
-        extension_page: { '#text': 'Enable the "Schema.org Article" module', '#url': 'internal:/admin/modules' }
-        configure_page: { '#text': 'Configure metatags', '#url': 'internal:/admin/config/search/metatag' }
-    thunder_media_update_8109:
-        '#title': 'Update twitter image style dimensions'
-        '#description': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
-        image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
