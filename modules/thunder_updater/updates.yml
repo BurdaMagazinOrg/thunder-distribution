@@ -209,3 +209,11 @@ v2.16:
         '#description_successful': '<p>The installation was successful.</p>'
         '#description_failed': '<p><strong>Installation failed</strong><p>'
         thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+v2.19:
+    '#title': 'Update to Thunder 2.19'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_media_update_8109:
+        '#title': 'Update twitter image style dimensions'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
+        image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
