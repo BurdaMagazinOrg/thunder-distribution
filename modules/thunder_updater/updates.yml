@@ -217,6 +217,9 @@ v2.19:
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
         image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
+v2.20:
+    '#title': 'Update to Thunder 2.20'
+    '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8122:
         '#title': 'Enable "Paragraphs features" module.'
         '#description': "<p>All new features for experimental widget are provided in the paragraphs features module and it should be enabled.</p>"
