@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:5b4ec8f7-f542-47c4-99a7-e826add30be9'
+dependencies: {  }
 id: riddle
 label: Riddle
-icon_uuid: 5b4ec8f7-f542-47c4-99a7-e826add30be9
+icon_uuid: null
 description: ''
 behavior_plugins: {  }

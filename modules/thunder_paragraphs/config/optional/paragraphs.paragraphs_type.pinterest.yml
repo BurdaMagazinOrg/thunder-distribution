@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:1f9438c2-bb6f-4e5d-8147-c5df6f1876b5'
+dependencies: {  }
 id: pinterest
 label: Pinterest
-icon_uuid: 1f9438c2-bb6f-4e5d-8147-c5df6f1876b5
+icon_uuid: null
 description: ''
 behavior_plugins: {  }

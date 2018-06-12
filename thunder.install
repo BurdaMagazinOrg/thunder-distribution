@@ -948,13 +948,13 @@ function thunder_update_8120() {
 /**
  * Installing paragraphs features module with corresponding settings for it.
  */
-function thunder_update_8122() {
+function thunder_update_8121() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   // Import settings for paragraphs features module, to enable drop-down to a
   // single button functionality.
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8122' => 'paragraphs_features'])) {
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'paragraphs_features'])) {
     $successful = $thunderUpdater->importConfigs(['paragraphs_features.settings']);
   }
   else {
@@ -963,85 +963,10 @@ function thunder_update_8122() {
 
   // Update should be marked as successful only if all steps are successful.
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
-  }
-
-  // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
-}
-
-/**
- * Importing paragraphs icons for paragraphs types.
- */
-function thunder_update_8123() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
-  $moduleHandler = \Drupal::moduleHandler();
-
-  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  // Few modules are required only for importing paragraphs type icons and they
-  // can be uninstalled afterwards.
-  $uninstall_after_content_import = [];
-  if (!$moduleHandler->moduleExists('default_content')) {
-    $uninstall_after_content_import[] = 'default_content';
-  }
-
-  if (!$moduleHandler->moduleExists('better_normalizers')) {
-    $uninstall_after_content_import[] = 'better_normalizers';
-  }
-
-  // There are few new modules required for experimental paragraphs widget.
-  $modulesInstalled = $thunderUpdater->installModules(['thunder__thunder_update_8123' => 'better_normalizers']) && $thunderUpdater->installModules(['thunder__thunder_update_8123' => 'default_content']);
-
-  // Update is successful only when all steps are successful.
-  $successfulImport = TRUE;
-
-  // Import icons for paragraphs types.
-  if ($modulesInstalled) {
-    /** @var \Drupal\default_content\Importer $contentImporter */
-    $contentImporter = \Drupal::service('default_content.importer');
-    try {
-      $contentImporter->importContent('thunder_paragraphs');
-    }
-    catch (Exception $e) {
-      $successfulImport = FALSE;
-    }
-  }
-
-  $successfulUninstall = TRUE;
-
-  // Modules for default content are not needed anymore.
-  if (!empty($uninstall_after_content_import)) {
-    try {
-      if ($moduleInstaller->uninstall($uninstall_after_content_import)) {
-        $thunderUpdater->logger()->info('Following modules are uninstalled, because they ware required only for update hook execution: "' . implode('", "', $uninstall_after_content_import) . '"');
-      }
-      else {
-        $thunderUpdater->logger()->warning('Unable to clean up following module(s): "' . implode('", "', $uninstall_after_content_import) . '"');
-
-        $successfulUninstall = FALSE;
-      }
-    }
-    catch (Exception $e) {
-      $thunderUpdater->logger()->warning('Unable to clean up following module(s): "' . implode('", "', $uninstall_after_content_import) . '"');
-
-      $successfulUninstall = FALSE;
-    }
-  }
-
-  // Update should be marked as successful only if all steps are successful.
-  if ($successfulImport && $modulesInstalled && $successfulUninstall) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -1051,18 +976,18 @@ function thunder_update_8123() {
 /**
  * Switch to paragraphs experimental widget.
  */
-function thunder_update_8124() {
+function thunder_update_8122() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   // Execute configuration update definition for switching to new experimental
   // paragraphs widget.
-  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8124']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8124']);
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8122']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
   }
   else {
     $thunderUpdater->logger()->warning('Unable to apply configuration changes for experimental paragraphs widget. Follow instructions provided in the update list.');
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8124']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
   }
 
   // Output logged messages to related chanel of update execution.
@@ -1072,7 +997,7 @@ function thunder_update_8124() {
 /**
  * Remove the old paragraph split text solution.
  */
-function thunder_update_8125() {
+function thunder_update_8123() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
@@ -1116,7 +1041,7 @@ function thunder_update_8125() {
     $moduleInstaller = \Drupal::service('module_installer');
 
     if ($moduleInstaller->uninstall(['paragraph_split_text'])) {
-      $thunderUpdater->logger()->info('Module "paragraph_split_text" is successfully removed.');
+      $thunderUpdater->logger()->info('MGodule "paragraph_split_text" is successfully removed.');
     }
     else {
       $thunderUpdater->logger()->warning('Module "paragraph_split_text" is not removed.');
@@ -1129,10 +1054,10 @@ function thunder_update_8125() {
 
   // Update should be marked as successful only if all steps are successful.
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
   }
 
   // Output logged messages to related chanel of update execution.

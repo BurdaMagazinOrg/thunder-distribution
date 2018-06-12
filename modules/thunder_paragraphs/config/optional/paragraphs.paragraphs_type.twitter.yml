@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:9af9c8ce-a96e-4083-9e9e-38db3eb1de43'
+dependencies: {  }
 id: twitter
 label: Twitter
-icon_uuid: 9af9c8ce-a96e-4083-9e9e-38db3eb1de43
+icon_uuid: null
 description: ''
 behavior_plugins: {  }

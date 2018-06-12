@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:9bf24a91-6acf-4330-b457-63f40d7baa7a'
+dependencies: {  }
 id: quote
 label: Quote
-icon_uuid: 9bf24a91-6acf-4330-b457-63f40d7baa7a
+icon_uuid: null
 description: ''
 behavior_plugins: {  }

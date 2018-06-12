@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:028e519c-14f4-4643-81ad-653686c7daa4'
+dependencies: {  }
 id: link
 label: Link
-icon_uuid: 028e519c-14f4-4643-81ad-653686c7daa4
+icon_uuid: null
 description: ''
 behavior_plugins: {  }

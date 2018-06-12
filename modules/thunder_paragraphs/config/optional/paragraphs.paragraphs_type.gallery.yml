@@ -1,10 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  content:
-    - 'file:file:bcfb8506-f3e1-45f1-a69b-9bbd7576ad19'
+dependencies: {  }
 id: gallery
 label: Gallery
-icon_uuid: bcfb8506-f3e1-45f1-a69b-9bbd7576ad19
+icon_uuid: null
 description: ''
 behavior_plugins: {  }
