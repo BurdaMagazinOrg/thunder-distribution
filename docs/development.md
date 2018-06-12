@@ -1,26 +1,17 @@
 # Thunder Development
 
-# Install development environment
+## Install development environment
 
-## Requirements
+### Requirements
 - [Acquia DevDesktop](https://dev.acquia.com/downloads)
 - [composer](https://getcomposer.org/)
-- [npm](https://nodejs.org/en/download/)
 
-```bash
-git clone git@github.com:BurdaMagazinOrg/thunder-distribution.git thunder-repo
-cd thunder-repo
-sh scripts/development/build-thunder.sh
-```
+### Install Thunder for development
+[Follow this instruction to get the code](https://github.com/thunder/thunder-develop/blob/master/README.md)
 
-This installs Thunder in a directory besides your checkout. Now we have to register the created docroot into Acquia's DevDesktop.
-After that we can install the site:
-```bash
-cd ../thunder
-bin/robo site:install devdesktop
-```
+Now we have to register the created docroot into Acquia's DevDesktop and then we can install the site.
 
-After that Thunder is successfully installed. Start coding now.
+After that, Thunder is successfully installed. Start coding now.
 
 ----------
 
