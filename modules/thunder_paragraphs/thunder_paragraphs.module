@@ -6,7 +6,6 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Field\WidgetInterface;
@@ -82,26 +81,6 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
     ],
     !$processing_new_paragraphs
   );
-}
-
-/**
- * Implements hook_modules_installed().
- */
-function thunder_paragraphs_modules_installed($modules) {
-  if (\Drupal::isConfigSyncing()) {
-    return;
-  }
-  foreach ($modules as $module) {
-    if ($module === 'default_content') {
-      try {
-        \Drupal::service('default_content.importer')->importContent('thunder_paragraphs');
-      }
-      catch (EntityStorageException $entity_storage_exception) {
-        \Drupal::logger('php')->info('Importing of paragraphs icons has failed. Reason could be that the icons are already imported.');
-      }
-      break;
-    }
-  }
 }
 
 /**
