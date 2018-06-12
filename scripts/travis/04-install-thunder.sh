@@ -64,6 +64,7 @@ apply_patches() {
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
 
+    cd ${TEST_DIR}/docroot/modules/contrib/default_content
     wget https://www.drupal.org/files/issues/2018-06-05/default_content-dont-reimport-existing-entities-2698425-102.patch
     patch -p1 < default_content-dont-reimport-existing-entities-2698425-102.patch
 }
