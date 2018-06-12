@@ -97,7 +97,7 @@ function thunder_paragraphs_modules_installed($modules) {
         \Drupal::service('default_content.importer')->importContent('thunder_paragraphs');
       }
       catch (EntityStorageException $entity_storage_exception) {
-        \Drupal::logger('php')->warning('Importing of paragraphs icons has failed. Reason could be that icons are already imported.');
+        \Drupal::logger('php')->info('Importing of paragraphs icons has failed. Reason could be that the icons are already imported.');
       }
       break;
     }
