@@ -50,10 +50,6 @@ composer_create_thunder() {
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
-
-    # Get custom branch of Thunder Admin theme
-    rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
-    git clone --depth 1 --single-branch --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 }
 
 apply_patches() {
