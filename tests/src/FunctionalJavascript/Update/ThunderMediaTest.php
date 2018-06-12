@@ -183,21 +183,4 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
-  /**
-   * Test autoplay of videos.
-   */
-  public function test8111() {
-
-    $this->drupalGet('node/6');
-    $this->assertSession()->elementAttributeContains('css', '.video-embed-field-responsive-video iframe', 'src', 'autoplay=0');
-    $this->drupalLogout();
-
-    $this->drupalGet('node/6');
-    $this->assertSession()->elementAttributeContains('css', '.video-embed-field-responsive-video iframe', 'src', 'autoplay=1');
-
-    $this->logWithRole('seo');
-    $this->drupalGet('node/6');
-    $this->assertSession()->elementAttributeContains('css', '.video-embed-field-responsive-video iframe', 'src', 'autoplay=0');
-  }
-
 }
