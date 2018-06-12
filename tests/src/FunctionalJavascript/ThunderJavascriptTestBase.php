@@ -86,7 +86,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    */
   protected function getDriverArgs() {
     $desiredCapabilities = NULL;
-    $webDriverUrl = 'http://127.0.0.1:4444/wd/hub';
+    $webDriverUrl = $this->getWebDriverUrl();
 
     // Get Sauce Labs variables from environment, if Sauce Labs build is set.
     if (!empty(getenv('SAUCE_LABS_ENABLED'))) {
@@ -110,6 +110,20 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $desiredCapabilities,
       $webDriverUrl,
     ];
+  }
+
+  /**
+   * Get WebDriver URL, that can be set by environment variable.
+   *
+   * @return string
+   *   Returns full URL to WebDriver interface.
+   */
+  protected function getWebDriverUrl() {
+    if (!empty(getenv('THUNDER_WEBDRIVER_HOST'))) {
+      return 'http://' . getenv('THUNDER_WEBDRIVER_HOST') . '/wd/hub';
+    }
+
+    return 'http://127.0.0.1:4444/wd/hub';
   }
 
   /**
@@ -399,7 +413,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     $this->getSession()
       ->getDriver()
-      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex));");
+      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex)); var ranges = selection.getRanges(); ranges[0].setEndBefore(ranges[0].getBoundaryNodes().endNode); selection.selectRanges(ranges);");
   }
 
   /**
@@ -542,6 +556,10 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   CKEditor ID.
    */
   protected function getCkEditorId($ckEditorCssSelector) {
+    // Since CKEditor requires some time to initialize, we are going to wait for
+    // CKEditor instance to be ready before we continue and return ID.
+    $this->getSession()->wait(10000, "(waitForCk = CKEDITOR.instances[jQuery(\"{$ckEditorCssSelector}\").attr('id')]) && waitForCk.instanceReady");
+
     $ckEditor = $this->getSession()->getPage()->find(
       'css',
       $ckEditorCssSelector

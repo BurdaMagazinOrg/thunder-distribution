@@ -37,7 +37,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
-    'amp',
 
     // Additional modules.
     // 'thunder_fia',
@@ -45,6 +44,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // thunder_liveblog_module_preinstall, so it's not possible to check the
     // thunder_liveblog config in a proper way.
     // 'thunder_liveblog',
+    // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
+    // 'amp'
     // end of list.
   ];
 
@@ -237,6 +238,10 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'content' => [
         'moderation_state' => TRUE,
       ],
+    ],
+    'paragraphs.paragraphs_type.nexx_video' => [
+      'icon_uuid' => TRUE,
+      'description' => TRUE,
     ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.

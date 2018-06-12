@@ -63,10 +63,9 @@ dependencies:
   - metatag_facebook
   - metatag_twitter_cards
   - paragraphs
-  - paragraph_split_text
+  - paragraphs_features
   - pathauto
   - redirect
-  - schema_article
   - scheduler_content_moderation_integration
   - simple_sitemap
   - slick_media
