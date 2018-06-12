@@ -944,3 +944,122 @@ function thunder_update_8120() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Installing paragraphs features module with corresponding settings for it.
+ */
+function thunder_update_8121() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Import settings for paragraphs features module, to enable drop-down to a
+  // single button functionality.
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'paragraphs_features'])) {
+    $successful = $thunderUpdater->importConfigs(['paragraphs_features.settings']);
+  }
+  else {
+    $successful = FALSE;
+  }
+
+  // Update should be marked as successful only if all steps are successful.
+  if ($successful) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Switch to paragraphs experimental widget.
+ */
+function thunder_update_8122() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definition for switching to new experimental
+  // paragraphs widget.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8122']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
+  }
+  else {
+    $thunderUpdater->logger()->warning('Unable to apply configuration changes for experimental paragraphs widget. Follow instructions provided in the update list.');
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Remove the old paragraph split text solution.
+ */
+function thunder_update_8123() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::configFactory();
+
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+  $moduleHandler = \Drupal::moduleHandler();
+
+  // Flag to keep status of update.
+  $successful = TRUE;
+
+  // We are disabling old split text plugin and uninstall split text module
+  // since split text feature will be used from paragraphs_features module.
+  $config = $configFactory->getEditable('editor.editor.basic_html');
+  if ($config) {
+    $items = $config->get('settings.toolbar.rows.0');
+    if (!empty($items) && is_array($items)) {
+      $last_item = &$items[count($items) - 1];
+      if (!empty($last_item['name']) && $last_item['name'] === 'Tools' && ($split_text_index = array_search('SplitTextBefore', $last_item['items'])) !== FALSE) {
+        array_splice($last_item['items'], $split_text_index, 1);
+        $config->set('settings.toolbar.rows.0', $items)->save();
+
+        $thunderUpdater->logger()->info('Split before option is successfully removed from Basic HTML Editor.');
+      }
+      else {
+        $thunderUpdater->logger()->info('Update did not found split before option for Basic HTML Editor.');
+      }
+    }
+    else {
+      $thunderUpdater->logger()->info('Update did not found split before option for Basic HTML Editor.');
+    }
+  }
+  else {
+    $thunderUpdater->logger()->warning('Basic HTML Editor configuration is not available.');
+  }
+
+  // Uninstall paragraph_split_text module.
+  if ($moduleHandler->moduleExists('paragraph_split_text')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+    $moduleInstaller = \Drupal::service('module_installer');
+
+    if ($moduleInstaller->uninstall(['paragraph_split_text'])) {
+      $thunderUpdater->logger()->info('MGodule "paragraph_split_text" is successfully removed.');
+    }
+    else {
+      $thunderUpdater->logger()->warning('Module "paragraph_split_text" is not removed.');
+      $successful = FALSE;
+    }
+  }
+  else {
+    $thunderUpdater->logger()->info('Module "paragraph_split_text" is not installed. Nothing to uninstall.');
+  }
+
+  // Update should be marked as successful only if all steps are successful.
+  if ($successful) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
+  }
+
+  // Output logged messages to related chanel of update execution.
+  return $thunderUpdater->logger()->output();
+}

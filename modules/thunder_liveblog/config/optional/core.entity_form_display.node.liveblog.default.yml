@@ -12,6 +12,7 @@ dependencies:
     - field_group
     - liveblog
     - paragraphs
+    - paragraphs_features
     - path
     - scheduler
 third_party_settings:
@@ -78,11 +79,20 @@ content:
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: preview
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
-    third_party_settings: {  }
+      features:
+        duplicate: '0'
+        collapse_edit_all: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: true
+        split_text: true
+        delete_confirmation: true
     type: paragraphs
     region: content
   field_posts_load_limit:
@@ -169,4 +179,9 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }
