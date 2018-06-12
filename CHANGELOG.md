@@ -1,5 +1,21 @@
 # Change Log
 
+## [8.2.19](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.19) 2018-06-11
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.18...8.2.19)
+
+Many small bug fixes, that accumulated over time.
+
+- Fix [Paragraphs fields are not translatable](https://www.drupal.org/project/thunder/issues/2961422)
+- Fix [Cannot install nexx module version 2](https://www.drupal.org/project/thunder/issues/2965904)
+- Fix [Remove unneeded CSS from Thunder profile](https://www.drupal.org/project/thunder/issues/2918085)
+- Fix [Make installing of ivw_intergration to be independent of channel vocabulary](https://www.drupal.org/project/thunder/issues/2972658)
+- Fix [thunder_update_8112() fails if one of the modules listed in the update is not enabled](https://www.drupal.org/project/thunder/issues/2937285)
+- Fix [Upscale twitter image style](https://www.drupal.org/project/thunder/issues/2952793)
+- Fix [Term overview page looks broken](https://www.drupal.org/project/thunder/issues/2978093)
+- Do [Update core make file to use current drupal release](https://www.drupal.org/project/thunder/issues/2978813)
+- Do [Update redirect module](https://www.drupal.org/project/thunder/issues/2977757)
+- Go back to lullabot amp library and partially revert [Prepare thunder for Drupal 8.5](https://www.drupal.org/project/thunder/issues/2948955)
+
 ## [8.2.18](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.18) 2018-04-26
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.17...8.2.18)
 

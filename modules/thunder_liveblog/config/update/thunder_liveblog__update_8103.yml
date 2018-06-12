@@ -1,0 +1,30 @@
+core.entity_form_display.node.liveblog.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        third_party_settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+        url_redirects:
+          settings: {  }
+          third_party_settings: {  }
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+            features:
+              collapse_edit_all: '0'
+              duplicate: '0'
+          third_party_settings:
+            paragraphs_features:
+              add_in_between: true
+              split_text: true
+              delete_confirmation: true
