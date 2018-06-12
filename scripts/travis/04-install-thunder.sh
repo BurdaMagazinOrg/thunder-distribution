@@ -63,6 +63,9 @@ apply_patches() {
     # apply cookie expire patch for javascript tests
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
+
+    wget https://www.drupal.org/files/issues/2018-06-05/interdiff-2698425-99-102-do-not-test.diff
+    patch -p1 < interdiff-2698425-99-102-do-not-test.diff
 }
 
 create_testing_dump() {
