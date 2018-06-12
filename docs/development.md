@@ -73,6 +73,14 @@ thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local
 
 This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
 
+Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
+Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
+For cases like this you can set environment variable `THUNDER_WEBDRIVER_HOST` in following way:
+
+```export THUNDER_WEBDRIVER_HOST=selenium:4444```
+
+That information will be picked up by testing classes and used for selenium endpoint.
+
 ----------
 
 ## Coding style
