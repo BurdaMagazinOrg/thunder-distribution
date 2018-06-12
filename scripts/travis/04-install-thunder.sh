@@ -64,8 +64,8 @@ apply_patches() {
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
 
-    wget https://www.drupal.org/files/issues/2018-06-05/interdiff-2698425-99-102-do-not-test.diff
-    patch -p1 < interdiff-2698425-99-102-do-not-test.diff
+    wget https://www.drupal.org/files/issues/2018-06-05/default_content-dont-reimport-existing-entities-2698425-102.patch
+    patch -p1 < default_content-dont-reimport-existing-entities-2698425-102.patch
 }
 
 create_testing_dump() {
