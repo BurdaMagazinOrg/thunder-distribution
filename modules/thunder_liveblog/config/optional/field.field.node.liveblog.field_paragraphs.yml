@@ -4,19 +4,11 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.liveblog
-    - paragraphs.paragraphs_type.gallery
-    - paragraphs.paragraphs_type.image
-    - paragraphs.paragraphs_type.instagram
-    - paragraphs.paragraphs_type.link
-    - paragraphs.paragraphs_type.quote
-    - paragraphs.paragraphs_type.text
-    - paragraphs.paragraphs_type.twitter
-    - paragraphs.paragraphs_type.video
-  module:
-    - entity_reference_revisions
   enforced:
     module:
       - thunder_liveblog
+  module:
+    - entity_reference_revisions
 id: node.liveblog.field_paragraphs
 field_name: field_paragraphs
 entity_type: node
@@ -30,38 +22,34 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles:
-      gallery: gallery
-      image: image
-      instagram: instagram
-      link: link
-      quote: quote
-      text: text
-      twitter: twitter
-      video: video
+    negate: 1
+    target_bundles: null
     target_bundles_drag_drop:
       gallery:
-        enabled: true
         weight: 9
+        enabled: false
       image:
-        enabled: true
         weight: 10
+        enabled: false
       instagram:
-        enabled: true
         weight: 11
+        enabled: false
       link:
-        enabled: true
         weight: 12
+        enabled: false
       quote:
-        enabled: true
         weight: 13
-      text:
-        enabled: true
+        enabled: false
+      pinterest:
         weight: 14
+        enabled: false
+      text:
+        weight: 14
+        enabled: false
       twitter:
-        enabled: true
         weight: 15
+        enabled: false
       video:
-        enabled: true
         weight: 16
+        enabled: false
 field_type: entity_reference_revisions
