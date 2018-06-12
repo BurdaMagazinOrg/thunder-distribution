@@ -1067,7 +1067,7 @@ function thunder_update_8123() {
 /**
  * Install content_moderation and scheduler integration.
  */
-function thunder_update_8122() {
+function thunder_update_8124() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
