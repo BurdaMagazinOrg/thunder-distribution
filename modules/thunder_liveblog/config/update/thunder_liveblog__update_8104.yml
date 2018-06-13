@@ -1,0 +1,72 @@
+field.field.node.liveblog.field_paragraphs:
+  expected_config:
+    settings:
+      handler_settings:
+        target_bundles:
+          gallery: gallery
+          image: image
+          instagram: instagram
+          link: link
+          quote: quote
+          text: text
+          twitter: twitter
+          video: video
+        target_bundles_drag_drop:
+          gallery:
+            enabled: true
+          image:
+            enabled: true
+          instagram:
+            enabled: true
+          link:
+            enabled: true
+          quote:
+            enabled: true
+          text:
+            enabled: true
+          twitter:
+            enabled: true
+          video:
+            enabled: true
+  update_actions:
+    add:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            pinterest:
+              enabled: false
+              weight: 14
+    change:
+      settings:
+        handler_settings:
+          negate: 1
+          target_bundles: null
+          target_bundles_drag_drop:
+            gallery:
+              enabled: false
+            image:
+              enabled: false
+            instagram:
+              enabled: false
+            link:
+              enabled: false
+            quote:
+              enabled: false
+            text:
+              enabled: false
+            twitter:
+              enabled: false
+            video:
+              enabled: false
+    delete:
+      settings:
+        handler_settings:
+          target_bundles:
+            gallery: gallery
+            image: image
+            instagram: instagram
+            link: link
+            quote: quote
+            text: text
+            twitter: twitter
+            video: video

@@ -129,3 +129,16 @@ function thunder_liveblog_update_8103() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Switch liveblog paragraphs field to use all existing types.
+ */
+function thunder_liveblog_update_8104() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8104']]);
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
