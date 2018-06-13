@@ -9,6 +9,8 @@
 
 (function ($, Drupal, drupalSettings, CKEDITOR, window) {
 
+  'use strict';
+
   CKEDITOR.plugins.add('splittext', {
     hidpi: true,
     requires: '',

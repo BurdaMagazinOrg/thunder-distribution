@@ -5,6 +5,8 @@
 
 (function ($) {
 
+  'use strict';
+
   /**
    * Attaches the behavior of the media entity browser view.
    */
