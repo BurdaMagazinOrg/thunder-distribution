@@ -4,8 +4,6 @@
  */
 (function ($, Drupal) {
 
-  'use strict';
-
   Drupal.theme.thunderParagraphsFieldWidgetSettingsWarning = function (options) {
     var message = Drupal.t('The !option option is not supported for the Thunder distribution because of potential data loss in combination with the inline_entity_form module. If you want to use it, make sure to remove all inline entity forms from your paragraph types.', {'!option': options.option});
     return '<div class="messages messages--warning js-form-wrapper form-wrapper">' + message + '</div>';
