@@ -1,5 +1,28 @@
 # Change Log
 
+## [8.2.20](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.20) 2018-06-13
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.19...8.2.20)
+
+This contains the update to the most current paragraphs release. This also means that we switch to the
+paragraphs "experimental" widget. The classic widget will still work, but it will not contain the Thunder specific
+enhancements like adding paragraphs in between other paragraphs or splitting text paragraphs.
+All the Thunder enhancements of paragraphs are now moved out of the distribution into the paragraphs_features module
+and can all be enabled and disabled to your liking. While we suggest using the Thunder admin theme, we also made sure, 
+that he paragraphs_features module works well with the seven theme.
+On update, the paragraphs fields that we ship get automatically updated to the experimental widget and should behave,
+as they did before. If you added some paragraph fields on your own, they will stay on the classic widget and will lose
+the add in between button. To re-enable the functionality, you will have to manually change the paragraph widget to
+experimental and enable the options you need in the widget settings. Options we provide are:
+
+- Enable confirmation on paragraphs remove
+- Enable add in between buttons
+- Enable split text for text paragraphs
+
+Changes since 8.2.19:
+
+- Do [[META] Move to Paragraphs experimental Widget](https://www.drupal.org/project/thunder/issues/2908887)
+- Fix [Do not disable "Autocollapse" and "Collapse / Edit all" options](https://www.drupal.org/project/thunder/issues/2979306)
+
 ## [8.2.19](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.19) 2018-06-11
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.18...8.2.19)
 
