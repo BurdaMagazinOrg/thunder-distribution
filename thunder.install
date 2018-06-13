@@ -1071,7 +1071,11 @@ function thunder_update_8124() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
 
-  $thunderUpdater->installModules(['thunder_enable_content_moderation' => 'content_moderation']);
+  if ($thunderUpdater->installModules(['thunder_enable_content_moderation' => 'content_moderation'])) {
+    /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+    $configReverter = \Drupal::service('config_update.config_update');
+    $configReverter->import('user_role', 'content_creator');
+  }
   if (\Drupal::service('module_handler')->moduleExists('scheduler')) {
     $thunderUpdater->installModules(['thunder_enable_content_moderation' => 'scheduler_content_moderation_integration']);
   }

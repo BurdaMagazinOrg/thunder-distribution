@@ -1,4 +1,3 @@
-uuid: 38a16e90-5433-4428-8a1c-0c7e3803a92e
 langcode: en
 status: true
 dependencies: {  }
@@ -44,7 +43,6 @@ permissions:
   - 'never autoplay videos'
   - 'revert article revisions'
   - 'revert page revisions'
-  - 'schedule publishing of nodes'
   - 'update any media'
   - 'update media'
   - 'use editorial transition create_new_draft'
@@ -55,6 +53,7 @@ permissions:
   - 'view any unpublished content'
   - 'view article revisions'
   - 'view latest version'
+  - 'view own unpublished content'
   - 'view page revisions'
   - 'view scheduled content'
   - 'view the administration theme'
