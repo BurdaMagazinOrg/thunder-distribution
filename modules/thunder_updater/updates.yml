@@ -233,7 +233,7 @@ v2.20:
     thunder__thunder_update_8123:
         '#title': 'Removing the old paragraph split text solution.'
         '#description': "<p>Since we have switched to the experimental paragraphs widget and split text feature is provided with paragraphs features module, we are removing old split text functionality and module.</p>"
-        '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text pluging for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
+        '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text plugin for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
         configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
         extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
 v2.21:
