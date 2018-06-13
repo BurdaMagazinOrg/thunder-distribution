@@ -236,10 +236,3 @@ v2.20:
         '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text pluging for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
         configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
         extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
-v2.21:
-    '#title': 'Update to Thunder 2.21'
-    '#description': '<h3>These are the new features for this release:</h3>'
-    thunder__thunder_update_8124:
-        '#title': 'Switch paragraphs field to use all existing types'
-        '#description': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
