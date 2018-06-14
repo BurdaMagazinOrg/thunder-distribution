@@ -39,9 +39,9 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')
       ->click();
-    $this->waitUntilVisible('[data-drupal-selector="edit-token-table-1-link"]', 5000);
-    $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="edit-token-table-1-link"]');
-    $tokenUrl = $copyToClipboard->getAttribute('data-clipboard-text');
+    $this->waitUntilVisible('[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
+    $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="access-token-list"]//a[contains(@class, "clipboard-button")]');
+    $tokenUrl = $copyToClipboard->getAttribute('data-unpublished-access-url');
 
     // Log-Out and check that URL with token works, but not URL without it.
     $loggedInUser = $this->loggedInUser;
@@ -55,8 +55,13 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     // Log-In and delete token -> check page can't be accessed.
     $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
-    $this->clickButtonDrupalSelector($page, 'edit-token-table-1-operation');
+    $this->expandAllTabs();
+    $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
+
+    $this->getSession()->executeScript("jQuery('[data-drupal-selector=\"access-token-list\"] li.dropbutton-toggle > button').trigger('click');");
+    $this->getSession()->executeScript("jQuery('[data-drupal-selector=\"access-token-list\"] li.delete > a').trigger('click');");
     $this->assertSession()->assertWaitOnAjaxRequest();
+    sleep(5);
     $this->clickSave();
 
     // Log-Out and check that URL with token doesn't work anymore.
