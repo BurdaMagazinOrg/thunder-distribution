@@ -236,3 +236,11 @@ v2.20:
         '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text plugin for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
         configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
         extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
+v2.21:
+    '#title': 'Update to Thunder 2.21'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8124:
+        '#title': 'Granting Editor and SEO role for access unpublished permissions.'
+        '#description': "<p>Permissions for deleting and renewing access tokens is granted.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the permissions page and grant the roles manually.</p>'
+        permission_page: { '#text': 'Permission page', '#url': 'internal:/admin/people/permissions' }
