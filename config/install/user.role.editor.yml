@@ -63,3 +63,6 @@ permissions:
   - 'view the administration theme'
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
+  - 'break content lock'
+  - 'renew token'
+  - 'delete token'

@@ -239,6 +239,11 @@ v2.20:
 v2.21:
     '#title': 'Update to Thunder 2.21'
     '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8124:
+        '#title': 'Granting Editor and SEO role for access unpublished permissions.'
+        '#description': "<p>Permissions for deleting and renewing access tokens is granted.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the permissions page and grant the roles manually.</p>'
+        permission_page: { '#text': 'Permission page', '#url': 'internal:/admin/people/permissions' }
     thunder_enable_content_moderation:
         '#title': 'Install content moderation module and scheduler integration with it.'
         '#description': '<p>Thunder now enables the content moderation module by default. The content moderation module gives you the ability to define workflows for content editing.</p><p>To disable the Thunder provided workflow follow the link.</p>'
