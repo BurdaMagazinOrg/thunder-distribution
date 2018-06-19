@@ -17,7 +17,7 @@ content:
     settings:
       entity_browser: image_browser
       field_widget_display: inline_entity_form
-      field_widget_remove: true
+      field_widget_remove: false
       open: true
       selection_mode: selection_append
       field_widget_display_settings:
