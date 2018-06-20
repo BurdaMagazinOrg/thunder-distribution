@@ -236,3 +236,10 @@ v2.20:
         '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text plugin for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
         configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
         extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
+v2.21:
+    '#title': 'Update to Thunder 2.21'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_paragraphs_update_8102:
+        '#title': 'Enable replace button for media entities.'
+        '#description': '<p>The replace button for media entities in the image paragraph has been enabled.</p>'
+        '#description_failed': '<p><strong>It was not possible to enable the replace button for the image field in the image paragraph. If you want to use the replace button for the entity browser on your fields, visit the form display settings of the entity browser field and configure the replace button.</strong><p>'
