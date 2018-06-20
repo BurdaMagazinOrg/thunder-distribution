@@ -1063,3 +1063,39 @@ function thunder_update_8123() {
   // Output logged messages to related chanel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Adjust access permissions related to "access_unpublish" module.
+ */
+function thunder_update_8124() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+
+  $successful = TRUE;
+  foreach ($roles as $role) {
+    try {
+      $role->grantPermission('delete token');
+      $role->grantPermission('renew token');
+      $role->save();
+
+      $thunderUpdater->logger()->info(t('Permissions for deleting and renewing access tokens is granted for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+    catch (EntityStorageException $storageException) {
+      $successful = FALSE;
+      $thunderUpdater->logger()->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  if ($successful) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8124']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8124']);
+  }
+
+  // Output logged result of update hook execution.
+  return $thunderUpdater->logger()->output();
+}
