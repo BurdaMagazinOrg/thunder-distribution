@@ -301,6 +301,7 @@ function thunder_modules_installed($modules) {
     foreach ($roles as $role) {
       try {
         $role->grantPermission('use editorial transition create_new_draft');
+        $role->grantPermission('use editorial transition publish');
         $role->grantPermission('use editorial transition unpublish');
         $role->grantPermission('use editorial transition unpublished_draft');
         $role->grantPermission('use editorial transition unpublished_published');
