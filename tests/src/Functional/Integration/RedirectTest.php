@@ -11,7 +11,7 @@ use Drupal\thunder\ThunderBaseTest;
  */
 class RedirectTest extends ThunderBaseTest {
 
-  protected static $modules = ['thunder_demo'];
+  protected static $modules = ['thunder_demo', 'content_moderation'];
 
   /**
    * Tests redirect from old URL to new one.
