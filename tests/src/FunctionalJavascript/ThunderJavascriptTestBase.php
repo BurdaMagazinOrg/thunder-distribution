@@ -32,7 +32,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_demo'];
+  protected static $modules = ['thunder_demo', 'content_moderation'];
 
   /**
    * The profile to install as a basis for testing.
