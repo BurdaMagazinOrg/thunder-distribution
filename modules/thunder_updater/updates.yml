@@ -212,15 +212,35 @@ v2.16:
 v2.19:
     '#title': 'Update to Thunder 2.19'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_article__thunder_update_8121:
-        '#title': 'Enable JSON-LD support'
-        '#description': '<p>JSON-LD is an implementation format for structuring data analogous to Microdata and RDFa. Typically, in terms of SEO, JSON-LD is implemented leveraging the Schema.org vocabulary, a joint effort by Google, Bing, Yahoo!, and Yandex in 2011 to create a unified structured data vocabulary for the web.</p>'
-        '#description_successful': '<p>The installation was successful. Now you can configure the metatags.</p>'
-        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
-        extension_page: { '#text': 'Enable the "Schema.org Article" module', '#url': 'internal:/admin/modules' }
-        configure_page: { '#text': 'Configure metatags', '#url': 'internal:/admin/config/search/metatag' }
     thunder_media_update_8109:
         '#title': 'Update twitter image style dimensions'
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
         image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
+v2.20:
+    '#title': 'Update to Thunder 2.20'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8121:
+        '#title': 'Enable "Paragraphs features" module.'
+        '#description': "<p>All new features for experimental widget are provided in the paragraphs features module and it should be enabled.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check that the paragraphs features module is successfully installed.</p>'
+        extension_page: { '#text': 'Enable the paragraphs features module', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Configure the paragraphs features module', '#url': 'internal:/admin/config/content/paragraphs_features' }
+    thunder__thunder_update_8122:
+        '#title': 'Change to paragraphs experimental widget.'
+        '#description': "<p>In order to get the new shiny paragraphs features, we are changing to paragraphs experimental widget.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, please check that all your paragraphs widgets are using the experimental widget.</p>'
+    thunder__thunder_update_8123:
+        '#title': 'Removing the old paragraph split text solution.'
+        '#description': "<p>Since we have switched to the experimental paragraphs widget and split text feature is provided with paragraphs features module, we are removing old split text functionality and module.</p>"
+        '#description_failed': '<p><strong>Uninstalling failed</strong>, please check that split text plugin for CKEditor is not used anymore and the paragraph split text module is uninstalled.</p>'
+        configure_page: { '#text': 'Remove split text plugin from editors', '#url': 'internal:/admin/config/content/formats' }
+        extension_page: { '#text': 'Disable the paragraph split text module', '#url': 'internal:/admin/modules' }
+v2.21:
+    '#title': 'Update to Thunder 2.21'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8124:
+        '#title': 'Granting Editor and SEO role for access unpublished permissions.'
+        '#description': "<p>Permissions for deleting and renewing access tokens is granted.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the permissions page and grant the roles manually.</p>'
+        permission_page: { '#text': 'Permission page', '#url': 'internal:/admin/people/permissions' }
