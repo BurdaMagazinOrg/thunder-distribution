@@ -196,17 +196,6 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
-
-  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
-  foreach ($configs as $config) {
-    $dependencies = $config->get('dependencies.module');
-    $enforced_dependencies = $config->get('dependencies.enforced.module');
-    $dependencies = $dependencies ?: [];
-    $enforced_dependencies = $enforced_dependencies ?: [];
-    if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
-      \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
-    }
-  }
 }
 
 /**
