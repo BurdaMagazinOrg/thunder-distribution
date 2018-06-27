@@ -3,4 +3,6 @@ status: true
 dependencies: {  }
 id: twitter
 label: Twitter
+icon_uuid: null
+description: ''
 behavior_plugins: {  }

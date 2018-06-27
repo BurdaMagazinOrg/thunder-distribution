@@ -1,26 +1,17 @@
 # Thunder Development
 
-# Install development environment
+## Install development environment
 
-## Requirements
+### Requirements
 - [Acquia DevDesktop](https://dev.acquia.com/downloads)
 - [composer](https://getcomposer.org/)
-- [npm](https://nodejs.org/en/download/)
 
-```bash
-git clone git@github.com:BurdaMagazinOrg/thunder-distribution.git thunder-repo
-cd thunder-repo
-sh scripts/development/build-thunder.sh
-```
+### Install Thunder for development
+[Follow this instruction to get the code](https://github.com/thunder/thunder-develop/blob/master/README.md)
 
-This installs Thunder in a directory besides your checkout. Now we have to register the created docroot into Acquia's DevDesktop.
-After that we can install the site:
-```bash
-cd ../thunder
-bin/robo site:install devdesktop
-```
+Now we have to register the created docroot into Acquia's DevDesktop and then we can install the site.
 
-After that Thunder is successfully installed. Start coding now.
+After that, Thunder is successfully installed. Start coding now.
 
 ----------
 
@@ -81,6 +72,14 @@ thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local
 ```
 
 This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+
+Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
+Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
+For cases like this you can set environment variable `THUNDER_WEBDRIVER_HOST` in following way:
+
+```export THUNDER_WEBDRIVER_HOST=selenium:4444```
+
+That information will be picked up by testing classes and used for selenium endpoint.
 
 ----------
 

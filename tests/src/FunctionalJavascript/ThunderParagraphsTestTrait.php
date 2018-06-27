@@ -39,7 +39,7 @@ trait ThunderParagraphsTestTrait {
   protected function getParagraphItems($fieldName) {
     $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
 
-    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[contains(@class, \"paragraph-item\")]");
+    return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[number(substring-after(@data-drupal-selector, \"edit-{$fieldNamePart}-\")) >= 0]");
   }
 
   /**
@@ -60,26 +60,27 @@ trait ThunderParagraphsTestTrait {
    * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
+    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
-      $addButtonSelector = "input[id^='edit-$fieldSelector-add-more-first-button-area-add-more']";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child input.paragraphs-features__add-in-between__button";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
     }
 
-    $addButton = $page->find('css', $addButtonSelector);
-    $this->scrollElementInView($addButtonSelector);
+    $addButton = $page->find('css', $addButtonCssSelector);
+    $this->scrollElementInView($addButtonCssSelector);
 
     $addButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->find('xpath', "//ul[@class='paragraphs-add-dialog-list']/li/button[@data-type='$type']")
+    $page->find('xpath', "//input[@name='{$fieldName}_{$type}_add_more']")
       ->click();
 
     $this->assertSession()->assertWaitOnAjaxRequest();

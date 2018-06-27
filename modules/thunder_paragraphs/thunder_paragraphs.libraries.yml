@@ -1,0 +1,6 @@
+fieldwidget_settings:
+  js:
+    js/paragraphs_fieldwidget.settings.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
