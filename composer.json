@@ -56,6 +56,9 @@
             ]
         },
         "patches": {
+            "drupal/core": {
+                "Seven's media-form library has dependency on Media, which may disabled": "https://www.drupal.org/files/issues/2921529-2.patch"
+            },
             "drupal/media_entity": {
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2934289-2813685-21.patch"
             },
