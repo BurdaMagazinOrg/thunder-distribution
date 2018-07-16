@@ -50,6 +50,14 @@ composer_create_thunder() {
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+
+    # Get branch of thunder_admin. REMOVE BEFORE MERGE
+    rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/2985260-remove-dependency https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+
+    # Get branch of module riddle_marketplace. REMOVE BEFORE MERGE
+    rm -rf ${TEST_DIR}/docroot/modules/contrib/riddle_marketplace
+    git clone --depth 1 --single-branch --branch fix/api-update https://github.com/BurdaMagazinOrg/module-riddle_marketplace.git ${TEST_DIR}/docroot/modules/contrib/riddle_marketplace
 }
 
 apply_patches() {
