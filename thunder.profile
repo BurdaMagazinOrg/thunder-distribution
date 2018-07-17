@@ -396,3 +396,14 @@ function thunder_toolbar_alter(&$items) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
   }
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function thunder_library_info_alter(&$libraries, $extension) {
+  // Remove seven's dependency on the media/form library.
+  // Can be removed after #2916741 or #2916786 has landed.
+  if ($extension == 'seven' && isset($libraries['media-form'])) {
+    unset($libraries['media-form']['dependencies']);
+  }
+}
