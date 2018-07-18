@@ -1109,20 +1109,12 @@ function thunder_update_8125() {
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
 
-  $successful = TRUE;
-
   if ($themeInstaller->install(['seven'])) {
     $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
-  }
-  else {
-    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
-    $successful = FALSE;
-  }
-
-  if ($successful) {
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
   }
   else {
+    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
   }
 
