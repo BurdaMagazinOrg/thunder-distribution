@@ -60,3 +60,5 @@ permissions:
   - 'view unpublished terms in tags'
   - 'break content lock'
   - 'administer redirects'
+  - 'renew token'
+  - 'delete token'

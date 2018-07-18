@@ -32,11 +32,11 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Edit gallery paragraph.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-edit-button"]');
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-0-edit-2"]');
     $this->setFieldValue($page, 'field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
 
     // Collapse parargraph form.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-0-top-links-collapse-button"]');
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_collapse"]');
     $this->clickSave();
 
     // Re-open edit form, value has changed.
@@ -60,12 +60,12 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $this->drupalGet("node/7/edit");
     $page = $this->getSession()->getPage();
 
-    // Edit gallery paragraph.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-edit-button"]');
+    // Edit video paragraph.
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-3-edit-2"]');
     $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][current][items][0][display][name][0][value]', 'New video name before collapse');
 
     // Collapse parargraph form.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="edit-field-paragraphs-3-top-links-collapse-button"]');
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_3_collapse"]');
     $this->clickSave();
 
     // Re-open edit form, value has changed.

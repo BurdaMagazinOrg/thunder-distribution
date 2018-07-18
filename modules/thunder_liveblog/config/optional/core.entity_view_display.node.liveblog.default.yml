@@ -10,7 +10,6 @@ dependencies:
     - node.type.liveblog
   module:
     - entity_reference_revisions
-    - text
     - user
 id: node.liveblog.default
 targetEntityType: node
