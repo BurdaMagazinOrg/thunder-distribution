@@ -60,7 +60,6 @@ apply_patches() {
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
 
-
     MODULES_DIR=${TEST_DIR}/docroot/profiles/thunder/modules
     if [ -d "${TEST_DIR}/docroot/modules/contrib" ]; then
      MODULES_DIR=${TEST_DIR}/docroot/modules/contrib
