@@ -244,3 +244,8 @@ v2.21:
         '#description': "<p>Permissions for deleting and renewing access tokens is granted.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the permissions page and grant the roles manually.</p>'
         permission_page: { '#text': 'Permission page', '#url': 'internal:/admin/people/permissions' }
+    thunder__thunder_update_8125:
+        '#title': 'Enable seven theme in preparation for Thunder admin theme update.'
+        '#description': "<p>The seven theme has been successfully enabled, you can update the admin theme now.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong> please enable the seven theme manually to be able to use the admin theme version >=2.0.</p>'
+        theme_page: { '#text': 'Theme page', '#url': 'internal:/admin/appearance' }
