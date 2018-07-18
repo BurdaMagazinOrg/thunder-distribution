@@ -44,7 +44,6 @@ before_install:
   - source ./scripts/travis/01-setup-environment.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
   - bash -x -e ./scripts/travis/03-test-source-code.sh
-
 install:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
 
