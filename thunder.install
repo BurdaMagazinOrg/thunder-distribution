@@ -1101,12 +1101,12 @@ function thunder_update_8124() {
 }
 
 /**
- * Enable select2_widget module.
+ * Enable select2 module.
  */
 function thunder_update_8125() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2_widget'])) {
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2'])) {
     /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
     $thunderUpdater = \Drupal::service('thunder_updater');
 

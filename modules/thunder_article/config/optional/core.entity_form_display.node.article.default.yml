@@ -19,7 +19,7 @@ dependencies:
     - paragraphs_features
     - path
     - scheduler
-    - select2_widget
+    - select2
 third_party_settings:
   field_group:
     group_teaser:
@@ -77,7 +77,7 @@ content:
     third_party_settings: {  }
     region: content
   field_channel:
-    type: select2_autocomplete_widget
+    type: select2_entity_reference
     weight: 2
     settings: {  }
     third_party_settings: {  }
@@ -124,7 +124,7 @@ content:
           tolerance: 10
     region: content
   field_tags:
-    type: select2_autocomplete_widget
+    type: select2_entity_reference
     weight: 5
     settings: {  }
     third_party_settings: {  }
