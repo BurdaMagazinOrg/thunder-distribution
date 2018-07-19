@@ -1,5 +1,21 @@
 # Change Log
 
+## [8.2.21](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.21) 2018-07-19
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.20...8.2.21)
+
+The release fixes some testing issues, updates some modules and prepares thunder installations for the next admin theme 
+release.
+The next admin theme will have seven as a base theme. In preparation for this, we enable the seven theme for you. If 
+this fails for some reason enable it manually before updating to the thunder_admin theme 1.0.0!
+
+Changes since 8.2.20:
+
+- Fix [thunder_updater breaks caching of toolbar for non-admin users](https://www.drupal.org/project/thunder/issues/2961673)
+- Testing fix [Eslint configuration mismatch](https://www.drupal.org/project/thunder/issues/2979376)
+- Testing fix [Remove hard coded fixture filename](https://www.drupal.org/project/thunder/issues/2981588)
+- Do [Adopt new access_unpublished release](https://www.drupal.org/project/thunder/issues/2979843)
+- Do [Prepare distribution for next admin theme version](https://www.drupal.org/project/thunder/issues/2982342)
+
 ## [8.2.20](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.20) 2018-06-13
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.19...8.2.20)
 

@@ -1101,21 +1101,43 @@ function thunder_update_8124() {
 }
 
 /**
- * Enable select2 module.
+ * Install seven theme.
  */
 function thunder_update_8125() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'select2'])) {
+  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
+  $themeInstaller = \Drupal::service('theme_installer');
+
+  if ($themeInstaller->install(['seven'])) {
+    $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
+  }
+  else {
+    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
+  }
+
+  // Output logged result of update hook execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable select2 module.
+ */
+function thunder_update_8126() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8126' => 'select2'])) {
     /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
     $thunderUpdater = \Drupal::service('thunder_updater');
 
     // Execute configuration update definitions with logging of success.
-    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8121']])) {
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
+    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8126']])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8126']);
     }
     else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8126']);
     }
   }
 
