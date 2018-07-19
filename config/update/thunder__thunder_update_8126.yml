@@ -2,23 +2,29 @@ core.entity_form_display.node.article.default:
   expected_config:
     content:
       field_channel:
-        type: options_select
         settings: {  }
+        type: options_select
       field_tags:
         settings:
           match_operator: CONTAINS
           placeholder: ''
           size: 60
-        third_party_settings: {  }
         type: entity_reference_autocomplete_tags
   update_actions:
     change:
       content:
         field_channel:
-          type: select2_autocomplete_widget
           settings:
             autocomplete: false
+          type: select2_entity_reference
         field_tags:
-          type: select2_autocomplete_widget
           settings:
             autocomplete: true
+          type: select2_entity_reference
+    delete:
+      content:
+        field_tags:
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
