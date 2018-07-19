@@ -79,7 +79,8 @@ content:
   field_channel:
     type: select2_entity_reference
     weight: 2
-    settings: {  }
+    settings:
+      autocomplete: false
     third_party_settings: {  }
     region: content
   field_meta_tags:
@@ -126,7 +127,8 @@ content:
   field_tags:
     type: select2_entity_reference
     weight: 5
-    settings: {  }
+    settings:
+      autocomplete: true
     third_party_settings: {  }
     region: content
   field_teaser_media:

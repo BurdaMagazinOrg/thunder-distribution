@@ -3,6 +3,7 @@ core.entity_form_display.node.article.default:
     content:
       field_channel:
         type: options_select
+        settings: {  }
       field_tags:
         settings:
           match_operator: CONTAINS
@@ -15,12 +16,9 @@ core.entity_form_display.node.article.default:
       content:
         field_channel:
           type: select2_autocomplete_widget
+          settings:
+            autocomplete: false
         field_tags:
           type: select2_autocomplete_widget
-    delete:
-      content:
-        field_tags:
           settings:
-            match_operator: CONTAINS
-            placeholder: ''
-            size: 60
+            autocomplete: true
