@@ -42,6 +42,11 @@ drush_make_thunder() {
     git clone --depth 1 --single-branch --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
+
+    # Get branch of module riddle_marketplace. REMOVE BEFORE MERGE	
+    rm -rf ${TEST_DIR}/docroot/profiles/thunder/modules/riddle_marketplace	
+    git clone --depth 1 --single-branch --branch fix/2982332-New-riddle-api https://github.com/BurdaMagazinOrg/module-riddle_marketplace.git ${TEST_DIR}/docroot/profiles/thunder/modules/riddle_marketplace	
+
 }
 
 composer_create_thunder() {
@@ -51,6 +56,11 @@ composer_create_thunder() {
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
+
+    # Get branch of module riddle_marketplace. REMOVE BEFORE MERGE
+    rm -rf ${TEST_DIR}/docroot/modules/contrib/riddle_marketplace
+    git clone --depth 1 --single-branch --branch fix/2982332-New-riddle-api https://github.com/BurdaMagazinOrg/module-riddle_marketplace.git ${TEST_DIR}/docroot/modules/contrib/riddle_marketplace
+
 }
 
 apply_patches() {
