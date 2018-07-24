@@ -25,7 +25,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
 
     // Create article and save it as unpublished.
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => [[1, 'News']],
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);

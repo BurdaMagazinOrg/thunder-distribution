@@ -80,16 +80,17 @@ trait ThunderFormFieldTestTrait {
       }
       else {
         foreach ($value as $item) {
-          if (!$field->find('named', ['option', $item])) {
-            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option('{$item}', '\$ID:{$item}', false, false)).trigger('change')");
-            $page->selectFieldOption($fieldName, "\$ID:{$item}", TRUE);
+          $id = is_array($item) ? $item[0] : "\$ID:$item";
+          $label = is_array($item) ? $item[1] : $item;
+          if (!$field->find('named', ['option', $id])) {
+            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option('$label', '$id', false, false)).trigger('change')");
+            $page->selectFieldOption($fieldName, $id, TRUE);
           }
           else {
-            $page->selectFieldOption($fieldName, $item, TRUE);
+            $page->selectFieldOption($fieldName, $id, TRUE);
           }
         }
       }
-
       return;
     }
 
