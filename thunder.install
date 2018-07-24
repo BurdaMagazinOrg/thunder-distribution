@@ -1128,18 +1128,17 @@ function thunder_update_8125() {
  * Seven theme was not added to thunder dependencies, therefore new
  * installations did not get it yet.
  */
-function thunder_update_8136() {
+function thunder_update_8162() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
   // Get installed themes.
   $installed_themes = \Drupal::configFactory()->getEditable('core.extension')->get('theme') ?: [];
-  $theme_to_enable = ['seven'];
-  if ($theme_to_enable = array_diff_key($theme_to_enable, $installed_themes)) {
+  if (array_key_exists('seven', $installed_themes)) {
     $thunderUpdater->logger()->info('Theme "seven" has already been installed.');
   }
-  elseif ($themeInstaller->install($theme_to_enable)) {
+  elseif ($themeInstaller->install(['seven'])) {
     $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
     $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
   }
