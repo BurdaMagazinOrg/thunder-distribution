@@ -45,7 +45,7 @@ trait ThunderFormFieldTestTrait {
    *   Current active page.
    * @param string $fieldName
    *   Field name.
-   * @param string $value
+   * @param string|array $value
    *   Value for field.
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
@@ -76,30 +76,19 @@ trait ThunderFormFieldTestTrait {
     }
     elseif ($fieldTag === 'select') {
       // Handling of dropdown list.
-      if ($page->find('css', "[name=\"{$fieldName}\"][class^='select2']")) {
-        if (is_array($value)) {
-          foreach ($value as $item) {
-            try {
-              $page->selectFieldOption($fieldName, $item, TRUE);
-            }
-            catch (ElementNotFoundException $e) {
-              $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option(\"{$item}\", \"{$item}\", false, false)).trigger('change')");
-            }
-          }
-          $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val([" . trim(json_encode(array_values($value)), '[]') . "]).trigger('change')");
-        }
-        else {
-          try {
-            $page->selectFieldOption($fieldName, $value, TRUE);
-          }
-          catch (ElementNotFoundException $e) {
-            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option(\"{$value}\", \"{$value}\", false, false)).trigger('change')");
-          }
-          $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').val([" . trim(json_encode([$value]), '[]') . "]).trigger('change')");
-        }
+      if (!$page->find('css', "[name=\"{$fieldName}\"][class*='select2-widget']")) {
+        $page->selectFieldOption($fieldName, $value, TRUE);
       }
       else {
-        $page->selectFieldOption($fieldName, $value, TRUE);
+        foreach ($value as $item) {
+          if (!$field->find('named', array('option', $item))) {
+            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option('{$item}', '\$ID:{$item}', false, false)).trigger('change')");
+            $page->selectFieldOption($fieldName, "\$ID:{$item}", TRUE);
+          }
+          else {
+            $page->selectFieldOption($fieldName, $item, TRUE);
+          }
+        }
       }
 
       return;
