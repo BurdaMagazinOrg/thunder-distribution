@@ -1128,7 +1128,7 @@ function thunder_update_8125() {
  * Seven theme was not added to thunder dependencies, therefore new
  * installations did not get it yet.
  */
-function thunder_update_8162() {
+function thunder_update_8126() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
   $thunderUpdater = \Drupal::service('thunder_updater');
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
