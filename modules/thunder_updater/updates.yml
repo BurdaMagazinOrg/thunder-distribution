@@ -256,6 +256,11 @@ v2.21:
 v2.22:
     '#title': 'Update to Thunder 2.22'
     '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8127:
+        '#title': 'Enable "select2" module.'
+        '#description': "<p>Provide Select2 field widgets for forms and views filters.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable "select2" module', '#url': 'internal:/admin/modules' }
     thunder_add_config_selector_to_content_media:
         '#title': 'Add config_selector settings to content and media view'
         '#description': '<p>Configuration is successfully updated.</p>'
