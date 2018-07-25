@@ -89,7 +89,7 @@
         "drupal/crop": "^2.0",
         "drupal/ctools": "^3.0",
         "drupal/default_content": "^1.0",
-        "drupal/diff": "1.0-rc1",
+        "drupal/diff": "1.0-rc2",
         "drupal/dropzonejs": "^2.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
@@ -117,6 +117,7 @@
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "^1.0",
+        "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
@@ -128,7 +129,8 @@
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24"
+        "bower-asset/shariff": "^1.24",
+        "bower-asset/select2": "4.0.4"
     },
     "suggest": {
         "drupal/riddle_marketplace": "Riddle marketplace integration",
