@@ -1,0 +1,167 @@
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        third_party_settings: {  }
+        type: entity_reference_paragraphs
+      langcode:
+        settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+            features:
+              collapse_edit_all: '0'
+              duplicate: '0'
+          third_party_settings:
+            paragraphs_features:
+              add_in_between: true
+              split_text: true
+              delete_confirmation: true
+          type: paragraphs
+        langcode:
+          settings:
+            include_locked: true
+core.entity_form_display.node.page.default:
+  expected_config:
+    content:
+      langcode:
+        settings: {  }
+  update_actions:
+    change:
+      content:
+        langcode:
+          settings:
+            include_locked: true
+paragraphs.paragraphs_type.gallery:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.image:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.instagram:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.link:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.pinterest:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.quote:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.text:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.twitter:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+paragraphs.paragraphs_type.video:
+  expected_config: {  }
+  update_actions:
+    add:
+      description: ''
+      icon_uuid: null
+core.entity_form_display.taxonomy_term.channel.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        third_party_settings: {  }
+        type: entity_reference_paragraphs
+      langcode:
+        settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+            features:
+              collapse_edit_all: '0'
+              duplicate: '0'
+          third_party_settings:
+            paragraphs_features:
+              add_in_between: true
+              split_text: true
+              delete_confirmation: true
+          type: paragraphs
+        langcode:
+          settings:
+            include_locked: true
+core.entity_form_display.taxonomy_term.tags.default:
+  expected_config:
+    content:
+      field_paragraphs:
+        settings:
+          edit_mode: preview
+        third_party_settings: {  }
+        type: entity_reference_paragraphs
+      langcode:
+        settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            autocollapse: none
+            closed_mode: preview
+    change:
+      content:
+        field_paragraphs:
+          settings:
+            edit_mode: closed
+            features:
+              collapse_edit_all: '0'
+              duplicate: '0'
+          third_party_settings:
+            paragraphs_features:
+              add_in_between: true
+              split_text: true
+              delete_confirmation: true
+          type: paragraphs
+        langcode:
+          settings:
+            include_locked: true

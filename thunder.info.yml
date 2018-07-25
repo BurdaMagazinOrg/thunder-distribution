@@ -63,7 +63,7 @@ dependencies:
   - metatag_facebook
   - metatag_twitter_cards
   - paragraphs
-  - paragraph_split_text
+  - paragraphs_features
   - pathauto
   - redirect
   - scheduler
@@ -78,5 +78,6 @@ dependencies:
   - thunder_taxonomy
   - thunder_updater
 themes:
+  - seven
   - thunder_base
   - thunder_admin
