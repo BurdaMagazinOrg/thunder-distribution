@@ -8,6 +8,7 @@ dependencies:
   module:
     - metatag
     - paragraphs
+    - paragraphs_features
     - path
 id: taxonomy_term.tags.default
 targetEntityType: taxonomy_term
@@ -21,21 +22,31 @@ content:
     third_party_settings: {  }
     region: content
   field_paragraphs:
-    type: entity_reference_paragraphs
+    type: paragraphs
     weight: 2
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: preview
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
-    third_party_settings: {  }
+      features:
+        duplicate: '0'
+        collapse_edit_all: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: true
+        split_text: true
+        delete_confirmation: true
     region: content
   langcode:
     type: language_select
     weight: 0
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
     region: content
   name:
