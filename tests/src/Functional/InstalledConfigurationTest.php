@@ -189,11 +189,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
     ],
 
-    // Diff module. Issue: https://www.drupal.org/node/2854581.
-    'core.entity_view_mode.node.diff' => [
-      'langcode' => TRUE,
-    ],
-
     // The thunder profile changes article and channel taxonomy when ivw module
     // is installed.
     'core.entity_form_display.node.article.default' => [
@@ -221,6 +216,10 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'path' => TRUE,
       ],
     ],
+    'paragraphs.paragraphs_type.nexx_video' => [
+      'icon_uuid' => TRUE,
+      'description' => TRUE,
+    ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
     'field.field.node.article.field_paragraphs' => [
@@ -234,6 +233,19 @@ class InstalledConfigurationTest extends ThunderBaseTest {
           ],
           'target_bundles_drag_drop' => [
             'riddle' => TRUE,
+          ],
+        ],
+      ],
+    ],
+    // Drupal 8.6.x adds the anchor key to the crop schema.
+    // As long as there is no release of Drupal 8.6.x we cannot provide a patch
+    // To the slick module. As soon as 8.6.0 is released we should provide that
+    // patch to get rid of this ignored key.
+    'image.style.slick_media' => [
+      'effects' => [
+        '4b434ce0-90cc-44c3-9423-35d7cccc7d93' => [
+          'data' => [
+            'anchor' => TRUE,
           ],
         ],
       ],

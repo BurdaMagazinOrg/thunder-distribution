@@ -42,9 +42,9 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
  */
 function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {
 
-  $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 2, TRUE),
+  $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 1, TRUE),
     [t('Status')],
-    array_slice($form['terms']['#header'], 2, NULL, TRUE));
+    array_slice($form['terms']['#header'], 1, NULL, TRUE));
 
   foreach ($form['terms'] as &$term) {
     if (is_array($term) && !empty($term['#term'])) {
@@ -53,9 +53,9 @@ function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateIn
         '#type' => 'item',
       ];
 
-      $term = array_slice($term, 0, 3, TRUE) +
+      $term = array_slice($term, 0, 1, TRUE) +
         $status +
-        array_slice($term, 3, NULL, TRUE);
+        array_slice($term, 1, NULL, TRUE);
     }
   }
 }

@@ -16,6 +16,9 @@ else
     TEST_UPDATE=""
 fi
 
+# In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
+# currently disable those tests. TODO: re-enable them after release of Thunder 3
+TEST_UPDATE=""
 export TEST_UPDATE;
 
 # base path for update tests

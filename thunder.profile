@@ -157,15 +157,28 @@ function thunder_modules_installed($modules) {
 
     $fieldWidget = 'ivw_integration_widget';
 
-    entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    // Attach field if channel vocabulary and article node type is
+    // present in the distribution.
+    try {
+      entity_get_form_display('node', 'article', 'default')
+        ->setComponent(
+          'field_ivw', [
+            'type' => $fieldWidget,
+          ])->save();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
+    }
 
-    entity_get_form_display('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+    try {
+      entity_get_form_display('taxonomy_term', 'channel', 'default')
+        ->setComponent('field_ivw', [
+          'type' => $fieldWidget,
+        ])->save();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
+    }
   }
 
   // Enable riddle paragraph in field_paragraphs.
@@ -182,17 +195,6 @@ function thunder_modules_installed($modules) {
     $field->setSetting('handler_settings', $settings);
 
     $field->save();
-  }
-
-  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
-  foreach ($configs as $config) {
-    $dependencies = $config->get('dependencies.module');
-    $enforced_dependencies = $config->get('dependencies.enforced.module');
-    $dependencies = $dependencies ?: [];
-    $enforced_dependencies = $enforced_dependencies ?: [];
-    if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
-      \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
-    }
   }
 }
 
@@ -243,5 +245,16 @@ function thunder_page_attachments(array &$attachments) {
 function thunder_toolbar_alter(&$items) {
   if (!empty($items['admin_toolbar_tools'])) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function thunder_library_info_alter(&$libraries, $extension) {
+  // Remove seven's dependency on the media/form library.
+  // Can be removed after #2916741 or #2916786 has landed.
+  if ($extension == 'seven' && isset($libraries['media-form'])) {
+    unset($libraries['media-form']['dependencies']);
   }
 }
