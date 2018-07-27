@@ -67,6 +67,7 @@ dependencies:
   - pathauto
   - redirect
   - scheduler
+  - select2
   - simple_sitemap
   - slick_media
   - responsive_preview
@@ -78,5 +79,6 @@ dependencies:
   - thunder_taxonomy
   - thunder_updater
 themes:
+  - seven
   - thunder_base
   - thunder_admin

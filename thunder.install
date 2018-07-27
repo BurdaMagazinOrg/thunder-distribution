@@ -1121,3 +1121,55 @@ function thunder_update_8125() {
   // Output logged result of update hook execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Install seven theme (again).
+ *
+ * Seven theme was not added to thunder dependencies, therefore new
+ * installations did not get it yet.
+ */
+function thunder_update_8126() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
+  $themeInstaller = \Drupal::service('theme_installer');
+  // Get installed themes.
+  $installed_themes = \Drupal::configFactory()->getEditable('core.extension')->get('theme') ?: [];
+  if (array_key_exists('seven', $installed_themes)) {
+    $thunderUpdater->logger()->info('Theme "seven" has already been installed.');
+  }
+  elseif ($themeInstaller->install(['seven'])) {
+    $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
+  }
+  else {
+    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
+  }
+
+  // Output logged result of update hook execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Enable select2 module.
+ */
+function thunder_update_8127() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8127' => 'select2'])) {
+    /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+    $thunderUpdater = \Drupal::service('thunder_updater');
+
+    // Execute configuration update definitions with logging of success.
+    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8127']])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8127']);
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8127']);
+    }
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
