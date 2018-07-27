@@ -65,11 +65,6 @@ apply_patches() {
      MODULES_DIR=${TEST_DIR}/docroot/modules/contrib
     fi
 
-    # media_entity deprecations
-    cd ${MODULES_DIR}/media_entity
-    wget https://www.drupal.org/files/issues/fixe_failling_tests-2923355-2.patch
-    patch -p1 < fixe_failling_tests-2923355-2.patch
-
     # metatag deprecations
     cd ${MODULES_DIR}/metatag
     wget https://www.drupal.org/files/issues/2018-04-13/2925714-2.patch
