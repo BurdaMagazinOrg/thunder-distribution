@@ -14,7 +14,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   protected $translations = [
     'Save and continue' => 'Speichern und fortfahren',
     'Errors found' => 'Fehler gefunden',
-    'continue anyway' => 'fahre weiter fort',
+    'continue anyway' => 'fortfahren',
   ];
 
   /**
