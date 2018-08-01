@@ -30,7 +30,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->articleFillNew([
-      'field_channel' => [[1, 'News']],
+      'field_channel' => 1,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);
