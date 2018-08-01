@@ -19,6 +19,7 @@ dependencies:
     - paragraphs_features
     - path
     - scheduler
+    - select2
 third_party_settings:
   field_group:
     group_teaser:
@@ -123,12 +124,10 @@ content:
           tolerance: 10
     region: content
   field_tags:
-    type: entity_reference_autocomplete_tags
+    type: select2_entity_reference
     weight: 5
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      autocomplete: true
     third_party_settings: {  }
     region: content
   field_teaser_media:

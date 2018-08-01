@@ -1150,3 +1150,26 @@ function thunder_update_8126() {
   // Output logged result of update hook execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Enable select2 module.
+ */
+function thunder_update_8127() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  if ($thunderUpdater->installModules(['thunder__thunder_update_8127' => 'select2'])) {
+    /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+    $thunderUpdater = \Drupal::service('thunder_updater');
+
+    // Execute configuration update definitions with logging of success.
+    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8127']])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8127']);
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8127']);
+    }
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
