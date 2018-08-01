@@ -239,14 +239,31 @@ v2.20:
 v2.21:
     '#title': 'Update to Thunder 2.21'
     '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_paragraphs_update_8102:
+        '#title': 'Enable replace button for media entities.'
+        '#description': '<p>The replace button for media entities in the image paragraph has been enabled.</p>'
+        '#description_failed': '<p><strong>It was not possible to enable the replace button for the image field in the image paragraph. If you want to use the replace button for the entity browser on your fields, visit the form display settings of the entity browser field and configure the replace button.</strong><p>'
     thunder__thunder_update_8124:
         '#title': 'Granting Editor and SEO role for access unpublished permissions.'
         '#description': "<p>Permissions for deleting and renewing access tokens is granted.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the permissions page and grant the roles manually.</p>'
         permission_page: { '#text': 'Permission page', '#url': 'internal:/admin/people/permissions' }
+    thunder__thunder_update_8125:
+        '#title': 'Enable seven theme in preparation for Thunder admin theme update.'
+        '#description': "<p>The seven theme has been successfully enabled, you can update the admin theme now.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong> please enable the seven theme manually to be able to use the admin theme version >=2.0.</p>'
+        theme_page: { '#text': 'Theme page', '#url': 'internal:/admin/appearance' }
+v2.22:
+    '#title': 'Update to Thunder 2.22'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8127:
+        '#title': 'Enable "select2" module.'
+        '#description': "<p>Provide Select2 field widgets for forms and views filters.</p>"
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+        extension_page: { '#text': 'Enable "select2" module', '#url': 'internal:/admin/modules' }
     thunder_enable_content_moderation:
-        '#title': 'Install content moderation module and scheduler integration with it.'
-        '#description': '<p>Thunder now enables the content moderation module by default. The content moderation module gives you the ability to define workflows for content editing.</p><p>To disable the Thunder provided workflow follow the link.</p>'
-        '#description_successful': '<p>The installation was successful.</p>'
-        '#description_failed': '<p><strong>Installation failed</strong><p>'
-        thunder_article_config: { '#text': 'Edit/disable editorial workflow', '#url': 'internal:/admin/config/workflow/workflows/manage/editorial' }
+      '#title': 'Install content moderation module and scheduler integration with it.'
+      '#description': '<p>Thunder now enables the content moderation module by default. The content moderation module gives you the ability to define workflows for content editing.</p><p>To disable the Thunder provided workflow follow the link.</p>'
+      '#description_successful': '<p>The installation was successful.</p>'
+      '#description_failed': '<p><strong>Installation failed</strong><p>'
+      thunder_article_config: { '#text': 'Edit/disable editorial workflow', '#url': 'internal:/admin/config/workflow/workflows/manage/editorial' }

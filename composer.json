@@ -72,7 +72,7 @@
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-06-16/2798689-71.patch"
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-07-31/2798689-98.patch"
             },
             "drupal/core": {
                 "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch"
@@ -101,11 +101,11 @@
         "drupal/crop": "^1.0",
         "drupal/ctools": "^3.0",
         "drupal/default_content": "^1.0",
-        "drupal/diff": "1.0-rc1",
+        "drupal/diff": "1.0-rc2",
         "drupal/dropzonejs": "^1.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
-        "drupal/entity_browser": "1.4",
+        "drupal/entity_browser": "1.5",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
         "drupal/field_group": "^1.0",
@@ -133,6 +133,7 @@
         "drupal/redirect": "^1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "1.0",
+        "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
@@ -146,7 +147,8 @@
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24"
+        "bower-asset/shariff": "^1.24",
+        "bower-asset/select2": "4.0.4"
     },
     "replace": {
         "bower-asset/jquery": "*",

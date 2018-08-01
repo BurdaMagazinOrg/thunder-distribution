@@ -196,11 +196,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
     ],
 
-    // Diff module. Issue: https://www.drupal.org/node/2854581.
-    'core.entity_view_mode.node.diff' => [
-      'langcode' => TRUE,
-    ],
-
     // The thunder profile changes article and channel taxonomy when ivw module
     // is installed.
     'core.entity_form_display.node.article.default' => [
