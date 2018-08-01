@@ -184,7 +184,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Create Article with facebook meta tags and check it.
     $fieldValues = $this->generateMetaTagFieldValues($facebookMetaTags, 'field_meta_tags[0]');
     $fieldValues += [
-      'field_channel' => [[1, 'News']],
+      'field_channel' => 1,
       'title[0][value]' => 'Test FB MetaTags Article',
       'field_seo_title[0][value]' => 'Facebook MetaTags',
       'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
@@ -375,7 +375,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     // Fill article form with base fields.
     $this->articleFillNew([
-      'field_channel' => [[1, 'News']],
+      'field_channel' => 1,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);

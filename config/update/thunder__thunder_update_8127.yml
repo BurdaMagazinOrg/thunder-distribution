@@ -1,9 +1,6 @@
 core.entity_form_display.node.article.default:
   expected_config:
     content:
-      field_channel:
-        settings: {  }
-        type: options_select
       field_tags:
         settings:
           match_operator: CONTAINS
@@ -13,10 +10,6 @@ core.entity_form_display.node.article.default:
   update_actions:
     change:
       content:
-        field_channel:
-          settings:
-            autocomplete: false
-          type: select2_entity_reference
         field_tags:
           settings:
             autocomplete: true

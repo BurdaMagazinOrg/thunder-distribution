@@ -122,7 +122,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected function createArticleWithFields(array $fieldValues = []) {
 
     $fieldValues += [
-      'field_channel' => [[1, 'News']],
+      'field_channel' => 1,
       'title[0][value]' => static::$tokens['[node:title]'],
       'field_seo_title[0][value]' => static::$tokens['[node:field_seo_title]'],
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
