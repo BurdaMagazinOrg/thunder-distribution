@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.2.23](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.23) 2018-08-02
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.21...8.2.23)
+
+Updating drupal-org-core.make to use Drupal core 8.5.6 which is a security release.
+See: https://www.drupal.org/sa-core-2018-005
+This does not concern people installing and updating thunder with composer, drush or manually. It is only relevant
+for people downloading the tar ball from drupal.org.
+
 ## [8.2.21](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.21) 2018-07-19
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.20...8.2.21)
 
