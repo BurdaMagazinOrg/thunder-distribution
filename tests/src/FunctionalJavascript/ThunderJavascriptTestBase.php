@@ -4,7 +4,11 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AnonymousUserSession;
+use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\thunder\ThunderTestTrait;
 
 /**
@@ -12,7 +16,7 @@ use Drupal\thunder\ThunderTestTrait;
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript
  */
-abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
+abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
   use ThunderTestTrait;
   use ThunderImageCompareTestTrait;
@@ -38,6 +42,11 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   protected $profile = 'thunder';
 
   /**
+   * {@inheritdoc}
+   */
+  protected $minkDefaultDriverClass = Selenium2Driver::class;
+
+  /**
    * Directory path for saving screenshots.
    *
    * @var string
@@ -50,6 +59,124 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    * @var string
    */
   protected static $defaultUserRole = 'editor';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function initMink() {
+    $this->minkDefaultDriverArgs = $this->getDriverArgs();
+
+    try {
+      return BrowserTestBase::initMink();
+    }
+    catch (Exception $e) {
+      $this->markTestSkipped('An unexpected error occurred while starting Mink: ' . $e->getMessage());
+    }
+  }
+
+  /**
+   * Get Web Driver arguments.
+   *
+   * Driver arguments depends on used environment where tests are executed.
+   * Currently it supports local environment (locally and on Travis CI) and
+   * SauceLabs environment on Travis CI.
+   *
+   * @return array
+   *   Returns default driver arguments.
+   */
+  protected function getDriverArgs() {
+    $desiredCapabilities = NULL;
+    $webDriverUrl = $this->getWebDriverUrl();
+
+    // Get Sauce Labs variables from environment, if Sauce Labs build is set.
+    if (!empty(getenv('SAUCE_LABS_ENABLED'))) {
+      $sauceUser = getenv('SAUCE_USERNAME');
+      $sauceKey = getenv('SAUCE_ACCESS_KEY');
+
+      $desiredCapabilities = [
+        'browserName' => 'chrome',
+        'version' => '55.0',
+        'platform' => 'macOS 10.12',
+        'screenResolution' => '1400x1050',
+        'tunnelIdentifier' => getenv('TRAVIS_JOB_NUMBER'),
+        'name' => get_class($this),
+      ];
+
+      $webDriverUrl = "https://{$sauceUser}:{$sauceKey}@ondemand.saucelabs.com:443/wd/hub";
+    }
+
+    return [
+      'chrome',
+      $desiredCapabilities,
+      $webDriverUrl,
+    ];
+  }
+
+  /**
+   * Get WebDriver URL, that can be set by environment variable.
+   *
+   * @return string
+   *   Returns full URL to WebDriver interface.
+   */
+  protected function getWebDriverUrl() {
+    if (!empty(getenv('THUNDER_WEBDRIVER_HOST'))) {
+      return 'http://' . getenv('THUNDER_WEBDRIVER_HOST') . '/wd/hub';
+    }
+
+    return 'http://127.0.0.1:4444/wd/hub';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function drupalLogin(AccountInterface $account) {
+    if ($this->loggedInUser) {
+      $this->drupalLogout();
+    }
+
+    // Add waiting time, before opening of new page.
+    $this->assertSession()->assertWaitOnAjaxRequest();
+
+    $this->drupalGet('user');
+    $this->submitForm([
+      'name' => $account->getUsername(),
+      'pass' => $account->passRaw,
+    ], t('Log in'));
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    $account->sessionId = $this->getSession()
+      ->getCookie($this->getSessionName());
+    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', ['name' => $account->getUsername()]));
+
+    $this->loggedInUser = $account;
+    $this->container->get('current_user')->setAccount($account);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function drupalLogout() {
+    // Make a request to the logout page, and redirect to the user page, the
+    // idea being if you were properly logged out you should be seeing a login
+    // screen.
+    $assert_session = $this->assertSession();
+    $this->drupalGet('user/logout', ['query' => ['destination' => 'user']]);
+    $assert_session->fieldExists('name');
+    $assert_session->fieldExists('pass');
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    unset($this->loggedInUser->sessionId);
+    $this->loggedInUser = FALSE;
+    $this->container->get('current_user')
+      ->setAccount(new AnonymousUserSession());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getHtmlOutputHeaders() {
+    return '';
+  }
 
   /**
    * {@inheritdoc}

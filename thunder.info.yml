@@ -11,7 +11,7 @@ distribution:
 # Required modules
 dependencies:
   - config_selector
-  - media_entity
+  - media
   - node
   - views
 
