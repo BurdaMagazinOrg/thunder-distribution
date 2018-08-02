@@ -25,23 +25,6 @@ function thunder_taxonomy_update_dependencies() {
 }
 
 /**
- * Implements hook_install().
- */
-function thunder_taxonomy_install() {
-  // Add our base fields to the schema.
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-
-}
-
-/**
- * Implements hook_uninstall().
- */
-function thunder_taxonomy_uninstall() {
-  // Remove our base fields from the schema.
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-}
-
-/**
  * Grant term access permissions.
  */
 function thunder_taxonomy_update_8001() {
