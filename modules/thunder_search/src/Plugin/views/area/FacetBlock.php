@@ -36,7 +36,7 @@ class FacetBlock extends AreaPluginBase {
 
       if ($config['view_id'] == $this->view->id() && $config['view_display'] == $this->view->current_display) {
         $built_facet = $facetManager->build($facet);
-        if ($built_facet) {
+        if (isset($built_facet[0]['#theme'])) {
           $build[$id] = [
             '#type' => 'container',
             '#attributes' => ['class' => 'form-item'],
