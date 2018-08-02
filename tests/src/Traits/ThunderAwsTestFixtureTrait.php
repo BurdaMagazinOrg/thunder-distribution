@@ -35,7 +35,7 @@ trait ThunderAwsTestFixtureTrait {
       $remote = 'https://s3-eu-west-1.amazonaws.com/thunder-public-files/test_fixtures/' . $filename;
 
       $client = $this->getHttpClient();
-      if (!file_exists($local) || sha1_file('/private/var/tmp/thunder_test_fixtures/thunder.2-0.php.gz') !== $client->head($remote)->getHeaderLine('x-amz-meta-sha')) {
+      if (!file_exists($local) || sha1_file($local) !== $client->head($remote)->getHeaderLine('x-amz-meta-sha')) {
         $client->get($remote, ['sink' => $local]);
       }
       $files[$filename] = $local;

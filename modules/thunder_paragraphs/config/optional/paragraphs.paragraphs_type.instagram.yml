@@ -3,4 +3,6 @@ status: true
 dependencies: {  }
 id: instagram
 label: Instagram
+icon_uuid: null
+description: ''
 behavior_plugins: {  }

@@ -37,7 +37,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
-    'amp',
 
     // Additional modules.
     // 'thunder_fia',
@@ -45,6 +44,8 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // thunder_liveblog_module_preinstall, so it's not possible to check the
     // thunder_liveblog config in a proper way.
     // 'thunder_liveblog',
+    // TODO: Uncomment this when https://www.drupal.org/node/2860803 is fixed.
+    // 'amp'
     // end of list.
   ];
 
@@ -188,11 +189,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       ],
     ],
 
-    // Diff module. Issue: https://www.drupal.org/node/2854581.
-    'core.entity_view_mode.node.diff' => [
-      'langcode' => TRUE,
-    ],
-
     // The thunder profile changes article and channel taxonomy when ivw module
     // is installed.
     'core.entity_form_display.node.article.default' => [
@@ -219,6 +215,10 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'content' => [
         'path' => TRUE,
       ],
+    ],
+    'paragraphs.paragraphs_type.nexx_video' => [
+      'icon_uuid' => TRUE,
+      'description' => TRUE,
     ],
     // Riddle paragraph is added dynamically by thunder profile on
     // thunder_riddle installation.
