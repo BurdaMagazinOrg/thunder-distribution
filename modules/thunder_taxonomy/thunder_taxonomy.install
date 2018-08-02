@@ -70,3 +70,30 @@ function thunder_taxonomy_update_8002() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Use core term status field definition.
+ */
+function thunder_taxonomy_update_8003() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $definition_update_manager->getEntityType('taxonomy_term');
+
+  $entity_keys = $entity_type->getKeys();
+  $entity_keys['published'] = 'status';
+  $entity_type->set('entity_keys', $entity_keys);
+
+  $definition_update_manager->updateEntityType($entity_type);
+
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $field_manager */
+  $field_manager = \Drupal::service('entity_field.manager');
+  $status = $field_manager->getBaseFieldDefinitions('taxonomy_term')['status'];
+
+  $definition_update_manager->updateFieldStorageDefinition($status->getFieldStorageDefinition());
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+
+}
