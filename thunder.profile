@@ -71,7 +71,7 @@ function thunder_post_install_redirect(array &$install_state) {
   install_finished($install_state);
 
   // Clear all messages.
-  \Drupal::messenger()->all();
+  \Drupal::messenger()->deleteAll();
 
   $success_message = t('Congratulations, you installed @drupal!', [
     '@drupal' => drupal_install_profile_distribution_name(),
