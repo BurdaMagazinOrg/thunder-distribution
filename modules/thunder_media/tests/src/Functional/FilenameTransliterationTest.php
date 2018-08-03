@@ -55,7 +55,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
-    $max_fid_after = $this->getDatabaseConnection()->query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
+    $max_fid_after = \Drupal::database()->query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
 
     $file = File::load($max_fid_after);
 
