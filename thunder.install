@@ -113,6 +113,15 @@ function thunder_install() {
 
   \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
 
+  // Disable default media view, because we have our own. This is also part of
+  // thunder_media_install() but we had to add it here again because the
+  // installation order of media_entity and thunder_media has changed.
+  if ($media_view = View::load('media')) {
+    $media_view->setStatus(FALSE)->save();
+  }
+  if ($thunder_media_view = View::load('thunder_media')) {
+    $thunder_media_view->setStatus(TRUE)->save();
+  }
 }
 
 /**

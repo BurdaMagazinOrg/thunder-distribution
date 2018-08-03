@@ -72,7 +72,7 @@ function thunder_taxonomy_update_8002() {
 }
 
 /**
- * Use core term status field definition.
+ * Use core's term status field definition.
  */
 function thunder_taxonomy_update_8003() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
@@ -95,5 +95,4 @@ function thunder_taxonomy_update_8003() {
 
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
-
 }
