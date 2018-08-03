@@ -87,10 +87,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Configure modules.
     $this->setUpModules();
 
-    // Click link, we don't get redirected automatically in tests.
-    $this->clickLink('click here');
-    $this->isInstalled = TRUE;
-
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
