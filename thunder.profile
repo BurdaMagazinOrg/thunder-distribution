@@ -71,7 +71,7 @@ function thunder_post_install_redirect(array &$install_state) {
   install_finished($install_state);
 
   // Clear all messages.
-  drupal_get_messages();
+  \Drupal::messenger()->deleteAll();
 
   $success_message = t('Congratulations, you installed @drupal!', [
     '@drupal' => drupal_install_profile_distribution_name(),
@@ -202,7 +202,7 @@ function thunder_themes_installed($theme_list) {
 
     // Adding header and footer blocks to default article view.
     /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $display */
-    $display = entity_load('entity_view_display', 'node.article.default');
+    $display = entity_get_display('node', 'article', 'default');
 
     $display->setComponent('field_header_blocks', [
       'type' => 'entity_reference_entity_view',
@@ -323,7 +323,7 @@ function thunder_modules_installed($modules) {
   if (in_array('thunder_riddle', $modules)) {
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = entity_load('field_config', 'node.article.field_paragraphs');
+    $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
     $settings = $field->getSetting('handler_settings');
 
