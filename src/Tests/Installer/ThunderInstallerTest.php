@@ -6,7 +6,9 @@ use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;
 use Drupal\Core\Site\Settings;
-use Drupal\simpletest\InstallerTestBase;
+use Drupal\Core\Test\HttpClientMiddleware\TestHttpClientMiddleware;
+use Drupal\FunctionalTests\Installer\InstallerTestBase;
+use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +25,14 @@ class ThunderInstallerTest extends InstallerTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
-
     $this->isInstalled = FALSE;
+
+    $this->setupBaseUrl();
+
+    $this->prepareDatabasePrefix();
+
+    // Install Drupal test site.
+    $this->prepareEnvironment();
 
     // Define information about the user 1 account.
     $this->rootUser = new UserSession([
@@ -42,14 +50,16 @@ class ThunderInstallerTest extends InstallerTestBase {
       $this->writeSettings($this->settings);
     }
 
-    // Note that WebTestBase::installParameters() returns form input values
-    // suitable for a programmed \Drupal::formBuilder()->submitForm().
-    // @see WebTestBase::translatePostValues()
+    // Note that FunctionalTestSetupTrait::installParameters() returns form
+    // input values suitable for a programmed
+    // \Drupal::formBuilder()->submitForm().
+    // @see InstallerTestBase::translatePostValues()
     $this->parameters = $this->installParameters();
 
-    // Set up a minimal container (required by WebTestBase).
+    // Set up a minimal container (required by BrowserTestBase). Set cookie and
+    // server information so that XDebug works.
     // @see install_begin_request()
-    $request = Request::create($GLOBALS['base_url'] . '/core/install.php');
+    $request = Request::create($GLOBALS['base_url'] . '/core/install.php', 'GET', [], $_COOKIE, [], $_SERVER);
     $this->container = new ContainerBuilder();
     $request_stack = new RequestStack();
     $request_stack->push($request);
@@ -64,10 +74,28 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->register('string_translation', 'Drupal\Core\StringTranslation\TranslationManager')
       ->addArgument(new Reference('language.default'));
     $this->container
+      ->register('http_client', 'GuzzleHttp\Client')
+      ->setFactory('http_client_factory:fromOptions');
+    $this->container
+      ->register('http_client_factory', 'Drupal\Core\Http\ClientFactory')
+      ->setArguments([new Reference('http_handler_stack')]);
+    $handler_stack = HandlerStack::create();
+    $test_http_client_middleware = new TestHttpClientMiddleware();
+    $handler_stack->push($test_http_client_middleware(), 'test.http_client.middleware');
+    $this->container
+      ->set('http_handler_stack', $handler_stack);
+
+    $this->container
       ->set('app.root', DRUPAL_ROOT);
     \Drupal::setContainer($this->container);
 
-    $this->drupalGet($GLOBALS['base_url'] . '/core/install.php');
+    // Setup Mink.
+    $this->initMink();
+
+    // Set up the browser test output file.
+    $this->initBrowserOutputFile();
+
+    $this->visitInstaller();
 
     // Select language.
     $this->setUpLanguage();
@@ -100,7 +128,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       // from the site directory. To allow drupal_generate_test_ua() to write
       // a file containing the private key for drupal_valid_test_ua(), the site
       // directory has to be writable.
-      // WebTestBase::tearDown() will delete the entire test site directory.
+      // BrowserTestBase::tearDown() will delete the entire test site directory.
       // Not using File API; a potential error must trigger a PHP warning.
       chmod($this->container->get('app.root') . '/' . $this->siteDirectory, 0777);
       $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
@@ -149,8 +177,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules() {
-
     $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
+    $this->isInstalled = TRUE;
   }
 
   /**

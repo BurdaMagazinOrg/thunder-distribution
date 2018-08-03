@@ -65,6 +65,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
     }
     $this->assertEqual($expected_warnings, $warnings);
     $this->clickLink($this->translations['continue anyway']);
+    $this->checkForMetaRefresh();
   }
 
 }
