@@ -4,14 +4,14 @@ namespace Drupal\Tests\thunder_media\Functional;
 
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests for transliteration of file names.
  *
  * @group Thunder
  */
-class FilenameTransliterationTest extends ThunderBaseTest {
+class FilenameTransliterationTest extends ThunderTestBase {
 
   /**
    * Modules to enable.
