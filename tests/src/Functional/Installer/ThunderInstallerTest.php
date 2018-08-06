@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Tests\Installer;
+namespace Drupal\Tests\thunder\Functional\Installer;
 
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;

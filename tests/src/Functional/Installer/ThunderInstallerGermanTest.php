@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Tests\Installer;
+namespace Drupal\Tests\thunder\Functional\Installer;
 
 /**
  * Tests the interactive installer installing the standard profile.

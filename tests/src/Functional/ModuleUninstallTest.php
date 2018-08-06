@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\thunder\ThunderBaseTest;
-
 /**
  * Test for checking of module uninstall functionality.
  *

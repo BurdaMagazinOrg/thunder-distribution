@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\thunder\ThunderBaseTest;
-
 /**
  * Test the Thunder content list view.
  *
