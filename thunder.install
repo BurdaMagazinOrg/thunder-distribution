@@ -74,7 +74,7 @@ function thunder_update_dependencies() {
  */
 function thunder_install() {
 
-  drupal_get_messages();
+  \Drupal::messenger()->deleteAll();
 
   // Enable the admin theme.
   \Drupal::configFactory()
@@ -1101,32 +1101,18 @@ function thunder_update_8124() {
 }
 
 /**
- * Install seven theme.
+ * Empty update.
  */
 function thunder_update_8125() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
-  $themeInstaller = \Drupal::service('theme_installer');
-
-  if ($themeInstaller->install(['seven'])) {
-    $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
-  }
-  else {
-    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
-  }
-
-  // Output logged result of update hook execution.
-  return $thunderUpdater->logger()->output();
+  // Moved to thunder_update_8126(): seven theme was not added to thunder
+  // dependencies, therefore new installations did not get it yet.
 }
 
 /**
- * Install seven theme (again).
+ * Install seven theme.
  *
- * Seven theme was not added to thunder dependencies, therefore new
- * installations did not get it yet.
+ * In preparation of a thunder_admin theme stable release which will use seven
+ * as a base theme.
  */
 function thunder_update_8126() {
   /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
