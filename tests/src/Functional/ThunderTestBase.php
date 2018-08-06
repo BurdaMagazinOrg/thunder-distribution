@@ -7,8 +7,6 @@ use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
 /**
  * Class ThunderTestBase.
- *
- * @package Drupal\thunder
  */
 abstract class ThunderTestBase extends BrowserTestBase {
 

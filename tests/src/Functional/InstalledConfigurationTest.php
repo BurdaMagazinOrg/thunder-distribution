@@ -12,7 +12,7 @@ use Drupal\Core\Config\Schema\SchemaCheckTrait;
  *
  * @group ThunderConfig
  */
-class InstalledConfigurationTestBase extends ThunderTestBase {
+class InstalledConfigurationTest extends ThunderTestBase {
 
   use SchemaCheckTrait;
 

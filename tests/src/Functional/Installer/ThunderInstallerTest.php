@@ -149,9 +149,9 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpLanguage() {
     // Verify that the distribution name appears.
-    $this->assertRaw('thunder');
+    $this->assertSession()->responseContains('thunder');
     // Verify that the "Choose profile" step does not appear.
-    $this->assertNoText('profile');
+    $this->assertSession()->pageTextNotContains('profile');
 
     parent::setUpLanguage();
   }
@@ -185,21 +185,21 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled() {
-    $this->assertUrl('?tour=1');
-    $this->assertResponse(200);
+    $this->assertSession()->addressEquals('?tour=1');
+    $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
-    $this->assertText($this->rootUser->getUsername());
+    $this->assertSession()->pageTextContains($this->rootUser->getUsername());
 
     // Ensure demo content is installed.
-    $this->assertText('Burda Launches Open-Source CMS Thunder');
-    $this->assertText('Come to DrupalCon New Orleans');
+    $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
+    $this->assertSession()->pageTextContains('Come to DrupalCon New Orleans');
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
       ->condition('severity', 4, '<');
 
     // Check that there are no warnings in the log after installation.
-    $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);
+    $this->assertEquals($query->countQuery()->execute()->fetchField(), 0);
 
   }
 
