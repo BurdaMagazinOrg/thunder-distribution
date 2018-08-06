@@ -6,11 +6,11 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
 /**
- * Class ThunderBaseTest.
+ * Class ThunderTestBase.
  *
  * @package Drupal\thunder
  */
-class ThunderBaseTest extends BrowserTestBase {
+abstract class ThunderTestBase extends BrowserTestBase {
 
   use ThunderTestTrait;
 

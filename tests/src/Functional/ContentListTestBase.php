@@ -7,7 +7,7 @@ namespace Drupal\Tests\thunder\Functional;
  *
  * @group Thunder
  */
-class ContentListTest extends ThunderBaseTest {
+class ContentListTestBase extends ThunderTestBase {
 
   /**
    * The profile to install as a basis for testing.
