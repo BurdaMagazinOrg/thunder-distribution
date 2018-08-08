@@ -91,8 +91,6 @@ function thunder_taxonomy_update_8003() {
   $field_manager = \Drupal::service('entity_field.manager');
   $status = $field_manager->getBaseFieldDefinitions('taxonomy_term')['status'];
 
-  $definition_update_manager->updateFieldStorageDefinition($status->getFieldStorageDefinition());
-
   // Copied this part from https://www.drupal.org/node/2985366. It's only for
   // safties sake, because Thunder user should never had the
   // content_translation_status field.
@@ -103,6 +101,8 @@ function thunder_taxonomy_update_8003() {
   else {
     $status->setInitialValue(TRUE);
   }
+
+  $definition_update_manager->updateFieldStorageDefinition($status->getFieldStorageDefinition());
 
   // Uninstall the 'content_translation_status' field if needed.
   if ($has_content_translation_status_field) {
