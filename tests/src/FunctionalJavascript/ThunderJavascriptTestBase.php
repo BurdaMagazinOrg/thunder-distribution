@@ -4,7 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
@@ -139,14 +139,14 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     $this->drupalGet('user');
     $this->submitForm([
-      'name' => $account->getUsername(),
+      'name' => $account->getAccountName(),
       'pass' => $account->passRaw,
     ], t('Log in'));
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     $account->sessionId = $this->getSession()
       ->getCookie($this->getSessionName());
-    $this->assertTrue($this->drupalUserIsLoggedIn($account), SafeMarkup::format('User %name successfully logged in.', ['name' => $account->getUsername()]));
+    $this->assertTrue($this->drupalUserIsLoggedIn($account), new FormattableMarkup('User %name successfully logged in.', ['%name' => $account->getAccountName()]));
 
     $this->loggedInUser = $account;
     $this->container->get('current_user')->setAccount($account);

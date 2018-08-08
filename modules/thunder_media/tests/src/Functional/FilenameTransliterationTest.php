@@ -47,7 +47,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
     // Upload with replace to guarantee there's something there.
     $edit = [
       'file_test_replace' => FILE_EXISTS_RENAME,
-      'files[file_test_upload]' => drupal_realpath('public://foo°.png'),
+      'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
     $this->assertSession()->statusCodeEquals(200);
@@ -55,7 +55,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
-    $max_fid_after = db_query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
+    $max_fid_after = \Drupal::database()->query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
 
     $file = File::load($max_fid_after);
 

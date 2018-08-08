@@ -24,7 +24,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    */
   public function testCreateArticle() {
     $this->articleFillNew([
-      'field_channel' => [[1, 'News']],
+      'field_channel' => 1,
       'title[0][value]' => 'Test article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
