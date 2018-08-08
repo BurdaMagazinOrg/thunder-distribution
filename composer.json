@@ -67,6 +67,9 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
+            },
+            "drupal/slick_media": {
+                "Is the video_embed_media dependency needed?": "https://www.drupal.org/files/issues/2018-08-08/2988579-3.patch"
             }
         }
     },
