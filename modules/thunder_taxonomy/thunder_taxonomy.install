@@ -93,6 +93,23 @@ function thunder_taxonomy_update_8003() {
 
   $definition_update_manager->updateFieldStorageDefinition($status->getFieldStorageDefinition());
 
+  // Copied this part from https://www.drupal.org/node/2985366. It's only for
+  // safties sake, because Thunder user should never had the
+  // content_translation_status field.
+  $has_content_translation_status_field = \Drupal::moduleHandler()->moduleExists('content_translation') && $definition_update_manager->getFieldStorageDefinition('content_translation_status', 'taxonomy_term');
+  if ($has_content_translation_status_field) {
+    $status->setInitialValueFromField('content_translation_status', TRUE);
+  }
+  else {
+    $status->setInitialValue(TRUE);
+  }
+
+  // Uninstall the 'content_translation_status' field if needed.
+  if ($has_content_translation_status_field) {
+    $content_translation_status = $definition_update_manager->getFieldStorageDefinition('content_translation_status', 'taxonomy_term');
+    $definition_update_manager->uninstallFieldStorageDefinition($content_translation_status);
+  }
+
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
