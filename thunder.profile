@@ -185,7 +185,7 @@ function thunder_modules_installed($modules) {
   if (in_array('thunder_riddle', $modules)) {
 
     /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = entity_load('field_config', 'node.article.field_paragraphs');
+    $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
     $settings = $field->getSetting('handler_settings');
 
