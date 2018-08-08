@@ -66,6 +66,10 @@ function thunder_update_dependencies() {
     $info[$updates[$module]['start']] = $list;
   }
 
+  // Set a custom skip message for update taxonomy_update_8601(), because we
+  // provide our own update path in thunder_taxonomy_update_8003().
+  \Drupal::state()->set('taxonomy_update_8601_skip_message', 'This update function was skipped, because Thunder provides it\'s own update for the status field on taxonomy terms.');
+
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
 }
 
