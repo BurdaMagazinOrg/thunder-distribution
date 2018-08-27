@@ -115,7 +115,7 @@
         "drupal/libraries": "^3.0",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
-        "drupal/media_entity": "1.7",
+        "drupal/media_entity": "1.8",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
         "drupal/media_entity_pinterest": "^1.0",
