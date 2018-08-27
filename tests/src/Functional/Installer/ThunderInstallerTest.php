@@ -151,7 +151,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Verify that the distribution name appears.
     $this->assertSession()->responseContains('thunder');
     // Verify that the "Choose profile" step does not appear.
-    $this->assertSession()->pageTextNotContains('profile');
+    $this->assertSession()->pageTextNotContains('Choose profile');
 
     parent::setUpLanguage();
   }

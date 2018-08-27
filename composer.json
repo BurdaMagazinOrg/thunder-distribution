@@ -70,9 +70,6 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
-            },
-            "drupal/core": {
-                "The message displayed by taxonomy_update_8601() should be overridable": "https://www.drupal.org/files/issues/2018-08-08/2991346-4.patch"
             }
         }
     },
@@ -91,7 +88,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "8.6.x-dev",
+        "drupal/core": "^8.6.0",
         "drupal/config_selector": "^1.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
