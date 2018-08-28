@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder;
+namespace Drupal\Tests\thunder\Traits;
 
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;

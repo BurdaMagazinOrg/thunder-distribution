@@ -2,14 +2,14 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the admin toolbar.
  *
  * @group Thunder
  */
-class AdminToolbarTest extends ThunderBaseTest {
+class AdminToolbarTest extends ThunderTestBase {
 
   /**
    * Tests empty menu groups are gone with admin_toolbar_links_access_filter.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Tests\Installer;
+namespace Drupal\Tests\thunder\Functional\Installer;
 
 /**
  * Tests the interactive installer installing the standard profile.
@@ -61,10 +61,11 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
     // Confirm that there are only the expected warnings.
     $warnings = [];
     foreach ($warning_elements as $warning) {
-      $warnings[] = trim((string) $warning);
+      $warnings[] = trim($warning->getText());
     }
-    $this->assertEqual($expected_warnings, $warnings);
+    $this->assertEquals($expected_warnings, $warnings);
     $this->clickLink($this->translations['continue anyway']);
+    $this->checkForMetaRefresh();
   }
 
 }
