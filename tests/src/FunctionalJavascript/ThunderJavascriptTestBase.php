@@ -9,7 +9,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\thunder\ThunderTestTrait;
+use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
 /**
  * Base class for Thunder Javascript functional tests.
