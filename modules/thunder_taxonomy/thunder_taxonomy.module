@@ -6,19 +6,14 @@
  */
 
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_entity_base_field_info().
+ * Implements hook_entity_base_field_info_alter().
  */
-function thunder_taxonomy_entity_base_field_info(EntityTypeInterface $entity_type) {
-  if ($entity_type->id() === 'taxonomy_term') {
-    $fields['status'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Published'))
-      ->setRevisionable(TRUE)
-      ->setTranslatable(TRUE)
-      ->setDefaultValue(TRUE)
+function thunder_taxonomy_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() == 'taxonomy_term') {
+    $fields['status']
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
         'settings' => [
@@ -27,8 +22,6 @@ function thunder_taxonomy_entity_base_field_info(EntityTypeInterface $entity_typ
         'weight' => 120,
       ])
       ->setDisplayConfigurable('form', TRUE);
-
-    return $fields;
   }
 }
 

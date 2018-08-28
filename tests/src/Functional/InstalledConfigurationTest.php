@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\Schema\SchemaCheckTrait;
-use Drupal\thunder\ThunderBaseTest;
 
 /**
  * Test for checking of configuration after install of thunder profile.
@@ -13,7 +12,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @group ThunderConfig
  */
-class InstalledConfigurationTest extends ThunderBaseTest {
+class InstalledConfigurationTest extends ThunderTestBase {
 
   use SchemaCheckTrait;
 

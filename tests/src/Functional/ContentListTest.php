@@ -2,14 +2,12 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\thunder\ThunderBaseTest;
-
 /**
  * Test the Thunder content list view.
  *
  * @group Thunder
  */
-class ContentListTest extends ThunderBaseTest {
+class ContentListTest extends ThunderTestBase {
 
   /**
    * The profile to install as a basis for testing.
