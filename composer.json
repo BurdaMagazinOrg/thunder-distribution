@@ -73,9 +73,6 @@
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-07-31/2798689-98.patch"
-            },
-            "drupal/core": {
-                "Move content_moderation config in standard profile": "https://www.drupal.org/files/issues/2018-03-13/move-content_moderation-config.patch"
             }
         }
     },
@@ -94,7 +91,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.5.0",
+        "drupal/core": "^8.6.0",
         "drupal/config_selector": "^1.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
@@ -117,7 +114,7 @@
         "drupal/libraries": "^3.0",
         "drupal/linkit": "^4.0",
         "drupal/liveblog": "^1.0",
-        "drupal/media_entity": "1.7",
+        "drupal/media_entity": "1.8",
         "drupal/media_entity_instagram": "^1.0",
         "drupal/media_entity_image": "^1.0",
         "drupal/media_entity_pinterest": "^1.0",

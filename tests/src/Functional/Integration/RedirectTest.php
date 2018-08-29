@@ -2,14 +2,14 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the redirect.
  *
  * @group Thunder
  */
-class RedirectTest extends ThunderBaseTest {
+class RedirectTest extends ThunderTestBase {
 
   protected static $modules = ['thunder_demo', 'content_moderation'];
 

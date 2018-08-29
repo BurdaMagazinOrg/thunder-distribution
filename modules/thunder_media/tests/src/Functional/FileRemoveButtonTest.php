@@ -2,14 +2,14 @@
 
 namespace Drupal\Tests\thunder_media\Functional;
 
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests for transliteration of file names.
  *
  * @group Thunder
  */
-class FileRemoveButtonTest extends ThunderBaseTest {
+class FileRemoveButtonTest extends ThunderTestBase {
 
   /**
    * Modules to enable.

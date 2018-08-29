@@ -5,6 +5,8 @@ namespace Drupal\thunder_article\Breadcrumb;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\ParamConverter\ParamNotConvertedException;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -13,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Drupal\Core\Entity\EntityManagerInterface;
 
 /**
  * Class to define the menu_link breadcrumb builder.
@@ -71,11 +72,11 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   protected $currentUser;
 
   /**
-   * The entity manager.
+   * The entity repository service.
    *
-   * @var \Drupal\Core\Entity\EntityManagerInterface
+   * @var \Drupal\Core\Entity\EntityRepositoryInterface
    */
-  protected $entityManager;
+  protected $entityRepository;
 
   /**
    * The taxonomy storage.
@@ -85,16 +86,21 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   protected $termStorage;
 
   /**
-   * Constructs the PathBasedBreadcrumbBuilder.
+   * Constructs the ThunderArticleBreadcrumbBuilder.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entityManager
-   *   EntityManager (entity.manager) service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository
+   *   The entity repository service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(EntityManagerInterface $entityManager, ConfigFactoryInterface $configFactory) {
-    $this->entityManager = $entityManager;
-    $this->termStorage = $entityManager->getStorage('taxonomy_term');
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, EntityRepositoryInterface $entityRepository, ConfigFactoryInterface $configFactory) {
+    $this->entityRepository = $entityRepository;
+    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
     $this->configFactory = $configFactory;
   }
 
@@ -132,7 +138,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
       $channels = $this->termStorage->loadAllParents($term->id());
       foreach (array_reverse($channels) as $term) {
-        $term = $this->entityManager->getTranslationFromContext($term);
+        $term = $this->entityRepository->getTranslationFromContext($term);
         $breadcrumb->addCacheableDependency($term);
         $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
       }
