@@ -38,7 +38,7 @@ drush_make_thunder() {
 
     # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
     rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-    git clone --depth 1 --single-branch --branch feature/content_moderation https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch "feature/content_moderation" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
 }
@@ -49,7 +49,11 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-feature/content_moderation" --no-progress
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+
+    # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
+    rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch "feature/content_moderation" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 }
 
 apply_patches() {
