@@ -26,6 +26,21 @@ function thunder_amp_preprocess_video_embed_iframe__youtube(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
+function thunder_amp_preprocess_media__source_oembed__derivative_video__provider_youtube(&$variables) {
+  #var_dump(array_keys($variables));
+  #var_dump($variables['content']);
+
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $variables['media'];
+  $url = $media->getSource()->getSourceFieldValue($media);
+
+  preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+  $variables['videoid'] = $match[1];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
 function thunder_amp_preprocess_media_twitter_tweet(&$variables) {
   $explodedUrl = explode('/', $variables['path']);
   $variables['tweetid'] = end($explodedUrl);
