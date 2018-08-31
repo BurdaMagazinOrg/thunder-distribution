@@ -83,6 +83,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
     'core.entity_view_mode.block.token',
+    'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
     'core.entity_view_mode.menu_link_content.token',
