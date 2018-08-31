@@ -43,6 +43,9 @@ function thunder_amp_preprocess_media__source_oembed__derivative_video__provider
   _thunder_amp_set_oembed_attributes($variables, $url);
 }
 
+/**
+ * Set's width and height for oEmbed items.
+ */
 function _thunder_amp_set_oembed_attributes(&$variables, $url) {
   /** @var \Drupal\media\OEmbed\UrlResolverInterface $url_resolver */
   $url_resolver = \Drupal::service('media.oembed.url_resolver');
