@@ -528,8 +528,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
 
     $page = $this->getSession()->getPage();
 
-    $this->scrollElementInView('#edit-moderation-state-0-state');
-    $page->find('xpath', '//*[@id="edit-moderation-state-0-state"]')
+    $page->find('xpath', '//*[@id="edit-moderation-state-0"]')
       ->selectOption($state);
   }
 
