@@ -317,4 +317,3 @@ function thunder_toolbar_alter(&$items) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
   }
 }
-
