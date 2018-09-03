@@ -6,9 +6,16 @@ distribution:
   name: Thunder
   install:
     theme: thunder_admin
+    finish_url: /?tour=1
 
 # Required modules
 dependencies:
+  - config_selector
+  - media_entity
+  - node
+  - views
+
+install:
   # core
   - block
   - breakpoint
@@ -22,7 +29,6 @@ dependencies:
   - inline_form_errors
   - menu_ui
   - language
-  - node
   - options
   - path
   - page_cache
@@ -33,14 +39,12 @@ dependencies:
   - field_ui
   - file
   - responsive_image
-  - views
   - views_ui
 # contrib
   - access_unpublished
   - admin_toolbar_tools
   - admin_toolbar_links_access_filter
   - blazy
-  - config_selector
   - content_lock
   - ctools
   - diff

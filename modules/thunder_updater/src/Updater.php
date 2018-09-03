@@ -8,7 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Drupal\Component\Utility\DiffArray;
 
 /**
@@ -28,7 +28,7 @@ class Updater implements UpdaterInterface {
   /**
    * Temp store factory.
    *
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempStoreFactory;
 
@@ -70,7 +70,7 @@ class Updater implements UpdaterInterface {
   /**
    * Constructs the PathBasedBreadcrumbBuilder.
    *
-   * @param \Drupal\user\SharedTempStoreFactory $tempStoreFactory
+   * @param \Drupal\Core\TempStore\SharedTempStoreFactory $tempStoreFactory
    *   A temporary key-value store service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory service.

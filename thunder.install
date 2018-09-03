@@ -66,6 +66,12 @@ function thunder_update_dependencies() {
     $info[$updates[$module]['start']] = $list;
   }
 
+  // Set a custom skip message for update taxonomy_update_8601(), because we
+  // provide our own update path in thunder_taxonomy_update_8003().
+  if (!empty($updates['taxonomy']['pending'][8601])) {
+    \Drupal::state()->set('taxonomy_update_8601_skip_message', 'This update function was skipped, because Thunder provides it\'s own update for the status field on taxonomy terms.');
+  }
+
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
 }
 
@@ -74,7 +80,7 @@ function thunder_update_dependencies() {
  */
 function thunder_install() {
 
-  drupal_get_messages();
+  \Drupal::messenger()->deleteAll();
 
   // Enable the admin theme.
   \Drupal::configFactory()
@@ -113,6 +119,15 @@ function thunder_install() {
 
   \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
 
+  // Disable default media view, because we have our own. This is also part of
+  // thunder_media_install() but we had to add it here again because the
+  // installation order of media_entity and thunder_media has changed.
+  if ($media_view = View::load('media')) {
+    $media_view->setStatus(FALSE)->save();
+  }
+  if ($thunder_media_view = View::load('thunder_media')) {
+    $thunder_media_view->setStatus(TRUE)->save();
+  }
 }
 
 /**
