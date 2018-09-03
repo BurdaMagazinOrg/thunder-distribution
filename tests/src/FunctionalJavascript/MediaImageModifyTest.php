@@ -4,7 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 use Imagick;
 
 /**
@@ -103,29 +103,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
       ->fieldValueEquals('field_source[0][value]', "Media {$mediaId} Source");
     $this->assertSession()
       ->fieldValueEquals('field_description[0][value]', "<p>Media {$mediaId} Description</p>");
-  }
-
-  /**
-   * Click article save option based on index of action.
-   *
-   * 1 - Save as unpublished (default).
-   * 2 - Save and publish.
-   *
-   * Media entity still using the old collased "Save and publish" button.
-   *
-   * @param int $actionIndex
-   *   Index for option that should be clicked. (by default 1)
-   *
-   * @TODO: Remove this when switching to core media.
-   */
-  protected function clickSave($actionIndex = 1) {
-    $page = $this->getSession()->getPage();
-    if ($actionIndex !== 1) {
-      $page->find('xpath', '//ul[@data-drupal-selector="edit-save"]/li[2]/button')
-        ->click();
-    }
-    $page->find('xpath', '(//ul[@data-drupal-selector="edit-save"]/li/input)[' . $actionIndex . ']')
-      ->click();
   }
 
 }

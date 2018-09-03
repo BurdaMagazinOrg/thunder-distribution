@@ -51,7 +51,7 @@ function thunder_riddle_uninstall() {
     'field.field.paragraph.riddle.field_riddle',
     'field.storage.media.field_riddle_id',
     'field.storage.paragraph.field_riddle',
-    'media_entity.bundle.riddle',
+    'media.type.riddle',
     'paragraphs.paragraphs_type.riddle',
     'views.view.riddle_browser',
   ];

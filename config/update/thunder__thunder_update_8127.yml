@@ -1,0 +1,23 @@
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_tags:
+        settings:
+          match_operator: CONTAINS
+          placeholder: ''
+          size: 60
+        type: entity_reference_autocomplete_tags
+  update_actions:
+    change:
+      content:
+        field_tags:
+          settings:
+            autocomplete: true
+          type: select2_entity_reference
+    delete:
+      content:
+        field_tags:
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60

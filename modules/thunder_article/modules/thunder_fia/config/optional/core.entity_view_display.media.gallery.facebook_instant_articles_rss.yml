@@ -4,7 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.facebook_instant_articles_rss
     - field.field.media.gallery.field_media_images
-    - media_entity.bundle.gallery
+    - media.type.gallery
 id: media.gallery.facebook_instant_articles_rss
 targetEntityType: media
 bundle: gallery

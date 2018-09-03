@@ -7,7 +7,7 @@ dependencies:
     - field.field.media.video.field_description
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
-    - media_entity.bundle.video
+    - media.type.video
   module:
     - text
     - video_embed_field

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
 id: media.field_riddle_id
 field_name: field_riddle_id
 entity_type: media

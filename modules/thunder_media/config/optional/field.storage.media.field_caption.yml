@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
     - text
 id: media.field_caption
 field_name: field_caption

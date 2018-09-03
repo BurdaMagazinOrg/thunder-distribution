@@ -6,9 +6,16 @@ distribution:
   name: Thunder
   install:
     theme: thunder_admin
+    finish_url: /?tour=1
 
 # Required modules
 dependencies:
+  - config_selector
+  - media
+  - node
+  - views
+
+install:
   # core
   - block
   - breakpoint
@@ -22,7 +29,6 @@ dependencies:
   - inline_form_errors
   - menu_ui
   - language
-  - node
   - options
   - path
   - page_cache
@@ -33,14 +39,12 @@ dependencies:
   - field_ui
   - file
   - responsive_image
-  - views
   - views_ui
 # contrib
   - access_unpublished
   - admin_toolbar_tools
   - admin_toolbar_links_access_filter
   - blazy
-  - config_selector
   - content_lock
   - ctools
   - diff
@@ -52,7 +56,6 @@ dependencies:
   - length_indicator
   - libraries
   - linkit
-  - media_entity_image
   - media_entity_instagram
   - media_entity_pinterest
   - media_entity_slideshow
@@ -67,6 +70,7 @@ dependencies:
   - pathauto
   - redirect
   - scheduler
+  - select2
   - simple_sitemap
   - slick_media
   - responsive_preview
@@ -78,5 +82,6 @@ dependencies:
   - thunder_taxonomy
   - thunder_updater
 themes:
+  - seven
   - thunder_base
   - thunder_admin

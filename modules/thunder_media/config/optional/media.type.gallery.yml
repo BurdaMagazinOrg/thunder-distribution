@@ -6,9 +6,9 @@ dependencies:
 id: gallery
 label: Gallery
 description: ''
-type: slideshow
+source: slideshow
 queue_thumbnail_downloads: false
 new_revision: false
-type_configuration:
+source_configuration:
   source_field: field_media_images
 field_map: {  }

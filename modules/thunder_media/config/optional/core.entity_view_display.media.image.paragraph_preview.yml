@@ -10,7 +10,7 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
     - image.style.paragraph_preview_thumbnail
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - image
 id: media.image.paragraph_preview

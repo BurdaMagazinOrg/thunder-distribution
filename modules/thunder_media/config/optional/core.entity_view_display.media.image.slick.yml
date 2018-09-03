@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - blazy
 id: media.image.slick

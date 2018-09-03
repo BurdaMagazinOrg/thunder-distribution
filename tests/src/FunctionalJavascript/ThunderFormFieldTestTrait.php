@@ -44,7 +44,7 @@ trait ThunderFormFieldTestTrait {
    *   Current active page.
    * @param string $fieldName
    *   Field name.
-   * @param string $value
+   * @param string|array $value
    *   Value for field.
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
@@ -75,8 +75,22 @@ trait ThunderFormFieldTestTrait {
     }
     elseif ($fieldTag === 'select') {
       // Handling of dropdown list.
-      $page->selectFieldOption($fieldName, $value);
-
+      if (!$page->find('css', "[name=\"{$fieldName}\"][class*='select2-widget']")) {
+        $page->selectFieldOption($fieldName, $value, TRUE);
+      }
+      else {
+        foreach ($value as $item) {
+          $id = is_array($item) ? $item[0] : "\$ID:$item";
+          $label = is_array($item) ? $item[1] : $item;
+          if (!$field->find('named', ['option', $id])) {
+            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option('$label', '$id', false, false)).trigger('change')");
+            $page->selectFieldOption($fieldName, $id, TRUE);
+          }
+          else {
+            $page->selectFieldOption($fieldName, $id, TRUE);
+          }
+        }
+      }
       return;
     }
 

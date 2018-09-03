@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\thunder\ThunderBaseTest;
-
 /**
  * Test for checking of module uninstall functionality.
  *
@@ -11,7 +9,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @group ThunderConfig
  */
-class ModuleUninstallTest extends ThunderBaseTest {
+class ModuleUninstallTest extends ThunderTestBase {
 
   /**
    * Modules to test uninstall/install capability.

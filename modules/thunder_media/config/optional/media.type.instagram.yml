@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - crop
-    - media_entity_pinterest
+    - media_entity_instagram
     - media_expire
 third_party_settings:
   crop:
@@ -12,13 +12,12 @@ third_party_settings:
     enable_expiring: null
     expire_field: null
     fallback_media: null
-id: pinterest
-label: Pinterest
+id: instagram
+label: Instagram
 description: ''
-type: pinterest
+source: instagram
 queue_thumbnail_downloads: false
 new_revision: false
-type_configuration:
-  use_pinterest_api: false
+source_configuration:
   source_field: field_url
 field_map: {  }

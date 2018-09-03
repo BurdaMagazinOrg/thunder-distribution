@@ -1,0 +1,13 @@
+core.entity_form_display.paragraph.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          field_widget_remove: true
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            field_widget_remove: false
+            field_widget_replace: true

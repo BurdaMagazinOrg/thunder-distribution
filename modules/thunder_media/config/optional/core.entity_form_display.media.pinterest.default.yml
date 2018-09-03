@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.pinterest.field_url
-    - media_entity.bundle.pinterest
+    - media.type.pinterest
   module:
     - link
 id: media.pinterest.default
@@ -19,9 +19,16 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   created: true
   langcode: true
-  path: true
   name: true
+  path: true
   uid: true

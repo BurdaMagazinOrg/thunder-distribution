@@ -132,8 +132,8 @@ class GenerateThunderUpdateCommand extends Command {
   protected function execute(InputInterface $input, OutputInterface $output) {
     $io = new DrupalStyle($input, $output);
 
-    // @see use Drupal\Console\Command\Shared\ConfirmationTrait::confirmGeneration
-    if (!$this->confirmGeneration($io)) {
+    // @see use Drupal\Console\Command\Shared\ConfirmationTrait::confirmOperation
+    if (!$this->confirmOperation()) {
       return 1;
     }
 
