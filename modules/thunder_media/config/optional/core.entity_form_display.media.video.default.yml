@@ -9,6 +9,7 @@ dependencies:
     - field.field.media.video.field_source
     - media.type.video
   module:
+    - media
     - text
 id: media.video.default
 targetEntityType: media
@@ -37,7 +38,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: oembed_textfield
     region: content
   status:
     type: boolean_checkbox
