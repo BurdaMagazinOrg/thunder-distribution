@@ -19,7 +19,9 @@ queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
   thumbnails_directory: 'public://oembed_thumbnails'
-  providers: {  }
+  providers:
+    - YouTube
+    - Vimeo
   source_field: field_media_video_embed_field
 field_map:
   author_name: field_copyright
