@@ -226,7 +226,7 @@ function thunder_modules_installed($modules) {
   if (in_array('content_moderation', $modules)) {
     /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
     $configReverter = \Drupal::service('config_update.config_update');
-    $configReverter->import('user_role', 'content_creator');
+    $configReverter->import('user_role', 'restricted_editor');
 
     // Granting permissions only for "editor" and "seo" user roles.
     $roles = Role::loadMultiple(['editor', 'seo']);
