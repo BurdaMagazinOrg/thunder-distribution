@@ -92,26 +92,22 @@ class ThunderNodeForm extends NodeForm {
       return $element;
     }
 
+    $element['status'] = [
+      '#type' => 'item',
+      '#markup' => $this->entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
+      '#weight' => 200,
+      '#wrapper_attributes' => [
+        'class' => ['status'],
+      ],
+    ];
+
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
     $element['moderation_state_current'] = [
       '#type' => 'item',
       '#markup' => $state->label(),
-      '#weight' => 200,
-      '#wrapper_attributes' => [
-        'class' => ['status', $state->id()],
-      ],
-    ];
-
-    if ($this->entity->isNew()) {
-      return $element;
-    }
-
-    $element['status'] = [
-      '#type' => 'item',
-      '#markup' => $this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('Published') : $this->t('Unpublished'),
       '#weight' => 210,
       '#wrapper_attributes' => [
-        'class' => ['status'],
+        'class' => ['status', $state->id()],
       ],
     ];
 
@@ -127,7 +123,7 @@ class ThunderNodeForm extends NodeForm {
       }
       $element['delete_revision'] = [
         '#type' => 'link',
-        '#title' => $this->t('Delete revision'),
+        '#title' => $this->t('Delete @state', ['@state' => lcfirst($state->label())]),
         '#access' => $this->entity->access('delete'),
         '#weight' => 101,
         '#attributes' => [
