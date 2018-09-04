@@ -123,7 +123,7 @@ class ThunderNodeForm extends NodeForm {
       }
       $element['delete_revision'] = [
         '#type' => 'link',
-        '#title' => $this->t('Delete @state', ['@state' => lcfirst($state->label())]),
+        '#title' => $this->t('Delete this version'),
         '#access' => $this->entity->access('delete'),
         '#weight' => 101,
         '#attributes' => [
