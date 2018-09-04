@@ -358,3 +358,21 @@ function thunder_library_info_alter(&$libraries, $extension) {
     unset($libraries['media-form']['dependencies']);
   }
 }
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function thunder_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type) {
+  if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin' && \Drupal::hasService('content_moderation.moderation_information')) {
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    if (!$moderation_info->canModerateEntitiesOfEntityType($entity_type)) {
+      return;
+    }
+    $fields['moderation_state']->setDisplayOptions('form', [
+      'type' => 'thunder_moderation_state_default',
+      'weight' => 100,
+      'settings' => [],
+    ]);
+  }
+}
