@@ -14,7 +14,7 @@ use Drupal\node\NodeForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Base for handler for taxonomy term edit forms.
+ * Base for handler for node add/edit forms.
  */
 class ThunderNodeForm extends NodeForm {
 
@@ -70,8 +70,7 @@ class ThunderNodeForm extends NodeForm {
     $entity = $form_object->getEntity();
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
-      $user = $this->entityTypeManager->getStorage('user')->load($entity->getRevisionUserId());
-      $this->messenger()->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $user->label()]));
+      $this->messenger()->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $entity->getRevisionUser()->label()]));
     }
 
     return parent::form($form, $form_state);

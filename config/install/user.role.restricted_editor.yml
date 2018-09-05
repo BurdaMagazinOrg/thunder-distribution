@@ -44,7 +44,6 @@ permissions:
   - 'update media'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition unpublished_draft'
-  - 'use editorial transition unpublished_published'
   - 'use text format full_html'
   - 'view all revisions'
   - 'view any unpublished content'
