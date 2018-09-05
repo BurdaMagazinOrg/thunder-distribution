@@ -7,6 +7,8 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
+ * Plugin implementation of the 'thunder_moderation_state_default' widget.
+ *
  * Thunder provides it's own moderation_state widget that only shows a list of
  * possible states to switch in. To display the current state is not part of
  * this widget. Thunder shows that in ThunderNodeForm.
