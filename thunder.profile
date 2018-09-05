@@ -180,22 +180,6 @@ function thunder_modules_installed($modules) {
       \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
     }
   }
-
-  // Enable riddle paragraph in field_paragraphs.
-  if (in_array('thunder_riddle', $modules)) {
-
-    /** @var \Drupal\field\Entity\FieldConfig $field */
-    $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
-
-    $settings = $field->getSetting('handler_settings');
-
-    $settings['target_bundles']['riddle'] = 'riddle';
-    $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
-
-    $field->setSetting('handler_settings', $settings);
-
-    $field->save();
-  }
 }
 
 /**
