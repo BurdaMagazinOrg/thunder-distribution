@@ -5,6 +5,7 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
 use Drupal\user\Entity\Role;
@@ -362,7 +363,7 @@ function thunder_library_info_alter(&$libraries, $extension) {
 /**
  * Implements hook_entity_base_field_info_alter().
  */
-function thunder_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type) {
+function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
   if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin' && \Drupal::hasService('content_moderation.moderation_information')) {
     /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
     $moderation_info = \Drupal::service('content_moderation.moderation_information');
