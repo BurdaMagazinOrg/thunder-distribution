@@ -219,23 +219,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'icon_uuid' => TRUE,
       'description' => TRUE,
     ],
-    // Riddle paragraph is added dynamically by thunder profile on
-    // thunder_riddle installation.
-    'field.field.node.article.field_paragraphs' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'settings' => [
-        'handler_settings' => [
-          'target_bundles' => [
-            'riddle' => TRUE,
-          ],
-          'target_bundles_drag_drop' => [
-            'riddle' => TRUE,
-          ],
-        ],
-      ],
-    ],
     // Drupal 8.6.x adds the anchor key to the crop schema.
     // As long as there is no release of Drupal 8.6.x we cannot provide a patch
     // To the slick module. As soon as 8.6.0 is released we should provide that
