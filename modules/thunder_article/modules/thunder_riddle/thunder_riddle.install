@@ -53,7 +53,6 @@ function thunder_riddle_uninstall() {
     'field.storage.paragraph.field_riddle',
     'media.type.riddle',
     'paragraphs.paragraphs_type.riddle',
-    'views.view.riddle_browser',
   ];
 
   foreach ($config as $tour) {
