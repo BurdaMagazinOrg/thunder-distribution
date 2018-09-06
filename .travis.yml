@@ -22,6 +22,10 @@ dist: trusty
 # Here is related issue: https://github.com/travis-ci/travis-ci/issues/7150
 sudo: required
 
+branches:
+  only:
+    - /^8\.x\-[0-9]+\.x$/
+
 mysql:
   database: drupal
   username: root
