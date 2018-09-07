@@ -65,6 +65,8 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    \Drupal::messenger()->deleteAll();
+
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
