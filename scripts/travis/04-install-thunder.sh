@@ -12,6 +12,7 @@ install_thunder() {
 
 # Update thunder to current test version
 update_thunder() {
+    drush cr
     # Link sites folder from initial installation
     mv ${TEST_DIR}/docroot/sites ${TEST_DIR}/docroot/_sites
     ln -s ${UPDATE_BASE_PATH}/docroot/sites ${TEST_DIR}/docroot/sites
