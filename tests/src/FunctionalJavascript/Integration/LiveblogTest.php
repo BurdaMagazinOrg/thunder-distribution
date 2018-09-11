@@ -146,25 +146,6 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     // plain wait is used.
     $this->getSession()->wait(5000);
 
-    // Add post with instagram.
-    $this->liveblogSetTitle($page, 'Instagram post');
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_Add_' . date('Ymd_His') . '.png');
-    $this->clickDropButton('field_embed_media_instagram_add_more');
-    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
-    $this->setFieldValue($page,
-      'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]',
-      'https://www.instagram.com/p/BNU5k6jhds9/'
-    );
-
-    $this->liveblogSetBody('Very nice instagram post you have here!');
-
-    $this->clickButtonDrupalSelector($page, "edit-submit");
-    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_' . date('Ymd_His') . '.png');
-
-    $this->waitUntilVisible('article[data-postid="4"]', 10000);
-    $this->waitUntilVisible('iframe[src^="https://www.instagram.com/p/BNU5k6jhds9/"]', 10000);
-
     // Check site with anonymous user.
     $url = $this->getUrl();
     $this->drupalLogout();
