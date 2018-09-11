@@ -99,9 +99,9 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Add first post.
+    $this->waitUntilVisible('input[data-drupal-selector="edit-title-0-value"]');
     $page = $this->getSession()->getPage();
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->liveblogSetTitle($page, 'Normal post');
     $this->liveblogSetBody("This is a normal text");
     $this->clickButtonDrupalSelector($page, "edit-submit");
