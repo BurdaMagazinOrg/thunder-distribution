@@ -92,7 +92,6 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     ];
 
     $this->drupalGet('node/add/liveblog');
-    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->expandAllTabs(1);
     $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     // 1 saves it as published in this case.
@@ -102,6 +101,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     // Add first post.
     $page = $this->getSession()->getPage();
 
+    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->liveblogSetTitle($page, 'Normal post');
     $this->liveblogSetBody("This is a normal text");
     $this->clickButtonDrupalSelector($page, "edit-submit");
