@@ -152,12 +152,10 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($url);
 
-    $this->waitUntilVisible('article[data-postid="4"]');
     $this->assertSession()->elementNotExists('css', 'article[data-postid="3"]');
     $this->assertSession()->elementNotExists('css', 'article[data-postid="2"]');
     $this->assertSession()->elementNotExists('css', 'article[data-postid="1"]');
 
-    $this->scrollElementInView('article[data-postid="4"]');
     $this->waitUntilVisible('article[data-postid="3"]');
     $this->waitUntilVisible('article[data-postid="2"]');
     $this->waitUntilVisible('article[data-postid="1"]');
