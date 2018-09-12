@@ -110,7 +110,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $editButton = $page->find('css', $submit_selector);
     $editButton->click();
 
-    $this->waitUntilVisible('article[data-postid="1"]', 10000);
+    $this->waitUntilVisible('article[data-postid="1"]', 100000);
 
     // Add post with image.
     $this->liveblogSetTitle($page, 'Image post');
