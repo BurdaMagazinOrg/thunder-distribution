@@ -101,7 +101,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     // Add first post.
     $page = $this->getSession()->getPage();
-
+    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->liveblogSetTitle($page, 'Normal post');
     $this->liveblogSetBody("This is a normal text");
     $this->clickButtonDrupalSelector($page, "edit-submit");
