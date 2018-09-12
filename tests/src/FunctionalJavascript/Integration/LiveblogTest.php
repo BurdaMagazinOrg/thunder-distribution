@@ -113,6 +113,10 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $editButton = $page->find('css', $submit_selector);
     $editButton->click();
 
+    $this->assertNotEmpty(
+      $this->assertSession()->waitForElementVisible('css', 'field_embed_media_0_subform_field_image', 10000), 'Form not visible'
+    );
+
     // Add post with image.
     $this->liveblogSetTitle($page, 'Image post');
 
