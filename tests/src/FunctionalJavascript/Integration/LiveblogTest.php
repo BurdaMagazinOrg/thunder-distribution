@@ -99,6 +99,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Add first post.
+    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->waitUntilVisible('input[data-drupal-selector="edit-submit"]', 10000);
     $page = $this->getSession()->getPage();
 
