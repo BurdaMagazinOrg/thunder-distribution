@@ -99,7 +99,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Add first post.
-    $this->waitUntilVisible('input[data-drupal-selector="edit-title-0-value"]');
+    $this->waitUntilVisible('input[data-drupal-selector="edit-submit"]');
     $page = $this->getSession()->getPage();
 
     $this->liveblogSetTitle($page, 'Normal post');

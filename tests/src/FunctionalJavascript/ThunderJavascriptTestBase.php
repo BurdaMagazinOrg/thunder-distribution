@@ -220,10 +220,8 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *   (Optional) Message to pass to assertJsCondition().
    */
   public function waitUntilVisible($selector, $timeout = 1000, $message = '') {
-    $this->assertNotEmpty(
-      $this->assertSession()->waitForElementVisible('css', $selector, $timeout),
-      $message
-    );
+    $condition = "jQuery('" . $selector . ":visible').length > 0";
+    $this->assertJsCondition($condition, $timeout, $message);
   }
 
   /**
