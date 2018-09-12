@@ -102,7 +102,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $submit_selector = '[data-drupal-selector="edit-submit"]';
 
     $this->assertNotEmpty(
-      $this->assertSession()->waitForElementVisible('css', $submit_selector,100000), 'Button not visible'
+      $this->assertSession()->waitForElementVisible('css', $submit_selector, 100000), 'Button not visible'
     );
     $page = $this->getSession()->getPage();
 
