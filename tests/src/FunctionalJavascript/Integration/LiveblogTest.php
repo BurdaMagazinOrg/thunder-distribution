@@ -113,7 +113,6 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $editButton = $page->find('css', $submit_selector);
     $editButton->click();
 
-
     // Add post with image.
     $this->liveblogSetTitle($page, 'Image post');
 
