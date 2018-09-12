@@ -10,7 +10,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderMediaTestTrait;
 /**
  * Testing integration of "liveblog" module.
  *
- * @group Thunder
+ * @group Thunder_restricted
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript\Integration
  */
@@ -99,7 +99,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Add first post.
-    $this->waitUntilVisible('input[data-drupal-selector="edit-submit"]');
+    $this->waitUntilVisible('input[data-drupal-selector="edit-submit"]', 10000);
     $page = $this->getSession()->getPage();
 
     $this->liveblogSetTitle($page, 'Normal post');
