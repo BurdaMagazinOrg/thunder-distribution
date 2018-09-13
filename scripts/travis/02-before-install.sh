@@ -50,7 +50,7 @@ mysql -e "CREATE USER 'thunder'@'localhost' IDENTIFIED BY 'thunder';"
 mysql -e "GRANT ALL ON drupal.* TO 'thunder'@'localhost';"
 
 # PHP conf tweaks
-echo 'max_execution_time = 120' >> drupal.php.ini;
+echo 'max_execution_time = 500' >> drupal.php.ini;
 echo 'sendmail_path = /bin/true' >> drupal.php.ini;
 echo 'always_populate_raw_post_data = -1' >> drupal.php.ini;
 phpenv config-add drupal.php.ini
