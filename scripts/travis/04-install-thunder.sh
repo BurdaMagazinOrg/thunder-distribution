@@ -19,8 +19,6 @@ update_thunder() {
     cd ${TEST_DIR}/docroot
 
     # Execute all required updates
-    drush ev "var_dump(apcu_clear_cache());"
-    drush cr
     drush updatedb -y
 
     # Adjust theme logo path because it can be different in case of composer build
@@ -51,9 +49,9 @@ composer_create_thunder() {
 
     cd ${TEST_DIR}
 
-    #if [[ ${TEST_UPDATE} == "true" ]]; then
-    #    sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
-    #fi
+    if [[ ${TEST_UPDATE} == "true" ]]; then
+        sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
+    fi
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
