@@ -6,6 +6,7 @@ use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\Form\NodeRevisionRevertForm;
+use Drupal\node\NodeInterface;
 
 /**
  * Provides a form for reverting a node revision.
@@ -40,9 +41,7 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $node = NULL) {
 
-    $default_revision = $this->getDefaultRevisionId($node);
-
-    $this->revision = $this->nodeStorage->loadRevision($default_revision);
+    $this->revision = $this->nodeStorage->load($node);
     $form = ConfirmFormBase::buildForm($form, $form_state);
 
     return $form;
@@ -51,17 +50,36 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
   /**
    * {@inheritdoc}
    */
-  protected function getDefaultRevisionId($entity_id) {
-    $result = $this->nodeStorage->getQuery()
-      ->currentRevision()
-      ->condition('nid', $entity_id)
-      // No access check is performed here since this is an API function and
-      // should return the same ID regardless of the current user.
-      ->accessCheck(FALSE)
-      ->execute();
-    if ($result) {
-      return key($result);
-    }
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    // The revision timestamp will be updated when the revision is saved. Keep
+    // the original one for the confirmation message.
+    $original_revision_timestamp = $this->revision->getRevisionCreationTime();
+
+    $this->revision = $this->prepareRevertedRevision($this->revision, $form_state);
+    $this->revision->revision_log = t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]);
+    $this->revision->setRevisionUserId($this->currentUser()->id());
+    $this->revision->setRevisionCreationTime($this->time->getRequestTime());
+    $this->revision->setChangedTime($this->time->getRequestTime());
+    $this->revision->save();
+
+    $this->logger('content')->notice('@type: reverted %title revision %revision.', ['@type' => $this->revision->bundle(), '%title' => $this->revision->label(), '%revision' => $this->revision->getRevisionId()]);
+    $this->messenger()
+      ->addStatus($this->t('@type %title has been reverted to the revision from %revision-date.', [
+        '@type' => node_get_type_label($this->revision),
+        '%title' => $this->revision->label(),
+        '%revision-date' => $this->dateFormatter->format($original_revision_timestamp),
+      ]));
+    $form_state->setRedirectUrl($this->getCancelUrl());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function prepareRevertedRevision(NodeInterface $revision, FormStateInterface $form_state) {
+    $revision->setNewRevision();
+    $revision->isDefaultRevision(TRUE);
+    $revision->setRevisionTranslationAffected(TRUE);
+    return $revision;
   }
 
 }

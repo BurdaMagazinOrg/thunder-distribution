@@ -91,7 +91,7 @@ class ThunderNodeForm extends NodeForm {
       return $element;
     }
 
-    $workflow = $this->moderationInfo->getWorkflowForEntity($entity);
+    $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
     $element['status'] = [
       '#type' => 'item',
       '#markup' => $this->entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
@@ -99,10 +99,9 @@ class ThunderNodeForm extends NodeForm {
       '#wrapper_attributes' => [
         'class' => ['status'],
       ],
-      '#access' => !$workflow->getTypePlugin()->getState($entity->moderation_state->value)->isDefaultRevisionState(),
+      '#access' => !$state->isDefaultRevisionState(),
     ];
 
-    $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
     $element['moderation_state_current'] = [
       '#type' => 'item',
       '#markup' => $state->label(),
