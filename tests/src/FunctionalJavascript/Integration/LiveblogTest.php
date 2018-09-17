@@ -46,6 +46,8 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
   /**
    * Testing of module integration.
+   *
+   * @requires PHP 7.0
    */
   public function testWithPusher() {
     $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), TRUE);
@@ -101,7 +103,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     // Add first post.
     $page = $this->getSession()->getPage();
-
+    $this->assertSession()->assertWaitOnAjaxRequest();
     $this->liveblogSetTitle($page, 'Normal post');
     $this->liveblogSetBody("This is a normal text");
     $this->clickButtonDrupalSelector($page, "edit-submit");
@@ -146,38 +148,17 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     // plain wait is used.
     $this->getSession()->wait(5000);
 
-    // Add post with instagram.
-    $this->liveblogSetTitle($page, 'Instagram post');
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_Add_' . date('Ymd_His') . '.png');
-    $this->clickDropButton('field_embed_media_instagram_add_more');
-    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
-    $this->setFieldValue($page,
-      'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]',
-      'https://www.instagram.com/p/BNU5k6jhds9/'
-    );
-
-    $this->liveblogSetBody('Very nice instagram post you have here!');
-
-    $this->clickButtonDrupalSelector($page, "edit-submit");
-    $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_InstagramPost_' . date('Ymd_His') . '.png');
-
-    $this->waitUntilVisible('article[data-postid="4"]', 10000);
-    $this->waitUntilVisible('iframe[src^="https://www.instagram.com/p/BNU5k6jhds9/"]', 10000);
-
     // Check site with anonymous user.
     $url = $this->getUrl();
     $this->drupalLogout();
 
     $this->drupalGet($url);
 
-    $this->waitUntilVisible('article[data-postid="4"]');
-    $this->assertSession()->elementNotExists('css', 'article[data-postid="3"]');
+    $this->waitUntilVisible('article[data-postid="3"]');
     $this->assertSession()->elementNotExists('css', 'article[data-postid="2"]');
     $this->assertSession()->elementNotExists('css', 'article[data-postid="1"]');
 
-    $this->scrollElementInView('article[data-postid="4"]');
-    $this->waitUntilVisible('article[data-postid="3"]');
+    $this->scrollElementInView('article[data-postid="3"]');
     $this->waitUntilVisible('article[data-postid="2"]');
     $this->waitUntilVisible('article[data-postid="1"]');
   }
