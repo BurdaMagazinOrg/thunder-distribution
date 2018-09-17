@@ -111,25 +111,25 @@ class ThunderNodeForm extends NodeForm {
     ];
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
-      $route_info = Url::fromRoute('node.revision_delete_confirm', [
+      $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
         'node' => $entity->id(),
-        'node_revision' => $entity->getLoadedRevisionId(),
+        'node_revision' => $entity->getRevisionId(),
       ]);
       if ($this->getRequest()->query->has('destination')) {
         $query = $route_info->getOption('query');
         $query['destination'] = $this->getRequest()->query->get('destination');
         $route_info->setOption('query', $query);
       }
-      $element['delete_revision'] = [
+      $element['revert_to_default'] = [
         '#type' => 'link',
-        '#title' => $this->t('Delete this version'),
-        '#access' => $this->entity->access('delete'),
+        '#title' => $this->t('Revert to default revision'),
+        '#access' => $this->entity->access('update'),
         '#weight' => 101,
         '#attributes' => [
           'class' => ['button', 'button--danger'],
         ],
       ];
-      $element['delete_revision']['#url'] = $route_info;
+      $element['revert_to_default']['#url'] = $route_info;
     }
 
     return $element;
