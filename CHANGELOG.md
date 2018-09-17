@@ -1,5 +1,40 @@
 # Change Log
 
+## [8.2.24](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.24) 2018-09-05
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.21...8.2.24)
+
+With the release of Drupal 8.6 some features that were part of thunder for a long time have been integrated into Drupal
+core. With this release we remove the duplicate functionality and rely on cores implementation:
+
+- Core provides now status fields dor taxonomy terms. See https://www.drupal.org/project/drupal/issues/2930996
+- Profiles can have have true dependencies, we do not need a workaround for that anymore. See https://www.drupal.org/project/drupal/issues/2952888
+- Configurable redirects after installation. See https://www.drupal.org/project/drupal/issues/2776605
+
+We added select2 as a new UX feature for select lists and implemented it for the tags selection. This improves
+the auto completion, reordering and deletion of tags.
+
+Additionally we removed several deprecations from code and updated to the newest version of required modules. The update
+of the entity_browser module also lead to a small UX improvement regarding replacing of images in the image paragraph.
+Instead of two clicks - one for removing the old image, and one to add a new image - you can now replace existing
+images with one click.
+
+Main changes since 8.2.21:
+
+- Do [Update to Entity Browser 1.5 and use newly available replace button](https://www.drupal.org/project/thunder/issues/2980452)
+- Do [Update to new diff release](https://www.drupal.org/project/thunder/issues/2987483)
+- Do [Integrate select2 module](https://www.drupal.org/project/thunder/issues/2988112)
+- Do [Prepare Thunder for Drupal 8.6 release](https://www.drupal.org/project/thunder/issues/2995568)
+- Do [Use core functionality to define real profile dependencies](https://www.drupal.org/project/thunder/issues/2969454)
+- Do [Remove custom code for redirect after installation](https://www.drupal.org/project/thunder/issues/2969459)
+- Do [Remove funky optional config install code](https://www.drupal.org/project/thunder/issues/2972637)
+- Fix [German installer test is failing on php5.6](https://www.drupal.org/project/thunder/issues/2989749)
+- Fix [Reduce deprecation errors](https://www.drupal.org/project/thunder/issues/2986501)
+
+## [8.2.23](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.23) 2018-08-02
+## [8.2.22](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.22) 2018-08-02
+
+8.2.22 and 8.2.23 were releases without changes. They were necessary to update the drupal.org tar-ball.
+
 ## [8.2.21](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.21) 2018-07-19
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.20...8.2.21)
 
