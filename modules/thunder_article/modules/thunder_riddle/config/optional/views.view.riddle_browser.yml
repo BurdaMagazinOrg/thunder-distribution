@@ -475,6 +475,18 @@ display:
           entity_type: media
           entity_field: created
           plugin_id: date
+        field_riddle_id_value:
+          id: field_riddle_id_value
+          table: media__field_riddle_id
+          field: field_riddle_id_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
       header: {  }
       footer: {  }
       empty: {  }

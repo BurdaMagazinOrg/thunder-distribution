@@ -5,21 +5,8 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
-use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
-
-/**
- * Implements hook_system_info_alter().
- */
-function thunder_system_info_alter(array &$info, Extension $file, $type) {
-  // Thunder can not work properly without these modules. So they are enforced
-  // to be enabled.
-  $required_modules = ['config_selector', 'views', 'media_entity', 'node'];
-  if ($type == 'module' && in_array($file->getName(), $required_modules)) {
-    $info['required'] = TRUE;
-  }
-}
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -49,61 +36,6 @@ function thunder_install_tasks(&$install_state) {
   ];
 
   return $tasks;
-}
-
-/**
- * Implements hook_install_tasks_alter().
- */
-function thunder_install_tasks_alter(array &$tasks, array $install_state) {
-  $tasks['install_finished']['function'] = 'thunder_post_install_redirect';
-}
-
-/**
- * Starts the tour after the installation.
- *
- * @param array $install_state
- *   The current install state.
- *
- * @return array
- *   A renderable array with a redirect header.
- */
-function thunder_post_install_redirect(array &$install_state) {
-  install_finished($install_state);
-
-  // Clear all messages.
-  \Drupal::messenger()->deleteAll();
-
-  $success_message = t('Congratulations, you installed @drupal!', [
-    '@drupal' => drupal_install_profile_distribution_name(),
-  ]);
-  drupal_set_message($success_message);
-
-  $output = [
-    '#title' => t('Ready to rock'),
-    'info' => [
-      '#markup' => t('Congratulations, you installed Thunder! If you are not redirected in 5 seconds, <a href="@url">click here</a> to proceed to your site.', [
-        '@url' => '/?tour=1',
-      ]),
-    ],
-    '#attached' => [
-      'http_header' => [
-        ['Cache-Control', 'no-cache'],
-      ],
-    ],
-  ];
-
-  // The installer doesn't make it easy (possible?) to return a redirect
-  // response, so set a redirection META tag in the output.
-  $meta_redirect = [
-    '#tag' => 'meta',
-    '#attributes' => [
-      'http-equiv' => 'refresh',
-      'content' => '0;url=/?tour=1',
-    ],
-  ];
-  $output['#attached']['html_head'][] = [$meta_redirect, 'meta_redirect'];
-
-  return $output;
 }
 
 /**
@@ -334,17 +266,6 @@ function thunder_modules_installed($modules) {
     $field->setSetting('handler_settings', $settings);
 
     $field->save();
-  }
-
-  $configs = Drupal::configFactory()->loadMultiple(\Drupal::configFactory()->listAll());
-  foreach ($configs as $config) {
-    $dependencies = $config->get('dependencies.module');
-    $enforced_dependencies = $config->get('dependencies.enforced.module');
-    $dependencies = $dependencies ?: [];
-    $enforced_dependencies = $enforced_dependencies ?: [];
-    if (array_intersect($modules, $dependencies) || array_intersect($modules, $enforced_dependencies)) {
-      \Drupal::service('config.installer')->installOptionalConfig(NULL, ['config' => $config->getName()]);
-    }
   }
 }
 
