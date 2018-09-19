@@ -23,6 +23,7 @@ class FacetBlock extends AreaPluginBase {
       ->getStorage('facets_facet')
       ->loadMultiple();
 
+    /** @var \Drupal\facets\FacetManager\DefaultFacetManager $facetManager */
     $facetManager = \Drupal::service('facets.manager');
     $build = ['#type' => 'container', '#attributes' => ['class' => 'form--inline clearfix']];
     $build['_view'] = $this->view->display_handler->viewExposedFormBlocks();
@@ -36,18 +37,17 @@ class FacetBlock extends AreaPluginBase {
 
       if ($config['view_id'] == $this->view->id() && $config['view_display'] == $this->view->current_display) {
         $built_facet = $facetManager->build($facet);
-        if (isset($built_facet[0]['#theme'])) {
-          $build[$id] = [
-            '#type' => 'container',
-            '#attributes' => ['class' => 'form-item'],
-            'label' => [
-              '#type' => 'label',
-              '#title' => $facet->label(),
-              '#title_display' => 'above',
-            ],
-            'element' => $built_facet,
-          ];
-        }
+        $build[$id] = [
+          '#type' => 'container',
+          '#attributes' => ['class' => 'form-item'],
+          'label' => [
+            '#type' => 'label',
+            '#title' => $facet->label(),
+            '#title_display' => 'above',
+          ],
+          'element' => $built_facet,
+        ];
+
       }
     }
 
