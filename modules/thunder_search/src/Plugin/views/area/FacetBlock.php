@@ -29,7 +29,7 @@ class FacetBlock extends AreaPluginBase {
     $build['_view'] = $this->view->display_handler->viewExposedFormBlocks();
     foreach ($facets as $id => $facet) {
       // No need to build the facet if it does not need to be visible.
-      if ($facet->getOnlyVisibleWhenFacetSourceIsVisible() && !$facet->getFacetSource()->isRenderedInCurrentRequest()) {
+      if (($facet->getOnlyVisibleWhenFacetSourceIsVisible() && !$facet->getFacetSource()->isRenderedInCurrentRequest())) {
         continue;
       }
 
@@ -37,17 +37,18 @@ class FacetBlock extends AreaPluginBase {
 
       if ($config['view_id'] == $this->view->id() && $config['view_display'] == $this->view->current_display) {
         $built_facet = $facetManager->build($facet);
-        $build[$id] = [
-          '#type' => 'container',
-          '#attributes' => ['class' => 'form-item'],
-          'label' => [
-            '#type' => 'label',
-            '#title' => $facet->label(),
-            '#title_display' => 'above',
-          ],
-          'element' => $built_facet,
-        ];
-
+        if (!in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
+          $build[$id] = [
+            '#type' => 'container',
+            '#attributes' => ['class' => 'form-item'],
+            'label' => [
+              '#type' => 'label',
+              '#title' => $facet->label(),
+              '#title_display' => 'above',
+            ],
+            'element' => $built_facet,
+          ];
+        }
       }
     }
 
