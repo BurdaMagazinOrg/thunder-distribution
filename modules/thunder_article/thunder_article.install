@@ -55,8 +55,6 @@ function thunder_article_update_8001() {
 
 }
 
-/*** 81xx Thunder Article update patches ***/
-
 /**
  * Enable shariff module.
  */
