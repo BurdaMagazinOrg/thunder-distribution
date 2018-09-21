@@ -28,6 +28,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  moderation_state: true
   langcode: true
   name: true
   path: true

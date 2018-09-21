@@ -91,6 +91,7 @@ content:
 hidden:
   created: true
   field_caption: true
+  moderation_state: true
   langcode: true
   name: true
   path: true
