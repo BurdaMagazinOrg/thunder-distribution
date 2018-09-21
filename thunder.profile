@@ -5,8 +5,10 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -152,6 +154,35 @@ function thunder_themes_installed($theme_list) {
  */
 function thunder_modules_installed($modules) {
 
+  if (in_array('content_moderation', $modules)) {
+    /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+    $configReverter = \Drupal::service('config_update.config_update');
+    $configReverter->import('user_role', 'restricted_editor');
+
+    // Granting permissions only for "editor" and "seo" user roles.
+    $roles = Role::loadMultiple(['editor', 'seo']);
+    foreach ($roles as $role) {
+      try {
+        $role->grantPermission('use editorial transition create_new_draft');
+        $role->grantPermission('use editorial transition publish');
+        $role->grantPermission('use editorial transition unpublish');
+        $role->grantPermission('use editorial transition unpublished_draft');
+        $role->grantPermission('use editorial transition unpublished_published');
+        $role->save();
+      }
+      catch (EntityStorageException $storageException) {
+      }
+    }
+    if (\Drupal::service('module_handler')->moduleExists('scheduler')) {
+      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+    }
+  }
+  if (in_array('scheduler', $modules)) {
+    if (\Drupal::service('module_handler')->moduleExists('content_moderation')) {
+      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+    }
+  }
+
   // Move fields into form display.
   if (in_array('ivw_integration', $modules)) {
 
@@ -240,5 +271,23 @@ function thunder_library_info_alter(&$libraries, $extension) {
   // Can be removed after #2916741 or #2916786 has landed.
   if ($extension == 'seven' && isset($libraries['media-form'])) {
     unset($libraries['media-form']['dependencies']);
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin' && \Drupal::hasService('content_moderation.moderation_information')) {
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    if (!$moderation_info->canModerateEntitiesOfEntityType($entity_type)) {
+      return;
+    }
+    $fields['moderation_state']->setDisplayOptions('form', [
+      'type' => 'thunder_moderation_state_default',
+      'weight' => 100,
+      'settings' => [],
+    ]);
   }
 }
