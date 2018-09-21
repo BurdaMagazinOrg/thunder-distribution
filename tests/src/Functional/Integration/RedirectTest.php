@@ -11,7 +11,7 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
  */
 class RedirectTest extends ThunderTestBase {
 
-  protected static $modules = ['thunder_demo'];
+  protected static $modules = ['thunder_demo', 'content_moderation'];
 
   /**
    * Tests redirect from old URL to new one.
@@ -23,9 +23,13 @@ class RedirectTest extends ThunderTestBase {
     $this->drupalGet('burda-launches-open-source-cms-thunder');
     $this->assertSession()->statusCodeEquals(200);
 
+    $page = $this->getSession()->getPage();
+
     $this->drupalGet('node/6/edit');
-    $this->getSession()->getPage()->fillField('SEO Title', 'Burda Launches Worldwide Coalition');
-    $this->getSession()->getPage()->pressButton('Save');
+    $page->fillField('SEO Title', 'Burda Launches Worldwide Coalition');
+    $page->find('xpath', '//*[@id="edit-moderation-state-0"]')
+      ->selectOption('published');
+    $page->pressButton('Save');
 
     $this->drupalGet('burda-launches-open-source-cms-thunder');
     $this->assertSession()->statusCodeEquals(200);

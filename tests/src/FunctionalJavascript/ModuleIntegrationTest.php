@@ -128,6 +128,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('node/7/revisions');
 
+    $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
+    $firstRightRadio->click();
     $lastLeftRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
     $lastLeftRadio->click();
 
@@ -290,6 +292,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $waitMidGallery = "jQuery('#block-thunder-base-content div.field__items > div.field__item:nth-child(3) div.slick-active img.b-loaded').css('opacity') === '1'";
 
     $this->drupalGet('node/8/edit');
+    $this->setModerationState('published');
 
     $windowSize['height'] = 950;
     $this->setWindowSize($windowSize);
