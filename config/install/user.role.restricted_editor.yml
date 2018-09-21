@@ -1,13 +1,11 @@
 langcode: en
 status: true
 dependencies: {  }
-id: seo
-label: Seo
-weight: -6
-is_admin: false
+id: restricted_editor
+label: 'Restricted editor'
+weight: -8
+is_admin: null
 permissions:
-  - 'access administration pages'
-  - 'access content'
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
@@ -19,25 +17,18 @@ permissions:
   - 'access tour'
   - 'access video_browser entity browser pages'
   - 'administer menu'
-  - 'administer meta tags'
   - 'administer nodes'
-  - 'administer redirects'
-  - 'administer taxonomy'
   - 'break content lock'
   - 'create article content'
   - 'create media'
   - 'create page content'
   - 'create url aliases'
-  - 'delete any article content'
-  - 'delete any media'
-  - 'delete any page content'
   - 'delete article revisions'
   - 'delete media'
   - 'delete own article content'
   - 'delete own page content'
   - 'delete page revisions'
-  - 'delete terms in channel'
-  - 'delete terms in tags'
+  - 'delete token'
   - 'dropzone upload files'
   - 'edit any article content'
   - 'edit any page content'
@@ -46,16 +37,13 @@ permissions:
   - 'edit terms in channel'
   - 'edit terms in tags'
   - 'never autoplay videos'
+  - 'renew token'
   - 'revert article revisions'
   - 'revert page revisions'
-  - 'schedule publishing of nodes'
   - 'update any media'
   - 'update media'
   - 'use editorial transition create_new_draft'
-  - 'use editorial transition publish'
-  - 'use editorial transition unpublish'
   - 'use editorial transition unpublished_draft'
-  - 'use editorial transition unpublished_published'
   - 'use text format full_html'
   - 'view all revisions'
   - 'view any unpublished content'
@@ -67,7 +55,3 @@ permissions:
   - 'view the administration theme'
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
-  - 'break content lock'
-  - 'administer redirects'
-  - 'renew token'
-  - 'delete token'

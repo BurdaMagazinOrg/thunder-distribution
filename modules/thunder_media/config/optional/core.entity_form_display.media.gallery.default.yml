@@ -36,6 +36,7 @@ content:
     region: content
 hidden:
   created: true
+  moderation_state: true
   langcode: true
   path: true
   uid: true

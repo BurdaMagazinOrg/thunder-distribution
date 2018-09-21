@@ -39,5 +39,6 @@ content:
     region: content
     third_party_settings: {  }
 hidden:
+  moderation_state: true
   path: true
   name: true

@@ -70,9 +70,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
     'system.action.user_add_role_action.editor',
+    'system.action.user_add_role_action.restricted_editor',
     'system.action.user_add_role_action.seo',
     'system.action.user_remove_role_action.administrator',
     'system.action.user_remove_role_action.editor',
+    'system.action.user_remove_role_action.restricted_editor',
     'system.action.user_remove_role_action.seo',
     'system.action.user_add_role_action.harbourmaster',
     'system.action.user_remove_role_action.harbourmaster',
@@ -80,6 +82,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
     'core.entity_view_mode.block.token',
+    'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
     'core.entity_view_mode.menu_link_content.token',
@@ -156,7 +159,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
-
+    'views.view.moderated_content' => [
+      'display' => [
+        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+      ],
+    ],
     // Diff Module: changed on installation of module when additional library
     // exists on system: mkalkbrenner/php-htmldiff-advanced.
     'diff.settings' => [
@@ -194,6 +202,17 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
       ],
     ],
     'paragraphs.paragraphs_type.nexx_video' => [
