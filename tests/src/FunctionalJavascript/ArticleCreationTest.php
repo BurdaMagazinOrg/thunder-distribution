@@ -2,6 +2,9 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Core\Url;
+use Drupal\Tests\node\Traits\NodeCreationTrait;
+
 /**
  * Tests the article creation.
  *
@@ -11,6 +14,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
+  use NodeCreationTrait;
 
   /**
    * Field name for paragraphs in article content.
@@ -114,6 +118,56 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check that one Pinterest widget is on page.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+  }
+
+  /**
+   * Tests draft creation and that reverting to the default revision works.
+   */
+  public function testModerationWorkflow() {
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Test workflow article',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+    ]);
+    $this->setModerationState('published');
+    $this->clickSave();
+    $this->assertPageTitle('Massive gaining seo traffic text');
+
+    $node = $this->getNodeByTitle('Test workflow article');
+
+    $this->drupalGet($node->toUrl('edit-form'));
+    $this->setFieldValues($this->getSession()->getPage(), [
+      'title[0][value]' => 'Test workflow article in draft',
+      'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
+    ]);
+    $this->setModerationState('draft');
+    $this->clickSave();
+
+    $this->drupalGet($node->toUrl('edit-form'));
+
+    $this->setFieldValues($this->getSession()->getPage(), [
+      'title[0][value]' => 'Test workflow article in draft 2',
+      'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
+    ]);
+    $this->setModerationState('draft');
+    $this->clickSave();
+
+    $this->assertPageTitle('Massive gaining even more and more seo traffic text');
+
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+
+    $revert_url = Url::fromRoute('node.revision_revert_default_confirm', [
+      'node' => $node->id(),
+      'node_revision' => $moderation_info->getLatestRevisionId('node', $node->id()),
+    ]);
+    $this->drupalPostForm($revert_url, [], t('Revert'));
+
+    $this->drupalGet($node->toUrl());
+    $this->assertPageTitle('Massive gaining seo traffic text');
+
+    $this->drupalGet($node->toUrl('edit-form'));
+    $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Massive gaining seo traffic text');
   }
 
 }

@@ -25,6 +25,7 @@ hidden:
   created: true
   field_author: true
   field_content: true
+  moderation_state: true
   langcode: true
   path: true
   name: true
