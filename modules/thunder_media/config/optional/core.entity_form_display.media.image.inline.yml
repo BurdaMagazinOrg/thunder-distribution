@@ -147,6 +147,7 @@ content:
 hidden:
   created: true
   field_tags: true
+  moderation_state: true
   langcode: true
   path: true
   status: true

@@ -70,6 +70,7 @@ install:
   - pathauto
   - redirect
   - scheduler
+  - scheduler_content_moderation_integration
   - select2
   - simple_sitemap
   - slick_media
