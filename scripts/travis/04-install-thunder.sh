@@ -49,6 +49,11 @@ composer_create_thunder() {
     composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
+
+    if [[ ${TEST_UPDATE} == "true" ]]; then
+        sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
+    fi
+
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
 }
