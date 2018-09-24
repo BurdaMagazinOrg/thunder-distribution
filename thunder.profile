@@ -5,6 +5,7 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
