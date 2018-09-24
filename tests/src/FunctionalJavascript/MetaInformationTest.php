@@ -166,7 +166,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Test Meta Tag default configuration and custom configuration for article.
    */
-  public function _testArticleMetaTags() {
+  public function testArticleMetaTags() {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
     $contentConfigs = $this->generateMetaTagConfiguration([static::$contentMetaTags]);
     $articleConfigs = $this->generateMetaTagConfiguration([static::$articleMetaTags]);
@@ -304,7 +304,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Test Site Map for Article.
    */
-  public function _testSiteMap() {
+  public function testSiteMap() {
     $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
