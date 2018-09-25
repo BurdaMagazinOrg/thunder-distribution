@@ -62,7 +62,7 @@ content:
     third_party_settings: {  }
     region: content
   publish_state:
-    type: publish_state
+    type: options_select
     weight: 30
     region: content
     settings: {  }
