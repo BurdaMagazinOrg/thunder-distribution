@@ -7,3 +7,14 @@ thunder_article.configuration_form:
     _permission: 'administer site configuration'
   options:
     _admin_route: TRUE
+
+node.revision_revert_default_confirm:
+  path: '/node/{node}/revisions/{node_revision}/revert-default'
+  defaults:
+    _form: '\Drupal\thunder_article\Form\NodeRevisionRevertDefaultForm'
+    _title: 'Revert to earlier revision'
+  requirements:
+    _access_node_revision: 'update'
+    node: \d+
+  options:
+    _node_operation_route: TRUE
