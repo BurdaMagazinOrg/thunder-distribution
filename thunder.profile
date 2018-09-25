@@ -258,6 +258,8 @@ function thunder_modules_installed($modules) {
         $role->grantPermission('use editorial transition unpublish');
         $role->grantPermission('use editorial transition unpublished_draft');
         $role->grantPermission('use editorial transition unpublished_published');
+        $role->grantPermission('view any unpublished content');
+        $role->grantPermission('view latest version');
         $role->save();
       }
       catch (EntityStorageException $storageException) {
