@@ -186,7 +186,7 @@ content:
     third_party_settings: {  }
     region: content
   publish_state:
-    type: options_select
+    type: scheduler_moderation
     weight: 30
     region: content
     settings: {  }
@@ -234,7 +234,7 @@ content:
     third_party_settings: {  }
     region: content
   unpublish_state:
-    type: options_select
+    type: scheduler_moderation
     weight: 30
     region: content
     settings: {  }
