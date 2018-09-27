@@ -1,5 +1,28 @@
 # Change Log
 
+## [8.2.25](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.25) 2018-09-27
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.24...8.2.25)
+
+With this release we introduce a content moderation integration. When Thunder is freshly installed, you will no longer have
+a simple publish checkbox, but three moderation states to save into. This makes it possible to save a draft of an published
+article without overwriting the published version.
+
+Additionally it is possible to restrict the permission to publish an article to certain users. We introduced a new "restricted Editor" role
+that is only able to create drafts, but not publish those drafts.
+
+When updating from an earlier version of Thunder, you will not automatically get these changes, since it would break your
+existing article workflow. If you want to enable the feature, just enable the content moderation module.
+
+Since this functionality is based on Drupal core content moderation and workflow modules, it is possible to add as much
+states and state changes to it as you like.
+
+It is strongly recommended to also update to the most recent version of the Thunder admin theme.
+
+Main changes since 8.2.24:
+
+- Do [Be able to create and save a draft without changing the published article](https://www.drupal.org/project/thunder/issues/2820056)
+- Fix [Update tests fail after content moderation merge](https://www.drupal.org/project/thunder/issues/3002190)
+
 ## [8.2.24](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.24) 2018-09-05
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.21...8.2.24)
 
