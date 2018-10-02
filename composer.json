@@ -73,6 +73,9 @@
             },
             "drupal/search_api": {
                 "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch"
+            },
+            "drupal/scheduler": {
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
             }
         }
     },
@@ -130,7 +133,7 @@
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
         "drupal/riddle_marketplace": "^2.0",
-        "drupal/scheduler": "^1.0",
+        "drupal/scheduler": "1.0",
         "drupal/search_api": "1.10",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",

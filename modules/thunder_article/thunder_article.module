@@ -24,3 +24,14 @@ function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
     }
   }
 }
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function thunder_article_entity_type_alter(array &$entity_types) {
+  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  if (!empty($entity_types['node'])) {
+    $entity_types['node']->setFormClass('default', 'Drupal\thunder_article\Form\ThunderNodeForm');
+    $entity_types['node']->setFormClass('edit', 'Drupal\thunder_article\Form\ThunderNodeForm');
+  }
+}

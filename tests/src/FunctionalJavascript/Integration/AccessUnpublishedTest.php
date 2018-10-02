@@ -30,9 +30,9 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Article 1',
     ]);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
-    $this->setPublishedStatus(FALSE);
+    $this->setModerationState('draft');
     $this->clickSave();
-    // Edit article and generate access unpubplished token.
+    // Edit article and generate access unpublished token.
     $this->drupalGet('node/10/edit');
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
@@ -70,7 +70,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);
     $this->drupalGet('node/10/edit');
-    $this->setPublishedStatus(TRUE);
+    $this->setModerationState('published');
     $this->clickSave();
 
     // Log-Out and check that URL to article works.

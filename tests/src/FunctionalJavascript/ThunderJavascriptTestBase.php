@@ -32,7 +32,7 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_demo'];
+  protected static $modules = ['thunder_demo', 'content_moderation'];
 
   /**
    * The profile to install as a basis for testing.
@@ -516,6 +516,20 @@ abstract class ThunderJavascriptTestBase extends JavascriptTestBase {
       $page->find('xpath', '//*[@id="edit-status-value"]')
         ->uncheck();
     }
+  }
+
+  /**
+   * Set moderation state.
+   *
+   * @param string $state
+   *   State id.
+   */
+  protected function setModerationState($state) {
+
+    $page = $this->getSession()->getPage();
+
+    $page->find('xpath', '//*[@id="edit-moderation-state-0"]')
+      ->selectOption($state);
   }
 
   /**
