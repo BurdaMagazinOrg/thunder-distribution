@@ -226,9 +226,11 @@ function thunder_themes_installed($theme_list) {
 function thunder_modules_installed($modules) {
 
   if (in_array('content_moderation', $modules)) {
-    /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
-    $configReverter = \Drupal::service('config_update.config_update');
-    $configReverter->import('user_role', 'restricted_editor');
+    if (!Role::load('restricted_editor')) {
+      /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+      $configReverter = \Drupal::service('config_update.config_update');
+      $configReverter->import('user_role', 'restricted_editor');
+    }
 
     // Granting permissions only for "editor" and "seo" user roles.
     $roles = Role::loadMultiple(['editor', 'seo']);
@@ -378,5 +380,14 @@ function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $ent
       'weight' => 100,
       'settings' => [],
     ]);
+  }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function thunder_field_widget_info_alter(array &$info) {
+  if (!\Drupal::moduleHandler()->moduleExists('content_moderation')) {
+    unset($info['thunder_moderation_state_default']);
   }
 }
