@@ -250,6 +250,7 @@ function thunder_modules_installed($modules) {
       \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
     }
   }
+
   if (in_array('scheduler', $modules)) {
     if (\Drupal::service('module_handler')->moduleExists('content_moderation')) {
       \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
@@ -300,6 +301,14 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
+
+  // When enabling password policy, also enabled the sub modules, we provide default config for.
+  if (in_array('password_policy', $modules)) {
+    \Drupal::service('module_installer')->install(['password_policy_length']);
+    \Drupal::service('module_installer')->install(['password_policy_history']);
+    \Drupal::service('module_installer')->install(['password_policy_character_types']);
+  }
+
 }
 
 /**
