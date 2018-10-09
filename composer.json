@@ -73,6 +73,9 @@
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
+            },
+            "drupal/password_policy": {
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
             }
         }
     },
