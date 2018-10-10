@@ -66,8 +66,8 @@ apply_patches() {
     # apply cookie expire patch for javascript tests
     #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
     #patch -p1 < test-session-expire-2771547-64.patch
-    wget https://www.drupal.org/files/issues/character_set_wrongly-2921548-2.patch
-    patch -p1 < character_set_wrongly-2921548-2.patch
+    #wget https://www.drupal.org/files/issues/character_set_wrongly-2921548-2.patch
+    #patch -p1 < character_set_wrongly-2921548-2.patch
 }
 
 create_testing_dump() {

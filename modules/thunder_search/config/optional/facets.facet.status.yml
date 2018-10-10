@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.content
-    - views.view.content_search_api
+  - search_api.index.content
+  - views.view.content_search_api
   module:
-    - search_api
+  - search_api
 id: status
 name: Status
 url_alias: status
@@ -17,7 +17,9 @@ facet_source_id: 'search_api:views_page__content_search_api__page_1'
 widget:
   type: select2
   config:
-    show_numbers: false
+    width: 100%
+    autocomplete: 0
+    match_operator: CONTAINS
 query_operator: or
 use_hierarchy: false
 expand_hierarchy: false

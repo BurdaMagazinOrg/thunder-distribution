@@ -2,14 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.content
-    - views.view.content_search_api
+  - search_api.index.content
+  - views.view.content_search_api
   module:
-    - search_api
+  - search_api
 id: tags
 name: Tags
 url_alias: tags
-weight: 0
+weight: -3
 min_count: 1
 show_only_one_result: false
 field_identifier: field_tags
@@ -17,8 +17,10 @@ facet_source_id: 'search_api:views_page__content_search_api__page_1'
 widget:
   type: select2
   config:
-    show_numbers: false
-query_operator: or
+    width: 300px
+    autocomplete: 1
+    match_operator: CONTAINS
+query_operator: and
 use_hierarchy: true
 expand_hierarchy: true
 enable_parent_when_child_gets_disabled: true
