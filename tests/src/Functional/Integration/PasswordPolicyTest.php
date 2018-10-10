@@ -3,7 +3,6 @@
 namespace Drupal\Tests\thunder\Functional\Integration;
 
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
-use Drupal\user\Entity\User;
 
 /**
  * Tests password policy integration.
@@ -61,7 +60,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, t('Save'));
     $this->assertSession()->responseNotContains('The changes have been saved.');
 
-    // Testing invalid character type combinations and password length restriction.
+    // Testing invalid character type combinations and length restriction.
     foreach ($invalid_passwords as $password => $response) {
       $edit['pass[pass2]'] = $password;
       $edit['pass[pass1]'] = $password;

@@ -304,7 +304,7 @@ function thunder_modules_installed($modules) {
     $field->save();
   }
 
-  // When enabling password policy, also enabled the sub modules, we provide default config for.
+  // When enabling password policy, enabled required sub modules.
   if (in_array('password_policy', $modules)) {
     \Drupal::service('module_installer')->install(['password_policy_length']);
     \Drupal::service('module_installer')->install(['password_policy_history']);
