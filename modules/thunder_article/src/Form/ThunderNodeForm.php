@@ -69,7 +69,7 @@ class ThunderNodeForm extends NodeForm {
     /** @var \Drupal\node\NodeInterface $entity */
     $entity = $form_object->getEntity();
 
-    if ($this->moderationInfo->hasPendingRevision($entity)) {
+    if ($this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
       $this->messenger()->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $entity->getRevisionUser()->label()]));
     }
 
