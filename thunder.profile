@@ -179,6 +179,7 @@ function thunder_themes_installed($theme_list) {
     $profilePath = drupal_get_path('profile', 'thunder');
     $configFactory->getEditable('infinite.settings')
       ->set('logo.use_default', FALSE)
+      ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
       ->set('favicon.use_default', FALSE)
       ->set('favicon.path', $profilePath . '/themes/thunder_base/favicon.ico')
       ->save(TRUE);
