@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
 
 /**
@@ -35,6 +36,9 @@ function thunder_install_tasks(&$install_state) {
     'thunder_module_install' => [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
+    ],
+    'thunder_finish_installation' => [
+      'display_name' => t('Finish installation'),
     ],
   ];
 
@@ -102,6 +106,21 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
 
   $context['results'][] = $module;
   $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
+}
+
+/**
+ * Finish Thunder installation process.
+ *
+ * @param array $install_state
+ *   The install state.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function thunder_finish_installation(array &$install_state) {
+  // Assign user 1 the "administrator" role.
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
 }
 
 /**
