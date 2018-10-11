@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.2.26](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.26) 2018-10-10
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.25...8.2.26)
+
+Fixes a bug, that we introduced with the last release.
+
+- Fix [Disabled content_moderation breaks Thunder](https://www.drupal.org/project/thunder/issues/3003428)
+
 ## [8.2.25](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.25) 2018-09-27
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.24...8.2.25)
 
