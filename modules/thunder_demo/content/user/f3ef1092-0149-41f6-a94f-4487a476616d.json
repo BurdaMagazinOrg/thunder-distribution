@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/user\/15?_format=hal_json"
+            "href": "http:\/\/default\/user\/13?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
@@ -9,28 +9,12 @@
     },
     "uid": [
         {
-            "value": 15
+            "value": 13
         }
     ],
     "uuid": [
         {
             "value": "f3ef1092-0149-41f6-a94f-4487a476616d"
-        }
-    ],
-    "langcode": [
-        {
-            "value": "en",
-            "lang": "en"
-        }
-    ],
-    "preferred_langcode": [
-        {
-            "value": "en"
-        }
-    ],
-    "preferred_admin_langcode": [
-        {
-            "value": "en"
         }
     ],
     "name": [
@@ -55,14 +39,13 @@
     ],
     "created": [
         {
-            "value": "2018-10-09T15:05:08+00:00",
+            "value": "1970-01-01T00:00:00+00:00",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "changed": [
         {
-            "value": "2018-10-09T15:05:08+00:00",
-            "lang": "en",
+            "value": "1970-01-01T00:00:00+00:00",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
@@ -85,17 +68,7 @@
     ],
     "default_langcode": [
         {
-            "value": true,
-            "lang": "en"
-        }
-    ],
-    "metatag": [
-        {
-            "value": {
-                "title": "test-restricted-editor | Site-Install",
-                "canonical_url": "http:\/\/default\/user\/15",
-                "description": "Site-Install"
-            }
+            "value": "1"
         }
     ]
 }
