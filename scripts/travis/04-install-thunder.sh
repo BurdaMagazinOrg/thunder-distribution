@@ -20,9 +20,6 @@ update_thunder() {
 
     # Execute all required updates
     drush updatedb -y
-
-    # Adjust theme logo path because it can be different in case of composer build
-    drush -y php-eval "Drupal::configFactory()->getEditable('thunder_base.settings')->set('logo.path', drupal_get_path('profile', 'thunder') . '/themes/thunder_base/images/Thunder-white_400x90.png')->save(TRUE);"
 }
 
 drush_make_thunder() {
@@ -48,12 +45,19 @@ composer_create_thunder() {
     composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
+
+    if [[ ${TEST_UPDATE} == "true" ]]; then
+        sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
+    fi
+
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
 }
 
 apply_patches() {
     cd ${TEST_DIR}/docroot
+    wget https://www.drupal.org/files/issues/2018-05-24/2975081-6.patch
+    patch -p1 < 2975081-6.patch
 
     #EXAMPLE:
     # apply cookie expire patch for javascript tests

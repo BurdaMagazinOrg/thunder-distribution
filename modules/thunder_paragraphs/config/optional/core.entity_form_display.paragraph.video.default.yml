@@ -28,5 +28,6 @@ content:
     type: entity_browser_entity_reference
 hidden:
   created: true
+  moderation_state: true
   status: true
   uid: true

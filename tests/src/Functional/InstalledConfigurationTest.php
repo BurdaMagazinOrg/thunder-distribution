@@ -62,7 +62,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $ignoreCoreConfigs = [
     'checklistapi.progress.thunder_updater',
-    'thunder_base.settings',
     'system.site',
     'core.extension',
     'system.performance',
@@ -71,9 +70,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
     'system.action.user_add_role_action.editor',
+    'system.action.user_add_role_action.restricted_editor',
     'system.action.user_add_role_action.seo',
     'system.action.user_remove_role_action.administrator',
     'system.action.user_remove_role_action.editor',
+    'system.action.user_remove_role_action.restricted_editor',
     'system.action.user_remove_role_action.seo',
     'system.action.user_add_role_action.harbourmaster',
     'system.action.user_remove_role_action.harbourmaster',
@@ -81,6 +82,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
     'core.entity_view_mode.block.token',
+    'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
     'core.entity_view_mode.menu_link_content.token',
@@ -97,11 +99,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static $ignoreConfigKeys = [
-    // Node settings is changed by Thunder Install hook.
-    'node.settings' => [
-      'use_admin_theme' => TRUE,
-    ],
-
     // It's not exported in Yaml, so that new key is generated.
     'scheduler.settings' => [
       'lightweight_cron_access_key' => TRUE,
@@ -138,19 +135,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'interface' => ['default' => TRUE],
     ],
 
-    // User register is changed by Thunder Install hook.
-    'user.settings' => [
-      'register' => TRUE,
-    ],
-
-    // Media view status is changed by Thunder Install hook.
-    'views.view.media' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => TRUE,
-    ],
-
     // Changed on installation.
     'views.view.glossary' => [
       'dependencies' => [
@@ -175,7 +159,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
-
+    'views.view.moderated_content' => [
+      'display' => [
+        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+      ],
+    ],
     // Diff Module: changed on installation of module when additional library
     // exists on system: mkalkbrenner/php-htmldiff-advanced.
     'diff.settings' => [
@@ -213,6 +202,17 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
       ],
     ],
     'paragraphs.paragraphs_type.nexx_video' => [
