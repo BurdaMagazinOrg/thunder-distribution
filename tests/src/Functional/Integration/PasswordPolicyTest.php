@@ -7,7 +7,7 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
 /**
  * Tests password policy integration.
  *
- * @group Thunder_password_policy
+ * @group Thunder
  */
 class PasswordPolicyTest extends ThunderTestBase {
 
