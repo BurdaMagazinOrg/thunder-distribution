@@ -8,7 +8,6 @@
 use Drupal\Component\Utility\NestedArray;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
-use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
@@ -73,61 +72,6 @@ function thunder_update_dependencies() {
   }
 
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
-}
-
-/**
- * Install the thunder installation profile.
- */
-function thunder_install() {
-
-  \Drupal::messenger()->deleteAll();
-
-  // Enable the admin theme.
-  \Drupal::configFactory()
-    ->getEditable('node.settings')
-    ->set('use_admin_theme', TRUE)
-    ->save(TRUE);
-
-  // Set frontend theme.
-  \Drupal::configFactory()
-    ->getEditable('system.theme')
-    ->set('default', 'thunder_base')
-    ->save(TRUE);
-
-  $profilePath = drupal_get_path('profile', 'thunder');
-  \Drupal::configFactory()
-    ->getEditable('thunder_base.settings')
-    ->set('logo.use_default', FALSE)
-    ->set('logo.path', $profilePath . '/themes/thunder_base/images/Thunder-white_400x90.png')
-    ->save(TRUE);
-
-  // Assign user 1 the "administrator" role.
-  $user = User::load(1);
-  $user->roles[] = 'administrator';
-  $user->save();
-
-  // Set default pages.
-  \Drupal::configFactory()->getEditable('system.site')
-    ->set('page.front', '/node')
-    ->save(TRUE);
-
-  // Configure user registration.
-  \Drupal::configFactory()
-    ->getEditable('user.settings')
-    ->set('register', 'visitors_admin_approval')
-    ->save(TRUE);
-
-  \Drupal::service('thunder_updater.update_checklist')->markAllUpdates();
-
-  // Disable default media view, because we have our own. This is also part of
-  // thunder_media_install() but we had to add it here again because the
-  // installation order of media_entity and thunder_media has changed.
-  if ($media_view = View::load('media')) {
-    $media_view->setStatus(FALSE)->save();
-  }
-  if ($thunder_media_view = View::load('thunder_media')) {
-    $thunder_media_view->setStatus(TRUE)->save();
-  }
 }
 
 /**
