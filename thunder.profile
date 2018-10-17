@@ -271,7 +271,6 @@ function thunder_modules_installed($modules) {
       \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
     }
   }
-
   if (in_array('scheduler', $modules)) {
     if (\Drupal::service('module_handler')->moduleExists('content_moderation')) {
       \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
@@ -328,6 +327,7 @@ function thunder_modules_installed($modules) {
     \Drupal::service('module_installer')->install(['password_policy_length']);
     \Drupal::service('module_installer')->install(['password_policy_history']);
     \Drupal::service('module_installer')->install(['password_policy_character_types']);
+    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
   }
 
 }

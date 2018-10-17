@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: { }
+id: thunder_admin_help
+theme: thunder_admin
+region: highlighted
+weight: 1
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

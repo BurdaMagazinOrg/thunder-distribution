@@ -22,10 +22,7 @@ class PasswordPolicyTest extends ThunderTestBase {
    * Tests redirect from old URL to new one.
    */
   public function testPasswordPolicies() {
-    $editor = $this->drupalCreateUser();
-    $editor->addRole('editor');
-    $editor->save();
-    $this->drupalLogin($editor);
+    $editor = $this->logWithRole('editor');
 
     $current_password = $editor->passRaw;
     $valid_password = 'This is 1 valid password!';
