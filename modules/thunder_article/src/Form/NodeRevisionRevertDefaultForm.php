@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Form;
+namespace Drupal\thunder_article\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
