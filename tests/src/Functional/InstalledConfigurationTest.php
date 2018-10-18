@@ -36,7 +36,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
-    'thunder_search',
+    #'thunder_search',
 
     // Additional modules.
     // 'thunder_fia',
@@ -144,25 +144,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'interface' => ['default' => TRUE],
     ],
 
-    // User register is changed by Thunder Install hook.
-    'user.settings' => [
-      'register' => TRUE,
-    ],
-
-    // View status is changed by Thunder Install hook.
-    'views.view.media' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => TRUE,
-    ],
-    'views.view.thunder_media' => [
-      'status' => TRUE,
-    ],
-    'views.view.content' => [
-      'status' => TRUE,
-    ],
-
     // Changed on installation.
     'views.view.glossary' => [
       'dependencies' => [
@@ -230,11 +211,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
-        'moderation_state' => TRUE,
-      ],
-    ],
-    'core.entity_form_display.paragraph.nexx_video.default' => [
-      'content' => [
         'moderation_state' => TRUE,
       ],
     ],
