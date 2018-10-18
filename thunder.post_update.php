@@ -16,8 +16,12 @@ function thunder_post_update_add_config_selector_to_content_media() {
 
   // Execute configuration update definitions with logging of success.
   if ($thunderUpdater->executeUpdates([['thunder', 'thunder_add_config_selector_to_content_media']])) {
-    View::load('content')->save();
-    View::load('thunder_media')->save();
+    if ($view = View::load('content')) {
+      $view->save();
+    }
+    if ($view = View::load('thunder_media')) {
+      $view->save();
+    }
     /** @var \Drupal\config_update\ConfigReverter $configReverter */
     $configReverter = \Drupal::service('config_update.config_update');
     $configReverter->import('config_selector_feature', 'thunder_content_view');

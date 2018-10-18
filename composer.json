@@ -138,7 +138,7 @@
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "1.0",
         "drupal/search_api": "1.10",
-        "drupal/select2": "^1.0",
+        "drupal/select2": "dev-1.x",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
         "drupal/slick": "^1.0",
