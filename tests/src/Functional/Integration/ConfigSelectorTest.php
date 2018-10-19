@@ -2,14 +2,14 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the config_selector.
  *
  * @group Thunder
  */
-class ConfigSelectorTest extends ThunderBaseTest {
+class ConfigSelectorTest extends ThunderTestBase {
 
   protected static $modules = ['thunder_demo'];
 
