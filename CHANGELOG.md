@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.2.27](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.27) 2018-10-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.26...8.2.27)
+
+Update Drupal core and contrib modules. Thunder can now be installed from config.
+
+- Do [Make Thunder ready for install from configuration](https://www.drupal.org/project/thunder/issues/3000140)
+- Do [Update core and contrib](https://www.drupal.org/project/thunder/issues/3007539)
+
 ## [8.2.26](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.26) 2018-10-10
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.25...8.2.26)
 
