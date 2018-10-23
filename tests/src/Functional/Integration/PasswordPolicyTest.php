@@ -29,9 +29,9 @@ class PasswordPolicyTest extends ThunderTestBase {
     $another_valid_password = 'This is 1 valid password 2!';
 
     $invalid_passwords = [
-      'This is no valid password!' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, punctuation.',
-      'This is not 1 valid password' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, punctuation.',
-      'this is not 1 valid password!' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, punctuation.',
+      'This is no valid password!' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, special characters.',
+      'This is not 1 valid password' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, special characters.',
+      'this is not 1 valid password!' => 'Password must contain at least 4 types of characters from the following character types: lowercase letters, uppercase letters, digits, special characters.',
       'short' => 'Password length must be at least 8 characters.',
     ];
 
