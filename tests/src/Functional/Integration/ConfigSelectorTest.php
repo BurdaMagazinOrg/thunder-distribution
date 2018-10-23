@@ -3,13 +3,14 @@
 namespace Drupal\Tests\thunder\Functional\Integration;
 
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 
 /**
  * Tests integration with the config_selector.
  *
  * @group Thunder
  */
-class ConfigSelectorTest extends ThunderTestBase {
+class ConfigSelectorTest extends ThunderJavascriptTestBase {
 
   protected static $modules = ['thunder_demo'];
 
@@ -29,10 +30,16 @@ class ConfigSelectorTest extends ThunderTestBase {
 
     // Install thunder_search.
     $this->drupalPostForm('admin/modules', ['modules[thunder_search][enable]' => 1], 'Install');
+    $this->drupalGet('admin/config/search/search-api/index/content');
     $this->click('#edit-submit');
 
     // Now we have a search_api based view.
-    $this->drupalGet('admin/content');
+    $this->drupalGet('admin/config/search/search-api/index/content');
+    $this->getSession()->getPage()->pressButton('Track now');
+
+
+    $this->drupalGet('admin/config/search/search-api/index/content');
+    #$this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-label-table-column"]/a');
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
 
