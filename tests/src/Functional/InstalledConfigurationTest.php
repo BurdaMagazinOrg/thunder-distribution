@@ -62,7 +62,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $ignoreCoreConfigs = [
     'checklistapi.progress.thunder_updater',
-    'thunder_base.settings',
     'system.site',
     'core.extension',
     'system.performance',
@@ -100,11 +99,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static $ignoreConfigKeys = [
-    // Node settings is changed by Thunder Install hook.
-    'node.settings' => [
-      'use_admin_theme' => TRUE,
-    ],
-
     // It's not exported in Yaml, so that new key is generated.
     'scheduler.settings' => [
       'lightweight_cron_access_key' => TRUE,
@@ -139,19 +133,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Changed on Testing.
     'system.mail' => [
       'interface' => ['default' => TRUE],
-    ],
-
-    // User register is changed by Thunder Install hook.
-    'user.settings' => [
-      'register' => TRUE,
-    ],
-
-    // Media view status is changed by Thunder Install hook.
-    'views.view.media' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => TRUE,
     ],
 
     // Changed on installation.
