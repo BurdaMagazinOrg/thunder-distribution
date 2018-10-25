@@ -59,6 +59,11 @@ processor_configs:
     weights:
       build: -10
     settings: {  }
+  hide_non_narrowing_result_processor:
+    processor_id: hide_non_narrowing_result_processor
+    weights:
+      build: 40
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
