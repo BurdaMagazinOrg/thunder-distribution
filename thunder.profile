@@ -383,17 +383,6 @@ function thunder_toolbar_alter(&$items) {
 }
 
 /**
- * Implements hook_library_info_alter().
- */
-function thunder_library_info_alter(&$libraries, $extension) {
-  // Remove seven's dependency on the media/form library.
-  // Can be removed after #2916741 or #2916786 has landed.
-  if ($extension == 'seven' && isset($libraries['media-form'])) {
-    unset($libraries['media-form']['dependencies']);
-  }
-}
-
-/**
  * Implements hook_entity_base_field_info_alter().
  */
 function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
