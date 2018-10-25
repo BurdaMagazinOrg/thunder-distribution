@@ -32,7 +32,7 @@ class FacetBlock extends AreaPluginBase {
         $facet_source = $source;
       }
     }
-    if (!$facet_source) {
+    if (!$facet_source || !$this->view->result) {
       return [];
     }
 

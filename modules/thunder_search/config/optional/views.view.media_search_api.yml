@@ -2,17 +2,21 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_expires
-    - image.style.thumbnail
-    - search_api.index.content
+  - field.storage.media.field_expires
+  - image.style.thumbnail
+  - search_api.index.content
   module:
-    - datetime
-    - image
-    - search_api
-    - thunder_search
-    - user
-    - views_bulk_operations
-    - config_selector
+  - config_selector
+  - datetime
+  - image
+  - search_api
+  - thunder_search
+  - user
+  - views_bulk_operations
+third_party_settings:
+  config_selector:
+    feature: thunder_media_view
+    priority: 1
 id: media_search_api
 label: 'Media - Search API'
 module: views
@@ -21,10 +25,6 @@ tag: ''
 base_table: search_api_index_content
 base_field: search_api_id
 core: 8.x
-third_party_settings:
-  config_selector:
-    feature: thunder_media_view
-    priority: 1
 display:
   default:
     display_plugin: default
@@ -829,7 +829,20 @@ display:
           empty: false
           plugin_id: facet_block
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'It''s needed to <a href=''/admin/config/search/search-api/index/content''>index the search index</a> in order to have all media items searchable.'
+            format: basic_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -841,13 +854,13 @@ display:
     cache_metadata:
       max-age: 0
       contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user.permissions
+      - 'languages:language_content'
+      - 'languages:language_interface'
+      - url
+      - url.query_args
+      - user.permissions
       tags:
-        - 'config:field.storage.media.field_expires'
+      - 'config:field.storage.media.field_expires'
   page_1:
     display_options:
       path: admin/content/media
@@ -878,10 +891,10 @@ display:
     cache_metadata:
       max-age: 0
       contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user.permissions
+      - 'languages:language_content'
+      - 'languages:language_interface'
+      - url
+      - url.query_args
+      - user.permissions
       tags:
-        - 'config:field.storage.media.field_expires'
+      - 'config:field.storage.media.field_expires'
