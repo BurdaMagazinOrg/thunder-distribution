@@ -1,16 +1,16 @@
 langcode: en
 status: true
 dependencies:
-  module:
-  - node
-  - user
-  - media_entity
-  - taxonomy
-  - search_api
   config:
   - field.storage.node.field_channel
   - field.storage.node.field_tags
   - search_api.server.database
+  module:
+  - media_entity
+  - user
+  - node
+  - taxonomy
+  - search_api
 id: content
 name: Content
 description: ''
@@ -241,50 +241,6 @@ processor_settings:
       preprocess_index: -20
       preprocess_query: -20
   rendered_item: {  }
-  stopwords:
-    all_fields: true
-    fields:
-    - label
-    - rendered_item
-    stopwords:
-    - a
-    - an
-    - and
-    - are
-    - as
-    - at
-    - be
-    - but
-    - by
-    - for
-    - if
-    - in
-    - into
-    - is
-    - it
-    - 'no'
-    - not
-    - of
-    - 'on'
-    - or
-    - s
-    - such
-    - t
-    - that
-    - the
-    - their
-    - then
-    - there
-    - these
-    - they
-    - this
-    - to
-    - was
-    - will
-    - with
-    weights:
-      preprocess_index: -5
-      preprocess_query: -2
   tokenizer:
     all_fields: true
     fields:
@@ -296,17 +252,6 @@ processor_settings:
     weights:
       preprocess_index: -6
       preprocess_query: -6
-  transliteration:
-    all_fields: true
-    fields:
-    - label
-    - media_author
-    - name
-    - rendered_item
-    - type
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
 tracker_settings:
   default:
     indexing_order: fifo

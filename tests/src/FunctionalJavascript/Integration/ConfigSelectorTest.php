@@ -28,7 +28,8 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content');
 
     // Install thunder_search.
-    \Drupal::service('module_installer')->install(['thunder_search']);
+    $module_installer = \Drupal::service('module_installer');
+    $module_installer->install(['thunder_search']);
 
     // Now we have a search_api based view.
     $this->drupalGet('admin/config/search/search-api/index/content');
@@ -40,7 +41,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
 
     // Uninstall search_api.
-    \Drupal::service('module_installer')->uninstall(['thunder_search', 'search_api']);
+    $module_installer->uninstall(['thunder_search', 'search_api']);
     drupal_flush_all_caches();
 
     // The normal view is back.

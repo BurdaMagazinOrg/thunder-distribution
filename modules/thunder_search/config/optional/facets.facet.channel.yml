@@ -21,7 +21,7 @@ widget:
     width: 100%
     autocomplete: false
     match_operator: CONTAINS
-query_operator: or
+query_operator: and
 use_hierarchy: true
 expand_hierarchy: true
 enable_parent_when_child_gets_disabled: true

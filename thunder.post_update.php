@@ -22,11 +22,16 @@ function thunder_post_update_add_config_selector_to_content_media() {
     if ($view = View::load('thunder_media')) {
       $view->save();
     }
-    /** @var \Drupal\config_update\ConfigReverter $configReverter */
-    $configReverter = \Drupal::service('config_update.config_update');
-    $configReverter->import('config_selector_feature', 'thunder_content_view');
-    $configReverter->import('config_selector_feature', 'thunder_media_view');
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_add_config_selector_to_content_media']);
+    try {
+      /** @var \Drupal\config_update\ConfigReverter $configReverter */
+      $configReverter = \Drupal::service('config_update.config_update');
+      $configReverter->import('config_selector_feature', 'thunder_content_view');
+      $configReverter->import('config_selector_feature', 'thunder_media_view');
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_add_config_selector_to_content_media']);
+    }
+    catch (\Exception $exception) {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder_add_config_selector_to_content_media']);
+    }
   }
   else {
     $thunderUpdater->checklist()->markUpdatesFailed(['thunder_add_config_selector_to_content_media']);
