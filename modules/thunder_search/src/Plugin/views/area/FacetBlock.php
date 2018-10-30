@@ -33,7 +33,7 @@ class FacetBlock extends AreaPluginBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return parent::create($container, $configuration, $plugin_id, $plugin_definition, $container->get('facets.manager'), $container->get('plugin.manager.facets.facet_source'));
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('facets.manager'), $container->get('plugin.manager.facets.facet_source'));
   }
 
   /**
@@ -63,24 +63,25 @@ class FacetBlock extends AreaPluginBase {
       }
       $config = $facet->getFacetSource()->getDisplay()->getPluginDefinition();
 
-      if ($config['view_id'] == $this->view->id() && $config['view_display'] == $this->view->current_display) {
-        $built_facet = $this->facetManager->build($facet);
-        if (!in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
-          $build['facets'][$id] = [
-            '#type' => 'container',
-            '#attributes' => ['class' => 'form-item'],
-            'label' => [
-              '#type' => 'label',
-              '#title' => $facet->label(),
-              '#title_display' => 'above',
-            ],
-            'element' => $built_facet,
-            '#weight' => $facet->getWeight(),
-          ];
-        }
+      if ($config['view_id'] != $this->view->id() || $config['view_display'] != $this->view->current_display) {
+        continue;
       }
+      $built_facet = $this->facetManager->build($facet);
+      if (in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
+        continue;
+      }
+      $build['facets'][$id] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => 'form-item'],
+        'label' => [
+          '#type' => 'label',
+          '#title' => $facet->label(),
+          '#title_display' => 'above',
+        ],
+        'element' => $built_facet,
+        '#weight' => $facet->getWeight(),
+      ];
     }
-
     // Return as render array.
     return $build;
   }
