@@ -65,6 +65,11 @@ class ModuleConfigureForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    // We have to delete all messages, because simple_sitemap adds a bunch of
+    // messages during the install process.
+    // @see https://www.drupal.org/project/simple_sitemap/issues/3001388.
+    $this->messenger()->deleteAll();
+
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
