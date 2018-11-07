@@ -18,7 +18,7 @@ widget:
   type: select2
   config:
     show_numbers: true
-    width: 100%
+    width: resolve
     autocomplete: false
     match_operator: CONTAINS
 query_operator: or

@@ -50,8 +50,12 @@ class FacetBlock extends AreaPluginBase {
       }
     }
 
-    $build = ['#type' => 'container', '#attributes' => ['class' => 'form--inline clearfix']];
-    $build['_view'] = $this->view->display_handler->viewExposedFormBlocks();
+    $build = [
+      '#type' => 'container',
+      '#attributes' => ['class' => 'form--inline clearfix'],
+      'exposed_form' => $this->view->display_handler->viewExposedFormBlocks(),
+    ];
+    $build['exposed_form']['#attributes']['class'][] = 'form-item';
 
     if (!$facet_source || !$this->view->result) {
       return $build;
@@ -70,15 +74,8 @@ class FacetBlock extends AreaPluginBase {
       if (in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
         continue;
       }
-      $build['facets'][$id] = [
-        '#type' => 'container',
-        '#attributes' => ['class' => 'form-item'],
-        'label' => [
-          '#type' => 'label',
-          '#title' => $facet->label(),
-          '#title_display' => 'above',
-        ],
-        'element' => $built_facet,
+      $build['facets'][$id] = $built_facet[0] + [
+        '#title' => $facet->getName(),
         '#weight' => $facet->getWeight(),
       ];
     }
