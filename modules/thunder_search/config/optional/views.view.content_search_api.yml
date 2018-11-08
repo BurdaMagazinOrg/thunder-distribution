@@ -890,20 +890,7 @@ display:
           empty: false
           plugin_id: facet_block
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: 'It''s needed to <a href=''/admin/config/search/search-api/index/content''>index the search index</a> in order to have all content searchable.'
-            format: basic_html
-          plugin_id: text
+      empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
