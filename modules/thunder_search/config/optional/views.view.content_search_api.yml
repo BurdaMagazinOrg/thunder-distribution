@@ -146,7 +146,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          default: node_changed
+          default: '-1'
           empty_table: false
       row:
         type: fields
@@ -839,7 +839,31 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        node_changed:
+          id: node_changed
+          table: search_api_index_content
+          field: node_changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        search_api_id:
+          id: search_api_id
+          table: search_api_index_content
+          field: search_api_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
           exposed: false
           expose:
             label: ''
