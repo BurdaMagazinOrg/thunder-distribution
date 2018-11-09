@@ -277,6 +277,9 @@ function thunder_modules_installed($modules) {
       \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
     }
   }
+  if (in_array('search_api', $modules)) {
+    \Drupal::service('module_installer')->install(['search_api_db']);
+  }
 
   // Move fields into form display.
   if (in_array('ivw_integration', $modules)) {
