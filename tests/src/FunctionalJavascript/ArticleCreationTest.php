@@ -96,8 +96,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Twitter widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
+      ->wait(5000, "jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
