@@ -863,6 +863,7 @@ display:
         operator: AND
         groups:
           1: AND
+      css_class: thunder-search-api
     cache_metadata:
       max-age: 0
       contexts:
