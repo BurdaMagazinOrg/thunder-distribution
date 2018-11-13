@@ -74,7 +74,7 @@
             "drupal/search_api": {
                 "Support entity 'operations' in Views": "https://www.drupal.org/files/issues/2861832-6--views_entity_operations.patch",
                 "VBO on a Search API view with facets didn't work": "https://www.drupal.org/files/issues/2018-11-06/3011743-2.patch",
-                "Facets are lost by Views on keyword search": "https://www.drupal.org/files/issues/2018-11-12/2378945-31-drupal8.patch"
+                "Facets are lost by Views on keyword search": "https://www.drupal.org/files/issues/2018-11-12/2378945-33-drupal8.patch"
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
