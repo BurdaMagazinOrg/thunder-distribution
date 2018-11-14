@@ -74,8 +74,7 @@ class FacetBlock extends AreaPluginBase {
       if (in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
         continue;
       }
-      $build['facets'][$id] = $built_facet[0] + [
-        '#title' => $facet->getName(),
+      $build['facets'][$id] = $built_facet + [
         '#weight' => $facet->getWeight(),
       ];
     }
