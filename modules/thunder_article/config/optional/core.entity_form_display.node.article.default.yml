@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.article.field_channel
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
+    - field.field.node.article.field_seo_keyword
     - field.field.node.article.field_seo_title
     - field.field.node.article.field_tags
     - field.field.node.article.field_teaser_media
@@ -21,6 +22,7 @@ dependencies:
     - path
     - scheduler
     - select2
+    - yoast_seo
 third_party_settings:
   field_group:
     group_teaser:
@@ -55,6 +57,7 @@ third_party_settings:
         - field_channel
         - title
         - field_seo_title
+        - field_seo_keyword
         - field_tags
       parent_name: ''
       weight: 3
@@ -110,6 +113,12 @@ content:
         split_text: true
         delete_confirmation: true
     region: content
+  field_seo_keyword:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: yoast_seo_widget
+    region: content
   field_seo_title:
     type: string_textfield
     weight: 4
@@ -126,7 +135,7 @@ content:
     region: content
   field_tags:
     type: select2_entity_reference
-    weight: 5
+    weight: 6
     settings:
       autocomplete: true
     third_party_settings: {  }

@@ -77,6 +77,7 @@ install:
   - slick_media
   - responsive_preview
   - video_embed_media
+  - yoast_seo
 # thunder
   - thunder_article
   - thunder_media
