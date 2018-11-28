@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Exception\DriverException;
 use Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver;
@@ -283,24 +282,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
     $page->pressButton($fieldName);
     $this->assertSession()->assertWaitOnAjaxRequest();
-  }
-
-  /**
-   * Assert page title.
-   *
-   * @param string $expectedTitle
-   *   Expected title.
-   */
-  protected function assertPageTitle($expectedTitle) {
-    $driver = $this->getSession()->getDriver();
-    if ($driver instanceof Selenium2Driver) {
-      $actualTitle = $driver->getWebDriverSession()->title();
-
-      static::assertEquals($expectedTitle, $actualTitle, 'Title found');
-    }
-    else {
-      $this->assertSession()->titleEquals($expectedTitle);
-    }
   }
 
   /**

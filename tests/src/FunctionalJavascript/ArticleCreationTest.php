@@ -71,7 +71,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
-    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
 
     // Check Image paragraph.
@@ -131,7 +131,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     ]);
     $this->setModerationState('published');
     $this->clickSave();
-    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertTitle('Massive gaining seo traffic text');
 
     $node = $this->getNodeByTitle('Test workflow article');
 
@@ -152,7 +152,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->setModerationState('draft');
     $this->clickSave();
 
-    $this->assertPageTitle('Massive gaining even more and more seo traffic text');
+    $this->assertTitle('Massive gaining even more and more seo traffic text');
 
     /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
     $moderation_info = \Drupal::service('content_moderation.moderation_information');
@@ -164,7 +164,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->drupalPostForm($revert_url, [], t('Revert'));
 
     $this->drupalGet($node->toUrl());
-    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertTitle('Massive gaining seo traffic text');
 
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Massive gaining seo traffic text');
