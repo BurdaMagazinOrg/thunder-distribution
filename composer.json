@@ -73,6 +73,9 @@
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
+            },
+            "drupal/media_expire": {
+                "Use patch": "https://www.drupal.org/files/issues/2018-11-28/move_to_post_install.patch"
             }
         }
     },
