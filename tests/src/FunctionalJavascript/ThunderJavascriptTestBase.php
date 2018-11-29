@@ -4,13 +4,8 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
-use Behat\Mink\Exception\DriverException;
-use Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
-use Zumba\GastonJS\Exception\DeadClient;
-use Zumba\Mink\Driver\PhantomJSDriver;
 
 /**
  * Base class for Thunder Javascript functional tests.
@@ -55,48 +50,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    * @var string
    */
   protected static $defaultUserRole = 'editor';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function initMink() {
-    if ($this->minkDefaultDriverClass === DrupalSelenium2Driver::class) {
-      $host = '127.0.0.1:4444';
-      if (!empty(getenv('THUNDER_WEBDRIVER_HOST'))) {
-        $host = getenv('THUNDER_WEBDRIVER_HOST');
-      }
-      $this->minkDefaultDriverArgs = ['chrome', NULL, "http://$host/wd/hub"];
-    }
-    elseif ($this->minkDefaultDriverClass === PhantomJSDriver::class) {
-      // Set up the template cache used by the PhantomJS mink driver.
-      $path = $this->tempFilesDirectory . DIRECTORY_SEPARATOR . 'browsertestbase-templatecache';
-      $this->minkDefaultDriverArgs = [
-        'http://127.0.0.1:8510',
-        $path,
-      ];
-      if (!file_exists($path)) {
-        mkdir($path);
-      }
-    }
-
-    try {
-      return BrowserTestBase::initMink();
-    }
-    catch (DeadClient $e) {
-      $this->markTestSkipped('PhantomJS is either not installed or not running. Start it via phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768&');
-    }
-    catch (DriverException $e) {
-      if ($this->minkDefaultDriverClass === DrupalSelenium2Driver::class) {
-        $this->markTestSkipped("The test wasn't able to connect to your webdriver instance. For more information read core/tests/README.md.\n\nThe original message while starting Mink: {$e->getMessage()}");
-      }
-      else {
-        throw $e;
-      }
-    }
-    catch (\Exception $e) {
-      $this->markTestSkipped('An unexpected error occurred while starting Mink: ' . $e->getMessage());
-    }
-  }
 
   /**
    * {@inheritdoc}
