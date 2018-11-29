@@ -72,7 +72,10 @@
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-11-28/2798689-136.patch"
+            },
+            "drupal/password_policy": {
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
             }
         }
     },
@@ -125,6 +128,7 @@
         "drupal/metatag": "^1.0",
         "drupal/paragraphs": "1.5",
         "drupal/paragraphs_features": "^1.0",
+        "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
