@@ -7,6 +7,7 @@ use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Exception\DriverException;
 use Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 use Zumba\GastonJS\Exception\DeadClient;
 use Zumba\Mink\Driver\PhantomJSDriver;
@@ -79,7 +80,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     }
 
     try {
-      return parent::initMink();
+      return BrowserTestBase::initMink();
     }
     catch (DeadClient $e) {
       $this->markTestSkipped('PhantomJS is either not installed or not running. Start it via phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768&');
