@@ -5,7 +5,7 @@ cd ${TEST_DIR}/docroot
 
 # require development packages needed for testing
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "masterminds/html5:~2.3.1" --no-progress --working-dir ${TEST_DIR}/docroot
+    composer require "behat/mink:1.7.x-dev" "behat/mink-selenium2-driver:1.3.x-dev" "behat/mink-goutte-driver:^1.2" "jcalderonzumba/mink-phantomjs-driver:^0.3.1" "mikey179/vfsStream" "lullabot/amp" "masterminds/html5:~2.3.1" --no-progress --working-dir ${TEST_DIR}/docroot
 fi
 
 # Final cache rebuild, to make sure every code change is respected
