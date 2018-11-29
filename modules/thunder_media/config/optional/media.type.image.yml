@@ -10,7 +10,7 @@ third_party_settings:
   media_expire:
     expire_field: field_expires
     enable_expiring: 1
-    fallback_media: '1'
+    fallback_media: null
 id: image
 label: Image
 description: ''
