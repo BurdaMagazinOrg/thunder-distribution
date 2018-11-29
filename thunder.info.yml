@@ -10,77 +10,77 @@ distribution:
 
 # Required modules
 dependencies:
-  - config_selector
-  - media
-  - node
-  - views
+  - config_selector:config_selector
+  - drupal:media
+  - drupal:node
+  - drupal:views
 
 install:
   # core
-  - block
-  - breakpoint
-  - ckeditor
-  - contextual
-  - menu_link_content
-  - datetime
-  - editor
-  - entity_reference
-  - image
-  - inline_form_errors
-  - menu_ui
-  - language
-  - options
-  - path
-  - page_cache
-  - taxonomy
-  - dblog
-  - dynamic_page_cache
-  - toolbar
-  - field_ui
-  - file
-  - responsive_image
-  - views_ui
+  - drupal:block
+  - drupal:breakpoint
+  - drupal:ckeditor
+  - drupal:contextual
+  - drupal:menu_link_content
+  - drupal:datetime
+  - drupal:editor
+  - drupal:entity_reference
+  - drupal:image
+  - drupal:inline_form_errors
+  - drupal:menu_ui
+  - drupal:language
+  - drupal:options
+  - drupal:path
+  - drupal:page_cache
+  - drupal:taxonomy
+  - drupal:dblog
+  - drupal:dynamic_page_cache
+  - drupal:toolbar
+  - drupal:field_ui
+  - drupal:file
+  - drupal:responsive_image
+  - drupal:views_ui
 # contrib
-  - access_unpublished
-  - admin_toolbar_tools
-  - admin_toolbar_links_access_filter
-  - blazy
-  - content_lock
-  - ctools
-  - diff
-  - dropzonejs_eb_widget
-  - empty_fields
-  - entity_browser_entity_form
-  - field_group
-  - focal_point
-  - length_indicator
-  - libraries
-  - linkit
-  - media_entity_instagram
-  - media_entity_pinterest
-  - media_entity_slideshow
-  - media_entity_twitter
-  - media_expire
-  - metatag
-  - metatag_open_graph
-  - metatag_facebook
-  - metatag_twitter_cards
-  - paragraphs
-  - paragraphs_features
-  - pathauto
-  - redirect
-  - scheduler
-  - scheduler_content_moderation_integration
-  - select2
-  - simple_sitemap
-  - slick_media
-  - responsive_preview
+- access_unpublished:access_unpublished
+- admin_toolbar:admin_toolbar_tools
+- admin_toolbar:admin_toolbar_links_access_filter
+- blazy:blazy
+- content_lock:content_lock
+- ctools:ctools
+- diff:diff
+- dropzonejs:dropzonejs_eb_widget
+- empty_fields:empty_fields
+- entity_browser:entity_browser_entity_form
+- field_group:field_group
+- focal_point:focal_point
+- length_indicator:length_indicator
+- libraries:libraries
+- linkit:linkit
+- media_entity_instagram:media_entity_instagram
+- media_entity_pinterest:media_entity_pinterest
+- media_entity_slideshow:media_entity_slideshow
+- media_entity_twitter:media_entity_twitter
+- media_expire:media_expire
+- metatag:metatag
+- metatag:metatag_open_graph
+- metatag:metatag_facebook
+- metatag:metatag_twitter_cards
+- paragraphs:paragraphs
+- paragraphs_features:paragraphs_features
+- pathauto:pathauto
+- redirect:redirect
+- scheduler:scheduler
+- scheduler:scheduler_content_moderation_integration
+- select2:select2
+- simple_sitemap:simple_sitemap
+- slick_media:slick_media
+- responsive_preview:responsive_preview
 # thunder
-  - thunder_article
-  - thunder_media
-  - thunder_paragraphs
-  - thunder_taxonomy
-  - thunder_updater
+  - thunder:thunder_article
+  - thunder:thunder_media
+  - thunder:thunder_paragraphs
+  - thunder:thunder_taxonomy
+  - thunder:thunder_updater
 themes:
   - seven
   - thunder_base
