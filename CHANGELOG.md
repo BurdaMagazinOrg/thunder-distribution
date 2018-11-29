@@ -1,5 +1,23 @@
 # Change Log
 
+## [8.2.29](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.29) 2018-11-21
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.28...8.2.29)
+
+Bugfix release.
+
+- Fix [AMP library not compatible with newest masterminds/html5](https://www.drupal.org/project/thunder/issues/3015230)
+- Fix [Article integration tests started to fail](https://www.drupal.org/project/thunder/issues/3012271)
+
+## [8.2.28](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.28) 2018-11-06
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.27...8.2.28)
+
+This release contains a new version of the paragraphs module, which fixes a security issue. See https://www.drupal.org/sa-contrib-2018-073.
+Additionally we had several small changes to testing, improved demo content and removed of unused code.
+
+- Do [Update paragraphs module](https://www.drupal.org/project/thunder/issues/3011427)
+- Do [Remove implementation of hook_library_info_alter() in thunder.profile](https://www.drupal.org/project/thunder/issues/3008779)
+- Add [Default users for testing](https://www.drupal.org/project/thunder/issues/3005411)
+
 ## [8.2.27](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.27) 2018-10-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.26...8.2.27)
 
