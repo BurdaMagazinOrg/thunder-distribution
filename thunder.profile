@@ -235,6 +235,15 @@ function thunder_modules_installed($modules) {
       \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
     }
   }
+
+  // When enabling password policy, enabled required sub modules.
+  if (in_array('password_policy', $modules)) {
+    \Drupal::service('module_installer')->install(['password_policy_length']);
+    \Drupal::service('module_installer')->install(['password_policy_history']);
+    \Drupal::service('module_installer')->install(['password_policy_character_types']);
+    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
+  }
+
 }
 
 /**

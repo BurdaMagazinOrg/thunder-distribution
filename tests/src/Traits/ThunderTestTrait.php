@@ -84,6 +84,7 @@ trait ThunderTestTrait {
     $editor->addRole($role);
     $editor->save();
     $this->drupalLogin($editor);
+    return $editor;
   }
 
   /**
