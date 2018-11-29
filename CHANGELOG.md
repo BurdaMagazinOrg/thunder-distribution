@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.2.29](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.29) 2018-11-21
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.28...8.2.29)
+
+Bugfix release.
+
+- Fix [AMP library not compatible with newest masterminds/html5](https://www.drupal.org/project/thunder/issues/3015230)
+- Fix [Article integration tests started to fail](https://www.drupal.org/project/thunder/issues/3012271)
+
 ## [8.2.28](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.28) 2018-11-06
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.27...8.2.28)
 
