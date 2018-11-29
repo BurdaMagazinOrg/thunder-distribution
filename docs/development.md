@@ -75,9 +75,9 @@ This is just an example. For better explanation see [Running PHPUnit tests](http
 
 Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
 Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
-For cases like this you can set environment variable `THUNDER_WEBDRIVER_HOST` in following way:
+For cases like this you can set environment variable `MINK_DRIVER_ARGS_WEBDRIVER` in following way:
 
-```export THUNDER_WEBDRIVER_HOST=selenium:4444```
+```export MINK_DRIVER_ARGS_WEBDRIVER='["chrome", null, "http://localhost:4444/wd/hub"]'```
 
 That information will be picked up by testing classes and used for selenium endpoint.
 
