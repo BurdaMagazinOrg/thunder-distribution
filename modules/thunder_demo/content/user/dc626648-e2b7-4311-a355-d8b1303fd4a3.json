@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/user\/12?_format=hal_json"
+            "href": "http:\/\/default\/user\/4?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
@@ -9,7 +9,7 @@
     },
     "uid": [
         {
-            "value": 12
+            "value": 4
         }
     ],
     "uuid": [
