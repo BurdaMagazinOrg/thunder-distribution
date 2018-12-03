@@ -16,8 +16,6 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access video_browser entity browser pages'
-  - 'administer menu'
-  - 'administer nodes'
   - 'break content lock'
   - 'create article content'
   - 'create media'
