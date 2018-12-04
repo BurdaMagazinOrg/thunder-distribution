@@ -9,7 +9,6 @@ Additionally we fix some scheduler bugs with this release and restrict the restr
 some code cleanups have been made.
 
 - Add [Password policy](https://www.drupal.org/project/thunder/issues/2986591)
-- Fix [Don't use a fallback image](https://www.drupal.org/project/thunder/issues/3016936)
 - Fix [Scheduling to unpublish a node fails](https://www.drupal.org/project/thunder/issues/3016857)
 - Fix [Restricted editor has administrative permissions](https://www.drupal.org/project/thunder/issues/3013934)
 - Cleanup [Dependency namespacing in .info.yml file](https://www.drupal.org/project/thunder/issues/3005773)
