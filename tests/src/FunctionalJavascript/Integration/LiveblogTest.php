@@ -89,7 +89,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     // Add liveblog node.
     $fieldValues = [
       'title[0][value]' => 'Test Liveblog',
-      'field_highlights[values][3]' => 'element',
+      'field_highlights[values][6]' => 'element',
       'field_posts_number_initial[0][value]' => '1',
     ];
 
