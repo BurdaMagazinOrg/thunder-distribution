@@ -268,11 +268,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     // Wait sufficient time before cron is executed.
-    sleep($unPublishDiffSeconds + 5);
+    sleep($unPublishDiffSeconds + 2);
 
     $this->runCron();
-
-    sleep(5);
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
