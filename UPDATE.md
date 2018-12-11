@@ -26,6 +26,11 @@ All you need to do now is:
 drush updb
 ```
 
+## Additional tasks
+We removed the compatibility layer for the media_browser and
+gallery_browser. If you still relying on these, please move to the image
+browser.
+
 ## Additional not required tasks:
 
 ### Generic view for entity browser
