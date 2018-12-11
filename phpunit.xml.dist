@@ -23,7 +23,7 @@
     <!-- Do not limit the amount of memory tests take to run. -->
     <ini name="memory_limit" value="-1"/>
     <!-- Example SIMPLETEST_BASE_URL value: http://localhost -->
-    <env name="SIMPLETEST_BASE_URL" value="http://thunder.dd:8083"/>
+    <env name="SIMPLETEST_BASE_URL" value="http://localhost"/>
     <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
     <env name="SIMPLETEST_DB" value="sqlite://localhost/sites/default/files/.ht.sqlite"/>
     <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
