@@ -26,7 +26,7 @@ All you need to do now is:
 ```
 drush updb
 ```
-Then you will be informed that all your code media_entiy code has to be
+Then you will be informed that all your media_entiy code has to be
 media in core compatible now. If you are sure that you are ready for the
 migration, call the drush command again.
 ```
@@ -35,27 +35,10 @@ drush updb
 
 ## Additional tasks
 
-### Removing entity browser support
+### Removing support for some entity browser configurations
 We removed the compatibility layer for the media_browser and
 gallery_browser. If you still relying on these, please move to the image
 browser.
-
-### Moving from video_embed_field to oEmbed
-In our default configuration we moved from video_embed_field to media
-oEmbed and we recommend it to you, too.
-Steps to migrate:
-* Add https://www.drupal.org/files/issues/2018-12-11/2997799-21.patch
-to your composer.json in the patch section for drupal/video_embed_field
-* ```
-  drush en vem_migrate_oembed
-  ```
-* ```
-  drush video-embed-media-migrate-oembed
-  ```
-* ```
-  drush pmu video_embed_field
-  ```
-* Remove the video_embed_field module and patch from your composer.json
 
 ## Additional not required tasks:
 
@@ -78,3 +61,21 @@ directory
 * Goto admin/config/content/entity_browser
 * Use the view "Entity Browser : Entity Browser" in the widgets section
 in each of your entity browser configurations
+
+### Moving from video_embed_field to oEmbed
+In our default configuration we moved from video_embed_field to media
+oEmbed and we recommend it to you, too.
+
+Steps to migrate:
+* Add https://www.drupal.org/files/issues/2018-12-11/2997799-22.patch
+to your composer.json in the patch section for drupal/video_embed_field
+* ```
+  drush en vem_migrate_oembed
+  ```
+* ```
+  drush video-embed-media-migrate-oembed
+  ```
+* ```
+  drush pmu video_embed_field
+  ```
+* Remove the video_embed_field module and patch from your composer.json
