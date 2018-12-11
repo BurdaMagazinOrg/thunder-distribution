@@ -24,4 +24,5 @@ source_configuration:
     - Vimeo
   source_field: field_media_video_embed_field
 field_map:
-  author_name: field_copyright
+  title: name
+  author_name: field_author

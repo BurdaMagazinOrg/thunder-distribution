@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video.field_author
     - field.field.media.video.field_caption
     - field.field.media.video.field_copyright
     - field.field.media.video.field_description
@@ -42,6 +43,7 @@ content:
     region: content
 hidden:
   created: true
+  field_author: true
   field_caption: true
   field_source: true
   langcode: true
