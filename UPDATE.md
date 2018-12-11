@@ -29,7 +29,7 @@ drush updb
 ## Additional not required tasks:
 
 ### Generic view for entity browser
-Entity browser views now support contextual parameter. So we removed
+Entity browser views now support contextual parameters. So we removed
 views.view.image_browser.yml, views.view.video_browser.yml and
 views.view.riddle_browser.yml and added a generic entity browser view
 that gets filtered based on the allowed media types of the current
@@ -37,3 +37,13 @@ field.
 
 The old views are still supported, but we would recommend to import
 views.view.entity_browser.yml and use that in the entity browser.
+
+Steps to migrate:
+* Copy config/optional/views.view.entity_browser into your config
+directory
+* ```
+  drush cim
+  ```
+* Goto admin/config/content/entity_browser
+* Use the view "Entity Browser : Entity Browser" in the widgets section
+in each of your entity browser configurations
