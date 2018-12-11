@@ -66,7 +66,8 @@
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
             },
             "drupal/entity_browser": {
-                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch",
+                "The View widget should filter based on field settings": "https://www.drupal.org/files/issues/2018-09-06/2997747-2.patch"
             },
             "drupal/scheduler": {
                 "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-11-28/2798689-136.patch"
