@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.thumbnail
+    - field.field.media.video.field_author
     - field.field.media.video.field_caption
     - field.field.media.video.field_copyright
     - field.field.media.video.field_description
@@ -27,6 +28,7 @@ content:
     region: content
 hidden:
   created: true
+  field_author: true
   field_caption: true
   field_copyright: true
   field_description: true
