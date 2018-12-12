@@ -75,7 +75,6 @@ install:
   - simple_sitemap:simple_sitemap
   - slick_media:slick_media
   - responsive_preview:responsive_preview
-  - video_embed_field:video_embed_media
 
 # thunder
   - thunder:thunder_article

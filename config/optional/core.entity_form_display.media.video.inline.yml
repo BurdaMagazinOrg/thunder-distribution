@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.inline
+    - field.field.media.video.field_author
     - field.field.media.video.field_caption
     - field.field.media.video.field_copyright
     - field.field.media.video.field_description
@@ -11,13 +12,12 @@ dependencies:
     - media.type.video
   module:
     - field_group
+    - media
     - text
-    - video_embed_field
 third_party_settings:
   field_group:
     group_top:
       children:
-        - name
         - field_media_video_embed_field
       parent_name: ''
       weight: 0
@@ -35,6 +35,7 @@ third_party_settings:
       label: Top
     group_bottom:
       children:
+        - field_author
         - field_copyright
         - field_source
         - field_description
@@ -57,8 +58,16 @@ targetEntityType: media
 bundle: video
 mode: inline
 content:
+  field_author:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_copyright:
-    weight: 2
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -67,7 +76,7 @@ content:
     region: content
   field_description:
     type: text_textarea
-    weight: 4
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -75,31 +84,26 @@ content:
     region: content
   field_media_video_embed_field:
     weight: 2
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: video_embed_field_textfield
+    type: oembed_textfield
     region: content
   field_source:
     type: string_textfield
-    weight: 3
+    weight: 2
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  name:
-    type: string_textfield
-    weight: 1
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
 hidden:
   created: true
   field_caption: true
-  moderation_state: true
   langcode: true
+  moderation_state: true
+  name: true
   path: true
   status: true
   uid: true

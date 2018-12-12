@@ -132,7 +132,6 @@
         "drupal/slick_media": "^2.0",
         "drupal/thunder_admin": "^1.0 || ^2.0-beta15",
         "drupal/token": "^1.0",
-        "drupal/video_embed_field": "^2.0",
         "bower-asset/dropzone": "^5.1",
         "bower-asset/exif-js": "^2.3.0",
         "bower-asset/blazy": "^1.6.0",

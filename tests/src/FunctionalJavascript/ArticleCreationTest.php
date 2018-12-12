@@ -111,8 +111,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Video paragraph.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('youtube.com/embed/Ksp5JVFryEg') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
     // Check that one Pinterest widget is on page.

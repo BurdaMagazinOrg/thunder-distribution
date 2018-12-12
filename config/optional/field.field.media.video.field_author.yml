@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_video_embed_field
+    - field.storage.media.field_author
     - media.type.video
-id: media.video.field_media_video_embed_field
-field_name: field_media_video_embed_field
+id: media.video.field_author
+field_name: field_author
 entity_type: media
 bundle: video
-label: 'Video URL'
+label: Author
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

@@ -62,7 +62,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     // Edit video paragraph.
     $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-3-edit-2"]');
-    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][current][items][0][display][name][0][value]', 'New video name before collapse');
+    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][current][items][0][display][field_copyright][0][value]', 'New copyright before collapse');
 
     // Collapse parargraph form.
     $this->clickButtonCssSelector($page, '[name="field_paragraphs_3_collapse"]');
@@ -70,7 +70,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     // Re-open edit form, value has changed.
     $this->drupalGet("node/7/edit");
-    $this->assertSession()->pageTextContains('New video name before collapse');
+    $this->assertSession()->pageTextContains('New copyright before collapse');
   }
 
 }

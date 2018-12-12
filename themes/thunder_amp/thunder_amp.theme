@@ -18,9 +18,45 @@ function thunder_amp_preprocess_html(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function thunder_amp_preprocess_video_embed_iframe__youtube(&$variables) {
-  $explodedUrl = explode('/', $variables['url']);
-  $variables['videoid'] = end($explodedUrl);
+function thunder_amp_preprocess_media__source_oembed__derivative_video__provider_youtube(&$variables) {
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $variables['media'];
+  $url = $media->getSource()->getSourceFieldValue($media);
+
+  preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+  $variables['videoid'] = $match[1];
+
+  _thunder_amp_set_oembed_attributes($variables, $url);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function thunder_amp_preprocess_media__source_oembed__derivative_video__provider_vimeo(&$variables) {
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $variables['media'];
+  $url = $media->getSource()->getSourceFieldValue($media);
+
+  preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $url, $match);
+  $variables['videoid'] = $match[3];
+
+  _thunder_amp_set_oembed_attributes($variables, $url);
+}
+
+/**
+ * Set's width and height for oEmbed items.
+ */
+function _thunder_amp_set_oembed_attributes(&$variables, $url) {
+  /** @var \Drupal\media\OEmbed\UrlResolverInterface $url_resolver */
+  $url_resolver = \Drupal::service('media.oembed.url_resolver');
+  $resource_url = $url_resolver->getResourceUrl($url);
+
+  /** @var \Drupal\media\OEmbed\ResourceFetcherInterface $resource_fetcher */
+  $resource_fetcher = \Drupal::service('media.oembed.resource_fetcher');
+  $resource = $resource_fetcher->fetchResource($resource_url);
+
+  $variables['attributes']['width'] = $resource->getWidth();
+  $variables['attributes']['height'] = $resource->getHeight();
 }
 
 /**
