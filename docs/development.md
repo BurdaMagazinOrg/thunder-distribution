@@ -15,6 +15,29 @@ After that, Thunder is successfully installed. Start coding now.
 
 ----------
 
+## Update profile configuration
+
+The Thunder distributions ships the config_profile module as a dev
+dependency for easier config updates. The worklflow for updating config
+files that are shipped in the distribution should be:
+* Install the latest dev version of Thunder
+* Enable the Config Profile module
+  ```
+  drush en config_profile
+  ```
+* Make all your changes in the UI
+* Export your configuration
+  ```
+  drush cex
+  ```
+* config_profile has now copied all the config changes to the profile
+folder
+* Put all new config files to the desired folder and add track it in git
+* Remove all untracked files
+  ```
+  git clean -fd
+  ```
+
 ## Drupal Tests
 
 Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
