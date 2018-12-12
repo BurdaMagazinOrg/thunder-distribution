@@ -1,0 +1,5 @@
+profile: thunder
+blacklist:
+  - scheduler.settings.yml
+  - diff.settings.yml
+  - system.site.yml

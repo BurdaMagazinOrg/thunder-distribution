@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.article.field_teaser_text
     - node.type.article
   module:
-    - content_moderation
     - entity_browser
     - field_group
     - metatag
@@ -20,7 +19,9 @@ dependencies:
     - paragraphs_features
     - path
     - scheduler
+    - scheduler_content_moderation_integration
     - select2
+    - thunder
 third_party_settings:
   field_group:
     group_teaser:
