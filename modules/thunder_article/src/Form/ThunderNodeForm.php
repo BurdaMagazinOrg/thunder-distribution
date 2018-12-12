@@ -46,6 +46,8 @@ class ThunderNodeForm extends NodeForm {
    *   The time service.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
+   * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
+   *   The node revision access check service.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   The moderation info service.
    */
