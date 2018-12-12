@@ -70,7 +70,7 @@
                 "The View widget should filter based on field settings": "https://www.drupal.org/files/issues/2018-09-06/2997747-2.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-11-28/2798689-136.patch"
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-12-10/2798689-153.patch"
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
@@ -137,8 +137,7 @@
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24",
-        "bower-asset/select2": "4.0.4",
-        "masterminds/html5":  "~2.3.1"
+        "bower-asset/select2": "4.0.4"
     },
     "suggest": {
         "drupal/riddle_marketplace": "Riddle marketplace integration",
