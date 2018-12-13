@@ -5,11 +5,15 @@ dependencies:
     - field.storage.media.field_expires
     - image.style.thumbnail
   module:
+    - config_selector
     - datetime
     - image
     - media_entity
     - user
-    - config_selector
+third_party_settings:
+  config_selector:
+    feature: thunder_media_view
+    priority: 0
 id: thunder_media
 label: Media
 module: views
@@ -18,10 +22,6 @@ tag: ''
 base_table: media_field_data
 base_field: mid
 core: 8.x
-third_party_settings:
-  config_selector:
-    feature: thunder_media_view
-    priority: 0
 display:
   default:
     display_plugin: default

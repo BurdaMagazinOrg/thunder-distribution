@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-  - field.storage.node.field_channel
-  - field.storage.node.field_tags
-  - search_api.server.database
+    - field.storage.node.field_channel
+    - field.storage.node.field_tags
+    - search_api.server.database
   module:
-  - media_entity
-  - user
-  - node
-  - taxonomy
-  - search_api
+    - media_entity
+    - user
+    - node
+    - taxonomy
+    - search_api
 id: content
 name: Content
 description: ''
@@ -23,7 +23,7 @@ field_settings:
     type: integer
     dependencies:
       config:
-      - field.storage.node.field_channel
+        - field.storage.node.field_channel
   field_tags:
     label: Tags
     datasource_id: 'entity:node'
@@ -31,7 +31,7 @@ field_settings:
     type: integer
     dependencies:
       config:
-      - field.storage.node.field_tags
+        - field.storage.node.field_tags
   label:
     label: Label
     property_path: aggregated_field
@@ -40,9 +40,9 @@ field_settings:
     configuration:
       type: union
       fields:
-      - 'entity:media/name'
-      - 'entity:node/title'
-      - 'entity:taxonomy_term/name'
+        - 'entity:media/name'
+        - 'entity:node/title'
+        - 'entity:taxonomy_term/name'
   media_author:
     label: 'Publisher ID » User » Name'
     datasource_id: 'entity:media'
@@ -50,9 +50,9 @@ field_settings:
     type: string
     dependencies:
       module:
-      - media_entity
-      - user
-      - user
+        - media_entity
+        - user
+        - user
   media_changed:
     label: Changed
     datasource_id: 'entity:media'
@@ -60,7 +60,7 @@ field_settings:
     type: date
     dependencies:
       module:
-      - media_entity
+        - media_entity
   media_status:
     label: 'Publishing status'
     datasource_id: 'entity:media'
@@ -68,7 +68,7 @@ field_settings:
     type: boolean
     dependencies:
       module:
-      - media_entity
+        - media_entity
   name:
     label: 'Authored by » User » Name'
     datasource_id: 'entity:node'
@@ -76,9 +76,9 @@ field_settings:
     type: string
     dependencies:
       module:
-      - node
-      - user
-      - user
+        - node
+        - user
+        - user
   node_changed:
     label: Changed
     datasource_id: 'entity:node'
@@ -86,7 +86,7 @@ field_settings:
     type: date
     dependencies:
       module:
-      - node
+        - node
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -101,7 +101,7 @@ field_settings:
     type: boolean
     dependencies:
       module:
-      - node
+        - node
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
@@ -132,7 +132,7 @@ field_settings:
     type_locked: true
     dependencies:
       module:
-      - node
+        - node
   sticky:
     label: 'Sticky at top of lists'
     datasource_id: 'entity:node'
@@ -140,7 +140,7 @@ field_settings:
     type: boolean
     dependencies:
       module:
-      - node
+        - node
   term_changed:
     label: Changed
     datasource_id: 'entity:taxonomy_term'
@@ -148,7 +148,7 @@ field_settings:
     type: date
     dependencies:
       module:
-      - taxonomy
+        - taxonomy
   term_status:
     label: Published
     datasource_id: 'entity:taxonomy_term'
@@ -156,7 +156,7 @@ field_settings:
     type: boolean
     dependencies:
       module:
-      - taxonomy
+        - taxonomy
   type:
     label: Type
     property_path: aggregated_field
@@ -164,9 +164,9 @@ field_settings:
     configuration:
       type: union
       fields:
-      - 'entity:media/bundle'
-      - 'entity:node/type'
-      - 'entity:taxonomy_term/vid'
+        - 'entity:media/bundle'
+        - 'entity:node/type'
+        - 'entity:taxonomy_term/vid'
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -176,7 +176,7 @@ field_settings:
     type_locked: true
     dependencies:
       module:
-      - node
+        - node
 datasource_settings:
   'entity:media':
     bundles:
@@ -213,11 +213,11 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
-    - label
-    - media_author
-    - name
-    - rendered_item
-    - type
+      - label
+      - media_author
+      - name
+      - rendered_item
+      - type
     title: true
     alt: true
     tags:
@@ -232,11 +232,11 @@ processor_settings:
   ignorecase:
     all_fields: true
     fields:
-    - label
-    - media_author
-    - name
-    - rendered_item
-    - type
+      - label
+      - media_author
+      - name
+      - rendered_item
+      - type
     weights:
       preprocess_index: -20
       preprocess_query: -20
@@ -244,8 +244,8 @@ processor_settings:
   tokenizer:
     all_fields: true
     fields:
-    - label
-    - rendered_item
+      - label
+      - rendered_item
     spaces: ''
     overlap_cjk: 1
     minimum_word_size: '3'

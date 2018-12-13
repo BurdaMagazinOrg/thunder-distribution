@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-  - search_api.index.content
-  - views.view.content_search_api
+    - search_api.index.content
+    - views.view.content_search_api
   module:
-  - search_api
+    - search_api
 id: promoted_to_front_page
 name: Promoted
 url_alias: promoted_to_front_page

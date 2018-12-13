@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-  - search_api_db
+    - search_api_db
 id: database
 name: Database
 description: ''

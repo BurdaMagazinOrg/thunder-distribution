@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-  - search_api.index.content
-  - views.view.content_search_api
+    - search_api.index.content
+    - views.view.content_search_api
   module:
-  - search_api
+    - search_api
 id: tags
 name: Tags
 url_alias: tags

@@ -2,16 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-  - field.storage.media.field_expires
-  - image.style.thumbnail
-  - search_api.index.content
+    - field.storage.media.field_expires
+    - image.style.thumbnail
+    - search_api.index.content
   module:
-  - config_selector
-  - datetime
-  - image
-  - search_api
-  - user
-  - views_bulk_operations
+    - config_selector
+    - datetime
+    - image
+    - search_api
+    - thunder
+    - user
+    - views_bulk_operations
 third_party_settings:
   config_selector:
     feature: thunder_media_view
@@ -866,13 +867,13 @@ display:
     cache_metadata:
       max-age: 0
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
       tags:
-      - 'config:field.storage.media.field_expires'
+        - 'config:field.storage.media.field_expires'
   page_1:
     display_options:
       path: admin/content/media
@@ -901,10 +902,10 @@ display:
     cache_metadata:
       max-age: 0
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
       tags:
-      - 'config:field.storage.media.field_expires'
+        - 'config:field.storage.media.field_expires'
