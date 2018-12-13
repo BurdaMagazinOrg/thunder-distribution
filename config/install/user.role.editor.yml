@@ -20,7 +20,6 @@ permissions:
   - 'administer menu'
   - 'administer nodes'
   - 'break content lock'
-  - 'break content lock'
   - 'create article content'
   - 'create media'
   - 'create page content'
