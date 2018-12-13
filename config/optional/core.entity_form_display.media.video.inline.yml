@@ -98,7 +98,7 @@ content:
 hidden:
   created: true
   field_caption: true
-  moderation_state: true
   langcode: true
+  moderation_state: true
   path: true
   uid: true

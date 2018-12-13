@@ -4,6 +4,6 @@ dependencies:
   module:
     - media_entity
 id: media.paragraph_preview
-label: Paragraph preview
+label: 'Paragraph preview'
 targetEntityType: media
 cache: true

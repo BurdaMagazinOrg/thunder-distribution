@@ -21,10 +21,10 @@ widget_selector_configuration: {  }
 widgets:
   3dca5e79-d9a9-40c9-b987-74f649942ef8:
     settings:
-      auto_select: false
       view: video_browser
       view_display: entity_browser_1
       submit_text: 'Select video'
+      auto_select: false
     uuid: 3dca5e79-d9a9-40c9-b987-74f649942ef8
     weight: 1
     label: 'Select existing'

@@ -10,11 +10,6 @@ label: Editorial
 type: content_moderation
 type_settings:
   states:
-    unpublished:
-      label: Unpublished
-      weight: 5
-      published: false
-      default_revision: true
     draft:
       label: Draft
       published: false
@@ -25,6 +20,11 @@ type_settings:
       published: true
       default_revision: true
       weight: 0
+    unpublished:
+      label: Unpublished
+      weight: 5
+      published: false
+      default_revision: true
   transitions:
     unpublish:
       label: Unpublish

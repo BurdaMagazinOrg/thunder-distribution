@@ -21,8 +21,8 @@ content:
     region: content
 hidden:
   created: true
-  moderation_state: true
   langcode: true
-  path: true
+  moderation_state: true
   name: true
+  path: true
   uid: true
