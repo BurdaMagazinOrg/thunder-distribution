@@ -77,10 +77,13 @@
                 "Facets are lost by Views on keyword search": "https://www.drupal.org/files/issues/2018-11-13/2378945-33-drupal8.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-08-02/2798689-102.patch"
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-12-10/2798689-153.patch"
             },
             "drupal/views_bulk_operations": {
                 "Fatal error when executing simple actions on Adminimal theme": "https://www.drupal.org/files/issues/2018-09-19/views_bulk_operations-theme_error-2952498-29.patch"
+            },
+            "drupal/password_policy": {
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
             }
         }
     },
@@ -134,6 +137,7 @@
         "drupal/metatag": "^1.0",
         "drupal/paragraphs": "1.5",
         "drupal/paragraphs_features": "^1.0",
+        "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
@@ -156,8 +160,7 @@
         "bower-asset/blazy": "^1.6.0",
         "bower-asset/slick-carousel": "^1.6",
         "bower-asset/shariff": "^1.24",
-        "bower-asset/select2": "4.0.4",
-        "masterminds/html5":  "~2.3.1"
+        "bower-asset/select2": "4.0.4"
     },
     "replace": {
         "bower-asset/jquery": "*",

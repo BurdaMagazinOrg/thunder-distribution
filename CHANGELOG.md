@@ -1,5 +1,28 @@
 # Change Log
 
+## [8.2.30](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.30) 2018-12-04
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.29...8.2.30)
+
+Thunder gets a password policy. It is not activated by default. If you want to use the password policy, you have to 
+enable the password policy module. 
+Additionally we fix some scheduler bugs with this release and restrict the restricted editor role even more. Finally
+some code cleanups have been made.
+
+- Add [Password policy](https://www.drupal.org/project/thunder/issues/2986591)
+- Fix [Scheduling to unpublish a node fails](https://www.drupal.org/project/thunder/issues/3016857)
+- Fix [Restricted editor has administrative permissions](https://www.drupal.org/project/thunder/issues/3013934)
+- Cleanup [Dependency namespacing in .info.yml file](https://www.drupal.org/project/thunder/issues/3005773)
+- Cleanup [Don't use a fallback image](https://www.drupal.org/project/thunder/issues/3016936)
+- Cleanup [WebDriverTestBase for Thunder JS Tests](https://www.drupal.org/project/thunder/issues/3016916)
+
+## [8.2.29](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.29) 2018-11-21
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.28...8.2.29)
+
+Bugfix release.
+
+- Fix [AMP library not compatible with newest masterminds/html5](https://www.drupal.org/project/thunder/issues/3015230)
+- Fix [Article integration tests started to fail](https://www.drupal.org/project/thunder/issues/3012271)
+
 ## [8.2.28](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.28) 2018-11-06
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.27...8.2.28)
 
