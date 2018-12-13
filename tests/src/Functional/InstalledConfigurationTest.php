@@ -36,7 +36,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
-    'thunder_search',
+    'search_api',
 
     // Additional modules.
     // 'thunder_fia',

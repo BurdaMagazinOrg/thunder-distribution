@@ -36,7 +36,6 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['redirect'],
     ['simple_sitemap'],
     [
-      'thunder_search',
       'search_api_db',
       'search_api',
       'facets',
