@@ -36,8 +36,6 @@ permissions:
   - 'edit terms in tags'
   - 'never autoplay videos'
   - 'renew token'
-  - 'revert article revisions'
-  - 'revert page revisions'
   - 'update any media'
   - 'update media'
   - 'use editorial transition create_new_draft'

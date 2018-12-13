@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Url;
+use Drupal\node\Access\NodeRevisionAccessCheck;
 use Drupal\node\NodeForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,6 +18,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Base for handler for node add/edit forms.
  */
 class ThunderNodeForm extends NodeForm {
+
+  /**
+   * The node revision access check service.
+   *
+   * @var \Drupal\node\Access\NodeRevisionAccessCheck
+   */
+  protected $nodeRevisionAccess;
 
   /**
    * The moderation information service.
@@ -38,11 +46,14 @@ class ThunderNodeForm extends NodeForm {
    *   The time service.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
+   * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
+   *   The node revision access check service.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   The moderation info service.
    */
-  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo = NULL) {
     parent::__construct($entity_repository, $temp_store_factory, $entity_type_bundle_info, $time, $current_user);
+    $this->nodeRevisionAccess = $node_revision_access;
     $this->moderationInfo = $moderationInfo;
   }
 
@@ -56,6 +67,7 @@ class ThunderNodeForm extends NodeForm {
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
       $container->get('current_user'),
+      $container->get('access_check.node.revision'),
       $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
     );
   }
@@ -121,10 +133,11 @@ class ThunderNodeForm extends NodeForm {
         $query['destination'] = $this->getRequest()->query->get('destination');
         $route_info->setOption('query', $query);
       }
+
       $element['revert_to_default'] = [
         '#type' => 'link',
         '#title' => $this->t('Revert to default revision'),
-        '#access' => $this->entity->access('update'),
+        '#access' => $this->nodeRevisionAccess->checkAccess($entity, $this->currentUser, 'update'),
         '#weight' => 101,
         '#attributes' => [
           'class' => ['button', 'button--danger'],
