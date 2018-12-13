@@ -6,7 +6,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  * Thunder Search integration.
  *
  * @ThunderOptionalModule(
- *   id = "thunder_search",
+ *   id = "search_api",
  *   label = @Translation("Thunder Search integration"),
  *   description = @Translation("Better search experience for editors and users"),
  *   type = "module",

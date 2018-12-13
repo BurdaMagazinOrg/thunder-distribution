@@ -2,25 +2,24 @@ langcode: en
 status: true
 dependencies:
   config:
-  - field.storage.media.field_expires
+  - field.storage.node.field_channel
+  - field.storage.node.field_teaser_media
   - image.style.thumbnail
   - search_api.index.content
   module:
   - config_selector
-  - datetime
-  - image
+  - media_entity
   - search_api
-  - thunder_search
   - user
   - views_bulk_operations
 third_party_settings:
   config_selector:
-    feature: thunder_media_view
+    feature: thunder_content_view
     priority: 1
-id: media_search_api
-label: 'Media - Search API'
+id: content_search_api
+label: 'Content - Search API'
 module: views
-description: 'Find and manage media with an advanced search technology.'
+description: 'Find and manage content with an advanced search technology.'
 tag: ''
 base_table: search_api_index_content
 base_field: search_api_id
@@ -89,12 +88,12 @@ display:
           description: ''
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
-            thumbnail: thumbnail
+            field_teaser_media: field_teaser_media
             label: label
             type: type
-            media_status: media_status
-            field_expires: field_expires
-            media_changed: media_changed
+            field_channel: field_channel
+            status: status
+            node_changed: node_changed
             search_api_operations: search_api_operations
           info:
             views_bulk_operations_bulk_form:
@@ -102,18 +101,18 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            thumbnail:
+            field_teaser_media:
               align: ''
               separator: ''
               empty_column: false
-              responsive: ''
+              responsive: priority-low
             label:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-medium
+              responsive: ''
             type:
               sortable: true
               default_sort_order: asc
@@ -121,19 +120,21 @@ display:
               separator: ''
               empty_column: false
               responsive: priority-medium
-            media_status:
+            field_channel:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            status:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: priority-medium
-            field_expires:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            media_changed:
+            node_changed:
               sortable: true
               default_sort_order: desc
               align: ''
@@ -201,42 +202,53 @@ display:
           batch: true
           batch_size: 10
           form_step: true
-          buttons: false
           action_title: Action
           selected_actions:
-            media_delete_action: media_delete_action
-            media_publish_action: media_publish_action
-            media_save_action: media_save_action
-            media_unpublish_action: media_unpublish_action
-            node_assign_owner_action: 0
-            node_unpromote_action: 0
-            node_promote_action: 0
-            node_publish_action: 0
-            node_save_action: 0
-            node_make_sticky_action: 0
-            node_unpublish_by_keyword_action: 0
-            node_unpublish_action: 0
-            node_make_unsticky_action: 0
-            views_bulk_operations_delete_entity: 0
+            media_delete_action: 0
+            media_publish_action: 0
+            media_save_action: 0
+            media_unpublish_action: 0
+            node_assign_owner_action: node_assign_owner_action
+            node_unpromote_action: node_unpromote_action
+            node_promote_action: node_promote_action
+            node_publish_action: node_publish_action
+            node_save_action: node_save_action
+            node_make_sticky_action: node_make_sticky_action
+            node_unpublish_by_keyword_action: node_unpublish_by_keyword_action
+            node_unpublish_action: node_unpublish_action
+            node_make_unsticky_action: node_make_unsticky_action
+            views_bulk_operations_delete_entity: views_bulk_operations_delete_entity
             pathauto_update_alias: 0
           preconfiguration:
-            media_delete_action:
+            node_assign_owner_action:
               label_override: ''
-            media_publish_action:
+            node_unpromote_action:
               label_override: ''
-            media_save_action:
+            node_promote_action:
               label_override: ''
-            media_unpublish_action:
+            node_publish_action:
+              label_override: ''
+            node_save_action:
+              label_override: ''
+            node_make_sticky_action:
+              label_override: ''
+            node_unpublish_by_keyword_action:
+              label_override: ''
+            node_unpublish_action:
+              label_override: ''
+            node_make_unsticky_action:
+              label_override: ''
+            views_bulk_operations_delete_entity:
               label_override: ''
           plugin_id: views_bulk_operations_bulk_form
-        thumbnail:
-          id: thumbnail
-          table: search_api_datasource_content_entity_media
-          field: thumbnail
+        field_teaser_media:
+          id: field_teaser_media
+          table: search_api_datasource_content_entity_node
+          field: field_teaser_media
           relationship: none
           group_type: group
           admin_label: ''
-          label: Thumbnail
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -269,7 +281,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -278,11 +290,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image
+          type: media_thumbnail
           settings:
             image_style: thumbnail
             image_link: ''
-          group_column: ''
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -293,12 +305,31 @@ display:
           separator: ', '
           field_api_classes: false
           field_rendering: true
-          fallback_handler: search_api
+          fallback_handler: search_api_entity
           fallback_options:
             link_to_item: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: media
+            display_methods:
+              gallery:
+                display_method: label
+                view_mode: default
+              image:
+                display_method: label
+                view_mode: default
+              instagram:
+                display_method: label
+                view_mode: default
+              pinterest:
+                display_method: label
+                view_mode: default
+              twitter:
+                display_method: label
+                view_mode: default
+              video:
+                display_method: label
+                view_mode: default
+          entity_type: node
           plugin_id: search_api_field
         label:
           id: label
@@ -404,10 +435,86 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        media_status:
-          id: media_status
+        field_channel:
+          id: field_channel
           table: search_api_index_content
-          field: media_status
+          field: field_channel
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Channel
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              channel:
+                display_method: label
+                view_mode: default
+              tags:
+                display_method: label
+                view_mode: default
+          plugin_id: search_api_field
+        status:
+          id: status
+          table: search_api_index_content
+          field: status
           relationship: none
           group_type: group
           admin_label: ''
@@ -479,85 +586,14 @@ display:
             multi_type: separator
             multi_separator: ', '
           plugin_id: search_api_field
-        field_expires:
-          id: field_expires
-          table: search_api_datasource_content_entity_media
-          field: field_expires
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Expires
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: short
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            multi_type: separator
-            multi_separator: ', '
-          entity_type: media
-          plugin_id: search_api_field
-        media_changed:
-          id: media_changed
+        node_changed:
+          id: node_changed
           table: search_api_index_content
-          field: media_changed
+          field: node_changed
           relationship: none
           group_type: group
           admin_label: ''
-          label: Updated
+          label: 'Changed '
           exclude: false
           alter:
             alter_text: false
@@ -765,7 +801,7 @@ display:
           admin_label: ''
           operator: or
           value:
-            'entity:media': 'entity:media'
+            'entity:node': 'entity:node'
           group: 1
           exposed: false
           expose:
@@ -808,10 +844,10 @@ display:
           expose:
             label: ''
           plugin_id: search_api
-        media_changed:
-          id: media_changed
+        node_changed:
+          id: node_changed
           table: search_api_index_content
-          field: media_changed
+          field: node_changed
           relationship: none
           group_type: group
           admin_label: ''
@@ -832,7 +868,7 @@ display:
           expose:
             label: ''
           plugin_id: search_api
-      title: Media
+      title: Content
       header:
         result:
           id: result
@@ -873,13 +909,14 @@ display:
       - url.query_args
       - user.permissions
       tags:
-      - 'config:field.storage.media.field_expires'
+      - 'config:field.storage.node.field_channel'
+      - 'config:field.storage.node.field_teaser_media'
   page_1:
     display_options:
-      path: admin/content/media
+      path: admin/content
       menu:
         type: tab
-        title: Media
+        title: Content
         description: ''
         expanded: false
         parent: ''
@@ -908,4 +945,5 @@ display:
       - url.query_args
       - user.permissions
       tags:
-      - 'config:field.storage.media.field_expires'
+      - 'config:field.storage.node.field_channel'
+      - 'config:field.storage.node.field_teaser_media'

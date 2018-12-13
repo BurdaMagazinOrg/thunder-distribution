@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_search\Plugin\views\area;
+namespace Drupal\thunder\Plugin\views\area;
 
 use Drupal\facets\FacetManager\DefaultFacetManager;
 use Drupal\facets\FacetSource\FacetSourcePluginManager;
