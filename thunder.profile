@@ -333,7 +333,7 @@ function thunder_modules_installed($modules) {
     \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
   }
 
-  // When enabling password policy, enabled required sub modules.
+  // When enabling search_api, enable facets and VBO.
   if (in_array('search_api', $modules)) {
     \Drupal::service('module_installer')->install(['search_api_db']);
     \Drupal::service('module_installer')->install(['facets']);
