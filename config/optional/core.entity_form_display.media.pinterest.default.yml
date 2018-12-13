@@ -28,8 +28,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  moderation_state: true
   langcode: true
+  moderation_state: true
   name: true
   path: true
   uid: true

@@ -8,7 +8,6 @@ dependencies:
     - datetime
     - image
     - media
-    - system
     - user
 id: media
 label: Media

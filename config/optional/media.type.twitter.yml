@@ -19,9 +19,9 @@ source: twitter
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
+  source_field: field_url
   use_twitter_api: false
   generate_thumbnails: false
-  source_field: field_url
   consumer_key: ''
   consumer_secret: ''
   oauth_access_token: ''
