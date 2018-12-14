@@ -76,6 +76,9 @@
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
+            },
+            "drupal/core": {
+                "Workflow transition current state is changed when using preview mode\n": "https://www.drupal.org/files/issues/2018-12-14/2914873-29.patch"
             }
         }
     },
@@ -94,7 +97,7 @@
         "drupal/blazy": "^1.0",
         "drupal/breakpoint_js_settings": "^1.0",
         "drupal/checklistapi": "^1.0",
-        "drupal/core": "^8.6.0",
+        "drupal/core": "8.6.4",
         "drupal/config_selector": "^1.0",
         "drupal/config_update": "^1.0",
         "drupal/content_lock": "^1.0",
