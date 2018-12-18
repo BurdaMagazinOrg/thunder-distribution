@@ -1,5 +1,21 @@
 # Change Log
 
+## [8.2.31](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.31) 2018-12-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.30...8.2.31)
+
+We fixed and improved several topics regarding the content moderation feature and started to reorganize the distribution 
+in preparation for the alpha release of Thunder 3.0. No new features have been added.
+
+- Fix [Cannot update to thunder 8.2.30 with composer](https://www.drupal.org/project/thunder/issues/3019353)
+- Fix [WSOD on scheduled nodes after saving](https://www.drupal.org/project/thunder/issues/3018530)
+- Fix [Wrong access check for revision reset](https://www.drupal.org/project/thunder/issues/3019596)
+- Fix [As a restricted editor I am not be able to edit scheduled nodes](https://www.drupal.org/project/thunder/issues/3020284)
+- Do [Demo users should be also authors of demo nodes](https://www.drupal.org/project/thunder/issues/3008594)
+- Do [Move optional config from Thunder base modules into distro folder](https://www.drupal.org/project/thunder/issues/3018523)
+- Do [Add demo tags, that are connected to our articles](https://www.drupal.org/project/thunder/issues/3008589)
+- Do [Add a phpunit.xml.dist file to the profile](https://www.drupal.org/project/thunder/issues/3019694)
+- Do [Add config_profile as a dev dependency](https://www.drupal.org/project/thunder/issues/3019992)
+
 ## [8.2.30](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.30) 2018-12-04
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.29...8.2.30)
 
