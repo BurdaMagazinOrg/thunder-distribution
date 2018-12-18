@@ -31,7 +31,6 @@ git:
 branches:
   only:
     - /^8\.x\-[0-9]+\.x$/
-    - feature/travis-update
 
 mysql:
   database: drupal

@@ -10,9 +10,6 @@ drush_download_thunder() {
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
-# update composer
-composer self-update
-
 # remove xdebug to make php execute faster
 phpenv config-rm xdebug.ini
 
