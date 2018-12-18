@@ -25,13 +25,7 @@ export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 # Set version of imagick
 export PHP_IMAGICK_VERSION="3.4.3"
 
-# Set version for Yaml PHP library (for PHP 5.6 -> Yaml version 1.x will be used)
-if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then
-  PHP_YAML_VERSION="1.3.1"
-else
-  PHP_YAML_VERSION="2.0.2"
-fi;
-export PHP_YAML_VERSION
+export PHP_YAML_VERSION="2.0.2"
 
 # Set a default install method if none set.
 if [[ ${INSTALL_METHOD} == "" ]]; then
