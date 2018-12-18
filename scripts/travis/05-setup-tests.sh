@@ -6,6 +6,7 @@ cd ${TEST_DIR}/docroot
 # require development packages needed for testing
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" --no-progress --working-dir ${TEST_DIR}/docroot
+    composer run-script drupal-phpunit-upgrade
 fi
 
 # Final cache rebuild, to make sure every code change is respected

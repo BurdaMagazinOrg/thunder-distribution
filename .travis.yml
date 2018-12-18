@@ -25,6 +25,9 @@ sudo: required
 services:
   - mysql
 
+git:
+  depth: 3
+
 branches:
   only:
     - /^8\.x\-[0-9]+\.x$/
