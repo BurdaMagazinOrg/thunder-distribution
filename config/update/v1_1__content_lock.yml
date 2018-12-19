@@ -1,3 +1,6 @@
+__global:
+  install_modules:
+    - content_lock
 user.role.editor:
   expected_config: {  }
   update_actions:

@@ -1,0 +1,3 @@
+__global_actions__:
+  install_modules:
+    - update_helper

@@ -1,3 +1,6 @@
+__global:
+  install_modules:
+    - select2
 core.entity_form_display.node.article.default:
   expected_config:
     content:

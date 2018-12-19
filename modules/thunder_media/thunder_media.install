@@ -5,7 +5,10 @@
  * Contains.
  */
 
+use Drupal\Component\Utility\DiffArray;
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\TempStore\TempStoreException;
 use Drupal\views\Entity\View;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
@@ -71,6 +74,104 @@ function thunder_media_update_dependencies() {
 }
 
 /**
+ * Support for legacy configuration update behaviour.
+ *
+ * With switching to "update_helper" module, API for direct configuration update
+ * is removed. That's why we have to use helper function.
+ *
+ * @param string $config_name
+ *   Configuration name that should be updated.
+ * @param array $configuration
+ *   Configuration array to update.
+ * @param array $expected_configuration
+ *   Only if current config is same like old config we are updating.
+ * @param array $delete_keys
+ *   List of parent keys to remove. @see NestedArray::unsetValue()
+ *
+ * @return bool
+ *   Returns TRUE if update of configuration was successful.
+ *
+ * @see \Drupal\update_helper\Updater::updateConfig()
+ */
+function _thunder_media_update_config($config_name, array $configuration, array $expected_configuration = [], array $delete_keys = []) {
+  $config_factory = \Drupal::configFactory();
+
+  $config = $config_factory->getEditable($config_name);
+  $config_data = $config->get();
+
+  // Check that configuration exists before executing update.
+  if (empty($config_data)) {
+    return FALSE;
+  }
+
+  // Check if configuration is already in new state.
+  $merged_data = NestedArray::mergeDeep($expected_configuration, $configuration);
+  if (empty(DiffArray::diffAssocRecursive($merged_data, $config_data))) {
+    return TRUE;
+  }
+
+  if (!empty($expected_configuration) && DiffArray::diffAssocRecursive($expected_configuration, $config_data)) {
+    return FALSE;
+  }
+
+  // Delete configuration keys from config.
+  if (!empty($delete_keys)) {
+    foreach ($delete_keys as $key_path) {
+      NestedArray::unsetValue($config_data, $key_path);
+    }
+  }
+
+  $config->setData(NestedArray::mergeDeep($config_data, $configuration));
+  $config->save();
+
+  return TRUE;
+}
+
+/**
+ * Update entity browser configuration.
+ *
+ * @param string $browser
+ *   Id of the entity browser.
+ * @param array $configuration
+ *   Configuration array to update.
+ * @param array $oldConfiguration
+ *   Only if current config is same like old config we are updating.
+ *
+ * @return bool
+ *   Indicates if config was updated or not.
+ */
+function _thunder_media_update_entity_browser_config($browser, array $configuration, array $oldConfiguration = []) {
+  if (!_thunder_media_update_config('entity_browser.browser.' . $browser, $configuration, $oldConfiguration)) {
+    return FALSE;
+  }
+
+  /** @var \Drupal\Core\TempStore\SharedTempStoreFactory $temp_store_factory */
+  $temp_store_factory = \Drupal::service('tempstore.shared');
+  $entity_browser_config = $temp_store_factory->get('entity_browser.config');
+
+  // Entity browser form uses ctools wizard form and if some has opened that
+  // form status is saved in temp storage and we want to update that status too.
+  $storage = $entity_browser_config->get($browser);
+  if (empty($storage)) {
+    return TRUE;
+  }
+
+  foreach ($configuration as $key => $value) {
+    $part = $storage['entity_browser']->getPluginCollections()[$key];
+    $part->setConfiguration(NestedArray::mergeDeep($part->getConfiguration(), $value));
+  }
+
+  try {
+    $entity_browser_config->set($browser, $storage);
+  }
+  catch (TempStoreException $e) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/**
  * Rename config object.
  */
 function thunder_media_update_8001() {
@@ -87,7 +188,6 @@ function thunder_media_update_8001() {
  * Change media_thumbnail image style.
  */
 function thunder_media_update_8002() {
-
   // List of configurations that should be checked for existence.
   $expectedConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['width'] = 241;
   $expectedConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['height'] = 138;
@@ -97,8 +197,7 @@ function thunder_media_update_8002() {
   $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['width'] = 182;
   $newConfig['effects']['8a41a5b5-469d-4918-879e-460f26e08700']['data']['height'] = 104;
 
-  \Drupal::service('thunder_updater')
-    ->updateConfig('image.style.media_thumbnail', $newConfig, $expectedConfig);
+  _thunder_media_update_config('image.style.media_thumbnail', $newConfig, $expectedConfig);
 }
 
 /**
@@ -156,17 +255,19 @@ function thunder_media_update_8004() {
   // existing configuration value for this property.
   $configsToUpdate['display_configuration']['auto_open'] = TRUE;
 
-  \Drupal::service('thunder_updater')
-    ->updateEntityBrowserConfig('gallery_browser', $configsToUpdate, $expectedConfig);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  _thunder_media_update_entity_browser_config('gallery_browser', $configsToUpdate, $expectedConfig);
 }
 
 /**
  * Update dropzonejs widget file extension filtering for images.
  */
 function thunder_media_update_8005() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   // List of expected configuration for listed entity browsers.
   $expectedConfig['multiple_image_browser']['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['extensions'] = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
@@ -179,7 +280,7 @@ function thunder_media_update_8005() {
   $newConfig['media_browser']['widgets']['ec1759ab-e969-4448-a9db-d3a70e123326']['settings']['extensions'] = 'png gif jpg jpeg';
 
   foreach ($newConfig as $browser => $configuration) {
-    if ($thunderUpdater->updateEntityBrowserConfig($browser, $configuration, $expectedConfig[$browser])) {
+    if (_thunder_media_update_entity_browser_config($browser, $configuration, $expectedConfig[$browser])) {
       $message = t('Image extensions filtering for "@configName" has been updated.', [
         '@configName' => 'entity_browser.browser.' . $browser,
       ]);
@@ -216,8 +317,10 @@ function thunder_media_update_8006() {
   $newConfig['widgets']['7d7f8f45-f628-48a3-84a8-c962c73f39e8']['settings']['auto_select'] = TRUE;
   $newConfig['widgets']['89532aea-140d-4b9e-96f4-2aa489c095cb']['settings']['auto_select'] = TRUE;
 
-  \Drupal::service('thunder_updater')
-    ->updateEntityBrowserConfig('multiple_image_browser', $newConfig, $expectedConfig);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  _thunder_media_update_entity_browser_config('multiple_image_browser', $newConfig, $expectedConfig);
 }
 
 /**
@@ -232,18 +335,16 @@ function thunder_media_update_8007() {
   $newConfig['content']['field_url']['settings']['width'] = NULL;
   $newConfig['content']['field_url']['settings']['height'] = NULL;
 
-  \Drupal::service('thunder_updater')
-    ->updateConfig('core.entity_view_display.media.instagram.default', $newConfig, $expectedConfig);
+  _thunder_media_update_config('core.entity_view_display.media.instagram.default', $newConfig, $expectedConfig);
 }
 
 /**
  * New image style for entity browser.
  */
 function thunder_media_update_8008() {
-
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -267,7 +368,7 @@ function thunder_media_update_8008() {
     $updateLogger->info($message);
 
     foreach ($newConfig as $view => $configuration) {
-      if ($thunderUpdater->updateConfig('views.view.' . $view, $configuration, $expectedConfig[$view])) {
+      if (_thunder_media_update_config('views.view.' . $view, $configuration, $expectedConfig[$view])) {
         $message = t('View "@view" is now using image style entity_browser_thumbnail.', [
           '@view' => $view,
         ]);
@@ -289,9 +390,9 @@ function thunder_media_update_8008() {
  */
 function thunder_media_update_8009() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   // List of expected configurations that should be checked.
   $expectedConfig['field.field.media.image.field_image']['required'] = FALSE;
@@ -303,7 +404,7 @@ function thunder_media_update_8009() {
 
   // Check that gallery paragraph uses complex widget.
   foreach ($configsToUpdate as $configName => $newConfig) {
-    if (!$thunderUpdater->updateConfig($configName, $newConfig, $expectedConfig[$configName])) {
+    if (!_thunder_media_update_config($configName, $newConfig, $expectedConfig[$configName])) {
       $updateLogger->warning(t('Unable to set field "@configName" as required.', ['@configName' => $configName]));
     }
   }
@@ -315,9 +416,9 @@ function thunder_media_update_8009() {
  * Activate support for responsive images with Blazy.
  */
 function thunder_media_update_8010() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   // Import image styles.
   \Drupal::service('module_installer')->install([
@@ -346,7 +447,7 @@ function thunder_media_update_8010() {
 
   if (\Drupal::moduleHandler()->moduleExists('blazy')
     && \Drupal::moduleHandler()->moduleExists('responsive_image')
-    && $thunderUpdater->updateConfig('blazy.settings', $newBlazySettings, $expectedBlazySettings)
+    && _thunder_media_update_config('blazy.settings', $newBlazySettings, $expectedBlazySettings)
   ) {
     $updateLogger->info('The support for responsive images was activated in the Blazy settings.');
   }
@@ -370,7 +471,7 @@ function thunder_media_update_8010() {
   $newConfigs['image.style.media_image']['effects']['21ef239e-0d92-4fcc-84fc-17f4da42ae2f']['data']['height'] = 527;
 
   foreach ($newConfigs as $configName => $newConfig) {
-    if (!$thunderUpdater->updateConfig($configName, $newConfig, $expectedConfigs[$configName])) {
+    if (!_thunder_media_update_config($configName, $newConfig, $expectedConfigs[$configName])) {
       $updateLogger->warning(t('Unable to update configuration for "@configName".', ['@configName' => $configName]));
     }
   }
@@ -401,9 +502,9 @@ function thunder_media_update_8011() {
  */
 function thunder_media_update_8012() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_image']['settings']['preview_image_style'] = 'thumbnail';
@@ -412,7 +513,7 @@ function thunder_media_update_8012() {
   $newConfig['content']['field_image']['settings']['preview_image_style'] = 'medium';
 
   // Execute update of config with additional validation of existing config.
-  $updateExecuted = $thunderUpdater->updateConfig(
+  $updateExecuted = _thunder_media_update_config(
     'core.entity_form_display.media.image.default',
     $newConfig,
     $expectedConfig
@@ -434,8 +535,8 @@ function thunder_media_update_8012() {
  * Import slick media display view configuration.
  */
 function thunder_media_update_8013() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   /** @var \Drupal\Core\Config\StorageInterface $configStorage */
   $configStorage = \Drupal::service('config.storage');
@@ -468,9 +569,12 @@ function thunder_media_update_8013() {
  * Remove "Language" filter and add descriptions from media browsers.
  */
 function thunder_media_update_8101() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Perform removal of language filters from relevant views.
   $successfulUpdate = TRUE;
@@ -510,7 +614,7 @@ function thunder_media_update_8101() {
   $newImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['label'] = 'Image name';
   $newImageViewConfig['display']['default']['display_options']['filters']['name']['expose']['description'] = 'Filter by name';
 
-  if ($thunderUpdater->updateConfig('views.view.image_browser', $newImageViewConfig, $expectedImageViewConfig)) {
+  if (_thunder_media_update_config('views.view.image_browser', $newImageViewConfig, $expectedImageViewConfig)) {
     $updateLogger->info(t('Entity browser image view filter descriptions and names are updated.'));
   }
   else {
@@ -521,11 +625,11 @@ function thunder_media_update_8101() {
 
   // If update is successful for all views, then check entry in checklist.
   if ($successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
+    $updateChecklist->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
   }
   else {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
+    $updateChecklist->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -537,9 +641,12 @@ function thunder_media_update_8101() {
  */
 function thunder_media_update_8102() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -651,7 +758,7 @@ function thunder_media_update_8102() {
     $newConfigs['image_browser']['widgets']['f09e2255-6bd8-4301-ba02-1d446f7fca70']['settings']['submit_text'] = 'Select image';
 
     foreach ($newConfigs as $browserId => $newConfig) {
-      if ($thunderUpdater->updateEntityBrowserConfig($browserId, $newConfig, $expectedConfigs[$browserId])) {
+      if (_thunder_media_update_entity_browser_config($browserId, $newConfig, $expectedConfigs[$browserId])) {
         $updateLogger->info(t('Text for @browser_id entity browser is adjusted.', ['@browser_id' => $browserId]));
       }
       else {
@@ -663,10 +770,10 @@ function thunder_media_update_8102() {
   }
 
   if ($successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+    $updateChecklist->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__image_video_paragraph']);
+    $updateChecklist->markUpdatesFailed(['v1_1__image_video_paragraph']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -678,9 +785,12 @@ function thunder_media_update_8102() {
  */
 function thunder_media_update_8103() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // List of configurations that should be checked for existence.
   $expectedConfig['hidden']['thumbnail'] = TRUE;
@@ -708,16 +818,16 @@ function thunder_media_update_8103() {
     'third_party_settings' => [],
   ];
 
-  if ($thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
+  if (_thunder_media_update_config('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
     $display = EntityViewDisplay::load('media.instagram.thumbnail');
     $display->removeComponent('field_url')->save();
 
     $updateLogger->info(t('Configuration is successfully changed for instagram thumbnail.'));
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
+    $updateChecklist->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__instagram_edit_preview']);
+    $updateChecklist->markUpdatesFailed(['v1_1__instagram_edit_preview']);
   }
 
   // Output log result depending on channel used for update execution.
@@ -729,9 +839,9 @@ function thunder_media_update_8103() {
  */
 function thunder_media_update_8104() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['display']['default']['display_options']['pager']['options']['items_per_page'] = 20;
@@ -742,7 +852,7 @@ function thunder_media_update_8104() {
   $successfulUpdate = TRUE;
 
   foreach (['video_browser', 'image_browser'] as $viewId) {
-    if ($thunderUpdater->updateConfig('views.view.' . $viewId, $newConfig, $expectedConfig)) {
+    if (_thunder_media_update_config('views.view.' . $viewId, $newConfig, $expectedConfig)) {
       $updateLogger->info(t('Configuration is successfully changed for @view view.', ['@view' => $viewId]));
     }
     else {
@@ -763,31 +873,34 @@ function thunder_media_update_8104() {
  * Enable empty fields module.
  */
 function thunder_media_update_8105() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['v1_1__empty_fields' => 'empty_fields']);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->installModules(['v1_1__empty_fields' => 'empty_fields']);
 
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Update url field labels in media entities.
  */
 function thunder_media_update_8106() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Execute configuration update defintions with logging of fails and
   // successes.
-  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media__update_8106']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_media_update_8106']);
+  if ($updater->executeUpdate('thunder_media', 'thunder_media__update_8106')) {
+    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8106']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8106']);
+    $updateChecklist->markUpdatesFailed(['thunder_media_update_8106']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -804,36 +917,42 @@ function thunder_media_update_8107() {
  * Use blazy for lazy loading.
  */
 function thunder_media_update_8108() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Execute configuration update definitions with logging of success.
-  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media_update_8108']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_media_update_8108']);
+  if ($updater->executeUpdate('thunder_media', 'thunder_media_update_8108')) {
+    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8108']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8108']);
+    $updateChecklist->markUpdatesFailed(['thunder_media_update_8108']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Update twitter image style dimensions.
  */
 function thunder_media_update_8109() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Execute configuration update definitions with logging of success.
-  if ($thunderUpdater->executeUpdates([['thunder_media', 'thunder_media_update_8109']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_media_update_8109']);
+  if ($updater->executeUpdate('thunder_media', 'thunder_media_update_8109')) {
+    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8109']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_media_update_8109']);
+    $updateChecklist->markUpdatesFailed(['thunder_media_update_8109']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }

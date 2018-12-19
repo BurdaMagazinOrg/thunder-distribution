@@ -61,6 +61,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static $ignoreCoreConfigs = [
+    // TODO: Check this!!!
     'checklistapi.progress.thunder_updater',
     'system.site',
     'core.extension',

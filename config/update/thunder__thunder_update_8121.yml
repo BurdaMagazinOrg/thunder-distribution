@@ -1,0 +1,5 @@
+__global:
+  install_modules:
+    - paragraphs_features
+  import_configs:
+    - paragraphs_features.settings

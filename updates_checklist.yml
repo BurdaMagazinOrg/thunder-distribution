@@ -261,3 +261,10 @@ v2.24:
         '#description': "<p>Provide Select2 field widgets for forms and views filters.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable "select2" module', '#url': 'internal:/admin/modules' }
+v2.xx:
+    '#title': 'Update to Thunder 2.xx'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8128:
+        '#title': 'Switch to Update Helper module.'
+        '#description': '<p>Switching to Update Helper was successfully.</p>'
+        '#description_failed': '<p><strong>Switching to Update Helper has failed.</strong><p>'

@@ -55,28 +55,31 @@ function thunder_taxonomy_update_8001() {
  * Enable pinterest paragraph type on taxonomy terms.
  */
 function thunder_taxonomy_update_8002() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Execute configuration update defintions with logging of fails and
   // successes.
-  if ($thunderUpdater->executeUpdates([['thunder_taxonomy', 'thunder_taxonomy__update_8002']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_taxonomy_update_8002']);
+  if ($updater->executeUpdate('thunder_taxonomy', 'thunder_taxonomy__update_8002')) {
+    $updateChecklist->markUpdatesSuccessful(['thunder_taxonomy_update_8002']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_taxonomy_update_8002']);
+    $updateChecklist->markUpdatesFailed(['thunder_taxonomy_update_8002']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Use core's term status field definition.
  */
 function thunder_taxonomy_update_8003() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
   $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
   $entity_type = $definition_update_manager->getEntityType('taxonomy_term');
@@ -104,5 +107,5 @@ function thunder_taxonomy_update_8003() {
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }

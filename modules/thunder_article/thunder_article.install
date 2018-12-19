@@ -59,9 +59,12 @@ function thunder_article_update_8001() {
  * Enable shariff module.
  */
 function thunder_article_update_8101() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   $modulesInstalledSuccessfully = TRUE;
 
@@ -73,7 +76,7 @@ function thunder_article_update_8101() {
   }
   catch (MissingDependencyException $e) {
     $updateLogger->warning($e->getMessage());
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+    $updateChecklist->markUpdatesFailed(['v1_1__shariff']);
     $modulesInstalledSuccessfully = FALSE;
   }
 
@@ -90,11 +93,11 @@ function thunder_article_update_8101() {
       )->save();
 
       $updateLogger->info(t('Shariff field is added for article.'));
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+      $updateChecklist->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
     }
     else {
       $updateLogger->warning(t('Unable to place shariff field.'));
-      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
+      $updateChecklist->markUpdatesFailed(['v1_1__shariff']);
     }
   }
 
@@ -105,20 +108,37 @@ function thunder_article_update_8101() {
  * Enable length_indicator module.
  */
 function thunder_article_update_8102() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Execute configuration update definitions with logging of success.
   if (
-    $thunderUpdater->installModules(['thunder_article_update_8102' => 'length_indicator']) &&
-    $thunderUpdater->executeUpdates([['thunder_article', 'thunder_article_update_8102']])
+    $updater->installModules(['thunder_article_update_8102' => 'length_indicator']) &&
+    $updater->executeUpdate('thunder_article', 'thunder_article_update_8102')
   ) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_article_update_8102']);
+    $updateChecklist->markUpdatesSuccessful(['thunder_article_update_8102']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article_update_8102']);
+    $updateChecklist->markUpdatesFailed(['thunder_article_update_8102']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
+}
+
+/**
+ * Configuration update.
+ */
+function thunder_article_update_8103() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder_article', 'thunder_article_update_8103');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
 }

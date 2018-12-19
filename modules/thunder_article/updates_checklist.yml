@@ -1,0 +1,7 @@
+8.x-2.31:
+    '#title': 'Update to Thunder 2.31'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_article_update_8103:
+        '#title': 'Configuration update.'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

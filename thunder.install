@@ -5,6 +5,7 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
+use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
@@ -12,6 +13,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\Paragraph;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Update hook dependencies.
@@ -265,8 +267,8 @@ function thunder_update_8006() {
     'config_update',
   ]);
 
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   $configs = [
     'entity_view_display' => [
@@ -322,56 +324,53 @@ function thunder_update_8102() {
 }
 
 /**
- * Installs the thunder_updater module.
+ * Installs the update_helper module.
  */
 function thunder_update_8103() {
-
   // We let exception bubble in this case, since it's not possible to continue
-  // with execution of update hooks without "thunder_updater" service.
-  \Drupal::service('module_installer')->install(['thunder_updater']);
+  // with execution of update hooks without "update_helper.updater" service.
+  \Drupal::service('module_installer')->install(['update_helper']);
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
-  $thunderUpdater->checklist()->markAllUpdates(FALSE);
+  try {
+    \Drupal::service('module_installer')->install(['update_helper_checklist']);
 
-  // Now Thunder updater is enabled, we can start marking checkboxes.
-  $thunderUpdater->installModules([
-    'v1_1__responsive_preview' => 'responsive_preview',
-    'v1_1__access_unpublished' => 'access_unpublished',
-  ]);
+    /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+    $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+    $updateChecklist->markAllUpdates(FALSE);
+  } catch (Exception $e) {
+    $updater->logger()->warning('Unable to install "update_helper_checklist".');
+  }
 
-  return $thunderUpdater->logger()->output();
+  // Now update helper is enabled and we can start using it!
+  $updater->executeUpdate('thunder', 'v1_1__responsive_preview');
+  $updater->executeUpdate('thunder', 'v1_1__access_unpublished');
+
+  return $updater->logger()->output();
 }
 
 /**
  * Installs the metatag_facebook module.
  */
 function thunder_update_8104() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__metatag_facebook');
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  $thunderUpdater->installModules([
-    'v1_1__metatag_facebook' => 'metatag_facebook',
-  ]);
-
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Installs the config_update module.
  */
 function thunder_update_8105() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__config_update');
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  $thunderUpdater->installModules([
-    'v1_1__config_update' => 'config_update',
-  ]);
-
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -379,14 +378,11 @@ function thunder_update_8105() {
  */
 function thunder_update_8106() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__diff');
 
-  $thunderUpdater->installModules([
-    'v1_1__diff' => 'diff',
-  ]);
-
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -397,9 +393,12 @@ function thunder_update_8106() {
  */
 function thunder_update_8107() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   $entityTypeManager = \Drupal::entityTypeManager();
   $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
@@ -519,10 +518,10 @@ function thunder_update_8107() {
   }
 
   if ($successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__thunder_riddle']);
+    $updateChecklist->markUpdatesSuccessful(['v1_1__thunder_riddle']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_riddle']);
+    $updateChecklist->markUpdatesFailed(['v1_1__thunder_riddle']);
   }
 
   return $updateLogger->output();
@@ -532,8 +531,8 @@ function thunder_update_8107() {
  * Adjust access permissions related to "access_unpublished" module.
  */
 function thunder_update_8108() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   // Granting permissions only for "anonymous" and "authenticated" user roles.
   $roles = Role::loadMultiple(['anonymous', 'authenticated']);
@@ -564,9 +563,12 @@ function thunder_update_8108() {
  */
 function thunder_update_8109() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
+  $config_factory = \Drupal::configFactory();
 
   // List of configurations that should be checked for existence.
   $expectedConfig['content']['field_paragraphs']['settings']['add_mode'] = 'dropdown';
@@ -575,24 +577,47 @@ function thunder_update_8109() {
   $newConfig['content']['field_paragraphs']['settings']['add_mode'] = 'modal';
 
   $successfulUpdate = TRUE;
-
   foreach (['node.article', 'taxonomy_term.channel', 'taxonomy_term.tags'] as $item) {
-    if ($thunderUpdater->updateConfig('core.entity_form_display.' . $item . '.default', $newConfig, $expectedConfig)) {
-      $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
-    }
-    else {
-      $successfulUpdate = FALSE;
+    $config = $config_factory->getEditable('core.entity_form_display.' . $item . '.default');
+    $config_data = $config->get();
 
+    // Check that configuration exists before executing update.
+    if (empty($config_data)) {
+      $successfulUpdate = FALSE;
       $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
+
+      continue;
     }
+
+    // Check if configuration is already in new state.
+    $merged_data = NestedArray::mergeDeep($expectedConfig, $newConfig);
+    if (empty(DiffArray::diffAssocRecursive($merged_data, $config_data))) {
+      $updateLogger->info(t('Default form display for @item has already new configuration.', ['@item' => $item]));
+
+      continue;
+    }
+
+    if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $config_data)) {
+      $successfulUpdate = FALSE;
+      $updateLogger->warning(t('Unable to adjust form display for @item default', ['@item' => $item]));
+
+      continue;
+    }
+
+    $config->setData(NestedArray::mergeDeep($config_data, $newConfig));
+    $config->save();
+
+    $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
   }
 
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
   if ($successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
+    $updateChecklist->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__paragraphs_modal']);
+    $updateChecklist->markUpdatesFailed(['v1_1__paragraphs_modal']);
   }
 
   return $updateLogger->output();
@@ -602,8 +627,8 @@ function thunder_update_8109() {
  * Adjust access permissions related to "responsive_preview" module.
  */
 function thunder_update_8110() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   // Granting permissions only for "editor" and "seo" user roles.
   $roles = Role::loadMultiple(['editor', 'seo']);
@@ -633,8 +658,8 @@ function thunder_update_8110() {
  * Adjust permissions related to "video_embed_field" module.
  */
 function thunder_update_8111() {
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   // Granting permissions only for "editor" and "seo" user roles.
   $roles = Role::loadMultiple(['editor', 'seo']);
@@ -660,305 +685,208 @@ function thunder_update_8111() {
  * Installs new Thunder Admin theme.
  */
 function thunder_update_8112() {
-
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
-
-  $successfulUpdate = TRUE;
-
-  // Order is important, because of dependencies.
-  $importConfigs = [
-    'core.entity_form_mode.media.inline',
-    'image.style.paragraph_preview_thumbnail',
-    'core.entity_view_mode.media.paragraph_preview',
-    'field.storage.media.field_author',
-    'field.storage.media.field_content',
-    'field.field.media.twitter.field_author',
-    'field.field.media.twitter.field_content',
-    'field.field.media.instagram.field_author',
-    'field.field.media.instagram.field_content',
-    'core.entity_view_display.media.gallery.paragraph_preview',
-    'core.entity_view_display.media.image.paragraph_preview',
-    'core.entity_view_display.media.twitter.paragraph_preview',
-    'core.entity_view_display.media.instagram.paragraph_preview',
-    'core.entity_view_display.media.video.paragraph_preview',
-    'core.entity_view_display.paragraph.link.preview',
-    'core.entity_view_display.paragraph.twitter.preview',
-    'core.entity_form_display.media.image.inline',
-    'core.entity_form_display.media.video.inline',
-  ];
-
-  if (!$thunderUpdater->importConfigs($importConfigs)) {
-    $successfulUpdate = FALSE;
-  }
-
-  // Execute update configurations with logging of fails and successes.
-  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8112']])) {
-    $successfulUpdate = FALSE;
-  }
-
-  // Set update checklist.
-  if ($successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__thunder_admin_ux']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__thunder_admin_ux']);
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__thunder_admin_ux');
 
   // Output logged messages to related channel of update execution.
-  return $updateLogger->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable content_lock module.
  */
 function thunder_update_8113() {
-
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
-
-  if ($thunderUpdater->installModules(['v1_1__content_lock' => 'content_lock'])) {
-    $updateLogger->info(t('content_lock module is successfully installed.'));
-
-    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8113']])) {
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__content_lock']);
-    }
-    else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__content_lock']);
-    }
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__content_lock');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable media_entity_pinterest module.
  */
 function thunder_update_8114() {
-
   if (\Drupal::moduleHandler()->moduleExists('media_entity_pinterest')) {
     return;
   }
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  $successfulUpdate = TRUE;
-
-  if ($thunderUpdater->installModules(['v1_1__media_entity_pinterest' => 'media_entity_pinterest'])) {
-
-    // Order is important, because of dependencies.
-    $importConfigs = [
-      'paragraphs.paragraphs_type.pinterest',
-      'media_entity.bundle.pinterest',
-      'field.field.media.pinterest.field_url',
-      'field.field.paragraph.pinterest.field_media',
-      'core.entity_view_display.media.pinterest.default',
-      'core.entity_view_display.media.pinterest.paragraph_preview',
-      'core.entity_view_display.paragraph.pinterest.default',
-      'core.entity_view_display.paragraph.pinterest.preview',
-      'core.entity_form_display.media.pinterest.default',
-      'core.entity_form_display.paragraph.pinterest.default',
-    ];
-
-    if ($thunderUpdater->importConfigs($importConfigs)) {
-      if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8114']])) {
-        $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__media_entity_pinterest']);
-      }
-      else {
-        $successfulUpdate = FALSE;
-      }
-    }
-    else {
-      $successfulUpdate = FALSE;
-    }
-  }
-  else {
-    $successfulUpdate = FALSE;
-  }
-
-  if (!$successfulUpdate) {
-    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__media_entity_pinterest']);
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__media_entity_pinterest');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Update to Drupal 8.4.
  */
 function thunder_update_8115() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   $successful = TRUE;
-  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8115']])) {
+  if (!$updater->executeUpdate('thunder', 'thunder__thunder_update_8115')) {
     $successful = FALSE;
   }
 
   if (\Drupal::moduleHandler()->moduleExists('thunder_riddle')) {
-    if (!$thunderUpdater->executeUpdates([['thunder_riddle', 'thunder__thunder_update_8115']])) {
+    if (!$updater->executeUpdate('thunder_riddle', 'thunder__thunder_update_8115')) {
       $successful = FALSE;
     }
   }
 
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8115']);
+    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8115']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8115']);
+    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8115']);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable inline_form_errors module.
  */
 function thunder_update_8116() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder__thunder_update_8116' => 'inline_form_errors']);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8116');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable paragraphs split text.
  */
 function thunder_update_8117() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8117' => 'paragraph_split_text'])) {
-    $config = \Drupal::configFactory()->getEditable('editor.editor.basic_html');
-    $items = $config->get('settings.toolbar.rows.0');
-    if ($items) {
-      foreach ($items as &$item) {
-        if (!empty($item['name'] && $item['name'] === 'Tools')) {
-          $item['items'][] = 'SplitTextBefore';
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
-        }
+  /** @var \Drupal\update_helper\UpdateLogger $updater_logger */
+  $updater_logger = $updater->logger();
+
+  if (!$updater->executeUpdate('thunder', 'thunder__thunder_update_8117')) {
+    return $updater_logger->output();
+  }
+
+  // Set split text functionality for basic html CKEditor mode.
+  $config = \Drupal::configFactory()->getEditable('editor.editor.basic_html');
+  $items = $config->get('settings.toolbar.rows.0');
+  if ($items) {
+    foreach ($items as &$item) {
+      if (!empty($item['name'] && $item['name'] === 'Tools')) {
+        $item['items'][] = 'SplitTextBefore';
+
       }
-      $config->set('settings.toolbar.rows.0', $items)->save();
     }
-    else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8117']);
+    $config->set('settings.toolbar.rows.0', $items)->save();
+  }
+  else {
+    try {
+      /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+      $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+      $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8117']);
+    }
+    catch (Exception $e) {
+      $updater_logger->warning('Unable to setup split text functionality for paragraphs.');
     }
   }
+
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater_logger->output();
 }
 
 /**
  * Enable admin_toolbar_links_access_filter module.
  */
 function thunder_update_8118() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->installModules(['thunder__thunder_update_8118' => 'admin_toolbar_links_access_filter']);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8118');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable redirect module.
  */
 function thunder_update_8119() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8119' => 'redirect'])) {
-    if ($role = Role::load('seo')) {
-      $role->grantPermission('administer redirects');
-      $role->save();
-    }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  if (!$updater->executeUpdate('thunder', 'thunder__thunder_update_8119')) {
+    return $updater->logger()->output();
   }
+
+  $role = Role::load('seo');
+  if ($role) {
+    $role->grantPermission('administer redirects');
+    $role->save();
+  }
+
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Install the Configuration Selector module if necessary.
  */
 function thunder_update_8120() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  if (!\Drupal::moduleHandler()->moduleExists('config_selector')) {
-    // This function was renamed after Thunder 2.14, because we want to ensure
-    // that the config_selector is always enabled.
-    // thunder_post_update_install_config_selector was the former name and is
-    // still the key for the checklist.
-    // After 2.16 this function was moved from
-    // thunder_post_update_ensure_config_selector_installed into a hook_update_N
-    // function, because we realized that module installs should happen here.
-    $thunderUpdater->installModules(['thunder_post_update_install_config_selector' => 'config_selector']);
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder_post_update_install_config_selector');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Installing paragraphs features module with corresponding settings for it.
  */
 function thunder_update_8121() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  // Import settings for paragraphs features module, to enable drop-down to a
-  // single button functionality.
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8121' => 'paragraphs_features'])) {
-    $successful = $thunderUpdater->importConfigs(['paragraphs_features.settings']);
-  }
-  else {
-    $successful = FALSE;
-  }
-
-  // Update should be marked as successful only if all steps are successful.
-  if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8121']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8121']);
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8121');
 
   // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Switch to paragraphs experimental widget.
  */
 function thunder_update_8122() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
   // Execute configuration update definition for switching to new experimental
   // paragraphs widget.
-  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8122']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8122']);
-  }
-  else {
-    $thunderUpdater->logger()->warning('Unable to apply configuration changes for experimental paragraphs widget. Follow instructions provided in the update list.');
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8122']);
-  }
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8122');
 
   // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Remove the old paragraph split text solution.
  */
 function thunder_update_8123() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
   $configFactory = \Drupal::configFactory();
@@ -980,18 +908,18 @@ function thunder_update_8123() {
         array_splice($last_item['items'], $split_text_index, 1);
         $config->set('settings.toolbar.rows.0', $items)->save();
 
-        $thunderUpdater->logger()->info('Split before option is successfully removed from Basic HTML Editor.');
+        $updater->logger()->info('Split before option is successfully removed from Basic HTML Editor.');
       }
       else {
-        $thunderUpdater->logger()->info('Update did not found split before option for Basic HTML Editor.');
+        $updater->logger()->info('Update did not found split before option for Basic HTML Editor.');
       }
     }
     else {
-      $thunderUpdater->logger()->info('Update did not found split before option for Basic HTML Editor.');
+      $updater->logger()->info('Update did not found split before option for Basic HTML Editor.');
     }
   }
   else {
-    $thunderUpdater->logger()->warning('Basic HTML Editor configuration is not available.');
+    $updater->logger()->warning('Basic HTML Editor configuration is not available.');
   }
 
   // Uninstall paragraph_split_text module.
@@ -1000,35 +928,38 @@ function thunder_update_8123() {
     $moduleInstaller = \Drupal::service('module_installer');
 
     if ($moduleInstaller->uninstall(['paragraph_split_text'])) {
-      $thunderUpdater->logger()->info('MGodule "paragraph_split_text" is successfully removed.');
+      $updater->logger()->info('MGodule "paragraph_split_text" is successfully removed.');
     }
     else {
-      $thunderUpdater->logger()->warning('Module "paragraph_split_text" is not removed.');
+      $updater->logger()->warning('Module "paragraph_split_text" is not removed.');
       $successful = FALSE;
     }
   }
   else {
-    $thunderUpdater->logger()->info('Module "paragraph_split_text" is not installed. Nothing to uninstall.');
+    $updater->logger()->info('Module "paragraph_split_text" is not installed. Nothing to uninstall.');
   }
 
   // Update should be marked as successful only if all steps are successful.
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8123']);
+    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8123']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8123']);
+    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8123']);
   }
 
   // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Adjust access permissions related to "access_unpublish" module.
  */
 function thunder_update_8124() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // Granting permissions only for "editor" and "seo" user roles.
   $roles = Role::loadMultiple(['editor', 'seo']);
@@ -1040,23 +971,23 @@ function thunder_update_8124() {
       $role->grantPermission('renew token');
       $role->save();
 
-      $thunderUpdater->logger()->info(t('Permissions for deleting and renewing access tokens is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      $updater->logger()->info(t('Permissions for deleting and renewing access tokens is granted for @user_role user role.', ['@user_role' => $role->id()]));
     }
     catch (EntityStorageException $storageException) {
       $successful = FALSE;
-      $thunderUpdater->logger()->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+      $updater->logger()->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
     }
   }
 
   if ($successful) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8124']);
+    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8124']);
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8124']);
+    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8124']);
   }
 
   // Output logged result of update hook execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -1074,47 +1005,49 @@ function thunder_update_8125() {
  * as a base theme.
  */
 function thunder_update_8126() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
+
   // Get installed themes.
   $installed_themes = \Drupal::configFactory()->getEditable('core.extension')->get('theme') ?: [];
   if (array_key_exists('seven', $installed_themes)) {
-    $thunderUpdater->logger()->info('Theme "seven" has already been installed.');
+    $updater->logger()->info('Theme "seven" has already been installed.');
   }
   elseif ($themeInstaller->install(['seven'])) {
-    $thunderUpdater->logger()->info('Theme "seven" successfully installed.');
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8125']);
+    $updater->logger()->info('Theme "seven" successfully installed.');
+    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8125']);
   }
   else {
-    $thunderUpdater->logger()->warning('Theme "seven" not installed.');
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8125']);
+    $updater->logger()->warning('Theme "seven" not installed.');
+    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8125']);
   }
 
   // Output logged result of update hook execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }
 
 /**
  * Enable select2 module.
  */
 function thunder_update_8127() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  if ($thunderUpdater->installModules(['thunder__thunder_update_8127' => 'select2'])) {
-    /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-    $thunderUpdater = \Drupal::service('thunder_updater');
-
-    // Execute configuration update definitions with logging of success.
-    if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8127']])) {
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8127']);
-    }
-    else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8127']);
-    }
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8127');
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
+}
+
+/**
+ * Switch to update_helper module instead of thunder_updater.
+ */
+function thunder_update_8128() {
+  // TODO - migrate old thunder_updater Update entities to new entities.
+
 }
