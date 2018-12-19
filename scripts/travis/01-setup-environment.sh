@@ -25,7 +25,8 @@ export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 # Set version of imagick
 export PHP_IMAGICK_VERSION="3.4.3"
 
-export PHP_YAML_VERSION="2.0.2"
+# Set version of php yaml
+export PHP_YAML_VERSION="2.0.4"
 
 # Set a default install method if none set.
 if [[ ${INSTALL_METHOD} == "" ]]; then
