@@ -38,7 +38,7 @@ drush_make_thunder() {
     git clone --depth 1 --single-branch --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
-    composer run-script drupal-phpunit-upgrade --working-dir=${DOWNLOAD_PATH}/docroot
+    composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 }
 
 composer_create_thunder() {
