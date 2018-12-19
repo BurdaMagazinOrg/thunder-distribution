@@ -37,10 +37,10 @@ cd $TRAVIS_BUILD_DIR
 # PHP conf tweaks
 
 
-echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-echo 'xdebug.remote_autostart = 0' >> drupal.php.ini;
-echo 'xdebug.remote_enable = 0' >> drupal.php.ini;
-echo 'xdebug.profiler_enable = 0' >> drupal.php.ini;
+echo 'sendmail_path = /bin/true' >> drupal.php.ini
+echo 'xdebug.remote_autostart = 0' >> drupal.php.ini
+echo 'xdebug.remote_enable = 0' >> drupal.php.ini
+echo 'xdebug.profiler_enable = 0' >> drupal.php.ini
 
 phpenv config-add drupal.php.ini
 phpenv rehash
