@@ -30,9 +30,12 @@ phpize
 ./configure
 make
 make install
-ls ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 echo "sendmail_path = /bin/true" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+# Disable xdebug.
+echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 phpenv rehash
 
 # Prepare test directory
