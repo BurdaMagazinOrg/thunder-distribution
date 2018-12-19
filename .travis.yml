@@ -23,11 +23,6 @@ branches:
   only:
     - /^8\.x\-[0-9]+\.x$/
 
-mysql:
-  database: drupal
-  username: root
-  encoding: utf8
-
 addons:
   artifacts:
     region: eu-west-1

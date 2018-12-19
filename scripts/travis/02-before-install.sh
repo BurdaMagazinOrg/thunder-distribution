@@ -37,15 +37,6 @@ echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.
 phpenv rehash
 cd $TRAVIS_BUILD_DIR
 
-# Set MySQL Options
-mysql -e "SET GLOBAL wait_timeout = 5400;"
-mysql -e "SHOW VARIABLES LIKE 'wait_timeout';"
-
-# Prepare MySQL user and database
-mysql -e "CREATE DATABASE drupal;"
-mysql -e "CREATE USER 'thunder'@'localhost' IDENTIFIED BY 'thunder';"
-mysql -e "GRANT ALL ON drupal.* TO 'thunder'@'localhost';"
-
 # PHP conf tweaks
 echo 'sendmail_path = /bin/true' >> drupal.php.ini;
 phpenv config-add drupal.php.ini
