@@ -10,9 +10,6 @@ drush_download_thunder() {
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
-# remove xdebug to make php execute faster
-phpenv config-rm xdebug.ini
-
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
@@ -38,7 +35,13 @@ phpenv rehash
 cd $TRAVIS_BUILD_DIR
 
 # PHP conf tweaks
+
+
 echo 'sendmail_path = /bin/true' >> drupal.php.ini;
+echo 'xdebug.remote_autostart = 0' >> drupal.php.ini;
+echo 'xdebug.remote_enable = 0' >> drupal.php.ini;
+echo 'xdebug.profiler_enable = 0' >> drupal.php.ini;
+
 phpenv config-add drupal.php.ini
 phpenv rehash
 
