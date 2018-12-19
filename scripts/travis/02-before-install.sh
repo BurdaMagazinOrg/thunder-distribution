@@ -30,19 +30,13 @@ phpize
 ./configure
 make
 make install
+ls ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-phpenv rehash
-cd $TRAVIS_BUILD_DIR
-
-ls ~/.phpenv/versions/$(phpenv version-name)/etc/
-
-# PHP conf tweaks
-echo 'sendmail_path = /bin/true' >> drupal.php.ini
-
-phpenv config-add drupal.php.ini
+echo "sendmail_path = /bin/true" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
 
 # Prepare test directory
+cd $TRAVIS_BUILD_DIR
 mkdir -p ${TEST_DIR}
 
 # Clear drush release history cache, to pick up new releases.
