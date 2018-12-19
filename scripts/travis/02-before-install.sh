@@ -10,6 +10,9 @@ drush_download_thunder() {
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
+# remove xdebug to make php execute faster
+phpenv config-rm xdebug.ini
+
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
