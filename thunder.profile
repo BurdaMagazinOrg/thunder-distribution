@@ -7,7 +7,6 @@
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
 use Drupal\user\Entity\User;
@@ -390,7 +389,7 @@ function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $ent
   if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin' && \Drupal::hasService('content_moderation.moderation_information')) {
     /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
     $moderation_info = \Drupal::service('content_moderation.moderation_information');
-    if ($moderation_info->canModerateEntitiesOfEntityType($entity_type) && $fields['moderation_state'] instanceof BaseFieldDefinition) {
+    if ($moderation_info->canModerateEntitiesOfEntityType($entity_type) && isset($fields['moderation_state'])) {
       $fields['moderation_state']->setDisplayOptions('form', [
         'type' => 'thunder_moderation_state_default',
         'weight' => 100,
