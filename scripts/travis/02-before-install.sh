@@ -8,6 +8,7 @@ drush_download_thunder() {
     cd $DOWNLOAD_PATH
     drush dl thunder --drupal-project-rename="docroot" -y
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
+    composer run-script drupal-phpunit-upgrade --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
 # update composer
