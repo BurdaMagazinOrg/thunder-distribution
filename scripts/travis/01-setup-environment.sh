@@ -41,7 +41,7 @@ fi;
 # git commit -m "Your other commit message [TEST_UPDATE=true|INSTALL_METHOD=composer]"
 if [[ ${TRAVIS_EVENT_TYPE} == "pull_request" ]]; then
     # These are the variables, that are allowed to be overridden
-    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD" "TEST_INSTALLER" "SAUCE_LABS_ENABLED")
+    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD" "TEST_INSTALLER")
     COMMIT_MESSAGE=$(git log --no-merges -1 --pretty="%B")
     for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
     do
