@@ -151,27 +151,23 @@ Other way to get UpdateLogger is from Thunder Updater service.
 
 #### Importing new configurations
 
-To import new configurations, the `Drupal\update_helper\Updater::importConfigs()` method could be used.
+You have to create configuration update definition file with global `import_configs` action. For example:
+```yaml
+__global:
+  import_configs:
+    - config.to.import
+    - config.to.import-no2
+```
 
-Here is example to import image paragraph configuration:
+After that you just have to execute configuration update. For example:
 ```php
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-  
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+  $updater->executeUpdate('thunder_article', 'thunder_update_8101');
 
-  if ($updater->importConfigs(['paragraphs.paragraphs_type.image'])) {
-    $updateChecklist->markUpdatesSuccessful(['v8_x_add_image_paragraph']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['v8_x_add_image_paragraph']);
-  }
-
-  // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 ```
-It imports configurations, that's in a module or profile config directory.
+This update hook will import configurations, that are in a module or profile config directory.
 
 #### Updating existing configuration (with manually defined configuration changes)
 

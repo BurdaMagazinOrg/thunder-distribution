@@ -1,0 +1,3 @@
+__global:
+  install_modules:
+    - empty_fields
