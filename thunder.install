@@ -7,13 +7,13 @@
 
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\update_helper_checklist\Entity\Update;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\Paragraph;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Update hook dependencies.
@@ -340,7 +340,8 @@ function thunder_update_8103() {
     /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
     $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
     $updateChecklist->markAllUpdates(FALSE);
-  } catch (Exception $e) {
+  }
+  catch (Exception $e) {
     $updater->logger()->warning('Unable to install "update_helper_checklist".');
   }
 
@@ -1048,6 +1049,25 @@ function thunder_update_8127() {
  * Switch to update_helper module instead of thunder_updater.
  */
 function thunder_update_8128() {
-  // TODO - migrate old thunder_updater Update entities to new entities.
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
+  $update_logger = $updater->logger();
+
+  if (\Drupal::hasService('update_helper_checklist.update_checklist')) {
+    // Migrate all Update entities.
+    $database = \Drupal::database();
+
+    $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
+    $updates = $database->query("SELECT * FROM $table_name;")->fetchAll();
+    foreach ($updates as $update_entry) {
+      $update = Update::create($update_entry);
+      $update->save();
+    }
+  }
+  else {
+    $update_logger->warning('Service "update_helper_checklist" is not available.');
+  }
+
+  echo $update_logger->output();
 }
