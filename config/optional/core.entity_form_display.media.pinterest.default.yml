@@ -2,31 +2,27 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.instagram.field_author
-    - field.field.media.instagram.field_content
-    - field.field.media.instagram.field_url
-    - media_entity.bundle.instagram
+    - field.field.media.pinterest.field_url
+    - media_entity.bundle.pinterest
   module:
     - link
-id: media.instagram.default
+id: media.pinterest.default
 targetEntityType: media
-bundle: instagram
+bundle: pinterest
 mode: default
 content:
   field_url:
-    type: link_default
     weight: 0
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+    type: link_default
     region: content
 hidden:
   created: true
-  field_author: true
-  field_content: true
-  moderation_state: true
   langcode: true
-  path: true
+  moderation_state: true
   name: true
+  path: true
   uid: true

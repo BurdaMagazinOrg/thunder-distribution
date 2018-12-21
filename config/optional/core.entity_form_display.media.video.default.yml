@@ -50,7 +50,7 @@ hidden:
   created: true
   field_caption: true
   field_source: true
-  moderation_state: true
   langcode: true
+  moderation_state: true
   path: true
   uid: true
