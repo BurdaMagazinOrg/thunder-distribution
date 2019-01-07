@@ -261,3 +261,12 @@ v2.24:
         '#description': "<p>Provide Select2 field widgets for forms and views filters.</p>"
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
         extension_page: { '#text': 'Enable "select2" module', '#url': 'internal:/admin/modules' }
+        thunder_article_config: { '#text': 'Move scheduler link back from local tasks to menu tab', '#url': 'internal:/admin/config/thunder_article/configuration' }
+v2.32:
+    '#title': 'Update to Thunder 2.32'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_article_update_8103:
+        '#title': 'Set metatag field translatable per default.'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Set "metatag" field translatable for node-type article failed</strong>, visit the field configuration after enabling content_translation.<p>'
+        'field_configuration_node_article': { '#text': 'Edit "metatag" field setting.', '#url': 'internal:/admin/structure/types/manage/article/fields/node.article.field_meta_tags' }
