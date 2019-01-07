@@ -105,7 +105,6 @@ projects[redirect][type] = module
 projects[redirect][version] = 1
 projects[search_api][type] = module
 projects[search_api][download][branch] = 8.x-1.x
-projects[search_api][patch][] = https://www.drupal.org/files/issues/2018-11-06/3011743-2.patch
 projects[scheduler][type] = module
 projects[scheduler][version] = 1.0
 projects[scheduler][patch][] = https://www.drupal.org/files/issues/2018-12-10/2798689-153.patch
