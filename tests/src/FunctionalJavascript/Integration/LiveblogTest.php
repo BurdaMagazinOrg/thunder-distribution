@@ -46,8 +46,6 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
   /**
    * Testing of module integration.
-   *
-   * @requires PHP 7.0
    */
   public function testWithPusher() {
     $pusherCredentials = json_decode(getenv('PUSHER_CREDENTIALS'), TRUE);
