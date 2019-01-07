@@ -1103,10 +1103,12 @@ function thunder_update_8128() {
   }
 
   // We want to remove all migrated updates, so that uninstall can work.
-  $database->query("DELETE * FROM {$table_name};")->execute();
+  if ($has_thunder_updater) {
+    $database->query("DELETE FROM {$table_name};")->execute();
 
-  // Finally remove Thunder Updater!
-  $module_installer->uninstall(['thunder_updater']);
+    // Finally remove Thunder Updater!
+    $module_installer->uninstall(['thunder_updater']);
+  }
 
   return $update_logger->output();
 }
