@@ -28,9 +28,11 @@ use Drupal\paragraphs\Entity\Paragraph;
 function thunder_update_dependencies() {
 
   $installThunderUpdaterHook = ['thunder' => 8103];
+  $switchToUpdaterHelperHook = ['thunder' => 8128];
 
   $dependencies['thunder'] = [
     8006 => $installThunderUpdaterHook,
+    8103 => $switchToUpdaterHelperHook,
   ];
 
   // Ensure that all thunder hook_update_N functions are called after all other
@@ -327,23 +329,8 @@ function thunder_update_8102() {
  * Installs the update_helper module.
  */
 function thunder_update_8103() {
-  // We let exception bubble in this case, since it's not possible to continue
-  // with execution of update hooks without "update_helper.updater" service.
-  \Drupal::service('module_installer')->install(['update_helper']);
-
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  try {
-    \Drupal::service('module_installer')->install(['update_helper_checklist']);
-
-    /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-    $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-    $updateChecklist->markAllUpdates(FALSE);
-  }
-  catch (Exception $e) {
-    $updater->logger()->warning('Unable to install "update_helper_checklist".');
-  }
 
   // Now update helper is enabled and we can start using it!
   $updater->executeUpdate('thunder', 'v1_1__responsive_preview');
@@ -1049,25 +1036,77 @@ function thunder_update_8127() {
  * Switch to update_helper module instead of thunder_updater.
  */
 function thunder_update_8128() {
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = \Drupal::moduleHandler();
+
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  // We let exception bubble in this case, since it's not possible to continue
+  // with execution of update hooks without "update_helper.updater" service.
+  $module_installer->install(['update_helper']);
+
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
   $update_logger = $updater->logger();
 
-  if (\Drupal::hasService('update_helper_checklist.update_checklist')) {
-    // Migrate all Update entities.
-    $database = \Drupal::database();
+  // Existing module states should be preserved!
+  $has_thunder_updater = $module_handler->moduleExists('thunder_updater');
+  $has_thunder_updater_checklist = $has_thunder_updater && $module_handler->moduleExists('checklist');
 
-    $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
-    $updates = $database->query("SELECT * FROM $table_name;")->fetchAll();
-    foreach ($updates as $update_entry) {
-      $update = Update::create($update_entry);
-      $update->save();
+  // We need database connection in order to migrate Thunder updates correctly.
+  $database = \Drupal::database();
+  $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
+
+  // We can have following statuses:
+  // - no thunder_updater             => install checklist integration
+  // - thunder_updater no checklist   => do not install checklist integration
+  // - thunder_updater with checklist => install checklist integration
+  // and we should act accordingly to that.
+  if (!$has_thunder_updater || $has_thunder_updater_checklist) {
+    try {
+      $module_installer->install(['update_helper_checklist']);
+
+      /** @var \Drupal\update_helper_checklist\UpdateChecklist $update_checklist */
+      $update_checklist = \Drupal::service('update_helper_checklist.update_checklist');
+      $update_checklist->markAllUpdates(FALSE);
+    }
+    catch (Exception $e) {
+      $update_logger->warning('Unable to install "update_helper_checklist".');
     }
   }
-  else {
-    $update_logger->warning('Service "update_helper_checklist" is not available.');
+
+  // Migrate existing Thunder update entities.
+  if ($has_thunder_updater_checklist) {
+    // We do not need entities created on "update_helper_checklist" install.
+    /** @var \Drupal\update_helper_checklist\Entity\Update[] $all_updates */
+    $all_updates = Update::loadMultiple();
+    foreach ($all_updates as $update) {
+      try {
+        $update->delete();
+      }
+      catch (EntityStorageException $e) {
+        $update_logger->warning(sprintf('Unable to delete Update entity (%s) for Update Helper Checklist.', $update->id()));
+      }
+    }
+
+    $thunder_updater_updates = $database->query("SELECT * FROM {$table_name};")->fetchAll();
+    foreach ($thunder_updater_updates as $thunder_updater_update) {
+      $update = Update::create($thunder_updater_update);
+      try {
+        $update->save();
+      }
+      catch (EntityStorageException $e) {
+        $update_logger->warning(sprintf('Unable to create Update entity (%s) for Update Helper Checklist.', $update->id()));
+      }
+    }
   }
 
-  echo $update_logger->output();
+  // We want to remove all migrated updates, so that uninstall can work.
+  $database->query("DELETE * FROM {$table_name};")->execute();
+
+  // Finally remove Thunder Updater!
+  $module_installer->uninstall(['thunder_updater']);
+
+  return $update_logger->output();
 }
