@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ * Scheduler Content Moderation Integration.
+ *
+ * This sub-module provides extended options widget populated with default
+ * revision states to allow publishing and un-publishing of nodes which are
+ * moderated.
+ *
+ * @see https://www.drupal.org/project/scheduler/issues/2798689
+ */
+
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\workflows\Transition;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function scheduler_content_moderation_integration_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'node') {
+    $fields['publish_state'] = BaseFieldDefinition::create('list_string')
+      ->setSetting('allowed_values_function', '_scheduler_content_moderation_integration_states_values')
+      ->setLabel(t('Publish state'))
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'region' => 'hidden',
+        'weight' => -5,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'scheduler_moderation',
+        'weight' => 30,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', FALSE)
+      ->setTranslatable(TRUE)
+      ->setRevisionable(TRUE)
+      ->addConstraint('SchedulerPublishState');
+
+    $fields['unpublish_state'] = BaseFieldDefinition::create('list_string')
+      ->setSetting('allowed_values_function', '_scheduler_content_moderation_integration_states_values')
+      ->setLabel(t('Unpublish state'))
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'region' => 'hidden',
+        'weight' => -5,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'scheduler_moderation',
+        'weight' => 30,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', FALSE)
+      ->setTranslatable(TRUE)
+      ->setRevisionable(TRUE)
+      ->addConstraint('SchedulerUnPublishState');
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function scheduler_content_moderation_integration_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  // Attach the publish/un-publish state form elements to the scheduler
+  // settings group.
+  $form['publish_state']['#group'] = 'scheduler_settings';
+  $form['unpublish_state']['#group'] = 'scheduler_settings';
+
+  $config = \Drupal::config('scheduler.settings');
+  /** @var \Drupal\node\NodeTypeInterface $type */
+  $type = $form_state->getFormObject()->getEntity()->type->entity;
+
+  // If scheduling for publish/unpublish is not enabled, then hide the state
+  // selection field.
+  $form['publish_state']['#access'] = $type->getThirdPartySetting('scheduler', 'publish_enable', $config->get('default_publish_enable'));
+  $form['unpublish_state']['#access'] = $type->getThirdPartySetting('scheduler', 'unpublish_enable', $config->get('default_unpublish_enable'));
+}
+
+/**
+ * Helper function for the scheduler moderation widget.
+ *
+ * Helps on generating the options dynamically for the scheduler
+ * moderation widget.
+ *
+ * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition
+ *   The field storage definition.
+ * @param \Drupal\Core\Entity\FieldableEntityInterface|null $entity
+ *   (optional) The entity context if known, or NULL if the allowed values are
+ *   being collected without the context of a specific entity.
+ * @param bool &$cacheable
+ *   (optional) If an $entity is provided, the $cacheable parameter should be
+ *   modified by reference and set to FALSE if the set of allowed values
+ *   returned was specifically adjusted for that entity and cannot not be reused
+ *   for other entities. Defaults to TRUE.
+ *
+ * @return array
+ *   The array of allowed values.
+ */
+function _scheduler_content_moderation_integration_states_values(FieldStorageDefinitionInterface $definition, FieldableEntityInterface $entity = NULL, &$cacheable = FALSE) {
+  $options = [];
+  // @todo should call $widget->getEmptyLabel().
+  $options['_none'] = '';
+
+  /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_information */
+  $moderation_information = \Drupal::service('content_moderation.moderation_information');
+
+  // Only add options for moderated entities.
+  if (!$moderation_information->isModeratedEntity($entity)) {
+    return $options;
+  }
+
+  $workflow = $moderation_information->getWorkflowForEntity($entity);
+
+  /** @var \Drupal\content_moderation\Plugin\WorkflowType\ContentModerationInterface $type_plugin */
+  $type_plugin = $workflow->getTypePlugin();
+
+  $user = \Drupal::currentUser();
+  $user_transitions = array_filter($type_plugin->getTransitions(), function (Transition $transition) use ($workflow, $user) {
+    return $user->hasPermission('use ' . $workflow->id() . ' transition ' . $transition->id());
+  });
+
+  foreach ($user_transitions as $transition) {
+    /** @var \Drupal\content_moderation\ContentModerationState $state */
+    $state = $transition->to();
+    if ($state->isDefaultRevisionState() && (($definition->getName() === 'publish_state' && $state->isPublishedState()) || ($definition->getName() === 'unpublish_state' && !$state->isPublishedState()))) {
+      $options[$state->id()] = $state->label();
+    }
+  }
+
+  return $options;
+}

@@ -72,8 +72,7 @@
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-12-10/2798689-153.patch",
-                "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
+                "Scheduler integration with core Content moderation": "patches/scheduler-content-moderation-integration.patch"
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
