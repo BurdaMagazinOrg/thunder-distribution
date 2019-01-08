@@ -6,30 +6,22 @@ cache:
   - "$HOME/.drush/cache"
   - "vendor"
 
-matrix:
-  include:
-  - php: 7.2
-    env: INSTALL_METHOD=composer
-  - php: 5.6
-    env: INSTALL_METHOD=drush_make
+php:
+  - 7.2
 
-# Use newer distribution on Travis CI (Ubuntu 14.04 - Trusty)
-dist: trusty
+env:
+  matrix:
+    - INSTALL_METHOD=composer
+    - INSTALL_METHOD=drush_make
 
-# Currently there is problem with chrome browser on Travis CI docker environment,
-# but when we enable "sudo" requirement, non-docker environment is used and problem
-# does not appear there.
-# Here is related issue: https://github.com/travis-ci/travis-ci/issues/7150
-sudo: required
+dist: xenial
+
+services:
+  - mysql
 
 branches:
   only:
     - /^8\.x\-[0-9]+\.x$/
-
-mysql:
-  database: drupal
-  username: root
-  encoding: utf8
 
 addons:
   artifacts:

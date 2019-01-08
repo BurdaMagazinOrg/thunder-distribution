@@ -10,12 +10,6 @@ drush_download_thunder() {
     composer install --working-dir=${DOWNLOAD_PATH}/docroot
 }
 
-# update composer
-composer self-update
-
-# remove xdebug to make php execute faster
-phpenv config-rm xdebug.ini
-
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
@@ -36,27 +30,18 @@ phpize
 ./configure
 make
 make install
+
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-phpenv rehash
-cd $TRAVIS_BUILD_DIR
 
-# Set MySQL Options
-mysql -e "SET GLOBAL wait_timeout = 5400;"
-mysql -e "SHOW VARIABLES LIKE 'wait_timeout';"
+# Disable xdebug.
+echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 
-# Prepare MySQL user and database
-mysql -e "CREATE DATABASE drupal;"
-mysql -e "CREATE USER 'thunder'@'localhost' IDENTIFIED BY 'thunder';"
-mysql -e "GRANT ALL ON drupal.* TO 'thunder'@'localhost';"
-
-# PHP conf tweaks
-echo 'max_execution_time = 120' >> drupal.php.ini;
-echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-echo 'always_populate_raw_post_data = -1' >> drupal.php.ini;
-phpenv config-add drupal.php.ini
+# Stop drush from sending email
+echo "sendmail_path = /bin/true" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
 
 # Prepare test directory
+cd $TRAVIS_BUILD_DIR
 mkdir -p ${TEST_DIR}
 
 # Clear drush release history cache, to pick up new releases.
