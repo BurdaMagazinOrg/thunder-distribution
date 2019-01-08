@@ -123,23 +123,3 @@ function thunder_article_update_8102() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
-
-/**
- * Set metatag field translatable per default.
- */
-function thunder_article_update_8103() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  $config = FieldConfig::load('node.article.field_meta_tags');
-  if ($config) {
-    $config->setTranslatable(TRUE)->save();
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_article_update_8103']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_article_update_8103']);
-  }
-
-  // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
-}

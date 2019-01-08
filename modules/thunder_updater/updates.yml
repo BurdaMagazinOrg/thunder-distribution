@@ -264,8 +264,8 @@ v2.24:
 v2.32:
     '#title': 'Update to Thunder 2.32'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_article_update_8103:
-        '#title': 'Set metatag field translatable per default.'
+    thunder__thunder_update_8128:
+        '#title': 'Set "metatag" fields translatable per default.'
         '#description': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Set "metatag" field translatable for node-type article failed</strong>, visit the field configuration after enabling content_translation.<p>'
-        field_configuration_node_article_page: { '#text': 'Edit "metatag" field setting.', '#url': 'internal:/admin/structure/types/manage/article/fields/node.article.field_meta_tags' }
+        '#description_failed': '<p><strong>Setting "metatag" fields translatable failed</strong>, see log for more details. Set metatag fields translatable on content language settings page.<p>'
+        content_language_page: { '#text': 'Content language settings.', '#url': 'internal:/admin/config/regional/content-language' }
