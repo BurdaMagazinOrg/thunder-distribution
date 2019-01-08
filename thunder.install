@@ -1128,7 +1128,12 @@ function thunder_update_8128() {
 
   // Execute configuration update definitions with logging of success.
   if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8128']])) {
-    if ($thunderUpdater->importConfigs(['core.entity_form_display.media.gallery.inline', 'core.entity_form_display.media.instagram.inline', 'core.entity_form_display.media.pinterest.inline', 'core.entity_form_display.media.twitter.inline'])) {
+    if ($thunderUpdater->importConfigs([
+      'core.entity_form_display.media.gallery.inline',
+      'core.entity_form_display.media.instagram.inline',
+      'core.entity_form_display.media.pinterest.inline',
+      'core.entity_form_display.media.twitter.inline'
+    ])) {
       $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8128']);
     }
     else {
