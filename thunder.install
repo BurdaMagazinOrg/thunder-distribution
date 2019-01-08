@@ -1132,8 +1132,8 @@ function thunder_update_8128() {
 
   $config_ids = [
     'node.article.field_meta_tags',
-    'taxnonomy_term.channel.field_meta_tags',
-    'taxnonomy_term.tags.field_meta_tags',
+    'taxonomy_term.channel.field_meta_tags',
+    'taxonomy_term.tags.field_meta_tags',
   ];
 
   foreach ($config_ids as $config_id) {
@@ -1145,11 +1145,6 @@ function thunder_update_8128() {
       $successfulUpdate = FALSE;
       $thunderUpdater->logger()->warning(t('Unable to load @config_id configuration.', ['@config_id' => $config_id]));
     }
-  }
-
-  // Execute update configurations with logging of fails and successes.
-  if (!$thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8128']])) {
-    $successfulUpdate = FALSE;
   }
 
   // Set update checklist.
