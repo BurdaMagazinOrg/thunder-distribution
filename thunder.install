@@ -1026,9 +1026,42 @@ function thunder_update_8127() {
 }
 
 /**
- * Switch to update_helper module instead of thunder_updater.
+ * Set metatag fields translatable per default.
  */
 function thunder_update_8128() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $update_logger = $updater->logger();
+
+  $successfulUpdate = TRUE;
+
+  $config_ids = [
+    'node.article.field_meta_tags',
+    'taxonomy_term.channel.field_meta_tags',
+    'taxonomy_term.tags.field_meta_tags',
+  ];
+
+  foreach ($config_ids as $config_id) {
+    $config = FieldConfig::load($config_id);
+    if ($config) {
+      $config->setTranslatable(TRUE)->save();
+    }
+    else {
+      $successfulUpdate = FALSE;
+      $update_logger->warning(t('Unable to load @config_id configuration.', ['@config_id' => $config_id]));
+    }
+  }
+
+  _thunder_mark_update_checklist('thunder__thunder_update_8128', $successfulUpdate, $update_logger);
+
+  // Output logged messages to related channel of update execution.
+  return $update_logger->output();
+}
+
+/**
+ * Switch to update_helper module instead of thunder_updater.
+ */
+function thunder_update_8129() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
   $module_handler = \Drupal::moduleHandler();
 
