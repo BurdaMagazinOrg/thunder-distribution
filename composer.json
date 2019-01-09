@@ -29,6 +29,10 @@
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
+            "type": "vcs",
+            "url": "git@github.com:thunder/thunder_testing_demo.git"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -56,6 +60,12 @@
             ]
         },
         "patches": {
+            "drupal/core": {
+                "Error Loading Language Not Translated For Current Revision #3001299": "https://www.drupal.org/files/issues/2018-09-20/core-translation-pending-revision.patch"
+            },
+            "drupal/access_unpublished": {
+                "Only display unpublished access form elements on relevant forms #2912066": "https://www.drupal.org/files/issues/only_display-2912066-2.patch"
+           },
             "drupal/media_entity": {
                 "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2934289-2813685-21.patch"
             },
@@ -141,6 +151,7 @@
         "drupal/slick": "^1.0",
         "drupal/slick_media": "^1.0",
         "drupal/thunder_admin": "^1.0 || ^2.0-beta15",
+        "drupal/thunder_testing_demo": "dev-feature/multilingual",
         "drupal/token": "^1.0",
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",

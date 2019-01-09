@@ -82,6 +82,7 @@ install:
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
+  - thunder:thunder_testing_multilingual
   - thunder:thunder_updater
 themes:
   - seven
