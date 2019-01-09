@@ -3,6 +3,7 @@
 namespace Drupal\thunder_article\Form;
 
 use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -46,13 +47,15 @@ class ThunderNodeForm extends NodeForm {
    *   The time service.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   The date formatter service.
    * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
    *   The node revision access check service.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   The moderation info service.
    */
-  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo = NULL) {
-    parent::__construct($entity_repository, $temp_store_factory, $entity_type_bundle_info, $time, $current_user);
+  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, DateFormatterInterface $date_formatter, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo = NULL) {
+    parent::__construct($entity_repository, $temp_store_factory, $entity_type_bundle_info, $time, $current_user, $date_formatter);
     $this->nodeRevisionAccess = $node_revision_access;
     $this->moderationInfo = $moderationInfo;
   }
@@ -67,6 +70,7 @@ class ThunderNodeForm extends NodeForm {
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
       $container->get('current_user'),
+      $container->get('date.formatter'),
       $container->get('access_check.node.revision'),
       $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
     );
