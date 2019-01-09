@@ -5,9 +5,6 @@
  * Thunder Article install hooks.
  */
 
-use Drupal\Core\Entity\Entity\EntityViewDisplay;
-use Drupal\Core\Extension\MissingDependencyException;
-
 /**
  * Install the thunder article integration.
  */
@@ -61,47 +58,9 @@ function thunder_article_update_8001() {
 function thunder_article_update_8101() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-  $updateLogger = $updater->logger();
+  $updater->executeUpdate('thunder', 'v1_1__shariff');
 
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  $modulesInstalledSuccessfully = TRUE;
-
-  try {
-    \Drupal::service('module_installer')->install([
-      'config_update',
-      'shariff',
-    ]);
-  }
-  catch (MissingDependencyException $e) {
-    $updateLogger->warning($e->getMessage());
-    $updateChecklist->markUpdatesFailed(['v1_1__shariff']);
-    $modulesInstalledSuccessfully = FALSE;
-  }
-
-  if ($modulesInstalledSuccessfully) {
-    $updateLogger->info(t('Shariff module is successfully installed.'));
-
-    $display = EntityViewDisplay::load('node.article.default');
-    if ($display && !$display->getComponent('shariff_field')) {
-      $display->setComponent(
-        'shariff_field',
-        [
-          'region' => 'content',
-        ]
-      )->save();
-
-      $updateLogger->info(t('Shariff field is added for article.'));
-      $updateChecklist->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
-    }
-    else {
-      $updateLogger->warning(t('Unable to place shariff field.'));
-      $updateChecklist->markUpdatesFailed(['v1_1__shariff']);
-    }
-  }
-
-  return $updateLogger->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -110,7 +69,7 @@ function thunder_article_update_8101() {
 function thunder_article_update_8102() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder_article', 'thunder_article_update_8102');
+  $updater->executeUpdate('thunder', 'thunder_article_update_8102');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();

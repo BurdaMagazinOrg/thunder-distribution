@@ -108,44 +108,9 @@ function thunder_paragraphs_update_8001() {
 function thunder_paragraphs_update_8101() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'v1_1__media_paragraph');
 
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
-  $updateLogger = $updater->logger();
-
-  /** @var \Drupal\Core\Config\Config $config */
-  $config = \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.media.default');
-
-  $previews_widget_display = $config->get('content.field_media.settings.field_widget_display');
-
-  if ($previews_widget_display === NULL) {
-    $updateLogger->info(t('No update for media paragraph needed.'));
-    $updateChecklist->markUpdatesSuccessful(['v1_1__media_paragraph']);
-  }
-  elseif ($previews_widget_display === 'rendered_entity') {
-    $config->set(
-      'content.field_media.settings.field_widget_display',
-      'inline_entity_form'
-    )
-      ->set('content.field_media.settings.field_widget_edit', FALSE)
-      ->set(
-        'content.field_media.settings.field_widget_display_settings.form_mode',
-        'inline'
-      );
-
-    $config->save();
-
-    $updateLogger->info(t('Configuration of media paragraph has been successfully updated.'));
-    $updateChecklist->markUpdatesSuccessful(['v1_1__media_paragraph'], FALSE);
-  }
-  else {
-    $updateLogger->warning(t('Unable to update configuration for media paragraph.'));
-    $updateChecklist->markUpdatesFailed(['v1_1__media_paragraph']);
-  }
-
-  return $updateLogger->output();
+  return $updater->logger()->output();
 }
 
 /**
@@ -154,17 +119,7 @@ function thunder_paragraphs_update_8101() {
 function thunder_paragraphs_update_8102() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  // Execute configuration update definitions with logging of success.
-  if ($updater->executeUpdate('thunder_paragraphs', 'thunder_paragraphs_update_8102')) {
-    $updateChecklist->markUpdatesSuccessful(['thunder_paragraphs_update_8102']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder_paragraphs_update_8102']);
-  }
+  $updater->executeUpdate('thunder', 'thunder_paragraphs_update_8102');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();

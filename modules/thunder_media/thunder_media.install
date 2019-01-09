@@ -14,6 +14,7 @@ use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Install the thunder media integration.
@@ -67,6 +68,7 @@ function thunder_media_update_dependencies() {
     8012 => $installThunderUpdaterHook,
     8013 => $installThunderUpdaterHook,
     8101 => $installThunderUpdaterHook,
+    8102 => $installThunderUpdaterHook,
     8106 => ['thunder' => 8114],
   ];
 
@@ -567,9 +569,6 @@ function thunder_media_update_8101() {
   $updater = \Drupal::service('update_helper.updater');
   $updateLogger = $updater->logger();
 
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
   // Perform removal of language filters from relevant views.
   $successfulUpdate = TRUE;
   $viewIds = ['image_browser', 'media_browser'];
@@ -618,12 +617,26 @@ function thunder_media_update_8101() {
   }
 
   // If update is successful for all views, then check entry in checklist.
-  if ($successfulUpdate) {
-    $updateChecklist->markUpdatesSuccessful(['v1_1__remove_entity_browser_language_filter']);
-  }
-  else {
+  if (!$successfulUpdate) {
     $updateLogger->warning(t('Unable to remove language filters from views. Please perform this process manually.'));
-    $updateChecklist->markUpdatesFailed(['v1_1__remove_entity_browser_language_filter']);
+  }
+
+  try {
+    /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+    $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+
+    if ($successfulUpdate) {
+      $updateChecklist->markUpdatesSuccessful(['thunder' => ['v1_1__remove_entity_browser_language_filter']]);
+    }
+    else {
+      $updateChecklist->markUpdatesFailed(['thunder' => ['v1_1__remove_entity_browser_language_filter']]);
+    }
+  }
+  catch (EntityStorageException $ee) {
+    $updateLogger->warning(t('Unable to mark update in checklist.'));
+  }
+  catch (ServiceNotFoundException $se) {
+    // If service is not available, we will just ignore it.
   }
 
   // Output log result depending on channel used for update execution.
@@ -638,9 +651,6 @@ function thunder_media_update_8102() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
   $updateLogger = $updater->logger();
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   \Drupal::service('module_installer')->install([
     'config_update',
@@ -763,11 +773,22 @@ function thunder_media_update_8102() {
     }
   }
 
-  if ($successfulUpdate) {
-    $updateChecklist->markUpdatesSuccessful(['v1_1__image_video_paragraph'], FALSE);
+  try {
+    /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+    $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+
+    if ($successfulUpdate) {
+      $updateChecklist->markUpdatesSuccessful(['thunder' => ['v1_1__image_video_paragraph']], FALSE);
+    }
+    else {
+      $updateChecklist->markUpdatesFailed(['thunder' => ['v1_1__image_video_paragraph']]);
+    }
   }
-  else {
-    $updateChecklist->markUpdatesFailed(['v1_1__image_video_paragraph']);
+  catch (EntityStorageException $ee) {
+    $updateLogger->warning(t('Unable to mark update in checklist.'));
+  }
+  catch (ServiceNotFoundException $se) {
+    // If service is not available, we will just ignore it.
   }
 
   // Output log result depending on channel used for update execution.
@@ -782,9 +803,6 @@ function thunder_media_update_8103() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
   $updateLogger = $updater->logger();
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
 
   // List of configurations that should be checked for existence.
   $expectedConfig['hidden']['thumbnail'] = TRUE;
@@ -812,16 +830,34 @@ function thunder_media_update_8103() {
     'third_party_settings' => [],
   ];
 
+  $successfulUpdate = TRUE;
   if (_thunder_media_update_config('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig)) {
     $display = EntityViewDisplay::load('media.instagram.thumbnail');
     $display->removeComponent('field_url')->save();
 
     $updateLogger->info(t('Configuration is successfully changed for instagram thumbnail.'));
-    $updateChecklist->markUpdatesSuccessful(['v1_1__instagram_edit_preview']);
   }
   else {
     $updateLogger->warning(t('Unable to adjust core.entity_view_display.media.instagram.thumbnail config'));
-    $updateChecklist->markUpdatesFailed(['v1_1__instagram_edit_preview']);
+    $successfulUpdate = FALSE;
+  }
+
+  try {
+    /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
+    $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+
+    if ($successfulUpdate) {
+      $updateChecklist->markUpdatesSuccessful(['thunder' => ['v1_1__instagram_edit_preview']]);
+    }
+    else {
+      $updateChecklist->markUpdatesFailed(['thunder' => ['v1_1__instagram_edit_preview']]);
+    }
+  }
+  catch (EntityStorageException $ee) {
+    $updateLogger->warning(t('Unable to mark update in checklist.'));
+  }
+  catch (ServiceNotFoundException $se) {
+    // If service is not available, we will just ignore it.
   }
 
   // Output log result depending on channel used for update execution.
@@ -869,7 +905,7 @@ function thunder_media_update_8104() {
 function thunder_media_update_8105() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder_media', 'v1_1__empty_fields');
+  $updater->executeUpdate('thunder', 'v1_1__empty_fields');
 
   return $updater->logger()->output();
 }
@@ -880,18 +916,7 @@ function thunder_media_update_8105() {
 function thunder_media_update_8106() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  // Execute configuration update defintions with logging of fails and
-  // successes.
-  if ($updater->executeUpdate('thunder_media', 'thunder_media__update_8106')) {
-    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8106']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder_media_update_8106']);
-  }
+  $updater->executeUpdate('thunder', 'thunder_media_update_8106');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
@@ -913,17 +938,7 @@ function thunder_media_update_8107() {
 function thunder_media_update_8108() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  // Execute configuration update definitions with logging of success.
-  if ($updater->executeUpdate('thunder_media', 'thunder_media_update_8108')) {
-    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8108']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder_media_update_8108']);
-  }
+  $updater->executeUpdate('thunder', 'thunder_media_update_8108');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
@@ -935,17 +950,7 @@ function thunder_media_update_8108() {
 function thunder_media_update_8109() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  // Execute configuration update definitions with logging of success.
-  if ($updater->executeUpdate('thunder_media', 'thunder_media_update_8109')) {
-    $updateChecklist->markUpdatesSuccessful(['thunder_media_update_8109']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder_media_update_8109']);
-  }
+  $updater->executeUpdate('thunder', 'thunder_media_update_8109');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();

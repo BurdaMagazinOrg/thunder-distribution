@@ -57,18 +57,7 @@ function thunder_taxonomy_update_8001() {
 function thunder_taxonomy_update_8002() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
-  // Execute configuration update defintions with logging of fails and
-  // successes.
-  if ($updater->executeUpdate('thunder_taxonomy', 'thunder_taxonomy__update_8002')) {
-    $updateChecklist->markUpdatesSuccessful(['thunder_taxonomy_update_8002']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder_taxonomy_update_8002']);
-  }
+  $updater->executeUpdate('thunder', 'thunder_taxonomy_update_8002');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();

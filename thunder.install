@@ -7,6 +7,7 @@
 
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\update_helper\UpdateLogger;
 use Drupal\update_helper_checklist\Entity\Update;
 use Drupal\views\Entity\View;
 use Drupal\user\Entity\Role;
@@ -14,6 +15,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\Paragraph;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Update hook dependencies.
@@ -76,6 +78,36 @@ function thunder_update_dependencies() {
   }
 
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
+}
+
+/**
+ * Helper function for direct use of update helper checklist service.
+ *
+ * @param string $update_id
+ *   Identifier of update in checklist.
+ * @param bool $successful
+ *   The success or failure of update.
+ * @param \Drupal\update_helper\UpdateLogger $update_logger
+ *   Used update logger service in update hook.
+ */
+function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $update_logger) {
+  try {
+    /** @var \Drupal\update_helper_checklist\UpdateChecklist $update_checklist */
+    $update_checklist = \Drupal::service('update_helper_checklist.update_checklist');
+
+    if ($successful) {
+      $update_checklist->markUpdatesSuccessful(['thunder' => [$update_id]]);
+    }
+    else {
+      $update_checklist->markUpdatesFailed(['thunder' => [$update_id]]);
+    }
+  }
+  catch (EntityStorageException $ee) {
+    $update_logger->warning(t('Unable to mark update in checklist.'));
+  }
+  catch (ServiceNotFoundException $se) {
+    // If service is not available, we will just ignore it.
+  }
 }
 
 /**
@@ -385,9 +417,6 @@ function thunder_update_8107() {
   $updater = \Drupal::service('update_helper.updater');
   $updateLogger = $updater->logger();
 
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-
   $entityTypeManager = \Drupal::entityTypeManager();
   $paragraphType = $entityTypeManager->getStorage('paragraphs_type')
     ->load('paragraphs_riddle_marketplace');
@@ -505,12 +534,7 @@ function thunder_update_8107() {
     }
   }
 
-  if ($successfulUpdate) {
-    $updateChecklist->markUpdatesSuccessful(['v1_1__thunder_riddle']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['v1_1__thunder_riddle']);
-  }
+  _thunder_mark_update_checklist('v1_1__thunder_riddle', $successfulUpdate, $updateLogger);
 
   return $updateLogger->output();
 }
@@ -598,15 +622,11 @@ function thunder_update_8109() {
     $updateLogger->info(t('Adjusted form display for @item default', ['@item' => $item]));
   }
 
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-  if ($successfulUpdate) {
-    $updateChecklist->markUpdatesSuccessful(['v1_1__paragraphs_modal']);
-  }
-  else {
+  if (!$successfulUpdate) {
     $updateLogger->warning(t('Unable to adjust paragraphs add mode.'));
-    $updateChecklist->markUpdatesFailed(['v1_1__paragraphs_modal']);
   }
+
+  _thunder_mark_update_checklist('v1_1__paragraphs_modal', $successfulUpdate, $updateLogger);
 
   return $updateLogger->output();
 }
@@ -715,9 +735,7 @@ function thunder_update_8114() {
 function thunder_update_8115() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+  $updateLogger = $updater->logger();
 
   $successful = TRUE;
   if (!$updater->executeUpdate('thunder', 'thunder__thunder_update_8115')) {
@@ -730,15 +748,11 @@ function thunder_update_8115() {
     }
   }
 
-  if ($successful) {
-    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8115']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8115']);
-  }
+  // TODO: ^^ Check logic of this update!?
+  _thunder_mark_update_checklist('thunder__thunder_update_8115', $successful, $updateLogger);
 
   // Output logged messages to related channel of update execution.
-  return $updater->logger()->output();
+  return $updateLogger->output();
 }
 
 /**
@@ -780,14 +794,9 @@ function thunder_update_8117() {
     $config->set('settings.toolbar.rows.0', $items)->save();
   }
   else {
-    try {
-      /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-      $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
-      $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8117']);
-    }
-    catch (Exception $e) {
-      $updater_logger->warning('Unable to setup split text functionality for paragraphs.');
-    }
+    // TODO: Check logic for this ESLE!!!
+    $updater_logger->warning('Unable to setup split text functionality for paragraphs.');
+    _thunder_mark_update_checklist('thunder__thunder_update_8117', FALSE, $updater_logger);
   }
 
   // Output logged messages to related channel of update execution.
@@ -872,9 +881,7 @@ function thunder_update_8122() {
 function thunder_update_8123() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+  $update_logger = $updater->logger();
 
   /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
   $configFactory = \Drupal::configFactory();
@@ -928,15 +935,10 @@ function thunder_update_8123() {
   }
 
   // Update should be marked as successful only if all steps are successful.
-  if ($successful) {
-    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8123']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8123']);
-  }
+  _thunder_mark_update_checklist('thunder__thunder_update_8123', $successful, $update_logger);
 
   // Output logged messages to related chanel of update execution.
-  return $updater->logger()->output();
+  return $update_logger->output();
 }
 
 /**
@@ -945,9 +947,7 @@ function thunder_update_8123() {
 function thunder_update_8124() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+  $update_logger = $updater->logger();
 
   // Granting permissions only for "editor" and "seo" user roles.
   $roles = Role::loadMultiple(['editor', 'seo']);
@@ -967,12 +967,7 @@ function thunder_update_8124() {
     }
   }
 
-  if ($successful) {
-    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8124']);
-  }
-  else {
-    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8124']);
-  }
+  _thunder_mark_update_checklist('thunder__thunder_update_8124', $successful, $update_logger);
 
   // Output logged result of update hook execution.
   return $updater->logger()->output();
@@ -995,9 +990,7 @@ function thunder_update_8125() {
 function thunder_update_8126() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */
-  $updateChecklist = \Drupal::service('update_helper_checklist.update_checklist');
+  $update_logger = $updater->logger();
 
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
@@ -1009,11 +1002,11 @@ function thunder_update_8126() {
   }
   elseif ($themeInstaller->install(['seven'])) {
     $updater->logger()->info('Theme "seven" successfully installed.');
-    $updateChecklist->markUpdatesSuccessful(['thunder__thunder_update_8125']);
+    _thunder_mark_update_checklist('thunder__thunder_update_8125', TRUE, $update_logger);
   }
   else {
     $updater->logger()->warning('Theme "seven" not installed.');
-    $updateChecklist->markUpdatesFailed(['thunder__thunder_update_8125']);
+    _thunder_mark_update_checklist('thunder__thunder_update_8125', FALSE, $update_logger);
   }
 
   // Output logged result of update hook execution.
