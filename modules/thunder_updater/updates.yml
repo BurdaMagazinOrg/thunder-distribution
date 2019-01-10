@@ -265,7 +265,11 @@ v2.32:
     '#title': 'Update to Thunder 2.32'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8128:
+      '#title': 'Set "metatag" fields translatable per default.'
+      '#description': '<p>Configuration is successfully updated.</p>'
+      '#description_failed': '<p><strong>Setting "metatag" fields translatable failed</strong>, see log for more details. Set metatag fields translatable on content language settings page.<p>'
+      content_language_page: { '#text': 'Content language settings.', '#url': 'internal:/admin/config/regional/content-language' }
+    thunder__thunder_update_8129:
         '#title': 'Structure media edit forms.'
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
-
