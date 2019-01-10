@@ -1,4 +1,4 @@
-__global:
+__global_actions:
   install_modules:
     - paragraphs_features
   import_configs:

@@ -1,4 +1,4 @@
-__global:
+__global_actions:
   install_modules:
     - content_lock
 user.role.editor:

@@ -269,10 +269,10 @@ v2.32:
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Setting "metatag" fields translatable failed</strong>, see log for more details. Set metatag fields translatable on content language settings page.<p>'
         content_language_page: { '#text': 'Content language settings.', '#url': 'internal:/admin/config/regional/content-language' }
-v2.xx:
-    '#title': 'Update to Thunder 2.xx'
+v2.33:
+    '#title': 'Update to Thunder 2.33'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_update_8128:
+    thunder_updater_update_8001:
         '#title': 'Switch to Update Helper module.'
         '#description': '<p>Switching to Update Helper was successfully.</p>'
         '#description_failed': '<p><strong>Switching to Update Helper has failed.</strong><p>'

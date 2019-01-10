@@ -1,4 +1,4 @@
-__global:
+__global_actions:
   install_modules:
     - select2
 core.entity_form_display.node.article.default:

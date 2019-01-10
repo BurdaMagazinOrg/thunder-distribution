@@ -1,4 +1,4 @@
-__global:
+__global_actions:
   import_configs:
     - core.entity_form_mode.media.inline
     - image.style.paragraph_preview_thumbnail
