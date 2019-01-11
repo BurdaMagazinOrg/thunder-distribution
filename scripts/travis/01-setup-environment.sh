@@ -16,8 +16,10 @@ if [[ ${TRAVIS_EVENT_TYPE} == "cron" ]]; then
 else
     TEST_UPDATE=""
 fi
-
 export TEST_UPDATE;
+
+# Flag used to define if test should run deployment workflow
+export TEST_DEPLOYMENT="true"
 
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
