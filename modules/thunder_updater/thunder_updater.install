@@ -31,7 +31,6 @@ function thunder_updater_update_8001() {
 
   // We need database connection in order to migrate Thunder updates correctly.
   $database = \Drupal::database();
-  $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
 
   // Existing module states should be preserved!
   $has_thunder_updater_checklist = $module_handler->moduleExists('checklistapi');
@@ -70,6 +69,7 @@ function thunder_updater_update_8001() {
       }
     }
 
+    $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
     $thunder_updater_updates = $database->query("SELECT * FROM {$table_name};")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($thunder_updater_updates as $thunder_updater_update) {
       $thunder_updater_update['id'] = 'thunder:' . $thunder_updater_update['id'];
@@ -100,7 +100,7 @@ function thunder_updater_update_8001() {
   }
 
   // We want to remove all migrated updates, so that uninstall can work.
-  $database->truncate($table_name)->execute();
+  $database->truncate('thunder_updater_update')->execute();
 
   // Finally remove Thunder Updater!
   $module_installer->uninstall(['thunder_updater']);
