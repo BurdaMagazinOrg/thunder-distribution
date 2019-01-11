@@ -476,6 +476,20 @@ display:
           entity_type: media
           entity_field: created
           plugin_id: date
+        mid:
+          id: mid
+          table: media_field_data
+          field: mid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: media
+          entity_field: mid
+          plugin_id: standard
       header: {  }
       footer: {  }
       empty: {  }
