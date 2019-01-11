@@ -10,7 +10,7 @@ install_thunder() {
     drush en simpletest -y
 
     if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
-        drush -y sql-dump --result-file=./dump_thunder_after_install.sql
+        drush -y sql-dump --result-file=${DEPLOYMENT_DUMP_FILE}
     fi
 }
 
@@ -21,7 +21,7 @@ update_thunder_mock_deployment() {
 
     drush -y cex sync
     drush -y sql-drop
-    drush -y sql-cli < ./dump_thunder_after_install.sql
+    drush -y sql-cli < ${DEPLOYMENT_DUMP_FILE}
     drush -y updatedb
     drush -y cim sync
 }
