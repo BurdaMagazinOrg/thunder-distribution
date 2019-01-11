@@ -9,7 +9,7 @@ if [[ "${TEST_UPDATE}" != "true" && "${TEST_DEPLOYMENT}" == "true" ]]; then
 
     # We have to use "2>&1" because drush outputs everything to stderr
     DRUSH_CIM_RESULT=$(drush -y cim sync 2>&1)
-    if [[ "${DRUSH_CIM_RESULT}" != "There are no changes to import."* ]]; then
+    if [[ "${DRUSH_CIM_RESULT}" != *"There are no changes to import."* ]]; then
         exit 1
     fi
 fi
