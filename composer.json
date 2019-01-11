@@ -77,6 +77,9 @@
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch"
+            },
+            "drupal/core": {
+                "BaseFieldDefinition::getProvider() always returns 'content_moderation'": "https://www.drupal.org/files/issues/2019-01-11/3025250-6.patch"
             }
         }
     },
