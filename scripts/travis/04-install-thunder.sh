@@ -35,7 +35,7 @@ drush_make_thunder() {
 
     # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
     rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
     composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
@@ -56,7 +56,7 @@ composer_create_thunder() {
 
      # Get custom branch of Thunder Admin theme
     rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
-    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 }
 
 apply_patches() {
