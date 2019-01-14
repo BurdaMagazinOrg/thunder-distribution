@@ -56,7 +56,7 @@ composer_create_thunder() {
 
      # Get custom branch of Thunder Admin theme
     rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
-    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 }
 
 apply_patches() {
