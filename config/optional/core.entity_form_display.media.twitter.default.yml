@@ -7,12 +7,51 @@ dependencies:
     - field.field.media.twitter.field_url
     - media.type.twitter
   module:
+    - field_group
     - link
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - field_url
+        - field_author
+        - field_content
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
 id: media.twitter.default
 targetEntityType: media
 bundle: twitter
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_author:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_content:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_url:
     type: link_default
     weight: 0
@@ -28,12 +67,17 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
-  field_author: true
-  field_content: true
   langcode: true
   moderation_state: true
   name: true
   path: true
-  uid: true

@@ -10,58 +10,124 @@ dependencies:
     - field.field.media.video.field_source
     - media.type.video
   module:
+    - field_group
     - media
     - text
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - name
+        - field_media_video_embed_field
+        - field_caption
+        - field_description
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
+    group_credits:
+      children:
+        - field_author
+        - field_copyright
+        - field_source
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Credits
 id: media.video.default
 targetEntityType: media
 bundle: video
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_author:
     type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_caption:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_copyright:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_media_video_embed_field:
+    type: oembed_textfield
     weight: 2
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_copyright:
-    weight: 1
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+  field_source:
     type: string_textfield
+    weight: 6
     region: content
-  field_description:
-    type: text_textarea
-    weight: 3
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
-  field_media_video_embed_field:
-    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: oembed_textfield
+  name:
+    type: string_textfield
+    weight: 1
     region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
-    region: content
     settings:
       display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
     third_party_settings: {  }
 hidden:
-  created: true
-  field_caption: true
-  field_source: true
   langcode: true
   moderation_state: true
-  name: true
   path: true
-  uid: true

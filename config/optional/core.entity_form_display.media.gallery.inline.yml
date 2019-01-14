@@ -2,41 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.media.inline
     - entity_browser.browser.multiple_image_browser
     - field.field.media.gallery.field_media_images
     - media.type.gallery
   module:
     - entity_browser
-    - field_group
-third_party_settings:
-  field_group:
-    group_basis:
-      children:
-        - name
-        - field_media_images
-      parent_name: ''
-      weight: 0
-      format_type: fieldset
-      format_settings:
-        id: ''
-        classes: content-form__form-section
-        description: ''
-        required_fields: true
-      label: Basis
-id: media.gallery.default
+id: media.gallery.inline
 targetEntityType: media
 bundle: gallery
-mode: default
+mode: inline
 content:
-  created:
-    type: datetime_timestamp
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_media_images:
     type: entity_browser_entity_reference
-    weight: 2
+    weight: 1
     settings:
       entity_browser: multiple_image_browser
       field_widget_display: rendered_entity
@@ -51,29 +30,16 @@ content:
     region: content
   name:
     type: string_textfield
-    weight: 1
+    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     region: content
-  status:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 2
-    region: content
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
+  created: true
   langcode: true
   moderation_state: true
   path: true
+  status: true
+  uid: true
