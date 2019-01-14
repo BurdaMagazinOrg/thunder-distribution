@@ -35,7 +35,7 @@ drush_make_thunder() {
 
     # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
     rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-    git clone --depth 1 --single-branch --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
     composer install --working-dir=${TEST_DIR}/docroot
     composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
@@ -53,6 +53,10 @@ composer_create_thunder() {
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+
+     # Get custom branch of Thunder Admin theme
+    rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+    git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 }
 
 apply_patches() {
