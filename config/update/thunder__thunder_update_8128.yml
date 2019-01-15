@@ -418,3 +418,59 @@ core.entity_form_display.media.video.default:
         field_caption: true
         field_source: true
         uid: true
+core.entity_form_display.paragraph.gallery.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.instagram.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.pinterest.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.twitter.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
