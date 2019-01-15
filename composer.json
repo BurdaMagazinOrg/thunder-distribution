@@ -167,5 +167,8 @@
         "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0"
+    },
+    "conflict": {
+        "masterminds/html5": "^2.4.0"
     }
 }
