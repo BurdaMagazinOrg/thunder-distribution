@@ -75,6 +75,7 @@ install:
   - select2:select2
   - simple_sitemap:simple_sitemap
   - slick_media:slick_media
+  - thunder_testing_multilingual:thunder_testing_multilingual
   - responsive_preview:responsive_preview
   - video_embed_field:video_embed_media
 # thunder
@@ -82,7 +83,6 @@ install:
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
-  - thunder:thunder_testing_multilingual
   - thunder:thunder_updater
 themes:
   - seven
