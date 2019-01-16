@@ -70,7 +70,7 @@
                 "The View widget should filter based on field settings": "https://www.drupal.org/files/issues/2018-09-06/2997747-2.patch"
             },
             "drupal/scheduler": {
-                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2018-12-10/2798689-153.patch",
+                "Scheduler integration with core Content moderation": "https://www.drupal.org/files/issues/2019-01-09/2798689-160-alternative-approach.patch",
                 "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
             },
             "drupal/password_policy": {
@@ -127,6 +127,7 @@
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "1.0",
+        "drupal/scheduler_content_moderation_integration": "~1.0",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
@@ -160,5 +161,8 @@
         "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0"
+    },
+    "conflict": {
+        "masterminds/html5": "^2.4.0"
     }
 }
