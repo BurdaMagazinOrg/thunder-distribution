@@ -6,7 +6,6 @@
 With this release we fix a bug that might occur when using composer to update the AMP module dependencies and a drush import-config issue.
 The media edit pages get to look a lot nicer and the content moderation integration was tweaked a bit.
 
-- Fix [As a restricted editor I am not be able to edit scheduled nodes](https://www.drupal.org/project/thunder/issues/3020284)
 - Fix [Call to a member function setDisplayOptions() on null (Drupal 8.7.x)](https://www.drupal.org/project/thunder/issues/3021430)
 - Fix [Error message saving translation](https://www.drupal.org/project/thunder/issues/3019638)
 - Fix [Password Policy module cannot be installed by drush config-import](https://www.drupal.org/project/thunder/issues/3025702)
