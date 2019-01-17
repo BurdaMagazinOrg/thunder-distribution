@@ -61,7 +61,7 @@
         },
         "patches": {
             "drupal/core": {
-                "Programmatically created translatable content type returns SQL error on content creation #2599228": "https://www.drupal.org/files/issues/2019-01-09/2599228-112-8.7.x.patch",
+                "Programmatically created translatable content type returns SQL error on content creation #2599228": "https://www.drupal.org/files/issues/2019-01-16/2599228-121.patch",
                 "Shipping a profile with multiple languages without locale module not possible #2413191": "https://www.drupal.org/files/issues/drupal-2413191-21.patch",
                 "Error Loading Language Not Translated For Current Revision #3001299": "https://www.drupal.org/files/issues/2018-09-20/core-translation-pending-revision.patch"
             },
