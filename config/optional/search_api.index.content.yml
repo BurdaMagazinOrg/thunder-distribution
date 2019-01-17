@@ -1,16 +1,15 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.storage.node.field_channel
-    - field.storage.node.field_tags
-    - search_api.server.database
   module:
     - media_entity
     - user
     - node
-    - taxonomy
     - search_api
+  config:
+    - field.storage.node.field_channel
+    - field.storage.node.field_tags
+    - search_api.server.database
 id: content
 name: Content
 description: ''
@@ -32,17 +31,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_tags
-  label:
-    label: Label
-    property_path: aggregated_field
-    type: text
-    boost: !!float 8
-    configuration:
-      type: union
-      fields:
-        - 'entity:media/name'
-        - 'entity:node/title'
-        - 'entity:taxonomy_term/name'
   media_author:
     label: 'Publisher ID » User » Name'
     datasource_id: 'entity:media'
@@ -61,11 +49,27 @@ field_settings:
     dependencies:
       module:
         - media_entity
+  media_name:
+    label: 'Media name'
+    datasource_id: 'entity:media'
+    property_path: name
+    type: string
+    dependencies:
+      module:
+        - media_entity
   media_status:
     label: 'Publishing status'
     datasource_id: 'entity:media'
     property_path: status
     type: boolean
+    dependencies:
+      module:
+        - media_entity
+  media_type:
+    label: Bundle
+    datasource_id: 'entity:media'
+    property_path: bundle
+    type: string
     dependencies:
       module:
         - media_entity
@@ -141,32 +145,22 @@ field_settings:
     dependencies:
       module:
         - node
-  term_changed:
-    label: Changed
-    datasource_id: 'entity:taxonomy_term'
-    property_path: changed
-    type: date
-    dependencies:
-      module:
-        - taxonomy
-  term_status:
-    label: Published
-    datasource_id: 'entity:taxonomy_term'
-    property_path: status
-    type: boolean
-    dependencies:
-      module:
-        - taxonomy
-  type:
-    label: Type
-    property_path: aggregated_field
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
     type: string
-    configuration:
-      type: union
-      fields:
-        - 'entity:media/bundle'
-        - 'entity:node/type'
-        - 'entity:taxonomy_term/vid'
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -192,13 +186,6 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
-  'entity:taxonomy_term':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
@@ -213,10 +200,12 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
-      - label
       - media_author
+      - media_name
+      - media_type
       - name
       - rendered_item
+      - title
       - type
     title: true
     alt: true
@@ -232,10 +221,12 @@ processor_settings:
   ignorecase:
     all_fields: true
     fields:
-      - label
       - media_author
+      - media_name
+      - media_type
       - name
       - rendered_item
+      - title
       - type
     weights:
       preprocess_index: -20
@@ -244,7 +235,6 @@ processor_settings:
   tokenizer:
     all_fields: true
     fields:
-      - label
       - rendered_item
     spaces: ''
     overlap_cjk: 1

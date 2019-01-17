@@ -90,8 +90,8 @@ display:
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             thumbnail: thumbnail
-            label: label
-            type: type
+            media_name: media_name
+            media_type: media_type
             media_status: media_status
             field_expires: field_expires
             media_changed: media_changed
@@ -107,20 +107,20 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            label:
+            media_name:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-medium
-            type:
+              responsive: ''
+            media_type:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-medium
+              responsive: ''
             media_status:
               sortable: true
               default_sort_order: asc
@@ -300,14 +300,14 @@ display:
             multi_separator: ', '
           entity_type: media
           plugin_id: search_api_field
-        label:
-          id: label
+        media_name:
+          id: media_name
           table: search_api_index_content
-          field: label
+          field: media_name
           relationship: none
           group_type: group
           admin_label: ''
-          label: Title
+          label: Name
           exclude: false
           alter:
             alter_text: false
@@ -340,7 +340,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -348,14 +348,32 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
           multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api
-        type:
-          id: type
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: true
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        media_type:
+          id: media_type
           table: search_api_index_content
-          field: type
+          field: media_type
           relationship: none
           group_type: group
           admin_label: ''
@@ -400,10 +418,31 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
           multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              media_bundle:
+                display_method: label
+          plugin_id: search_api_field
         media_status:
           id: media_status
           table: search_api_index_content
