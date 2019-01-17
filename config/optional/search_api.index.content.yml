@@ -10,6 +10,7 @@ dependencies:
     - field.storage.node.field_channel
     - field.storage.node.field_tags
     - search_api.server.database
+    - core.entity_view_mode.node.search_index
 id: content
 name: Content
 description: ''
@@ -122,11 +123,8 @@ field_settings:
           twitter: default
           video: default
         'entity:node':
-          article: default
-          page: default
-        'entity:taxonomy_term':
-          channel: default
-          tags: default
+          article: search_index
+          page: search_index
   status:
     label: status
     datasource_id: 'entity:node'
