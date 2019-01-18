@@ -8,6 +8,22 @@ install_thunder() {
 
     /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://travis@127.0.0.1/drupal -y thunder_module_configure_form.install_modules_thunder_demo
     drush en simpletest -y
+
+    if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
+        drush -y sql-dump --result-file=${DEPLOYMENT_DUMP_FILE}
+    fi
+}
+
+# Mock update process for deployment workflow
+update_thunder_mock_deployment() {
+    # Enable optional modules
+    drush -y en password_policy
+
+    drush -y cex sync
+    drush -y sql-drop
+    drush -y sql-cli < ${DEPLOYMENT_DUMP_FILE}
+    drush -y updatedb
+    drush -y cim sync
 }
 
 # Update thunder to current test version
@@ -20,6 +36,10 @@ update_thunder() {
 
     # Execute all required updates
     drush updatedb -y
+
+    if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
+        update_thunder_mock_deployment
+    fi
 }
 
 drush_make_thunder() {
