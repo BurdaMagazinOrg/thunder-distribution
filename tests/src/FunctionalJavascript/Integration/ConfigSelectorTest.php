@@ -37,7 +37,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $assert_session->waitForId('edit-index-now');
 
     $this->drupalGet('admin/content');
-    $assert_session->elementExists('xpath', '//*[@id="view-label-table-column"]/a');
+    $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
 
     // Uninstall search_api.
