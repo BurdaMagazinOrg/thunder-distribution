@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.media.inline
     - field.field.paragraph.instagram.field_media
     - paragraphs.paragraphs_type.instagram
   module:
@@ -14,10 +15,12 @@ content:
   field_media:
     weight: 0
     settings:
-      form_mode: default
-      override_labels: false
+      form_mode: inline
       label_singular: ''
       label_plural: ''
+      override_labels: false
+      collapsible: false
+      collapsed: false
     third_party_settings: {  }
     type: inline_entity_form_simple
     region: content
