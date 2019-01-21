@@ -1,5 +1,20 @@
 # Change Log
 
+## [8.2.32](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.32) 2019-01-17
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.31...8.2.32)
+
+With this release we fix a bug that might occur when using composer to update the AMP module dependencies and a drush import-config issue.
+The media edit pages get to look a lot nicer and the content moderation integration was tweaked a bit.
+
+- Fix [Call to a member function setDisplayOptions() on null (Drupal 8.7.x)](https://www.drupal.org/project/thunder/issues/3021430)
+- Fix [Error message saving translation](https://www.drupal.org/project/thunder/issues/3019638)
+- Fix [Password Policy module cannot be installed by drush config-import](https://www.drupal.org/project/thunder/issues/3025702)
+- Fix [The masterminds/html5 dependency gets updated to incompatible version](https://www.drupal.org/project/thunder/issues/3025743)
+- Do [Update and cleanup travis integration](https://www.drupal.org/project/thunder/issues/3021420)
+- Do [Structure media edit pages](https://www.drupal.org/project/thunder/issues/3018703)
+- Do [Add testing of deployment](https://www.drupal.org/project/thunder/issues/3025101)
+- Do [Use scheduler_content_moderation_integration](https://www.drupal.org/project/thunder/issues/3025705)
+
 ## [8.2.31](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.31) 2018-12-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.30...8.2.31)
 
