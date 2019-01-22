@@ -2,13 +2,42 @@
 
 namespace Drupal\thunder_article\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\metatag\MetatagTagPluginManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ConfigurationForm.
  */
 class ConfigurationForm extends ConfigFormBase {
+
+  /**
+   * The metatag tag plugin manager.
+   *
+   * @var \Drupal\metatag\MetatagTagPluginManager
+   */
+  protected $metatagTagManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, MetatagTagPluginManager $metatag_tag_manager = NULL) {
+    parent::__construct($config_factory);
+
+    $this->metatagTagManager = $metatag_tag_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->has('plugin.manager.metatag.tag') ? $container->get('plugin.manager.metatag.tag') : NULL
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -39,6 +68,21 @@ class ConfigurationForm extends ConfigFormBase {
       '#default_value' => $config->get('move_scheduler_local_task'),
     ];
 
+    if ($this->metatagTagManager) {
+      $tags = [];
+      foreach ($this->metatagTagManager->getDefinitions() as $definition) {
+        $tags[$definition['id']] = $definition['group'] . ': ' . $definition['label'];
+      }
+
+      $form['metatags_tags'] = [
+        '#type' => 'checkboxes',
+        '#title' => $this->t("Move metatag tags into the 'Thunder' group"),
+        '#description' => $this->t("The 'Thunder' group is displayed on the article edit page."),
+        '#default_value' => $config->get('metatags_tags') ? $config->get('metatags_tags') : [],
+        '#options' => $tags,
+      ];
+    }
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -50,6 +94,7 @@ class ConfigurationForm extends ConfigFormBase {
 
     $this->config('thunder_article.settings')
       ->set('move_scheduler_local_task', $form_state->getValue('move_scheduler_local_task'))
+      ->set('metatags_tags', array_keys(array_filter($form_state->getValue('metatags_tags'))))
       ->save();
   }
 

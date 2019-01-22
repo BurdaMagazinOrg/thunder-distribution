@@ -407,3 +407,9 @@ function thunder_field_widget_info_alter(array &$info) {
     unset($info['thunder_moderation_state_default']);
   }
 }
+
+function thunder_metatag_tags_alter(array &$definition) {
+  foreach (\Drupal::config('thunder_article.settings')->get('metatags_tags') as $tag) {
+    $definition[$tag]['group'] = 'thunder';
+  }
+}
