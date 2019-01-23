@@ -1051,3 +1051,14 @@ function thunder_update_8128() {
   // Output logged messages to related channel of update execution.
   return $update_logger->output();
 }
+
+/**
+ * Structure the media edit forms.
+ */
+function thunder_update_8129() {
+  /** @var \Drupal\update_helper\UpdaterInterface $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8128');
+
+  return $updater->logger()->output();
+}

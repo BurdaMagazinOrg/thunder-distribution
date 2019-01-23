@@ -5,24 +5,52 @@ dependencies:
     - field.field.media.pinterest.field_url
     - media_entity.bundle.pinterest
   module:
+    - field_group
     - link
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - field_url
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
 id: media.pinterest.default
 targetEntityType: media
 bundle: pinterest
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_url:
-    weight: 0
+    weight: 1
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
   langcode: true
   moderation_state: true
   name: true
   path: true
-  uid: true
