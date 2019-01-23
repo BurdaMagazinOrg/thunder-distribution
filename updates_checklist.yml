@@ -280,3 +280,7 @@ v2.33:
         '#title': 'Switch to Update Helper module.'
         '#description': '<p>Switching to Update Helper was successfully.</p>'
         '#description_failed': '<p><strong>Switching to Update Helper has failed.</strong><p>'
+    thunder_update_8130:
+        '#title': 'Update configurations related to previously used Thunder Updater'
+        '#description': '<p>Configuration related with replacement of Thunder Updater with Update helper is successfully applied.</p>'
+        '#description_failed': '<p><strong>Configuration changes related with replacement of Thunder Updater with Update Helper are not properly applied.</strong><p>'

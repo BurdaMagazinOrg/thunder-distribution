@@ -8,7 +8,7 @@ types:
   media: {  }
   redirect: {  }
   taxonomy_term: {  }
-  thunder_updater_update: {  }
+  update_helper_checklist_update: {  }
   user: {  }
   menu_link_content: {  }
   paragraph: {  }
@@ -36,7 +36,7 @@ form_op_lock:
   taxonomy_term:
     mode: 0
     values: {  }
-  thunder_updater_update:
+  update_helper_checklist_update:
     mode: null
     values: {  }
   user:

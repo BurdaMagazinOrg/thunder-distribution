@@ -1062,3 +1062,17 @@ function thunder_update_8129() {
 
   return $updater->logger()->output();
 }
+
+/**
+ * Update configurations related to previously used Thunder Updater
+ */
+function thunder_update_8130() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8130');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
