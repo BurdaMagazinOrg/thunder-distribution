@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.33](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.33) 2019-12-24
+## [8.2.33](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.33) 2019-1-24
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.32...8.2.33)
 
 The scheduler content moderation integration module that we introduced with the last release now provides the required scheduler patch by itself.
