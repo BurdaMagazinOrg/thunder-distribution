@@ -29,10 +29,6 @@
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/thunder/scheduler_content_moderation_integration.git"
-        },
-        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -139,7 +135,7 @@
         "drupal/redirect": "^1.0",
         "drupal/riddle_marketplace": "^2.0",
         "drupal/scheduler": "^1.0",
-        "drupal/scheduler_content_moderation_integration": "dev-task/add-scheduler-patch",
+        "drupal/scheduler_content_moderation_integration": "^1.0",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
