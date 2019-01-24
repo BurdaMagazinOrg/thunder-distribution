@@ -77,6 +77,7 @@ composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver"
 ```
 
 After that drupal tests can be executed (if you are in ```docroot``` folder of Thunder installation and composer requirements are installed):
+
 ```bash
 php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
 ```
