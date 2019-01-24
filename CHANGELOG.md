@@ -1,5 +1,20 @@
 # Change Log
 
+## [8.2.33](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.33) 2019-01-24
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.32...8.2.33)
+
+The scheduler content moderation integration module that we introduced with the last release now provides the required scheduler patch by itself.
+That means, that we had to remove the patch from the distribution, otherwise installation will fail.
+
+Additionally, we fix an update bug from the last release. While the update was correctly done in the release, the update was always marked as failed. To check, if your update
+was successful, you can take a look at your media entity form-displays. You should have the inline form mode on your media entities.
+For more information on this take a look at the corresponding drupal.org issue: https://www.drupal.org/project/thunder/issues/3027152
+
+No features have been added.
+
+- Fix [After update to 8.x-2.32 Pending Thunder updates message persists](https://www.drupal.org/project/thunder/issues/3027152)
+- Do [Move scheduler patch to integration module](https://www.drupal.org/project/thunder/issues/3027869)  
+
 ## [8.2.32](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.32) 2019-01-17
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.31...8.2.32)
 
