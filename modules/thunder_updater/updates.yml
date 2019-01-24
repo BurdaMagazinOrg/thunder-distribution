@@ -274,7 +274,7 @@ v2.32:
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
 v2.34:
-    '#title': 'Update to Thunder 2.33'
+    '#title': 'Update to Thunder 2.34'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8130:
         '#title': 'Hide content lock messages on other forms than node edit.'
