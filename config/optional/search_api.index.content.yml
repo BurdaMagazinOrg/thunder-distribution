@@ -1,16 +1,16 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - media_entity
-    - user
-    - node
-    - search_api
   config:
     - field.storage.node.field_channel
     - field.storage.node.field_tags
     - search_api.server.database
     - core.entity_view_mode.node.search_index
+  module:
+    - media_entity
+    - user
+    - node
+    - search_api
 id: content
 name: Content
 description: ''

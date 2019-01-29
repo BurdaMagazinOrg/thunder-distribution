@@ -25,7 +25,7 @@ query_operator: and
 use_hierarchy: true
 expand_hierarchy: true
 enable_parent_when_child_gets_disabled: true
-hard_limit: 0
+hard_limit: 250
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
