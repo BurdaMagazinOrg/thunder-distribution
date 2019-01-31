@@ -1,0 +1,20 @@
+content_lock.settings:
+  expected_config:
+    form_op_lock:
+      node:
+        mode: 0
+        values: {  }
+  update_actions:
+    add:
+      form_op_lock:
+        content_moderation_state:
+          mode: null
+          values: {  }
+      types:
+        content_moderation_state: {  }
+    change:
+      form_op_lock:
+        node:
+          mode: 1
+          values:
+            edit: edit
