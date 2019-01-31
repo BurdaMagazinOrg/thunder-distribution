@@ -83,6 +83,9 @@
             },
             "drupal/search_api": {
                 "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-01-17/3026526.patch"
+            },
+            "drupal/facets": {
+                "Improve performance for taxonomy hierarchical facets": "https://www.drupal.org/files/issues/2019-01-30/3005018-8.patch"
             }
         }
     },
