@@ -21,7 +21,6 @@ class ArticleSchedulerIntegration extends ThunderJavascriptTestBase {
       'title[0][value]' => 'Scheduler integration testing',
       'field_seo_title[0][value]' => 'Scheduler integration testing seo title',
     ]);
-    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")][text() = "Create Article"]')));
     $this->assertSession()->elementNotExists('xpath', '//*[@data-drupal-selector="edit-publish-on-wrapper"]');
 
     $this->clickSave();
