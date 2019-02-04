@@ -98,7 +98,8 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
 
     # Check for deprecated methods.
-    phpstan analyse --memory-limit 200M --configuration ${TEST_DIR}/docroot/profiles/contrib/thunder/phpstan.neon ${TEST_DIR}/docroot/profiles/contrib/thunder
+    cp ${TEST_DIR}/docroot/profiles/thunder/phpstan.neon .
+    phpstan analyse --memory-limit 200M ${TEST_DIR}/docroot/profiles/contrib/thunder
 fi
 
 # Install Thunder
