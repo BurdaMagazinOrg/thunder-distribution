@@ -98,7 +98,7 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
 
     # Check for deprecated methods.
-    cp ${TEST_DIR}/docroot/profiles/thunder/phpstan.neon .
+    cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
     phpstan analyse --memory-limit 200M ${TEST_DIR}/docroot/profiles/contrib/thunder
 fi
 
