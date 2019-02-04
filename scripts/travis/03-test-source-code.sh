@@ -12,4 +12,4 @@ fi
 eslint .
 
 # Check for deprecated methods.
-phpstan analyse --memory-limit 200M --configuration docroot/profiles/contrib/thunder/phpstan.neon docroot/profiles/contrib/thunder
+phpstan analyse --memory-limit 200M .
