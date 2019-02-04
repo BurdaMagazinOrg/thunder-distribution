@@ -98,6 +98,9 @@ elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
 fi
 
+# Check for deprecated methods.
+phpstan analyse --memory-limit 200M --configuration ${TEST_DIR}/docroot/profiles/contrib/thunder/phpstan.neon ${TEST_DIR}/docroot/profiles/contrib/thunder
+
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Install last drupal org version and update to currently tested version

@@ -10,6 +10,3 @@ if ! [ -x "$(command -v eslint)" ]; then
     npm install -g eslint
 fi
 eslint .
-
-# Check for deprecated methods.
-phpstan analyse --memory-limit 200M .
