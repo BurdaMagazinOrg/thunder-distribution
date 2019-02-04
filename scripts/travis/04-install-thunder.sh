@@ -96,10 +96,10 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
-fi
 
-# Check for deprecated methods.
-phpstan analyse --memory-limit 200M --configuration ${TEST_DIR}/docroot/profiles/contrib/thunder/phpstan.neon ${TEST_DIR}/docroot/profiles/contrib/thunder
+    # Check for deprecated methods.
+    phpstan analyse --memory-limit 200M --configuration ${TEST_DIR}/docroot/profiles/contrib/thunder/phpstan.neon ${TEST_DIR}/docroot/profiles/contrib/thunder
+fi
 
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then

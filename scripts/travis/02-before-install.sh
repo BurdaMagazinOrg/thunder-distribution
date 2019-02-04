@@ -11,7 +11,7 @@ drush_download_thunder() {
 }
 
 # Install Drush and drupalorg_drush module
-composer global require drush/drush:^8.1 drupal/coder mglaman/phpstan-drupal phpstan/phpstan-deprecation-rules
+composer global require drush/drush:^8.1 drupal/coder
 phpenv rehash
 drush dl drupalorg_drush-7.x
 
