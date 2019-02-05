@@ -32,10 +32,19 @@ class ContentTranslationTest extends ThunderTestBase {
 
     $this->logWithRole('editor');
 
-    $edit = [
-      'title'
-    ];
-    $this->drupalPostForm('node/article/add', $edit, t('Save'));
+    $page = $this->getSession()->getPage();
+
+    $this->drupalGet('node/add/article');
+    $page->fillField('Title', 'English draft');
+    $page->fillField('SEO Title', 'English draft');
+
+    $page->pressButton('Save');
+
+
+
+    file_put_contents('foo.html', $page->getHtml());
+
+
   }
 
 }
