@@ -38,7 +38,7 @@
         },
         {
             "type": "git",
-            "url": "git@github.com:BurdaMagazinOrg/module-update_helper.git"
+            "url": "https://github.com/BurdaMagazinOrg/module-update_helper.git"
         }
     ],
     "extra": {
