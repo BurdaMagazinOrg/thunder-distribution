@@ -1058,7 +1058,7 @@ function thunder_update_8128() {
 function thunder_update_8129() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder', 'thunder__thunder_update_8128');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8129');
 
   return $updater->logger()->output();
 }
