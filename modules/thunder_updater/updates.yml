@@ -280,3 +280,7 @@ v2.34:
         '#title': 'Hide content lock messages on other forms than node edit.'
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+    thunder__thunder_update_8131:
+        '#title': 'Change the base table of scheduler view.'
+        '#description': '<p>The old scheduler view was based on the node table. That means, scheduled drafts are not shown in the view. Because drafts are not the default revision of a node.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
