@@ -79,7 +79,7 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
             },
             "drupal/core": {
-                "Workflow transition current state is changed when using preview mode\n": "https://www.drupal.org/files/issues/2018-12-14/2914873-29.patch"
+                "Workflow transition current state is changed when using preview mode": "https://www.drupal.org/files/issues/2019-01-28/2914873-32.patch"
             }
         }
     },
