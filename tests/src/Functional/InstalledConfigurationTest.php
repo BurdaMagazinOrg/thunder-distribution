@@ -285,6 +285,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'access riddle_browser entity browser pages',
       ],
     ],
+    // Google analytics adds one permission dynamically in the install hook.
+    'user.role.authenticated' => [
+      'permissions' => [
+        'opt-in or out of google analytics tracking',
+      ],
+    ],
   ];
 
   /**
