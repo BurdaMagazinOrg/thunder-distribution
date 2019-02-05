@@ -1207,7 +1207,6 @@ function thunder_update_8130() {
   return $thunderUpdater->logger()->output();
 }
 
-
 /**
  * Change the base table of scheduler view.
  */
