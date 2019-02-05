@@ -1118,3 +1118,91 @@ function thunder_update_8127() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Set metatag fields translatable per default.
+ */
+function thunder_update_8128() {
+
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+  $updateLogger = $thunderUpdater->logger();
+
+  $successfulUpdate = TRUE;
+
+  $config_ids = [
+    'node.article.field_meta_tags',
+    'taxonomy_term.channel.field_meta_tags',
+    'taxonomy_term.tags.field_meta_tags',
+  ];
+
+  foreach ($config_ids as $config_id) {
+    $config = FieldConfig::load($config_id);
+    if ($config) {
+      $config->setTranslatable(TRUE)->save();
+    }
+    else {
+      $successfulUpdate = FALSE;
+      $thunderUpdater->logger()->warning(t('Unable to load @config_id configuration.', ['@config_id' => $config_id]));
+    }
+  }
+
+  // Set update checklist.
+  if ($successfulUpdate) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8128']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8128']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $updateLogger->output();
+}
+
+/**
+ * Structure the media edit forms.
+ */
+function thunder_update_8129() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8129']])) {
+    if ($thunderUpdater->importConfigs([
+      'core.entity_form_display.media.gallery.inline',
+      'core.entity_form_display.media.instagram.inline',
+      'core.entity_form_display.media.pinterest.inline',
+      'core.entity_form_display.media.twitter.inline',
+    ])) {
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8129']);
+    }
+    else {
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8129']);
+    }
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8129']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Hide content lock messages on other forms than node edit.
+ */
+function thunder_update_8130() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8130']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8130']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8130']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}

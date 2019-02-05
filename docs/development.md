@@ -77,6 +77,7 @@ composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver"
 ```
 
 After that drupal tests can be executed (if you are in ```docroot``` folder of Thunder installation and composer requirements are installed):
+
 ```bash
 php ./core/scripts/run-tests.sh --php '/usr/local/bin/php' --verbose --url http://thunder.dev --dburl mysql://drupaluser@127.0.0.1:3306/thunder Thunder
 ```
@@ -121,7 +122,6 @@ We support some test execution options. They can be provided in commit message i
 - TEST_UPDATE - allowed values: (true), this option will execute custom test path, where update (including execution of update hooks) from latest released version will be tested. This option should be used in case of pull request with update hooks or module update.
 - INSTALL_METHOD - allowed values: (drush_make, composer), this options overwrites default install method and it allows to test PHP 5.6 and 7.2 with same install method.
 - TEST_INSTALLER - allowed values: (true), this option will execute additional tests, that tests installation of Thunder with default language (English) and German. These tests require significant more time to be executed.
-- SAUCE_LABS_ENABLED - allowed values: (true), this option will execute tests on [Sauce Labs](https://saucelabs.com), where screenshots and videos of test executions are available for additional investigation of possible problems. This option significantly increases execution time of tests.
 
 Example to execute update test path:
 ```

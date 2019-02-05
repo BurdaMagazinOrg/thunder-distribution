@@ -1,0 +1,476 @@
+core.entity_form_display.media.gallery.default:
+  expected_config:
+    content:
+      field_media_images:
+        weight: 1
+      name:
+        weight: 0
+    hidden:
+      created: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 1
+        field_media_images:
+          settings:
+            field_widget_replace: false
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - name
+              - field_media_images
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+    change:
+      content:
+        field_media_images:
+          weight: 2
+        name:
+          weight: 1
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 2
+    delete:
+      hidden:
+        created: true
+        uid: true
+core.entity_form_display.media.image.default:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 3
+      field_description:
+        weight: 5
+      field_image:
+        weight: 1
+      field_source:
+        weight: 4
+      name:
+        weight: 0
+    hidden:
+      created: true
+      field_tags: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 3
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - name
+              - field_tags
+              - field_image
+              - field_description
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+          group_credits:
+            children:
+              - field_copyright
+              - field_source
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Credits
+            parent_name: ''
+            weight: 1
+    change:
+      content:
+        field_copyright:
+          weight: 1
+        field_description:
+          weight: 4
+        field_image:
+          weight: 3
+        field_source:
+          weight: 2
+        field_tags:
+          region: content
+          settings:
+            autocomplete: true
+            match_operator: CONTAINS
+            width: 100%
+          third_party_settings: {  }
+          type: select2_entity_reference
+          weight: 2
+        name:
+          weight: 1
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 4
+    delete:
+      hidden:
+        created: true
+        field_tags: true
+        uid: true
+core.entity_form_display.media.instagram.default:
+  expected_config:
+    content:
+      field_url:
+        weight: 0
+    hidden:
+      created: true
+      field_author: true
+      field_content: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 4
+        field_author:
+          region: content
+          settings:
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: string_textfield
+          weight: 2
+        field_content:
+          region: content
+          settings:
+            placeholder: ''
+            rows: 5
+          third_party_settings: {  }
+          type: string_textarea
+          weight: 3
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - field_url
+              - field_author
+              - field_content
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+    change:
+      content:
+        field_url:
+          weight: 1
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 5
+    delete:
+      hidden:
+        created: true
+        field_author: true
+        field_content: true
+        uid: true
+core.entity_form_display.media.pinterest.default:
+  expected_config:
+    content:
+      field_url:
+        weight: 0
+    hidden:
+      created: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 1
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - field_url
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+    change:
+      content:
+        field_url:
+          weight: 1
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 2
+    delete:
+      hidden:
+        created: true
+        uid: true
+core.entity_form_display.media.twitter.default:
+  expected_config:
+    hidden:
+      created: true
+      field_author: true
+      field_content: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 1
+        field_author:
+          region: content
+          settings:
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: string_textfield
+          weight: 1
+        field_content:
+          region: content
+          settings:
+            placeholder: ''
+            rows: 5
+          third_party_settings: {  }
+          type: string_textarea
+          weight: 2
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 2
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - field_url
+              - field_author
+              - field_content
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+    delete:
+      hidden:
+        created: true
+        field_author: true
+        field_content: true
+        uid: true
+core.entity_form_display.media.video.default:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 3
+      field_media_video_embed_field:
+        weight: 1
+      name:
+        weight: 0
+    hidden:
+      created: true
+      field_caption: true
+      field_source: true
+      uid: true
+  update_actions:
+    add:
+      content:
+        created:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp
+          weight: 2
+        field_caption:
+          region: content
+          settings:
+            placeholder: ''
+            rows: 5
+          third_party_settings: {  }
+          type: text_textarea
+          weight: 3
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - name
+              - field_media_video_embed_field
+              - field_caption
+              - field_description
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            weight: 0
+          group_credits:
+            children:
+              - field_copyright
+              - field_source
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+            format_type: fieldset
+            label: Credits
+            parent_name: ''
+            weight: 1
+    change:
+      content:
+        field_copyright:
+          weight: 2
+        field_media_video_embed_field:
+          weight: 2
+        field_source:
+          region: content
+          settings:
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: string_textfield
+          weight: 3
+        name:
+          weight: 1
+        uid:
+          region: content
+          settings:
+            match_operator: CONTAINS
+            placeholder: ''
+            size: 60
+          third_party_settings: {  }
+          type: entity_reference_autocomplete
+          weight: 3
+    delete:
+      hidden:
+        created: true
+        field_caption: true
+        field_source: true
+        uid: true
+core.entity_form_display.paragraph.gallery.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.instagram.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.pinterest.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
+core.entity_form_display.paragraph.twitter.default:
+  expected_config:
+    content:
+      field_media:
+        settings:
+          form_mode: default
+  update_actions:
+    change:
+      content:
+        field_media:
+          settings:
+            collapsed: false
+            collapsible: false
+            form_mode: inline
