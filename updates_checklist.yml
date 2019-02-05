@@ -273,14 +273,21 @@ v2.32:
         '#title': 'Structure media edit forms.'
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
-v2.33:
+v2.34:
+    '#title': 'Update to Thunder 2.34'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8130:
+        '#title': 'Hide content lock messages on other forms than node edit.'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v2.35:
     '#title': 'Update to Thunder 2.33'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder_updater_update_8001:
         '#title': 'Switch to Update Helper module.'
         '#description': '<p>Switching to Update Helper was successfully.</p>'
         '#description_failed': '<p><strong>Switching to Update Helper has failed.</strong><p>'
-    thunder_update_8130:
+    thunder_update_8131:
         '#title': 'Update configurations related to previously used Thunder Updater'
         '#description': '<p>Configuration related with replacement of Thunder Updater with Update helper is successfully applied.</p>'
         '#description_failed': '<p><strong>Configuration changes related with replacement of Thunder Updater with Update Helper are not properly applied.</strong><p>'
