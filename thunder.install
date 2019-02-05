@@ -1167,21 +1167,40 @@ function thunder_update_8129() {
   $thunderUpdater = \Drupal::service('thunder_updater');
 
   // Execute configuration update definitions with logging of success.
-  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8128']])) {
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8129']])) {
     if ($thunderUpdater->importConfigs([
       'core.entity_form_display.media.gallery.inline',
       'core.entity_form_display.media.instagram.inline',
       'core.entity_form_display.media.pinterest.inline',
       'core.entity_form_display.media.twitter.inline',
     ])) {
-      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8128']);
+      $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8129']);
     }
     else {
-      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8128']);
+      $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8129']);
     }
   }
   else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8128']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8129']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Hide content lock messages on other forms than node edit.
+ */
+function thunder_update_8130() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8130']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8130']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8130']);
   }
 
   // Output logged messages to related channel of update execution.
