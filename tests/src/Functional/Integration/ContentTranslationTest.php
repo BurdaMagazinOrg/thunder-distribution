@@ -17,12 +17,21 @@ class ContentTranslationTest extends ThunderTestBase {
   ];
 
   /**
+   * List of used languages.
+   *
+   * @var \Drupal\Core\Language\LanguageInterface[]
+   */
+  protected $languages = [];
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp() {
     parent::setUp();
 
-    ConfigurableLanguage::createFromLangcode('de')->save();
+    $this->languages['en'] = ConfigurableLanguage::createFromLangcode('en');
+    $this->languages['de'] = ConfigurableLanguage::createFromLangcode('de');
+    $this->languages['de']->save();
   }
 
   /**
@@ -35,16 +44,21 @@ class ContentTranslationTest extends ThunderTestBase {
     $page = $this->getSession()->getPage();
 
     $this->drupalGet('node/add/article');
+    $page->selectFieldOption('Channel', 'News');
     $page->fillField('Title', 'English draft');
     $page->fillField('SEO Title', 'English draft');
 
     $page->pressButton('Save');
 
+    $node = $this->getNodeByTitle('English draft');
 
+    $url = $node->toUrl('drupal:content-translation-add');
+    $url->setRouteParameter('source', 'en');
+    $url->setRouteParameter('target', 'de');
 
-    file_put_contents('foo.html', $page->getHtml());
-
-
+    $this->drupalGet($url);
+    $page->fillField('Title', 'German draft');
+    $page->pressButton('Save');
   }
 
 }

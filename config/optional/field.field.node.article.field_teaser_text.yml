@@ -11,7 +11,7 @@ bundle: article
 label: 'Teaser Text'
 description: 'The teaser text is displayed on overview pages. Additionally, it is used for Facebook and Google snippets.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

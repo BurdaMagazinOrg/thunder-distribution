@@ -12,7 +12,7 @@ bundle: article
 label: Tags
 description: 'Multiple tags can be separated with (,) comma. Tags can be modified <a href="/admin/structure/taxonomy/manage/tags/overview" target="_blank">here</a>.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

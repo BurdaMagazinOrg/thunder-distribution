@@ -11,7 +11,7 @@ bundle: article
 label: 'SEO Title'
 description: 'The SEO Title is used for the automatic generation of the Url. It''s best to put the major keywords at the beginning.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

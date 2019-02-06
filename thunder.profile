@@ -330,6 +330,24 @@ function thunder_modules_installed($modules) {
     \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
   }
 
+  // When enabling content_translation, grant permissions to Thunder user roles.
+  if (in_array('content_translation', $modules)) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
+    foreach ($roles as $role) {
+      try {
+        $role->grantPermission('create content translations');
+        $role->grantPermission('update content translations');
+        $role->grantPermission('translate any entity');
+        if (in_array($role->id(), ['editor', 'seo'])) {
+          $role->grantPermission('delete content translations');
+        }
+        $role->save();
+      }
+      catch (EntityStorageException $storageException) {
+      }
+    }
+  }
 }
 
 /**
