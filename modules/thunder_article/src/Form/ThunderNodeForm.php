@@ -6,6 +6,7 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
@@ -34,6 +35,13 @@ class ThunderNodeForm extends NodeForm {
   protected $moderationInfo;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Constructs a NodeForm object.
    *
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
@@ -50,11 +58,14 @@ class ThunderNodeForm extends NodeForm {
    *   The node revision access check service.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   The moderation info service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(EntityRepositoryInterface $entity_repository, PrivateTempStoreFactory $temp_store_factory, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, AccountInterface $current_user, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo = NULL, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($entity_repository, $temp_store_factory, $entity_type_bundle_info, $time, $current_user);
     $this->nodeRevisionAccess = $node_revision_access;
     $this->moderationInfo = $moderationInfo;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -68,7 +79,8 @@ class ThunderNodeForm extends NodeForm {
       $container->get('datetime.time'),
       $container->get('current_user'),
       $container->get('access_check.node.revision'),
-      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
+      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL,
+      $container->get('entity_type.manager')
     );
   }
 
@@ -81,7 +93,9 @@ class ThunderNodeForm extends NodeForm {
     /** @var \Drupal\node\NodeInterface $entity */
     $entity = $form_object->getEntity();
 
-    if ($this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
+    $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
+    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
+    if ($latest_revision_id !== NULL && $this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
       $this->messenger()->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $entity->getRevisionUser()->label()]));
     }
 
@@ -99,7 +113,10 @@ class ThunderNodeForm extends NodeForm {
     /** @var \Drupal\node\NodeInterface $entity */
     $entity = $form_object->getEntity();
 
-    if (!$this->moderationInfo || !$this->moderationInfo->isModeratedEntity($entity)) {
+    $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
+    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
+
+    if ($latest_revision_id == NULL || !$this->moderationInfo || !$this->moderationInfo->isModeratedEntity($entity)) {
       return $element;
     }
 
