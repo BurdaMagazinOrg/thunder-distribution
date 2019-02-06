@@ -5,15 +5,10 @@ dependencies:
     - field.storage.media.field_expires
     - image.style.thumbnail
   module:
-    - config_selector
     - datetime
     - image
     - media_entity
     - user
-third_party_settings:
-  config_selector:
-    feature: thunder_media_view
-    priority: 0
 id: thunder_media
 label: Media
 module: views

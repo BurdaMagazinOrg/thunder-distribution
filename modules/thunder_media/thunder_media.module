@@ -61,13 +61,9 @@ function thunder_media_page_attachments(array &$page) {
  * Implements hook_menu_local_actions_alter().
  */
 function thunder_media_menu_local_actions_alter(&$local_actions) {
-  /** @var \Drupal\config_selector\ActiveEntity $config_selector */
-  $config_selector = \Drupal::service('config_selector.active');
-  /** @var \Drupal\views\ViewEntityInterface $view */
-  $view = $config_selector->get('view', 'thunder_media_view');
-  if ($view && $view->status()) {
-    $view->getExecutable()->initDisplay();
-    $local_actions['media.add']['appears_on'][] = $view->getExecutable()->getUrl()->getRouteName();
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  if ($view) {
+    $local_actions['media.add']['appears_on'][] = 'view.thunder_media.media_page_list';
   }
 }
 
@@ -75,13 +71,9 @@ function thunder_media_menu_local_actions_alter(&$local_actions) {
  * Implements hook_menu_links_discovered_alter().
  */
 function thunder_media_menu_links_discovered_alter(&$links) {
-  /** @var \Drupal\config_selector\ActiveEntity $config_selector */
-  $config_selector = \Drupal::service('config_selector.active');
-  /** @var \Drupal\views\ViewEntityInterface $view */
-  $view = $config_selector->get('view', 'thunder_media_view');
-  if ($view && $view->status()) {
-    $view->getExecutable()->initDisplay();
-    $links['entity.media.collection']['route_name'] = $view->getExecutable()->getUrl()->getRouteName();
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('thunder_media');
+  if ($view) {
+    $links['entity.media.collection']['route_name'] = 'view.thunder_media.media_page_list';
   }
 }
 

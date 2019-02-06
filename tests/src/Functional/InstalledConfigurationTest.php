@@ -148,9 +148,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'views.view.content' => [
       'status' => TRUE,
     ],
-    'views.view.thunder_media' => [
-      'status' => TRUE,
-    ],
     'views.view.glossary' => [
       'dependencies' => [
         'config' => TRUE,

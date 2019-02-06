@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  enforced:
-    module:
-      - config_selector
-id: thunder_media_view
-label: 'Media view'
-description: 'The main view for editing media items'

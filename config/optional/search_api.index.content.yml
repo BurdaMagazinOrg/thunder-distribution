@@ -7,9 +7,8 @@ dependencies:
     - search_api.server.database
     - core.entity_view_mode.node.search_index
   module:
-    - media_entity
-    - user
     - node
+    - user
     - search_api
 id: content
 name: Content
@@ -32,48 +31,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_tags
-  media_author:
-    label: 'Publisher ID » User » Name'
-    datasource_id: 'entity:media'
-    property_path: 'uid:entity:name'
-    type: string
-    dependencies:
-      module:
-        - media_entity
-        - user
-        - user
-  media_changed:
-    label: Changed
-    datasource_id: 'entity:media'
-    property_path: changed
-    type: date
-    dependencies:
-      module:
-        - media_entity
-  media_name:
-    label: 'Media name'
-    datasource_id: 'entity:media'
-    property_path: name
-    type: string
-    dependencies:
-      module:
-        - media_entity
-  media_status:
-    label: 'Publishing status'
-    datasource_id: 'entity:media'
-    property_path: status
-    type: boolean
-    dependencies:
-      module:
-        - media_entity
-  media_type:
-    label: Bundle
-    datasource_id: 'entity:media'
-    property_path: bundle
-    type: string
-    dependencies:
-      module:
-        - media_entity
   name:
     label: 'Authored by » User » Name'
     datasource_id: 'entity:node'
@@ -170,13 +127,6 @@ field_settings:
       module:
         - node
 datasource_settings:
-  'entity:media':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: true
@@ -198,9 +148,6 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
-      - media_author
-      - media_name
-      - media_type
       - name
       - rendered_item
       - title
@@ -219,9 +166,6 @@ processor_settings:
   ignorecase:
     all_fields: true
     fields:
-      - media_author
-      - media_name
-      - media_type
       - name
       - rendered_item
       - title
