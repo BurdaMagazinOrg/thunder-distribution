@@ -35,7 +35,7 @@ class ContentTranslationTest extends ThunderTestBase {
   }
 
   /**
-   * Tests empty menu groups are gone with admin_toolbar_links_access_filter.
+   * Test that basic translation creation works.
    */
   public function testEmptyMenuEntriesAreGone() {
 
