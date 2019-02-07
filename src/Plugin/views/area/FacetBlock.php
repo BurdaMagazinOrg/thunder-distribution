@@ -2,6 +2,8 @@
 
 namespace Drupal\thunder\Plugin\views\area;
 
+use Drupal\Core\Block\BlockManagerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\facets\FacetManager\DefaultFacetManager;
 use Drupal\facets\FacetSource\FacetSourcePluginManager;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
@@ -20,20 +22,26 @@ class FacetBlock extends AreaPluginBase {
 
   protected $facetSourceManager;
 
+  protected $blockManager;
+
+  protected $currentUser;
+
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, DefaultFacetManager $facetManager, FacetSourcePluginManager $facetSourceManager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, DefaultFacetManager $facetManager, FacetSourcePluginManager $facetSourceManager, BlockManagerInterface $blockManager, AccountInterface $account) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->facetManager = $facetManager;
     $this->facetSourceManager = $facetSourceManager;
+    $this->blockManager = $blockManager;
+    $this->currentUser = $account;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition, $container->get('facets.manager'), $container->get('plugin.manager.facets.facet_source'));
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('facets.manager'), $container->get('plugin.manager.facets.facet_source'), $container->get('plugin.manager.block'), $container->get('current_user'));
   }
 
   /**
@@ -47,6 +55,7 @@ class FacetBlock extends AreaPluginBase {
       $source = $this->facetSourceManager->createInstance($definition['id']);
       if ($this->view->id() == $source->getViewsDisplay()->id() && $this->view->current_display == $source->getViewsDisplay()->current_display) {
         $facet_source = $source;
+        break;
       }
     }
 
@@ -61,20 +70,18 @@ class FacetBlock extends AreaPluginBase {
       return $build;
     }
     foreach ($this->facetManager->getFacetsByFacetSourceId($facet_source->pluginId) as $id => $facet) {
-      // No need to build the facet if it does not need to be visible.
-      if (($facet->getOnlyVisibleWhenFacetSourceIsVisible() && !$facet->getFacetSource()->isRenderedInCurrentRequest())) {
-        continue;
-      }
-      $config = $facet->getFacetSource()->getDisplay()->getPluginDefinition();
+      /** @var \Drupal\Core\Block\BlockPluginInterface $plugin_block */
+      $plugin_block = $this->blockManager->createInstance('facet_block:' . $facet->id(), []);
 
-      if ($config['view_id'] != $this->view->id() || $config['view_display'] != $this->view->current_display) {
-        continue;
+      // Some blocks might implement access check.
+      $access_result = $plugin_block->access($this->currentUser);
+
+      // Return empty render array if user doesn't have access. $access_result
+      // can be boolean or an AccessResult class.
+      if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
+        return [];
       }
-      $built_facet = $this->facetManager->build($facet);
-      if (in_array('facet-empty', $built_facet[0]['#attributes']['class'])) {
-        continue;
-      }
-      $build['facets'][$id] = $built_facet + [
+      $build['facets'][$id] = $plugin_block->build() + [
         '#weight' => $facet->getWeight(),
       ];
     }
