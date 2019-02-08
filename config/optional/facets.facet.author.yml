@@ -27,7 +27,7 @@ expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 20
 exclude: false
-only_visible_when_facet_source_is_visible: true
+only_visible_when_facet_source_is_visible: false
 processor_configs:
   active_widget_order:
     processor_id: active_widget_order

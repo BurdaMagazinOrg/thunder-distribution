@@ -934,7 +934,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      use_ajax: false
+      use_ajax: true
       filter_groups:
         operator: AND
         groups:
