@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.type
+  module:
+    - facets
+  theme:
+    - thunder_admin
+id: thunder_admin_facet_type
+theme: thunder_admin
+region: content
+weight: -4
+provider: null
+plugin: 'facet_block:type'
+settings:
+  id: 'facet_block:type'
+  label: Type
+  provider: facets
+  label_display: '0'
+  block_id: type
+visibility: {  }

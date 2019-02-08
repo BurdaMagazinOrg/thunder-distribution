@@ -10,7 +10,6 @@ dependencies:
     - config_selector
     - media_entity
     - search_api
-    - thunder
     - user
     - views_bulk_operations
 third_party_settings:
@@ -920,15 +919,6 @@ display:
           empty: false
           content: 'Displaying @start - @end of @total'
           plugin_id: result
-        facet_block:
-          id: facet_block
-          table: views
-          field: facet_block
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          plugin_id: facet_block
       footer: {  }
       empty: {  }
       relationships: {  }

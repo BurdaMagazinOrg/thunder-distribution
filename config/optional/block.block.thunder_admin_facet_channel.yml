@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.channel
+  module:
+    - facets
+  theme:
+    - thunder_admin
+id: thunder_admin_facet_channel
+theme: thunder_admin
+region: content
+weight: -7
+provider: null
+plugin: 'facet_block:channel'
+settings:
+  id: 'facet_block:channel'
+  label: Channel
+  provider: facets
+  label_display: '0'
+  block_id: channel
+visibility: {  }

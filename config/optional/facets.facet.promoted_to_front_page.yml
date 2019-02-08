@@ -18,7 +18,7 @@ widget:
   type: select2
   config:
     show_numbers: true
-    width: 100%
+    width: 10%
     autocomplete: false
     match_operator: CONTAINS
 query_operator: or
@@ -27,7 +27,7 @@ expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 3
 exclude: false
-only_visible_when_facet_source_is_visible: false
+only_visible_when_facet_source_is_visible: true
 processor_configs:
   boolean_item:
     processor_id: boolean_item
