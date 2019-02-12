@@ -18,5 +18,5 @@ settings:
   label: Author
   provider: facets
   label_display: '0'
-  block_id: author
+  block_id: thunder_admin_facet_author
 visibility: {  }

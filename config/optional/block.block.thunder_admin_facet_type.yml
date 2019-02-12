@@ -18,5 +18,5 @@ settings:
   label: Type
   provider: facets
   label_display: '0'
-  block_id: type
+  block_id: thunder_admin_facet_type
 visibility: {  }
