@@ -82,7 +82,7 @@
                 "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-01-17/3026526.patch"
             },
             "drupal/facets": {
-                "Improve performance for taxonomy hierarchical facets": "https://www.drupal.org/files/issues/2019-01-30/3005018-8.patch",
+                "Missing schema for facet blocks": "https://www.drupal.org/files/issues/2019-02-13/3023187-8.patch",
                 "Provide JavaScript API for facet widgets": "https://www.drupal.org/files/issues/2019-02-08/3031581_3.patch"
             },
             "drupal/select2": {
@@ -119,7 +119,7 @@
         "drupal/entity_browser": "1.6",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
-        "drupal/facets": "^1.0",
+        "drupal/facets": "dev-1.x",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
