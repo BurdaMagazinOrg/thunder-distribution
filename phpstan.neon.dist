@@ -1,0 +1,22 @@
+parameters:
+  customRulesetUsed: true
+  reportUnmatchedIgnoredErrors: false
+  # Ignore phpstan-drupal extension's rules.
+  ignoreErrors:
+    - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
+    - '#Plugin definitions cannot be altered.#'
+    - '#Missing cache backend declaration for performance.#'
+    - '#Plugin manager has cache backend specified but does not declare cache tags.#'
+    #TODO: Remove when https://www.drupal.org/project/drupal/issues/2367933 is fixed.
+    - '#Call to deprecated function entity_get_display().#'
+    - '#Call to deprecated function entity_get_form_display().#'
+    #TODO: Remove when https://www.drupal.org/project/drupal/issues/2869573 is fixed.
+    - '#Call to deprecated method prepareLegacyRequest\(\) of class Drupal\\Core\\DrupalKernel.#'
+  autoload_files:
+    - docroot/modules/contrib/token/token.module
+    - docroot/modules/contrib/video_embed_field/modules/video_embed_media/video_embed_media.module
+  fileExtensions:
+    - profile
+includes:
+  - ./vendor/mglaman/phpstan-drupal/extension.neon
+  - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon
