@@ -77,7 +77,7 @@ composer_create_thunder() {
 
 apply_patches() {
     cd ${TEST_DIR}/docroot
-    wget https://www.drupal.org/files/issues/2019-02-05/2975081-2-25.patch
+    wget https://www.drupal.org/files/issues/2019-02-13/2975081-2-46.patch
     patch -p1 < 2975081-2-25.patch
 
     #EXAMPLE:
