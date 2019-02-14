@@ -79,7 +79,8 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
             },
             "drupal/search_api": {
-                "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-01-17/3026526.patch"
+                "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-02-14/3026526-7.patch",
+                "Entity operations should be cached by url": "https://www.drupal.org/files/issues/2019-02-14/3032916.patch"
             },
             "drupal/facets": {
                 "Missing schema for facet blocks": "https://www.drupal.org/files/issues/2019-02-13/3023187-8.patch",
