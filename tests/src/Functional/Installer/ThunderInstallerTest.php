@@ -188,7 +188,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->assertSession()->addressEquals('?tour=1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
-    $this->assertSession()->pageTextContains($this->rootUser->getUsername());
+    $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
     // Ensure demo content is installed.
     $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
