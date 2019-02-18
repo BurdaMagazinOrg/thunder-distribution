@@ -73,6 +73,7 @@ composer_create_thunder() {
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
     composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress
+    composer drupal-scaffold
 }
 
 apply_patches() {

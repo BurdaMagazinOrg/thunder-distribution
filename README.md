@@ -30,6 +30,8 @@ Using open source technology reduces development costs and resources and makes y
 
 ```
 composer create-project burdamagazinorg/thunder-project thunder --no-interaction
+cd thunder
+composer drupal-scaffold
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install).
 
