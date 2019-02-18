@@ -73,7 +73,7 @@ composer_create_thunder() {
     fi
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
 }
 
 apply_patches() {
@@ -97,6 +97,10 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
+
+    # Check for deprecated methods.
+    cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
+    phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder
 fi
 
 # Install Thunder
