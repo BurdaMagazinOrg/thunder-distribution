@@ -14,7 +14,6 @@ parameters:
     - '#Call to deprecated method prepareLegacyRequest\(\) of class Drupal\\Core\\DrupalKernel.#'
   autoload_files:
     - docroot/modules/contrib/token/token.module
-    - docroot/modules/contrib/video_embed_field/modules/video_embed_media/video_embed_media.module
   fileExtensions:
     - profile
 includes:
