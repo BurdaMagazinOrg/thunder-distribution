@@ -505,13 +505,7 @@ views.view.scheduler_scheduled_content:
                     administrator: '0'
                     anonymous: '0'
             relationships:
-              uid:
-                admin_label: author
-                field: uid
-                id: uid
-                plugin_id: standard
-                required: true
-                table: node_field_data
+              uid: 'delete me'
             show_admin_links: false
         overview:
           cache_metadata:
