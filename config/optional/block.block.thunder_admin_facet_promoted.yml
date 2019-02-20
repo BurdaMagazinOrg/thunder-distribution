@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_promoted
 theme: thunder_admin
 region: content
-weight: -2
+weight: 0
 provider: null
 plugin: 'facet_block:promoted_to_front_page'
 settings:

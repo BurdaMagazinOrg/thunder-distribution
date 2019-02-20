@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_tags
 theme: thunder_admin
 region: content
-weight: -6
+weight: -4
 provider: null
 plugin: 'facet_block:tags'
 settings:

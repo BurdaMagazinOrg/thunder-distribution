@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_search_api
+  module:
+    - system
+    - views
+  theme:
+    - thunder_admin
+id: thunder_admin_exposedformcontent_search_apipage_1
+theme: thunder_admin
+region: content
+weight: -6
+provider: null
+plugin: 'views_exposed_filter_block:content_search_api-page_1'
+settings:
+  id: 'views_exposed_filter_block:content_search_api-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /admin/content
+    negate: false
+    context_mapping: {  }

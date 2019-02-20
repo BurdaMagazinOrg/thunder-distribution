@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_status
 theme: thunder_admin
 region: content
-weight: -3
+weight: -1
 provider: null
 plugin: 'facet_block:status'
 settings:

@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_sticky
 theme: thunder_admin
 region: content
-weight: -1
+weight: 1
 provider: null
 plugin: 'facet_block:sticky_at_top_of_lists'
 settings:

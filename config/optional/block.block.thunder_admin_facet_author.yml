@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_author
 theme: thunder_admin
 region: content
-weight: -5
+weight: -3
 provider: null
 plugin: 'facet_block:author'
 settings:

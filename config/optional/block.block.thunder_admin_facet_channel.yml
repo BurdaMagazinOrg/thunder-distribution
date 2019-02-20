@@ -10,7 +10,7 @@ dependencies:
 id: thunder_admin_facet_channel
 theme: thunder_admin
 region: content
-weight: -7
+weight: -5
 provider: null
 plugin: 'facet_block:channel'
 settings:
