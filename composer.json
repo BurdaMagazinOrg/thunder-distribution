@@ -181,7 +181,9 @@
     "require-dev": {
         "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "drupal/config_profile": "^1.0"
+        "drupal/config_profile": "^1.0",
+        "mglaman/phpstan-drupal": "^0.11.1",
+        "phpstan/phpstan-deprecation-rules": "^0.11.0"
     },
     "conflict": {
         "masterminds/html5": "^2.4.0"

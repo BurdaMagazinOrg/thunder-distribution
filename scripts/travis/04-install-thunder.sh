@@ -72,7 +72,7 @@ composer_create_thunder() {
     fi
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" --no-progress
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress
 }
 
 apply_patches() {
@@ -96,6 +96,14 @@ if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
 elif [[ ${INSTALL_METHOD} == "composer" ]]; then
     composer_create_thunder
+
+    # Check for deprecated methods.
+    cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
+    if [[ ${TEST_UPDATE} == "true" ]]; then
+        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/thunder
+    else
+        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder
+    fi
 fi
 
 # Install Thunder
