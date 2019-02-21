@@ -34,6 +34,7 @@ update_thunder() {
 
     cd ${TEST_DIR}/docroot
 
+    drush cr
     # Execute all required updates
     drush updatedb -y
 
