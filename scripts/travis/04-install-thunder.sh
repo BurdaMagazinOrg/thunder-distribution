@@ -22,6 +22,7 @@ update_thunder_mock_deployment() {
     drush -y cex sync
     drush -y sql-drop
     drush -y sql-cli < ${DEPLOYMENT_DUMP_FILE}
+    drush cr
     drush -y updatedb
     drush -y cim sync
 }
