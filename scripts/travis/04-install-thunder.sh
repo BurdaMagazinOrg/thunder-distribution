@@ -36,6 +36,7 @@ update_thunder() {
     cd ${TEST_DIR}/docroot
 
     # Execute all required updates
+    drush cr
     drush updatedb -y
 
     if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
