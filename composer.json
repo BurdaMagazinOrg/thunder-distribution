@@ -80,8 +80,7 @@
             },
             "drupal/search_api": {
                 "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-02-21/3026526-9.patch",
-                "Entity operations should be cached by url": "https://www.drupal.org/files/issues/2019-02-14/3032916.patch",
-                "Facets are lost by Views on keyword search": "https://www.drupal.org/files/issues/2019-02-14/2378945-adjust-to-use-get-query-for-forms-exposed-as-blocks.patch"
+                "Entity operations should be cached by url": "https://www.drupal.org/files/issues/2019-02-14/3032916.patch"
             },
             "drupal/facets": {
                 "Provide JavaScript API for facet widgets": "https://www.drupal.org/files/issues/2019-02-21/3031581-10.patch"
