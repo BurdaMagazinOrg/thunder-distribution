@@ -24,6 +24,9 @@ addons:
     paths:
       - /tmp/thunder-travis-ci
 
+stages:
+  - test
+
 jobs:
   include:
     - stage: test
@@ -33,16 +36,25 @@ jobs:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
 
     - stage: test
-      name: Run tests
+      name: Run tests with composer build
       install:
         - bash -x -e ./scripts/travis/02-before-install.sh
         - bash -x -e ./scripts/travis/04-install-thunder.sh
         - bash -x -e ./scripts/travis/05-setup-tests.sh
       script:
         - bash -x -e ./scripts/travis/06-run-tests.sh
-      env:
-        - INSTALL_METHOD=composer
-        - INSTALL_METHOD=drush_make
+      env: INSTALL_METHOD=composer
+
+    - stage: test
+      name: Run tests with drush_make build
+      install:
+        - bash -x -e ./scripts/travis/02-before-install.sh
+        - bash -x -e ./scripts/travis/04-install-thunder.sh
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
+      script:
+        - bash -x -e ./scripts/travis/06-run-tests.sh
+      env: INSTALL_METHOD=drush_make
+
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
