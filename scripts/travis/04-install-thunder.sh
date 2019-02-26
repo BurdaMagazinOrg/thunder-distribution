@@ -104,6 +104,9 @@ create_testing_dump() {
 }
 
 
+
+
+
 # If we test update, we also need the previous version of thunder downloaded
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
