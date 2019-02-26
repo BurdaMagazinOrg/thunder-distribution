@@ -29,14 +29,20 @@ addons:
     paths:
       - /tmp/thunder-travis-ci
 
+stages:
+  - code quality
+  - test
+
 jobs:
   include:
     - stage: code quality
+      name: Verify makefile, check coding standards
       install: skip
       script:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
 
     - stage: test
+      name: Run tests
       install:
         - bash -x -e ./scripts/travis/04-install-thunder.sh
         - bash -x -e ./scripts/travis/05-setup-tests.sh
