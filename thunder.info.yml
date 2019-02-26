@@ -1,7 +1,10 @@
 name: Thunder
 type: profile
 description: 'The Drupal8 based CMS for professional publishing.'
+project: thunder
 core: 8.x
+version: '8.x-2.35'
+
 distribution:
   name: Thunder
   install:
@@ -87,5 +90,3 @@ themes:
   - seven
   - thunder_base
   - thunder_admin
-version: '8.x-2.34'
-project: thunder
