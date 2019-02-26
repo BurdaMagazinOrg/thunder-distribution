@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ${THUNDER_DIST_DIR}/scripts/travis/functions.sh
+
 # Clear drush release history cache, to pick up new releases.
 rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
 

@@ -3,7 +3,7 @@
 ## Setup environment
 # add composer's global bin directory to the path
 # see: https://github.com/drush-ops/drush#install---composer
-export THUNDER_DIST_DIR=`echo $(pwd)`
+export THUNDER_DIST_DIR=`echo $(pwd -P)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
 export PATH="$TEST_DIR/bin:$HOME/.composer/vendor/bin:$PATH"
 export TEST_INSTALLER="false"

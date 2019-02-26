@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ${THUNDER_DIST_DIR}/scripts/travis/functions.sh
+
 # Install drupalorg_drush module
 drush dl drupalorg_drush-7.x
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
