@@ -87,3 +87,5 @@ themes:
   - seven
   - thunder_base
   - thunder_admin
+version: '8.x-2.34'
+project: thunder
