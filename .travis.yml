@@ -12,7 +12,7 @@ php:
 env:
   matrix:
     - INSTALL_METHOD=composer
-#    - INSTALL_METHOD=drush_make
+    - INSTALL_METHOD=drush_make
 
 dist: xenial
 
