@@ -12,7 +12,7 @@ php:
 env:
   matrix:
     - INSTALL_METHOD=composer
-    - INSTALL_METHOD=drush_make
+#    - INSTALL_METHOD=drush_make
 
 dist: xenial
 
@@ -39,7 +39,6 @@ jobs:
     - stage: test
       install:
         - bash -x -e ./scripts/travis/04-install-thunder.sh
-      before_script:
         - bash -x -e ./scripts/travis/05-setup-tests.sh
       script:
         - bash -x -e ./scripts/travis/06-run-tests.sh
