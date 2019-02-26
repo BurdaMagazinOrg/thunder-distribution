@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-# Download thunder from drupal.org with drush
-drush_download_thunder() {
-    DOWNLOAD_PATH=$1
-
-    mkdir -p $DOWNLOAD_PATH
-    cd $DOWNLOAD_PATH
-    drush dl thunder --drupal-project-rename="docroot" -y
-    composer install --working-dir=${DOWNLOAD_PATH}/docroot
-}
 
 # Install Drush and drupalorg_drush module
 composer global require drush/drush:^8.1 drupal/coder
@@ -46,9 +37,3 @@ mkdir -p ${TEST_DIR}
 
 # Clear drush release history cache, to pick up new releases.
 rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
-
-# If we test update, we also need the previous version of thunder downloaded
-if [[ ${TEST_UPDATE} == "true" ]]; then
-    # Download latest release from drupal.org
-    drush_download_thunder $UPDATE_BASE_PATH
-fi

@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Download thunder from drupal.org with drush
+drush_download_thunder() {
+    DOWNLOAD_PATH=$1
+
+    mkdir -p $DOWNLOAD_PATH
+    cd $DOWNLOAD_PATH
+    drush dl thunder --drupal-project-rename="docroot" -y
+    composer install --working-dir=${DOWNLOAD_PATH}/docroot
+}
 
 # Install thunder and enable Test module
 # in provided folder
@@ -93,6 +102,14 @@ create_testing_dump() {
 
     php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
 }
+
+
+# If we test update, we also need the previous version of thunder downloaded
+if [[ ${TEST_UPDATE} == "true" ]]; then
+    # Download latest release from drupal.org
+    drush_download_thunder $UPDATE_BASE_PATH
+fi
+
 # Build current revision of thunder
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
