@@ -103,16 +103,6 @@ create_testing_dump() {
     php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
 }
 
-
-
-
-
-# If we test update, we also need the previous version of thunder downloaded
-if [[ ${TEST_UPDATE} == "true" ]]; then
-    # Download latest release from drupal.org
-    drush_download_thunder $UPDATE_BASE_PATH
-fi
-
 # Build current revision of thunder
 if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
     drush_make_thunder
@@ -130,6 +120,8 @@ fi
 
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then
+    # Download latest release from drupal.org
+    drush_download_thunder $UPDATE_BASE_PATH
     # Install last drupal org version and update to currently tested version
     install_thunder ${UPDATE_BASE_PATH}/docroot
     update_thunder
