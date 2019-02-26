@@ -27,7 +27,7 @@ addons:
 jobs:
   include:
     - stage: test
-      name: Verify makefile, check coding standards
+      name: Verify makefile, check coding standards, check for deprecated code
       install: skip
       script:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
@@ -58,5 +58,4 @@ jobs:
 before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
-  - source ./scripts/travis/functions.sh
   - bash -x -e ./scripts/travis/01-setup-environment-2.sh

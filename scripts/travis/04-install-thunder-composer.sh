@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+pwd
+
 composer_create_thunder
 
 # Install Thunder
