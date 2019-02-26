@@ -27,11 +27,10 @@ addons:
 stages:
   - test
 
-strawberry: &strawberry
+test_run: &test_run
   stage: test
-  before_install:
-    - bash -x -e ./scripts/travis/02-before-install.sh
   install:
+    - bash -x -e ./scripts/travis/02-before-install.sh
     - bash -x -e ./scripts/travis/04-install-thunder.sh
     - bash -x -e ./scripts/travis/05-setup-tests.sh
   script:
@@ -45,14 +44,12 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
 
-    - <<: *strawberry
+    - <<: *test_run
       env: INSTALL_METHOD=composer
       name: Run tests with composer build
-    - <<: *strawberry
+    - <<: *test_run
       env: INSTALL_METHOD=drush_make
       name: Run tests with drush_make build
-
-
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
