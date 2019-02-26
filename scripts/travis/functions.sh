@@ -102,33 +102,3 @@ create_testing_dump() {
 
     php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
 }
-
-# Build current revision of thunder
-if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    drush_make_thunder
-elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    composer_create_thunder
-
-    # Check for deprecated methods.
-    cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
-    if [[ ${TEST_UPDATE} == "true" ]]; then
-        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/thunder
-    else
-        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder
-    fi
-fi
-
-# Install Thunder
-if [[ ${TEST_UPDATE} == "true" ]]; then
-    # Download latest release from drupal.org
-    drush_download_thunder $UPDATE_BASE_PATH
-    # Install last drupal org version and update to currently tested version
-    install_thunder ${UPDATE_BASE_PATH}/docroot
-    update_thunder
-else
-    install_thunder ${TEST_DIR}/docroot
-fi
-
-create_testing_dump
-
-apply_patches

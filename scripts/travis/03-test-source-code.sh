@@ -16,3 +16,10 @@ if ! [ -x "$(command -v eslint)" ]; then
     npm install -g eslint
 fi
 eslint .
+
+# Build docroot
+composer_create_thunder
+
+# Check for deprecated methods.
+cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
+phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder

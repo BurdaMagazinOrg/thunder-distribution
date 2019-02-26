@@ -19,6 +19,3 @@ phpenv rehash
 # Prepare test directory
 cd $TRAVIS_BUILD_DIR
 mkdir -p ${TEST_DIR}
-
-# Clear drush release history cache, to pick up new releases.
-rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*

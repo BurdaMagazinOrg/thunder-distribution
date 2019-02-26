@@ -18,10 +18,6 @@ else
 fi
 export TEST_UPDATE;
 
-# Flag used to define if test should run deployment workflow
-export TEST_DEPLOYMENT="true"
-export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
-
 # base path for update tests
 export UPDATE_BASE_PATH=${TEST_DIR}-update-base
 
@@ -35,6 +31,16 @@ export PHP_YAML_VERSION="2.0.4"
 if [[ ${INSTALL_METHOD} == "" ]]; then
   export INSTALL_METHOD=composer
 fi;
+
+# Flag used to define if test should run deployment workflow
+if [[ ${INSTALL_METHOD} == "composer" ]]; then
+  TEST_DEPLOYMENT="true"
+
+else
+    TEST_DEPLOYMENT=""
+fi
+export TEST_DEPLOYMENT;
+export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
 # your commit message:
