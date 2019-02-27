@@ -31,7 +31,7 @@ jobs:
       env: INSTALL_METHOD=composer
       before_script: true
       script:
-        - bash -x -e ./scripts/travis/03-test-source-code.sh
+        - bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: test
       name: Run tests with composer build
