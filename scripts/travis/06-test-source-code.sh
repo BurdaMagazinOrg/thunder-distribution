@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+pwd
+
 # run phpcs
 phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 # Ignore check of .md files, because they should be able to contain more then 80 characters per line.

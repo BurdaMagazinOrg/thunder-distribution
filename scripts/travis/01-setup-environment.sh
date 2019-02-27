@@ -6,7 +6,6 @@
 export THUNDER_DIST_DIR=`echo $(pwd -P)`
 export TEST_DIR=`echo ${THUNDER_DIST_DIR}"/../test-dir"`
 export PATH="$TEST_DIR/bin:$HOME/.composer/vendor/bin:$PATH"
-export TEST_INSTALLER="false"
 export MINK_DRIVER_ARGS_WEBDRIVER='["chrome", null, "http://localhost:4444/wd/hub"]'
 
 # base path for update tests
