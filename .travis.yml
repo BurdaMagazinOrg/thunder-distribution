@@ -28,21 +28,18 @@ jobs:
   include:
     - stage: test
       name: Verify makefile, check coding standards, check for deprecated code
+      env: INSTALL_METHOD=composer
       before_script: true
       script:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
 
     - stage: test
       name: Run tests with composer build
-      install:
-        - bash -x -e ./scripts/travis/02-before-install.sh
-        - bash -x -e ./scripts/travis/03-download-thunder-composer.sh
+      env: INSTALL_METHOD=composer
 
     - stage: test
       name: Run tests with drush_make build
-      install:
-        - bash -x -e ./scripts/travis/02-before-install.sh
-        - bash -x -e ./scripts/travis/03-download-thunder-drush.sh
+      env: INSTALL_METHOD=drush_make
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
@@ -52,7 +49,8 @@ before_install:
   - source ./scripts/travis/functions.sh
   - bash -x -e ./scripts/travis/01-setup-environment-2.sh
 
-install: true
+install:
+  - bash -x -e ./scripts/travis/03-download-thunder.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
