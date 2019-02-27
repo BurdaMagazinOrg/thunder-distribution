@@ -2,8 +2,6 @@
 
 source ${THUNDER_DIST_DIR}/scripts/travis/functions.sh
 
-composer_create_thunder
-
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
@@ -15,6 +13,3 @@ else
     install_thunder ${TEST_DIR}/docroot
 fi
 
-create_testing_dump
-
-apply_patches

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+create_testing_dump
+
+apply_patches
+
 # Rebuild caches and start servers
 cd ${TEST_DIR}/docroot
 
