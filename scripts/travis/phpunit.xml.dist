@@ -29,7 +29,7 @@
     <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
     <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
     <!-- To disable deprecation testing uncomment the next line. -->
-    <!--  <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak_vendors"/>  -->
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
     <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["chrome", null, "http://localhost:4444/wd/hub"]'/>
 
     <!-- Example for changing the driver class for mink tests MINK_DRIVER_CLASS value: 'Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver' -->

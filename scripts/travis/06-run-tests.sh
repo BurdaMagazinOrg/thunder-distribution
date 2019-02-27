@@ -18,7 +18,7 @@ fi
 
 # disable configuration testing for update test path
 if [[ ${TEST_UPDATE} != "true" ]]; then
-    thunderDumpFile=thunder.php php ${TEST_DIR}/vendor/phpunit/phpunit/phpunit ${THUNDER_DIST_DIR}/tests --stop-on-failure --group ThunderConfig
+    thunderDumpFile=thunder.php php ${TEST_DIR}/vendor/brianium/paratest/bin/paratest ${THUNDER_DIST_DIR}/tests --stop-on-failure --group ThunderConfig
 fi
 
 # execute Drupal tests
