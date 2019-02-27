@@ -41,6 +41,12 @@ jobs:
       name: Run tests with drush_make build
       env: INSTALL_METHOD=drush_make
 
+    - stage: test
+      name: Run update test
+      env: INSTALL_METHOD=drush_make
+      if: commit_message =~ ^\[TEST_UPDATE\]
+
+
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
