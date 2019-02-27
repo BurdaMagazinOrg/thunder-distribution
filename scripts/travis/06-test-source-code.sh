@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+cd ${THUNDER_DIST_DIR}
 # Install drupalorg_drush module
 drush dl drupalorg_drush-7.x
 # verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
@@ -18,5 +19,6 @@ fi
 eslint .
 
 # Check for deprecated methods.
+cd ${TEST_DIR}
 cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
 phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder

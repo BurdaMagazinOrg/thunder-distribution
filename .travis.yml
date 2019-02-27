@@ -47,7 +47,7 @@ before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
   - source ./scripts/travis/functions.sh
-  - bash -x -e ./scripts/travis/01-setup-environment-2.sh
+  - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
   - bash -x -e ./scripts/travis/03-download-thunder.sh
