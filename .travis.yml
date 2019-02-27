@@ -28,6 +28,7 @@ jobs:
   include:
     - stage: test
       name: Verify makefile, check coding standards, check for deprecated code
+      before_script: true
       script:
         - bash -x -e ./scripts/travis/03-test-source-code.sh
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ${THUNDER_DIST_DIR}/scripts/travis/functions.sh
+
 create_testing_dump
 
 apply_patches
