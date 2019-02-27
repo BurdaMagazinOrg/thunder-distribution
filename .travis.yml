@@ -23,6 +23,12 @@ addons:
     region: eu-west-1
     paths:
       - /tmp/thunder-travis-ci
+  apt:
+    sources:
+      - mysql-8.0-xenial
+    packages:
+      - mysql-server
+      - mysql-client
 
 jobs:
   include:

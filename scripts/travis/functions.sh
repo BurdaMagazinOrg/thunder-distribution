@@ -100,5 +100,5 @@ apply_patches() {
 create_testing_dump() {
     cd ${TEST_DIR}/docroot
 
-    php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
+    php ./core/scripts/db-tools.php dump-database-d8-mysql > thunder.php
 }
