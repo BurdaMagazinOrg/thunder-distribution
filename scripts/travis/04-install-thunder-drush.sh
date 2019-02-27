@@ -21,3 +21,6 @@ fi
 create_testing_dump
 
 apply_patches
+
+# require development packages needed for testing
+composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot

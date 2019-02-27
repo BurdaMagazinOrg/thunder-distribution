@@ -3,11 +3,6 @@
 # Rebuild caches and start servers
 cd ${TEST_DIR}/docroot
 
-# require development packages needed for testing
-if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
-fi
-
 # Final cache rebuild, to make sure every code change is respected
 drush cr
 

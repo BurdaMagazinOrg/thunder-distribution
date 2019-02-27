@@ -27,19 +27,8 @@ export PHP_IMAGICK_VERSION="3.4.3"
 # Set version for Yaml PHP library
 export PHP_YAML_VERSION="2.0.4"
 
-# Set a default install method if none set.
-if [[ ${INSTALL_METHOD} == "" ]]; then
-  export INSTALL_METHOD=composer
-fi;
-
 # Flag used to define if test should run deployment workflow
-if [[ ${INSTALL_METHOD} == "composer" ]]; then
-  TEST_DEPLOYMENT="true"
-
-else
-    TEST_DEPLOYMENT=""
-fi
-export TEST_DEPLOYMENT;
+export TEST_DEPLOYMENT="true";
 export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
 
 # Manual overrides of environment variables by commit messages. To override a variable add something like this to
@@ -47,10 +36,10 @@ export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
 # git commit -m "Your commit message [TEST_UPDATE=true]"
 #
 # To override multiple variables us something like this:
-# git commit -m "Your other commit message [TEST_UPDATE=true|INSTALL_METHOD=composer]"
+# git commit -m "Your other commit message [TEST_UPDATE=true|TEST_INSTALLER=true]"
 if [[ ${TRAVIS_EVENT_TYPE} == "pull_request" ]]; then
     # These are the variables, that are allowed to be overridden
-    ALLOWED_VARIABLES=("TEST_UPDATE" "INSTALL_METHOD" "TEST_INSTALLER")
+    ALLOWED_VARIABLES=("TEST_UPDATE" "TEST_INSTALLER")
     COMMIT_MESSAGE=$(git log --no-merges -1 --pretty="%B")
     for VARIABLE_NAME in "${ALLOWED_VARIABLES[@]}"
     do
