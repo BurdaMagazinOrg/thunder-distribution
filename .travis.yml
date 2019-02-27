@@ -11,9 +11,6 @@ php:
 
 dist: xenial
 
-services:
-  - mysql
-
 branches:
   only:
     - /^8\.x\-[0-9]+\.x$/
