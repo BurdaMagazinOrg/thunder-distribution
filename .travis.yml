@@ -44,6 +44,10 @@ jobs:
     - stage: test
       name: Run tests with drush_make build
       env: INSTALL_METHOD=drush_make
+      install:
+        # Install Drush
+        - composer global require drush/drush:^8.1
+        - bash -x -e ./scripts/travis/03-download-thunder.sh
 
     - stage: test
       name: Run update test
