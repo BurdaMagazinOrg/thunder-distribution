@@ -18,13 +18,12 @@ fi
 
 # disable configuration testing for update test path
 if [[ ${TEST_UPDATE} != "true" ]]; then
-    thunderDumpFile=thunder.php paratest --phpunit=/home/travis/build/BurdaMagazinOrg/thunder-distribution/../test-dir/bin/phpunit ${THUNDER_DIST_DIR}/tests --colors --functional --group ThunderConfig
+    thunderDumpFile=thunder.php paratest --phpunit=/home/travis/build/BurdaMagazinOrg/thunder-distribution/../test-dir/bin/phpunit ${THUNDER_DIST_DIR}/tests --runner WrapperRunner -p2 --group ThunderConfig
 fi
 
 # execute Drupal tests
 thunderDumpFile=thunder.php paratest --phpunit=/home/travis/build/BurdaMagazinOrg/thunder-distribution/../test-dir/bin/phpunit ${THUNDER_DIST_DIR}/tests --runner WrapperRunner -p2 --group Thunder,thunder_updater
 
 if [[ ${TEST_UPDATE} == "true" || ${TEST_INSTALLER} == "true" ]]; then
-    php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerTest"
-    php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerGermanTest"
+    thunderDumpFile=thunder.php paratest --phpunit=/home/travis/build/BurdaMagazinOrg/thunder-distribution/../test-dir/bin/phpunit ${THUNDER_DIST_DIR}/tests --runner WrapperRunner -p2 --group ThunderInstaller
 fi
