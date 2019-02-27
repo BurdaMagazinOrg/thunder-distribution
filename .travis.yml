@@ -29,6 +29,10 @@ jobs:
     - stage: test
       name: Verify makefile, check coding standards, check for deprecated code
       env: INSTALL_METHOD=composer
+      install:
+        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
+        - drush dl drupalorg_drush-7.x && drush verify-makefile
+        - bash -x -e ./scripts/travis/03-download-thunder.sh
       before_script: true
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
@@ -43,8 +47,8 @@ jobs:
 
     - stage: test
       name: Run update test
-      env: INSTALL_METHOD=drush_make
-      if: commit_message =~ ^\[TEST_UPDATE\]
+      env: INSTALL_METHOD=composer TEST_UPDATE=true
+      if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
 
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
@@ -52,7 +56,6 @@ jobs:
 before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
-  - source ./scripts/travis/functions.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
