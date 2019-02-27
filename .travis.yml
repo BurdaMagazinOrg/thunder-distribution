@@ -30,6 +30,8 @@ jobs:
       name: Verify makefile, check coding standards, check for deprecated code
       env: INSTALL_METHOD=composer
       install:
+        # Install Drush
+        - composer global require drush/drush:^8.1
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
         - bash -x -e ./scripts/travis/03-download-thunder.sh
