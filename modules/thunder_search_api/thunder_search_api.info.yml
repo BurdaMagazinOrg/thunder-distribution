@@ -1,0 +1,7 @@
+name: 'Thunder Search Api'
+description: 'Provide search_api integration for thunder.'
+type: module
+core: 8.x
+dependencies:
+  - search_api:search_api
+package: Thunder
