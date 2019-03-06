@@ -79,7 +79,7 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
             },
             "drupal/search_api": {
-                "SearchApiTagCache::getRowId is very expensive": "https://www.drupal.org/files/issues/2019-02-21/3026526-9.patch"
+                "SearchApi combined patches": "https://www.drupal.org/files/issues/2019-02-22/3026526-9and3034996-4_combined.patch"
             },
             "drupal/facets": {
                 "Provide JavaScript API for facet widgets": "https://www.drupal.org/files/issues/2019-02-21/3031581-10.patch"
