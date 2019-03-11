@@ -40,6 +40,16 @@ Using open source technology reduces development costs and resources and makes y
 
 *[More information about the modules used in Thunder](https://burdamagazinorg.github.io/thunder-documentation/modules)*
 
+## Support
+For general help using Thunder, please refer to [the official Thunder documentation](https://burdamagazinorg.github.io/thunder-documentation).
+
+### Community support
+For additional help, you can use one of this channel to ask question:
+
+* [Slack](https://thunder.org/contact-us) (highly recommended for faster support)
+* [Twitter](https://twitter.com/ThunderCoreTeam)
+* [Facebook](https://www.facebook.com/Thunder-CMS-168018513979183/).
+
 ## Contributing
 If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
 
