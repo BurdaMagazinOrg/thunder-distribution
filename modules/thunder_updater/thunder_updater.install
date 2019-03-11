@@ -69,8 +69,7 @@ function thunder_updater_update_8001() {
       }
     }
 
-    $table_name = $database->getFullQualifiedTableName('thunder_updater_update');
-    $thunder_updater_updates = $database->query("SELECT * FROM {$table_name};")->fetchAll(PDO::FETCH_ASSOC);
+    $thunder_updater_updates = $database->query('SELECT * FROM {thunder_updater_update};')->fetchAll(PDO::FETCH_ASSOC);
     foreach ($thunder_updater_updates as $thunder_updater_update) {
       $thunder_updater_update['id'] = 'thunder:' . $thunder_updater_update['id'];
 
