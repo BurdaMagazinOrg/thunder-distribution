@@ -4,7 +4,7 @@
 cd ${TEST_DIR}/docroot
 
 # Make simple export import
-if [[ "${TEST_UPDATE}" != "true" && "${TEST_DEPLOYMENT}" == "true" ]]; then
+if [[ "${TEST_UPDATE}" != "true" ]]; then
     drush -y cex sync
 
     # We have to use "2>&1" because drush outputs everything to stderr
@@ -22,7 +22,7 @@ fi
 # execute Drupal tests
 thunderDumpFile=thunder.php php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 Thunder,thunder_updater
 
-if [[ ${TEST_UPDATE} == "true" || ${TEST_INSTALLER} == "true" ]]; then
+if [[ ${TEST_UPDATE} == "true" ]]; then
     php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerTest"
     php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerGermanTest"
 fi

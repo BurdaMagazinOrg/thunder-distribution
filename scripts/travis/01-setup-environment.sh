@@ -17,6 +17,4 @@ export PHP_IMAGICK_VERSION="3.4.3"
 # Set version for Yaml PHP library
 export PHP_YAML_VERSION="2.0.4"
 
-# Flag used to define if test should run deployment workflow
-export TEST_DEPLOYMENT="true";
 export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"

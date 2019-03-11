@@ -53,7 +53,7 @@ jobs:
 
     - stage: test
       name: Run update test
-      env: INSTALL_METHOD=composer TEST_UPDATE=true
+      env: INSTALL_METHOD=composer TEST_UPDATE=true TEST_DEPLOYMENT=true
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
       install:
         # Install Drush
