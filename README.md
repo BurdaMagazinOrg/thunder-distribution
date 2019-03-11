@@ -13,7 +13,7 @@ To start quickly, run this in your terminal to install Thunder from command line
 
 ```
 composer create-project burdamagazinorg/thunder-project thunder --no-interaction
-cd thunder
+cd thunder/docroot
 php core/scripts/drupal quick-start thunder
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
@@ -52,9 +52,6 @@ For additional help, you can use one of this channel to ask question:
 
 ## Contributing
 If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
-
-## Documentation
-For more detailed information, please take a look at [https://burdamagazinorg.github.io/thunder-documentation/](https://burdamagazinorg.github.io/thunder-documentation/).
 
 ## Development
 For information on the installation and development of Thunder, please take a look at [docs/development.md](docs/development.md).
