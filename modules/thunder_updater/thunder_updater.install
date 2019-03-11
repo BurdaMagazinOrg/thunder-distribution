@@ -33,7 +33,9 @@ function thunder_updater_update_8001() {
   $database = \Drupal::database();
 
   // Existing module states should be preserved!
-  $has_thunder_updater_checklist = $module_handler->moduleExists('checklistapi');
+  $has_thunder_updater_checklist =
+    $module_handler->moduleExists('checklistapi')
+    && !empty($config_factory->get('checklistapi.progress.thunder_updater')->getRawData());
 
   // Migrate existing Thunder update entities and checklist config.
   if ($has_thunder_updater_checklist) {
