@@ -50,7 +50,7 @@ function thunder_updater_update_8001() {
       $update_logger->warning('Unable to install "update_helper_checklist".');
     }
 
-    // We do not need entities created on "update_helper_checklist" install.
+    // Remove update entities created on "update_helper_checklist" install.
     /** @var \Drupal\update_helper_checklist\Entity\Update[] $all_updates */
     $all_updates = Update::loadMultiple();
     foreach ($all_updates as $update) {
