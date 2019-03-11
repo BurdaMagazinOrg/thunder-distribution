@@ -18,8 +18,6 @@ php core/scripts/drupal quick-start thunder
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
 
-If you don't want to use Composer, you can install Thunder the traditional way by downloading a tarball from our [drupal.org](https://www.drupal.org/project/thunder) project page, but we do **not** recommend it.
-
 ## Feature Highlights
 ### <img src="./files/images/story_fireplace_b.png" alt="Storytelling" width="2%"/> Storytelling
 Create thrilling articles with multimedia content. It’s easy to enrich your article with pictures, video, and social media snippets and arrange everything as you like it.
