@@ -1076,12 +1076,24 @@ function thunder_update_8130() {
 }
 
 /**
- * Update configurations related to previously used Thunder Updater.
+ * Change the base table of the scheduler view.
  */
 function thunder_update_8131() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder', 'thunder_update_8131');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8131');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Update configurations related to previously used Thunder Updater.
+ */
+function thunder_update_8132() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder_update_8132');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
