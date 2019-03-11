@@ -24,10 +24,10 @@ function thunder_article_post_update_move_scheduler_to_content_list() {
     if ($view) {
       $view->set('id', 'locked_content_old');
       $view->save();
-      $updater->logger()->alert('The locked content view was renamed to views.view.locked_content_old.');
+      $updateLogger->alert('The locked content view was renamed to views.view.locked_content_old.');
     }
     if ($config_update->import('view', 'locked_content')) {
-      $updater->logger()->info('The new locked content view was imported as views.view.locked_content.');
+      $updateLogger->info('The new locked content view was imported as views.view.locked_content.');
 
       try {
         /** @var \Drupal\update_helper_checklist\UpdateChecklist $updateChecklist */

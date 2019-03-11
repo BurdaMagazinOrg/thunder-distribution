@@ -114,7 +114,7 @@ function thunder_liveblog_update_8102() {
   }
 
   // Output logged messages to related channel of update execution.
-  return $updater->logger()->output();
+  return $updateLogger->output();
 }
 
 /**

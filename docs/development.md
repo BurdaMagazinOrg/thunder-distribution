@@ -160,7 +160,7 @@ All text logged as as INFO, will be outputted as success in `drush` output.
   return $updateLogger->output();
 ```
 
-Other way to get UpdateLogger is from Thunder Updater service.
+Other way to get UpdateLogger is from Update Helper Updater service.
 ```php
   // Get service from Thunder Updater service.
   /** @var \Drupal\update_helper\Updater $updater */
