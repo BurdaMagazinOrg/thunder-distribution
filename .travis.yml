@@ -26,6 +26,7 @@ addons:
 
 stages:
   - sanity_checks
+    name: Sanity checks
   - test
 
 jobs:
