@@ -146,12 +146,12 @@
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
-        "bower-asset/dropzone": "^5.1",
-        "bower-asset/exif-js": "^2.3.0",
-        "bower-asset/blazy": "^1.6.0",
-        "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24",
-        "bower-asset/select2": "4.0.4"
+        "npm-asset/dropzone": "^5.5",
+        "npm-asset/exif-js": "^2.3.0",
+        "npm-asset/blazy": "^1.8",
+        "npm-asset/slick-carousel": "^1.8",
+        "npm-asset/shariff": "^3.1",
+        "npm-asset/select2": "4.0.4"
     },
     "replace": {
         "bower-asset/jquery": "*",
