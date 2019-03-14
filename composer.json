@@ -77,6 +77,9 @@
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
+            },
+            "drupal/shariff": {
+                "Support Shariff 3 over composer npm-asset": "https://www.drupal.org/files/issues/2019-03-13/3039848-3.patch"
             }
         }
     },
@@ -154,14 +157,10 @@
         "npm-asset/select2": "4.0.4"
     },
     "replace": {
-        "bower-asset/jquery": "*",
-        "bower-asset/jqueryui": "*",
-        "bower-asset/backbone": "*",
-        "bower-asset/underscore": "*",
         "npm-asset/jquery": "*",
-        "npm-asset/jqueryui": "*",
-        "npm-asset/backbone": "*",
-        "npm-asset/underscore": "*"
+        "npm-asset/jquery-mousewheel": "*",
+        "npm-asset/almond": "*",
+        "npm-asset/fortawesome--fontawesome-free-webfonts": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
