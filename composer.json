@@ -20,8 +20,8 @@
             "email": "volker.killesreiter@burda.com"
         },
         {
-            "name": "Timo Welde",
-            "email": "welde@galaniprojects.de"
+            "name": "Alex Pott",
+            "email": "alex.a.pott@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -157,7 +157,6 @@
         "npm-asset/underscore": "*"
     },
     "require-dev": {
-        "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",
