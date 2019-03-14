@@ -284,3 +284,11 @@ v2.34:
         '#title': 'Change the base table of the scheduler view.'
         '#description': '<p>The old scheduler view was based on the node table. That means, scheduled drafts are not shown in the view. Because drafts are not the default revision of a node.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v2.36:
+    '#title': 'Update to Thunder 2.36'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8132:
+        '#title': 'Update image and video browser views configuration.'
+        '#description': '<p>Change div to span in field override, use type id instead of label for css class.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of image and video browser views configuration has failed.</strong><p>'
