@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
+namespace Drupal\thunder_install\Plugin\thunder_install\OptionalModule;
 
 /**
  * Facebook Instant Articles.

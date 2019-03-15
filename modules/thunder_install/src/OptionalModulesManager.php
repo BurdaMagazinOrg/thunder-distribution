@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder;
+namespace Drupal\thunder_install;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -24,14 +24,14 @@ class OptionalModulesManager extends DefaultPluginManager {
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     parent::__construct(
-      'Plugin/Thunder/OptionalModule',
+      'Plugin/thunder_install/OptionalModule',
       $namespaces,
       $module_handler,
-      'Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule',
-      'Drupal\thunder\Annotation\ThunderOptionalModule'
+      'Drupal\thunder_install\Plugin\thunder_install\OptionalModule\AbstractOptionalModule',
+      'Drupal\thunder_install\Annotation\ThunderOptionalModule'
     );
-    $this->alterInfo('thunder_optional_module_info');
-    $this->setCacheBackend($cache_backend, 'thunder_optional_module_plugins');
+    $this->alterInfo('thunder_install_optional_module_info');
+    $this->setCacheBackend($cache_backend, 'thunder_install_optional_module_plugins');
 
   }
 

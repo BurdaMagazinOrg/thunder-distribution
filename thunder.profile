@@ -26,23 +26,43 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
  * Implements hook_install_tasks().
  */
 function thunder_install_tasks(&$install_state) {
-
-  $tasks = [
-    'thunder_module_configure_form' => [
-      'display_name' => t('Configure additional modules'),
-      'type' => 'form',
-      'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ],
-    'thunder_module_install' => [
-      'display_name' => t('Install additional modules'),
-      'type' => 'batch',
-    ],
-    'thunder_finish_installation' => [
-      'display_name' => t('Finish installation'),
-    ],
-  ];
-
+  $tasks = [];
+  if (empty($install_state['config_install_path'])) {
+    $tasks = [
+      'thunder_module_configure_form' => [
+        'display_name' => t('Configure additional modules'),
+        'type' => 'form',
+        'function' => 'Drupal\thunder_install\Installer\Form\ModuleConfigureForm',
+      ],
+      'thunder_module_install' => [
+        'display_name' => t('Install additional modules'),
+        'type' => 'batch',
+      ],
+      'thunder_finish_installation' => [
+        'display_name' => t('Finish installation'),
+      ],
+    ];
+  }
   return $tasks;
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function thunder_install_tasks_alter(&$tasks, $install_state) {
+  if (!empty($install_state['config_install_path'])) {
+    return;
+  }
+  $key = array_search('install_install_profile', array_keys($tasks), TRUE);
+
+  $config_tasks['thunder_module_configure_form'] = $tasks['thunder_module_configure_form'];
+  $config_tasks['thunder_module_install'] = $tasks['thunder_module_install'];
+  unset($tasks['thunder_module_configure_form']);
+  unset($tasks['thunder_module_install']);
+
+  $tasks = array_slice($tasks, 0, $key, TRUE) +
+    $config_tasks +
+    array_slice($tasks, $key, NULL, TRUE);
 }
 
 /**
@@ -86,7 +106,7 @@ function thunder_module_install(array &$install_state) {
 function _thunder_install_module_batch($module, $module_name, $form_values, &$context) {
   set_time_limit(0);
 
-  $optionalModulesManager = \Drupal::service('plugin.manager.thunder.optional_modules');
+  $optionalModulesManager = \Drupal::service('plugin.manager.thunder_install.optional_modules');
 
   try {
     $definition = $optionalModulesManager->getDefinition($module_name);

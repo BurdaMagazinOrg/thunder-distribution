@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Annotation;
+namespace Drupal\thunder_install\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 

@@ -17,6 +17,7 @@ dependencies:
   - media_entity:media_entity
   - drupal:node
   - drupal:views
+  - thunder:thunder_install
 
 install:
   # core

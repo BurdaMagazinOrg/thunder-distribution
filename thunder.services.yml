@@ -1,4 +1,0 @@
-services:
-  plugin.manager.thunder.optional_modules:
-    class: Drupal\thunder\OptionalModulesManager
-    parent: default_plugin_manager

@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\thunder\Installer\Form;
+namespace Drupal\thunder_install\Installer\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder\OptionalModulesManager;
+use Drupal\thunder_install\OptionalModulesManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,7 +16,7 @@ class ModuleConfigureForm extends ConfigFormBase {
   /**
    * The plugin manager.
    *
-   * @var \Drupal\thunder\OptionalModulesManager
+   * @var \Drupal\thunder_install\OptionalModulesManager
    */
   protected $optionalModulesManager;
 
@@ -25,7 +25,7 @@ class ModuleConfigureForm extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
-   * @param \Drupal\thunder\OptionalModulesManager $optionalModulesManager
+   * @param \Drupal\thunder_install\OptionalModulesManager $optionalModulesManager
    *   The factory for configuration objects.
    */
   public function __construct(ConfigFactoryInterface $config_factory, OptionalModulesManager $optionalModulesManager) {
@@ -41,7 +41,7 @@ class ModuleConfigureForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('plugin.manager.thunder.optional_modules')
+      $container->get('plugin.manager.thunder_install.optional_modules')
     );
   }
 
