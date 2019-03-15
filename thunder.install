@@ -1244,3 +1244,22 @@ function thunder_update_8132() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Use select2 widget for author field.
+ */
+function thunder_update_8133() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8133']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8133']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8133']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
