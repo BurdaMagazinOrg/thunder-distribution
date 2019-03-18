@@ -1088,12 +1088,24 @@ function thunder_update_8131() {
 }
 
 /**
- * Update configurations related to previously used Thunder Updater.
+ * Update image and video browser views configuration.
  */
 function thunder_update_8132() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder', 'thunder_update_8132');
+  $updater->executeUpdate('thunder', 'thunder__thunder_update_8132');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Update configurations related to previously used Thunder Updater.
+ */
+function thunder_update_8133() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder_update_8133');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
