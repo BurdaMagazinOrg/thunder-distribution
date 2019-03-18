@@ -79,8 +79,6 @@ composer_create_thunder() {
 
 apply_patches() {
     cd ${TEST_DIR}/docroot
-    wget https://www.drupal.org/files/issues/2019-02-14/2975081-53.patch
-    patch -p1 < 2975081-53.patch
 
     #EXAMPLE:
     # apply cookie expire patch for javascript tests
