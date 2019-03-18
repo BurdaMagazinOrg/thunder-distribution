@@ -250,9 +250,10 @@ function thunder_themes_installed($theme_list) {
  *   The flag to only check if direct module install is executed.
  *
  * @return bool
+ *   Returns if on module install requirements are fulfilled.
  */
-function _thunder_are_modules_installed($installed_modules, $required_modules, $only_direct_module_installs = TRUE) {
-  // First check is not ensure that installed modules are in list of required modules.
+function _thunder_are_modules_installed(array $installed_modules, array $required_modules, $only_direct_module_installs = TRUE) {
+  // First ensure that at least one installed module is in required list.
   $installed_required_modules = array_intersect($installed_modules, $required_modules);
   if (empty($installed_required_modules)) {
     return FALSE;
@@ -263,7 +264,7 @@ function _thunder_are_modules_installed($installed_modules, $required_modules, $
     $only_direct_module_installs
     && (Drupal::isConfigSyncing() || drupal_installation_attempted())
   ) {
-      return FALSE;
+    return FALSE;
   }
 
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
