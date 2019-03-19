@@ -216,22 +216,6 @@ function thunder_themes_installed($theme_list) {
         ->save(TRUE);
     }
 
-    // Disable unused blocks.
-    /** @var \Drupal\block\Entity\Block[] $blocks */
-    $blocks = Block::loadMultiple([
-      'thunder_amp_account_menu',
-      'thunder_amp_breadcrumbs',
-      'thunder_amp_footer',
-      'thunder_amp_local_actions',
-      'thunder_amp_local_tasks',
-      'thunder_amp_main_menu',
-      'thunder_amp_messages',
-      'thunder_amp_tools',
-    ]);
-    foreach ($blocks as $block) {
-      $block->disable()->save();
-    }
-
   }
 
   if (in_array('amptheme', $theme_list)) {
