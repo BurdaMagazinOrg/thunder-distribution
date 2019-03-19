@@ -1,7 +1,7 @@
 services:
   thunder_article.breadcrumb.default:
     class: Drupal\thunder_article\Breadcrumb\ThunderArticleBreadcrumbBuilder
-    arguments: ['@entity_type.manager', '@entity.repository', '@config.factory']
+    arguments: ['@router.request_context', '@access_manager', '@router', '@path_processor_manager', '@config.factory',  '@title_resolver', '@current_user', '@path.current', '@path.matcher', '@entity_type.manager', '@entity.repository']
     tags:
       - { name: breadcrumb_builder, priority: 100 }
   thunder_article.twig.filter_extension:
