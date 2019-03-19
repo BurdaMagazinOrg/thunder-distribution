@@ -240,35 +240,43 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
- * Helper function to check if all required modules are available on install.
+ * Check if provided triggering modules are one of just installed modules.
  *
- * @param array $installed_modules
- *   Modules installed.
- * @param array $required_modules
- *   Required modules to be available.
- * @param bool $only_direct_module_installs
- *   The flag to only check if direct module install is executed.
+ * This function is helper for thunder_modules_installed.
+ *
+ * @param array $modules
+ *   The list of the modules that were newly installed.
+ * @param array $triggering_modules
+ *   The list of triggering modules required for executing some action.
+ * @param bool $only_module_enable
+ *   Support only module installations done by module enabling. This flag will
+ *   exclude checks for module installation when profile is installed or when
+ *   module installation is triggered by configuration import.
  *
  * @return bool
- *   Returns if on module install requirements are fulfilled.
+ *   Returns if triggering module is newly installed.
  */
-function _thunder_are_modules_installed(array $installed_modules, array $required_modules, $only_direct_module_installs = TRUE) {
-  // Check direct module installs.
+function _thunder_check_triggering_modules(array $modules, array $triggering_modules, $only_module_enable = TRUE) {
+  // Sometimes we want to react only on module installations done by enabling of
+  // module. In that case we want to ignore module installation when profile is
+  // installed or when module is enabled over configuration import.
   if (
-    $only_direct_module_installs
+    $only_module_enable
     && (drupal_installation_attempted() || Drupal::isConfigSyncing())
   ) {
     return FALSE;
   }
 
-  // Check that at least one required module is in list of installed modules.
-  $required_not_installed_modules = array_diff($required_modules, $installed_modules);
-  if (count($required_not_installed_modules) === count($required_modules)) {
+  // Check that at least one triggering module is in list of the modules that
+  // were newly installed.
+  $triggering_not_installed_modules = array_diff($triggering_modules, $modules);
+  if (count($triggering_not_installed_modules) === count($triggering_modules)) {
     return FALSE;
   }
 
-  // When all required modules are also installed.
-  if (empty($required_not_installed_modules)) {
+  // All required triggering modules are in the list of the modules that were
+  // newly installed.
+  if (empty($triggering_not_installed_modules)) {
     return TRUE;
   }
 
@@ -276,8 +284,8 @@ function _thunder_are_modules_installed(array $installed_modules, array $require
   $module_handler = Drupal::moduleHandler();
   $active_modules = array_keys($module_handler->getModuleList());
 
-  // Ensure that all required modules are available.
-  $required_not_active_modules = array_diff($required_not_installed_modules, $active_modules);
+  // Ensure that all triggering modules modules are installed on system.
+  $required_not_active_modules = array_diff($triggering_not_installed_modules, $active_modules);
 
   return empty($required_not_active_modules);
 }
@@ -286,7 +294,7 @@ function _thunder_are_modules_installed(array $installed_modules, array $require
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
-  if (_thunder_are_modules_installed($modules, ['content_moderation', 'config_update'])) {
+  if (_thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])) {
     if (!Role::load('restricted_editor')) {
       /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
       $configReverter = \Drupal::service('config_update.config_update');
@@ -311,12 +319,12 @@ function thunder_modules_installed($modules) {
     }
   }
 
-  if (_thunder_are_modules_installed($modules, ['content_moderation', 'scheduler'])) {
+  if (_thunder_check_triggering_modules($modules, ['content_moderation', 'scheduler'])) {
     \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
   }
 
   // Move fields into form display.
-  if (_thunder_are_modules_installed($modules, ['ivw_integration'], FALSE)) {
+  if (_thunder_check_triggering_modules($modules, ['ivw_integration'], FALSE)) {
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -344,7 +352,7 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (_thunder_are_modules_installed($modules, ['thunder_riddle'], FALSE)) {
+  if (_thunder_check_triggering_modules($modules, ['thunder_riddle'], FALSE)) {
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
@@ -359,7 +367,7 @@ function thunder_modules_installed($modules) {
   }
 
   // When enabling password policy, enabled required sub modules.
-  if (_thunder_are_modules_installed($modules, ['password_policy'])) {
+  if (_thunder_check_triggering_modules($modules, ['password_policy'])) {
     \Drupal::service('module_installer')->install(['password_policy_length']);
     \Drupal::service('module_installer')->install(['password_policy_history']);
     \Drupal::service('module_installer')->install(['password_policy_character_types']);
