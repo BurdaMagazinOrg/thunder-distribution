@@ -214,7 +214,8 @@ v2.19:
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder_media_update_8109:
         '#title': 'Update twitter image style dimensions'
-        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description': '<p>Increase the image style dimensions for twitter to be in-line with the Twitter best practices.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of image style dimension has failed</strong>, visit the image style page to adjust it on your own.<p>'
         image_page: { '#text': 'Edit "twitter" image style', '#url': 'internal:/admin/config/media/image-styles/manage/twitter' }
 v2.20:
@@ -266,20 +267,39 @@ v2.32:
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8128:
         '#title': 'Set "metatag" fields translatable per default.'
-        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description': 'The metatag field was not translatable in Thunder so far.'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Setting "metatag" fields translatable failed</strong>, see log for more details. Set metatag fields translatable on content language settings page.<p>'
         content_language_page: { '#text': 'Content language settings.', '#url': 'internal:/admin/config/regional/content-language' }
     thunder__thunder_update_8129:
         '#title': 'Structure media edit forms.'
-        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description': 'We updated the media forms to have the same look and feel like the node edit forms.'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
 v2.34:
     '#title': 'Update to Thunder 2.34'
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder__thunder_update_8130:
         '#title': 'Hide content lock messages on other forms than node edit.'
-        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description': 'Content lock messages were shown on other forms then the edit form which is confusing for the editor.'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v2.35:
+    '#title': 'Update to Thunder 2.35'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8131:
+        '#title': 'Change the base table of the scheduler view.'
+        '#description': '<p>The old scheduler view was based on the node table. That means, scheduled drafts are not shown in the view. Because drafts are not the default revision of a node.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v2.36:
+    '#title': 'Update to Thunder 2.36'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8132:
+        '#title': 'Update image and video browser views configuration.'
+        '#description': '<p>Change div to span in field override, use type id instead of label for css class.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of image and video browser views configuration has failed.</strong><p>'
     thunder_add_config_selector_to_content:
         '#title': 'Add config_selector settings to content view'
         '#description': '<p>Configuration is successfully updated.</p>'

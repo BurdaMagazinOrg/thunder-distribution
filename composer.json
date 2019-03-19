@@ -20,8 +20,8 @@
             "email": "volker.killesreiter@burda.com"
         },
         {
-            "name": "Timo Welde",
-            "email": "welde@galaniprojects.de"
+            "name": "Alex Pott",
+            "email": "alex.a.pott@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -79,7 +79,7 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
             },
             "drupal/search_api": {
-                "SearchApi combined patches": "https://www.drupal.org/files/issues/2019-02-22/3026526-9and3034996-4_combined.patch"
+                "SearchApiQuery does not implement getCacheTags()": "https://www.drupal.org/files/issues/2019-03-13/3034996-7.patch"
             },
             "drupal/facets": {
                 "Provide JavaScript API for facet widgets": "https://www.drupal.org/files/issues/2019-02-21/3031581-10.patch"
@@ -176,7 +176,6 @@
         "npm-asset/underscore": "*"
     },
     "require-dev": {
-        "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",

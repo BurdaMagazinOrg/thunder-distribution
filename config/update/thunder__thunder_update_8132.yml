@@ -1,0 +1,66 @@
+views.view.image_browser:
+  expected_config:
+    display:
+      default:
+        display_options:
+          fields:
+            bundle:
+              settings:
+                link: false
+              type: entity_reference_label
+            name:
+              alter:
+                text: "<div class=\"media-info\">\n<span class=\"media-info--{{ bundle }}\">{{ bundle }}</span>\n{{ name }}\n</div>"
+  update_actions:
+    change:
+      display:
+        default:
+          display_options:
+            fields:
+              bundle:
+                settings: {  }
+                type: entity_reference_entity_id
+              name:
+                alter:
+                  text: '<span class="media-info"><span class="media-info--{{ bundle }}">{{ bundle }}</span>{{ name }}</span>'
+    delete:
+      display:
+        default:
+          display_options:
+            fields:
+              bundle:
+                settings:
+                  link: false
+views.view.video_browser:
+  expected_config:
+    display:
+      default:
+        display_options:
+          fields:
+            bundle:
+              settings:
+                link: false
+              type: entity_reference_label
+            name:
+              alter:
+                text: "<div class=\"media-info\">\n<span class=\"media-info--{{ bundle }}\">{{ bundle }}</span>\n{{ name }}\n</div>"
+  update_actions:
+    change:
+      display:
+        default:
+          display_options:
+            fields:
+              bundle:
+                settings: {  }
+                type: entity_reference_entity_id
+              name:
+                alter:
+                  text: '<span class="media-info"><span class="media-info--{{ bundle }}">{{ bundle }}</span>{{ name }}</span>'
+    delete:
+      display:
+        default:
+          display_options:
+            fields:
+              bundle:
+                settings:
+                  link: false

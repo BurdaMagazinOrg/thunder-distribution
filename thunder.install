@@ -1206,3 +1206,41 @@ function thunder_update_8130() {
   // Output logged messages to related channel of update execution.
   return $thunderUpdater->logger()->output();
 }
+
+/**
+ * Change the base table of the scheduler view.
+ */
+function thunder_update_8131() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8131']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8131']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8131']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
+
+/**
+ * Update image and video browser views configuration.
+ */
+function thunder_update_8132() {
+  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
+  $thunderUpdater = \Drupal::service('thunder_updater');
+
+  // Execute configuration update definitions with logging of success.
+  if ($thunderUpdater->executeUpdates([['thunder', 'thunder__thunder_update_8132']])) {
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder__thunder_update_8132']);
+  }
+  else {
+    $thunderUpdater->checklist()->markUpdatesFailed(['thunder__thunder_update_8132']);
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $thunderUpdater->logger()->output();
+}
