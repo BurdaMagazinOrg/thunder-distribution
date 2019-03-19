@@ -68,19 +68,11 @@ class ThunderArticleBreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function __construct(RequestContext $context, AccessManagerInterface $access_manager, RequestMatcherInterface $router, InboundPathProcessorInterface $path_processor, ConfigFactoryInterface $config_factory, TitleResolverInterface $title_resolver, AccountInterface $current_user, CurrentPathStack $current_path, PathMatcherInterface $path_matcher = NULL, EntityTypeManagerInterface $entityTypeManager, EntityRepositoryInterface $entityRepository) {
-    $this->context = $context;
-    $this->accessManager = $access_manager;
-    $this->router = $router;
-    $this->pathProcessor = $path_processor;
-    $this->config = $config_factory->get('system.site');
-    $this->titleResolver = $title_resolver;
-    $this->currentUser = $current_user;
-    $this->currentPath = $current_path;
-    $this->pathMatcher = $path_matcher ?: \Drupal::service('path.matcher');
+    $path_matcher = $path_matcher ?: \Drupal::service('path.matcher');
+    parent::__construct($context, $access_manager, $router, $path_processor, $config_factory, $title_resolver, $current_user, $current_path, $path_matcher);
 
     $this->entityRepository = $entityRepository;
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
-
   }
 
   /**
