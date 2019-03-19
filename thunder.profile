@@ -253,28 +253,33 @@ function thunder_themes_installed($theme_list) {
  *   Returns if on module install requirements are fulfilled.
  */
 function _thunder_are_modules_installed(array $installed_modules, array $required_modules, $only_direct_module_installs = TRUE) {
-  // First ensure that at least one installed module is in required list.
-  $installed_required_modules = array_intersect($installed_modules, $required_modules);
-  if (empty($installed_required_modules)) {
+  // Check direct module installs.
+  if (
+    $only_direct_module_installs
+    && (drupal_installation_attempted() || Drupal::isConfigSyncing())
+  ) {
     return FALSE;
   }
 
-  // Support option to handle only direct module installs.
-  if (
-    $only_direct_module_installs
-    && (Drupal::isConfigSyncing() || drupal_installation_attempted())
-  ) {
+  // Check that at least one required module is in list of installed modules.
+  $required_not_installed_modules = array_diff($required_modules, $installed_modules);
+  if (count($required_not_installed_modules) === count($required_modules)) {
     return FALSE;
+  }
+
+  // When all required modules are also installed.
+  if (empty($required_not_installed_modules)) {
+    return TRUE;
   }
 
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
   $module_handler = Drupal::moduleHandler();
   $active_modules = array_keys($module_handler->getModuleList());
 
-  // Check that all required modules are available.
-  $not_active_required_modules = array_diff($required_modules, $active_modules);
+  // Ensure that all required modules are available.
+  $required_not_active_modules = array_diff($required_not_installed_modules, $active_modules);
 
-  return empty($not_active_required_modules);
+  return empty($required_not_active_modules);
 }
 
 /**
