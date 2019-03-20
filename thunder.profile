@@ -8,7 +8,6 @@
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\block\Entity\Block;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
 
