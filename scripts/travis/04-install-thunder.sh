@@ -74,7 +74,7 @@ composer_create_thunder() {
     fi
 
     composer config repositories.thunder path ${THUNDER_DIST_DIR}
-    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-feature/3041804-layout_thunder_editorial_search_with_search_api" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress
+    composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress
 }
 
 apply_patches() {
