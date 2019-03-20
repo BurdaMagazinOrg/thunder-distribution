@@ -300,10 +300,3 @@ v2.36:
         '#description': '<p>Change div to span in field override, use type id instead of label for css class.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of image and video browser views configuration has failed.</strong><p>'
-    thunder__thunder_update_8133:
-        '#title': 'Use select2 widget for author field.'
-        '#description': '<p>Switch to the select2 widget for the author field in order to provide a better UX</p>'
-        '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
-        '#description_failed': '<p><strong>Update of configuration has failed.</strong></p><p>Switch manually to the select2 widget for the "Author by" field on all node and media types.</p>'
-        node_article_manage_form_page: { '#text': 'Node "article" manage form display', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
-        node_page_manage_form_page: { '#text': 'Node "page" manage form display', '#url': 'internal:/admin/structure/types/manage/page/form-display' }
