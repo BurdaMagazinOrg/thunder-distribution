@@ -240,33 +240,20 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
- * Check if provided triggering modules are one of just installed modules.
+ * Check if provided triggering modules are one of the newly installed modules.
  *
- * This function is helper for thunder_modules_installed.
+ * This function is helper for thunder_modules_installed(). Using it in another
+ * context is not recommended. @see hook_modules_installed()
  *
  * @param array $modules
  *   The list of the modules that were newly installed.
  * @param array $triggering_modules
  *   The list of triggering modules required for executing some action.
- * @param bool $only_module_enable
- *   Support only module installations done by module enabling. This flag will
- *   exclude checks for module installation when profile is installed or when
- *   module installation is triggered by configuration import.
  *
  * @return bool
  *   Returns if triggering module is newly installed.
  */
-function _thunder_check_triggering_modules(array $modules, array $triggering_modules, $only_module_enable = TRUE) {
-  // Sometimes we want to react only on module installations done by enabling of
-  // module. In that case we want to ignore module installation when profile is
-  // installed or when module is enabled over configuration import.
-  if (
-    $only_module_enable
-    && (drupal_installation_attempted() || Drupal::isConfigSyncing())
-  ) {
-    return FALSE;
-  }
-
+function _thunder_check_triggering_modules(array $modules, array $triggering_modules) {
   // Check that at least one triggering module is in list of the modules that
   // were newly installed.
   $triggering_not_installed_modules = array_diff($triggering_modules, $modules);
@@ -291,10 +278,26 @@ function _thunder_check_triggering_modules(array $modules, array $triggering_mod
 }
 
 /**
+ * Check if enabling of a module is executed.
+ *
+ * This function is helper for thunder_modules_installed(). Using it in another
+ * context is not recommended. @see hook_modules_installed()
+ *
+ * @return bool
+ *   Returns if enabling of a module is currently running.
+ */
+function _thunder_is_enabling_module() {
+  return !drupal_installation_attempted() && !Drupal::isConfigSyncing();
+}
+
+/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
-  if (_thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])) {
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])
+  ) {
     if (!Role::load('restricted_editor')) {
       /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
       $configReverter = \Drupal::service('config_update.config_update');
@@ -319,12 +322,26 @@ function thunder_modules_installed($modules) {
     }
   }
 
-  if (_thunder_check_triggering_modules($modules, ['content_moderation', 'scheduler'])) {
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['content_moderation', 'scheduler'])
+  ) {
     \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
   }
 
+  // When enabling password policy, enabled required sub modules.
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['password_policy'])
+  ) {
+    \Drupal::service('module_installer')->install(['password_policy_length']);
+    \Drupal::service('module_installer')->install(['password_policy_history']);
+    \Drupal::service('module_installer')->install(['password_policy_character_types']);
+    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
+  }
+
   // Move fields into form display.
-  if (_thunder_check_triggering_modules($modules, ['ivw_integration'], FALSE)) {
+  if (_thunder_check_triggering_modules($modules, ['ivw_integration'])) {
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -352,7 +369,7 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (_thunder_check_triggering_modules($modules, ['thunder_riddle'], FALSE)) {
+  if (_thunder_check_triggering_modules($modules, ['thunder_riddle'])) {
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
@@ -365,15 +382,6 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
-
-  // When enabling password policy, enabled required sub modules.
-  if (_thunder_check_triggering_modules($modules, ['password_policy'])) {
-    \Drupal::service('module_installer')->install(['password_policy_length']);
-    \Drupal::service('module_installer')->install(['password_policy_history']);
-    \Drupal::service('module_installer')->install(['password_policy_character_types']);
-    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
-  }
-
 }
 
 /**
