@@ -16,6 +16,9 @@ parameters:
     - docroot/modules/contrib/token/token.module
   fileExtensions:
     - profile
+  #TODO: Remove when https://www.drupal.org/project/thunder/issues/2947071 is fixed.
+  excludes_analyse:
+    - *thunder_updater*
 includes:
   - ./vendor/mglaman/phpstan-drupal/extension.neon
   - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon
