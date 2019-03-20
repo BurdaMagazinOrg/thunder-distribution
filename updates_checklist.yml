@@ -310,7 +310,8 @@ v2.36:
         '#description': '<p>After the switch to update helper, there are still some configurations that should be changed afterward.</p>'
         '#description_successful': '<p>Configuration related with replacement of Thunder Updater with Update helper is successfully applied.</p>'
         '#description_failed': '<p><strong>Configuration changes related with replacement of Thunder Updater with Update Helper are not properly applied.</strong><p>'
-    thunder_add_config_selector_to_content:
-      '#title': 'Add config_selector settings to content view'
-      '#description': '<p>Configuration is successfully updated.</p>'
-      '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+    thunder_update_8134:
+        '#title': 'Add config_selector settings to content view'
+        '#description': '<p>Config selector settings have to be added to the content view, to ensure that view switching by the config selector works properly.</p>'
+        '#description_successful': '<p>Settings successfully added.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

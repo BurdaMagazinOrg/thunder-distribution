@@ -1110,3 +1110,15 @@ function thunder_update_8133() {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Add config_selector settings to content view.
+ */
+function thunder_update_8134() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder_update_8134');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
