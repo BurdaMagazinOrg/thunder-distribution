@@ -240,47 +240,11 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
- * Helper function to check if all required modules are available on install.
- *
- * @param array $installed_modules
- *   Modules installed.
- * @param array $required_modules
- *   Required modules to be available.
- * @param bool $only_direct_module_installs
- *   The flag to only check if direct module install is executed.
- *
- * @return bool
- */
-function _thunder_are_modules_installed($installed_modules, $required_modules, $only_direct_module_installs = TRUE) {
-  // First check is not ensure that installed modules are in list of required modules.
-  $installed_required_modules = array_intersect($installed_modules, $required_modules);
-  if (empty($installed_required_modules)) {
-    return FALSE;
-  }
-
-  // Support option to handle only direct module installs.
-  if (
-    $only_direct_module_installs
-    && (Drupal::isConfigSyncing() || drupal_installation_attempted())
-  ) {
-      return FALSE;
-  }
-
-  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
-  $module_handler = Drupal::moduleHandler();
-  $active_modules = array_keys($module_handler->getModuleList());
-
-  // Check that all required modules are available.
-  $not_active_required_modules = array_diff($required_modules, $active_modules);
-
-  return empty($not_active_required_modules);
-}
-
-/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
-  if (_thunder_are_modules_installed($modules, ['content_moderation', 'config_update'])) {
+
+  if (in_array('content_moderation', $modules)) {
     if (!Role::load('restricted_editor')) {
       /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
       $configReverter = \Drupal::service('config_update.config_update');
@@ -303,14 +267,19 @@ function thunder_modules_installed($modules) {
       catch (EntityStorageException $storageException) {
       }
     }
+    if (\Drupal::service('module_handler')->moduleExists('scheduler')) {
+      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+    }
   }
-
-  if (_thunder_are_modules_installed($modules, ['content_moderation', 'scheduler'])) {
-    \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+  if (in_array('scheduler', $modules)) {
+    if (\Drupal::service('module_handler')->moduleExists('content_moderation')) {
+      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+    }
   }
 
   // Move fields into form display.
-  if (_thunder_are_modules_installed($modules, ['ivw_integration'], FALSE)) {
+  if (in_array('ivw_integration', $modules)) {
+
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -338,7 +307,8 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (_thunder_are_modules_installed($modules, ['thunder_riddle'], FALSE)) {
+  if (in_array('thunder_riddle', $modules)) {
+
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
@@ -353,7 +323,7 @@ function thunder_modules_installed($modules) {
   }
 
   // When enabling password policy, enabled required sub modules.
-  if (_thunder_are_modules_installed($modules, ['password_policy'])) {
+  if (in_array('password_policy', $modules)) {
     \Drupal::service('module_installer')->install(['password_policy_length']);
     \Drupal::service('module_installer')->install(['password_policy_history']);
     \Drupal::service('module_installer')->install(['password_policy_character_types']);
