@@ -1,5 +1,10 @@
 # Change Log
 
+## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.36) 2019-03-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.35...8.2.36)
+
+Update without changes to update the release tar-ball on drupal.org to include the Drupal security release 8.6.13. 
+
 ## [8.2.35](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.35) 2019-02-26
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.34...8.2.35)
 
