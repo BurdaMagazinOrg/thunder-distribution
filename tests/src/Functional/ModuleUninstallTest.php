@@ -26,7 +26,6 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['diff'],
     ['content_lock'],
-    ['checklistapi'],
     ['adsense'],
     ['google_analytics'],
     ['access_unpublished'],
