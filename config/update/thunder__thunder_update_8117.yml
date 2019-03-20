@@ -1,3 +1,0 @@
-__global_actions:
-  install_modules:
-    - paragraph_split_text

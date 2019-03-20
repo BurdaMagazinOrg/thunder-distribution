@@ -1,3 +1,0 @@
-__global_actions:
-  install_modules:
-    - admin_toolbar_links_access_filter
