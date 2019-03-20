@@ -28,22 +28,21 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
  * Implements hook_install_tasks().
  */
 function thunder_install_tasks(&$install_state) {
-
-  $tasks = [
-    'thunder_module_configure_form' => [
+  $tasks = [];
+  if (empty($install_state['config_install_path'])) {
+    $tasks['thunder_module_configure_form'] = [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
       'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ],
-    'thunder_module_install' => [
+    ];
+    $tasks['thunder_module_install'] = [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
-    ],
-    'thunder_finish_installation' => [
-      'display_name' => t('Finish installation'),
-    ],
+    ];
+  }
+  $tasks['thunder_finish_installation'] = [
+    'display_name' => t('Finish installation'),
   ];
-
   return $tasks;
 }
 
@@ -94,7 +93,6 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
     $definition = $optionalModulesManager->getDefinition($module_name);
     if ($definition['type'] == 'module') {
       \Drupal::service('module_installer')->install($module, TRUE);
-      \Drupal::service('config.installer')->installOptionalConfig();
     }
     elseif ($definition['type'] == 'theme') {
       \Drupal::service('theme_installer')->install($module, TRUE);
@@ -120,6 +118,8 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function thunder_finish_installation(array &$install_state) {
+  \Drupal::service('config.installer')->installOptionalConfig();
+
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
@@ -243,11 +243,64 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
+ * Check if provided triggering modules are one of the newly installed modules.
+ *
+ * This function is helper for thunder_modules_installed(). Using it in another
+ * context is not recommended. @see hook_modules_installed()
+ *
+ * @param array $modules
+ *   The list of the modules that were newly installed.
+ * @param array $triggering_modules
+ *   The list of triggering modules required for executing some action.
+ *
+ * @return bool
+ *   Returns if triggering module is newly installed.
+ */
+function _thunder_check_triggering_modules(array $modules, array $triggering_modules) {
+  // Check that at least one triggering module is in list of the modules that
+  // were newly installed.
+  $triggering_not_installed_modules = array_diff($triggering_modules, $modules);
+  if (count($triggering_not_installed_modules) === count($triggering_modules)) {
+    return FALSE;
+  }
+
+  // All required triggering modules are in the list of the modules that were
+  // newly installed.
+  if (empty($triggering_not_installed_modules)) {
+    return TRUE;
+  }
+
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = Drupal::moduleHandler();
+  $active_modules = array_keys($module_handler->getModuleList());
+
+  // Ensure that all triggering modules modules are installed on system.
+  $required_not_active_modules = array_diff($triggering_not_installed_modules, $active_modules);
+
+  return empty($required_not_active_modules);
+}
+
+/**
+ * Check if enabling of a module is executed.
+ *
+ * This function is helper for thunder_modules_installed(). Using it in another
+ * context is not recommended. @see hook_modules_installed()
+ *
+ * @return bool
+ *   Returns if enabling of a module is currently running.
+ */
+function _thunder_is_enabling_module() {
+  return !drupal_installation_attempted() && !Drupal::isConfigSyncing();
+}
+
+/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
-
-  if (in_array('content_moderation', $modules)) {
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])
+  ) {
     if (!Role::load('restricted_editor')) {
       /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
       $configReverter = \Drupal::service('config_update.config_update');
@@ -270,19 +323,28 @@ function thunder_modules_installed($modules) {
       catch (EntityStorageException $storageException) {
       }
     }
-    if (\Drupal::service('module_handler')->moduleExists('scheduler')) {
-      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
-    }
   }
-  if (in_array('scheduler', $modules)) {
-    if (\Drupal::service('module_handler')->moduleExists('content_moderation')) {
-      \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
-    }
+
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['content_moderation', 'scheduler'])
+  ) {
+    \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
+  }
+
+  // When enabling password policy, enabled required sub modules.
+  if (
+    _thunder_is_enabling_module()
+    && _thunder_check_triggering_modules($modules, ['password_policy'])
+  ) {
+    \Drupal::service('module_installer')->install(['password_policy_length']);
+    \Drupal::service('module_installer')->install(['password_policy_history']);
+    \Drupal::service('module_installer')->install(['password_policy_character_types']);
+    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
   }
 
   // Move fields into form display.
-  if (in_array('ivw_integration', $modules)) {
-
+  if (_thunder_check_triggering_modules($modules, ['ivw_integration'])) {
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -310,8 +372,7 @@ function thunder_modules_installed($modules) {
   }
 
   // Enable riddle paragraph in field_paragraphs.
-  if (in_array('thunder_riddle', $modules)) {
-
+  if (_thunder_check_triggering_modules($modules, ['thunder_riddle'])) {
     /** @var \Drupal\field\Entity\FieldConfig $field */
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
 
@@ -325,23 +386,14 @@ function thunder_modules_installed($modules) {
     $field->save();
   }
 
-  // When enabling password policy, enabled required sub modules.
-  if (in_array('password_policy', $modules)) {
-    \Drupal::service('module_installer')->install(['password_policy_length']);
-    \Drupal::service('module_installer')->install(['password_policy_history']);
-    \Drupal::service('module_installer')->install(['password_policy_character_types']);
-    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
-  }
-
   // When enabling search_api, enable facets and VBO.
-  if (in_array('search_api', $modules)) {
+  if (_thunder_check_triggering_modules($modules, ['search_api'])) {
     \Drupal::service('module_installer')->install(['search_api_db']);
     \Drupal::service('module_installer')->install(['facets']);
     \Drupal::service('module_installer')->install(['select2_facets']);
     \Drupal::service('module_installer')->install(['views_bulk_operations']);
     \Drupal::messenger()->addStatus(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
   }
-
 }
 
 /**
