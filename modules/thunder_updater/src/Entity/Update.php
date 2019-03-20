@@ -2,13 +2,14 @@
 
 namespace Drupal\thunder_updater\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Defines the Contact entity.
+ *
+ * We left this entity type, to simplify migration of content.
  *
  * @ContentEntityType(
  *   id = "thunder_updater_update",
@@ -21,70 +22,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *   }
  * )
  */
-class Update extends ContentEntityBase implements UpdateInterface {
-
-  /**
-   * {@inheritdoc}
-   *
-   * When a new entity instance is added, set the user_id entity reference to
-   * the current user as the creator of the instance.
-   */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += [
-      'user_id' => \Drupal::currentUser()->id(),
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setChangedTime($timestamp) {
-    $this->set('changed', $timestamp);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTimeAcrossTranslations() {
-    $changed = $this->getUntranslated()->getChangedTime();
-    foreach ($this->getTranslationLanguages(FALSE) as $language) {
-      $translation_changed = $this->getTranslation($language->getId())
-        ->getChangedTime();
-      $changed = max($translation_changed, $changed);
-    }
-    return $changed;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function wasSuccessfulByHook() {
-    return $this->get('successful_by_hook')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setSuccessfulByHook($success) {
-    $this->set('successful_by_hook', $success);
-    return $this;
-  }
+class Update extends ContentEntityBase {
 
   /**
    * {@inheritdoc}

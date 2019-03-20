@@ -300,3 +300,13 @@ v2.36:
         '#description': '<p>Change div to span in field override, use type id instead of label for css class.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of image and video browser views configuration has failed.</strong><p>'
+    thunder_updater_update_8001:
+        '#title': 'Switch to Update Helper module.'
+        '#description': '<p>We have switched to use Update Helper module instead of Thunder Updater.</p>'
+        '#description_successful': '<p>Switching to Update Helper was successfully.</p>'
+        '#description_failed': '<p><strong>Switching to Update Helper has failed.</strong><p>'
+    thunder_update_8133:
+        '#title': 'Update configurations related to previously used Thunder Updater'
+        '#description': '<p>After the switch to update helper, there are still some configurations that should be changed afterward.</p>'
+        '#description_successful': '<p>Configuration related with replacement of Thunder Updater with Update helper is successfully applied.</p>'
+        '#description_failed': '<p><strong>Configuration changes related with replacement of Thunder Updater with Update Helper are not properly applied.</strong><p>'
