@@ -67,9 +67,9 @@ function thunder_liveblog_module_preinstall($module) {
  */
 function thunder_liveblog_update_8101() {
 
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   /** @var \Drupal\field\Entity\FieldConfig $field */
   $field = FieldConfig::load('liveblog_post.liveblog_post.field_embed_media');
@@ -102,10 +102,11 @@ function thunder_liveblog_update_8101() {
  * Provide nicer liveblog form display.
  */
 function thunder_liveblog_update_8102() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
-  if ($thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8102']])) {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  if ($updater->executeUpdate('thunder_liveblog', 'thunder_liveblog__update_8102')) {
     $updateLogger->info(t('New form display successfully installed.'));
   }
   else {
@@ -113,19 +114,19 @@ function thunder_liveblog_update_8102() {
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updateLogger->output();
 }
 
 /**
  * Switch to new experimental paragraphs widget and paragraphs features.
  */
 function thunder_liveblog_update_8103() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
   // Update should be marked as successful only if all steps are successful.
-  $thunderUpdater->executeUpdates([['thunder_liveblog', 'thunder_liveblog__update_8103']]);
+  $updater->executeUpdate('thunder_liveblog', 'thunder_liveblog__update_8103');
 
   // Output logged messages to related chanel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }

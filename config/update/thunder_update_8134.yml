@@ -1,0 +1,11 @@
+__global_actions:
+  import_configs:
+    - config_selector.feature.thunder_content_view
+views.view.content:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        config_selector:
+          feature: thunder_content_view
+          priority: 0
