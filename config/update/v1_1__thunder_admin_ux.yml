@@ -1,3 +1,23 @@
+__global_actions:
+  import_configs:
+    - core.entity_form_mode.media.inline
+    - image.style.paragraph_preview_thumbnail
+    - core.entity_view_mode.media.paragraph_preview
+    - field.storage.media.field_author
+    - field.storage.media.field_content
+    - field.field.media.twitter.field_author
+    - field.field.media.twitter.field_content
+    - field.field.media.instagram.field_author
+    - field.field.media.instagram.field_content
+    - core.entity_view_display.media.gallery.paragraph_preview
+    - core.entity_view_display.media.image.paragraph_preview
+    - core.entity_view_display.media.twitter.paragraph_preview
+    - core.entity_view_display.media.instagram.paragraph_preview
+    - core.entity_view_display.media.video.paragraph_preview
+    - core.entity_view_display.paragraph.link.preview
+    - core.entity_view_display.paragraph.twitter.preview
+    - core.entity_form_display.media.image.inline
+    - core.entity_form_display.media.video.inline
 core.entity_form_display.media.instagram.default:
   expected_config: {  }
   update_actions:
