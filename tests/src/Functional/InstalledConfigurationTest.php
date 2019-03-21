@@ -61,7 +61,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static $ignoreCoreConfigs = [
-    'checklistapi.progress.thunder_updater',
+    'checklistapi.progress.update_helper_checklist',
     'system.site',
     'core.extension',
     'system.performance',
@@ -90,7 +90,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.paragraph.token',
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
-    'core.entity_view_mode.thunder_updater_update.token',
   ];
 
   /**
