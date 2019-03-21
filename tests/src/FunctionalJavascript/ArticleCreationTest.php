@@ -107,7 +107,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check for sharing buttons.
     $this->assertSession()->elementExists('css', '.shariff-button.twitter');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
-    $this->assertSession()->elementExists('css', '.shariff-button.googleplus');
 
     // Check Video paragraph.
     $this->getSession()
