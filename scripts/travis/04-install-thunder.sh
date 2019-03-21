@@ -65,7 +65,7 @@ drush_make_thunder() {
 
 composer_create_thunder() {
     cd ${THUNDER_DIST_DIR}
-    composer create-project burdamagazinorg/thunder-project:dev-feature/support-npm-assets ${TEST_DIR} --stability dev --no-interaction --no-install
+    composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
 
     cd ${TEST_DIR}
 
