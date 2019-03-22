@@ -4,7 +4,6 @@ shariff_orientation: horizontal
 shariff_services:
   twitter: twitter
   facebook: facebook
-  googleplus: googleplus
 shariff_twitter_via: ''
 shariff_mail_url: 'mailto:'
 shariff_mail_subject: ''
