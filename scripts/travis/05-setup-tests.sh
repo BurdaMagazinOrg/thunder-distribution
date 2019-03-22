@@ -21,11 +21,3 @@ phpenv rehash
 
 apply_patches
 
-# Rebuild caches and start servers
-cd ${TEST_DIR}/docroot
-
-# Final cache rebuild, to make sure every code change is respected
-drush cr
-
-# Run the webserver
-php -S localhost:8080 .ht.router.php &>/dev/null &
