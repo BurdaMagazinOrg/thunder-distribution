@@ -11,8 +11,14 @@ php:
 
 env:
   matrix:
-    - INSTALL_METHOD=composer
-    - INSTALL_METHOD=drush_make
+    - INSTALL_METHOD=composer DRUPAL_CORE=~8.7
+    - INSTALL_METHOD=composer DRUPAL_CORE=~8.6
+#    - INSTALL_METHOD=drush_make
+
+
+matrix:
+  allow_failures:
+    - env: INSTALL_METHOD=composer DRUPAL_CORE=~8.7
 
 dist: xenial
 
