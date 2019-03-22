@@ -6,7 +6,8 @@
  */
 
 use Drupal\Core\Cache\Cache;
-
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder_article\Form\ThunderNodeForm;
 /**
  * Implements hook_menu_local_tasks_alter().
  */
@@ -28,8 +29,8 @@ function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_article_form_node_article_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function thunder_article_form_node_article_edit_form_alter(&$form, FormStateInterface $form_state) {
   \Drupal::service('class_resolver')
-    ->getInstanceFromDefinition(\Drupal\thunder_article\Form\ThunderNodeForm::class)
+    ->getInstanceFromDefinition(ThunderNodeForm::class)
     ->formAlter($form, $form_state);
 }
