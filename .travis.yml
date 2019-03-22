@@ -46,6 +46,8 @@ jobs:
     - stage: sanity checks
       name: Check config
       env: INSTALL_METHOD=composer
+      before_script:
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
