@@ -17,7 +17,7 @@ make install
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
 
-create_testing_dump
+#create_testing_dump
 
 apply_patches
 
