@@ -42,7 +42,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
 
     $original = drupal_get_path('module', 'simpletest') . '/files';
 
-    \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    file_unmanaged_copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
 
     // Upload with replace to guarantee there's something there.
     $edit = [

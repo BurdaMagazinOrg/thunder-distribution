@@ -91,7 +91,7 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
    * Test that Video and Image entity browser uses 24 images per page.
    */
   public function test8104() {
-    \Drupal::service('file_system')->copy(realpath(dirname(__FILE__) . '/../../../fixtures/thunder.jpg'), PublicStream::basePath() . '/testing_thunder.jpg');
+    file_unmanaged_copy(realpath(dirname(__FILE__) . '/../../../fixtures/thunder.jpg'), PublicStream::basePath() . '/testing_thunder.jpg');
     $file = File::create([
       'uri' => 'public://testing_thunder.jpg',
       'status' => FILE_STATUS_PERMANENT,
