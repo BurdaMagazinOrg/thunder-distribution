@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome:3.14.0-iron
+docker ps -a
+
 # Run Drupal tests (@group Thunder)
 cd ${TEST_DIR}/docroot
 
