@@ -25,12 +25,12 @@ addons:
       - /tmp/thunder-travis-ci
 
 stages:
-  - sanity_checks
+  - sanity checks
   - test
 
 jobs:
   include:
-    - stage: sanity_checks
+    - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code
       env: INSTALL_METHOD=composer
       install:
