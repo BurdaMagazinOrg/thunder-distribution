@@ -21,3 +21,8 @@ phpenv rehash
 
 apply_patches
 
+# Start servers
+cd ${TEST_DIR}/docroot
+
+# Run the webserver
+php -S localhost:8080 .ht.router.php &>/dev/null &
