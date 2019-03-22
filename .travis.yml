@@ -25,12 +25,12 @@ addons:
       - /tmp/thunder-travis-ci
 
 stages:
-  - sanity checks
-  - test
+  - Sanity Checks
+  - Test
 
 jobs:
   include:
-    - stage: sanity checks
+    - stage: Sanity Checks
       name: Verify makefile, check coding standards, check for deprecated code
       env: INSTALL_METHOD=composer
       install:
@@ -43,11 +43,11 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
-    - stage: test
+    - stage: Test
       name: Run tests with composer build
       env: INSTALL_METHOD=composer
 
-    - stage: test
+    - stage: Test
       name: Run tests with drush_make build
       env: INSTALL_METHOD=drush_make
       install:
