@@ -134,9 +134,7 @@ Thunder tries to provide updates for every change that was made. That could be c
 
 ### Writing update hooks
 
-To support the creation of update hooks, Thunder provides the thunder_updater module. That contains several methods to e.g. update existing configuration or enabling modules.
-
-All the helper methods can be found in the [UpdaterInterface](https://github.com/BurdaMagazinOrg/thunder-distribution/blob/develop/modules/thunder_updater/src/UpdaterInterface.php).
+To support the creation of update hooks, Thunder integrated the `update_helper` module. That contains several methods to e.g. update existing configuration or enabling modules.
 
 Outputting results of update hook is highly recommended for that we have provided UpdateLogger, it handles output of result properly for `drush` or  UI (`update.php`) update workflow.
 That's why every update hook that changes something should log what is changed and was it successful or it has failed. And last line in update hook should be returning of UpdateLogger output.
@@ -145,8 +143,8 @@ All text logged as as INFO, will be outputted as success in `drush` output.
 
 ```php
   // Get service directly.
-  /** @var \Drupal\thunder_updater\UpdateLogger $updateLogger */
-  $updateLogger = \Drupal::service('thunder_updater.logger');
+  /** @var \Drupal\update_helper\UpdateLogger $updateLogger */
+  $updateLogger = \Drupal::service('update_helper.logger');
 
   // Log change success or failures.
   if (...) {
@@ -160,12 +158,12 @@ All text logged as as INFO, will be outputted as success in `drush` output.
   return $updateLogger->output();
 ```
 
-Other way to get UpdateLogger is from Thunder Updater service.
+Other way to get UpdateLogger is from Update Helper Updater service.
 ```php
   // Get service from Thunder Updater service.
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $updateLogger = $thunderUpdater->logger();
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
 
   ...
 
@@ -175,28 +173,27 @@ Other way to get UpdateLogger is from Thunder Updater service.
 
 #### Importing new configurations
 
-To import new configurations, the `Drupal\thunder_updater\Updater::importConfigs()` method could be used.
-
-Here is example to import image paragraph configuration:
-```php
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
-
-  if ($thunderUpdater->importConfigs(['paragraphs.paragraphs_type.image'])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['v8_x_add_image_paragraph']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['v8_x_add_image_paragraph']);
-  }
-
-  // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+You have to create configuration update definition file with global `import_configs` action. For example:
+```yaml
+__global:
+  import_configs:
+    - config.to.import
+    - config.to.import-no2
 ```
-It imports configurations, that's in a module or profile config directory.
+
+After that you just have to execute configuration update. For example:
+```php
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder_article', 'thunder_update_8101');
+
+  return $updater->logger()->output();
+```
+This update hook will import configurations, that are in a module or profile config directory.
 
 #### Updating existing configuration (with manually defined configuration changes)
 
-Before Drupal\thunder_updater\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state.
+Before Drupal\update_helper\Updater::updateConfig() updates existing configuration, it could check the current values of that config. That helps to leave modified, existing configuration in a valid state.
 
 ```php
   // List of configurations that should be checked for existence.
@@ -224,8 +221,9 @@ Before Drupal\thunder_updater\Updater::updateConfig() updates existing configura
     'third_party_settings' => [],
   ];
 
-  $thunderUpdater = \Drupal::service('thunder_updater');
-  $thunderUpdater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig);
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->updateConfig('core.entity_view_display.media.instagram.thumbnail', $newConfig, $expectedConfig);
 ```
 
 #### Updating existing configuration (with using of generated configuration changes)

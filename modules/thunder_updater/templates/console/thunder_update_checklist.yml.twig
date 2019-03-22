@@ -8,6 +8,7 @@ vX.YY:
 {% block file_methods %}
     {{ update_hook_name }}:
         '#title': '{{ checklist_title }}'
-        '#description': '<p>{{ checklist_success }}</p>'
+        '#description': '<p></p>'
+        '#description_successful': '<p>{{ checklist_success }}</p>'
         '#description_failed': '<p><strong>{{ checklist_failed }}</strong><p>'
 {% endblock %}
