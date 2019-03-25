@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source ${THUNDER_DIST_DIR}/scripts/travis/functions.sh
-
 # install image magick
 wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
 yes '' | pecl install -f php-imagick-LATEST.tar.gz
@@ -17,12 +15,15 @@ make install
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
 
-create_testing_dump
-
-apply_patches
-
-# Start servers
 cd ${TEST_DIR}/docroot
+
+#EXAMPLE:
+# apply cookie expire patch for javascript tests
+#wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+#patch -p1 < test-session-expire-2771547-64.patch
+
+# CREATE TESTING DUMP
+php ./core/scripts/db-tools.php dump-database-d8-mysql > thunder.php
 
 # Run the webserver
 php -S localhost:8080 .ht.router.php &>/dev/null &

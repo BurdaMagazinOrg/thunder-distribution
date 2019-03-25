@@ -39,7 +39,7 @@ jobs:
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
         - bash -x -e ./scripts/travis/03-download-thunder.sh
-      before_script: true
+      before_script: skip
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
