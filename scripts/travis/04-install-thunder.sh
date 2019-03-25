@@ -36,9 +36,7 @@ update_thunder() {
     drush cr
     drush updatedb -y
 
-    if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
-        update_thunder_mock_deployment
-    fi
+    update_thunder_mock_deployment
 }
 
 # Install Thunder
