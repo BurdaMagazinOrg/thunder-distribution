@@ -32,43 +32,38 @@ jobs:
   include:
     - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code
-      env: INSTALL_METHOD=composer
       install:
-        # Install Drush
-        - composer global require drush/drush:^8.1
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
-        - bash -x -e ./scripts/travis/03-download-thunder.sh
+        - bash -x -e ./scripts/travis/03-download-thunder-composer.sh
       before_script: skip
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: sanity checks
-      name: Check config
-      env: INSTALL_METHOD=composer
+      name: Check config for composer build
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: sanity checks
+      name: Check config for drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-download-thunder-drush.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: test
       name: Run tests with composer build
-      env: INSTALL_METHOD=composer
 
     - stage: test
       name: Run tests with drush_make build
-      env: INSTALL_METHOD=drush_make
       install:
-        # Install Drush
-        - composer global require drush/drush:^8.1
-        - bash -x -e ./scripts/travis/03-download-thunder.sh
+        - bash -x -e ./scripts/travis/03-download-thunder-drush.sh
 
     - stage: test
       name: Run update test
-      env: INSTALL_METHOD=composer TEST_UPDATE=true TEST_DEPLOYMENT=true
+      env: TEST_UPDATE=true TEST_DEPLOYMENT=true
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
-      install:
-        # Install Drush
-        - composer global require drush/drush:^8.1
-        - bash -x -e ./scripts/travis/03-download-thunder.sh
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
@@ -78,7 +73,7 @@ before_install:
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/03-download-thunder.sh
+  - bash -x -e ./scripts/travis/03-download-thunder-composer.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh

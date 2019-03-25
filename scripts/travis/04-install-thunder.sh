@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-# Install Thunder
-if [[ ${TEST_UPDATE} == "true" ]]; then
-    # Install last drupal org version and update to currently tested version
-    install_thunder ${UPDATE_BASE_PATH}/docroot
-    update_thunder
-else
-    install_thunder ${TEST_DIR}/docroot
-fi
-
 # Install thunder and enable Test module
 # in provided folder
 install_thunder() {
@@ -49,3 +40,12 @@ update_thunder() {
         update_thunder_mock_deployment
     fi
 }
+
+# Install Thunder
+if [[ ${TEST_UPDATE} == "true" ]]; then
+    # Install last drupal org version and update to currently tested version
+    install_thunder ${UPDATE_BASE_PATH}/docroot
+    update_thunder
+else
+    install_thunder ${TEST_DIR}/docroot
+fi

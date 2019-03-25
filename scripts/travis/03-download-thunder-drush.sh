@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# Clear drush release history cache, to pick up new releases.
-rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
-
-drush_make_thunder
-
-# require development packages needed for testing
-composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
-
 drush_make_thunder() {
     cd ${THUNDER_DIST_DIR}
 
@@ -26,3 +18,11 @@ drush_make_thunder() {
     composer install --working-dir=${TEST_DIR}/docroot
     composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 }
+
+# Clear drush release history cache, to pick up new releases.
+rm -f ~/.drush/cache/download/*---updates.drupal.org-release-history-*
+
+drush_make_thunder
+
+# require development packages needed for testing
+composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
