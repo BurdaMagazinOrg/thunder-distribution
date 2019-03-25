@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
-drush dl drupalorg_drush-7.x && drush verify-makefile
-
 # run phpcs
 phpcs --config-set installed_paths ${TEST_DIR}/vendor/drupal/coder/coder_sniffer
 # Ignore check of .md files, because they should be able to contain more then 80 characters per line.
