@@ -1,9 +1,11 @@
 # Update instructions Thunder 2 -> Thunder 3
 
 These are the instructions to manually update to Thunder 3. The most
-significant change is the migration to media in core.
+significant change is the migration to media in core. But we also made
+some significant changes to our composer.json.
 
-We also removed some modules from our codebase. If you are using one of
+### General composer.json adjustments
+First we removed some modules from our codebase. If you are using one of
 following modules, please add them to the composer.json of your project.
 * valiton/harbourmaster
 * drupal/riddle_marketplace
@@ -11,6 +13,19 @@ following modules, please add them to the composer.json of your project.
 * burdamagazinorg/infinite_module
 * burdamagazinorg/infinite_theme
 
+We also switched from bower-asset to npm-asset for our frontend-libraries.
+In order to get the libraries downloaded to the correct location, please
+replace
+```
+"installer-types": ["bower-asset"],
+```
+by
+```
+"installer-types": ["bower-asset", "npm-asset"],
+```
+in the composer.json of your project.
+
+### Pre-requirements for the media update
 After that the following steps should be done for the update:
 * Add drupal/media_entity ^2.0 to your composer.json
 * Add drupal/video_embed_field ^2.0 to your composer.json
@@ -22,6 +37,7 @@ See here for more information:
 * [Moved a refined version of the contributed Media entity module to core as Media module](https://www.drupal.org/node/2863992)
 * [FAQ - Transition from Media Entity to Media in core](https://www.drupal.org/docs/8/core/modules/media/faq-transition-from-media-entity-to-media-in-core#upgrade-instructions-from-media-entity-contrib-to-media-in-core)
 
+### Execute the media update
 All you need to do now is:
 ```
 drush updb
