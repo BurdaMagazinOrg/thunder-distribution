@@ -11,6 +11,8 @@ fi
 
 cd ${THUNDER_DIST_DIR}
 composer create-project burdamagazinorg/thunder-project:2.x ${TEST_DIR} --stability dev --no-interaction --no-install
+composer remove "burdamagazinorg/thunder:*"
+composer require zaporylie/composer-drupal-optimizations:^1.1
 
 cd ${TEST_DIR}
 
@@ -19,4 +21,4 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress --prefer-dist
+composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "phpstan/phpstan-deprecation-rules" --no-progress
