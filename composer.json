@@ -20,8 +20,8 @@
             "email": "volker.killesreiter@burda.com"
         },
         {
-            "name": "Timo Welde",
-            "email": "welde@galaniprojects.de"
+            "name": "Alex Pott",
+            "email": "alex.a.pott@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -106,7 +106,7 @@
         "drupal/dropzonejs": "^1.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
-        "drupal/entity_browser": "1.6",
+        "drupal/entity_browser": "1.7",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "dev-1.x",
         "drupal/field_group": "^1.0",
@@ -127,7 +127,7 @@
         "drupal/media_expire": "^1.0",
         "drupal/nexx_integration": "^1.0||^2.0",
         "drupal/metatag": "^1.0",
-        "drupal/paragraphs": "1.5",
+        "drupal/paragraphs": "1.6",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "^1.0",
@@ -143,14 +143,15 @@
         "drupal/slick_media": "^1.0",
         "drupal/thunder_admin": "^1.0 || ^2.0-beta15",
         "drupal/token": "^1.0",
+        "drupal/update_helper": "^1.0",
         "drupal/video_embed_field": "^1.0",
         "drupal/views_load_more": "dev-1.x",
         "valiton/harbourmaster": "~8.1",
-        "bower-asset/dropzone": "^5.1",
+        "bower-asset/dropzone": "^5.5",
         "bower-asset/exif-js": "^2.3.0",
-        "bower-asset/blazy": "^1.6.0",
-        "bower-asset/slick-carousel": "^1.6",
-        "bower-asset/shariff": "^1.24",
+        "bower-asset/blazy": "^1.8",
+        "bower-asset/slick-carousel": "^1.8",
+        "bower-asset/shariff": "^1.26.2",
         "bower-asset/select2": "4.0.4"
     },
     "replace": {
@@ -164,7 +165,6 @@
         "npm-asset/underscore": "*"
     },
     "require-dev": {
-        "behat/mink-selenium2-driver": "dev-master",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",

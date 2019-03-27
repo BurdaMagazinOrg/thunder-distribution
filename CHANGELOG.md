@@ -1,5 +1,29 @@
 # Change Log
 
+## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.36) 2019-03-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.35...8.2.36)
+
+Update without changes to update the release tar-ball on drupal.org to include the Drupal security release 8.6.13. 
+
+## [8.2.35](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.35) 2019-02-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.34...8.2.35)
+
+Fixes an issue with the scheduled content view.
+
+- Fix[Use revision based scheduler view in Thunder](https://www.drupal.org/project/thunder/issues/3030724)
+
+## [8.2.34](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.34) 2019-02-21
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.33...8.2.34)
+
+Release due to [SA-CORE-2019-003](https://www.drupal.org/sa-core-2019-003). Some small bugfixes go with this release as well.
+
+- Do [Consider SA-CORE-2019-003 updates](https://www.drupal.org/project/thunder/issues/3034656)
+- Do [Add scheduler access test](https://www.drupal.org/project/thunder/issues/3028105)
+- Fix [Remove unlock choice from delete confirm form](https://www.drupal.org/project/thunder/issues/3025821)
+- Fix [Error while adding new translation and having content_moderation enabled](https://www.drupal.org/project/thunder/issues/3029401)
+- Fix [Daily tests are failing](https://www.drupal.org/project/thunder/issues/3029977) 
+
+
 ## [8.2.33](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.33) 2019-01-24
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.32...8.2.33)
 
