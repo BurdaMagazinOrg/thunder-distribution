@@ -54,6 +54,13 @@ jobs:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: sanity checks
+      env: DRUPAL_CORE=~8.7
+      name: Check config for composer build
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: sanity checks
+      env: DRUPAL_CORE=~8.6
       name: Check config for composer build
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
@@ -67,6 +74,11 @@ jobs:
 
     - stage: test
       name: Run tests with composer build
+      env: DRUPAL_CORE=~8.7
+
+    - stage: test
+      name: Run tests with composer build
+      env: DRUPAL_CORE=~8.6
 
     - stage: test
       name: Run tests with drush_make build
@@ -75,7 +87,7 @@ jobs:
 
     - stage: test
       name: Run update test
-      env: TEST_UPDATE=true
+      env: TEST_UPDATE=true DRUPAL_CORE=~8.7
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
