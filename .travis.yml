@@ -52,31 +52,22 @@ jobs:
       env: DRUPAL_CORE=~8.7
       script: bash -x -e ./scripts/travis/06-test-source-code.sh
 
-    - stage: sanity checks
-      env: DRUPAL_CORE=~8.7
-      name: Check config for composer build (D8.7)
-      script: bash -x -e ./scripts/travis/06-run-config-tests.sh
-
-    - stage: sanity checks
-      name: Check config for drush_make build (D8.7)
-      install: bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-      script: bash -x -e ./scripts/travis/06-run-config-tests.sh
-
     - stage: test
       name: Run tests with composer build (D8.7)
-      env: DRUPAL_CORE=~8.7
+      env: DRUPAL_CORE=~8.7 CONFIG_CHECK=true
 
     - stage: test
       name: Run tests with composer build (D8.6)
-      env: DRUPAL_CORE=~8.6
+      env: DRUPAL_CORE=~8.6 CONFIG_CHECK=false
 
     - stage: test
       name: Run tests with drush_make build (D8.7)
       install: bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      env: CONFIG_CHECK=false
 
     - stage: test
       name: Run update test (D8.7)
-      env: TEST_UPDATE=true DRUPAL_CORE=~8.7
+      env: TEST_UPDATE=true DRUPAL_CORE=~8.7 CONFIG_CHECK=true
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
