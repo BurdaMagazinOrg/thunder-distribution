@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # Install thunder and enable Test module
 # in provided folder
 install_thunder() {
@@ -9,9 +8,7 @@ install_thunder() {
     /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://travis@127.0.0.1/drupal -y thunder_module_configure_form.install_modules_thunder_demo
     drush en simpletest -y
 
-    if [[ "${TEST_DEPLOYMENT}" == "true" ]]; then
-        drush -y sql-dump --result-file=${DEPLOYMENT_DUMP_FILE}
-    fi
+    drush -y sql-dump --result-file=${DEPLOYMENT_DUMP_FILE}
 }
 
 # Mock update process for deployment workflow
@@ -81,35 +78,6 @@ composer_create_thunder() {
     git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 }
 
-apply_patches() {
-    cd ${TEST_DIR}/docroot
-
-    #EXAMPLE:
-    # apply cookie expire patch for javascript tests
-    #wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
-    #patch -p1 < test-session-expire-2771547-64.patch
-}
-
-create_testing_dump() {
-    cd ${TEST_DIR}/docroot
-
-    php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.php.gz
-}
-# Build current revision of thunder
-if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    drush_make_thunder
-elif [[ ${INSTALL_METHOD} == "composer" ]]; then
-    composer_create_thunder
-
-    # Check for deprecated methods.
-    cp ${THUNDER_DIST_DIR}/phpstan.neon.dist phpstan.neon
-    if [[ ${TEST_UPDATE} == "true" ]]; then
-        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/thunder
-    else
-        phpstan analyse --memory-limit 300M ${TEST_DIR}/docroot/profiles/contrib/thunder
-    fi
-fi
-
 # Install Thunder
 if [[ ${TEST_UPDATE} == "true" ]]; then
     # Install last drupal org version and update to currently tested version
@@ -118,7 +86,3 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 else
     install_thunder ${TEST_DIR}/docroot
 fi
-
-create_testing_dump
-
-apply_patches
