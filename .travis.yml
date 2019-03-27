@@ -27,9 +27,6 @@ stages:
   - test
 
 jobs:
-  allow_failures:
-    - env: DRUPAL_CORE=~8.7
-      script: bash -x -e ./scripts/travis/06-test-source-code.sh
   include:
     - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code (D8.6)
@@ -50,6 +47,7 @@ jobs:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script: skip
       env: DRUPAL_CORE=~8.7
+      TRAVIS_ALLOW_FAILURE: true
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
