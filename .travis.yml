@@ -40,8 +40,7 @@ jobs:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script: skip
       env: DRUPAL_CORE=~8.6
-      script:
-        - bash -x -e ./scripts/travis/06-test-source-code.sh
+      script: bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code (D8.7)
@@ -53,18 +52,15 @@ jobs:
       env: DRUPAL_CORE=~8.7
       script: bash -x -e ./scripts/travis/06-test-source-code.sh
 
-#    - stage: sanity checks
-#      env: DRUPAL_CORE=~8.7
-#      name: Check config for composer build (D8.7)
-#      script:
-#        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+    - stage: sanity checks
+      env: DRUPAL_CORE=~8.7
+      name: Check config for composer build (D8.7)
+      script: bash -x -e ./scripts/travis/06-run-config-tests.sh
 
-#    - stage: sanity checks
-#      name: Check config for drush_make build (D8.7)
-#      install:
-#        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-#      script:
-#        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+    - stage: sanity checks
+      name: Check config for drush_make build (D8.7)
+      install: bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      script: bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: test
       name: Run tests with composer build (D8.7)
@@ -76,8 +72,7 @@ jobs:
 
     - stage: test
       name: Run tests with drush_make build (D8.7)
-      install:
-        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      install: bash -x -e ./scripts/travis/03-build-thunder-drush.sh
 
     - stage: test
       name: Run update test (D8.7)
