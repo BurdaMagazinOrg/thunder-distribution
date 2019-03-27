@@ -33,7 +33,7 @@ jobs:
       install:
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
-        - bash -x -e ./scripts/travis/03-download-thunder-composer.sh
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script: skip
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
@@ -46,7 +46,7 @@ jobs:
     - stage: sanity checks
       name: Check config for drush_make build
       install:
-        - bash -x -e ./scripts/travis/03-download-thunder-drush.sh
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
@@ -56,7 +56,7 @@ jobs:
     - stage: test
       name: Run tests with drush_make build
       install:
-        - bash -x -e ./scripts/travis/03-download-thunder-drush.sh
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
 
     - stage: test
       name: Run update test
@@ -71,7 +71,7 @@ before_install:
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/03-download-thunder-composer.sh
+  - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
