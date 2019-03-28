@@ -316,3 +316,8 @@ v2.36:
         '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong></p><p>Switch manually to the select2 widget for the "Author by" field on all node and media types.</p>'
         node_article_manage_form_page: { '#text': 'Node "article" manage form display', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+    thunder_update_8135:
+        '#title': 'Updating the filter weights.'
+        '#description': '<p>Configuration is successfully updated.</p>'
+        '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
