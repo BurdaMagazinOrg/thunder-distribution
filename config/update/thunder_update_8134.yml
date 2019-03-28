@@ -191,16 +191,6 @@ core.entity_form_display.node.article.default:
   update_actions:
     add:
       content:
-        field_paragraphs:
-          settings:
-            closed_mode_threshold: 0
-        field_tags:
-          settings:
-            match_operator: CONTAINS
-            width: 100%
-        field_teaser_media:
-          settings:
-            field_widget_replace: false
         uid:
           settings:
             autocomplete: true
