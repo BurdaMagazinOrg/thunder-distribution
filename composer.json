@@ -108,7 +108,7 @@
         "drupal/entity": "^1.0",
         "drupal/entity_browser": "1.7",
         "drupal/entity_reference_revisions": "^1.0",
-        "drupal/fb_instant_articles": "dev-1.x",
+        "drupal/fb_instant_articles": "dev-2.x",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",

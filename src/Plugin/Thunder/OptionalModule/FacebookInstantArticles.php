@@ -6,7 +6,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  * Facebook Instant Articles.
  *
  * @ThunderOptionalModule(
- *   id = "thunder_fia",
+ *   id = "fb_instant_articles",
  *   label = @Translation("Facebook Instant Articles"),
  *   description = @Translation("A new way for any publisher to create fast, interactive articles on Facebook."),
  *   type = "module",
