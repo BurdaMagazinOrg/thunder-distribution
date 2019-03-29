@@ -55,6 +55,10 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
+    if (isset($_SERVER['strictConfigSchema'])) {
+      $this->strictConfigSchema = $_SERVER['strictConfigSchema'] === 'true' ? TRUE : FALSE;
+    }
+
     parent::setUp();
 
     $this->logWithRole(static::$defaultUserRole);

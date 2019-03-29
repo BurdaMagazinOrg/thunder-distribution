@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder_article\Form\ThunderNodeForm;
 
 /**
  * Implements hook_menu_local_tasks_alter().
@@ -26,12 +28,10 @@ function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
 }
 
 /**
- * Implements hook_entity_type_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
-function thunder_article_entity_type_alter(array &$entity_types) {
-  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
-  if (!empty($entity_types['node'])) {
-    $entity_types['node']->setFormClass('default', 'Drupal\thunder_article\Form\ThunderNodeForm');
-    $entity_types['node']->setFormClass('edit', 'Drupal\thunder_article\Form\ThunderNodeForm');
-  }
+function thunder_article_form_node_article_edit_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(ThunderNodeForm::class)
+    ->formAlter($form, $form_state);
 }

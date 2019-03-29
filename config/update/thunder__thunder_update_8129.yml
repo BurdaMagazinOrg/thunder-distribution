@@ -1,3 +1,9 @@
+__global_actions:
+  import_configs:
+    - core.entity_form_display.media.gallery.inline
+    - core.entity_form_display.media.instagram.inline
+    - core.entity_form_display.media.pinterest.inline
+    - core.entity_form_display.media.twitter.inline
 core.entity_form_display.media.gallery.default:
   expected_config:
     content:

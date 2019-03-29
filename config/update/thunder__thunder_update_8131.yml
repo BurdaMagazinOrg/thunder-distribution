@@ -1,0 +1,515 @@
+views.view.scheduler_scheduled_content:
+  expected_config:
+    base_field: nid
+    base_table: node_field_data
+    display:
+      default:
+        cache_metadata:
+          cacheable: false
+        display_options:
+          exposed_form:
+            options:
+              reset_button: true
+              submit_button: Filter
+          fields:
+            name:
+              relationship: uid
+            operations:
+              table: node
+            publish_on:
+              custom_date_format: ''
+              date_format: short
+              plugin_id: date
+              table: node_field_data
+              timezone: ''
+            status:
+              label: Status
+              table: node_field_data
+            title:
+              settings:
+                link_to_entity: true
+              table: node_field_data
+            type:
+              relationship: none
+            unpublish_on:
+              custom_date_format: ''
+              date_format: short
+              plugin_id: date
+              table: node_field_data
+              timezone: ''
+          filters:
+            langcode:
+              table: node_field_data
+            publish_on:
+              expose:
+                identifier: publish_on
+                label: 'Publish on'
+                operator: publish_on_op
+                operator_id: publish_on_op
+                remember_roles:
+                  administrator: '0'
+                  anonymous: '0'
+                use_operator: true
+              group_info:
+                description: null
+                group_items:
+                  1: {  }
+                  2: {  }
+                  3: {  }
+                identifier: publish_on
+                label: 'Publish on'
+              table: node_field_data
+            status:
+              expose:
+                description: ''
+                label: Status
+                required: false
+              table: node_field_data
+              value: '1'
+            title:
+              operator: contains
+              table: node_field_data
+            type:
+              relationship: none
+            unpublish_on:
+              expose:
+                identifier: unpublish_on
+                label: 'Unpublish on'
+                operator: unpublish_on_op
+                operator_id: unpublish_on_op
+                remember_roles:
+                  administrator: '0'
+                  anonymous: '0'
+              table: node_field_data
+          relationships:
+            uid:
+              admin_label: author
+              field: uid
+              id: uid
+              plugin_id: standard
+              required: true
+              table: node_field_data
+          show_admin_links: false
+      overview:
+        cache_metadata:
+          cacheable: false
+      user_page:
+        cache_metadata:
+          cacheable: false
+        display_options:
+          arguments:
+            uid:
+              table: node_field_data
+    module: node
+    tag: default
+  update_actions:
+    add:
+      display:
+        default:
+          display_options:
+            cache:
+              options: {  }
+            fields:
+              name:
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                element_label_class: ''
+                element_label_colon: true
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+                group_type: group
+                multi_type: separator
+              node_bulk_form:
+                action_title: Action
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                element_label_class: ''
+                element_label_colon: false
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                group_type: group
+                include_exclude: exclude
+                relationship: nid
+                selected_actions: {  }
+              operations:
+                entity_type: node
+              publish_on:
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+              status:
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                element_label_class: ''
+                element_label_colon: true
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+                group_type: group
+                relationship: none
+                separator: ', '
+              title:
+                admin_label: ''
+                alter:
+                  absolute: false
+                  ellipsis: false
+                  html: false
+                  make_link: false
+                  strip_tags: false
+                  trim: false
+                  word_boundary: false
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                element_label_class: ''
+                element_label_colon: true
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+                group_type: group
+                multi_type: separator
+                relationship: none
+                separator: ', '
+              unpublish_on:
+                field_api_classes: false
+                group_column: value
+                group_columns: {  }
+                group_rows: true
+            filters:
+              latest_revision:
+                admin_label: ''
+                entity_type: node
+                expose:
+                  description: ''
+                  identifier: ''
+                  label: ''
+                  multiple: false
+                  operator: ''
+                  operator_id: ''
+                  remember: false
+                  remember_roles:
+                    authenticated: authenticated
+                  required: false
+                  use_operator: false
+                exposed: false
+                field: latest_revision
+                group: 1
+                group_info:
+                  default_group: All
+                  default_group_multiple: {  }
+                  description: ''
+                  group_items: {  }
+                  identifier: ''
+                  label: ''
+                  multiple: false
+                  optional: true
+                  remember: false
+                  widget: select
+                group_type: group
+                id: latest_revision
+                is_grouped: false
+                operator: '='
+                plugin_id: latest_revision
+                relationship: none
+                table: node_revision
+                value: ''
+              title:
+                expose:
+                  placeholder: ''
+                  remember_roles:
+                    editor: '0'
+                    restricted_editor: '0'
+                    seo: '0'
+            footer: {  }
+            header: {  }
+            pager:
+              options:
+                id: 0
+                offset: 0
+                total_pages: null
+            query:
+              options:
+                disable_sql_rewrite: false
+                distinct: false
+                query_comment: ''
+                query_tags: {  }
+                replica: false
+        overview:
+          display_options:
+            menu:
+              expanded: false
+    change:
+      base_field: vid
+      base_table: node_field_revision
+      display:
+        default:
+          display_options:
+            exposed_form:
+              options:
+                reset_button: false
+                submit_button: Apply
+            fields:
+              name:
+                relationship: revision_uid
+                separator: ', '
+                settings:
+                  link_to_entity: true
+              operations:
+                table: node_revision
+              publish_on:
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                multi_type: separator
+                plugin_id: field
+                separator: ', '
+                settings:
+                  custom_date_format: ''
+                  date_format: medium
+                  timezone: ''
+                table: node_field_revision
+                type: timestamp
+              status:
+                label: Published
+                multi_type: separator
+                table: node_field_revision
+              title:
+                settings:
+                  link_to_entity: false
+                table: node_field_revision
+              type:
+                relationship: nid
+              unpublish_on:
+                click_sort_column: value
+                delta_first_last: false
+                delta_limit: 0
+                delta_offset: 0
+                delta_reversed: false
+                multi_type: separator
+                plugin_id: field
+                separator: ', '
+                settings:
+                  custom_date_format: ''
+                  date_format: medium
+                  timezone: ''
+                table: node_field_revision
+                type: timestamp
+            filters:
+              langcode:
+                table: node_field_revision
+              publish_on:
+                expose:
+                  identifier: ''
+                  label: ''
+                  max_placeholder: ''
+                  min_placeholder: ''
+                  operator: ''
+                  operator_id: ''
+                  placeholder: ''
+                  use_operator: false
+                group_info:
+                  description: ''
+                  group_items: {  }
+                  identifier: ''
+                  label: ''
+                table: node_field_revision
+              status:
+                expose:
+                  description: null
+                  label: Published
+                  required: true
+                table: node_field_revision
+                value: ''
+              title:
+                operator: '='
+                table: node_field_revision
+              type:
+                relationship: nid
+              unpublish_on:
+                expose:
+                  identifier: ''
+                  label: ''
+                  max_placeholder: ''
+                  min_placeholder: ''
+                  operator: ''
+                  operator_id: ''
+                  placeholder: ''
+                table: node_field_revision
+            relationships:
+              nid:
+                admin_label: 'Get the actual content from a content revision.'
+                entity_field: nid
+                entity_type: node
+                field: nid
+                group_type: group
+                id: nid
+                plugin_id: standard
+                relationship: none
+                required: false
+                table: node_field_revision
+              revision_uid:
+                admin_label: 'revision user'
+                entity_field: revision_uid
+                entity_type: node
+                field: revision_uid
+                group_type: group
+                id: revision_uid
+                plugin_id: standard
+                relationship: none
+                required: false
+                table: node_revision
+        user_page:
+          display_options:
+            arguments:
+              uid:
+                table: node_field_revision
+      module: views
+      tag: ''
+    delete:
+      display:
+        default:
+          cache_metadata:
+            cacheable: false
+          display_options:
+            fields:
+              publish_on:
+                custom_date_format: ''
+                date_format: short
+                timezone: ''
+              unpublish_on:
+                custom_date_format: ''
+                date_format: short
+                timezone: ''
+            filters:
+              publish_on:
+                expose:
+                  remember_roles:
+                    administrator: '0'
+                    anonymous: '0'
+                group_info:
+                  group_items:
+                    1: {  }
+                    2: {  }
+                    3: {  }
+              unpublish_on:
+                expose:
+                  remember_roles:
+                    administrator: '0'
+                    anonymous: '0'
+            relationships:
+              uid: 'delete me'
+            show_admin_links: false
+        overview:
+          cache_metadata:
+            cacheable: false
+        user_page:
+          cache_metadata:
+            cacheable: false
