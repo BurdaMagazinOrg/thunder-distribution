@@ -7,7 +7,7 @@ namespace Drupal\Tests\thunder\Functional;
  *
  * @package Drupal\Tests\thunder\Kernel
  *
- * @group ThunderConfig
+ * @group Thunder
  */
 class ModuleUninstallTest extends ThunderTestBase {
 
