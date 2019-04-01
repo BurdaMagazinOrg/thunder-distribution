@@ -32,8 +32,7 @@ jobs:
       name: Verify makefile, check coding standards, check for deprecated code
       install:
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
-        # Use again when https://www.drupal.org/project/drupalorg_drush/issues/3044780 is fixed.
-        # - drush dl drupalorg_drush-7.x && drush verify-makefile
+        - drush dl drupalorg_drush-7.x && drush verify-makefile
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script: skip
       script:
