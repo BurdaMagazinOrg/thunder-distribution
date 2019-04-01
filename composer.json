@@ -71,6 +71,9 @@
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
             },
+            "drupal/fb_instant_articles": {
+                "FiaFields::__construct() broken on Drupal 8.7.x": "https://www.drupal.org/files/issues/2019-04-01/3044894-2.patch"
+            },
             "drupal/scheduler": {
                 "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
             },
