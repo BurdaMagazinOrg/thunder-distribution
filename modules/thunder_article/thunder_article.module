@@ -30,7 +30,7 @@ function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_article_form_node_article_edit_form_alter(&$form, FormStateInterface $form_state) {
+function thunder_article_form_node_form_alter(&$form, FormStateInterface $form_state) {
   \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(ThunderNodeForm::class)
     ->formAlter($form, $form_state);
