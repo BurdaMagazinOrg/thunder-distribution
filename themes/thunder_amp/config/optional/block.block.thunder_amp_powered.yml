@@ -7,8 +7,8 @@ dependencies:
     - thunder_amp
 id: thunder_amp_powered
 theme: thunder_amp
-region: header
-weight: 10
+region: footer
+weight: -1
 provider: null
 plugin: thunder_powered_by_block
 settings:
