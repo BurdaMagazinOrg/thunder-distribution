@@ -316,3 +316,9 @@ v2.36:
         '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong></p><p>Switch manually to the select2 widget for the "Author by" field on all node and media types.</p>'
         node_article_manage_form_page: { '#text': 'Node "article" manage form display', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+    thunder_update_8135:
+        '#title': 'Updating the filter weights.'
+        '#description': '<p>The weights of the text format filters were the same. This led to different orders in some languages.</p>'
+        '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
+        '#description_failed': '<p><strong>Adjust the order to your needs and save the page. If the order is already correct displayed, move one item for and back before saving.</strong><p>'
+        filter_page: { '#text': 'Text formats and editors', '#url': 'internal:/admin/config/content/formats' }

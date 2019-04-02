@@ -1124,3 +1124,17 @@ function thunder_update_8134() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Updating the filter weights.
+ */
+function thunder_update_8135() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8135');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
