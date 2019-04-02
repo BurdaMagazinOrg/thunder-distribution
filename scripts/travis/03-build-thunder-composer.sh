@@ -20,3 +20,7 @@ fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "drupal/core:${DRUPAL_CORE}" "mglaman/phpstan-drupal" "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" --no-progress
+
+ # Get custom branch of Thunder Admin theme
+rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
