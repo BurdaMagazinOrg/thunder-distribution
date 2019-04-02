@@ -12,14 +12,10 @@ drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${T
 
 # Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
 rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-git clone --depth 1 --single-branch --branch 8.x-2.x https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
+git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://git.drupal.org/project/thunder_admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
 composer install --working-dir=${TEST_DIR}/docroot
 composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
 composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
-
-# Get development branch of Thunder Admin theme (to use same admin theme as for composer build)
-rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
-git clone --depth 1 --single-branch --branch fix/3025280-entity-browser-z-index https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
