@@ -72,7 +72,7 @@ jobs:
 
     - stage: test
       name: Run update test (D8.7)
-      env: TEST_UPDATE=true DRUPAL_CORE=~8.7 strictConfigSchema=false
+      env: TEST_UPDATE=true DRUPAL_CORE=~8.7 strictConfigSchema=true
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
