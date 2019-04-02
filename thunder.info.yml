@@ -3,7 +3,7 @@ type: profile
 description: 'The Drupal8 based CMS for professional publishing.'
 project: thunder
 core: 8.x
-version: '8.x-2.35'
+version: '8.x-2.36'
 
 distribution:
   name: Thunder
@@ -17,6 +17,7 @@ dependencies:
   - media_entity:media_entity
   - drupal:node
   - drupal:views
+  - update_helper:update_helper
 
 install:
   # core
@@ -79,13 +80,13 @@ install:
   - simple_sitemap:simple_sitemap
   - slick_media:slick_media
   - responsive_preview:responsive_preview
+  - update_helper_checklist:update_helper_checklist
   - video_embed_field:video_embed_media
 # thunder
   - thunder:thunder_article
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
-  - thunder:thunder_updater
 themes:
   - seven
   - thunder_base
