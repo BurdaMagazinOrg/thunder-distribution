@@ -18,5 +18,3 @@ export PHP_IMAGICK_VERSION="3.4.3"
 export PHP_YAML_VERSION="2.0.4"
 
 export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
-
-export THUNDER_ADMIN_BRANCH="fix/3025280-entity-browser-z-index"

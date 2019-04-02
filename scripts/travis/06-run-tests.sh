@@ -16,7 +16,7 @@ if [[ "${TEST_UPDATE}" != "true" ]]; then
     fi
 fi
 
-if [[ ${strictConfigSchema} == "true" ]]; then
+if [${TEST_UPDATE} == "false"] && [${strictConfigSchema} == "true" ]; then
   thunderDumpFile=thunder.php php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 ThunderConfig
 fi
 

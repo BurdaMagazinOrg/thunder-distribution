@@ -26,6 +26,11 @@ stages:
   - sanity checks
   - test
 
+env:
+  global:
+    - TEST_UPDATE=false
+    - THUNDER_ADMIN_BRANCH=fix/3025280-entity-browser-z-index
+
 jobs:
   allow_failures:
     - env: DRUPAL_CORE=~8.7
