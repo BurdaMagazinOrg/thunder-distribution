@@ -2,6 +2,7 @@ module.exports = {
   '@tags': ['Thunder'],
   createArticleWithParagraphs(browser) {
     browser
+      .resizeWindow(1024, 1024)
       .drupalRelativeURL('/user/login')
       // TODO - move 'http://localhost:8202', '.thunder.dd' into some configuration!!!
       .performanceMeasurementStart('http://localhost:8200', 'NightwatchJS - Test', 'Create an article with paragraphs', '.thunder.dd')
