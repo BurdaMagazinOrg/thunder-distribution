@@ -380,6 +380,53 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->getSession()->executeScript('AMPValidationSuccess = false; console.info = function(message) { if (message === "AMP validation successful.") { AMPValidationSuccess = true } }; amp.validator.validateUrlAndLog(document.location.href, document);');
     $this->assertJsCondition('AMPValidationSuccess === true', 10000, 'AMP validation successful.');
 
+    $this->drupalLogout();
+    $this->drupalLogin($this->rootUser);
+
+    // Verify that the Site branding block is in the header region.
+    $this->drupalGet('admin/structure/block/list/thunder_amp');
+    $element = $this->xpath("//tr[contains(@data-drupal-selector, :block) and contains(@class, :status)]//select/option[@selected and @value=:region]",
+      [
+        ':block' => 'edit-blocks-thunder-amp-branding',
+        ':status' => 'block-enabled',
+        ':region' => 'header',
+      ]
+    );
+    $this->assertTrue(!empty($element));
+
+    // Verify that the Title block is in the content region.
+    $this->drupalGet('admin/structure/block/list/thunder_amp');
+    $element = $this->xpath("//tr[contains(@data-drupal-selector, :block) and contains(@class, :status)]//select/option[@selected and @value=:region]",
+      [
+        ':block' => 'edit-blocks-thunder-amp-page-title',
+        ':status' => 'block-enabled',
+        ':region' => 'content',
+      ]
+    );
+    $this->assertTrue(!empty($element));
+
+    // Verify that the Content block is in the content region.
+    $this->drupalGet('admin/structure/block/list/thunder_amp');
+    $element = $this->xpath("//tr[contains(@data-drupal-selector, :block) and contains(@class, :status)]//select/option[@selected and @value=:region]",
+      [
+        ':block' => 'edit-blocks-thunder-amp-content',
+        ':status' => 'block-enabled',
+        ':region' => 'content',
+      ]
+    );
+    $this->assertTrue(!empty($element));
+
+    // Verify that the Powered By block is in the footer region.
+    $this->drupalGet('admin/structure/block/list/thunder_amp');
+    $element = $this->xpath("//tr[contains(@data-drupal-selector, :block) and contains(@class, :status)]//select/option[@selected and @value=:region]",
+      [
+        ':block' => 'edit-blocks-thunder-amp-powered',
+        ':status' => 'block-enabled',
+        ':region' => 'footer',
+      ]
+    );
+    $this->assertTrue(!empty($element));
+
   }
 
   /**
