@@ -1,8 +1,8 @@
 /**
  * @file
- * Start performance measurement for test.
+ * Stop last measurement mark and start new performance measurement mark.
  *
- * This provides a custom command, .perfPageLoad()
+ * This provides a custom command, .performanceMark()
  *
  * @param {string} markName
  *   The mark name used for naming of time spans.
