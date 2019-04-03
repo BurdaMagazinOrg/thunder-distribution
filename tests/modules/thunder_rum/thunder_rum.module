@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks for Thunder performance testing.
+ */
+
+function thunder_rum_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'thunder_rum/elastic_rum';
+}
