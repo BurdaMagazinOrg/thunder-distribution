@@ -31,14 +31,16 @@ exports.command = function performanceMeasurementStart(serverUrl, serviceName, t
       browser.apmTrans = apmInstance.startTransaction(transactionName, 'test');
       browser.apmSpans = [];
 
-      browser.setCookie({
-        domain: domain,
-        expiry: 3533274000,
-        httpOnly: false,
-        name: 'traceId',
-        path: '/',
-        value: browser.apmTrans.traceId
-      });
+      browser
+        .setCookie({
+          domain: domain,
+          expiry: 3533274000,
+          httpOnly: false,
+          name: 'traceId',
+          path: '/',
+          value: browser.apmTrans.traceId
+        })
+        .performanceSetTag('branch', process.env.THUNDER_BRANCH)
     });
 
   return browser;
