@@ -2,9 +2,12 @@
 
 /**
  * @file
- * Contains hooks for Thunder performance testing.
+ * Contains hooks for Thunder performance testing module.
  */
 
+/**
+ * Implements hook_page_attachments().
+ */
 function thunder_rum_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'thunder_rum/elastic_rum';
 }
