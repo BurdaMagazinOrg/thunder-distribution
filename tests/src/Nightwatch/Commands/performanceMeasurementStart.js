@@ -40,6 +40,14 @@ exports.command = function performanceMeasurementStart(serverUrl, serviceName, t
           path: '/',
           value: browser.apmTrans.traceId
         })
+        .setCookie({
+          domain: domain,
+          expiry: 3533274000,
+          httpOnly: false,
+          name: 'serverUrl',
+          path: '/',
+          value: serverUrl
+        })
         .performanceSetTag('branch', process.env.THUNDER_BRANCH)
     });
 

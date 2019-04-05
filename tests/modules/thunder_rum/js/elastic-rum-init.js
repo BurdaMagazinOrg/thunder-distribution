@@ -18,15 +18,17 @@
    */
   var getCookie = function (name) {
     var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+
     return v ? v[2] : null;
   };
 
   var traceId = getCookie('traceId');
+  var serverUrl = getCookie('serverUrl') || 'http://localhost:8200';
 
   // Init Elastic RUM.
   window.apm = elasticApm.init({
     serviceName: 'ThunderRUM',
-    serverUrl: 'http://localhost:8200',
+    serverUrl: serverUrl,
     pageLoadTransactionName: window.location.pathname,
     pageLoadTraceId: traceId,
     flushInterval: 1

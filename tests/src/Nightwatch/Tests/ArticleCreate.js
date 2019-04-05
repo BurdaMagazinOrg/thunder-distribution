@@ -4,8 +4,7 @@ module.exports = {
     browser
       .resizeWindow(1024, 1024)
       .drupalRelativeURL('/user/login')
-      // TODO - move 'http://localhost:8202', '.thunder.dd' into some configuration!!!
-      .performanceMeasurementStart('http://localhost:8200', 'NightwatchJS - Test', 'Create an article with paragraphs', '.thunder.dd')
+      .performanceMeasurementStart(process.env.THUNDER_APM_URL, 'NightwatchJS - Test', 'Create an article with paragraphs', '.' + process.env.THUNDER_SITE_HOSTNAME)
       .performanceMarkStart('full task')
       .performanceMarkStart('login')
       .drupalLogin({name: 'test-editor', password: 'test-editor'})
