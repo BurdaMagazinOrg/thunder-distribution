@@ -34,6 +34,10 @@
     flushInterval: 1
   });
 
+  window.apm.addTags({
+    branch: getCookie('branchTag')
+  });
+
   elasticApm.addFilter(function (payload) {
     if (!payload.transactions) {
       return payload;

@@ -17,16 +17,19 @@ exports.command = function performanceMarkStart(markName) {
   browser
     .perform(function () {
       var span = browser.apmTrans.startSpan(markName);
+      span.setTag('branch', process.env.THUNDER_BRANCH);
+
       browser.apmSpans.push(span);
 
-      browser.setCookie({
-        domain: browser.apmDomain,
-        expiry: 3533274000,
-        httpOnly: false,
-        name: 'spanId',
-        path: '/',
-        value: span.id
-      });
+      browser
+        .setCookie({
+          domain: browser.apmDomain,
+          expiry: 3533274000,
+          httpOnly: false,
+          name: 'spanId',
+          path: '/',
+          value: span.id
+        });
     });
 
   return browser;

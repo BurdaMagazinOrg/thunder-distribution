@@ -36,17 +36,25 @@ exports.command = function performanceMeasurementStart(serverUrl, serviceName, t
           domain: domain,
           expiry: 3533274000,
           httpOnly: false,
-          name: 'traceId',
           path: '/',
+          name: 'traceId',
           value: browser.apmTrans.traceId
         })
         .setCookie({
           domain: domain,
           expiry: 3533274000,
           httpOnly: false,
-          name: 'serverUrl',
           path: '/',
+          name: 'serverUrl',
           value: serverUrl
+        })
+        .setCookie({
+          domain: domain,
+          expiry: 3533274000,
+          httpOnly: false,
+          path: '/',
+          name: 'branchTag',
+          value: process.env.THUNDER_BRANCH
         })
         .performanceSetTag('branch', process.env.THUNDER_BRANCH)
     });
