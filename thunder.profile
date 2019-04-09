@@ -460,4 +460,3 @@ function thunder_field_widget_info_alter(array &$info) {
     unset($info['thunder_moderation_state_default']);
   }
 }
-
