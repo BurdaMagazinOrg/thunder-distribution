@@ -1,6 +1,18 @@
+/**
+ * @file
+ * Testing of an article creation with 15 paragraphs.
+ */
+
+var apm = require('elastic-apm-node');
+
 module.exports = {
   '@tags': ['Thunder'],
-  createArticleWithParagraphs(browser) {
+  before: function (browser, done) {
+    browser.apm = apm;
+
+    done();
+  },
+  'Create an article with 15 paragraphs': function (browser) {
     browser
       .resizeWindow(1024, 1024)
       .drupalRelativeURL('/user/login')
@@ -91,12 +103,12 @@ module.exports = {
       })
 
       // End creation of paragraphs
-      // Close: create paragraphs - set 5
+      // Close: create paragraphs - set 5.
       .performanceMarkEnd()
-      // Close: create paragraphs
+      // Close: create paragraphs.
       .performanceMarkEnd()
 
-      // Submit form
+      // Submit form.
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible('//*[@id="block-thunder-base-content"]/div/article/div/div[1]/div[13]/div/div/p[1]/strong/span', 60000)
       .performanceMeasurementEnd();
