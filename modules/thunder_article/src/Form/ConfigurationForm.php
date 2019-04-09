@@ -74,11 +74,11 @@ class ConfigurationForm extends ConfigFormBase {
         $tags[$definition['id']] = $definition['group'] . ': ' . $definition['label'];
       }
 
-      $form['metatags_tags'] = [
+      $form['thunder_article_metatags'] = [
         '#type' => 'checkboxes',
-        '#title' => $this->t("Move metatag tags into the 'Thunder' group"),
-        '#description' => $this->t("The 'Thunder' group is displayed on the article edit page."),
-        '#default_value' => $config->get('metatags_tags') ? $config->get('metatags_tags') : [],
+        '#title' => $this->t("Move metatag tags into the 'Thunder Article' group"),
+        '#description' => $this->t("The 'Thunder Article' group is displayed on the article edit page."),
+        '#default_value' => $config->get('thunder_article_metatags') ? $config->get('thunder_article_metatags') : [],
         '#options' => $tags,
       ];
     }
@@ -94,7 +94,7 @@ class ConfigurationForm extends ConfigFormBase {
 
     $this->config('thunder_article.settings')
       ->set('move_scheduler_local_task', $form_state->getValue('move_scheduler_local_task'))
-      ->set('metatags_tags', array_keys(array_filter($form_state->getValue('metatags_tags'))))
+      ->set('thunder_article_metatags', array_keys(array_filter($form_state->getValue('thunder_article_metatags'))))
       ->save();
 
     $this->metatagTagManager->clearCachedDefinitions();

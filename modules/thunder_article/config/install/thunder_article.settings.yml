@@ -1,5 +1,5 @@
 move_scheduler_local_task: true
-metatags_tags:
+thunder_article_metatags:
   - referrer
   - title
   - content_language

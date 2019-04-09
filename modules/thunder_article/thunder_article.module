@@ -35,3 +35,12 @@ function thunder_article_entity_type_alter(array &$entity_types) {
     $entity_types['node']->setFormClass('edit', 'Drupal\thunder_article\Form\ThunderNodeForm');
   }
 }
+
+/**
+ * Implements hook_metatag_tags_alter().
+ */
+function thunder_article_metatag_tags_alter(array &$definition) {
+  foreach (\Drupal::config('thunder_article.settings')->get('thunder_article_metatags') as $tag) {
+    $definition[$tag]['group'] = 'thunder_article';
+  }
+}

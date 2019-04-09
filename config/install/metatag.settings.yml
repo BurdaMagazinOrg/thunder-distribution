@@ -1,4 +1,4 @@
 entity_type_groups:
   node:
     article:
-      thunder: thunder
+      thunder_article: thunder_article
