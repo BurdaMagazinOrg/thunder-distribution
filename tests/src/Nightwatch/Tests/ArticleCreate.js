@@ -12,7 +12,7 @@ module.exports = {
 
     done();
   },
-  'Create an article with 15 paragraphs': function (browser) {
+  'Create an article with paragraphs': function (browser) {
     browser
       .resizeWindow(1024, 1024)
       .drupalRelativeURL('/user/login')
