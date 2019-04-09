@@ -5,7 +5,7 @@ namespace Drupal\thunder_article\Plugin\metatag\Group;
 use Drupal\metatag\Plugin\metatag\Group\GroupBase;
 
 /**
- * The basic group.
+ * Curated list of metatags for the Thunder article edit page.
  *
  * @MetatagGroup(
  *   id = "thunder_article",
@@ -14,6 +14,4 @@ use Drupal\metatag\Plugin\metatag\Group\GroupBase;
  *   weight = 1
  * )
  */
-class Thunder extends GroupBase {
-  // Inherits everything from Base.
-}
+class ThunderArticle extends GroupBase {}
