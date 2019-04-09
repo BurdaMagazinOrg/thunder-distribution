@@ -83,6 +83,7 @@ projects[media_expire][type] = module
 projects[media_expire][version] = 1
 projects[metatag][type] = module
 projects[metatag][version] = 1
+projects[metatag][patch][] = https://www.drupal.org/files/issues/2019-04-09/3046976.patch
 projects[nexx_integration][type] = module
 projects[nexx_integration][version] = 1
 projects[paragraphs][type] = module
