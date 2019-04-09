@@ -96,6 +96,8 @@ class ConfigurationForm extends ConfigFormBase {
       ->set('move_scheduler_local_task', $form_state->getValue('move_scheduler_local_task'))
       ->set('metatags_tags', array_keys(array_filter($form_state->getValue('metatags_tags'))))
       ->save();
+
+    $this->metatagTagManager->clearCachedDefinitions();
   }
 
 }

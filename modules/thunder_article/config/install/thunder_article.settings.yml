@@ -1,2 +1,22 @@
 move_scheduler_local_task: true
-metatags_tags: {}
+metatags_tags:
+  - referrer
+  - title
+  - content_language
+  - robots
+  - canonical_url
+  - description
+  - image_src
+  - og_image_width
+  - og_image
+  - og_image_height
+  - og_url
+  - og_description
+  - og_site_name
+  - og_image_type
+  - og_title
+  - twitter_cards_image
+  - twitter_cards_image_width
+  - twitter_cards_description
+  - twitter_cards_type
+  - twitter_cards_image_height

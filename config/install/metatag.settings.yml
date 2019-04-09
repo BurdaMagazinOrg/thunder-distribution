@@ -1,0 +1,4 @@
+entity_type_groups:
+  node:
+    article:
+      thunder: thunder
