@@ -5,5 +5,8 @@ thunder_article.settings:
       type: boolean
       label: 'Move scheduler to local task of content list'
     thunder_article_metatags:
-      type: mapping
+      type: sequence
       label: "Move metatag tags into the 'Thunder' group"
+      sequence:
+        type: string
+        label: 'Metatags'
