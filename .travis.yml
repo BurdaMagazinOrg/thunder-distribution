@@ -1,18 +1,11 @@
 language: php
 cache:
-  apt: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
-  - "vendor"
 
 php:
   - 7.2
-
-env:
-  matrix:
-    - INSTALL_METHOD=composer
-    - INSTALL_METHOD=drush_make
 
 dist: xenial
 
@@ -29,17 +22,59 @@ addons:
     paths:
       - /tmp/thunder-travis-ci
 
+stages:
+  - sanity checks
+  - test
+
+jobs:
+  include:
+    - stage: sanity checks
+      name: Verify makefile, check coding standards, check for deprecated code
+      install:
+        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
+        - drush dl drupalorg_drush-7.x && drush verify-makefile
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+      before_script: skip
+      script:
+        - bash -x -e ./scripts/travis/06-test-source-code.sh
+
+    - stage: sanity checks
+      name: Check config for composer build
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: sanity checks
+      name: Check config for drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: test
+      name: Run tests with composer build
+
+    - stage: test
+      name: Run tests with drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+
+    - stage: test
+      name: Run update test
+      env: TEST_UPDATE=true
+      if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
+
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
   - bash -e ./scripts/travis/00-keep-travis-running.sh &
   - source ./scripts/travis/01-setup-environment.sh
   - bash -x -e ./scripts/travis/02-before-install.sh
-  - bash -x -e ./scripts/travis/03-test-source-code.sh
+
 install:
-  - bash -x -e ./scripts/travis/04-install-thunder.sh
+  - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
 before_script:
+  - bash -x -e ./scripts/travis/04-install-thunder.sh
   - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
