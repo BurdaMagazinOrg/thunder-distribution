@@ -7,7 +7,7 @@ namespace Drupal\Tests\thunder\Functional;
  *
  * @package Drupal\Tests\thunder\Kernel
  *
- * @group ThunderConfig
+ * @group Thunder
  */
 class ModuleUninstallTest extends ThunderTestBase {
 
@@ -26,7 +26,6 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['diff'],
     ['content_lock'],
-    ['checklistapi'],
     ['adsense'],
     ['google_analytics'],
     ['access_unpublished'],
