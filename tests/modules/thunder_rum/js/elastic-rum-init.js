@@ -22,12 +22,25 @@
     return v ? v[2] : null;
   };
 
+  /**
+   * User traceId if it's available in cookie.
+   *
+   * @type {string|null}
+   */
   var traceId = getCookie('traceId');
+
+  /**
+   * Use Server URL if it's provided over cookie.
+   *
+   * @type {string}
+   */
   var serverUrl = getCookie('serverUrl') || 'http://localhost:8200';
 
-  // Init Elastic RUM.
-  window.apm = elasticApm.init({
-    serviceName: 'ThunderRUM',
+  /**
+   * Init Elastic APM real user monitoring.
+   */
+  window.apm = window.elasticApm.init({
+    serviceName: 'Thunder RUM',
     serverUrl: serverUrl,
     pageLoadTransactionName: window.location.pathname,
     pageLoadTraceId: traceId,
@@ -38,7 +51,7 @@
     branch: getCookie('branchTag')
   });
 
-  elasticApm.addFilter(function (payload) {
+  window.elasticApm.addFilter(function (payload) {
     if (!payload.transactions) {
       return payload;
     }
@@ -50,7 +63,7 @@
 
     payload.transactions[0].parent_id = spanId;
 
-    return payload
+    return payload;
   });
 
 }());

@@ -16,7 +16,7 @@
  */
 
 exports.command = function thunderSelectTag(field, name, waitFor) {
-  var browser = this;
+  const browser = this;
 
   browser
     .setValue(field, name)

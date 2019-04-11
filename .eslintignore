@@ -8,3 +8,4 @@ profiles/**/libraries/**/*
 **/js_test_files/**/*
 docroot/**/*
 tests/modules/thunder_test/js/jquery.simulate.js
+**/elastic-apm-js-base.umd.min.js

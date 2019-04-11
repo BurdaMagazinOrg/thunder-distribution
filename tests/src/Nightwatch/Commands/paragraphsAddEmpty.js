@@ -16,21 +16,28 @@
  */
 
 exports.command = function paragraphsAddEmpty(fieldName, type, position) {
-  var browser = this;
+  const browser = this;
 
   if (position < 1) {
     return browser;
   }
 
-  var fieldNameId = fieldName.replace(/_/g, '-');
-  var addButtonPosition = position * 2 - 1;
+  const fieldNameId = fieldName.replace(/_/g, "-");
+  const addButtonPosition = position * 2 - 1;
 
   browser
-    .thunderScrollIntoView('//table[contains(@id, "' + fieldNameId + '-values")]/tbody/tr[' + addButtonPosition + ']//input')
-    .click('//table[contains(@id, "' + fieldNameId + '-values")]/tbody/tr[' + addButtonPosition + ']//input')
-    .click('//*[@name="' + fieldName + '_' + type + '_add_more"]')
-    .waitForElementVisible('//table[contains(@id, "' + fieldNameId + '-values")]/tbody/tr[' + (addButtonPosition + 1) + ']//div[contains(@class, "ajax-new-content")]', 10000);
+    .thunderScrollIntoView(
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
+    )
+    .click(
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
+    )
+    .click(`//*[@name="${fieldName}_${type}_add_more"]`)
+    .waitForElementVisible(
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition +
+        1}]//div[contains(@class, "ajax-new-content")]`,
+      10000
+    );
 
   return browser;
-}
-;
+};

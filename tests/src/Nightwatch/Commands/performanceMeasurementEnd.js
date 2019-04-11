@@ -9,12 +9,12 @@
  */
 
 exports.command = function performanceMeasurementEnd() {
-  var browser = this;
+  const browser = this;
 
   browser
     .performanceWaitBrowser()
-    .perform(function () {
-      var span = browser.apmSpans.pop();
+    .perform(() => {
+      let span = browser.apmSpans.pop();
 
       while (span) {
         span.end();
@@ -22,7 +22,7 @@ exports.command = function performanceMeasurementEnd() {
         span = browser.apmSpans.pop();
       }
     })
-    .perform(function () {
+    .perform(() => {
       browser.apmTrans.end();
     });
 

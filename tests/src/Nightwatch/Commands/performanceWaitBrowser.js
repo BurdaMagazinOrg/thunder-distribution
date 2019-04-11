@@ -12,44 +12,43 @@
  *   The 'browser' object.
  */
 
+/* eslint-disable func-names */
 exports.command = function performanceWaitBrowser(maxWait) {
-  var browser = this;
+  const browser = this;
 
   maxWait = maxWait || 10000;
 
-  browser
-    .timeoutsAsyncScript(maxWait)
-    .executeAsync(function (done) {
-        var checkBrowserTransaction = function () {
-          if (typeof elasticApm === "undefined") {
-            setTimeout(checkBrowserTransaction, 100);
+  browser.timeoutsAsyncScript(maxWait).executeAsync(
+    function(done) {
+      const checkBrowserTransaction = () => {
+        if (typeof elasticApm === "undefined") {
+          setTimeout(checkBrowserTransaction, 100);
 
-            return;
-          }
+          return;
+        }
 
-          var transaction = elasticApm.getCurrentTransaction();
-          if (!transaction) {
-            setTimeout(checkBrowserTransaction, 100);
+        const transaction = window.elasticApm.getCurrentTransaction();
+        if (!transaction) {
+          setTimeout(checkBrowserTransaction, 100);
 
-            return;
-          }
+          return;
+        }
 
-          if (transaction.type === "page-load" && !transaction.ended) {
-            setTimeout(checkBrowserTransaction, 100);
+        if (transaction.type === "page-load" && !transaction.ended) {
+          setTimeout(checkBrowserTransaction, 100);
 
-            return;
-          }
+          return;
+        }
 
-          // TODO: Ensure that not page-load transactions are also sent before navigating to new page!
-          setTimeout(done, 0);
-        };
+        // TODO: Ensure that not page-load transactions are also sent before navigating to new page!
+        setTimeout(done, 0);
+      };
 
-        setTimeout(checkBrowserTransaction, 200);
-      },
-      [],
-      function () {
-      }
-    );
+      setTimeout(checkBrowserTransaction, 200);
+    },
+    [],
+    function() {}
+  );
 
   return browser;
 };

@@ -10,6 +10,12 @@ phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile
 if ! [ -x "$(command -v eslint)" ]; then
     npm install -g eslint
 fi
+
+# Install ESLint requirements
+npm install -g eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import
+npm install -g prettier eslint-config-prettier eslint-plugin-prettier
+
+# Execute JavaScript code check
 eslint .
 
 # Check for deprecated methods.

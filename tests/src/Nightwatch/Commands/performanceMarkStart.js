@@ -12,25 +12,23 @@
  */
 
 exports.command = function performanceMarkStart(markName) {
-  var browser = this;
+  const browser = this;
 
-  browser
-    .perform(function () {
-      var span = browser.apmTrans.startSpan(markName);
-      span.setTag('branch', process.env.THUNDER_BRANCH);
+  browser.perform(() => {
+    const span = browser.apmTrans.startSpan(markName);
+    span.setTag("branch", process.env.THUNDER_BRANCH);
 
-      browser.apmSpans.push(span);
+    browser.apmSpans.push(span);
 
-      browser
-        .setCookie({
-          domain: browser.apmDomain,
-          expiry: 3533274000,
-          httpOnly: false,
-          name: 'spanId',
-          path: '/',
-          value: span.id
-        });
+    browser.setCookie({
+      domain: browser.apmDomain,
+      expiry: 3533274000,
+      httpOnly: false,
+      name: "spanId",
+      path: "/",
+      value: span.id
     });
+  });
 
   return browser;
 };

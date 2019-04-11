@@ -17,47 +17,51 @@
  *   The 'browser' object.
  */
 
-exports.command = function performanceMeasurementStart(serverUrl, serviceName, transactionName, domain) {
-  var browser = this;
+exports.command = function performanceMeasurementStart(
+  serverUrl,
+  serviceName,
+  transactionName,
+  domain
+) {
+  const browser = this;
 
-  browser
-    .perform(function () {
-      var apmInstance = browser.apm.start({
-        serverUrl: serverUrl,
-        serviceName: serviceName
-      });
-
-      browser.apmDomain = domain;
-      browser.apmTrans = apmInstance.startTransaction(transactionName, 'test');
-      browser.apmSpans = [];
-
-      browser
-        .setCookie({
-          domain: domain,
-          expiry: 3533274000,
-          httpOnly: false,
-          path: '/',
-          name: 'traceId',
-          value: browser.apmTrans.traceId
-        })
-        .setCookie({
-          domain: domain,
-          expiry: 3533274000,
-          httpOnly: false,
-          path: '/',
-          name: 'serverUrl',
-          value: serverUrl
-        })
-        .setCookie({
-          domain: domain,
-          expiry: 3533274000,
-          httpOnly: false,
-          path: '/',
-          name: 'branchTag',
-          value: process.env.THUNDER_BRANCH
-        })
-        .performanceSetTag('branch', process.env.THUNDER_BRANCH)
+  browser.perform(() => {
+    const apmInstance = browser.apm.start({
+      serverUrl,
+      serviceName
     });
+
+    browser.apmDomain = domain;
+    browser.apmTrans = apmInstance.startTransaction(transactionName, "test");
+    browser.apmSpans = [];
+
+    browser
+      .setCookie({
+        domain,
+        expiry: 3533274000,
+        httpOnly: false,
+        path: "/",
+        name: "traceId",
+        value: browser.apmTrans.traceId
+      })
+      .setCookie({
+        domain,
+        expiry: 3533274000,
+        httpOnly: false,
+        path: "/",
+        name: "serverUrl",
+        value: serverUrl
+      })
+      .setCookie({
+        domain,
+        expiry: 3533274000,
+        httpOnly: false,
+        path: "/",
+        name: "branchTag",
+        value: process.env.THUNDER_BRANCH
+      })
+      .performanceSetTag("branch", process.env.THUNDER_BRANCH);
+  });
 
   return browser;
 };

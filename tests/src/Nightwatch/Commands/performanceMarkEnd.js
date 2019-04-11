@@ -9,36 +9,34 @@
  */
 
 exports.command = function performanceMarkEnd() {
-  var browser = this;
+  const browser = this;
 
-  browser
-    .performanceWaitBrowser()
-    .perform(function () {
-      var span = browser.apmSpans.pop();
+  browser.performanceWaitBrowser().perform(() => {
+    let span = browser.apmSpans.pop();
 
-      if (!span) {
-        return;
-      }
+    if (!span) {
+      return;
+    }
 
-      span.end();
+    span.end();
 
-      // Set spanId to current active span, if there is any.
-      span = browser.apmSpans.pop();
+    // Set spanId to current active span, if there is any.
+    span = browser.apmSpans.pop();
 
-      if (!span) {
-        return;
-      }
+    if (!span) {
+      return;
+    }
 
-      browser.setCookie({
-        domain: browser.apmDomain,
-        expiry: 3533274000,
-        httpOnly: false,
-        name: 'spanId',
-        path: '/',
-        value: span.id
-      });
-      browser.apmSpans.push(span);
+    browser.setCookie({
+      domain: browser.apmDomain,
+      expiry: 3533274000,
+      httpOnly: false,
+      name: "spanId",
+      path: "/",
+      value: span.id
     });
+    browser.apmSpans.push(span);
+  });
 
   return browser;
 };

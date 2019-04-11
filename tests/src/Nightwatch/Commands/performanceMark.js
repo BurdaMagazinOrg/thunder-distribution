@@ -12,11 +12,9 @@
  */
 
 exports.command = function performanceMark(markName) {
-  var browser = this;
+  const browser = this;
 
-  browser
-    .performanceMarkEnd()
-    .performanceMarkStart(markName);
+  browser.performanceMarkEnd().performanceMarkStart(markName);
 
   return browser;
 };

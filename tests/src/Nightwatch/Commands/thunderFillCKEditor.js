@@ -13,22 +13,21 @@
  *   The 'browser' object.
  */
 
+/* eslint-disable func-names */
 exports.command = function thunderFillCKEditor(selector, value) {
-  var browser = this;
+  const browser = this;
 
-  browser
-    .executeAsync(
-      function (selector, value, done) {
-        var elem = document.evaluate(selector, document).iterateNext();
+  browser.executeAsync(
+    function(selectorInBrowser, valueInBrowser, done) {
+      const elem = document.evaluate(selectorInBrowser, document).iterateNext();
 
-        CKEDITOR.instances[jQuery(elem)[0].id].insertHtml(value);
+      CKEDITOR.instances[jQuery(elem)[0].id].insertHtml(valueInBrowser);
 
-        done();
-      },
-      [selector, value],
-      function () {
-      }
-    );
+      done();
+    },
+    [selector, value],
+    function() {}
+  );
 
   return browser;
 };

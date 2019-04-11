@@ -14,12 +14,11 @@
  */
 
 exports.command = function performanceSetTag(name, value) {
-  var browser = this;
+  const browser = this;
 
-  browser
-    .perform(function () {
-      browser.apmTrans.setTag(name, value);
-    });
+  browser.perform(() => {
+    browser.apmTrans.setTag(name, value);
+  });
 
   return browser;
 };
