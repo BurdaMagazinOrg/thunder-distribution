@@ -1,5 +1,0 @@
-name: Thunder Install
-type: module
-package: Thunder
-core: 8.x
-hidden: true

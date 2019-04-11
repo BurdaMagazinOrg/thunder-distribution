@@ -87,7 +87,6 @@ install:
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
-  - thunder:thunder_install
 themes:
   - seven
   - thunder_base
