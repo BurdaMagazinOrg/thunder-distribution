@@ -2,13 +2,50 @@
 
 namespace Drupal\thunder_install\Installer\Form;
 
+use Drupal\Core\Extension\ThemeInstallerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\State\StateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the site configuration form.
  */
 class ModuleConfigureForm extends FormBase {
+
+  /**
+   * The state service.
+   *
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
+
+  /**
+   * The theme installer service.
+   *
+   * @var \Drupal\Core\Extension\ThemeInstallerInterface
+   */
+  protected $themeInstaller;
+
+  /**
+   * ModuleConfigureForm constructor.
+   *
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state service.
+   * @param \Drupal\Core\Extension\ThemeInstallerInterface $installer
+   *   The theme installer service.
+   */
+  public function __construct(StateInterface $state, ThemeInstallerInterface $installer) {
+    $this->state = $state;
+    $this->themeInstaller = $installer;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('state'), $container->get('theme_installer'));
+  }
 
   protected $providers = [
     'adsense' => [
@@ -87,7 +124,7 @@ class ModuleConfigureForm extends FormBase {
 
     $form['install_modules'] = [
       '#type' => 'checkboxes',
-      '#title' => 'Select modules',
+      '#title' => $this->t('Select modules'),
       '#options' => $options,
     ] + $descriptions;
 
@@ -108,7 +145,7 @@ class ModuleConfigureForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $system_modules = \Drupal::state()->get('install_profile_modules');
+    $system_modules = $this->state->get('install_profile_modules');
 
     $themes = [];
     foreach (array_filter($form_state->getValue('install_modules')) as $item) {
@@ -116,13 +153,12 @@ class ModuleConfigureForm extends FormBase {
         $system_modules[] = $item;
       }
       elseif ($this->providers[$item]['type'] === 'theme') {
-        $install_state['profile_info']['themes'][] = $item;
         $themes[] = $item;
       }
     }
 
-    \Drupal::service('theme_installer')->install($themes);
-    \Drupal::state()->set('install_profile_modules', $system_modules);
+    $this->themeInstaller->install($themes);
+    $this->state->set('install_profile_modules', $system_modules);
   }
 
 }

@@ -22,8 +22,8 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
   $form['demo_content'] = [
     '#type' => 'checkbox',
-    '#title' => 'Install Demo Content',
-    '#description' => 'Installs demo content to show how Thunder works.',
+    '#title' => t('Install Demo Content'),
+    '#description' => t('Installs demo content to show how Thunder works.'),
     '#default_value' => TRUE,
   ];
 
