@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_install\Installer\Form;
+namespace Drupal\thunder\Installer\Form;
 
 use Drupal\Core\Extension\ThemeInstallerInterface;
 use Drupal\Core\Form\FormBase;
