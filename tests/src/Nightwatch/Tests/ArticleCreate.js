@@ -3,7 +3,15 @@
  * Testing of an article creation with 15 paragraphs.
  */
 
-var apm = require('elastic-apm-node');
+/**
+ * Module "elastic-apm-node" has to be installed for core.
+ *
+ * You can use Yarn command for that: yarn add elastic-apm-node --dev
+ * and it will install that module with it's requirements.
+ *
+ * We are using "process.cwd()" to get core directory.
+ */
+var apm = require(process.cwd() + '/node_modules/elastic-apm-node');
 
 module.exports = {
   '@tags': ['Thunder'],
