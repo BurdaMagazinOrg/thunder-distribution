@@ -24,7 +24,7 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
     '#type' => 'checkbox',
     '#title' => 'Install Demo Content',
     '#description' => 'Installs demo content to show how Thunder works.',
-    '#default_value' => TRUE
+    '#default_value' => TRUE,
   ];
 
   $form['#submit'][] = 'thunder_install_configure_form_submit';
