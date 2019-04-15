@@ -1,5 +1,17 @@
 # Change Log
 
+## [8.2.37](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.37) 2019-04-15
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.36...8.2.37)
+
+Maintenance release.
+
+- Do [Update libraries](https://www.drupal.org/project/thunder/issues/3040125)
+- Do [Switch to travis stages](https://www.drupal.org/project/thunder/issues/3039151)
+- Do [Update filter format weights](https://www.drupal.org/project/thunder/issues/3043522)
+- Fix [Two authors, but only one shown](https://www.drupal.org/project/thunder/issues/2846679)
+- Fix [Download URLs for sandboxes in the drush makefile](https://www.drupal.org/project/thunder/issues/3044793)
+- Fix [Deleting the media types removes thunder media view](https://www.drupal.org/project/thunder/issues/3046666)
+
 ## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.36) 2019-03-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.35...8.2.36)
 
