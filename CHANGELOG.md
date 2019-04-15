@@ -5,12 +5,18 @@
 
 Maintenance release.
 
+- Do [Document drupal quickstart command in README](https://www.drupal.org/project/thunder/issues/3039132)
+- Do [Cleanup composer dev dependencies](https://www.drupal.org/project/thunder/issues/3024231)
 - Do [Update libraries](https://www.drupal.org/project/thunder/issues/3040125)
+- Do [Use update_helper module and remove thunder_updater](https://www.drupal.org/project/thunder/issues/2947071)
 - Do [Switch to travis stages](https://www.drupal.org/project/thunder/issues/3039151)
 - Do [Update filter format weights](https://www.drupal.org/project/thunder/issues/3043522)
+- Do [Tweak thunder install task logic](https://www.drupal.org/project/thunder/issues/3040605)
 - Fix [Two authors, but only one shown](https://www.drupal.org/project/thunder/issues/2846679)
+- Fix [The descriptions in updates.yml are misleading](https://www.drupal.org/project/thunder/issues/3040175)
 - Fix [Download URLs for sandboxes in the drush makefile](https://www.drupal.org/project/thunder/issues/3044793)
 - Fix [Deleting the media types removes thunder media view](https://www.drupal.org/project/thunder/issues/3046666)
+- Fix [Thunder modules installed hook should not expect module installation order](https://www.drupal.org/project/thunder/issues/3041383)
 
 ## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.36) 2019-03-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.35...8.2.36)
