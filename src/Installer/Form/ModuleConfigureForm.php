@@ -6,6 +6,7 @@ use Drupal\Core\Extension\ThemeInstallerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -116,10 +117,18 @@ class ModuleConfigureForm extends FormBase {
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
     ];
 
-    $options = $descriptions = [];
+    $options = $descriptions = $module_form = $actions = [];
     foreach ($this->providers as $id => $provider) {
       $options[$id] = $provider['label'];
       $descriptions[$id] = ['#description' => $provider['description']];
+
+      if (method_exists($this, $id . '_form')) {
+        $module_form[$id] = $this->{$id . '_form'}();
+      }
+
+      if (method_exists($this, $id . '_form_submit')) {
+        $actions[] = '::' . $id . '_form_submit';
+      }
     }
 
     $form['install_modules'] = [
@@ -127,6 +136,8 @@ class ModuleConfigureForm extends FormBase {
       '#title' => $this->t('Select modules'),
       '#options' => $options,
     ] + $descriptions;
+
+    $form += $module_form;
 
     $form['#title'] = $this->t('Select additional modules');
 
@@ -159,6 +170,40 @@ class ModuleConfigureForm extends FormBase {
 
     $this->themeInstaller->install($themes);
     $this->state->set('install_profile_modules', $system_modules);
+  }
+
+  protected function google_analytics_form() {
+    return [
+      'ga_account' => [
+        '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics" target="_blank">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid"  target="_blank">Find more information in the documentation</a>.', [
+          ':analytics' => 'http://www.google.com/analytics/',
+          ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])
+            ->toString(),
+        ]),
+        '#maxlength' => 20,
+        '#placeholder' => 'UA-',
+        '#size' => 15,
+        '#title' => t('Web Property ID'),
+        '#type' => 'textfield',
+      ],
+    ];
+  }
+
+  protected function google_analytics_form() {
+    return [
+      'ga_account' => [
+        '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics" target="_blank">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid"  target="_blank">Find more information in the documentation</a>.', [
+          ':analytics' => 'http://www.google.com/analytics/',
+          ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])
+            ->toString(),
+        ]),
+        '#maxlength' => 20,
+        '#placeholder' => 'UA-',
+        '#size' => 15,
+        '#title' => t('Web Property ID'),
+        '#type' => 'textfield',
+      ],
+    ];
   }
 
 }
