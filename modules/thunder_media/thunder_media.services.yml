@@ -1,5 +1,5 @@
 services:
   thunder_media_config_subscriber:
-    class: \Drupal\thunder_media\EventSubscriber\ConfigEventsSubscriber
+    class: Drupal\thunder_media\EventSubscriber\ConfigEventsSubscriber
     tags:
       - { name: 'event_subscriber' }

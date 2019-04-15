@@ -34,7 +34,7 @@ class ConfigEventsSubscriber implements EventSubscriberInterface {
    */
   public function configDelete(ConfigCrudEvent $event) {
     $config = $event->getConfig();
-    if ($config->getName() == 'views.view.thunder_media' && ($media_view = View::load('media'))) {
+    if ($config->getName() === 'views.view.thunder_media' && ($media_view = View::load('media'))) {
       $media_view->setStatus(TRUE)->save();
     }
   }
