@@ -1126,12 +1126,26 @@ function thunder_update_8134() {
 }
 
 /**
- * Add config_selector settings to content view.
+ * Updating the filter weights.
  */
 function thunder_update_8135() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8135');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Add config_selector settings to content view.
+ */
+function thunder_update_8136() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
   $updater = \Drupal::service('update_helper.updater');
-  $updater->executeUpdate('thunder', 'thunder_update_8135');
+  $updater->executeUpdate('thunder', 'thunder_update_8136');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
