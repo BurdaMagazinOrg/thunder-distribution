@@ -5,7 +5,7 @@ cache:
   - "$HOME/.drush/cache"
 
 php:
-  - 7.2
+  - 7.3
 
 dist: xenial
 
