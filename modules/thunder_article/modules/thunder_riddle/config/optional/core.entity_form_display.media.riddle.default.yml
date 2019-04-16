@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.field.media.riddle.field_riddle_id
     - media.type.riddle
+  module:
+    - select2
 id: media.riddle.default
 targetEntityType: media
 bundle: riddle
@@ -30,12 +32,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   uid:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 5
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
     region: content
     third_party_settings: {  }
 hidden:
