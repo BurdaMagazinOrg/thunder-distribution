@@ -135,12 +135,12 @@
         "drupal/thunder_admin": "^1.0 || ^2.0-beta15",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
-        "bower-asset/dropzone": "^5.5",
-        "bower-asset/exif-js": "^2.3.0",
-        "bower-asset/blazy": "^1.8",
-        "bower-asset/slick-carousel": "^1.8",
-        "bower-asset/shariff": "^1.26.2",
-        "bower-asset/select2": "4.0.4"
+        "npm-asset/dropzone": "^5.5",
+        "npm-asset/exif-js": "^2.3.0",
+        "npm-asset/blazy": "^1.8",
+        "npm-asset/slick-carousel": "^1.8",
+        "npm-asset/shariff": "^3.1.1",
+        "npm-asset/select2": "4.0.4"
     },
     "suggest": {
         "drupal/riddle_marketplace": "Riddle marketplace integration",
@@ -155,7 +155,10 @@
         "npm-asset/jquery": "*",
         "npm-asset/jqueryui": "*",
         "npm-asset/backbone": "*",
-        "npm-asset/underscore": "*"
+        "npm-asset/underscore": "*",
+        "npm-asset/fortawesome--fontawesome-free-webfonts": "*",
+        "npm-asset/jquery-mousewheel": "*",
+        "npm-asset/almond": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
