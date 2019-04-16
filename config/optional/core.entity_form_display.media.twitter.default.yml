@@ -9,6 +9,7 @@ dependencies:
   module:
     - field_group
     - link
+    - select2
 third_party_settings:
   field_group:
     group_basis:
@@ -68,13 +69,13 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 2
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
 hidden:
   langcode: true

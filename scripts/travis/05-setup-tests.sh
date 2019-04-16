@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
 
-# Rebuild caches and start servers
+# install image magick
+wget https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
+yes '' | pecl install -f php-imagick-LATEST.tar.gz
+
+# Build and install the YAML extension for strict parsing.
+wget https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
+tar -C /tmp -zxvf php-yaml-LATEST.tar.gz
+cd /tmp/pecl-file_formats-yaml-$PHP_YAML_VERSION
+phpize
+./configure
+make
+make install
+echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+phpenv rehash
+
 cd ${TEST_DIR}/docroot
 
-# require development packages needed for testing
-if [[ ${INSTALL_METHOD} == "drush_make" ]]; then
-    composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
-fi
+#EXAMPLE:
+# apply cookie expire patch for javascript tests
+#wget https://www.drupal.org/files/issues/test-session-expire-2771547-64.patch
+#patch -p1 < test-session-expire-2771547-64.patch
 
-# Final cache rebuild, to make sure every code change is respected
-drush cr
+# CREATE TESTING DUMP
+php ./core/scripts/db-tools.php dump-database-d8-mysql > thunder.php
 
 # Run the webserver
 php -S localhost:8080 .ht.router.php &>/dev/null &
-
-docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome:3.14.0-iron
-docker ps -a
