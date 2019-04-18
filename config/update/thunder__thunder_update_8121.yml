@@ -1,5 +1,0 @@
-__global_actions:
-  install_modules:
-    - paragraphs_features
-  import_configs:
-    - paragraphs_features.settings

@@ -75,6 +75,7 @@ install:
   - redirect:redirect
   - scheduler:scheduler
   - scheduler:scheduler_content_moderation_integration
+  - shariff:shariff
   - select2:select2
   - simple_sitemap:simple_sitemap
   - slick_media:slick_media
