@@ -1,5 +1,14 @@
 # Change Log
 
+## [8.2.38](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.38) 2019-04-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.37...8.2.38)
+
+Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.6.15.
+
+The only other change this release contains is an update of the testing environment.
+
+- Do [Update travis to PHP 7.3](https://www.drupal.org/node/3044358)
+
 ## [8.2.37](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.37) 2019-04-15
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.36...8.2.37)
 
