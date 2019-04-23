@@ -103,7 +103,7 @@ module.exports = {
           "<p><strong><span>1: Lorem ipsum dolor sit amet</span></strong></p><p><span>an est tacimates molestiae, vel eu animal suscipit. Populo accusam ad has, cu libris disputando voluptatibus ius, feugiat nusquam instructior id pro?</span></p><p><span>Vel possim invidunt ex, est facer erant phaedrum ea? Ei ancillae detraxit mei, antiopam euripidis vim in? Vel ea amet movet fastidii. Magna oratio molestie eum ea, ius cu odio cibo?</span></p>"
       })
       .paragraphsAdd("field_paragraphs", "image", 2, {
-        uploadImage: path.resolve(`${__dirname}/../../../fixtures/cat1.jpg`)
+        selectIndex: 14
       })
       .paragraphsAdd("field_paragraphs", "instagram", 3, {
         url:
@@ -116,7 +116,7 @@ module.exports = {
           "<p><strong><span>2: Ex cotidieque intellegebat nec</span></strong></p><p><span>quo cu quis ridens, ei  cibo omnes complectitur duo. Cu sed deleniti indoctum assueverit. Elit eligendi senserit eu nam. Velit delectus ut cum, no vim habeo veniam mentitum, eos id eros senserit.</span></p>"
       })
       .paragraphsAdd("field_paragraphs", "image", 5, {
-        uploadImage: path.resolve(`${__dirname}/../../../fixtures/cat2.jpg`)
+        selectIndex: 13
       })
       .paragraphsAdd("field_paragraphs", "instagram", 6, {
         url:
@@ -129,7 +129,7 @@ module.exports = {
           "<p><strong><span>3: Ne cum copiosae praesent, feugait quaestio inciderint eos ad.</span></strong></p><p><span>Odio salutatus constituto eam ea. Mel zril cotidieque dissentiunt ea, erant inimicus convenire sit cu, ea nam oratio vituperatoribus. Noster invenire instructior ex pro. Duo ad mutat fierent.</span></p>"
       })
       .paragraphsAdd("field_paragraphs", "image", 8, {
-        uploadImage: path.resolve(`${__dirname}/../../../fixtures/cat3.jpg`)
+        selectIndex: 12
       })
       .paragraphsAdd("field_paragraphs", "instagram", 9, {
         url:
@@ -142,7 +142,7 @@ module.exports = {
           "<p><strong><span>4: Commune accumsan deleniti ad duo, cum cibo lorem delicatissimi ex!</span></strong></p><p><span>Cum mundi nostro forensibus id. At eos elitr fabulas intellegebat! Eleifend praesent mea no, id stet deseruisse pro!</span></p>"
       })
       .paragraphsAdd("field_paragraphs", "image", 11, {
-        uploadImage: path.resolve(`${__dirname}/../../../fixtures/cat4.jpg`)
+        selectIndex: 13
       })
       .paragraphsAdd("field_paragraphs", "instagram", 12, {
         url:
@@ -155,7 +155,7 @@ module.exports = {
           "<p><strong><span>5: Ex persecuti argumentum pri, phaedrum cotidieque mel te?</span></strong></p><p><span>Vix choro nusquam molestiae eu. Pro ei prodesset honestatis, an duo omnes dictas meliore. Fastidii reformidans sea ne. Modus mucius per et, audiam partiendo eu sea! Eam ea augue signiferumque.</span></p>"
       })
       .paragraphsAdd("field_paragraphs", "image", 14, {
-        uploadImage: path.resolve(`${__dirname}/../../../fixtures/hermine.jpg`)
+        selectIndex: 14
       })
       .paragraphsAdd("field_paragraphs", "instagram", 15, {
         url:
