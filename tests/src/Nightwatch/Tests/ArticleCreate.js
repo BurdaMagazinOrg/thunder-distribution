@@ -50,7 +50,7 @@ module.exports = {
       )
       .setValue(
         '//*[@id="edit-field-seo-title-0-value"]',
-        "10 Reasons why cats"
+        `10 Reasons why cats ${Math.random().toString(36)}`
       )
       .thunderSelectTag(
         '//*[@id="edit-field-tags-wrapper"]//input',
