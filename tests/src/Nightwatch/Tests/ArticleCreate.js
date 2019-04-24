@@ -3,8 +3,6 @@
  * Testing of an article creation with 15 paragraphs.
  */
 
-const path = require("path");
-
 /**
  * Module "elastic-apm-node" has to be installed for core.
  *
