@@ -28,51 +28,43 @@ stages:
 
 env:
   global:
-    - TEST_UPDATE=false
     - THUNDER_ADMIN_BRANCH=fix/3025280-entity-browser-z-index
 
 jobs:
-  allow_failures:
-    - env: DRUPAL_CORE=~8.7
-      script: bash -x -e ./scripts/travis/06-test-source-code.sh
-
   include:
     - stage: sanity checks
-      name: Verify makefile, check coding standards, check for deprecated code (D8.6)
+      name: Verify makefile, check coding standards, check for deprecated code
       install:
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script: skip
-      env: DRUPAL_CORE=~8.6
-      script: bash -x -e ./scripts/travis/06-test-source-code.sh
+      script:
+        - bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: sanity checks
-      name: Verify makefile, check coding standards, check for deprecated code (D8.7)
+      name: Check config for composer build
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: sanity checks
+      name: Check config for drush_make build
       install:
-        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
-        - drush dl drupalorg_drush-7.x && drush verify-makefile
-        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
-      before_script: skip
-      env: DRUPAL_CORE=~8.7
-      script: bash -x -e ./scripts/travis/06-test-source-code.sh
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: test
-      name: Run tests with composer build (D8.7)
-      env: DRUPAL_CORE=~8.7 strictConfigSchema=true
+      name: Run tests with composer build
 
     - stage: test
-      name: Run tests with composer build (D8.6)
-      env: DRUPAL_CORE=~8.6 strictConfigSchema=false
+      name: Run tests with drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
 
     - stage: test
-      name: Run tests with drush_make build (D8.7)
-      install: bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-      env: strictConfigSchema=true
-
-    - stage: test
-      name: Run update test (D8.7)
-      env: TEST_UPDATE=true DRUPAL_CORE=~8.7 strictConfigSchema=true
+      name: Run update test
+      env: TEST_UPDATE=true
       if: commit_message =~ ^\[TEST_UPDATE\] OR type = cron
 
 # The main functionality is divided into different scripts, each is prefixed by a number which
