@@ -1,5 +1,0 @@
-name: 'Thunder RUM Testing module'
-description: 'Provide helper libraries for performance testing of Thunder.'
-type: module
-core: 8.x
-package: Thunder
