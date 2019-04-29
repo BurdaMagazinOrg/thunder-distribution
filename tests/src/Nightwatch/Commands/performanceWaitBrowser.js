@@ -1,6 +1,6 @@
 /**
  * @file
- * Waits for Browser RUM performance metrics to be sent.
+ * Waits for browser performance metrics to be sent.
  *
  * This provides a custom command, .performanceWaitBrowser()
  *
