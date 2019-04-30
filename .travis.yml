@@ -26,6 +26,10 @@ stages:
   - sanity checks
   - test
 
+env:
+  global:
+    - THUNDER_ADMIN_BRANCH=fix/3025280-entity-browser-z-index
+
 jobs:
   include:
     - stage: sanity checks
