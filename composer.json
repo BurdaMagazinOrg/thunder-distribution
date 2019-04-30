@@ -75,6 +75,9 @@
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
+            },
+            "drupal/core": {
+                "Make sure TestSitePath exist before creating .htkey": "https://www.drupal.org/files/issues/2018-11-30/2246725-34.patch"
             }
         }
     },
