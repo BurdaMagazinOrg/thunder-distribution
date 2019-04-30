@@ -34,7 +34,9 @@ module.exports = {
       .performanceMarkStart("full task")
       .performanceMarkStart("login")
       .drupalLogin({ name: "test-editor", password: "test-editor" })
-      .performanceMark("create article")
+      .performanceMarkEnd()
+
+      .performanceMarkStart("create article")
       .drupalRelativeURL("/node/add/article")
       // Start using XPATH!!!
       .useXpath()
@@ -65,8 +67,10 @@ module.exports = {
         "Cats",
         '//*[@id="select2-edit-field-tags-results"]/li[contains(@class, "highlighted")]'
       )
+      .performanceMarkEnd()
+
       // Set teaser information for an Article.
-      .performanceMark("create article teaser information")
+      .performanceMarkStart("create article teaser information")
       .setValue(
         '//*[@id="edit-field-teaser-text-0-value"]',
         "The cat (Felis catus) is a small carnivorous mammal. It is the only domesticated species in the family Felidae and often referred to as the domestic cat to distinguish it from wild members of the family. The cat is either a house cat, kept as a pet, or a feral cat, freely ranging and avoiding human contact.[5] A house cat is valued by humans for companionship and for its ability to hunt rodents. About 60 cat breeds are recognized by various cat registries."
@@ -92,9 +96,10 @@ module.exports = {
         '//*[contains(@id, "edit-field-teaser-media-current-items-0")]/article/div/img',
         10000
       )
-      // Create paragraphs for an Article.
-      .performanceMark("create paragraphs")
+      .performanceMarkEnd()
 
+      // Create paragraphs for an Article.
+      .performanceMarkStart("create paragraphs")
       .performanceMarkStart("create paragraphs - set 1")
       .paragraphsAdd("field_paragraphs", "text", 1, {
         text:
@@ -107,8 +112,9 @@ module.exports = {
         url:
           "https://www.instagram.com/p/BtlH0ysgGLs/?utm_source=ig_web_copy_link"
       })
+      .performanceMarkEnd()
 
-      .performanceMark("create paragraphs - set 2")
+      .performanceMarkStart("create paragraphs - set 2")
       .paragraphsAdd("field_paragraphs", "text", 4, {
         text:
           "<p><strong><span>2: Ex cotidieque intellegebat nec</span></strong></p><p><span>quo cu quis ridens, ei  cibo omnes complectitur duo. Cu sed deleniti indoctum assueverit. Elit eligendi senserit eu nam. Velit delectus ut cum, no vim habeo veniam mentitum, eos id eros senserit.</span></p>"
@@ -120,8 +126,9 @@ module.exports = {
         url:
           "https://www.instagram.com/p/BtSRBAgAYod/?utm_source=ig_web_copy_link"
       })
+      .performanceMarkEnd()
 
-      .performanceMark("create paragraphs - set 3")
+      .performanceMarkStart("create paragraphs - set 3")
       .paragraphsAdd("field_paragraphs", "text", 7, {
         text:
           "<p><strong><span>3: Ne cum copiosae praesent, feugait quaestio inciderint eos ad.</span></strong></p><p><span>Odio salutatus constituto eam ea. Mel zril cotidieque dissentiunt ea, erant inimicus convenire sit cu, ea nam oratio vituperatoribus. Noster invenire instructior ex pro. Duo ad mutat fierent.</span></p>"
@@ -133,8 +140,9 @@ module.exports = {
         url:
           "https://www.instagram.com/p/BtH8DB3g3GL/?utm_source=ig_web_copy_link"
       })
+      .performanceMarkEnd()
 
-      .performanceMark("create paragraphs - set 4")
+      .performanceMarkStart("create paragraphs - set 4")
       .paragraphsAdd("field_paragraphs", "text", 10, {
         text:
           "<p><strong><span>4: Commune accumsan deleniti ad duo, cum cibo lorem delicatissimi ex!</span></strong></p><p><span>Cum mundi nostro forensibus id. At eos elitr fabulas intellegebat! Eleifend praesent mea no, id stet deseruisse pro!</span></p>"
@@ -146,8 +154,9 @@ module.exports = {
         url:
           "https://www.instagram.com/p/Btv_rtKF8mU/?utm_source=ig_web_copy_link"
       })
+      .performanceMarkEnd()
 
-      .performanceMark("create paragraphs - set 5")
+      .performanceMarkStart("create paragraphs - set 5")
       .paragraphsAdd("field_paragraphs", "text", 13, {
         text:
           "<p><strong><span>5: Ex persecuti argumentum pri, phaedrum cotidieque mel te?</span></strong></p><p><span>Vix choro nusquam molestiae eu. Pro ei prodesset honestatis, an duo omnes dictas meliore. Fastidii reformidans sea ne. Modus mucius per et, audiam partiendo eu sea! Eam ea augue signiferumque.</span></p>"
