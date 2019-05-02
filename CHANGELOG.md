@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.2.39](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.39) 2019-05-02
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.38...8.2.39)
+
+Fix Drupal 8.7 compatibility issues.
+
+- Do [Prepare Thunder for Drupal 8.7](https://www.drupal.org/project/thunder/issues/3024698)
+
 ## [8.2.38](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.38) 2019-04-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.37...8.2.38)
 
