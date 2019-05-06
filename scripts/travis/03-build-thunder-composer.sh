@@ -19,8 +19,8 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "burdamagazinorg/thunder:*" "drupal/thunder_admin:dev-2.x" "mglaman/phpstan-drupal" "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" --no-progress
+composer require "burdamagazinorg/thunder:*" "mglaman/phpstan-drupal" "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" --no-progress
 
-# Get custom branch of Thunder Admin theme
+ # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
-git clone --depth 1 --single-branch --branch "feature/3041804-layout_thunder_editorial_search_with_search_api" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin

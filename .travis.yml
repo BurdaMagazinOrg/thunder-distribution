@@ -26,6 +26,10 @@ stages:
   - sanity checks
   - test
 
+env:
+  global:
+    - THUNDER_ADMIN_BRANCH=feature/3041804-layout_thunder_editorial_search_with_search_api
+
 jobs:
   include:
     - stage: sanity checks
