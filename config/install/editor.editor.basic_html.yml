@@ -19,7 +19,7 @@ settings:
         -
           name: Linking
           items:
-            - Linkit
+            - DrupalLink
             - DrupalUnlink
         -
           name: Lists
@@ -42,8 +42,11 @@ settings:
   plugins:
     stylescombo:
       styles: ''
-    linkit:
+    drupallink:
+      linkit_enabled: true
       linkit_profile: basic_html
+    language:
+      language_list: un
 image_upload:
   status: true
   scheme: public

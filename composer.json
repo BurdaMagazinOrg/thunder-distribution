@@ -75,6 +75,9 @@
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
+            },
+            "drupal/linkit": {
+                "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
             }
         }
     },
@@ -111,7 +114,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0",
         "drupal/libraries": "^3.0",
-        "drupal/linkit": "^4.0",
+        "drupal/linkit": "5.0-beta8",
         "drupal/liveblog": "^1.0",
         "drupal/media_entity_instagram": "^2.0",
         "drupal/media_entity_pinterest": "^2.0",
