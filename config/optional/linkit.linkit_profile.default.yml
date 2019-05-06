@@ -12,7 +12,6 @@ matchers:
     id: 'entity:node'
     weight: 0
     settings:
-      result_description: Article
       bundles:
         article: article
       group_by_bundle: false
@@ -25,7 +24,6 @@ matchers:
     id: 'entity:media'
     weight: 0
     settings:
-      result_description: Media
       bundles:
         image: image
       group_by_bundle: true
