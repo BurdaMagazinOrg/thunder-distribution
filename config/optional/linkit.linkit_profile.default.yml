@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - node
-id: basic_html
+id: default
 label: 'Basic HTML'
 description: ''
 matchers:
