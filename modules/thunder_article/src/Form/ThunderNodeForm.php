@@ -74,18 +74,19 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    *   The request stack service.
    * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
    *   The node revision access check service.
-   * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
-   *   The moderation info service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
+   *   (optional) The moderation info service. The optionality is important
+   *   otherwise this form becomes dependent on the content_moderation module.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, ModerationInformationInterface $moderationInfo, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, EntityTypeManagerInterface $entity_type_manager, ModerationInformationInterface $moderationInfo = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
     $this->nodeRevisionAccess = $node_revision_access;
-    $this->moderationInfo = $moderationInfo;
     $this->entityTypeManager = $entity_type_manager;
+    $this->moderationInfo = $moderationInfo;
   }
 
   /**
@@ -97,8 +98,8 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $container->get('messenger'),
       $container->get('request_stack'),
       $container->get('access_check.node.revision'),
-      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL,
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
     );
   }
 
