@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.2.40](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.40) 2019-05-07
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.39...8.2.40)
+
+Fixes an issue when content_moderation module is not enabled.
+
+- Fix [Content_moderation module has to be enabled, otherwise all node add/edit pages break](https://www.drupal.org/project/thunder/issues/3053041)
+
 ## [8.2.39](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.39) 2019-05-02
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.38...8.2.39)
 
