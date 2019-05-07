@@ -81,9 +81,6 @@
             "drupal/search_api": {
                 "SearchApiQuery does not implement getCacheTags()": "https://www.drupal.org/files/issues/2019-03-13/3034996-7.patch"
             },
-            "drupal/facets": {
-                "Provide JavaScript API for facet widgets": "https://www.drupal.org/files/issues/2019-02-21/3031581-10.patch"
-            },
             "drupal/select2": {
                 "Support for AJAX Facets": "https://patch-diff.githubusercontent.com/raw/thunder/select2/pull/54.patch"
             }
@@ -118,7 +115,7 @@
         "drupal/entity_browser": "1.7",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "^1.0",
-        "drupal/facets": "dev-1.x",
+        "drupal/facets": "^1.0",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
