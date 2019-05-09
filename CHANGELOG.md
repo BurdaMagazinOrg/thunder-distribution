@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.41) 2019-05-09
+## [8.2.41](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.41) 2019-05-09
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.40...8.2.41)
 
 Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.7.1.
