@@ -94,6 +94,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     // Assert only one revision is created during the operation.
     $this->assertEquals($revision_id + 1, Node::load($node->id())->getRevisionId());
   }
+
   /**
    * Tests publish scheduling for a draft of a published node.
    */
