@@ -120,6 +120,27 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   }
 
   /**
+   * Test Creation of Article without content moderation.
+   */
+  public function testCreateArticleWithNoModeration() {
+    // Delete all the articles so we can disable content moderation.
+    foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
+      $node->delete();
+    }
+    \Drupal::service('module_installer')->uninstall(['content_moderation']);
+
+    // Try to create an article.
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Test article',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+    ]);
+    $this->clickSave();
+    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertSession()->pageTextContains('Test article');
+  }
+
+  /**
    * Tests draft creation and that reverting to the default revision works.
    */
   public function testModerationWorkflow() {
