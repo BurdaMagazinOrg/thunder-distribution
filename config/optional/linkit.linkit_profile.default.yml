@@ -4,7 +4,7 @@ dependencies:
   module:
     - node
 id: default
-label: 'Basic HTML'
+label: 'Default'
 description: ''
 matchers:
   abb64004-44db-4254-8189-1a06a4b8c830:
