@@ -3,29 +3,30 @@ status: true
 dependencies:
   module:
     - node
-id: basic_html
-label: 'Basic HTML'
+id: default
+label: 'Default'
 description: ''
-attributes: {  }
 matchers:
   abb64004-44db-4254-8189-1a06a4b8c830:
     uuid: abb64004-44db-4254-8189-1a06a4b8c830
     id: 'entity:node'
     weight: 0
     settings:
-      result_description: Article
       bundles:
         article: article
       group_by_bundle: false
       include_unpublished: false
+      metadata: '[node:author] | [node:created:medium]'
+      substitution_type: canonical
+      limit: 100
   54dba6c0-a78b-4f93-8955-b083b930a2ff:
     uuid: 54dba6c0-a78b-4f93-8955-b083b930a2ff
     id: 'entity:media'
     weight: 0
     settings:
-      result_description: Media
       bundles:
-        gallery: gallery
         image: image
-        video: video
       group_by_bundle: true
+      metadata: '[media:field_caption]'
+      substitution_type: media
+      limit: 100
