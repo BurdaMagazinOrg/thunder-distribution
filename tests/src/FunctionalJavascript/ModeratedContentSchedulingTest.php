@@ -80,7 +80,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
       'moderation_state[0]' => 'published',
       'unpublish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'unpublish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
-      'unpublish_state[0]' => 'archived',
+      'unpublish_state[0]' => 'unpublished',
     ]);
     $this->clickSave();
 
@@ -109,7 +109,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     ]);
     $this->clickSave();
 
-    $node = $this->getNodeByTitle('Test workflow article - Published');
+    $node = $this->getNodeByTitle('Test workflow article 3 - Published');
 
     $nid = $node->id();
     // Assert node is published.
