@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "Checking build type"
       - WEBHOOK_TRIGGER_TYPE=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d'/' -f 1)
-      - echo "Trigger type: ${WEBHOOK_TRIGGER_TYPE}"
+      - echo "Trigger type ${WEBHOOK_TRIGGER_TYPE}"
       - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d'/' -f 2)
       - echo "Logging in to Amazon ECR..."
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
