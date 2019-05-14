@@ -9,16 +9,18 @@ phases:
       - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -c8-)
       - DOCKER_IMAGE_TAG=$(echo $BRANCH_NAME | sed 's/\//_/g')
       - echo "Logging in to Amazon ECR..."
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+#      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
-      - docker build --build-arg BRANCH_NAME=$BRANCH_NAME -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
-      - docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+#      - docker build --build-arg BRANCH_NAME=$BRANCH_NAME -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+#      - docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-      - echo "Done!"
+      - echo "Build completed on `date`"
+      - echo "Pushing the Docker image..."
+#      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+      - echo "Create ECS Task..."
+      - aws ecs describe-task-definition --task-definition thunder_performance_runner:21 --region $AWS_DEFAULT_REGION | jq ".taskDefinition | .containerDefinitions[0].image=\"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG\" | .containerDefinitions[0].environment[3].value=\"$BRANCH_NAME\" | del(.taskDefinitionArn,.status,.requiresAttributes,.compatibilities,.revision)" > thunder_performance_runner_21.json
+      - aws ecs register-task-definition --cli-input-json file://$(pwd)/thunder_performance_runner_21.json --region $AWS_DEFAULT_REGION
