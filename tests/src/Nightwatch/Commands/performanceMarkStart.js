@@ -16,7 +16,7 @@ exports.command = function performanceMarkStart(markName) {
 
   browser.perform(() => {
     const span = browser.apmTrans.startSpan(markName);
-    span.setTag("branch", process.env.THUNDER_BRANCH);
+    span.setLabel("branch", process.env.THUNDER_BRANCH);
 
     browser.apmSpans.push(span);
 

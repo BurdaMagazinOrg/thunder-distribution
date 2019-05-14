@@ -17,7 +17,7 @@ exports.command = function performanceSetTag(name, value) {
   const browser = this;
 
   browser.perform(() => {
-    browser.apmTrans.setTag(name, value);
+    browser.apmTrans.setLabel(name, value);
   });
 
   return browser;
