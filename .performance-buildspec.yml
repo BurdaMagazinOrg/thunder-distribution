@@ -1,8 +1,0 @@
-version: 0.2
-
-phases:
-  build:
-    commands:
-      - echo "Build it!"
-      - pwd
-      - ls -al
