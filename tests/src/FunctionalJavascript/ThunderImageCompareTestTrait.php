@@ -138,7 +138,7 @@ trait ThunderImageCompareTestTrait {
   public function compareImages($expectedImageFile, $actualImageFile, $threshold = 0.01) {
     // Store created screenshot file for next test execution.
     if ($this->generateMode) {
-      $newFileName = file_unmanaged_move($actualImageFile, $expectedImageFile, FILE_EXISTS_REPLACE);
+      $newFileName = \Drupal::service('file_system')->move($actualImageFile, $expectedImageFile, FILE_EXISTS_REPLACE);
 
       if (!$newFileName) {
         throw new \Exception(sprintf('Unable to create file in %s.', $expectedImageFile));
