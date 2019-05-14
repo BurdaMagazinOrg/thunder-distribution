@@ -4,6 +4,7 @@ phases:
   pre_build:
     commands:
       - echo "Checking build type"
+      - echo "CODEBUILD_WEBHOOK_TRIGGER is $CODEBUILD_WEBHOOK_TRIGGER"
       - WEBHOOK_TRIGGER_TYPE=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d'/' -f 1)
       - echo "Trigger type ${WEBHOOK_TRIGGER_TYPE}"
       - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d'/' -f 2)
