@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+# Install Thunder
+
+DB_HOST=${DB_HOST:-'127.0.0.1'}
+CHROME_HOST=${CHROME_HOST:-'127.0.0.1'}
+THUNDER_HOST=${THUNDER_HOST:-'localhost'}
+ELASTIC_APM_URL=${ELASTIC_APM_URL:-'http://localhost:8200'}
+ELASTIC_APM_CONTEXT_TAG_BRANCH=${ELASTIC_APM_CONTEXT_TAG_BRANCH:-'8.x-2.x'}
+
+# Tweak .env file for testing
+# .env file
+cp /home/thunder/www/docroot/core/.env.example /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_WEBDRIVER_CHROME_ARGS=\\\`--disable-gpu --headless --no-sandbox --disable-web-security\\\`" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_CHROMEDRIVER_AUTOSTART=false" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_WEBDRIVER_PORT=4444" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_WEBDRIVER_PATH_PREFIX=/wd/hub" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_BASE_URL=http://${THUNDER_HOST}:8080" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_DB_URL=mysql://thunder@${DB_HOST}:3306/thunder" >> /home/thunder/www/docroot/core/.env
+echo "DRUPAL_TEST_WEBDRIVER_HOSTNAME=${CHROME_HOST}" >> /home/thunder/www/docroot/core/.env
+echo "THUNDER_BRANCH=${ELASTIC_APM_CONTEXT_TAG_BRANCH}" >> /home/thunder/www/docroot/core/.env
+echo "THUNDER_SITE_HOSTNAME=${THUNDER_HOST}" >> /home/thunder/www/docroot/core/.env
+echo "THUNDER_APM_URL=${ELASTIC_APM_URL}" >> /home/thunder/www/docroot/core/.env
+
+# Adjust settings.php
+cat <<EOF >> /home/thunder/www/docroot/sites/default/settings.php
+
+if (!isset(\$databases)) {
+      \$databases = [];
+}
+
+\$settings['hash_salt'] = '0128c13beb15817d30128c13beb15817d30128c13beb15817d3';
+
+\$databases['default']['default'] = [
+  'database' => 'thunder',
+  'username' => 'thunder',
+  'password' => 'thunder',
+  'prefix' => '',
+  'host' => '127.0.0.1',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+];
+
+EOF
+
+echo "\$databases['default']['default']['host'] = '${DB_HOST}';" >> /home/thunder/www/docroot/sites/default/settings.php
+
+# Remove write for settings.php
+chmod a-w /home/thunder/www/docroot/sites/default/settings.php
+
+# Wait for mysql database and check connection with simple mysql command!
+sleep 15
+mysql -h ${DB_HOST} -u thunder --password=thunder -e "SHOW DATABASES;"
+
+# Install and required modules
+su - thunder -c "cd /home/thunder/www/docroot && ../bin/drush -y si thunder --debug"
+su - thunder -c "cd /home/thunder/www/docroot && ../bin/drush -y en thunder_performance_measurement --debug"
+su - thunder -c "cd /home/thunder/www/docroot && ../bin/drush cr"
+
+# Start testing
+su - thunder -c "docker-thunder-run-tests"

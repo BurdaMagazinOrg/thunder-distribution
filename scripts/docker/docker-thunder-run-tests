@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Run Nightwatch JS Tests
+
+cd /home/thunder/www/docroot
+php -S 0.0.0.0:8080 .ht.router.php &
+
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Failed to start '.ht.router.php': $status"
+  exit $status
+fi
+
+while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do
+    sleep 1
+done
+
+cd /home/thunder/www/docroot/core
+while true; do
+    yarn test:nightwatch ../profiles/contrib/thunder/tests/src/Nightwatch/Tests/ArticleCreate.js
+
+    sleep 10
+done
