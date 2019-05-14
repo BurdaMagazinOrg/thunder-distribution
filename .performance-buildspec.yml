@@ -6,17 +6,18 @@ phases:
       - echo "Checking build type"
       - WEBHOOK_TRIGGER_TYPE=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -d'/' -f 1)
       - echo "Trigger type ${WEBHOOK_TRIGGER_TYPE}"
-      - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -c8-);
+      - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | cut -c8-)
+      - DOCKER_IMAGE_TAG=$(echo $BRANCH_NAME | sed 's/\//_/g')
       - echo "Logging in to Amazon ECR..."
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
-      - docker build --build-arg BRANCH_NAME=$BRANCH_NAME -t $DOCKER_IMAGE_NAME:$BRANCH_NAME .
-      - docker tag $DOCKER_IMAGE_NAME:$BRANCH_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$BRANCH_NAME
+      - docker build --build-arg BRANCH_NAME=$BRANCH_NAME -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+      - docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$BRANCH_NAME
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
