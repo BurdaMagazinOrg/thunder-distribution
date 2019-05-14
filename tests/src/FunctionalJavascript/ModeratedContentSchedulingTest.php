@@ -19,7 +19,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   public function testPublishStateSchedule() {
     $publish_timestamp = strtotime('yesterday');
     /* @var $moderation_info \Drupal\content_moderation\ModerationInformationInterface */
-    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    $moderation_info = $this->container->get('content_moderation.moderation_information');
 
     $this->articleFillNew([
       'field_channel' => 1,
@@ -37,7 +37,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $revision_id = $node->getRevisionId();
     // Make sure node is unpublished.
     $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
-    $this->runCron();
+    $this->container->get('cron')->run();
 
     $node = $moderation_info->getLatestRevision('node', $node->id());
     // Assert node is now published.
@@ -46,6 +46,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     // Assert only one revision is created during the operation.
     $this->assertEquals($revision_id + 1, $node->getRevisionId());
 
+    $edit_url = $node->toUrl('edit-form');
+    $this->drupalGet($edit_url);
+    $this->expandAllTabs();
     $this->setFieldValues($this->getSession()->getPage(), [
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
@@ -58,7 +61,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $node = $moderation_info->getLatestRevision('node', $node->id());
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
-    $this->runCron();
+    $this->container->get('cron')->run();
 
     $node = $moderation_info->getLatestRevision('node', $node->id());
     $this->assertEquals(TRUE, $node->isPublished());
@@ -88,7 +91,8 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $revision_id = $node->getRevisionId();
     // Make sure node is published.
     $this->assertEquals(TRUE, Node::load($node->id())->isPublished());
-    $this->runCron();
+    $this->container->get('cron')->run();
+
     // Assert node is now unpublished.
     $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
     // Assert only one revision is created during the operation.
@@ -113,7 +117,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
 
     $nid = $node->id();
     // Assert node is published.
-    $this->assertEquals('Published title', Node::load($nid)->getTitle());
+    $this->assertEquals('Test workflow article 3 - Published', Node::load($nid)->getTitle());
 
     // Create a new pending revision and validate it's not the default published
     // one.
@@ -130,7 +134,8 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $revision_id = $node->getRevisionId();
     // Test latest revision is not the published one.
     $this->assertEquals('Test workflow article 3 - Published', Node::load($nid)->getTitle());
-    $this->runCron();
+    $this->container->get('cron')->run();
+
     // Test latest revision is now the published one.
     $this->assertEquals('Test workflow article 3 - Draft', Node::load($nid)->getTitle());
     // Assert only one revision is created during the operation.
