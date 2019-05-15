@@ -9,8 +9,10 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -383,6 +385,15 @@ function thunder_modules_installed($modules) {
 
     $field->save();
   }
+
+  // When enabling search_api, enable facets and VBO.
+  if (_thunder_check_triggering_modules($modules, ['search_api'])) {
+    \Drupal::service('module_installer')->install(['search_api_db']);
+    \Drupal::service('module_installer')->install(['facets']);
+    \Drupal::service('module_installer')->install(['select2_facets']);
+    \Drupal::service('module_installer')->install(['views_bulk_operations']);
+    \Drupal::messenger()->addStatus(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
+  }
 }
 
 /**
@@ -459,4 +470,36 @@ function thunder_field_widget_info_alter(array &$info) {
   if (!\Drupal::moduleHandler()->moduleExists('content_moderation')) {
     unset($info['thunder_moderation_state_default']);
   }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function thunder_views_data() {
+  $data['views']['facet_block'] = [
+    'title' => t('Facet block'),
+    'help' => t('.'),
+    'area' => [
+      'id' => 'facet_block',
+    ],
+  ];
+  return $data;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function thunder_views_pre_render(ViewExecutable $view) {
+  if ($view->result || !$view->query instanceof SearchApiQuery) {
+    return;
+  }
+
+  /** @var \Drupal\search_api\Task\IndexTaskManagerInterface $index_task_manager */
+  $index_task_manager = \Drupal::service('search_api.index_task_manager');
+
+  $index = $view->query->getIndex();
+  if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()->getRemainingItemsCount()) {
+    \Drupal::messenger()->addError(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
+  }
+
 }

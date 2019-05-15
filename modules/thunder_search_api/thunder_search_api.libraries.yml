@@ -1,0 +1,6 @@
+thunder_search_api:
+  js:
+    js/thunder_search_api.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal

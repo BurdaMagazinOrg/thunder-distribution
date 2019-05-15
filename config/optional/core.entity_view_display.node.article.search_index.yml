@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.article.field_channel
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_paragraphs
+    - field.field.node.article.field_seo_title
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_teaser_media
+    - field.field.node.article.field_teaser_text
+    - node.type.article
+  module:
+    - entity_reference_revisions
+    - user
+id: node.article.search_index
+targetEntityType: node
+bundle: article
+mode: search_index
+content:
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_tags:
+    type: entity_reference_label
+    weight: 2
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    region: content
+  field_teaser_text:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  content_moderation_control: true
+  field_channel: true
+  field_meta_tags: true
+  field_seo_title: true
+  field_teaser_media: true
+  langcode: true
+  links: true
+  shariff_field: true

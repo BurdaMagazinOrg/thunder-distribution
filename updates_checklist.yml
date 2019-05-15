@@ -322,3 +322,8 @@ v2.36:
         '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
         '#description_failed': '<p><strong>Adjust the order to your needs and save the page. If the order is already correct displayed, move one item for and back before saving.</strong><p>'
         filter_page: { '#text': 'Text formats and editors', '#url': 'internal:/admin/config/content/formats' }
+thunder_update_8136:
+        '#title': 'Add config_selector settings to content view'
+        '#description': '<p>Config selector settings have to be added to the content view, to ensure that view switching by the config selector works properly.</p>'
+        '#description_successful': '<p>Settings successfully added.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

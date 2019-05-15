@@ -6,9 +6,14 @@ dependencies:
     - field.storage.node.field_teaser_media
     - image.style.thumbnail
   module:
+    - config_selector
     - media_entity
     - node
     - user
+third_party_settings:
+  config_selector:
+    feature: thunder_content_view
+    priority: 0
 id: content
 label: Content
 module: node

@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.content
+    - views.view.content_search_api
+  module:
+    - search_api
+id: status
+name: Status
+url_alias: status
+weight: 0
+min_count: 1
+show_only_one_result: true
+field_identifier: status
+facet_source_id: 'search_api:views_page__content_search_api__page_1'
+widget:
+  type: select2
+  config:
+    show_numbers: true
+    width: resolve
+    autocomplete: false
+    match_operator: CONTAINS
+query_operator: or
+use_hierarchy: false
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+hard_limit: 3
+exclude: false
+only_visible_when_facet_source_is_visible: true
+processor_configs:
+  boolean_item:
+    processor_id: boolean_item
+    weights:
+      build: -10
+    settings:
+      on_value: Published
+      off_value: Unpublished
+  hide_1_result_facet:
+    processor_id: hide_1_result_facet
+    weights:
+      build: -10
+    settings: {  }
+  hide_non_narrowing_result_processor:
+    processor_id: hide_non_narrowing_result_processor
+    weights:
+      build: 40
+    settings: {  }
+  url_processor_handler:
+    processor_id: url_processor_handler
+    weights:
+      pre_query: -10
+      build: -10
+    settings: {  }
+empty_behavior:
+  behavior: none
+show_title: true

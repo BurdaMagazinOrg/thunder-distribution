@@ -1,0 +1,193 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_channel
+    - field.storage.node.field_tags
+    - search_api.server.database
+    - core.entity_view_mode.node.search_index
+  module:
+    - node
+    - user
+    - search_api
+id: content
+name: Content
+description: ''
+read_only: false
+field_settings:
+  field_channel:
+    label: Channel
+    datasource_id: 'entity:node'
+    property_path: field_channel
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_channel
+  field_tags:
+    label: Tags
+    datasource_id: 'entity:node'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+  name:
+    label: 'Authored by » User » Name'
+    datasource_id: 'entity:node'
+    property_path: 'uid:entity:name'
+    type: string
+    dependencies:
+      module:
+        - node
+        - user
+        - user
+  node_changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  promote:
+    label: 'Promoted to front page'
+    datasource_id: 'entity:node'
+    property_path: promote
+    type: boolean
+    dependencies:
+      module:
+        - node
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:media':
+          gallery: default
+          image: default
+          instagram: default
+          pinterest: default
+          twitter: default
+          video: default
+        'entity:node':
+          article: search_index
+          page: search_index
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  sticky:
+    label: 'Sticky at top of lists'
+    datasource_id: 'entity:node'
+    property_path: sticky
+    type: boolean
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  hierarchy:
+    fields:
+      field_channel: taxonomy_term-parent
+    weights:
+      preprocess_index: -45
+  html_filter:
+    all_fields: true
+    fields:
+      - name
+      - rendered_item
+      - title
+      - type
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignorecase:
+    all_fields: true
+    fields:
+      - name
+      - rendered_item
+      - title
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  rendered_item: {  }
+  tokenizer:
+    all_fields: true
+    fields:
+      - rendered_item
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '3'
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: database

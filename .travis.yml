@@ -28,7 +28,7 @@ stages:
 
 env:
   global:
-    - THUNDER_ADMIN_BRANCH=8.x-2.x
+    - THUNDER_ADMIN_BRANCH=feature/3041804-layout_thunder_editorial_search_with_search_api
 
 jobs:
   include:
