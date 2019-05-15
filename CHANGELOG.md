@@ -1,5 +1,24 @@
 # Change Log
 
+## [8.2.41](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.41) 2019-05-09
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.40...8.2.41)
+
+Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.7.1.
+
+## [8.2.40](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.40) 2019-05-07
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.39...8.2.40)
+
+Fixes an issue when content_moderation module is not enabled.
+
+- Fix [Content_moderation module has to be enabled, otherwise all node add/edit pages break](https://www.drupal.org/project/thunder/issues/3053041)
+
+## [8.2.39](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.39) 2019-05-02
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.38...8.2.39)
+
+Fix Drupal 8.7 compatibility issues.
+
+- Do [Prepare Thunder for Drupal 8.7](https://www.drupal.org/project/thunder/issues/3024698)
+
 ## [8.2.38](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.38) 2019-04-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.37...8.2.38)
 

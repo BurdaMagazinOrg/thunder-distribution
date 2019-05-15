@@ -26,6 +26,10 @@ stages:
   - sanity checks
   - test
 
+env:
+  global:
+    - THUNDER_ADMIN_BRANCH=8.x-2.x
+
 jobs:
   include:
     - stage: sanity checks
