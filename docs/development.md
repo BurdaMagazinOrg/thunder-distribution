@@ -116,7 +116,7 @@ Documentation how to check your code for coding style issues can be found [here]
 
 ## Thunder Travis CI
 
-All Thunder pull requests are execute on [Travis CI](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3 (with drush make install and with composer install). All code will be checked against coding style.
+All Thunder pull requests are execute on [Travis CI](https://travis-ci.com/thunder/thunder-distribution). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3 (with drush make install and with composer install). All code will be checked against coding style.
 
 We support some test execution options. They can be provided in commit message in square brackets []. Here is list of options supported:
 - TEST_UPDATE - this option will execute custom test path, where update (including execution of update hooks) from latest released version will be tested. This option should be used in case of pull request with update hooks or module update.

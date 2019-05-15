@@ -1,6 +1,6 @@
 # <img src="./files/images/thunder.svg?sanitize=true" alt="Thunder" width="4%"/> Thunder [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=I%20just%20tried%20ThunderCMS.%20The%20CMS%20for%20professional%20publishing!&url=https://www.thunder.org&via=ThunderCoreTeam&hashtags=drupal8,publishing,ThunderCMS)
 
-[![Build Status](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution.svg?branch=8.x-2.x)](https://travis-ci.org/BurdaMagazinOrg/thunder-distribution)
+[![Build Status](https://travis-ci.com/thunder/thunder-distribution.svg?branch=8.x-3.x)](https://travis-ci.com/thunder/thunder-distribution)
 
 Thunder is a Drupal 8 distribution for professional publishers. It consists of the current Drupal 8 functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
 
@@ -12,7 +12,7 @@ Instructions on how to install Thunder can be found at the [installation guide](
 To start quickly, run this in your terminal to install Thunder from command line:
 
 ```
-composer create-project burdamagazinorg/thunder-project thunder --no-interaction
+composer create-project thunder/thunder-project thunder --no-interaction
 cd thunder/docroot
 php core/scripts/drupal quick-start thunder
 ```

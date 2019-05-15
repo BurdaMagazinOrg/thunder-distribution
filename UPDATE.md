@@ -5,7 +5,18 @@ significant change is the migration to media in core. But we also made
 some significant changes to our composer.json.
 
 ### General composer.json adjustments
-First we removed some modules from our codebase. If you are using one of
+First, we moved the composer package under the thunder namespace. So you
+need to replace
+```
+"burdamagazinorg/thunder": "~8.2",
+```
+by
+```
+"thunder/thunder-distribution": "~3.3",
+```
+in the require section of your composer.json.
+
+Second, we removed some modules from our codebase. If you are using one of
 following modules, please add them to the composer.json of your project.
 * valiton/harbourmaster
 * drupal/riddle_marketplace

@@ -1,5 +1,5 @@
 {
-    "name": "burdamagazinorg/thunder",
+    "name": "thunder/thunder-distribution",
     "description": "The thunder distribution",
     "type": "drupal-profile",
     "authors": [
@@ -38,6 +38,7 @@
         }
     ],
     "extra": {
+        "installer-name": "thunder",
         "installer-paths": {
             "docroot/core": [
                 "type:drupal-core"

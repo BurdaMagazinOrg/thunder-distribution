@@ -14,10 +14,10 @@ $ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token <TRAVIS_CI_TOKEN>" \
   -d '{ "quiet": true }' \
-  https://api.travis-ci.org/job/<TRAVIS_CI_JOB_ID>/debug
+  https://api.travis-ci.com/job/<TRAVIS_CI_JOB_ID>/debug
 ```
 
-After that Travis CI job will run in debug mode and in log output on travis.org, it will provide a ssh link to access it.
+After that Travis CI job will run in debug mode and in log output on travis.com, it will provide a ssh link to access it.
 It looks like: ssh <SOME_HASH>@ny2.tmate.io
 
 Copy that command and execute it in the console, that will make a connection to `tmux` for Travis CI debug session.
