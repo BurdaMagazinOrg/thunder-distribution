@@ -6,3 +6,4 @@ package: Thunder
 dependencies:
   - liveblog:liveblog_pusher
   - paragraphs:paragraphs
+  - select2:select2
