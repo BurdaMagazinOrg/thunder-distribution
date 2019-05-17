@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.pinterest.field_url
+    - media_entity.bundle.pinterest
+  module:
+    - field_group
+    - link
+    - select2
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - field_url
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
+id: media.pinterest.default
+targetEntityType: media
+bundle: pinterest
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_url:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  uid:
+    type: select2_entity_reference
+    weight: 2
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  moderation_state: true
+  name: true
+  path: true

@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+  module:
+    - content_moderation
+id: editorial
+label: Editorial
+type: content_moderation
+type_settings:
+  states:
+    draft:
+      label: Draft
+      published: false
+      default_revision: false
+      weight: -5
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: 0
+    unpublished:
+      label: Unpublished
+      weight: 5
+      published: false
+      default_revision: true
+  transitions:
+    unpublish:
+      label: Unpublish
+      from:
+        - draft
+        - published
+      to: unpublished
+      weight: 2
+    unpublished_draft:
+      label: 'Restore to Draft'
+      from:
+        - unpublished
+      to: draft
+      weight: 3
+    unpublished_published:
+      label: Restore
+      from:
+        - unpublished
+      to: published
+      weight: 4
+    create_new_draft:
+      label: 'Create New Draft'
+      to: draft
+      weight: 0
+      from:
+        - draft
+        - published
+    publish:
+      label: Publish
+      to: published
+      weight: 1
+      from:
+        - draft
+        - published
+  entity_types:
+    node:
+      - article

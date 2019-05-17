@@ -2,6 +2,9 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Core\Url;
+use Drupal\Tests\node\Traits\NodeCreationTrait;
+
 /**
  * Tests the article creation.
  *
@@ -11,6 +14,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
+  use NodeCreationTrait;
 
   /**
    * Field name for paragraphs in article content.
@@ -92,8 +96,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Twitter widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitterwidget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
+      ->wait(5000, "jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
@@ -103,7 +107,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check for sharing buttons.
     $this->assertSession()->elementExists('css', '.shariff-button.twitter');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
-    $this->assertSession()->elementExists('css', '.shariff-button.googleplus');
 
     // Check Video paragraph.
     $this->getSession()
@@ -114,6 +117,77 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check that one Pinterest widget is on page.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+  }
+
+  /**
+   * Test Creation of Article without content moderation.
+   */
+  public function testCreateArticleWithNoModeration() {
+    // Delete all the articles so we can disable content moderation.
+    foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
+      $node->delete();
+    }
+    \Drupal::service('module_installer')->uninstall(['content_moderation']);
+
+    // Try to create an article.
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Test article',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+    ]);
+    $this->clickSave();
+    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertSession()->pageTextContains('Test article');
+  }
+
+  /**
+   * Tests draft creation and that reverting to the default revision works.
+   */
+  public function testModerationWorkflow() {
+    $this->articleFillNew([
+      'field_channel' => 1,
+      'title[0][value]' => 'Test workflow article',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+    ]);
+    $this->setModerationState('published');
+    $this->clickSave();
+    $this->assertPageTitle('Massive gaining seo traffic text');
+
+    $node = $this->getNodeByTitle('Test workflow article');
+
+    $this->drupalGet($node->toUrl('edit-form'));
+    $this->setFieldValues($this->getSession()->getPage(), [
+      'title[0][value]' => 'Test workflow article in draft',
+      'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
+    ]);
+    $this->setModerationState('draft');
+    $this->clickSave();
+
+    $this->drupalGet($node->toUrl('edit-form'));
+
+    $this->setFieldValues($this->getSession()->getPage(), [
+      'title[0][value]' => 'Test workflow article in draft 2',
+      'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
+    ]);
+    $this->setModerationState('draft');
+    $this->clickSave();
+
+    $this->assertPageTitle('Massive gaining even more and more seo traffic text');
+
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+
+    $revert_url = Url::fromRoute('node.revision_revert_default_confirm', [
+      'node' => $node->id(),
+      'node_revision' => $moderation_info->getLatestRevisionId('node', $node->id()),
+    ]);
+    $this->drupalPostForm($revert_url, [], t('Revert'));
+
+    $this->drupalGet($node->toUrl());
+    $this->assertPageTitle('Massive gaining seo traffic text');
+
+    $this->drupalGet($node->toUrl('edit-form'));
+    $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Massive gaining seo traffic text');
   }
 
 }

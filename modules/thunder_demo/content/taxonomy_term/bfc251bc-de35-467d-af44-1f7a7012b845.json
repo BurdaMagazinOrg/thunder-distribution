@@ -49,7 +49,9 @@
     ],
     "field_meta_tags": [
         {
-            "value": "a:1:{s:8:\"referrer\";s:11:\"no-referrer\";}"
+            "value": {
+                "referrer": "no-referrer"
+            }
         }
     ]
 }

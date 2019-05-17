@@ -1,0 +1,74 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/user\/4?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 4
+        }
+    ],
+    "uuid": [
+        {
+            "value": "dc626648-e2b7-4311-a355-d8b1303fd4a3"
+        }
+    ],
+    "name": [
+        {
+            "value": "test-admin"
+        }
+    ],
+    "pass": [
+        {
+            "value": "test-admin"
+        }
+    ],
+    "timezone": [
+        {
+            "value": "UTC"
+        }
+    ],
+    "status": [
+        {
+            "value": true
+        }
+    ],
+    "created": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "access": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "login": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "roles": [
+        {
+            "target_id": "administrator"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

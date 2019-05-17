@@ -5,22 +5,106 @@
  * Thunder Updater install hooks.
  */
 
-use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\update_helper_checklist\Entity\Update;
 
 /**
- * Install the thunder updater.
+ * Switch to update_helper module instead of thunder_updater.
  */
-function thunder_updater_install() {
-  $logger = \Drupal::logger('thunder_updater');
+function thunder_updater_update_8001() {
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = \Drupal::moduleHandler();
 
-  // Install Checklist API as soft dependency.
-  try {
-    \Drupal::service('module_installer')->install(['checklistapi']);
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
+  $config_factory = \Drupal::configFactory();
+
+  // We let exception bubble in this case, since it's not possible to continue
+  // with execution of update hooks without "update_helper.updater" service.
+  $module_installer->install(['update_helper']);
+
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $update_logger = $updater->logger();
+
+  // We need database connection in order to migrate Thunder updates correctly.
+  $database = \Drupal::database();
+
+  // Existing module states should be preserved!
+  $has_thunder_updater_checklist =
+    $module_handler->moduleExists('checklistapi')
+    && !empty($config_factory->get('checklistapi.progress.thunder_updater')->getRawData());
+
+  // Migrate existing Thunder update entities and checklist config.
+  if ($has_thunder_updater_checklist) {
+    try {
+      $module_installer->install(['update_helper_checklist']);
+
+      /** @var \Drupal\update_helper_checklist\UpdateChecklist $update_checklist */
+      $update_checklist = \Drupal::service('update_helper_checklist.update_checklist');
+      $update_checklist->markAllUpdates(FALSE);
+
+      $update_checklist->markUpdatesSuccessful(['thunder' => ['thunder_updater_update_8001']]);
+    }
+    catch (Exception $e) {
+      $update_logger->warning('Unable to install "update_helper_checklist".');
+    }
+
+    // Remove update entities created on "update_helper_checklist" install.
+    /** @var \Drupal\update_helper_checklist\Entity\Update[] $all_updates */
+    $all_updates = Update::loadMultiple();
+    foreach ($all_updates as $update) {
+      try {
+        // We want to keep status for this update hook.
+        if ($update->id() === 'thunder:thunder_updater_update_8001') {
+          continue;
+        }
+
+        $update->delete();
+      }
+      catch (EntityStorageException $e) {
+        $update_logger->warning(sprintf('Unable to delete Update entity (%s) for Update Helper Checklist.', $update->id()));
+
+        $update_checklist->markUpdatesFailed(['thunder' => ['thunder_updater_update_8001']]);
+      }
+    }
+
+    $thunder_updater_updates = $database->query('SELECT * FROM {thunder_updater_update};')->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($thunder_updater_updates as $thunder_updater_update) {
+      $thunder_updater_update['id'] = 'thunder:' . $thunder_updater_update['id'];
+
+      $update = Update::create($thunder_updater_update);
+      try {
+        $update->save();
+      }
+      catch (EntityStorageException $e) {
+        $update_logger->warning(sprintf('Unable to create Update entity (%s) for Update Helper Checklist.', $update->id()));
+
+        $update_checklist->markUpdatesFailed(['thunder' => ['thunder_updater_update_8001']]);
+      }
+    }
+
+    // Migrate Checklist API configuration.
+    $thunder_updater_checklist = $config_factory->getEditable('checklistapi.progress.thunder_updater');
+    $update_helper_checklist = $config_factory->getEditable('checklistapi.progress.update_helper_checklist');
+    foreach ($thunder_updater_checklist->get('progress.#items') as $update_id => $update_info) {
+      $update_helper_checklist->set('progress.#items.thunder:' . $update_id, $update_info);
+    }
+
+    $update_helper_checklist->set('progress.#completed_items', $update_helper_checklist->get('progress.#completed_items') + $thunder_updater_checklist->get('progress.#completed_items'));
+    $update_helper_checklist->save();
+
+    // Remove Thunder Updater checklist configuration.
+    $thunder_updater_checklist->delete();
   }
-  catch (MissingDependencyException $e) {
-    $logger->warning(
-      'Could not install Checklist API module. You will not see information 
-      about updates in the drupal admin pages.'
-    );
-  }
+
+  // We want to remove all migrated updates, so that uninstall can work.
+  $database->truncate('thunder_updater_update')->execute();
+
+  // Finally remove Thunder Updater!
+  $module_installer->uninstall(['thunder_updater']);
+
+  return $update_logger->output();
 }

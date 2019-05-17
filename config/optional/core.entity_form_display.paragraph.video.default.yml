@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.video_browser
+    - field.field.paragraph.video.field_video
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_browser
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_video:
+    weight: 0
+    settings:
+      entity_browser: video_browser
+      field_widget_display: inline_entity_form
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        form_mode: inline
+      field_widget_edit: false
+    third_party_settings: {  }
+    region: content
+    type: entity_browser_entity_reference
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

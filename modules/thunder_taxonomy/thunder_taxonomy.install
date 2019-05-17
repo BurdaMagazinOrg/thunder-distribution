@@ -25,23 +25,6 @@ function thunder_taxonomy_update_dependencies() {
 }
 
 /**
- * Implements hook_install().
- */
-function thunder_taxonomy_install() {
-  // Add our base fields to the schema.
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-
-}
-
-/**
- * Implements hook_uninstall().
- */
-function thunder_taxonomy_uninstall() {
-  // Remove our base fields from the schema.
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-}
-
-/**
  * Grant term access permissions.
  */
 function thunder_taxonomy_update_8001() {
@@ -72,18 +55,46 @@ function thunder_taxonomy_update_8001() {
  * Enable pinterest paragraph type on taxonomy terms.
  */
 function thunder_taxonomy_update_8002() {
-  /** @var \Drupal\thunder_updater\Updater $thunderUpdater */
-  $thunderUpdater = \Drupal::service('thunder_updater');
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updater->executeUpdate('thunder', 'thunder_taxonomy_update_8002');
 
-  // Execute configuration update defintions with logging of fails and
-  // successes.
-  if ($thunderUpdater->executeUpdates([['thunder_taxonomy', 'thunder_taxonomy__update_8002']])) {
-    $thunderUpdater->checklist()->markUpdatesSuccessful(['thunder_taxonomy_update_8002']);
-  }
-  else {
-    $thunderUpdater->checklist()->markUpdatesFailed(['thunder_taxonomy_update_8002']);
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Use core's term status field definition.
+ */
+function thunder_taxonomy_update_8003() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $definition_update_manager->getEntityType('taxonomy_term');
+
+  $entity_keys = $entity_type->getKeys();
+  $entity_keys['published'] = 'status';
+  $entity_type->set('entity_keys', $entity_keys);
+
+  $definition_update_manager->updateEntityType($entity_type);
+
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $field_manager */
+  $field_manager = \Drupal::service('entity_field.manager');
+  $status = $field_manager->getBaseFieldDefinitions('taxonomy_term')['status'];
+
+  $definition_update_manager->updateFieldStorageDefinition($status->getFieldStorageDefinition());
+
+  // Copied this part from https://www.drupal.org/node/2985366. It's only for
+  // safties sake, because Thunder user should never had the
+  // content_translation_status field.
+  $has_content_translation_status_field = $definition_update_manager->getFieldStorageDefinition('content_translation_status', 'taxonomy_term');
+  // Uninstall the 'content_translation_status' field if needed.
+  if ($has_content_translation_status_field) {
+    $content_translation_status = $definition_update_manager->getFieldStorageDefinition('content_translation_status', 'taxonomy_term');
+    $definition_update_manager->uninstallFieldStorageDefinition($content_translation_status);
   }
 
   // Output logged messages to related channel of update execution.
-  return $thunderUpdater->logger()->output();
+  return $updater->logger()->output();
 }

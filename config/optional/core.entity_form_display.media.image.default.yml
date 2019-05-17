@@ -1,0 +1,129 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.medium
+    - media_entity.bundle.image
+  module:
+    - datetime
+    - field_group
+    - focal_point
+    - select2
+    - text
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - name
+        - field_tags
+        - field_image
+        - field_description
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
+    group_credits:
+      children:
+        - field_copyright
+        - field_source
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Credits
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_copyright:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    type: text_textarea
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_expires:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_image:
+    weight: 3
+    settings:
+      offsets: '50,50'
+      progress_indicator: throbber
+      preview_image_style: medium
+      preview_link: true
+    third_party_settings: {  }
+    type: image_focal_point
+    region: content
+  field_source:
+    type: string_textfield
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_tags:
+    type: select2_entity_reference
+    weight: 2
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: select2_entity_reference
+    weight: 4
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  moderation_state: true
+  path: true

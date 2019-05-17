@@ -8,7 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/uid": [
             {
-                "href": "http:\/\/default\/user\/1?_format=hal_json"
+                "href": "http:\/\/default\/user\/3?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/revision_uid": [
@@ -36,6 +36,11 @@
             },
             {
                 "href": ""
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_tags": [
+            {
+                "href": "http:\/\/default\/drupal?_format=hal_json"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_teaser_media": [
@@ -79,7 +84,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                        "href": "http:\/\/default\/user\/3?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
@@ -87,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "741faabc-56ed-45cb-b963-57c95db628d9"
+                        "value": "be8e7a25-8a41-4bda-a854-b4b9bb1b0a02"
                     }
                 ]
             }
@@ -208,6 +213,23 @@
                 "target_revision_id": "17"
             }
         ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_tags": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/drupal?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/tags"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "35bdba6e-9b45-472a-8fda-11e7e69de71b"
+                    }
+                ]
+            }
+        ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_teaser_media": [
             {
                 "_links": {
@@ -258,7 +280,12 @@
     ],
     "field_meta_tags": [
         {
-            "value": "a:4:{s:5:\"title\";s:22:\"[node:field_seo_title]\";s:11:\"description\";s:24:\"[node:field_teaser_text]\";s:13:\"canonical_url\";s:11:\"[node:path]\";s:16:\"content_language\";s:15:\"[node:langcode]\";}"
+            "value": {
+                "title": "[node:field_seo_title]",
+                "description": "[node:field_teaser_text]",
+                "canonical_url": "[node:path]",
+                "content_language": "[node:langcode]"
+            }
         }
     ],
     "field_seo_title": [

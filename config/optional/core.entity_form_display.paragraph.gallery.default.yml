@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.inline
+    - field.field.paragraph.gallery.field_media
+    - paragraphs.paragraphs_type.gallery
+  module:
+    - inline_entity_form
+id: paragraph.gallery.default
+targetEntityType: paragraph
+bundle: gallery
+mode: default
+content:
+  field_media:
+    type: inline_entity_form_simple
+    weight: 0
+    settings:
+      form_mode: inline
+      override_labels: true
+      label_singular: Gallery
+      label_plural: Galleries
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

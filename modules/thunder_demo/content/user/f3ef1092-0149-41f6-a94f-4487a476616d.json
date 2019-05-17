@@ -1,0 +1,74 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/user\/5?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 5
+        }
+    ],
+    "uuid": [
+        {
+            "value": "f3ef1092-0149-41f6-a94f-4487a476616d"
+        }
+    ],
+    "name": [
+        {
+            "value": "test-restricted-editor"
+        }
+    ],
+    "pass": [
+        {
+            "value": "test-restricted-editor"
+        }
+    ],
+    "timezone": [
+        {
+            "value": "UTC"
+        }
+    ],
+    "status": [
+        {
+            "value": true
+        }
+    ],
+    "created": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "access": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "login": [
+        {
+            "value": "1970-01-01T00:00:00+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "roles": [
+        {
+            "target_id": "restricted_editor"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": "1"
+        }
+    ]
+}

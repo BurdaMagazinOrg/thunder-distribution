@@ -3,7 +3,7 @@ status: true
 dependencies: {  }
 id: editor
 label: Editor
-weight: 2
+weight: -7
 is_admin: false
 permissions:
   - 'access content'
@@ -19,6 +19,7 @@ permissions:
   - 'access video_browser entity browser pages'
   - 'administer menu'
   - 'administer nodes'
+  - 'break content lock'
   - 'create article content'
   - 'create media'
   - 'create page content'
@@ -33,6 +34,7 @@ permissions:
   - 'delete page revisions'
   - 'delete terms in channel'
   - 'delete terms in tags'
+  - 'delete token'
   - 'dropzone upload files'
   - 'edit any article content'
   - 'edit any page content'
@@ -41,18 +43,25 @@ permissions:
   - 'edit terms in channel'
   - 'edit terms in tags'
   - 'never autoplay videos'
+  - 'renew token'
   - 'revert article revisions'
   - 'revert page revisions'
   - 'schedule publishing of nodes'
   - 'update any media'
   - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition unpublish'
+  - 'use editorial transition unpublished_draft'
+  - 'use editorial transition unpublished_published'
   - 'use text format full_html'
   - 'view all revisions'
+  - 'view any unpublished content'
   - 'view article revisions'
+  - 'view latest version'
   - 'view own unpublished content'
   - 'view page revisions'
   - 'view scheduled content'
   - 'view the administration theme'
   - 'view unpublished terms in channel'
   - 'view unpublished terms in tags'
-  - 'break content lock'

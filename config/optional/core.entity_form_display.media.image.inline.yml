@@ -1,0 +1,153 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.inline
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.medium
+    - media_entity.bundle.image
+  module:
+    - datetime
+    - field_group
+    - focal_point
+    - text
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - field_image
+      parent_name: group_wrapper
+      weight: 1
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: left
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Left
+    group_right:
+      children:
+        - name
+        - field_source
+        - field_expires
+        - field_copyright
+      parent_name: group_wrapper
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: right
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Right
+    group_bottom:
+      children:
+        - field_description
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: Bottom
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: bottom
+      label: Bottom
+    group_wrapper:
+      children:
+        - group_left
+        - group_right
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: column-container
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Wrapper
+id: media.image.inline
+targetEntityType: media
+bundle: image
+mode: inline
+content:
+  field_copyright:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    type: text_textarea
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_expires:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_image:
+    weight: 2
+    settings:
+      offsets: '50,50'
+      progress_indicator: throbber
+      preview_image_style: medium
+      preview_link: true
+    third_party_settings: {  }
+    type: image_focal_point
+    region: content
+  field_source:
+    type: string_textfield
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  name:
+    type: string_textfield
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  langcode: true
+  moderation_state: true
+  path: true
+  uid: true

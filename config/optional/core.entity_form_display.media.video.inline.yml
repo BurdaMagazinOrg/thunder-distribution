@@ -1,0 +1,104 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.inline
+    - field.field.media.video.field_caption
+    - field.field.media.video.field_copyright
+    - field.field.media.video.field_description
+    - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_source
+    - media_entity.bundle.video
+  module:
+    - field_group
+    - text
+    - video_embed_field
+third_party_settings:
+  field_group:
+    group_top:
+      children:
+        - name
+        - field_media_video_embed_field
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: top
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Top
+    group_bottom:
+      children:
+        - field_copyright
+        - field_source
+        - field_description
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: bottom
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Bottom
+id: media.video.inline
+targetEntityType: media
+bundle: video
+mode: inline
+content:
+  field_copyright:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    type: text_textarea
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_media_video_embed_field:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+    region: content
+  field_source:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_caption: true
+  langcode: true
+  moderation_state: true
+  path: true
+  uid: true

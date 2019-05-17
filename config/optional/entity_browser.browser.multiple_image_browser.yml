@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.image
+    - views.view.image_browser
+  module:
+    - dropzonejs_eb_widget
+    - media_entity
+    - views
+name: multiple_image_browser
+label: 'Multiple Image Browser'
+display: modal
+display_configuration:
+  width: '1245'
+  height: ''
+  link_text: 'Select images'
+  auto_open: false
+selection_display: multi_step_display
+selection_display_configuration:
+  entity_type: media
+  display: rendered_entity
+  display_settings:
+    view_mode: thumbnail
+  select_text: 'Use selected'
+  selection_hidden: false
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  89532aea-140d-4b9e-96f4-2aa489c095cb:
+    settings:
+      media_entity_bundle: image
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 128M
+      extensions: 'png gif jpg jpeg'
+      clientside_resize: false
+      resize_width: 0
+      resize_height: 0
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: 'Import images'
+      auto_select: true
+    uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
+    weight: -9
+    label: 'Import image'
+    id: dropzonejs_media_entity
+  7d7f8f45-f628-48a3-84a8-c962c73f39e8:
+    settings:
+      view: image_browser
+      view_display: entity_browser_1
+      submit_text: 'Select images'
+      auto_select: true
+    uuid: 7d7f8f45-f628-48a3-84a8-c962c73f39e8
+    weight: -10
+    label: 'Select existing'
+    id: view

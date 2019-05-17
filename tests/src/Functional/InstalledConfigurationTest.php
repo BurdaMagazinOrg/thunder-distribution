@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\Schema\SchemaCheckTrait;
-use Drupal\thunder\ThunderBaseTest;
 
 /**
  * Test for checking of configuration after install of thunder profile.
@@ -13,7 +12,7 @@ use Drupal\thunder\ThunderBaseTest;
  *
  * @group ThunderConfig
  */
-class InstalledConfigurationTest extends ThunderBaseTest {
+class InstalledConfigurationTest extends ThunderTestBase {
 
   use SchemaCheckTrait;
 
@@ -61,8 +60,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
    * @var array
    */
   protected static $ignoreCoreConfigs = [
-    'checklistapi.progress.thunder_updater',
-    'thunder_base.settings',
+    'checklistapi.progress.update_helper_checklist',
     'system.site',
     'core.extension',
     'system.performance',
@@ -71,9 +69,11 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
     'system.action.user_add_role_action.editor',
+    'system.action.user_add_role_action.restricted_editor',
     'system.action.user_add_role_action.seo',
     'system.action.user_remove_role_action.administrator',
     'system.action.user_remove_role_action.editor',
+    'system.action.user_remove_role_action.restricted_editor',
     'system.action.user_remove_role_action.seo',
     'system.action.user_add_role_action.harbourmaster',
     'system.action.user_remove_role_action.harbourmaster',
@@ -81,6 +81,7 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
     'core.entity_view_mode.block.token',
+    'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
     'core.entity_view_mode.menu_link_content.token',
@@ -88,7 +89,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_view_mode.paragraph.token',
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
-    'core.entity_view_mode.thunder_updater_update.token',
   ];
 
   /**
@@ -97,11 +97,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
    * @var array
    */
   protected static $ignoreConfigKeys = [
-    // Node settings is changed by Thunder Install hook.
-    'node.settings' => [
-      'use_admin_theme' => TRUE,
-    ],
-
     // It's not exported in Yaml, so that new key is generated.
     'scheduler.settings' => [
       'lightweight_cron_access_key' => TRUE,
@@ -138,19 +133,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
       'interface' => ['default' => TRUE],
     ],
 
-    // User register is changed by Thunder Install hook.
-    'user.settings' => [
-      'register' => TRUE,
-    ],
-
-    // Media view status is changed by Thunder Install hook.
-    'views.view.media' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'status' => TRUE,
-    ],
-
     // Changed on installation.
     'views.view.glossary' => [
       'dependencies' => [
@@ -175,7 +157,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
         'default' => ['cache_metadata' => ['max-age' => TRUE]],
       ],
     ],
-
+    'views.view.moderated_content' => [
+      'display' => [
+        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+      ],
+    ],
     // Diff Module: changed on installation of module when additional library
     // exists on system: mkalkbrenner/php-htmldiff-advanced.
     'diff.settings' => [
@@ -186,11 +173,6 @@ class InstalledConfigurationTest extends ThunderBaseTest {
           ],
         ],
       ],
-    ],
-
-    // Diff module. Issue: https://www.drupal.org/node/2854581.
-    'core.entity_view_mode.node.diff' => [
-      'langcode' => TRUE,
     ],
 
     // The thunder profile changes article and channel taxonomy when ivw module
@@ -218,6 +200,17 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.paragraph.nexx_video.default' => [
+      'content' => [
+        'moderation_state' => TRUE,
       ],
     ],
     'paragraphs.paragraphs_type.nexx_video' => [
@@ -237,6 +230,19 @@ class InstalledConfigurationTest extends ThunderBaseTest {
           ],
           'target_bundles_drag_drop' => [
             'riddle' => TRUE,
+          ],
+        ],
+      ],
+    ],
+    // Drupal 8.6.x adds the anchor key to the crop schema.
+    // As long as there is no release of Drupal 8.6.x we cannot provide a patch
+    // To the slick module. As soon as 8.6.0 is released we should provide that
+    // patch to get rid of this ignored key.
+    'image.style.slick_media' => [
+      'effects' => [
+        '4b434ce0-90cc-44c3-9423-35d7cccc7d93' => [
+          'data' => [
+            'anchor' => TRUE,
           ],
         ],
       ],
@@ -275,6 +281,12 @@ class InstalledConfigurationTest extends ThunderBaseTest {
     'user.role.seo' => [
       'permissions' => [
         'access riddle_browser entity browser pages',
+      ],
+    ],
+    // Google analytics adds one permission dynamically in the install hook.
+    'user.role.authenticated' => [
+      'permissions' => [
+        'opt-in or out of google analytics tracking',
       ],
     ],
   ];

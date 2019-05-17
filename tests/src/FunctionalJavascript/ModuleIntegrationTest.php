@@ -128,6 +128,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('node/7/revisions');
 
+    $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
+    $firstRightRadio->click();
     $lastLeftRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
     $lastLeftRadio->click();
 
@@ -290,6 +292,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $waitMidGallery = "jQuery('#block-thunder-base-content div.field__items > div.field__item:nth-child(3) div.slick-active img.b-loaded').css('opacity') === '1'";
 
     $this->drupalGet('node/8/edit');
+    $this->setModerationState('published');
 
     $windowSize['height'] = 950;
     $this->setWindowSize($windowSize);
@@ -421,6 +424,49 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][1]//iframe[contains(@src, "https://www.riddle.com/a/114982")]');
     $this->assertSession()
       ->elementExists('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//iframe[contains(@src, "https://www.riddle.com/a/114979")]');
+  }
+
+  /**
+   * Testing integration of "AMP" module and theme.
+   */
+  public function testAmpIntegration() {
+    if (!\Drupal::service('theme_installer')->install(['thunder_amp'])) {
+      $this->fail("thunder_amp theme couldn't be installed.");
+      return;
+    }
+
+    $this->drupalGet('/node/6', ['query' => ['amp' => 1]]);
+
+    // Text paragraph.
+    $this->assertSession()->pageTextContains('Board Member Philipp Welte explains');
+
+    // Image paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--image amp-img');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--image amp-img img');
+
+    $this->drupalGet('/node/7', ['query' => ['amp' => 1], 'fragment' => 'development=1']);
+
+    // Gallery paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--gallery amp-carousel');
+    // Images in gallery paragraph.
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--gallery amp-carousel amp-img');
+    $this->assertSession()->elementsCount('css', '.paragraph--type--gallery amp-carousel amp-img', 5);
+
+    // Instagram Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--instagram amp-instagram[data-shortcode="2rh_YmDglx"] iframe');
+
+    // Video Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"] iframe');
+
+    // Twitter Paragraph.
+    $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"]');
+    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"] iframe');
+
+    $this->getSession()->executeScript('AMPValidationSuccess = false; console.info = function(message) { if (message === "AMP validation successful.") { AMPValidationSuccess = true } }; amp.validator.validateUrlAndLog(document.location.href, document);');
+    $this->assertJsCondition('AMPValidationSuccess === true', 10000, 'AMP validation successful.');
+
   }
 
   /**

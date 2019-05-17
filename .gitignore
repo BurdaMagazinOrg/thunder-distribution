@@ -7,3 +7,5 @@
 .DS_Store
 composer.lock
 package-lock.json
+phpunit.xml
+phpstan.neon

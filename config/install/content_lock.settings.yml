@@ -8,10 +8,11 @@ types:
   media: {  }
   redirect: {  }
   taxonomy_term: {  }
-  thunder_updater_update: {  }
+  update_helper_checklist_update: {  }
   user: {  }
   menu_link_content: {  }
   paragraph: {  }
+  content_moderation_state: {  }
 types_translation_lock: {  }
 types_js_lock: {  }
 form_op_lock:
@@ -28,15 +29,16 @@ form_op_lock:
     mode: 0
     values: {  }
   node:
-    mode: 0
-    values: {  }
+    mode: 1
+    values:
+      edit: edit
   redirect:
     mode: 0
     values: {  }
   taxonomy_term:
     mode: 0
     values: {  }
-  thunder_updater_update:
+  update_helper_checklist_update:
     mode: null
     values: {  }
   user:
@@ -47,4 +49,7 @@ form_op_lock:
     values: {  }
   paragraph:
     mode: 0
+    values: {  }
+  content_moderation_state:
+    mode: null
     values: {  }

@@ -1,0 +1,61 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/drupal?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/tags"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/tags\/parent": [
+            null
+        ]
+    },
+    "tid": [
+        {
+            "value": 5
+        }
+    ],
+    "uuid": [
+        {
+            "value": "35bdba6e-9b45-472a-8fda-11e7e69de71b"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "tags"
+        }
+    ],
+    "status": [
+        {
+            "value": true
+        }
+    ],
+    "name": [
+        {
+            "value": "Drupal"
+        }
+    ],
+    "weight": [
+        {
+            "value": 0
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/tags\/parent": [
+            null
+        ]
+    },
+    "default_langcode": [
+        {
+            "value": true
+        }
+    ],
+    "metatag": [
+        {
+            "value": {
+                "title": "Drupal | Thunder",
+                "canonical_url": "http:\/\/default\/drupal"
+            }
+        }
+    ]
+}

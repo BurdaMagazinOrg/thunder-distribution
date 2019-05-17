@@ -7,4 +7,5 @@ dependencies:
   - paragraphs:paragraphs
   - entity_browser:entity_browser
   - riddle_marketplace:media_riddle_marketplace
+  - select2:select2
 package: Thunder

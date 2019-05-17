@@ -4,14 +4,14 @@ namespace Drupal\Tests\thunder_media\Functional;
 
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
-use Drupal\thunder\ThunderBaseTest;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests for transliteration of file names.
  *
  * @group Thunder
  */
-class FilenameTransliterationTest extends ThunderBaseTest {
+class FilenameTransliterationTest extends ThunderTestBase {
 
   /**
    * Modules to enable.
@@ -42,12 +42,12 @@ class FilenameTransliterationTest extends ThunderBaseTest {
 
     $original = drupal_get_path('module', 'simpletest') . '/files';
 
-    file_unmanaged_copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
 
     // Upload with replace to guarantee there's something there.
     $edit = [
       'file_test_replace' => FILE_EXISTS_RENAME,
-      'files[file_test_upload]' => drupal_realpath('public://foo°.png'),
+      'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
     $this->assertSession()->statusCodeEquals(200);
@@ -55,7 +55,7 @@ class FilenameTransliterationTest extends ThunderBaseTest {
 
     $this->assertTrue(file_exists('temporary://foodeg.png'));
 
-    $max_fid_after = db_query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
+    $max_fid_after = \Drupal::database()->query('SELECT MAX(fid) AS fid FROM {file_managed}')->fetchField();
 
     $file = File::load($max_fid_after);
 

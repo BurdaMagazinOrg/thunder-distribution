@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.image.field_image
+    - paragraphs.paragraphs_type.image
+  module:
+    - entity_browser
+id: paragraph.image.default
+targetEntityType: paragraph
+bundle: image
+mode: default
+content:
+  field_image:
+    weight: 0
+    settings:
+      entity_browser: image_browser
+      field_widget_display: inline_entity_form
+      field_widget_remove: false
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        form_mode: inline
+      field_widget_edit: false
+      field_widget_replace: true
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

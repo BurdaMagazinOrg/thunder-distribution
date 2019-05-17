@@ -1,0 +1,115 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.video.field_caption
+    - field.field.media.video.field_copyright
+    - field.field.media.video.field_description
+    - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_source
+    - media_entity.bundle.video
+  module:
+    - field_group
+    - select2
+    - text
+    - video_embed_field
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - name
+        - field_media_video_embed_field
+        - field_caption
+        - field_description
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Basis
+    group_credits:
+      children:
+        - field_copyright
+        - field_source
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: content-form__form-section
+        description: ''
+        required_fields: true
+      label: Credits
+id: media.video.default
+targetEntityType: media
+bundle: video
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_caption:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_copyright:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    type: text_textarea
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_media_video_embed_field:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+    region: content
+  field_source:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: select2_entity_reference
+    weight: 3
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  moderation_state: true
+  path: true

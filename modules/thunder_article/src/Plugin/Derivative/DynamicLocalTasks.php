@@ -95,6 +95,15 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
       ] + $base_plugin_definition;
     }
 
+    if ($this->moduleHandler->moduleExists('access_unpublished') && $this->routeProvider->getRoutesByNames(['access_unpublished.access_token.list'])) {
+      $this->derivatives["thunder_article.access_unpublished"] = [
+        'route_name' => "access_unpublished.access_token.list",
+        'title' => $this->t('Unpublished access'),
+        'parent_id' => "system.admin_content",
+        'weight' => 4,
+      ] + $base_plugin_definition;
+    }
+
     return $this->derivatives;
   }
 

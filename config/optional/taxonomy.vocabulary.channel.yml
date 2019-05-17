@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Channel
+vid: channel
+description: ''
+weight: 0
