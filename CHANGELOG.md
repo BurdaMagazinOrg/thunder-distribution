@@ -1,15 +1,11 @@
 # Change Log
 
 ## [8.2.42](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.42) 2019-05-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.41...8.2.42)
 
 Fixes an installation and update bug.
 
 - Fix [Can't install thunder with composer](https://www.drupal.org/project/thunder/issues/3055630)
-
-## [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.41...8.2.42)
-
-Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.7.1.
-
 
 ## [8.2.41](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.41) 2019-05-09
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.40...8.2.41)
