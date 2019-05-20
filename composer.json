@@ -76,7 +76,7 @@
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
+                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             }
         }
     },
@@ -168,6 +168,7 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",
+        "phpstan/phpstan": "0.11.6",
         "phpstan/phpstan-deprecation-rules": "^0.11.0"
     },
     "conflict": {
