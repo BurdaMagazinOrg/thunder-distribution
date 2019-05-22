@@ -28,7 +28,7 @@ stages:
 
 env:
   global:
-    - THUNDER_ADMIN_BRANCH=fix/3025280-entity-browser-z-index
+    - THUNDER_ADMIN_BRANCH=8.x-2.x
 
 jobs:
   allow_failures:
