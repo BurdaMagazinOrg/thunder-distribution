@@ -2,48 +2,104 @@
 
 namespace Drupal\thunder\Installer\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Extension\ThemeInstallerInterface;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder\OptionalModulesManager;
+use Drupal\Core\State\StateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the site configuration form.
  */
-class ModuleConfigureForm extends ConfigFormBase {
+class ModuleConfigureForm extends FormBase {
 
   /**
-   * The plugin manager.
+   * The state service.
    *
-   * @var \Drupal\thunder\OptionalModulesManager
+   * @var \Drupal\Core\State\StateInterface
    */
-  protected $optionalModulesManager;
+  protected $state;
 
   /**
-   * Constructs a \Drupal\system\ConfigFormBase object.
+   * The theme installer service.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\thunder\OptionalModulesManager $optionalModulesManager
-   *   The factory for configuration objects.
+   * @var \Drupal\Core\Extension\ThemeInstallerInterface
    */
-  public function __construct(ConfigFactoryInterface $config_factory, OptionalModulesManager $optionalModulesManager) {
+  protected $themeInstaller;
 
-    parent::__construct($config_factory);
-
-    $this->optionalModulesManager = $optionalModulesManager;
+  /**
+   * ModuleConfigureForm constructor.
+   *
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state service.
+   * @param \Drupal\Core\Extension\ThemeInstallerInterface $installer
+   *   The theme installer service.
+   */
+  public function __construct(StateInterface $state, ThemeInstallerInterface $installer) {
+    $this->state = $state;
+    $this->themeInstaller = $installer;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('plugin.manager.thunder.optional_modules')
-    );
+    return new static($container->get('state'), $container->get('theme_installer'));
   }
+
+  protected $providers = [
+    'adsense' => [
+      'type' => 'module',
+      'label' => 'AdSense',
+      'description' => 'With Google AdSense, you can earn money from your online content',
+    ],
+    'thunder_amp' => [
+      'type' => 'theme',
+      'label' => 'AMP',
+      'description' => 'The Google AMP project strives for better performance, especially on mobile devices.',
+    ],
+    'thunder_help' => [
+      'type' => 'module',
+      'label' => 'Help',
+      'description' => 'Provides a tour to learn more about Thunder',
+    ],
+    'thunder_fia' => [
+      'type' => 'module',
+      'label' => 'Facebook Instant Articles',
+      'description' => 'A new way for any publisher to create fast, interactive articles on Facebook.',
+    ],
+    'google_analytics' => [
+      'type' => 'module',
+      'label' => "Google Analytics",
+      'description' => "Google Analytics lets you measure your advertising ROI as well as track your video, and social networking sites and applications.",
+    ],
+    'harbourmaster' => [
+      'type' => 'module',
+      'label' => "Harbourmaster SSO connector",
+      'description' => "Harbourmaster is providing a single sign-on solution.",
+    ],
+    'ivw_integration' => [
+      'type' => 'module',
+      'label' => "IVW Integration",
+      'description' => "Integration module for the German audience measurement organisation IVW.",
+    ],
+    'thunder_liveblog' => [
+      'type' => 'module',
+      'label' => "Liveblog",
+      'description' => "The Liveblog module allows you to distribute blog posts to thousands of users in realtime.",
+    ],
+    'nexx_integration' => [
+      'type' => 'module',
+      'label' => "Nexx video integration",
+      'description' => "nexx.tv offers end-to-end online video platform solutions.",
+    ],
+    'thunder_riddle' => [
+      'type' => 'module',
+      'label' => "Riddle integration",
+      'description' => "Riddle makes it easy to quickly create beautiful and highly shareable quizzes, tests, lists, polls, and more.",
+    ],
+  ];
 
   /**
    * {@inheritdoc}
@@ -55,49 +111,35 @@ class ModuleConfigureForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
-
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    // We have to delete all messages, because simple_sitemap adds a bunch of
-    // messages during the install process.
-    // @see https://www.drupal.org/project/simple_sitemap/issues/3001388.
-    $this->messenger()->deleteAll();
-
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
     ];
 
-    $form['install_modules'] = [
-      '#type' => 'container',
-    ];
+    $options = $descriptions = $module_form = $actions = [];
+    foreach ($this->providers as $id => $provider) {
+      $options[$id] = $provider['label'];
+      $descriptions[$id] = ['#description' => $provider['description']];
 
-    $providers = $this->optionalModulesManager->getDefinitions();
+      if (method_exists($this, $id . '_form')) {
+        $module_form[$id] = $this->{$id . '_form'}();
+      }
 
-    static::sortByWeights($providers);
-
-    foreach ($providers as $provider) {
-
-      $instance = $this->optionalModulesManager->createInstance($provider['id']);
-
-      $form['install_modules_' . $provider['id']] = [
-        '#type' => 'checkbox',
-        '#title' => $provider['label'],
-        '#description' => isset($provider['description']) ? $provider['description'] : '',
-        '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
-      ];
-
-      $form = $instance->buildForm($form, $form_state);
-
+      if (method_exists($this, $id . '_form_submit')) {
+        $actions[] = '::' . $id . '_form_submit';
+      }
     }
-    $form['#title'] = $this->t('Install & configure modules');
+
+    $form['install_modules'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Select modules'),
+      '#options' => $options,
+    ] + $descriptions;
+
+    $form += $module_form;
+
+    $form['#title'] = $this->t('Select additional modules');
 
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['save'] = [
@@ -114,48 +156,54 @@ class ModuleConfigureForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $installModules = [];
+    $system_modules = $this->state->get('install_profile_modules');
 
-    foreach ($form_state->getValues() as $key => $value) {
-
-      if (strpos($key, 'install_modules') !== FALSE && $value) {
-        preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
-        $installModules[] = $values['name'];
+    $themes = [];
+    foreach (array_filter($form_state->getValue('install_modules')) as $item) {
+      if ($this->providers[$item]['type'] === 'module') {
+        $system_modules[] = $item;
+      }
+      elseif ($this->providers[$item]['type'] === 'theme') {
+        $themes[] = $item;
       }
     }
 
-    $buildInfo = $form_state->getBuildInfo();
-
-    $install_state = $buildInfo['args'];
-
-    $install_state[0]['thunder_additional_modules'] = $installModules;
-    $install_state[0]['form_state_values'] = $form_state->getValues();
-
-    $buildInfo['args'] = $install_state;
-
-    $form_state->setBuildInfo($buildInfo);
-
+    $this->themeInstaller->install($themes);
+    $this->state->set('install_profile_modules', $system_modules);
   }
 
-  /**
-   * Returns a sorting function to sort an array by weights.
-   *
-   * If an array element doesn't provide a weight, it will be set to 0.
-   * If two elements have the same weight, they are sorted by label.
-   *
-   * @param array $array
-   *   The array to be sorted.
-   */
-  private static function sortByWeights(array &$array) {
-    uasort($array, function ($a, $b) {
-      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
-      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
+  protected function google_analytics_form() {
+    return [
+      'ga_account' => [
+        '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics" target="_blank">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid"  target="_blank">Find more information in the documentation</a>.', [
+          ':analytics' => 'http://www.google.com/analytics/',
+          ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])
+            ->toString(),
+        ]),
+        '#maxlength' => 20,
+        '#placeholder' => 'UA-',
+        '#size' => 15,
+        '#title' => t('Web Property ID'),
+        '#type' => 'textfield',
+      ],
+    ];
+  }
 
-      if ($a_weight == $b_weight) {
-        return ($a['label'] > $b['label']) ? 1 : -1;
-      }
-      return ($a_weight > $b_weight) ? 1 : -1;
-    });
+  protected function google_analytics_form() {
+    return [
+      'ga_account' => [
+        '#description' => t('This ID is unique to each site you want to track separately, and is in the form of UA-xxxxxxx-yy. To get a Web Property ID, <a href=":analytics" target="_blank">register your site with Google Analytics</a>, or if you already have registered your site, go to your Google Analytics Settings page to see the ID next to every site profile. <a href=":webpropertyid"  target="_blank">Find more information in the documentation</a>.', [
+          ':analytics' => 'http://www.google.com/analytics/',
+          ':webpropertyid' => Url::fromUri('https://developers.google.com/analytics/resources/concepts/gaConceptsAccounts', ['fragment' => 'webProperty'])
+            ->toString(),
+        ]),
+        '#maxlength' => 20,
+        '#placeholder' => 'UA-',
+        '#size' => 15,
+        '#title' => t('Web Property ID'),
+        '#type' => 'textfield',
+      ],
+    ];
   }
 
 }

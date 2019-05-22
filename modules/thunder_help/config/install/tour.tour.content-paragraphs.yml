@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - thunder_demo
+    - thunder_help
 id: content-paragraphs
 label: 'Introduction to paragraphs'
-module: thunder_demo
+module: thunder_help
 routes:
   -
     route_name: entity.node.edit_form

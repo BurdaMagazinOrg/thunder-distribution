@@ -1,0 +1,8 @@
+name: Thunder Help
+type: module
+description: Provides a tour and some help.
+package: Thunder
+core: 8.x
+dependencies:
+  - drupal:tour
+  - drupal:help

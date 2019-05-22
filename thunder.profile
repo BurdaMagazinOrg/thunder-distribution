@@ -20,6 +20,14 @@ use Drupal\user\Entity\Role;
 function thunder_form_install_configure_form_alter(&$form, FormStateInterface $form_state) {
   // Add a value as example that one can choose an arbitrary site name.
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
+  $form['demo_content'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Install Demo Content'),
+    '#description' => t('Installs demo content to show how Thunder works.'),
+    '#default_value' => TRUE,
+  ];
+
+  $form['#submit'][] = 'thunder_install_configure_form_submit';
 }
 
 /**
@@ -28,83 +36,47 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
 function thunder_install_tasks(&$install_state) {
   $tasks = [];
   if (empty($install_state['config_install_path'])) {
-    $tasks['thunder_module_configure_form'] = [
-      'display_name' => t('Configure additional modules'),
-      'type' => 'form',
-      'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
-    ];
-    $tasks['thunder_module_install'] = [
-      'display_name' => t('Install additional modules'),
-      'type' => 'batch',
+    $profile_path = drupal_get_path('profile', 'thunder');
+    include_once $profile_path . '/src/Installer/Form/ModuleConfigureForm.php';
+    $tasks = [
+      'thunder_module_configure_form' => [
+        'display_name' => t('Select additional modules'),
+        'type' => 'form',
+        'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
+      ],
     ];
   }
   $tasks['thunder_finish_installation'] = [
     'display_name' => t('Finish installation'),
   ];
+
   return $tasks;
 }
 
 /**
- * Installs the thunder modules in a batch.
- *
- * @param array $install_state
- *   The install state.
- *
- * @return array
- *   A batch array to execute.
+ * Implements hook_install_tasks_alter().
  */
-function thunder_module_install(array &$install_state) {
-
-  $modules = $install_state['thunder_additional_modules'];
-
-  $batch = [];
-  if ($modules) {
-    $operations = [];
-    foreach ($modules as $module) {
-      $operations[] = [
-        '_thunder_install_module_batch',
-        [[$module], $module, $install_state['form_state_values']],
-      ];
-    }
-
-    $batch = [
-      'operations' => $operations,
-      'title' => t('Installing additional modules'),
-      'error_message' => t('The installation has encountered an error.'),
-    ];
+function thunder_install_tasks_alter(&$tasks, $install_state) {
+  if (empty($tasks['thunder_module_configure_form'])) {
+    return;
   }
+  $key = array_search('install_profile_modules', array_keys($tasks), TRUE);
 
-  return $batch;
+  $config_tasks['thunder_module_configure_form'] = $tasks['thunder_module_configure_form'];
+  unset($tasks['thunder_module_configure_form']);
+
+  $tasks = array_slice($tasks, 0, $key, TRUE) +
+    $config_tasks +
+    array_slice($tasks, $key, NULL, TRUE);
 }
 
 /**
- * Implements callback_batch_operation().
- *
- * Performs batch installation of modules.
+ * Implements hook_form_submit().
  */
-function _thunder_install_module_batch($module, $module_name, $form_values, &$context) {
-  set_time_limit(0);
-
-  $optionalModulesManager = \Drupal::service('plugin.manager.thunder.optional_modules');
-
-  try {
-    $definition = $optionalModulesManager->getDefinition($module_name);
-    if ($definition['type'] == 'module') {
-      \Drupal::service('module_installer')->install($module, TRUE);
-    }
-    elseif ($definition['type'] == 'theme') {
-      \Drupal::service('theme_installer')->install($module, TRUE);
-    }
-
-    $instance = $optionalModulesManager->createInstance($module_name);
-    $instance->submitForm($form_values);
+function thunder_install_configure_form_submit(array &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('demo_content')) {
+    \Drupal::service('module_installer')->install(['thunder_demo']);
   }
-  catch (\Exception $e) {
-
-  }
-
-  $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
 }
 
 /**
@@ -116,8 +88,6 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function thunder_finish_installation(array &$install_state) {
-  \Drupal::service('config.installer')->installOptionalConfig();
-
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
