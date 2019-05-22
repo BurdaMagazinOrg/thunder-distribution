@@ -144,7 +144,7 @@
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
-        "npm-asset/select2": "4.0.4"
+        "npm-asset/select2": "^4.0.7"
     },
     "suggest": {
         "drupal/riddle_marketplace": "Riddle marketplace integration",
@@ -160,9 +160,7 @@
         "npm-asset/jqueryui": "*",
         "npm-asset/backbone": "*",
         "npm-asset/underscore": "*",
-        "npm-asset/fortawesome--fontawesome-free-webfonts": "*",
-        "npm-asset/jquery-mousewheel": "*",
-        "npm-asset/almond": "*"
+        "npm-asset/fortawesome--fontawesome-free": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
