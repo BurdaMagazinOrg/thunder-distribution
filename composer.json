@@ -152,7 +152,7 @@
         "bower-asset/blazy": "^1.8",
         "bower-asset/slick-carousel": "^1.8",
         "bower-asset/shariff": "^1.26.2",
-        "bower-asset/select2": "4.0.4"
+        "bower-asset/select2": "^4.0.7"
     },
     "replace": {
         "bower-asset/jquery": "*",
