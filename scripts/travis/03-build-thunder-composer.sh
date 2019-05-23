@@ -19,7 +19,7 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "burdamagazinorg/thunder:*" "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6"  "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" --no-progress
+COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6"  "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" --no-progress
 
  # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
