@@ -8,7 +8,7 @@
         },
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/thumbnail": [
             {
-                "href": "http:\/\/default\/sites\/default\/files\/video_thumbnails\/cnT8dycXnMU.jpg"
+                "href": "http:\/\/default\/sites\/default\/files\/oembed_thumbnails\/Kn9fM5SvNoiqS2ax6hn0rA-deV89HEvmfbEoE1M6F50.jpg"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
@@ -52,7 +52,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/sites\/default\/files\/video_thumbnails\/cnT8dycXnMU.jpg"
+                        "href": "http:\/\/default\/sites\/default\/files\/oembed_thumbnails\/Kn9fM5SvNoiqS2ax6hn0rA-deV89HEvmfbEoE1M6F50.jpg"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
@@ -65,8 +65,8 @@
                 ],
                 "alt": "Thumbnail",
                 "title": "Thunder",
-                "width": "1280",
-                "height": "720"
+                "width": "480",
+                "height": "360"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
