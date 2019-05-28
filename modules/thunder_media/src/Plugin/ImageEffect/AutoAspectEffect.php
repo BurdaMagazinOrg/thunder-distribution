@@ -114,18 +114,18 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
     $image_styles = image_style_options(FALSE);
     $form['landscape'] = [
       '#type' => 'select',
-      '#title' => t('Landscape image style'),
+      '#title' => $this->t('Landscape image style'),
       '#options' => $image_styles,
       '#default_value' => $this->configuration['landscape'],
-      '#description' => t('Select the image style for landscape images'),
+      '#description' => $this->t('Select the image style for landscape images'),
       '#required' => TRUE,
     ];
     $form['portrait'] = [
       '#type' => 'select',
-      '#title' => t('Portrait'),
+      '#title' => $this->t('Portrait'),
       '#options' => $image_styles,
       '#default_value' => $this->configuration['portrait'],
-      '#description' => t('Select the image style for portrait images'),
+      '#description' => $this->t('Select the image style for portrait images'),
       '#required' => TRUE,
     ];
     return $form;

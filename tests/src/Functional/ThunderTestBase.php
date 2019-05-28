@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
@@ -11,6 +12,7 @@ use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 abstract class ThunderTestBase extends BrowserTestBase {
 
   use ThunderTestTrait;
+  use StringTranslationTrait;
 
   protected $profile = 'thunder';
 
