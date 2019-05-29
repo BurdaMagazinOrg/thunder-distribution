@@ -19,7 +19,7 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "thunder/thunder-distribution:*" "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6" "nette/di:*@stable" "phpstan/phpstan-deprecation-rules" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress
+composer require "thunder/thunder-distribution:*" "phpunit/phpunit:^6.5" "symfony/browser-kit:^4.0.0" "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6" "phpstan/phpstan-deprecation-rules:0.11.1" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
 
  # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
