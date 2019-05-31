@@ -23,6 +23,7 @@ addons:
       - /tmp/thunder-travis-ci
 
 stages:
+  - build project
   - sanity checks
   - test
 
@@ -33,18 +34,27 @@ env:
 
 jobs:
   include:
+    - stage: build project
+      name: Build project with composer and package it
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+      script:
+        - bash -x -e ./scripts/travis/07-upload-artifacts-to-s3.sh
+
     - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code
       install:
         # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
         - drush dl drupalorg_drush-7.x && drush verify-makefile
-        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+        - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
       before_script: skip
       script:
         - bash -x -e ./scripts/travis/06-test-source-code.sh
 
     - stage: sanity checks
       name: Check config for composer build
+      before_script:
+        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
@@ -57,6 +67,8 @@ jobs:
 
     - stage: test
       name: Run tests with composer (max) build
+      before_script:
+        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
 
     - stage: test
       name: Run tests with drush_make build
@@ -68,6 +80,8 @@ jobs:
       env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
       php: 7.1
       if: commit_message =~ ^\[TEST_MIN|TEST_EVERYTHING\] OR type = cron
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
@@ -84,11 +98,10 @@ before_install:
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+  - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
-  - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
   - bash -x -e ./scripts/travis/06-run-tests.sh
