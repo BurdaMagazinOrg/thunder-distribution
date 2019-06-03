@@ -88,7 +88,7 @@
         "drupal/amp": "1.2",
         "drupal/amptheme": "~1.0",
         "oomphinc/composer-installers-extender": "^1.1",
-        "drupal/access_unpublished": "^1.0",
+        "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.0",
         "drupal/better_normalizers": "^1.0",
