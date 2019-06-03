@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
@@ -16,6 +17,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
   use ThunderTestTrait;
   use ThunderImageCompareTestTrait;
+  use StringTranslationTrait;
 
   /**
    * Modules to enable.

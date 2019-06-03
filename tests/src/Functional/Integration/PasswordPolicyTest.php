@@ -39,7 +39,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass2]'] = $valid_password;
     $edit['pass[pass1]'] = $valid_password;
 
-    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, t('Save'));
+    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, $this->t('Save'));
     $this->assertSession()->responseContains('The changes have been saved.');
 
     // Testing reusing of password.
@@ -47,14 +47,14 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass2]'] = $another_valid_password;
     $edit['pass[pass1]'] = $another_valid_password;
 
-    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, t('Save'));
+    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, $this->t('Save'));
     $this->assertSession()->responseContains('The changes have been saved.');
 
     $edit['current_pass'] = $another_valid_password;
     $edit['pass[pass2]'] = $valid_password;
     $edit['pass[pass1]'] = $valid_password;
 
-    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, t('Save'));
+    $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, $this->t('Save'));
     $this->assertSession()->responseNotContains('The changes have been saved.');
 
     // Testing invalid character type combinations and length restriction.
@@ -62,7 +62,7 @@ class PasswordPolicyTest extends ThunderTestBase {
       $edit['pass[pass2]'] = $password;
       $edit['pass[pass1]'] = $password;
 
-      $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, t('Save'));
+      $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, $this->t('Save'));
       $this->assertSession()->responseContains($response);
     }
 

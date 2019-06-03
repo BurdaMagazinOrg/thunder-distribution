@@ -31,23 +31,23 @@ class Liveblog extends AbstractOptionalModule {
 
     $form['thunder_liveblog']['pusher_app_id'] = [
       '#type' => 'textfield',
-      '#title' => t('App ID'),
+      '#title' => $this->t('App ID'),
     ];
 
     $form['thunder_liveblog']['pusher_key'] = [
       '#type' => 'textfield',
-      '#title' => t('Key'),
+      '#title' => $this->t('Key'),
     ];
 
     $form['thunder_liveblog']['pusher_secret'] = [
       '#type' => 'textfield',
-      '#title' => t('Secret'),
+      '#title' => $this->t('Secret'),
     ];
 
     $form['thunder_liveblog']['pusher_cluster'] = [
       '#type' => 'textfield',
-      '#title' => t('Cluster'),
-      '#description' => t('The cluster name to connect to. Leave empty for the default cluster: mt1 (US east coast)'),
+      '#title' => $this->t('Cluster'),
+      '#description' => $this->t('The cluster name to connect to. Leave empty for the default cluster: mt1 (US east coast)'),
     ];
 
     return $form;

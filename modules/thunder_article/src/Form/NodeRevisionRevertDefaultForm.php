@@ -26,7 +26,7 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return t('Are you sure you want to revert to the default revision from %revision-date?', ['%revision-date' => $this->dateFormatter->format($this->revision->getRevisionCreationTime())]);
+    return $this->t('Are you sure you want to revert to the default revision from %revision-date?', ['%revision-date' => $this->dateFormatter->format($this->revision->getRevisionCreationTime())]);
   }
 
   /**
@@ -56,7 +56,7 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
     $original_revision_timestamp = $this->revision->getRevisionCreationTime();
 
     $this->revision = $this->prepareRevertedRevision($this->revision, $form_state);
-    $this->revision->revision_log = t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]);
+    $this->revision->revision_log = $this->t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]);
     $this->revision->setRevisionUserId($this->currentUser()->id());
     $this->revision->setRevisionCreationTime($this->time->getRequestTime());
     $this->revision->setChangedTime($this->time->getRequestTime());
