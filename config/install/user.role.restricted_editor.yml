@@ -13,6 +13,7 @@ permissions:
   - 'access media overview'
   - 'access multiple_image_browser entity browser pages'
   - 'access responsive preview'
+  - 'access tokens overview'
   - 'access toolbar'
   - 'access tour'
   - 'access video_browser entity browser pages'
