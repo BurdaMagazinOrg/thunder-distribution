@@ -58,22 +58,25 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
+    - stage: test
+      name: Run tests with composer (max) build
+      before_script:
+        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
+
+
     - stage: sanity checks
       name: Check config for drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
-
-    - stage: test
-      name: Run tests with composer (max) build
-      before_script:
-        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
+      if: commit_message =~ ^\[TEST_DRUSH_MAKE|TEST_EVERYTHING\] OR type = cron OR head_branch =~ ^release
 
     - stage: test
       name: Run tests with drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      if: commit_message =~ ^\[TEST_DRUSH_MAKE|TEST_EVERYTHING\] OR type = cron OR head_branch =~ ^release
 
     - stage: test
       name: Run tests with composer (min) build
