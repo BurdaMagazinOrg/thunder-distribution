@@ -333,6 +333,11 @@
             "value": "1"
         }
     ],
+    "moderation_state": [
+        {
+            "value": "published"
+        }
+    ],
     "field_meta_tags": [
         {
             "value": {
