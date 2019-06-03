@@ -1138,3 +1138,31 @@ function thunder_update_8135() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Add permissions to access the tokens overview page.
+ */
+function thunder_update_8136() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+  $updateLogger = $updater->logger();
+
+  $successful = TRUE;
+  foreach (Role::loadMultiple(['editor', 'seo', 'restricted_editor']) as $role) {
+    try {
+      $role->grantPermission('access tokens overview');
+      $role->save();
+
+      $updateLogger->info(t('Permissions for accessing the tokens overview page is granted for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+    catch (EntityStorageException $storageException) {
+      $successful = FALSE;
+      $updateLogger->warning(t('Unable to change permissions for @user_role user role.', ['@user_role' => $role->id()]));
+    }
+  }
+
+  _thunder_mark_update_checklist('thunder__thunder_update_8136', $successful, $updateLogger);
+
+  // Output logged result of update hook execution.
+  return $updateLogger->output();
+}
