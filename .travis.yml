@@ -63,7 +63,6 @@ jobs:
       before_script:
         - bash -x -e ./scripts/travis/04-use-database-artifact.sh
 
-
     - stage: sanity checks
       name: Check config for drush_make build
       install:
