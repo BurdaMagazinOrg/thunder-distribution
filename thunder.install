@@ -1150,10 +1150,12 @@ function thunder_update_8136() {
   $successful = TRUE;
   foreach (Role::loadMultiple(['editor', 'seo', 'restricted_editor']) as $role) {
     try {
-      $role->grantPermission('access tokens overview');
-      $role->save();
+      if ($role->hasPermission('renew token')) {
+        $role->grantPermission('access tokens overview');
+        $role->save();
 
-      $updateLogger->info(t('Permissions for accessing the tokens overview page is granted for @user_role user role.', ['@user_role' => $role->id()]));
+        $updateLogger->info(t('Permissions for accessing the tokens overview page is granted for @user_role user role.', ['@user_role' => $role->id()]));
+      }
     }
     catch (EntityStorageException $storageException) {
       $successful = FALSE;
