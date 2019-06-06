@@ -26,6 +26,7 @@ stages:
   - build project
   - sanity checks
   - test
+  - performance test
 
 env:
   global:
@@ -33,6 +34,9 @@ env:
     - ADDITIONAL_COMPOSER_PARAMETERS=""
 
 jobs:
+  allow_failures:
+    - stage: performance test
+
   include:
     - stage: build project
       name: Build project with composer and package it
@@ -69,21 +73,29 @@ jobs:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
-      if: commit_message =~ ^\[TEST_DRUSH_MAKE|TEST_EVERYTHING\] OR type = cron OR head_branch =~ ^release
+      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
 
     - stage: test
       name: Run tests with drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-      if: commit_message =~ ^\[TEST_DRUSH_MAKE|TEST_EVERYTHING\] OR type = cron OR head_branch =~ ^release
+      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
 
     - stage: test
       name: Run tests with composer (min) build
       env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
       php: 7.1
-      if: commit_message =~ ^\[TEST_MIN|TEST_EVERYTHING\] OR type = cron
+      if: commit_message =~ ^\[(TEST_MIN|TEST_EVERYTHING)\] OR type = cron
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+
+    - stage: performance test
+      name: Build performance testing Docker image
+      if: commit_message =~ ^\[TEST_PERFORMANCE\] OR type = cron
+      install: skip
+      before_script: skip
+      script:
+        - bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3

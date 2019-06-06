@@ -20,8 +20,15 @@ export PHP_YAML_VERSION="2.0.4"
 # Database dump for deployment testing
 export DEPLOYMENT_DUMP_FILE="${TEST_DIR}/dump_thunder_test_deployment.sql"
 
+# Provide environment variables for AWS Cli
+export AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}"
+export AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}"
+
 # Artifact names and files for AWS S3 backup and reuse
 export DB_ARTIFACT_FILE_NAME="${TRAVIS_BUILD_ID}-db-dump.gz"
 export DB_ARTIFACT_FILE="${THUNDER_DIST_DIR}/../${DB_ARTIFACT_FILE_NAME}"
 export PROJECT_ARTIFACT_FILE_NAME="${TRAVIS_BUILD_ID}-thunder.tar.gz"
 export PROJECT_ARTIFACT_FILE="${THUNDER_DIST_DIR}/../${PROJECT_ARTIFACT_FILE_NAME}"
+
+# Branch name related to Travis CI job
+export BRANCH_NAME=$([[ "${TRAVIS_EVENT_TYPE}" == "pull_request" ]] && echo "${TRAVIS_PULL_REQUEST_BRANCH}" || echo "${TRAVIS_BRANCH}")

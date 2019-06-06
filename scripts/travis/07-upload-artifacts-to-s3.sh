@@ -5,6 +5,10 @@
 # Package database
 gzip < "${DEPLOYMENT_DUMP_FILE}" > "${DB_ARTIFACT_FILE}"
 
+# Include performance measurement module in artifact
+cd "${TEST_DIR}"
+composer require "thunder/thunder_performance_measurement:dev-master" --no-interaction --update-no-dev
+
 # Cleanup project
 cd "${TEST_DIR}"
 composer install --no-dev
@@ -17,5 +21,5 @@ find "${THUNDER_DIST_DIR}" -type d -name ".git" | xargs rm -rf
 cd "${TEST_DIR}" && tar -czhf "${PROJECT_ARTIFACT_FILE}" .
 
 # Upload files to S3 bucket
-AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}" AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}" aws s3 cp "${DB_ARTIFACT_FILE}" "s3://thunder-builds/${DB_ARTIFACT_FILE_NAME}"
-AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}" AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}" aws s3 cp "${PROJECT_ARTIFACT_FILE}" "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}"
+aws s3 cp "${DB_ARTIFACT_FILE}" "s3://thunder-builds/${DB_ARTIFACT_FILE_NAME}"
+aws s3 cp "${PROJECT_ARTIFACT_FILE}" "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}"
