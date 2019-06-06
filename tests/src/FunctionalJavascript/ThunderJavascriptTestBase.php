@@ -20,6 +20,13 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   use StringTranslationTrait;
 
   /**
+   * Keep CSS animations enabled for JavaScript tests.
+   *
+   * @var bool
+   */
+  protected $disableCssAnimations = FALSE;
+
+  /**
    * Modules to enable.
    *
    * The test runner will merge the $modules lists from this class, the class
