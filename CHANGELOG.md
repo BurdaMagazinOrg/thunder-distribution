@@ -1,5 +1,14 @@
 # Change Log
 
+## [8.2.43](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.43) 2019-06-13
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.42...8.2.43)
+
+Updates for various dependencies. Also fixes an installation problem with password policy module.
+
+- Fix [Composer is unable to apply patch](https://www.drupal.org/project/thunder/issues/3061366)
+- Do [Update JS libraries](https://www.drupal.org/project/thunder/issues/3056095)
+- Do [Update to access_unpublished alpha8](https://www.drupal.org/project/thunder/issues/3059035)
+
 ## [8.2.42](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.42) 2019-05-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.41...8.2.42)
 
