@@ -58,13 +58,17 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
    * Test for instagram media previews in backend.
    */
   public function test8103() {
+    $sourceFieldName = 'source';
+    if (getenv('TRAVIS_JOB_NAME') == 'Run upgrade test') {
+      $sourceFieldName = 'provider';
+    }
     // Check thumbnails in media list for instagram type.
     $this->drupalGet('admin/content/media');
     $page = $this->getSession()->getPage();
 
     // Filter only instagram media type.
-    $this->setFieldValue($page, 'source', 'instagram');
-    $page->find('xpath', '//*[@id="edit-submit"]')->click();
+    $this->setFieldValue($page, $sourceFieldName, 'instagram');
+    $page->find('xpath', '//div[@class="view-filters"]//input[@type="submit"]')->click();
 
     // Adjust position for list, before making screenshot.
     $this->scrollElementInView('#edit-submit');

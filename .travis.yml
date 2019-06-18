@@ -89,6 +89,16 @@ jobs:
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
+    - stage: test
+      name: Run upgrade test
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder2.sh
+      script:
+        - bash -x -e ./scripts/travis/05-update-2-3.sh
+        - bash -x -e ./scripts/travis/06-run-tests.sh
+      php: 7.1
+      if: commit_message =~ ^\[(TEST_UPGRADE|TEST_EVERYTHING)\] OR type = cron
+
     - stage: performance test
       name: Build performance testing Docker image
       if: commit_message =~ ^\[TEST_PERFORMANCE\] OR type = cron

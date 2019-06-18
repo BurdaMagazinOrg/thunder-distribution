@@ -28,6 +28,18 @@ function thunder_riddle_install() {
       $logger->warning(t('Unable to grant access for riddle entity browser for "@user_role" user role.', ['@user_role' => $role->id()]));
     }
   }
+
+  /** @var \Drupal\field\Entity\FieldConfig $field */
+  $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
+  if ($field) {
+    $settings = $field->getSetting('handler_settings');
+    if (!isset($settings['negate']) || !$settings['negate']) {
+      $settings['target_bundles']['riddle'] = 'riddle';
+      $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
+      $field->setSetting('handler_settings', $settings);
+      $field->save();
+    }
+  }
 }
 
 /**
