@@ -14,6 +14,9 @@ abstract class ThunderTestBase extends BrowserTestBase {
   use ThunderTestTrait;
   use StringTranslationTrait;
 
+  /**
+   * {@inheritdoc}
+   */
   protected $profile = 'thunder';
 
 }
