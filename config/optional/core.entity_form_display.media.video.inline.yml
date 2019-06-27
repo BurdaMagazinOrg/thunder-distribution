@@ -33,6 +33,7 @@ third_party_settings:
         effect: none
         speed: fast
       label: Top
+      region: content
     group_bottom:
       children:
         - field_copyright
@@ -52,6 +53,7 @@ third_party_settings:
         effect: none
         speed: fast
       label: Bottom
+      region: content
 id: media.video.inline
 targetEntityType: media
 bundle: video
