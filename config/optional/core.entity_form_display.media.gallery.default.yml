@@ -24,7 +24,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Basis
-      region: con
+      region: content
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
