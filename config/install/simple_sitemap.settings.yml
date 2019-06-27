@@ -1,9 +1,14 @@
 max_links: 2000
 cron_generate: true
+cron_generate_interval: 0
+generate_duration: 10000
 remove_duplicates: true
-batch_process_limit: 1500
+skip_untranslated: false
+xsl: true
+base_url: ''
+default_variant: default
+custom_links_include_images: false
+excluded_languages: []
 enabled_entity_types:
   - node
   - taxonomy_term
-skip_untranslated: false
-base_url: ''
