@@ -5,3 +5,12 @@ blazy:
   loadInvisible: false
   offset: 100
   saveViewportOffsetDelay: 50
+  validateDelay: null
+unbreakpoints: false
+placeholder: ''
+io:
+  enabled: false
+  unblazy: false
+  rootMargin: 0px
+  threshold: '0'
+  disconnect: false

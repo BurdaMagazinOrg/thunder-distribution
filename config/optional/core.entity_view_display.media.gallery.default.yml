@@ -3,8 +3,10 @@ status: true
 dependencies:
   config:
     - field.field.media.gallery.field_media_images
+    - image.style.gallery
     - media.type.gallery
   module:
+    - empty_fields
     - slick_media
 id: media.gallery.default
 targetEntityType: media
@@ -21,8 +23,11 @@ content:
       skin: classic
       skin_thumbnail: ''
       image_style: gallery
+      responsive_image_style: ''
+      thumbnail_effect: ''
       thumbnail_position: ''
       media_switch: ''
+      thumbnail_style: ''
       ratio: ''
       view_mode: slick
       image: ''
@@ -41,26 +46,20 @@ content:
       sizes: ''
       current_view_mode: default
       background: false
-      iframe_lazy: false
       breakpoints:
         xs:
-          breakpoint: ''
           image_style: ''
           width: ''
         sm:
-          breakpoint: ''
           image_style: ''
           width: ''
         md:
-          breakpoint: ''
           image_style: ''
           width: ''
         lg:
-          breakpoint: ''
           image_style: ''
           width: ''
         xl:
-          breakpoint: ''
           image_style: ''
           width: ''
       override: false
@@ -73,28 +72,26 @@ content:
         mouseWheel: '0'
         randomize: '0'
         variableWidth: '0'
-      color_field: ''
+      thumbnail: ''
+      skin_arrows: ''
+      skin_dots: ''
+      style: ''
+      icon: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      box_media_style: ''
+      preserve_keys: false
+      visible_items: 0
       grid: 0
       grid_header: ''
       grid_medium: 0
       grid_small: 0
-      preserve_keys: false
-      thumbnail: ''
-      visible_items: 0
-      thumbnail_effect: ''
-      display: main
-      skin_arrows: ''
-      skin_dots: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      icon: ''
-      responsive_image_style: ''
-      thumbnail_style: ''
       id: ''
       overlay: ''
-    third_party_settings: {  }
+    third_party_settings:
+      empty_fields:
+        handler: ''
     type: slick_media
     region: content
 hidden:

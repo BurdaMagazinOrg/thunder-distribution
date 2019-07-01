@@ -80,6 +80,9 @@
             "drupal/linkit": {
                 "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
             },
+            "drupal/core": {
+                "Allow updating modules with new service dependencies": "https://www.drupal.org/files/issues/2019-06-25/2863986-3-87.patch"
+            },
             "drupal/simple_sitemap": {
                 "Remove setting": "https://www.drupal.org/files/issues/2019-06-25/3063870-3.patch",
                 "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-24/3062747-8.patch"
@@ -97,9 +100,9 @@
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.22",
         "drupal/better_normalizers": "^1.0-beta3",
-        "drupal/blazy": "^1.0-rc3",
+        "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
-        "drupal/core": "~8.7.1",
+        "drupal/core": "8.7.3",
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^1.0-alpha8",
@@ -140,7 +143,7 @@
         "drupal/simple_sitemap": "3.2",
         "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
-        "drupal/slick": "^1.0",
+        "drupal/slick": "^2.0-rc3",
         "drupal/slick_media": "^2.0-alpha2",
         "drupal/thunder_admin": "3.x-dev",
         "drupal/token": "^1.0",
