@@ -91,7 +91,7 @@ function thunder_updater_update_8001() {
     $update_helper_checklist = $config_factory->getEditable('checklistapi.progress.update_helper_checklist');
 
     $items = $thunder_updater_checklist->get('progress.#items');
-    if (!empty($items) && is_array($items)) {
+    if (is_array($items)) {
       foreach ($items as $update_id => $update_info) {
         $update_helper_checklist->set('progress.#items.thunder:' . $update_id, $update_info);
       }
@@ -109,6 +109,13 @@ function thunder_updater_update_8001() {
 
   // Finally remove Thunder Updater!
   $module_installer->uninstall(['thunder_updater']);
+
+  // @todo This can be removed when
+  //   https://www.drupal.org/project/drupal/issues/3063734 lands.
+  // Remove thunder_updater from the update schema list.
+  register_shutdown_function(function () {
+    \Drupal::keyValue('system.schema')->delete('thunder_updater');
+  });
 
   return $update_logger->output();
 }
