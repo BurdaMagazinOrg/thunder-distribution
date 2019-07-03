@@ -113,7 +113,7 @@
         "drupal/entity_browser": "1.7",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "^1.0",
-        "drupal/field_group": "^3.0",
+        "drupal/field_group": "3.0-rc1",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
         "drupal/inline_entity_form": "^1.0",
