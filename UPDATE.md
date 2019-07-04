@@ -16,13 +16,6 @@ by
 ```
 in the require section of your composer.json.
 
-Second, we removed some modules from our codebase. If you are using one of
-following modules, please add them to the composer.json of your project.
-* valiton/harbourmaster
-* drupal/riddle_marketplace
-* drupal/nexx_integration
-* burdamagazinorg/infinite_module
-* burdamagazinorg/infinite_theme
 
 We also switched from bower-asset to npm-asset for our frontend-libraries.
 In order to get the libraries downloaded to the correct location, please
@@ -34,15 +27,48 @@ by
 ```
 "installer-types": ["bower-asset", "npm-asset"],
 ```
-in the composer.json of your project.
+in the composer.json of your project and add "type:npm-asset" to the "docroot/libraries/{$name}" section in installer-paths.
+
+You have to update composer now
+
+```
+composer update
+```
+
+Additionally, we removed some modules from our codebase. If you are using one of
+following modules, please require them manually for your project.
+
+```
+composer require drupal/views_load_more --no-update
+composer require drupal/breakpoint_js_settings --no-update
+composer require valiton/harbourmaster --no-update
+composer require drupal/riddle_marketplace:~3.0 --no-update
+composer require drupal/nexx_integration:~3.0 --no-update
+composer require burdamagazinorg/infinite_module:~1.0 --no-update
+composer require burdamagazinorg/infinite_theme:~1.0 --no-update
+```
+### Updating fb_instant_articles
+If you are using the fb_instant_articles, please note that the RSS feed url will change
+and therefore needs to be updated in the facebook account.
+
+When updating while fb_instant_articles is enabled, there will be an error message like `The "fiafields" plugin does not exist. Valid plugin IDs for Drupal\views\Plugin\ViewsPluginManager are: ...`
+this is due to invalid configuration present in the system before the update and can safely be ignored.
 
 ### Pre-requirements for the media update
+First we should make sure that the latest drush version is installed.
+```
+composer require drush/drush:~9.7.0 --no-update
+```
+
 After that the following steps should be done for the update:
-* Add drupal/media_entity ^2.0 to your composer.json
-* Add drupal/video_embed_field ^2.0 to your composer.json
+
+```
+composer require drupal/media_entity:^2.0 drupal/media_entity_image drupal/video_embed_field
+```
+
 * Make sure that you use the "Media in core" branch for all your
 media_* modules. (For the media modules in Thunder, we take care of that)
-* Make sure that all your media_entity related code is moved to media.
+* Make sure that all your code that uses media_entity API is modified to use the core media API.
 
 See here for more information:
 * [Moved a refined version of the contributed Media entity module to core as Media module](https://www.drupal.org/node/2863992)
@@ -50,14 +76,16 @@ See here for more information:
 
 ### Execute the media update
 All you need to do now is:
+
 ```
 drush updb
+drush cr
 ```
-Then you will be informed that all your media_entiy code has to be
-media in core compatible now. If you are sure that you are ready for the
-migration, call the drush command again.
+
+### Cleanup codebase
+Now the update is done and you can remove some modules from your project.
 ```
-drush updb
+composer remove drupal/media_entity drupal/media_entity_image
 ```
 
 ## Additional tasks
@@ -94,15 +122,28 @@ In our default configuration we moved from video_embed_field to media
 oEmbed and we recommend it to you, too.
 
 Steps to migrate:
-* Add https://www.drupal.org/files/issues/2018-12-11/2997799-22.patch
-to your composer.json in the patch section for drupal/video_embed_field
+* Add https://www.drupal.org/files/issues/2019-07-03/2997799-29.patch
+to your composer.json in the patch section for drupal/video_embed_field, it should look similar to this:
+
+```
+        "patches": {
+            "drupal/video_embed_field": {
+                "Include upgrade path from video_embed_field to oEmbed": "https://www.drupal.org/files/issues/2019-07-03/2997799-29.patch"
+            }
+        },
+```
+
 * ```
-  drush en vem_migrate_oembed
+  composer update
+  ```
+
+* ```
+  drush pm:enable vem_migrate_oembed
   ```
 * ```
-  drush video-embed-media-migrate-oembed
+  drush vem:migrate_oembed
   ```
 * ```
-  drush pmu video_embed_field
+  drush pm:uninstall video_embed_field
   ```
 * Remove the video_embed_field module and patch from your composer.json
