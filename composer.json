@@ -102,7 +102,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
-        "drupal/core": "8.7.3",
+        "drupal/core": "8.7.4",
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^1.0-alpha8",
