@@ -12,11 +12,19 @@ Instructions on how to install Thunder can be found at the [installation guide](
 To start quickly, run this in your terminal to install Thunder from command line:
 
 ```
-composer create-project thunder/thunder-project thunder --no-interaction
-cd thunder/docroot
+composer create-project thunder/thunder-project thunder --no-interaction --no-install
+cd thunder
+composer install
+composer drupal:scaffold
+cd docroot
 php core/scripts/drupal quick-start thunder
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
+
+### Updating Thunder 2 to Thunder 3
+If you want to update from Thunder 2 to Thunder 3 some manual steps are necessary, they are described here:
+
+[How to update Thunder 2 to Thunder 3](https://thunder.github.io/thunder-documentation/update-2-to-3)
 
 ## Feature Highlights
 ### <img src="./files/images/story_fireplace_b.png" alt="Storytelling" width="2%"/> Storytelling

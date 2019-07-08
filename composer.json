@@ -142,7 +142,7 @@
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
         "drupal/slick_media": "^2.0-alpha2",
-        "drupal/thunder_admin": "3.x-dev",
+        "drupal/thunder_admin": "^3.0",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
         "npm-asset/dropzone": "^5.5.1",
