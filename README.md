@@ -18,6 +18,10 @@ php core/scripts/drupal quick-start thunder
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
 
+### Updating to Thunder 3
+To update an existing Thunder 2 installation to Thunder 3 a few manual steps have to be executed. More informations about that can be found here:
+[How to update Thunder 2 to Thunder 3](https://thunder.github.io/thunder-documentation/update-2-to-3) 
+
 ## Feature Highlights
 ### <img src="./files/images/story_fireplace_b.png" alt="Storytelling" width="2%"/> Storytelling
 Create thrilling articles with multimedia content. It’s easy to enrich your article with pictures, video, and social media snippets and arrange everything as you like it.
