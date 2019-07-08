@@ -1,5 +1,17 @@
 # Change Log
 
+## [8.2.44](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.44) 2019-07-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.43...8.2.44)
+
+Thunder 3 will be released shortly, before updating to Thunder 3 you should update to this version of Thunder 2 as it 
+fixes some problems we found with the update path to Thunder 3. 
+
+- Fix [Notices and warnings in thunder_updater upgrade path](https://www.drupal.org/project/thunder/issues/3065653)
+- Fix [Coding style issues](https://www.drupal.org/project/thunder/issues/3062710)
+- Do [Update to Drupal 8.7.4 and adopt test changes](https://www.drupal.org/project/thunder/issues/3065838)
+- Do [Ensure we use the latest nexx_integration release](https://www.drupal.org/project/thunder/issues/3065803)
+- Do [Add information on how to update to Thunder 3](https://www.drupal.org/project/thunder/issues/3066433)
+
 ## [8.2.43](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.43) 2019-06-13
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.42...8.2.43)
 
