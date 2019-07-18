@@ -1,5 +1,11 @@
 # Change Log
 
+## [8.2.45](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.45) 2019-07-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.44...8.2.45)
+
+This release updates the Drupal version to 8.7.5, which is a security update. No features or fixes are included in this
+release.
+
 ## [8.2.44](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.44) 2019-07-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.43...8.2.44)
 
