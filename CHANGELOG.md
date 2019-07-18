@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0-beta2](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta2) 2019-07-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/3.3.0-beta1...3.3.0-beta2)
+
+This release updates the Drupal version to 8.7.5, which is a security update. No features or fixes are included in this
+release. 
+
 ## [3.3.0-beta1](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta1) 2019-07-08
 
 The first public release of Thunder 3. Feature-wise it is currently identical to Thunder 2, but uses Drupal media instead
