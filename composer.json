@@ -83,6 +83,9 @@
             "drupal/simple_sitemap": {
                 "Remove setting": "https://www.drupal.org/files/issues/2019-06-25/3063870-3.patch",
                 "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-24/3062747-8.patch"
+            },
+            "drupal/inline_entity_form": {
+                "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
             }
         }
     },
@@ -116,7 +119,7 @@
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "^1.0-rc1",
+        "drupal/inline_entity_form": "1.0-rc1",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
