@@ -6,20 +6,7 @@ Thunder is a Drupal 8 distribution for professional publishers. It consists of t
 
 
 ## Installing Thunder
-Instructions on how to install Thunder can be found at the [installation guide](https://burdamagazinorg.github.io/thunder-documentation/docs#docs-install) and in the [Drupal documentation](https://www.drupal.org/docs/8/install)..
-
-### Quick start installation
-To start quickly, run this in your terminal to install Thunder from command line:
-
-```
-composer create-project thunder/thunder-project thunder --no-interaction --no-install
-cd thunder
-composer install
-composer drupal:scaffold
-cd docroot
-php core/scripts/drupal quick-start thunder
-```
-For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
+Instructions on how to install Thunder can be found at the [installation guide](https://thunder.github.io/thunder-documentation/quick-install).
 
 ### Updating Thunder 2 to Thunder 3
 If you want to update from Thunder 2 to Thunder 3 some manual steps are necessary, they are described here:
@@ -47,7 +34,7 @@ Using open source technology reduces development costs and resources and makes y
 *[More information about the modules used in Thunder](https://burdamagazinorg.github.io/thunder-documentation/modules)*
 
 ## Support
-For general help using Thunder, please refer to [the official Thunder documentation](https://burdamagazinorg.github.io/thunder-documentation).
+For general help using Thunder, please refer to [the official Thunder documentation](https://thunder.github.io/thunder-documentation).
 
 ### Community support
 For additional help, you can use one of this channel to ask question:
