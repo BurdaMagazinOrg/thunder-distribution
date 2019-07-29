@@ -78,11 +78,9 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
             "drupal/core": {
-                "Allow updating modules with new service dependencies and Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-03/3055443-19-2863986-111-combined.patch"
-            },
-            "drupal/simple_sitemap": {
-                "Remove setting": "https://www.drupal.org/files/issues/2019-06-25/3063870-3.patch",
-                "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-24/3062747-8.patch"
+                "Allow updating modules with new service dependencies": "https://www.drupal.org/files/issues/2019-07-07/2863986-4-114.patch",
+                "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch",
+                "Stop invoking pre-save methods in EntityStorageInterface::restore()": "https://www.drupal.org/files/issues/2019-07-23/3066439-2-58.patch"
             },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
@@ -130,7 +128,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.0-alpha1",
         "drupal/media_expire": "^2.2",
-        "drupal/metatag": "^1.8",
+        "drupal/metatag": "^1.9",
         "drupal/paragraphs": "1.6",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
@@ -140,7 +138,7 @@
         "drupal/scheduler": "1.0",
         "drupal/scheduler_content_moderation_integration": "^1.0-beta1",
         "drupal/select2": "^1.0",
-        "drupal/simple_sitemap": "3.2",
+        "drupal/simple_sitemap": "^3.3",
         "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
