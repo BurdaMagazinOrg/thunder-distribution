@@ -3,8 +3,7 @@
 ## [8.2.46](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.46) 2019-07-29
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.45...8.2.46)
 
-This release updates the contrib Metatag version to 1.9, which is a security update. No features or fixes are included in this
-release.
+This release updates the contrib Metatag version to 1.9, which is a security update. No features or fixes are included in this release.
 
 ## [8.2.45](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.45) 2019-07-18
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.44...8.2.45)
