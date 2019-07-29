@@ -1,7 +1,15 @@
 # Changelog
 
+## [3.3.0-beta3](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta3) 2019-07-29
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta2...3.3.0-beta3)
+
+This release updates the contrib Metatag module version to 1.9, which is a security update. 
+
+- Fix [#3055350 - Do not show revisionlog message form on inline forms](https://www.drupal.org/i/3055350) 
+- Task [#3069987 - Update documentation](https://www.drupal.org/i/3069987)
+
 ## [3.3.0-beta2](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta2) 2019-07-18
-[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/3.3.0-beta1...3.3.0-beta2)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta1...3.3.0-beta2)
 
 This release updates the Drupal version to 8.7.5, which is a security update. No features or fixes are included in this
 release. 

@@ -3,7 +3,7 @@ type: profile
 description: 'The Drupal8 based CMS for professional publishing.'
 project: thunder
 core: 8.x
-version: '8.x-3.0-beta2'
+version: '8.x-3.0-beta3'
 
 distribution:
   name: Thunder
