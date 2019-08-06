@@ -25,14 +25,14 @@ class IvwIntegration extends AbstractOptionalModule {
 
     $form['ivw_integration']['ivw_site'] = [
       '#type' => 'textfield',
-      '#title' => t('IVW Site name'),
-      '#description' => t('Site name as given by IVW, this is used as default for the "st" parameter in the iam_data object'),
+      '#title' => $this->t('IVW Site name'),
+      '#description' => $this->t('Site name as given by IVW, this is used as default for the "st" parameter in the iam_data object'),
     ];
 
     $form['ivw_integration']['mobile_site'] = [
       '#type' => 'textfield',
-      '#title' => t('IVW Mobile Site name'),
-      '#description' => t('Mobile site name as given by IVW, this is used as default for the "st" parameter in the iam_data object'),
+      '#title' => $this->t('IVW Mobile Site name'),
+      '#description' => $this->t('Mobile site name as given by IVW, this is used as default for the "st" parameter in the iam_data object'),
     ];
 
     return $form;

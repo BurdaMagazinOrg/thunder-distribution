@@ -37,7 +37,7 @@ class ThunderTermForm extends TermForm {
     $term = $form_state->getFormObject()->getEntity();
     $form['path_settings'] = [
       '#type' => 'details',
-      '#title' => t('URL path settings'),
+      '#title' => $this->t('URL path settings'),
       '#open' => !empty($form['path']['widget'][0]['alias']['#value']),
       '#group' => 'advanced',
       '#access' => !empty($form['path']['#access']) && $term->hasField('path') && $term->get('path')->access('edit'),

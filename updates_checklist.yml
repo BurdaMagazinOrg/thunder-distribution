@@ -322,3 +322,11 @@ v2.36:
         '#description_successful': '<p><strong>Configuration is successfully updated.</strong></p>'
         '#description_failed': '<p><strong>Adjust the order to your needs and save the page. If the order is already correct displayed, move one item for and back before saving.</strong><p>'
         filter_page: { '#text': 'Text formats and editors', '#url': 'internal:/admin/config/content/formats' }
+v2.43:
+    '#title': 'Update to Thunder 2.43'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder__thunder_update_8136:
+        '#title': 'Add permissions to access the tokens overview page.'
+        '#description': '<p>Adds the "access tokens overview" permission for Editor, Restricted Editor and SEO.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Updating the permissions has failed.</strong><p>'

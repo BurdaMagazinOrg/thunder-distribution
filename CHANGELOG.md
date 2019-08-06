@@ -1,5 +1,90 @@
 # Change Log
 
+## [8.2.46](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.46) 2019-07-29
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.45...8.2.46)
+
+This release updates the contrib Metatag version to 1.9, which is a security update. No features or fixes are included in this release.
+
+## [8.2.45](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.45) 2019-07-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.44...8.2.45)
+
+This release updates the Drupal version to 8.7.5, which is a security update. No features or fixes are included in this
+release.
+
+## [8.2.44](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.44) 2019-07-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.43...8.2.44)
+
+Thunder 3 will be released shortly, before updating to Thunder 3 you should update to this version of Thunder 2 as it 
+fixes some problems we found with the update path to Thunder 3. 
+
+- Fix [Notices and warnings in thunder_updater upgrade path](https://www.drupal.org/project/thunder/issues/3065653)
+- Fix [Coding style issues](https://www.drupal.org/project/thunder/issues/3062710)
+- Do [Update to Drupal 8.7.4 and adopt test changes](https://www.drupal.org/project/thunder/issues/3065838)
+- Do [Ensure we use the latest nexx_integration release](https://www.drupal.org/project/thunder/issues/3065803)
+- Do [Add information on how to update to Thunder 3](https://www.drupal.org/project/thunder/issues/3066433)
+
+## [8.2.43](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.43) 2019-06-13
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.42...8.2.43)
+
+Updates for various dependencies. Also fixes an installation problem with password policy module.
+
+- Fix [Composer is unable to apply patch](https://www.drupal.org/project/thunder/issues/3061366)
+- Do [Update JS libraries](https://www.drupal.org/project/thunder/issues/3056095)
+- Do [Update to access_unpublished alpha8](https://www.drupal.org/project/thunder/issues/3059035)
+
+## [8.2.42](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.42) 2019-05-20
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.41...8.2.42)
+
+Fixes an installation and update bug.
+
+- Fix [Can't install thunder with composer](https://www.drupal.org/project/thunder/issues/3055630)
+
+## [8.2.41](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.41) 2019-05-09
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.40...8.2.41)
+
+Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.7.1.
+
+## [8.2.40](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.40) 2019-05-07
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.39...8.2.40)
+
+Fixes an issue when content_moderation module is not enabled.
+
+- Fix [Content_moderation module has to be enabled, otherwise all node add/edit pages break](https://www.drupal.org/project/thunder/issues/3053041)
+
+## [8.2.39](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.39) 2019-05-02
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.38...8.2.39)
+
+Fix Drupal 8.7 compatibility issues.
+
+- Do [Prepare Thunder for Drupal 8.7](https://www.drupal.org/project/thunder/issues/3024698)
+
+## [8.2.38](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.38) 2019-04-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.37...8.2.38)
+
+Update without user facing changes to update the release tar-ball on drupal.org to include the Drupal security release 8.6.15.
+
+The only other change this release contains is an update of the testing environment.
+
+- Do [Update travis to PHP 7.3](https://www.drupal.org/node/3044358)
+
+## [8.2.37](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.37) 2019-04-15
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.36...8.2.37)
+
+Maintenance release.
+
+- Do [Document drupal quickstart command in README](https://www.drupal.org/project/thunder/issues/3039132)
+- Do [Cleanup composer dev dependencies](https://www.drupal.org/project/thunder/issues/3024231)
+- Do [Update libraries](https://www.drupal.org/project/thunder/issues/3040125)
+- Do [Use update_helper module and remove thunder_updater](https://www.drupal.org/project/thunder/issues/2947071)
+- Do [Switch to travis stages](https://www.drupal.org/project/thunder/issues/3039151)
+- Do [Update filter format weights](https://www.drupal.org/project/thunder/issues/3043522)
+- Do [Tweak thunder install task logic](https://www.drupal.org/project/thunder/issues/3040605)
+- Fix [Two authors, but only one shown](https://www.drupal.org/project/thunder/issues/2846679)
+- Fix [The descriptions in updates.yml are misleading](https://www.drupal.org/project/thunder/issues/3040175)
+- Fix [Download URLs for sandboxes in the drush makefile](https://www.drupal.org/project/thunder/issues/3044793)
+- Fix [Deleting the media types removes thunder media view](https://www.drupal.org/project/thunder/issues/3046666)
+- Fix [Thunder modules installed hook should not expect module installation order](https://www.drupal.org/project/thunder/issues/3041383)
+
 ## [8.2.36](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.36) 2019-03-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.35...8.2.36)
 

@@ -89,8 +89,12 @@ function thunder_updater_update_8001() {
     // Migrate Checklist API configuration.
     $thunder_updater_checklist = $config_factory->getEditable('checklistapi.progress.thunder_updater');
     $update_helper_checklist = $config_factory->getEditable('checklistapi.progress.update_helper_checklist');
-    foreach ($thunder_updater_checklist->get('progress.#items') as $update_id => $update_info) {
-      $update_helper_checklist->set('progress.#items.thunder:' . $update_id, $update_info);
+
+    $items = $thunder_updater_checklist->get('progress.#items');
+    if (is_array($items)) {
+      foreach ($items as $update_id => $update_info) {
+        $update_helper_checklist->set('progress.#items.thunder:' . $update_id, $update_info);
+      }
     }
 
     $update_helper_checklist->set('progress.#completed_items', $update_helper_checklist->get('progress.#completed_items') + $thunder_updater_checklist->get('progress.#completed_items'));

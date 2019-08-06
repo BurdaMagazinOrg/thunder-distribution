@@ -42,14 +42,14 @@ class FilenameTransliterationTest extends ThunderTestBase {
 
     $original = drupal_get_path('module', 'simpletest') . '/files';
 
-    file_unmanaged_copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
 
     // Upload with replace to guarantee there's something there.
     $edit = [
       'file_test_replace' => FILE_EXISTS_RENAME,
       'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
-    $this->drupalPostForm('file-test/upload', $edit, t('Submit'));
+    $this->drupalPostForm('file-test/upload', $edit, $this->t('Submit'));
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->responseContains('You WIN!');
 

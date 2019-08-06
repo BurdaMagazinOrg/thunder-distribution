@@ -21,7 +21,6 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - select2
-    - thunder
 third_party_settings:
   field_group:
     group_teaser:

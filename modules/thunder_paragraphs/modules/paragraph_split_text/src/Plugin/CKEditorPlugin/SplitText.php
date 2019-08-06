@@ -35,11 +35,11 @@ class SplitText extends CKEditorPluginBase {
   public function getButtons() {
     return [
       'SplitTextBefore' => [
-        'label' => t('Split Text Before'),
+        'label' => $this->t('Split Text Before'),
         'image' => $this->getLibraryPath() . '/icons/splittext-before.png',
       ],
       'SplitTextAfter' => [
-        'label' => t('Split Text After'),
+        'label' => $this->t('Split Text After'),
         'image' => $this->getLibraryPath() . '/icons/splittext-after.png',
       ],
     ];
