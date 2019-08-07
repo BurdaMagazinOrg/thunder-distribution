@@ -1179,4 +1179,5 @@ function thunder_update_8137() {
 /**
  * Thunder 3 release preparation.
  */
-function thunder_update_8138() {}
+function thunder_update_8138() {
+}
