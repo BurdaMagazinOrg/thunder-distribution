@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.47](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.47) 2019-08-07
+## [8.2.47](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.47) 2019-08-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.46...8.2.47)
 
 We update the schema version of Thunder with this release, to reliably make sure, that updates to Thunder 3
