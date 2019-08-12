@@ -1175,3 +1175,9 @@ function thunder_update_8136() {
 function thunder_update_8137() {
   \Drupal::keyValue('system.schema')->delete('thunder_updater');
 }
+
+/**
+ * Thunder 3 release preparation.
+ */
+function thunder_update_8138() {
+}
