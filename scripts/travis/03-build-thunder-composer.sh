@@ -5,7 +5,14 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     # Download latest release from drupal.org
     mkdir -p $UPDATE_BASE_PATH
     cd $UPDATE_BASE_PATH
-    drush dl thunder --drupal-project-rename="docroot" -y
+
+    # Get latest Thunder 2 release
+    THUNDER_2_LATEST=$(git ls-remote --sort="version:refname" --tags --refs https://git.drupal.org/project/thunder.git 8.x-2.* | cut -d/ -f3 | tail -n1)
+    wget https://ftp.drupal.org/files/projects/thunder-${THUNDER_2_LATEST}-core.tar.gz
+    tar -zxf thunder-${THUNDER_2_LATEST}-core.tar.gz
+    mv thunder-${THUNDER_2_LATEST} ${UPDATE_BASE_PATH}/docroot
+
+    # Install latest Thunder 2 release
     composer install --working-dir=${UPDATE_BASE_PATH}/docroot
 fi
 
