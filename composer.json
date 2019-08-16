@@ -71,6 +71,9 @@
             "drupal/scheduler": {
                 "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
             },
+            "drupal/paragraphs": {
+                "Update from very old version fails": "https://www.drupal.org/files/issues/2019-08-16/3075406.patch"
+            },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
@@ -124,7 +127,7 @@
         "drupal/media_expire": "^1.0",
         "drupal/nexx_integration": "^2.4",
         "drupal/metatag": "^1.9",
-        "drupal/paragraphs": "^1.9",
+        "drupal/paragraphs": "1.9",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
         "drupal/pathauto": "^1.0",
