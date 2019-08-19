@@ -15,6 +15,12 @@ make install
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 phpenv rehash
 
+
+# Apply paragraphs update hook patch for version 1.1
+cd ${TEST_DIR}/docroot/modules/contrib/paragraphs
+wget https://www.drupal.org/files/issues/2019-08-16/3075406.patch
+patch -p1 < 3075406.patch
+
 cd ${TEST_DIR}/docroot
 
 #EXAMPLE:
