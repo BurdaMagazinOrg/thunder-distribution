@@ -120,7 +120,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
     $this->getSession()
       ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].setData(\"$thirdParagraphContent\");");
+      ->executeScript("window.ed = CKEDITOR.instances[\"$ckEditorId\"]; window.ed.setData(\"$thirdParagraphContent\"); window.ed.updateElement(); window.ed.element.data('editor-value-is-changed', true);");
 
     $this->addTextParagraph(static::$paragraphsField, '', 'text', 1);
 
