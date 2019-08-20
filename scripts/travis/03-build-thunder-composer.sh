@@ -25,7 +25,9 @@ COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "mglaman/p
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 
-# Apply paragraphs update hook patch for version 1.1
-cd ${TEST_DIR}/docroot/modules/contrib/paragraphs
-wget https://www.drupal.org/files/issues/2019-08-16/3075406.patch
-patch -p1 < 3075406.patch
+if [[ ${TEST_UPDATE} == "true" ]]; then
+    # Apply paragraphs update hook patch for version 1.1
+    cd ${TEST_DIR}/docroot/modules/contrib/paragraphs
+    wget https://www.drupal.org/files/issues/2019-08-16/3075406.patch
+    patch -p1 < 3075406.patch
+fi
