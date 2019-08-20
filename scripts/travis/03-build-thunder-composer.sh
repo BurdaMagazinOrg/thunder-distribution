@@ -24,15 +24,3 @@ COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "mglaman/p
  # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
-
-if [[ ${TEST_UPDATE} == "true" ]]; then
-    # Remove paragraphs schema version check from thunder_requirements().
-    cd ${THUNDER_DIST_DIR}
-    wget https://www.drupal.org/files/issues/2019-08-20/3042078-disable-requirements-check-for-update-test.patch
-    patch -p1 < 3042078-disable-requirements-check-for-update-test.patch
-
-    # Apply paragraphs update hook patch for version 1.1
-    cd ${TEST_DIR}/docroot/modules/contrib/paragraphs
-    wget https://www.drupal.org/files/issues/2019-08-16/3075406.patch
-    patch -p1 < 3075406.patch
-fi
