@@ -21,7 +21,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     parent::setUp();
 
     $module_handler = \Drupal::service('module_handler');
-    $this->applyPatch('https://www.drupal.org/files/issues/2019-08-20/3042078-disable-requirements-check-for-update-test.patch', $module_handler->getModule('thunder')->getPath());
     $this->applyPatch('https://www.drupal.org/files/issues/2019-08-16/3075406.patch', $module_handler->getModule('paragraphs')->getPath());
   }
 
