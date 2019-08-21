@@ -14,7 +14,7 @@ class RedirectTest extends ThunderTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['thunder_demo', 'content_moderation'];
+  protected static $modules = ['thunder_testing_demo', 'content_moderation'];
 
   /**
    * Tests redirect from old URL to new one.
