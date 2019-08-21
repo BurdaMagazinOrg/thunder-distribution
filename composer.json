@@ -62,10 +62,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/paragraphs": {
-                "Support of add above functionality in Thunder": "https://www.drupal.org/files/issues/2018-09-28/2977454_7.patch",
-                "Make paragraphs module working with field_group version 3.x with support for the field_layout module #2907094": "https://www.drupal.org/files/issues/2019-06-19/2907094-52.patch"
-            },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
             },
@@ -131,7 +127,7 @@
         "drupal/media_expire": "^1.0",
         "drupal/nexx_integration": "^2.4",
         "drupal/metatag": "^1.9",
-        "drupal/paragraphs": "1.6",
+        "drupal/paragraphs": "^1.9",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
         "drupal/pathauto": "^1.0",

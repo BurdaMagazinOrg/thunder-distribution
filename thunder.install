@@ -1181,3 +1181,29 @@ function thunder_update_8137() {
  */
 function thunder_update_8138() {
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function thunder_requirements($phase) {
+  // Bail out if we are not in 'update' phase
+  // or a simpletest testing environment is present.
+  if ($phase !== 'update' || drupal_valid_test_ua() !== FALSE) {
+    return [];
+  }
+  $requirements = [];
+
+  if (array_key_exists('paragraphs', \Drupal::moduleHandler()->getModuleList())) {
+    $paragraphs_schema = drupal_get_installed_schema_version('paragraphs');
+
+    if ($paragraphs_schema < 8014) {
+      $requirements['thunder'] = [
+        'title' => t('Thunder'),
+        'description' => t('The paragraphs version installed is too old for update. Update paragraphs module to version 1.3 before updating to latest thunder.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  return $requirements;
+}
