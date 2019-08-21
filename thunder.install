@@ -1186,7 +1186,9 @@ function thunder_update_8138() {
  * Implements hook_requirements().
  */
 function thunder_requirements($phase) {
-  if ($phase !== 'update' || drupal_valid_test_ua()) {
+  // Bail out if we are not in 'update' phase
+  // or a simpletest testing environment is present.
+  if ($phase !== 'update' || drupal_valid_test_ua() !== FALSE) {
     return [];
   }
   $requirements = [];
