@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.article.field_teaser_media
     - field.field.node.article.field_teaser_text
     - node.type.article
+    - workflows.workflow.editorial
   module:
     - entity_browser
     - field_group
@@ -21,6 +22,7 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - select2
+    - thunder
 third_party_settings:
   field_group:
     group_teaser:
@@ -37,6 +39,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: 'content-form__form-section article-teaser'
+      region: content
     group_paragraphs:
       children:
         - field_paragraphs
@@ -50,6 +53,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: 'content-form__form-section paragraphs-container'
+      region: content
     group_basis:
       children:
         - field_channel
@@ -66,6 +70,7 @@ third_party_settings:
         id: ''
         classes: content-form__form-section
       label: Basis
+      region: content
 id: node.article.default
 targetEntityType: node
 bundle: article
@@ -104,6 +109,7 @@ content:
       features:
         duplicate: '0'
         collapse_edit_all: '0'
+      closed_mode_threshold: 0
     third_party_settings:
       paragraphs_features:
         add_in_between: true
@@ -129,6 +135,8 @@ content:
     weight: 5
     settings:
       autocomplete: true
+      match_operator: CONTAINS
+      width: 100%
     third_party_settings: {  }
     region: content
   field_teaser_media:
@@ -142,6 +150,7 @@ content:
       field_widget_display_settings:
         view_mode: thumbnail
       selection_mode: selection_append
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content

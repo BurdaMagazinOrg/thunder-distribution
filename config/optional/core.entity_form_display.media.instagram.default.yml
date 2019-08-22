@@ -26,6 +26,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Basis
+      region: content
 id: media.instagram.default
 targetEntityType: media
 bundle: instagram
