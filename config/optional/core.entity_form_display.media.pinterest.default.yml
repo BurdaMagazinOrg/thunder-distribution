@@ -22,6 +22,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Basis
+      region: content
 id: media.pinterest.default
 targetEntityType: media
 bundle: pinterest
