@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.48](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.48) 2019-08-08
+## [8.2.48](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.48) 2019-08-26
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.47...8.2.48)
 
 The release updates the paragraphs modules to version 1.9 and the field groups module to version 3.0-rc1
