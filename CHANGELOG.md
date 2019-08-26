@@ -1,5 +1,15 @@
 # Change Log
 
+## [8.2.48](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.48) 2019-08-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.47...8.2.48)
+
+The release updates the paragraphs modules to version 1.9 and the field groups module to version 3.0-rc1
+
+- Do [Consider upgrading field_group module](https://www.drupal.org/node/3059646)
+- Do [Update to Paragraphs 1.9](https://www.drupal.org/node/3042078)
+- Do [Remove deprecated code for checklist api integration](https://www.drupal.org/node/3040952)
+- Fix [Occasionally failing tests for paragraphs text split](https://www.drupal.org/node/3073791)
+
 ## [8.2.47](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.47) 2019-08-08
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.46...8.2.47)
 
