@@ -33,9 +33,6 @@ function thunder_update_dependencies() {
     8006 => $switchToUpdaterHelperUpdaterHook,
   ];
 
-  // Update media form display settings before updating field_group.
-  $dependencies['field_group'][8301] = ['thunder' => 8129];
-
   // Ensure that all thunder hook_update_N functions are called after all other
   // update hooks.
   $list = [];
@@ -74,6 +71,14 @@ function thunder_update_dependencies() {
   // provide our own update path in thunder_taxonomy_update_8003().
   if (!empty($updates['taxonomy']['pending'][8601])) {
     \Drupal::state()->set('taxonomy_update_8601_skip_message', 'This update function was skipped, because Thunder provides it\'s own update for the status field on taxonomy terms.');
+  }
+
+  // Update media form display settings before updating field_group.
+  if (isset($updates['field_group']['pending'][8301])) {
+    // Add dependency to field_group to re-order update hooks.
+    $dependencies['field_group'][8301] = ['thunder' => 8129];
+    // Remove dependency set above (used to move thunder updates to end).
+    unset($return['thunder'][$updates['thunder']['start']]['field_group']);
   }
 
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
