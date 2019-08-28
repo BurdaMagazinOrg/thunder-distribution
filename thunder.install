@@ -73,14 +73,6 @@ function thunder_update_dependencies() {
     \Drupal::state()->set('taxonomy_update_8601_skip_message', 'This update function was skipped, because Thunder provides it\'s own update for the status field on taxonomy terms.');
   }
 
-  // Update media form display settings before updating field_group.
-  if (isset($updates['field_group']['pending'][8301])) {
-    // Add dependency to field_group to re-order update hooks.
-    $dependencies['field_group'][8301] = ['thunder' => 8129];
-    // Remove dependency set above (used to move thunder updates to end).
-    unset($return['thunder'][$updates['thunder']['start']]['field_group']);
-  }
-
   return NestedArray::mergeDeepArray([$return, $dependencies], TRUE);
 }
 
@@ -1188,6 +1180,20 @@ function thunder_update_8137() {
  * Thunder 3 release preparation.
  */
 function thunder_update_8138() {
+}
+
+/**
+ * Add missing region key to field groups in form display settings.
+ */
+function thunder_update_8139() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8139');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
 }
 
 /**
