@@ -33,6 +33,9 @@ function thunder_update_dependencies() {
     8006 => $switchToUpdaterHelperUpdaterHook,
   ];
 
+  // Update media form display settings before updating field_group.
+  $dependencies['field_group'][8301] = ['thunder' => 8129];
+
   // Ensure that all thunder hook_update_N functions are called after all other
   // update hooks.
   $list = [];
