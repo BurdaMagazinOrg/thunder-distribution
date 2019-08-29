@@ -86,11 +86,11 @@ class RiddleTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Select first riddle.
-    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:24']);
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:23']);
 
     // Select second riddle.
     $paragraphIndex = $this->addParagraph('field_paragraphs', 'riddle');
-    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:25']);
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:24']);
 
     // Save article as unpublished.
     $this->clickSave();

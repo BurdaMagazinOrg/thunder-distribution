@@ -28,7 +28,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
   protected static $modules = [
-    'thunder_demo',
+    'thunder_testing_demo',
     'google_analytics',
     'nexx_integration',
     'ivw_integration',
