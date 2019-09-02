@@ -67,6 +67,8 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-23/2858438-26.patch"
+                "Entity Browser iFrame 100% height can cause vertical scrollbar #3055358": "https://www.drupal.org/files/issues/2019-05-21/entity-browser-iframe-scrollbar-3055358-4.patch",
+                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-09-02/entity-browser-reorder-remove-2851580-61.patch"
             },
             "drupal/field_group": {
                 "Incompatibility with inline entity form #2986704":"https://www.drupal.org/files/issues/2018-10-30/field_group-inline_entity_form_compatibility-2986704-3.patch"
