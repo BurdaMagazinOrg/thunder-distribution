@@ -61,11 +61,11 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Edit video paragraph.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-3-edit-2"]');
-    $this->setFieldValue($page, 'field_paragraphs[3][subform][field_video][current][items][0][display][name][0][value]', 'New video name before collapse');
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-2-edit-2"]');
+    $this->setFieldValue($page, 'field_paragraphs[2][subform][field_video][current][items][0][display][name][0][value]', 'New video name before collapse');
 
     // Collapse parargraph form.
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_3_collapse"]');
+    $this->clickButtonCssSelector($page, '[name="field_paragraphs_2_collapse"]');
     $this->clickSave();
 
     // Re-open edit form, value has changed.

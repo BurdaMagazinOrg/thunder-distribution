@@ -127,7 +127,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->clickButtonDrupalSelector($page, 'edit-selected-items-24-2-remove-button');
+    $this->clickButtonDrupalSelector($page, 'edit-selected-items-23-2-remove-button');
 
     $this->submitEntityBrowser($page);
 

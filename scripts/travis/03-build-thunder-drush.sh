@@ -18,4 +18,4 @@ composer install --working-dir=${TEST_DIR}/docroot
 composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
-composer require "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
+composer require "thunder/thunder_testing_demo:2.x-dev" "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
