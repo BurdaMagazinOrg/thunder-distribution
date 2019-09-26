@@ -74,26 +74,4 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
     $this->checkForMetaRefresh();
   }
 
-  /**
-   * Confirms that the installation succeeded.
-   */
-  public function testInstalled() {
-    $this->assertSession()->addressEquals('?tour=1');
-    $this->assertSession()->statusCodeEquals(200);
-    // Confirm that we are logged-in after installation.
-    $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
-
-    // Ensure demo content is installed.
-    $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
-    $this->assertSession()->pageTextContains('Come to DrupalCon New Orleans');
-
-    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
-    $query = \Drupal::database()->select('watchdog', 'w')
-      ->condition('severity', 4, '<');
-
-    // Check that there are no warnings in the log after installation.
-    $this->assertEquals(0, $query->countQuery()->execute()->fetchField());
-
-  }
-
 }
