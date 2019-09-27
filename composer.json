@@ -71,9 +71,6 @@
             "drupal/field_group": {
                 "Incompatibility with inline entity form #2986704":"https://www.drupal.org/files/issues/2018-10-30/field_group-inline_entity_form_compatibility-2986704-3.patch"
             },
-            "drupal/scheduler": {
-                "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
-            },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
@@ -134,8 +131,8 @@
         "drupal/responsive_preview": "^1.0",
         "drupal/redirect": "^1.0",
         "drupal/riddle_marketplace": "^2.0",
-        "drupal/scheduler": "1.1",
-        "drupal/scheduler_content_moderation_integration": "~1.0",
+        "drupal/scheduler": "^1.1",
+        "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
