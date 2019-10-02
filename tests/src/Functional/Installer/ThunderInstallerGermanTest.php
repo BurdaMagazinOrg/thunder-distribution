@@ -9,8 +9,14 @@ namespace Drupal\Tests\thunder\Functional\Installer;
  */
 class ThunderInstallerGermanTest extends ThunderInstallerTest {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $langcode = 'de';
 
+  /**
+   * {@inheritdoc}
+   */
   protected $translations = [
     'Save and continue' => 'Speichern und fortfahren',
     'Errors found' => 'Fehler gefunden',

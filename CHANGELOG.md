@@ -1,5 +1,62 @@
 # Change Log
 
+## [8.2.49](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.49) 2019-08-28
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.48...8.2.49)
+
+Fixes update problems with the field group module.
+
+- Fix [field_group update](https://www.drupal.org/project/thunder/issues/3077672)
+
+## [8.2.48](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.48) 2019-08-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.47...8.2.48)
+
+The release updates the paragraphs modules to version 1.9 and the field groups module to version 3.0-rc1
+
+- Do [Consider upgrading field_group module](https://www.drupal.org/node/3059646)
+- Do [Update to Paragraphs 1.9](https://www.drupal.org/node/3042078)
+- Do [Remove deprecated code for checklist api integration](https://www.drupal.org/node/3040952)
+- Fix [Occasionally failing tests for paragraphs text split](https://www.drupal.org/node/3073791)
+
+## [8.2.47](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.47) 2019-08-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.46...8.2.47)
+
+We update the schema version of Thunder with this release, to reliably make sure, that updates to Thunder 3
+are not done with an old version of Thunder 2. No other changes have been made.
+
+- Do [Ensure you are coming from the latest Thunder 2 release](https://www.drupal.org/project/thunder/issues/3064515)
+
+## [8.2.46](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.46) 2019-07-29
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.45...8.2.46)
+
+This release updates the contrib Metatag version to 1.9, which is a security update. No features or fixes are included in this release.
+
+## [8.2.45](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.45) 2019-07-18
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.44...8.2.45)
+
+This release updates the Drupal version to 8.7.5, which is a security update. No features or fixes are included in this
+release.
+
+## [8.2.44](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.44) 2019-07-08
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.43...8.2.44)
+
+Thunder 3 will be released shortly, before updating to Thunder 3 you should update to this version of Thunder 2 as it 
+fixes some problems we found with the update path to Thunder 3. 
+
+- Fix [Notices and warnings in thunder_updater upgrade path](https://www.drupal.org/project/thunder/issues/3065653)
+- Fix [Coding style issues](https://www.drupal.org/project/thunder/issues/3062710)
+- Do [Update to Drupal 8.7.4 and adopt test changes](https://www.drupal.org/project/thunder/issues/3065838)
+- Do [Ensure we use the latest nexx_integration release](https://www.drupal.org/project/thunder/issues/3065803)
+- Do [Add information on how to update to Thunder 3](https://www.drupal.org/project/thunder/issues/3066433)
+
+## [8.2.43](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.43) 2019-06-13
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.42...8.2.43)
+
+Updates for various dependencies. Also fixes an installation problem with password policy module.
+
+- Fix [Composer is unable to apply patch](https://www.drupal.org/project/thunder/issues/3061366)
+- Do [Update JS libraries](https://www.drupal.org/project/thunder/issues/3056095)
+- Do [Update to access_unpublished alpha8](https://www.drupal.org/project/thunder/issues/3059035)
+
 ## [8.2.42](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.42) 2019-05-20
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.41...8.2.42)
 

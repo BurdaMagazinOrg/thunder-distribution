@@ -15,6 +15,16 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   use ThunderAwsTestFixtureTrait;
 
   /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    $module_handler = \Drupal::service('module_handler');
+    $this->applyPatch('https://www.drupal.org/files/issues/2019-08-16/3075406.patch', $module_handler->getModule('paragraphs')->getPath());
+  }
+
+  /**
    * An array of config to skip schema checking on.
    *
    * @var array
@@ -63,6 +73,25 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
       return;
     }
     return parent::assertConfigSchema($typed_config, $config_name, $config_data);
+  }
+
+  /**
+   * Applies provided patch at provided location.
+   *
+   * @param string $patch
+   *   Url to patch.
+   * @param string $location
+   *   File system location.
+   */
+  public function applyPatch($patch, $location) {
+    $old_cwd = getcwd();
+
+    chdir($location);
+    exec('/usr/bin/curl -s ' . escapeshellarg($patch) . ' | patch -p1', $output, $retcode);
+    chdir($old_cwd);
+    if ($retcode != 0) {
+      throw new \Exception("Patch ${patch} failed to apply.");
+    }
   }
 
 }

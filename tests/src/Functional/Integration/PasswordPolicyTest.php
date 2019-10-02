@@ -11,6 +11,9 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
  */
 class PasswordPolicyTest extends ThunderTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'password_policy_character_types',
     'password_policy_history',

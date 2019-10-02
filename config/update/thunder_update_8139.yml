@@ -1,0 +1,52 @@
+core.entity_form_display.media.gallery.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+core.entity_form_display.media.image.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+          group_credits:
+            region: content
+core.entity_form_display.media.instagram.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+core.entity_form_display.media.pinterest.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+core.entity_form_display.media.twitter.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+core.entity_form_display.media.video.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            region: content
+          group_credits:
+            region: content
