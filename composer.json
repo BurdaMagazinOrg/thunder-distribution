@@ -66,7 +66,9 @@
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch"
             },
             "drupal/entity_browser": {
-                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2858438_6.patch"
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
+                "Entity Browser iFrame 100% height can cause vertical scrollbar #3055358": "https://www.drupal.org/files/issues/2019-05-21/entity-browser-iframe-scrollbar-3055358-4.patch",
+                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-09-02/entity-browser-reorder-remove-2851580-61.patch"
             },
             "drupal/field_group": {
                 "Incompatibility with inline entity form #2986704":"https://www.drupal.org/files/issues/2018-10-30/field_group-inline_entity_form_compatibility-2986704-3.patch"
@@ -103,7 +105,7 @@
         "drupal/dropzonejs": "^1.0",
         "drupal/empty_fields": "^1.0",
         "drupal/entity": "^1.0",
-        "drupal/entity_browser": "1.7",
+        "drupal/entity_browser": "1.8",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/field_group": "3.0-rc1",
         "drupal/focal_point": "^1.2",
