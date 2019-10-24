@@ -20,6 +20,10 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   protected function setUp() {
     parent::setUp();
 
+    // Remove fb_instant_articles 1.x broken config..
+    $configFactory = \Drupal::configFactory();
+    $configFactory->getEditable('views.view.fb_instant_articles')->delete();
+
     $module_handler = \Drupal::service('module_handler');
     $this->applyPatch('https://www.drupal.org/files/issues/2019-08-16/3075406.patch', $module_handler->getModule('paragraphs')->getPath());
   }
@@ -35,7 +39,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     'core.entity_view_display.liveblog_post.liveblog_post.default',
     'core.entity_view_display.paragraph.gallery.preview',
     'nexx_integration.settings',
-    'views.view.fb_instant_articles',
   ];
 
   /**
