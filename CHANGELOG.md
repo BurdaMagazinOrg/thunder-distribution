@@ -11,7 +11,6 @@ Main changes:
 - Do [Update entity_browser to 8.x-1.8](https://www.drupal.org/node/3065999)
 - Do [Update scheduler and scmi](https://www.drupal.org/node/3077867)
 - Do [Remove scheduler patch](https://www.drupal.org/node/3083312)
- 
 
 ## [8.2.49](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.49) 2019-08-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.48...8.2.49)
