@@ -1,5 +1,18 @@
 # Change Log
 
+## [8.2.50](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.50) 2019-11-06
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.49...8.2.50)
+
+Maintenance release with updated dependencies.
+
+Main changes:
+
+- Fix [Increase minimum required focal point version](https://www.drupal.org/node/3083350)
+- Do [Update entity_browser to 8.x-1.8](https://www.drupal.org/node/3065999)
+- Do [Update scheduler and scmi](https://www.drupal.org/node/3077867)
+- Do [Remove scheduler patch](https://www.drupal.org/node/3083312)
+ 
+
 ## [8.2.49](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.49) 2019-08-28
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.48...8.2.49)
 
