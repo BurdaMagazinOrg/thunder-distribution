@@ -1,7 +1,10 @@
 core.entity_form_display.media.gallery.default:
-  expected_config: {  }
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
   update_actions:
-    add:
+    change:
       third_party_settings:
         field_group:
           group_basis:
