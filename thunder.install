@@ -1190,7 +1190,8 @@ function thunder_update_8139() {
   $updateHelper = \Drupal::service('update_helper.updater');
 
   // Execute configuration update definitions with logging of success.
-  $updateHelper->executeUpdate('thunder', 'thunder_update_8139');
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8139_a');
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8139_b');
 
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
