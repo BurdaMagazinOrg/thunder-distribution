@@ -70,9 +70,6 @@
                 "Entity Browser iFrame 100% height can cause vertical scrollbar #3055358": "https://www.drupal.org/files/issues/2019-05-21/entity-browser-iframe-scrollbar-3055358-4.patch",
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-09-02/entity-browser-reorder-remove-2851580-61.patch"
             },
-            "drupal/field_group": {
-                "Incompatibility with inline entity form #2986704":"https://www.drupal.org/files/issues/2018-10-30/field_group-inline_entity_form_compatibility-2986704-3.patch"
-            },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
@@ -108,7 +105,7 @@
         "drupal/entity_browser": "1.8",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "^1.0",
-        "drupal/field_group": "3.0-rc1",
+        "drupal/field_group": "^3.0",
         "drupal/focal_point": "^1.2",
         "drupal/google_analytics": "^2.0",
         "drupal/inline_entity_form": "^1.0",
