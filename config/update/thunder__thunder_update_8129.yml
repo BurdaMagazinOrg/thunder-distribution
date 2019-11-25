@@ -40,6 +40,7 @@ core.entity_form_display.media.gallery.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
     change:
       content:
@@ -102,6 +103,7 @@ core.entity_form_display.media.image.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
           group_credits:
             children:
@@ -201,6 +203,7 @@ core.entity_form_display.media.instagram.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
     change:
       content:
@@ -251,6 +254,7 @@ core.entity_form_display.media.pinterest.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
     change:
       content:
@@ -325,6 +329,7 @@ core.entity_form_display.media.twitter.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
     delete:
       hidden:
@@ -379,6 +384,7 @@ core.entity_form_display.media.video.default:
             format_type: fieldset
             label: Basis
             parent_name: ''
+            region: content
             weight: 0
           group_credits:
             children:
