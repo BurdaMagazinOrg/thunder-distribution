@@ -1,5 +1,12 @@
 # Change Log
 
+## [8.2.51](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.51) 2019-11-26
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.50...8.2.51)
+
+Bugfix release.
+
+- Fix [Follow-up for "Fix field_group update": Check if field groups exists](https://www.drupal.org/node/3087938)
+
 ## [8.2.50](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.50) 2019-11-06
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.49...8.2.50)
 
