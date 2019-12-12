@@ -53,7 +53,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL . PHP_EOL . '<p><br />' . PHP_EOL . '</p>' . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL);
     $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $secondParagraphContent . PHP_EOL);
   }
 
@@ -85,7 +85,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
-    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL . PHP_EOL . '<p><br />' . PHP_EOL . '</p>' . PHP_EOL);
+    $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
     $this->assertCkEditorContent($this->getCkEditorCssSelector(2), $secondParagraphContent . PHP_EOL);
   }
 
