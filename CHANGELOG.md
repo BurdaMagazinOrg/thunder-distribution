@@ -1,5 +1,14 @@
 # Change Log
 
+## [8.2.52](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.52) 2019-12-19
+[Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.51...8.2.52)
+
+This release updates the Drupal version to 8.7.11, which is a security update.
+
+Additional changes:
+
+- Do [Fix deprecations and coding style issues](https://www.drupal.org/node/3100288)
+
 ## [8.2.51](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.51) 2019-11-26
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.50...8.2.51)
 
