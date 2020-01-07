@@ -44,7 +44,12 @@ trait ThunderMetaTagTrait {
     foreach ($metaTagConfiguration as $metaTagName => $value) {
       $metaTag = explode(' ', $metaTagName);
 
-      $this->checkMetaTag($metaTag[1], $value);
+      if ($metaTag[1] == 'title') {
+        $this->assertSession()->elementContains('xpath', '//head/title', $value);
+      }
+      else {
+        $this->checkMetaTag($metaTag[1], $value);
+      }
     }
   }
 
