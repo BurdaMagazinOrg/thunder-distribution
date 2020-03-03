@@ -19,3 +19,7 @@ composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
 composer require "thunder/thunder_testing_demo:2.x-dev" "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
+
+ # Get custom update_helper branch
+rm -rf ${TEST_DIR}/docroot/profiles/thunder/modules/update_helper
+git clone --depth 1 --single-branch --branch "fix/3089823-delete-action-is-not-performed" https://github.com/BurdaMagazinOrg/module-update_helper.git ${TEST_DIR}/docroot/profiles/thunder/modules/update_helper

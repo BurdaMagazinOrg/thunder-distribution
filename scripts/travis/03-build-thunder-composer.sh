@@ -31,3 +31,7 @@ COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "thunder/t
  # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+
+ # Get custom update_helper branch
+rm -rf ${TEST_DIR}/docroot/modules/contrib/update_helper
+git clone --depth 1 --single-branch --branch "fix/3089823-delete-action-is-not-performed" https://github.com/BurdaMagazinOrg/module-update_helper.git ${TEST_DIR}/docroot/modules/contrib/update_helper
