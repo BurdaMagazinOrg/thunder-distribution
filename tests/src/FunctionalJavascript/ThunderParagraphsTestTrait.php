@@ -80,7 +80,7 @@ trait ThunderParagraphsTestTrait {
     $addButton->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->find('xpath', "//input[@name='{$fieldName}_{$type}_add_more']")
+    $page->find('xpath', "(//input[@name='{$fieldName}_{$type}_add_more'])[2]")
       ->click();
 
     $this->assertSession()->assertWaitOnAjaxRequest();
