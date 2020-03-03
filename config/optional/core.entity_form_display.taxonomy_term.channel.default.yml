@@ -38,9 +38,10 @@ content:
         collapse_edit_all: '0'
     third_party_settings:
       paragraphs_features:
+        delete_confirmation: true
         add_in_between: true
         split_text: true
-        delete_confirmation: true
+        show_drag_and_drop: false
     region: content
   langcode:
     type: language_select
