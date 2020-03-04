@@ -28,6 +28,10 @@ fi
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "thunder/thunder_testing_demo:2.x-dev" "mglaman/phpstan-drupal:~0.11.11" "phpstan/phpstan-deprecation-rules:~0.11.0" --no-progress
 
- # Get custom branch of Thunder Admin theme
+# Module branch
+rm -rf ${TEST_DIR}/docroot/modules/contrib/nexx_integration
+git clone --depth 1 --single-branch --branch fix/paragraphs-config-schema https://github.com/BurdaMagazinOrg/module-nexx_integration.git ${TEST_DIR}/docroot/modules/contrib/nexx_integration
+
+# Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
