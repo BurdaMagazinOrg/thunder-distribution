@@ -25,12 +25,10 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
 fi
 
-composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer config repositories.nexx_integration git https://github.com/BurdaMagazinOrg/module-nexx_integration.git
-composer config repositories.0 --unset
-composer config repositories.1 --unset
-composer config repositories.drupal composer https://packages.drupal.org/8
-composer config repositories.assets composer https://asset-packagist.org
+composer config repositories.0 path ${THUNDER_DIST_DIR}
+composer config repositories.1 git https://github.com/BurdaMagazinOrg/module-nexx_integration.git
+composer config repositories.2 composer https://packages.drupal.org/8
+composer config repositories.3 composer https://asset-packagist.org
 
 COMPOSER_MEMORY_LIMIT=-1 composer require "burdamagazinorg/thunder:*" "thunder/thunder_testing_demo:2.x-dev" "mglaman/phpstan-drupal:~0.11.11" "phpstan/phpstan-deprecation-rules:~0.11.0" "drupal/nexx_integration:dev-fix/paragraphs-config-schema" --no-progress
 
