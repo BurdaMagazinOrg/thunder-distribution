@@ -27,20 +27,16 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "GPL-2.0-or-later",
-    "repositories": {
-        "nexx_integration": {
-            "type": "git",
-            "url": "git@github.com:BurdaMagazinOrg/module-nexx_integration"
-        },
-        "drupal": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "assets": {
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    },
+    ],
     "extra": {
         "installer-paths": {
             "docroot/core": [
@@ -125,7 +121,7 @@
         "drupal/media_entity_slideshow": "^1.0",
         "drupal/media_entity_twitter": "^1.0",
         "drupal/media_expire": "^1.0",
-        "drupal/nexx_integration": "dev-fix/paragraphs-config-schema",
+        "drupal/nexx_integration": "^2.4",
         "drupal/metatag": "^1.9",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
