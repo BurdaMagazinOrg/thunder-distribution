@@ -15,17 +15,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   use ThunderAwsTestFixtureTrait;
 
   /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    $module_handler = \Drupal::service('module_handler');
-    $this->applyPatch('https://www.drupal.org/files/issues/2019-08-16/3075406.patch', $module_handler->getModule('paragraphs')->getPath());
-    $this->applyPatch('https://www.drupal.org/files/issues/2020-02-20/3114512-1.patch', $module_handler->getModule('paragraphs')->getPath());
-  }
-
-  /**
    * An array of config to skip schema checking on.
    *
    * @var array
