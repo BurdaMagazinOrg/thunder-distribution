@@ -1,6 +1,6 @@
 # Change Log
 
-## [8.2.53](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.52) 2020-03-06
+## [8.2.53](https://github.com/BurdaMagazinOrg/thunder-distribution/tree/8.2.53) 2020-03-06
 [Full Changelog](https://github.com/BurdaMagazinOrg/thunder-distribution/compare/8.2.52...8.2.53)
 
 Fixes and improvements related to the paragraphs module 1.11 release. Also fixing several testing issues.
