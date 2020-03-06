@@ -4,5 +4,6 @@ dependencies: {  }
 id: gallery
 label: Gallery
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }

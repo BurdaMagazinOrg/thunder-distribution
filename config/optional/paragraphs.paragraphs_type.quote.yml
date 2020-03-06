@@ -4,5 +4,6 @@ dependencies: {  }
 id: quote
 label: Quote
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
