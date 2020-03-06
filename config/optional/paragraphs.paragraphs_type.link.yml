@@ -4,5 +4,6 @@ dependencies: {  }
 id: link
 label: Link
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }

@@ -1,0 +1,34 @@
+core.entity_form_display.node.article.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            features:
+              add_above: '0'
+          third_party_settings:
+            paragraphs_features:
+              show_drag_and_drop: false
+core.entity_form_display.taxonomy_term.channel.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          third_party_settings:
+            paragraphs_features:
+              show_drag_and_drop: false
+core.entity_form_display.taxonomy_term.tags.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          settings:
+            closed_mode_threshold: 0
+            features:
+              add_above: '0'
+          third_party_settings:
+            paragraphs_features:
+              show_drag_and_drop: false

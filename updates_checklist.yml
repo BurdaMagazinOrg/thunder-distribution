@@ -330,3 +330,11 @@ v2.43:
         '#description': '<p>Adds the "access tokens overview" permission for Editor, Restricted Editor and SEO.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Updating the permissions has failed.</strong><p>'
+v2.53:
+    '#title': 'Update to version v2.53'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8140:
+        '#title': 'Disable paragraphs drag & drop action button'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. To  manually change your configuration visit your paragraphs widget configurations and select or deselect the show drag & drop button option.</strong><p>'
