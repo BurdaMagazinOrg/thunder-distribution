@@ -14,10 +14,6 @@ drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${T
 rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
-# Module branch
-rm -rf ${TEST_DIR}/docroot/profiles/thunder/modules/nexx_integration
-git clone --depth 1 --single-branch --branch fix/paragraphs-config-schema https://github.com/BurdaMagazinOrg/module-nexx_integration.git ${TEST_DIR}/docroot/profiles/thunder/modules/nexx_integration
-
 composer install --working-dir=${TEST_DIR}/docroot
 composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 
