@@ -14,8 +14,9 @@ drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${T
 rm -rf ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/profiles/thunder/themes/thunder_admin
 
+# require development packages needed for testing
+composer require "thunder/thunder_testing_demo:2.x-dev" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --no-update --working-dir ${TEST_DIR}/docroot
+
 composer install --working-dir=${TEST_DIR}/docroot
 composer run-script drupal-phpunit-upgrade --working-dir=${TEST_DIR}/docroot
 
-# require development packages needed for testing
-composer require "thunder/thunder_testing_demo:2.x-dev" "behat/mink-selenium2-driver" "behat/mink-goutte-driver" "mikey179/vfsStream" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
